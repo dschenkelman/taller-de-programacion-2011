@@ -1,5 +1,4 @@
 #include <string>
-using namespace std;
 
 #pragma once
 class xmlValidatorFixture
@@ -8,7 +7,7 @@ public:
 	xmlValidatorFixture(void);
 	~xmlValidatorFixture(void);
 	void run (void);
-	void printResult(string testName, bool result);
+	void printResult(std::string testName, bool result);
 	bool testValidatorReturnsTrueWithValidXml(void);
 	bool testValidatorReturnsFalseWithNotClosingFinalElement(void);
 	bool testValidatorReturnsFalseWithNotOpeningInitialElement(void);
@@ -25,4 +24,6 @@ public:
 	bool testValidatorReturnsFalseWhenClosingElementDoesNotMatchOpeningElement(void);
 	bool testValidatorReturnsFalseWhenClosingElementIsMissing(void);
 	bool testValidatorReturnsFalseWhenOpeningElementIsMissing(void);
+	bool testValidatorReturnsTrueWhenAttributeNameIsSeparatedFromEqualSign(void);
+	bool testValidatorReturnsTrueWhenAttributeValueIsSeparatedFromEqualSign(void);
 };

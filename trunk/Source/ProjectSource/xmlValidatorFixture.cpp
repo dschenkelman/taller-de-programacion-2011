@@ -30,6 +30,8 @@ void xmlValidatorFixture :: run (void)
 	printResult("testValidatorReturnsFalseWhenElementNameHasNonAlphabeticalCharacterOtherThanUnderscoreWhenOpeningTag", testValidatorReturnsFalseWhenElementNameHasNonAlphabeticalCharacterOtherThanUnderscoreWhenOpeningTag());
 	printResult("testValidatorReturnsTrueWhenElementNameHasUnderscoreAsFirstCharacter", testValidatorReturnsTrueWhenElementNameHasUnderscoreAsFirstCharacter());
 	printResult("testValidatorReturnsFalseWhenClosingElementDoesNotMatchOpeningElement", testValidatorReturnsFalseWhenClosingElementDoesNotMatchOpeningElement());
+	printResult("testValidatorReturnsTrueWhenAttributeNameIsSeparatedFromEqualSign", testValidatorReturnsTrueWhenAttributeNameIsSeparatedFromEqualSign());
+	printResult("testValidatorReturnsTrueWhenAttributeValueIsSeparatedFromEqualSign", testValidatorReturnsTrueWhenAttributeValueIsSeparatedFromEqualSign());
 }
 
 void xmlValidatorFixture :: printResult(string testName, bool result)
@@ -182,4 +184,22 @@ bool xmlValidatorFixture::testValidatorReturnsFalseWhenOpeningElementIsMissing(v
 	bool isValid = validator->validate(xml);
 	delete validator;
 	return !isValid;
+}
+
+bool xmlValidatorFixture::testValidatorReturnsTrueWhenAttributeNameIsSeparatedFromEqualSign(void)
+{
+	string xml = "<note><to>Tove</to><from name =\"value\">Jani</from><heading>Reminder</heading><body>Don&quot;t forget me this weekend!</body></note>";
+	xmlValidator* validator = new xmlValidator();
+	bool isValid = validator->validate(xml);
+	delete validator;
+	return isValid;
+}
+
+bool xmlValidatorFixture::testValidatorReturnsTrueWhenAttributeValueIsSeparatedFromEqualSign(void)
+{
+	string xml = "<note><to>Tove</to><from name= \"value\">Jani</from><heading>Reminder</heading><body>Don&quot;t forget me this weekend!</body></note>";
+	xmlValidator* validator = new xmlValidator();
+	bool isValid = validator->validate(xml);
+	delete validator;
+	return isValid;
 }
