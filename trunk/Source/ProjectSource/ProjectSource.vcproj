@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="8.00"
+	Version="8,00"
 	Name="ProjectSource"
 	ProjectGUID="{A9CAD7DF-BABF-4C8A-89D8-AA8E3EB9C07B}"
 	RootNamespace="ProjectSource"
@@ -199,6 +199,18 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath=".\Tokenizer.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\xmlTagUtils.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\xmlTagUtilsTest.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\xmlValidator.cpp"
 				>
 			</File>
@@ -214,6 +226,18 @@
 			>
 			<File
 				RelativePath=".\stdafx.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Tokenizer.h"
+				>
+			</File>
+			<File
+				RelativePath=".\xmlTagUtils.h"
+				>
+			</File>
+			<File
+				RelativePath=".\xmlTagUtilsTest.h"
 				>
 			</File>
 			<File
