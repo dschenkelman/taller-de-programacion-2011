@@ -1,3 +1,4 @@
+//Tokenizer, para parsear distintos tipos de strings.
 #include <string>
 using namespace std;
 #pragma once
