@@ -42,6 +42,8 @@ void ListTests::run()
 	printResult("testThrowsExceptionWhenRemovingNonExistingItems",testThrowsExceptionWhenRemovingNonExistingItems());
 	printResult("testThrowsExceptionWhenRemovingElementAtPositionOutsideOfBounds", testThrowsExceptionWhenRemovingElementAtPositionOutsideOfBounds());
 	printResult("testRemovesElementAtProvidedPosition", testRemovesElementAtProvidedPosition());
+	printResult("testDecreasesLengthWhenRemoveAtIsCalled", testDecreasesLengthWhenRemoveAtIsCalled());
+	printResult("testRemovingElementAtZeroWorks", testRemovingElementAtZeroWorks());
 
 	//dump memory leaks to VS Output Window
 	int leaks = _CrtDumpMemoryLeaks();
@@ -274,4 +276,36 @@ bool ListTests::testRemovesElementAtProvidedPosition(void)
 	bool successCondition2 = list.at(0) == 1;
 	bool successCondition3 = list.at(1) == 3;
 	return successCondition1 && successCondition2 && successCondition3;
+}
+
+bool ListTests::testDecreasesLengthWhenRemoveAtIsCalled(void)
+{
+	List<int> list;
+	list.add(1);
+	list.add(2);
+	list.add(3);
+	list.removeAt(1);
+	bool successCondition1 = list.length() == 2;
+	list.removeAt(1);
+	bool successCondition2 = list.length() == 1;
+	list.removeAt(0);
+	bool successCondition3 = list.length() == 0;
+	return successCondition1 && successCondition2 && successCondition3;
+}
+
+bool ListTests::testRemovingElementAtZeroWorks(void)
+{
+	List<int> list;
+	list.add(1);
+	list.add(2);
+	list.add(3);
+	list.add(4);
+
+	bool successCondition1 = list.removeAt(0) == 1;
+	bool successCondition2 = list.removeAt(0) == 2;
+	bool successCondition3 = list.removeAt(0) == 3;
+	bool successCondition4 = list.removeAt(0) == 4;
+
+	return successCondition1 && successCondition2 &&
+		successCondition3 && successCondition4;
 }
