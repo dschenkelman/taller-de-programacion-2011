@@ -36,6 +36,10 @@ void ListTests::run()
 	printResult("testCanAddElevenItems", testCanAddElevenItems());
 	printResult("testThrowsExceptionWhenAccessingElementAtInvalidIndex", testThrowsExceptionWhenAccessingElementAtInvalidIndex());
 	printResult("testCanRemoveLastItemWhenOnlyOneWasAdded", testCanRemoveLastItemWhenOnlyOneWasAdded());
+	printResult("testCanRemoveAndAddItemsAfterwards", testCanRemoveAndAddItemsAfterwards());
+	printResult("testCapacityIsIncreasedWhenSpaceIsRequired", testCapacityIsIncreasedWhenSpaceIsRequired());
+	printResult("testCapacityIsDecreasedWhenCanBeReleased", testCapacityIsDecreasedWhenCanBeReleased());
+	printResult("testThrowsExceptionWhenRemovingNonExistingItems",testThrowsExceptionWhenRemovingNonExistingItems());
 
 	//dump memory leaks to VS Output Window
 	int leaks = _CrtDumpMemoryLeaks();
@@ -105,6 +109,7 @@ bool ListTests::testCanAddElevenItems(void)
 	}
 	return successCondition;
 }
+
 bool ListTests::testThrowsExceptionWhenAccessingElementAtInvalidIndex(void)
 {
 	List<int> list;
@@ -140,9 +145,10 @@ bool ListTests::testCanRemoveLastItemWhenOnlyOneWasAdded(void)
 {
 	List<int> list;
 	list.add(5);
-	list.removeLast();
+	int removed = list.removeLast();
 	bool successCondition1 = list.length() == 0;
 	bool successCondition2 = false;
+	bool successCondition3 = removed == 5;
 	
 	try
 	{
@@ -153,5 +159,83 @@ bool ListTests::testCanRemoveLastItemWhenOnlyOneWasAdded(void)
 		successCondition2 = true;
 	}
 
-	return successCondition1 && successCondition2;
+	return successCondition1 && successCondition2 && successCondition3;
+}
+
+bool ListTests::testCanRemoveAndAddItemsAfterwards(void)
+{
+	List<int> list;
+	list.add(5);
+	list.add(6);
+	list.add(7);
+	list.add(8);
+	int removed1 = list.removeLast();
+	int removed2 = list.removeLast();
+	bool successCondition1 = list.length() == 2;
+	bool successCondition2 = removed1 == 8;
+	bool successCondition3 = removed2 == 7;
+	
+	list.add(9);
+	int removed3 = list.removeLast();
+	bool successCondition4 = removed3 == 9;
+	return successCondition1 && successCondition2 
+		&& successCondition3 && successCondition4;
+}
+
+bool ListTests::testCapacityIsIncreasedWhenSpaceIsRequired(void)
+{
+	List<int> list;
+	bool successCondition = list.capacity() == 10;
+	
+	for (int i = 0; i < 100; i++)
+	{
+		list.add(i);
+		//capacity should increase in multiples of ten
+		if (i % 10 	== 0)
+		{
+			successCondition = successCondition && list.capacity() == 10 + i;
+		}
+	}
+
+	return successCondition;
+}
+
+bool ListTests::testCapacityIsDecreasedWhenCanBeReleased(void)
+{
+	List<int> list;
+	bool successCondition = true;
+	
+	for (int i = 0; i < 100; i++)
+	{
+		list.add(i);
+	}
+
+	for (int i = 0; i < 100; i++)
+	{
+		list.removeLast();
+
+		if (i % 10 	== 0)
+		{
+			successCondition = successCondition && list.capacity() == 100 - i;
+		}
+	}
+
+	return successCondition;
+}
+
+bool ListTests::testThrowsExceptionWhenRemovingNonExistingItems(void)
+{
+	List<int> list;
+	bool successCondition = false;
+
+	try
+	{
+		list.removeLast();
+	}
+	catch (exception& e)
+	{
+		successCondition = true;
+	}
+
+	return successCondition;
 }
