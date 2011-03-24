@@ -23,4 +23,6 @@ public:
 	bool testThrowsExceptionWhenRemovingNonExistingItems(void);
 	bool testThrowsExceptionWhenRemovingElementAtPositionOutsideOfBounds(void);
 	bool testRemovesElementAtProvidedPosition(void);
+	bool testDecreasesLengthWhenRemoveAtIsCalled(void);
+	bool testRemovingElementAtZeroWorks(void);
 };
