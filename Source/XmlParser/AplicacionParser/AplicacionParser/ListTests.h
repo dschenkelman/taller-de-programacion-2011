@@ -21,4 +21,6 @@ public:
 	bool testCapacityIsIncreasedWhenSpaceIsRequired(void);
 	bool testCapacityIsDecreasedWhenCanBeReleased(void);
 	bool testThrowsExceptionWhenRemovingNonExistingItems(void);
+	bool testThrowsExceptionWhenRemovingElementAtPositionOutsideOfBounds(void);
+	bool testRemovesElementAtProvidedPosition(void);
 };
