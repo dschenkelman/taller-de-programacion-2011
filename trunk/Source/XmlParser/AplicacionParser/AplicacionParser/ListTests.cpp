@@ -19,7 +19,7 @@ ListTests::~ListTests(void)
 
 void ListTests::printResult(std::string testName, bool result)
 {
-	std::cout << (testName.append(result ? ": Passed\n" : ": Failed\n"));
+	std::cout << (testName.append(result ? ": Passed\n" : ": Failed!!!\n"));
 }
 
 void ListTests::printLeaks(int leaks)
@@ -40,6 +40,8 @@ void ListTests::run()
 	printResult("testCapacityIsIncreasedWhenSpaceIsRequired", testCapacityIsIncreasedWhenSpaceIsRequired());
 	printResult("testCapacityIsDecreasedWhenCanBeReleased", testCapacityIsDecreasedWhenCanBeReleased());
 	printResult("testThrowsExceptionWhenRemovingNonExistingItems",testThrowsExceptionWhenRemovingNonExistingItems());
+	printResult("testThrowsExceptionWhenRemovingElementAtPositionOutsideOfBounds", testThrowsExceptionWhenRemovingElementAtPositionOutsideOfBounds());
+	printResult("testRemovesElementAtProvidedPosition", testRemovesElementAtProvidedPosition());
 
 	//dump memory leaks to VS Output Window
 	int leaks = _CrtDumpMemoryLeaks();
@@ -238,4 +240,38 @@ bool ListTests::testThrowsExceptionWhenRemovingNonExistingItems(void)
 	}
 
 	return successCondition;
+}
+
+
+bool ListTests::testThrowsExceptionWhenRemovingElementAtPositionOutsideOfBounds()
+{
+	List<int> list;
+	list.add(1);
+	list.add(2);
+	list.add(3);
+	bool successCondition = false;
+
+	try
+	{
+		list.removeAt(5);
+	}
+	catch (exception& e)
+	{
+		successCondition = true;
+	}
+
+	return successCondition;
+}
+
+bool ListTests::testRemovesElementAtProvidedPosition(void)
+{
+	List<int> list;
+	list.add(1);
+	list.add(2);
+	list.add(3);
+	int removed = list.removeAt(1);
+	bool successCondition1 = removed == 2;
+	bool successCondition2 = list.at(0) == 1;
+	bool successCondition3 = list.at(1) == 3;
+	return successCondition1 && successCondition2 && successCondition3;
 }

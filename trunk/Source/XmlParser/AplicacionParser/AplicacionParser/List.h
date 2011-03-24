@@ -39,17 +39,23 @@ private:
 	{
 		this->resize(-this->sizeDifferential);
 	}
+	bool shouldDecreaseSize()
+	{
+		return this->count < (this->currentSize - this->sizeDifferential);
+	}
+	bool isWithinBounds(size_t index)
+	{
+		return !(index < 0 || index >= this->count);
+	}
 public:
 	List(void) : count(0), currentSize(initialItems)
 	{
 		this->items = new T[initialItems];
 	}
-	
 	~List(void)
 	{
 		delete items;
 	}
-
 	void add(const T& item)
 	{
 		if (this->count == this->currentSize)
@@ -59,36 +65,46 @@ public:
 		this->items[this->count] = item;
 		this->count++;
 	}
-	
-	T removeLast()
+	T removeAt(size_t position)
 	{
-		if (this->count == 0)
+		if (!this->isWithinBounds(position))
 		{
 			throw std::exception();
 		}
-		(this->count)--;
+
+		T item = this->items[position];
 		
-		if (this->count < (this->currentSize - this->sizeDifferential))
+		for (size_t i = position + 1; i < this->count; i++)
 		{
-			this->decreaseSize();	
+			this->items[i - 1] = this->items[i];
 		}
-		
-		return this->items[this->count];
+
+		this->count--;
+
+		if (this->shouldDecreaseSize())
+		{
+			this->decreaseSize();
+		}
+
+		return item;
 	}
-	
+	T removeLast()
+	{
+		return this->removeAt(this->count - 1);
+	}
 	T at(size_t position)
 	{
-		if (position < 0 || position >= this->count)
+		if (!this->isWithinBounds(position))
 		{
 			throw std::exception();
 		}
 		return this->items[position];
 	}
-	
 	size_t length()
 	{
 		return this->count;
 	}
+
 
 	size_t capacity()
 	{
