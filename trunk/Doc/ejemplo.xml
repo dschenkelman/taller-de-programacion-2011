@@ -1,0 +1,11 @@
+<escenario nombre="">
+	<grilla ancho="10" alto="15" tipoObstaculoPorDefecto="obs1">
+		<obstaculo fila="1" col="5" tipo="obs1" />
+		<camino fila="5" col="3">
+			<bonus tipo="frutillita" />
+		</camino>
+	</grilla>
+	<tiposobs>
+		<tipoobs nombre="obs1" textura="1" />
+	</tiposobs>
+</escenario>
