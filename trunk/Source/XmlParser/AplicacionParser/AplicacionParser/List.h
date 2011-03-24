@@ -9,25 +9,35 @@ private:
 	size_t count;
 	size_t currentSize;
 	T* items;
-	enum {initialItems = 10, increase = 10};
-	void increaseSize()
+	enum {initialItems = 10, sizeDifferential = 10};
+	void resize(size_t differential)
 	{
 		size_t initialSize = this->currentSize;
 		//keep reference to old memory to copy and delete
 		T* aux = this->items;
 
 		//increase current size
-		currentSize = currentSize + increase;
+		currentSize = currentSize + differential;
 		this->items = new T[currentSize];
 		
 		//copy elements to new container
-		for (size_t i = 0; i < initialSize; i++)
+		size_t endSize = currentSize > initialSize ?  initialSize : currentSize;
+
+		for (size_t i = 0; i < endSize; i++)
 		{
 			this->items[i] = aux[i];
 		}
 
 		//delete previous container
 		delete aux;
+	}
+	void increaseSize()
+	{
+		this->resize(this->sizeDifferential);
+	}
+	void decreaseSize()
+	{
+		this->resize(-this->sizeDifferential);
 	}
 public:
 	List(void) : count(0), currentSize(initialItems)
@@ -52,7 +62,17 @@ public:
 	
 	T removeLast()
 	{
+		if (this->count == 0)
+		{
+			throw std::exception();
+		}
 		(this->count)--;
+		
+		if (this->count < (this->currentSize - this->sizeDifferential))
+		{
+			this->decreaseSize();	
+		}
+		
 		return this->items[this->count];
 	}
 	
@@ -67,6 +87,11 @@ public:
 	
 	size_t length()
 	{
-		return count;
+		return this->count;
+	}
+
+	size_t capacity()
+	{
+		return this->currentSize;
 	}
 };

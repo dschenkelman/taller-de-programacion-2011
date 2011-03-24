@@ -15,6 +15,10 @@ public:
 	bool testThatCanAddTwoItems(void);
 	bool testCanAddFiveItems(void);
 	bool testCanAddElevenItems(void);
-	bool testCanRemoveLastItemWhenOnlyOneWasAdded(void);
 	bool testThrowsExceptionWhenAccessingElementAtInvalidIndex(void);
+	bool testCanRemoveLastItemWhenOnlyOneWasAdded(void);
+	bool testCanRemoveAndAddItemsAfterwards(void);
+	bool testCapacityIsIncreasedWhenSpaceIsRequired(void);
+	bool testCapacityIsDecreasedWhenCanBeReleased(void);
+	bool testThrowsExceptionWhenRemovingNonExistingItems(void);
 };
