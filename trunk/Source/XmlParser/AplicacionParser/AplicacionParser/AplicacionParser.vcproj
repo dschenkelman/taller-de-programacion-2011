@@ -215,6 +215,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\XmlElementTests.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\XmlParser.cpp"
 				>
 			</File>
@@ -254,6 +258,10 @@
 			</File>
 			<File
 				RelativePath=".\XmlElement.h"
+				>
+			</File>
+			<File
+				RelativePath=".\XmlElementTests.h"
 				>
 			</File>
 			<File
