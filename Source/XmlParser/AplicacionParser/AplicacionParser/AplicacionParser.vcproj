@@ -215,6 +215,14 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath=".\String.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\StringTests.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\XmlAttribute.cpp"
 				>
 			</File>
@@ -262,6 +270,14 @@
 			</File>
 			<File
 				RelativePath=".\stdafx.h"
+				>
+			</File>
+			<File
+				RelativePath=".\String.h"
+				>
+			</File>
+			<File
+				RelativePath=".\StringTests.h"
 				>
 			</File>
 			<File
