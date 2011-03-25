@@ -6,6 +6,8 @@ template<class T>
 class List
 {
 private:
+	bool ownItems;
+	
 	size_t count;
 
 	size_t currentSize;
@@ -59,7 +61,7 @@ private:
 	}
 
 public:
-	List(void) : count(0), currentSize(initialItems)
+	List(bool ownItems = false) : count(0), currentSize(initialItems), ownItems(ownItems)
 	{
 		this->items = new T[initialItems];
 	}
