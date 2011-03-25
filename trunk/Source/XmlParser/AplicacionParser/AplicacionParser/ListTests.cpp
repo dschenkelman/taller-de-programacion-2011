@@ -24,7 +24,7 @@ void ListTests::printResult(std::string testName, bool result)
 
 void ListTests::printLeaks(int leaks)
 {
-	std::cout << "Hubo " << leaks << " memory leaks.";
+	std::cout << "List Tests: Hubo " << leaks << " memory leaks." << endl << endl;
 }
 
 void ListTests::run()

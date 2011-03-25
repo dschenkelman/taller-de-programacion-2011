@@ -9,7 +9,7 @@ public:
 	~ListTests(void);
 	void run (void);
 	void printResult(std::string testName, bool result);
-	void ListTests::printLeaks(int leaks);
+	void printLeaks(int leaks);
 	bool testListIsCreatedWithNoElements(void);
 	bool testThatOneItemShouldBeAdded(void);
 	bool testThatCanAddTwoItems(void);
