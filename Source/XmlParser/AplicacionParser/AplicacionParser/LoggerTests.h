@@ -11,4 +11,5 @@ public:
 	void printResult(std::string testName, bool result);
 	bool testLogWarning(void);
 	bool testLogError(void);
+	void printLeaks(int leaks);
 };

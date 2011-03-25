@@ -2,12 +2,23 @@
 #include "Logger.h"
 #include "LoggerTests.h"
 #include <iostream>
+#include <exception>
+//useful to detect memory leaks
+#define _CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+#include <crtdbg.h>
+using namespace std;
 
 LoggerTests::LoggerTests(void)
 {
 }
 LoggerTests::~LoggerTests(void)
 {
+}
+
+void LoggerTests::printLeaks(int leaks)
+{
+	std::cout << "List Tests: Hubo " << leaks << " memory leaks." << endl << endl;
 }
 
 void LoggerTests::printResult(std::string testName, bool result)
@@ -20,6 +31,10 @@ void LoggerTests::run()
 	std::cout << ("\n ::LoggerTests::\n");
 	printResult("testLogWarning", testLogWarning());
 	printResult("testLogError", testLogError());
+	
+	//dump memory leaks to VS Output Window
+	int leaks = _CrtDumpMemoryLeaks();
+	printLeaks(leaks);
 }
 
 bool LoggerTests::testLogWarning(void)
