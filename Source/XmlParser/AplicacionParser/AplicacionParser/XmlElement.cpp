@@ -11,6 +11,10 @@ XmlElement::XmlElement(std::string name, int start_line, int end_line)
 	this->end_line = end_line;
 }
 
+string XmlElement::getName() {
+	return this->name;
+}
+
 void XmlElement::addChild(XmlElement child) {
 	this->children.add(child);
 }

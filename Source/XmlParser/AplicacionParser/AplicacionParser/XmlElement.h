@@ -11,6 +11,7 @@ private:
 	List<XmlAttribute> attributes;
 public:
 	XmlElement(std::string name, int start_line, int end_line);
+	std::string getName(void);
 	void addChild(XmlElement child);
 	bool addAttribute(XmlAttribute attribute);
 	bool hasAttribute(std::string key);
