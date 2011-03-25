@@ -183,6 +183,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Logger.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\LoggerTests.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\StackTests.cpp"
 				>
 			</File>
@@ -237,10 +245,11 @@
 				>
 			</File>
 			<File
-				RelativePath=".\resource.h"
+				RelativePath=".\Logger.h"
 				>
 			</File>
 			<File
+				RelativePath=".\LoggerTests.h"
 				RelativePath=".\Stack.h"
 				>
 			</File>
@@ -253,6 +262,7 @@
 				>
 			</File>
 			<File
+				RelativePath=".\stdafx.h"
 				RelativePath=".\XmlAttribute.h"
 				>
 			</File>
