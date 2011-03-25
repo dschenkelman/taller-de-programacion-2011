@@ -3,6 +3,7 @@
 
 #include "stdafx.h"
 #include "ListTests.h"
+#include "LoggerTests.h"
 #include "XmlParser.h"
 #include "StackTests.h"
 #include <iostream>
@@ -22,6 +23,8 @@ int _tmain(int argc, _TCHAR* argv[])
 	//xmlParser.getXmlLine();
 	//cout<<"La línea leida es: "<<xmlParser.getLineRead();
 
+	LoggerTests loggerTests;
+	loggerTests.run();
 	char aux;
 	cin >> aux;
 
