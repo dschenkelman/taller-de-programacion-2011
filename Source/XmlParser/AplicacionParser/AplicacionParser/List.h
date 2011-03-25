@@ -7,9 +7,14 @@ class List
 {
 private:
 	size_t count;
+
 	size_t currentSize;
+
 	T* items;
+
 	enum {initialItems = 10, sizeDifferential = 10};
+
+
 	void resize(size_t differential)
 	{
 		size_t initialSize = this->currentSize;
@@ -31,31 +36,39 @@ private:
 		//delete previous container
 		delete aux;
 	}
+
+
 	void increaseSize()
 	{
 		this->resize(this->sizeDifferential);
 	}
+
 	void decreaseSize()
 	{
 		this->resize(-this->sizeDifferential);
 	}
+
 	bool shouldDecreaseSize()
 	{
 		return this->count < (this->currentSize - this->sizeDifferential);
 	}
+
 	bool isWithinBounds(size_t index)
 	{
 		return !(index < 0 || index >= this->count);
 	}
+
 public:
 	List(void) : count(0), currentSize(initialItems)
 	{
 		this->items = new T[initialItems];
 	}
+
 	~List(void)
 	{
-		delete items;
+		delete []items;
 	}
+
 	void add(const T& item)
 	{
 		if (this->count == this->currentSize)
@@ -65,6 +78,7 @@ public:
 		this->items[this->count] = item;
 		this->count++;
 	}
+
 	T removeAt(size_t position)
 	{
 		if (!this->isWithinBounds(position))
@@ -88,11 +102,14 @@ public:
 
 		return item;
 	}
+
+
 	T removeLast()
 	{
 		return this->removeAt(this->count - 1);
 	}
-	T at(size_t position)
+
+	T& at(size_t position)
 	{
 		if (!this->isWithinBounds(position))
 		{
@@ -100,14 +117,19 @@ public:
 		}
 		return this->items[position];
 	}
+
 	size_t length()
 	{
 		return this->count;
 	}
 
-
 	size_t capacity()
 	{
 		return this->currentSize;
+	}
+
+	T& operator[](size_t index)
+	{
+		return this->at(index);
 	}
 };

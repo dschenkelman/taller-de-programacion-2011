@@ -25,4 +25,7 @@ public:
 	bool testRemovesElementAtProvidedPosition(void);
 	bool testDecreasesLengthWhenRemoveAtIsCalled(void);
 	bool testRemovingElementAtZeroWorks(void);
+	bool testElementAtIndexCanBeAccessedThroughSubscriptOperatorForReadPurposes(void);
+	bool testElementAtIndexCanBeAccessedThroughSubscriptOperatorForWritePurposes(void);
+	bool testElementAtNonExistingIndexThrowsExceptionWhenAccessedThroughSubscripting(void);
 };

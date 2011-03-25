@@ -44,6 +44,9 @@ void ListTests::run()
 	printResult("testRemovesElementAtProvidedPosition", testRemovesElementAtProvidedPosition());
 	printResult("testDecreasesLengthWhenRemoveAtIsCalled", testDecreasesLengthWhenRemoveAtIsCalled());
 	printResult("testRemovingElementAtZeroWorks", testRemovingElementAtZeroWorks());
+	printResult("testElementAtIndexCanBeAccessedThroughSubscriptOperatorForReadPurposes", testElementAtIndexCanBeAccessedThroughSubscriptOperatorForReadPurposes());
+	printResult("testElementAtIndexCanBeAccessedThroughSubscriptOperatorForWritePurposes", testElementAtIndexCanBeAccessedThroughSubscriptOperatorForWritePurposes());
+	printResult("testElementAtNonExistingIndexThrowsExceptionWhenAccessedThroughSubscripting", testElementAtNonExistingIndexThrowsExceptionWhenAccessedThroughSubscripting());
 
 	//dump memory leaks to VS Output Window
 	int leaks = _CrtDumpMemoryLeaks();
@@ -308,4 +311,76 @@ bool ListTests::testRemovingElementAtZeroWorks(void)
 
 	return successCondition1 && successCondition2 &&
 		successCondition3 && successCondition4;
+}
+
+bool ListTests::testElementAtIndexCanBeAccessedThroughSubscriptOperatorForReadPurposes(void)
+{
+	List<int> list;
+	bool successCondition = true;
+
+	for (int i = 0; i < 100; i++)
+	{
+		list.add(i);
+	}
+
+	for (int i = 0; i < 100; i++)
+	{
+		successCondition = successCondition && list[i] == i;
+	}
+
+	return successCondition;
+}
+
+bool ListTests::testElementAtIndexCanBeAccessedThroughSubscriptOperatorForWritePurposes(void)
+{
+	List<int> list;
+	bool successCondition = true;
+
+	for (int i = 0; i < 100; i++)
+	{
+		list.add(i);
+	}
+
+	for (int i = 100; i > 0; i--)
+	{
+		int j = 100 - i;
+		list[i - 1] = j;
+	}
+
+	for (int i = 0; i < 100; i++)
+	{
+		successCondition = successCondition && list.at(i) == 99 - i;
+	}
+
+	return successCondition;
+}
+
+bool ListTests::testElementAtNonExistingIndexThrowsExceptionWhenAccessedThroughSubscripting(void)
+{
+	List<int> list;
+	bool successCondition1 = false;
+	bool successCondition2 = false;
+
+	list.add(5);
+	list.add(6);
+
+	try
+	{
+		int a = list[4];
+	}
+	catch (exception& e)
+	{
+		successCondition1 = true;
+	}
+
+	try
+	{
+		list[8] = 4;
+	}
+	catch (exception& e)
+	{
+		successCondition2 = true;
+	}
+
+	return successCondition1 && successCondition2;
 }
