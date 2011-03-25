@@ -11,12 +11,13 @@ public:
 	{
 		this->items = new List<T>();
 	}
+
 	~Stack(void)
 	{
 		delete this->items;
 	}
 
-	T peek()
+	T& peek()
 	{
 		return this->items->at(this->items->length() - 1);
 	}
@@ -25,11 +26,12 @@ public:
 	{	
 		return this->items->removeLast();		
 	}
-	
+
 	void push(const T& item)
 	{
 		this->items->add(item);
 	}
+
 
 	size_t count()
 	{
