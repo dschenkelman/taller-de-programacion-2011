@@ -72,7 +72,7 @@ void XmlParser::parseLine(void){
 	token=strtok_s(test," \t\n",&nextToken);
 	while (token != NULL){
 		cout<<"TOKEN LEIDO: "<<token<<endl;
-		if (strstr(token,"=") != NULL)
+		if (strstr(token,"=") != NULL) //Si tiene "=" debe ser un atributo.
 			this->parseAttribute(token);
 		token=strtok_s(NULL," \t\n",&nextToken);
 	}
