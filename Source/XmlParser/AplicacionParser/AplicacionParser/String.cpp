@@ -14,7 +14,7 @@ bool String::operator ==(const char* s)
 {
 	int i = 0;
 	char externalChar = s[i];
-	char internalChar = this->characters[i];
+	char internalChar = this->characters.at(i);
 	while(internalChar != END_CHAR && internalChar != END_CHAR)
 	{
 		if (internalChar != externalChar)
@@ -24,7 +24,7 @@ bool String::operator ==(const char* s)
 
 		i++;
 		externalChar = s[i];
-		internalChar = this->characters[i];
+		internalChar = this->characters.at(i);
 	}
 
 	if (externalChar == internalChar)
@@ -35,6 +35,32 @@ bool String::operator ==(const char* s)
 	return false;
 }
 
+bool String::operator ==(String& s)
+{
+	int i = 0;
+	char externalChar = s.characters.at(i);
+	char internalChar = this->characters.at(i);
+	while(internalChar != END_CHAR && internalChar != END_CHAR)
+	{
+		if (internalChar != externalChar)
+		{
+			return false;
+		}
+
+		i++;
+		externalChar = s.characters.at(i);
+		internalChar = this->characters.at(i);
+	}
+
+	if (externalChar == internalChar)
+	{
+		return true;
+	}
+
+	return false;
+}
+
+//private methods
 void String::copyToCharacters(const char *s)
 {
 	int i = 0;
@@ -46,4 +72,9 @@ void String::copyToCharacters(const char *s)
 		currentChar = s[i];
 	}
 	this->characters.add(END_CHAR);
+}
+
+size_t String::length(void)
+{
+	return this->characters.length() - 1;
 }
