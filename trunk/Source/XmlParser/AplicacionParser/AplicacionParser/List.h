@@ -1,13 +1,12 @@
 #pragma once
 #include <exception>
+#include <iostream>
 
 //inline class to easily follow template inclusion model
 template<class T>
 class List
 {
 private:
-	bool ownItems;
-	
 	size_t count;
 
 	size_t currentSize;
@@ -61,7 +60,7 @@ private:
 	}
 
 public:
-	List(bool ownItems = false) : count(0), currentSize(initialItems), ownItems(ownItems)
+	List() : count(0), currentSize(initialItems)
 	{
 		this->items = new T[initialItems];
 	}

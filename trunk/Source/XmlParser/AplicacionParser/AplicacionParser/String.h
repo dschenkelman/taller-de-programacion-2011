@@ -11,4 +11,6 @@ public:
 	String(const char*);
 	~String(void);
 	bool operator==(const char*);
+	bool operator==(String&);
+	size_t length(void);
 };

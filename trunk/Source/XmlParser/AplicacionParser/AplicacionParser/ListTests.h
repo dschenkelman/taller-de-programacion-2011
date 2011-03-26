@@ -28,4 +28,5 @@ public:
 	bool testElementAtIndexCanBeAccessedThroughSubscriptOperatorForReadPurposes(void);
 	bool testElementAtIndexCanBeAccessedThroughSubscriptOperatorForWritePurposes(void);
 	bool testElementAtNonExistingIndexThrowsExceptionWhenAccessedThroughSubscripting(void);
+	bool testTwoListsCanBeInstantiatedAtTheSameTime(void);
 };

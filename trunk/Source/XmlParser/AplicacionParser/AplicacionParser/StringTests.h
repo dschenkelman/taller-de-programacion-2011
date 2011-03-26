@@ -12,4 +12,8 @@ public:
 	bool testCreatedStringIsEqualToTemporaryStringIfTheyAreEqual(void);
 	bool testCreatedStringIsNotEqualToTemporaryStringIfTheyAreNotEqual(void);
 	bool testCreatedEmptyStringIsEqualToEmptyString(void);
+	bool testCanCompareStringThatAreEqualAndReturnEqual(void);
+	bool testCreatedStringIsNotEqualToAnotherStringIfTheyAreNotEqual(void);
+	bool testCorrectlyComparesTwoEmptyStrings(void);
+	bool testReturnsCorrectStringLength(void);
 };
