@@ -1,15 +1,19 @@
 #include <iostream>
 #include <fstream>
-#include <string>
+#include <string.h>
+#include <stdio.h>
+
+#define LINE_SIZE 200
 #pragma once
 
 class XmlParser
 {
 private:
 	long lineNumber;
-	std::ifstream file;
-	char * lineRead;
-	std::string line;
+	FILE *xmlFile;
+	char lineRead[LINE_SIZE];
+	bool isFileOpen(void);
+	void parseAttribute(char *);
 public:
 
 	XmlParser(void);
@@ -21,4 +25,5 @@ public:
 	char * getLineTagAttributes(char * tagName);
 	char * getLineRead(void);
 	long getLineNumber(void);
+	void parseLine(void);
 };

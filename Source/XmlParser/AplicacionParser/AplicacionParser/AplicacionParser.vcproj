@@ -238,6 +238,10 @@
 				RelativePath=".\XmlParser.cpp"
 				>
 			</File>
+			<File
+				RelativePath=".\XmlParserTest.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -294,6 +298,10 @@
 			</File>
 			<File
 				RelativePath=".\XmlParser.h"
+				>
+			</File>
+			<File
+				RelativePath=".\XmlParserTest.h"
 				>
 			</File>
 		</Filter>
