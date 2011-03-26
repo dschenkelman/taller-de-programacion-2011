@@ -1,11 +1,10 @@
 #include "StdAfx.h"
 #include "Logger.h"
 
-
 Logger::Logger(const char* ruta, const char* mensajeWarning, const char* mensajeError)
 {
 	// Abro el archivo y lo dejo listo para escribir
-	this->archivoFisico = fopen(ruta, "a+");
+	fopen_s(&this->archivoFisico, ruta, "a+");
 	this->mensajeWarning = mensajeWarning;
 	this->mensajeError = mensajeError;
 }
@@ -29,8 +28,8 @@ void Logger::logWarning(const char* mensaje)
 	//TODO: Refactorizar este metodo y el de Error para no repetir tanto codigo.
 	this->buffer = (char*)malloc(strlen(mensajeWarning)+strlen(mensaje)+1);
 	this->buffer[0] = '\0';
-	strcat(this->buffer, mensajeWarning);
-	strcat(this->buffer, mensaje);
+	strcat_s(this->buffer, strlen(mensajeWarning)+strlen(mensaje)+1,this->mensajeWarning);
+	strcat_s(this->buffer, strlen(mensajeWarning)+strlen(mensaje)+1, mensaje);
 	escribirEnArchivo(this->buffer);
 	free(buffer);
 }
@@ -38,10 +37,10 @@ void Logger::logWarning(const char* mensaje)
 
 void Logger::logError(const char* mensaje)
 {
-	this->buffer = (char*)malloc(strlen(mensajeWarning)+strlen(mensaje)+1);
+	this->buffer = (char*)malloc(strlen(this->mensajeError)+strlen(mensaje)+1);
 	this->buffer[0] = '\0';
-	strcat(this->buffer, mensajeError);
-	strcat(this->buffer, mensaje);
+	strcat_s(this->buffer, strlen(this->mensajeError)+strlen(mensaje)+1,this->mensajeError);
+	strcat_s(this->buffer, strlen(this->mensajeError)+strlen(mensaje)+1, mensaje);
 	escribirEnArchivo(this->buffer);
 	free(buffer);
 }

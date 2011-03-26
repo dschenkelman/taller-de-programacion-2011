@@ -53,7 +53,7 @@ bool LoggerTests::testLogWarning(void)
 	fseek (loggerInstance.obetenerArchivo(), 0, SEEK_END);
 	size_t tamanioArchivoAntes = ftell(loggerInstance.obetenerArchivo());
 	
-	mensaje = "el escenario no tiene un nombre asignado.";
+	mensaje = "el escenario no tiene un nombre asignado.\0";
 
 	// Loggeo el warning
 	loggerInstance.logWarning(mensaje);
@@ -89,7 +89,7 @@ bool LoggerTests::testLogError(void)
 	fseek (loggerInstance.obetenerArchivo(), 0, SEEK_END);
 	size_t tamanioArchivoAntes = ftell(loggerInstance.obetenerArchivo());
 	
-	mensaje = "el tipo del obstaculo no existe.";
+	mensaje = "el tipo del obstaculo no existe.\0";
 
 	// Loggeo el ERROR
 	loggerInstance.logError(mensaje);
