@@ -8,6 +8,7 @@
 #include "StackTests.h"
 #include "StringTests.h"
 #include "XmlParserTest.h"
+#include "XmlElementTests.h"
 #include <iostream>
 using namespace std;
 
@@ -33,6 +34,9 @@ int _tmain(int argc, _TCHAR* argv[])
 	XmlParserTest xmlParserTest;
 	xmlParserTest.run();
 
+	cout<<"Test de XmlElement"<<endl;
+	XmlElementTests xmlElementTests;
+	xmlElementTests.run();
 
 	char aux;
 	cin >> aux;
