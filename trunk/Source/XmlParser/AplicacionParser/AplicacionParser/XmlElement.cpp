@@ -9,6 +9,18 @@ XmlElement::XmlElement(std::string name, int start_line, int end_line)
 	this->name = name;
 	this->start_line = start_line;
 	this->end_line = end_line;
+	this->children_created = false;
+}
+
+XmlElement::XmlElement(void)
+{
+}
+
+XmlElement::XmlElement(XmlElement* other) {
+	this->name = other->name;
+	this->start_line = other->start_line;
+	this->end_line = other->end_line;
+	this->children_created = other->children_created;
 }
 
 string XmlElement::getName() {
@@ -16,7 +28,11 @@ string XmlElement::getName() {
 }
 
 void XmlElement::addChild(XmlElement child) {
-	this->children.add(child);
+	if (!this->children_created) {
+		this->children = new List<XmlElement>;
+		this->children_created = true;
+	}
+	this->children->add(child);
 }
 
 bool XmlElement::hasAttribute(string key) {
@@ -51,9 +67,7 @@ string XmlElement::getValue(string key) {
 	return "";
 }
 
-XmlElement::XmlElement(void) {
-}
-
 XmlElement::~XmlElement(void)
 {
+	delete this->children;
 }
