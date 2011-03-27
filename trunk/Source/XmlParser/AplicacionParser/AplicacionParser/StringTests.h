@@ -29,5 +29,8 @@ public:
 	bool testSubstringMethodThrowsExceptionWithNotValidIndex(void);
 	bool testSubstringMethodReturnsExpectedResultsWithValidStartingIndexAndAmountOfElements(void);
 	bool testSubstringMethodThrowsExceptionWithNotValidStartingIndex(void);
+	bool testSplitWorksWithSingleCharacter(void);
+	bool testSplitWorksWithTemporalString(void);
+	bool testSplitWorksWithString(void);
 };
 
