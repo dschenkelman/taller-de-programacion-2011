@@ -36,6 +36,10 @@ void StringTests::run(void)
 	printResult("testFindUsingStringReturnsCorrectIndex", testFindUsingStringReturnsCorrectIndex());
 	printResult("testContainsUsingTemporaryStringReturnsCorrectResult", testContainsUsingTemporaryStringReturnsCorrectResult());
 	printResult("testContainsUsingStringReturnsCorrectResult", testContainsUsingStringReturnsCorrectResult());
+	printResult("testSubstringMethodReturnsExpectedResultsWithValidStartingIndex", testSubstringMethodReturnsExpectedResultsWithValidStartingIndex());
+	printResult("testSubstringMethodThrowsExceptionWithNotValidIndex", testSubstringMethodThrowsExceptionWithNotValidIndex());
+	printResult("testSubstringMethodReturnsExpectedResultsWithValidStartingIndexAndAmountOfElements", testSubstringMethodReturnsExpectedResultsWithValidStartingIndexAndAmountOfElements());
+	printResult("testSubstringMethodThrowsExceptionWithNotValidStartingIndex", testSubstringMethodThrowsExceptionWithNotValidStartingIndex());
 
 	//dump memory leaks to VS Output Window
 	int leaks = _CrtDumpMemoryLeaks();
@@ -312,4 +316,94 @@ bool StringTests::testContainsUsingStringReturnsCorrectResult(void)
 			successCondition5 &&
 			successCondition6 &&
 			successCondition7;
+}
+
+bool StringTests::testSubstringMethodReturnsExpectedResultsWithValidStartingIndex(void)
+{
+	String s = "abcdefgh";
+	String s1 = s.substring(2);
+	String s2 = s.substring(0);
+	String s3 = s.substring(7);
+	bool successCondition1 = s1 == "cdefgh";
+	bool successCondition2 = s2 == s;
+	bool successCondition3 = s3 == "h";
+
+	return successCondition1 &&
+			successCondition2 &&
+			successCondition3;
+}
+
+bool StringTests::testSubstringMethodThrowsExceptionWithNotValidIndex(void)
+{
+	String s1 = "abcdefgh";
+	String s2 = "";
+	bool successCondition1 = false;
+	bool successCondition2 = false;
+	
+	try
+	{
+		s1.substring(8);
+	}
+	catch(exception& e)
+	{
+		successCondition1 = true;
+	}
+
+	try
+	{
+		s2.substring(0);
+	}
+	catch(exception& e)
+	{
+		successCondition2 = true;
+	}
+
+	return successCondition1 && successCondition2;
+}
+
+
+bool StringTests::testSubstringMethodReturnsExpectedResultsWithValidStartingIndexAndAmountOfElements(void)
+{
+	String s = "abcdefgh";
+	String s1 = s.substring(2, 1);
+	String s2 = s.substring(0, 4);
+	String s3 = s.substring(5, 4);
+	String s4 = s.substring(0, 10);
+	bool successCondition1 = s1 == "c";
+	bool successCondition2 = s2 == "abcd";
+	bool successCondition3 = s3 == "fgh";
+	bool successCondition4 = s4 == "abcdefgh";
+
+	return successCondition1 &&
+			successCondition2 &&
+			successCondition3 &&
+			successCondition4;	
+}
+
+bool StringTests::testSubstringMethodThrowsExceptionWithNotValidStartingIndex(void)
+{
+	String s1 = "abcdefgh";
+	String s2 = "";
+	bool successCondition1 = false;
+	bool successCondition2 = false;
+	
+	try
+	{
+		s1.substring(8, 1);
+	}
+	catch(exception& e)
+	{
+		successCondition1 = true;
+	}
+
+	try
+	{
+		s2.substring(0, 1);
+	}
+	catch(exception& e)
+	{
+		successCondition2 = true;
+	}
+
+	return successCondition1 && successCondition2;
 }

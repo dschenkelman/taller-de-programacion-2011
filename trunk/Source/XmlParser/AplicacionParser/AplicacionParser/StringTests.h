@@ -25,5 +25,9 @@ public:
 	bool testFindUsingStringReturnsCorrectIndex(void);
 	bool testContainsUsingTemporaryStringReturnsCorrectResult(void);
 	bool testContainsUsingStringReturnsCorrectResult(void);
+	bool testSubstringMethodReturnsExpectedResultsWithValidStartingIndex(void);
+	bool testSubstringMethodThrowsExceptionWithNotValidIndex(void);
+	bool testSubstringMethodReturnsExpectedResultsWithValidStartingIndexAndAmountOfElements(void);
+	bool testSubstringMethodThrowsExceptionWithNotValidStartingIndex(void);
 };
 
