@@ -102,6 +102,30 @@ long String::find(const String& otherString) const
 	return -1;
 }
 
+String String::substring(size_t startIndex) const
+{
+	return this->substring(startIndex, this->length() - startIndex);
+}
+
+String String::substring(size_t startIndex, size_t subLen) const
+{
+	if (startIndex >= this->length())
+	{
+		throw std::exception();
+	}
+	
+	String aux;
+	size_t end = (startIndex + subLen) < this->length() ? (startIndex + subLen) : this->length();
+	for (size_t i = startIndex; i < end; i++)
+	{
+		aux.characters.add(this->characters.at(i));
+	}
+
+	aux.characters.add(END_CHAR);
+
+	return aux;
+}
+
 //private methods
 void String::copyToCharacters(const char *s)
 {
@@ -149,4 +173,9 @@ bool String::equals(String& s) const
 	}
 
 	return false;
+}
+
+String::String()
+{
+
 }

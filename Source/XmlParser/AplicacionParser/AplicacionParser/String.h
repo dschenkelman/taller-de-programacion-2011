@@ -9,6 +9,7 @@ private:
 	void copyToCharacters(const char* s);
 	bool equals(const char*) const;
 	bool equals(String&) const;
+	String();
 public:
 	String(const char*);
 	~String(void);
@@ -24,4 +25,6 @@ public:
 	long find(const char*) const;
 	long find(const String&) const;
 	size_t length(void) const;
+	String substring(size_t startIndex) const;
+	String substring(size_t startIndex, size_t len) const;
 };
