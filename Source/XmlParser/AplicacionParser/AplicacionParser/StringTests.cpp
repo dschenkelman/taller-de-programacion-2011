@@ -42,6 +42,7 @@ void StringTests::run(void)
 	printResult("testSubstringMethodThrowsExceptionWithNotValidStartingIndex", testSubstringMethodThrowsExceptionWithNotValidStartingIndex());
 	printResult("testSplitWorksWithSingleCharacter", testSplitWorksWithSingleCharacter());
 	printResult("testSplitWorksWithTemporalString", testSplitWorksWithTemporalString());
+	printResult("testCanCreateStringFromChar", testCanCreateStringFromChar());
 
 	//dump memory leaks to VS Output Window
 	int leaks = _CrtDumpMemoryLeaks();
@@ -508,4 +509,23 @@ bool StringTests::testSplitWorksWithString(void)
 	return successCondition1 &&
 			successCondition2 &&
 			successCondition3;
+}
+
+bool StringTests::testCanCreateStringFromChar(void)
+{
+	String s1('s');
+	bool successCondition1 = s1 == "s";
+	bool successCondition2 = s1.length() == 1;
+
+	String s2('*');
+	bool successCondition3 = s2 == "*";
+	bool successCondition4 = s2.length() == 1;
+
+	String s3('\0');
+	bool successCondition5 = s3 == "";
+	bool successCondition6 = s3.length() == 0;
+
+	return successCondition1 && successCondition2 &&
+		successCondition3 && successCondition4 &&
+		successCondition5 && successCondition6;
 }

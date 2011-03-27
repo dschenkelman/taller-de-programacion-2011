@@ -12,6 +12,7 @@ private:
 
 public:
 	String();
+	String(char);
 	String(const char*);
 	~String(void);
 	bool operator==(const char*) const;
