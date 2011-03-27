@@ -34,6 +34,8 @@ void StringTests::run(void)
 	printResult("testFindForSingleCharReturnsCorrectIndex", testFindForSingleCharReturnsCorrectIndex());
 	printResult("testFindUsingTemporaryStringReturnsCorrectIndex", testFindUsingTemporaryStringReturnsCorrectIndex());
 	printResult("testFindUsingStringReturnsCorrectIndex", testFindUsingStringReturnsCorrectIndex());
+	printResult("testContainsUsingTemporaryStringReturnsCorrectResult", testContainsUsingTemporaryStringReturnsCorrectResult());
+	printResult("testContainsUsingStringReturnsCorrectResult", testContainsUsingStringReturnsCorrectResult());
 
 	//dump memory leaks to VS Output Window
 	int leaks = _CrtDumpMemoryLeaks();
@@ -262,6 +264,46 @@ bool StringTests::testFindUsingStringReturnsCorrectIndex(void)
 	bool successCondition5 = s.find(String("Rest")) == -1;
 	bool successCondition6 = s.find(String("estS")) == -1;
 	bool successCondition7 = s.find(String("")) == 0;
+
+	return successCondition1 && 
+			successCondition2 &&
+			successCondition3 && 
+			successCondition4 &&
+			successCondition5 &&
+			successCondition6 &&
+			successCondition7;
+}
+
+bool StringTests::testContainsUsingTemporaryStringReturnsCorrectResult(void)
+{
+	String s("Test String");
+	bool successCondition1 = s.contains("ring");
+	bool successCondition2 = s.contains("Te");
+	bool successCondition3 = s.contains("st ");
+	bool successCondition4 = !s.contains("RING");
+	bool successCondition5 = !s.contains("Rest");
+	bool successCondition6 = !s.contains("estS");
+	bool successCondition7 = s.contains("");
+
+	return successCondition1 && 
+			successCondition2 &&
+			successCondition3 && 
+			successCondition4 &&
+			successCondition5 &&
+			successCondition6 &&
+			successCondition7;
+}
+
+bool StringTests::testContainsUsingStringReturnsCorrectResult(void)
+{
+	String s("Test String");
+	bool successCondition1 = s.contains(String("ring"));
+	bool successCondition2 = s.contains(String("Te"));
+	bool successCondition3 = s.contains(String("st "));
+	bool successCondition4 = !s.contains(String("RING"));
+	bool successCondition5 = !s.contains(String("Rest"));
+	bool successCondition6 = !s.contains(String("estS"));
+	bool successCondition7 = s.contains(String(""));
 
 	return successCondition1 && 
 			successCondition2 &&
