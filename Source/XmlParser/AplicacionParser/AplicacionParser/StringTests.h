@@ -16,4 +16,7 @@ public:
 	bool testCreatedStringIsNotEqualToAnotherStringIfTheyAreNotEqual(void);
 	bool testCorrectlyComparesTwoEmptyStrings(void);
 	bool testReturnsCorrectStringLength(void);
+	bool testCharacterAtIndexCanBeAccessedForReadPurposes(void);
+	bool testCharacterAtIndexCanBeAccessedForWritePurposes(void);
+	bool testElementAtNonExistingIndexThrowsExceptionWhenAccessedThroughSubscripting(void);
 };

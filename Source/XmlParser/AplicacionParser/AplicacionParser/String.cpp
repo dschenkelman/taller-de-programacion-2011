@@ -30,6 +30,11 @@ bool String::operator !=(String& s)
 	return !this->equals(s);
 }
 
+char& String::operator [](size_t index)
+{
+	return this->characters.at(index);
+}
+
 size_t String::length(void)
 {
 	return this->characters.length() - 1;

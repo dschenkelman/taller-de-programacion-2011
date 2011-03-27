@@ -27,6 +27,9 @@ void StringTests::run(void)
 	printResult("testCreatedStringIsNotEqualToAnotherStringIfTheyAreNotEqual", testCreatedStringIsNotEqualToAnotherStringIfTheyAreNotEqual());
 	printResult("testCorrectlyComparesTwoEmptyStrings", testCorrectlyComparesTwoEmptyStrings());
 	printResult("testReturnsCorrectStringLength", testReturnsCorrectStringLength());
+	printResult("testCharacterAtIndexCanBeAccessedForReadPurposes", testCharacterAtIndexCanBeAccessedForReadPurposes());
+	printResult("testCharacterAtIndexCanBeAccessedForWritePurposes", testCharacterAtIndexCanBeAccessedForWritePurposes());
+	printResult("testElementAtNonExistingIndexThrowsExceptionWhenAccessedThroughSubscripting", testElementAtNonExistingIndexThrowsExceptionWhenAccessedThroughSubscripting());
 
 	//dump memory leaks to VS Output Window
 	int leaks = _CrtDumpMemoryLeaks();
@@ -125,4 +128,62 @@ bool StringTests::testReturnsCorrectStringLength(void)
 	bool successCondition3 = (s3.length() == 57);
 
 	return successCondition1 && successCondition2 && successCondition3;
+}
+
+bool StringTests::testCharacterAtIndexCanBeAccessedForReadPurposes(void)
+{
+	String s("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+	bool successCondition = true;
+
+	for (int i = 65; i < 91; i++)
+	{
+		successCondition = successCondition && s[i - 65] == i;
+	}
+
+	return successCondition;
+}
+
+bool StringTests::testCharacterAtIndexCanBeAccessedForWritePurposes(void)
+{
+	String s("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+	bool successCondition = true;
+
+	for (int i = 0; i < 26; i++)
+	{
+		s[i] = '*';
+	}
+
+	for (int i = 0; i < 26; i++)
+	{
+		successCondition = successCondition && s[i] == '*';
+	}
+
+	return successCondition;
+}
+
+bool StringTests::testElementAtNonExistingIndexThrowsExceptionWhenAccessedThroughSubscripting(void)
+{
+	String s("TestString");
+	bool successCondition1 = false;
+	bool successCondition2 = false;
+
+	try
+	{
+		char a = s[12];
+	}
+	catch (exception& e)
+	{
+		successCondition1 = true;
+	}
+
+	try
+	{
+		s[15] = 't';
+	}
+	catch (exception& e)
+	{
+		successCondition2 = true;
+	}
+
+	return successCondition1 && successCondition2;
 }
