@@ -32,5 +32,6 @@ public:
 	bool testSplitWorksWithSingleCharacter(void);
 	bool testSplitWorksWithTemporalString(void);
 	bool testSplitWorksWithString(void);
+	bool testCanCreateStringFromChar(void);
 };
 

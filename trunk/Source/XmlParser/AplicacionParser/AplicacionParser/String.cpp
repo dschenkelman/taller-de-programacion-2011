@@ -11,6 +11,15 @@ String::String(const char* s)
 	this->copyToCharacters(s);
 }
 
+String::String(char c)
+{
+	if (c != END_CHAR)
+	{
+		this->characters.add(c);
+	}
+	this->characters.add(END_CHAR);
+}
+
 String::~String(void)
 {
 }
@@ -62,15 +71,7 @@ bool String::contains(String& s) const
 
 long String::find(char c) const
 {
-	for (size_t i = 0; i < this->characters.length(); i++)
-	{
-		if (this->characters.at(i) == c)
-		{
-			return i;
-		}
-	}
-
-	return -1;
+	return this->find(String(c));
 }
 
 long String::find(const char* s) const
@@ -131,37 +132,9 @@ String String::substring(size_t startIndex, size_t subLen) const
 	return aux;
 }
 
-List<String> String::split(char c) const
+List<String> String::split(char delimiter) const
 {
-	size_t times = 0;
-	List<size_t> indexes;
-	for (size_t i = 0; i < this->length(); i++)
-	{
-		if (this->characters.at(i) == c)
-		{
-			indexes.add(i);
-		}
-	}
-
-	List<String> tokens;
-	size_t initialIndex = 0;
-	for (size_t i = 0; i < indexes.length(); i++)
-	{
-		size_t finalIndex = indexes.at(i);
-		tokens.add(this->substring(initialIndex, finalIndex - initialIndex));
-		initialIndex = finalIndex + 1;
-	}
-
-	if (initialIndex == this->length())
-	{
-		tokens.add(String(""));
-	}
-	else
-	{
-		tokens.add(this->substring(initialIndex, this->length() - initialIndex));
-	}
-
-	return tokens;
+	return this->split(String(delimiter));
 }
 
 List<String> String::split(const char* delimiters) const
