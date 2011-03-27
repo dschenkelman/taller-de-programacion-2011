@@ -19,4 +19,8 @@ public:
 	bool testCharacterAtIndexCanBeAccessedForReadPurposes(void);
 	bool testCharacterAtIndexCanBeAccessedForWritePurposes(void);
 	bool testElementAtNonExistingIndexThrowsExceptionWhenAccessedThroughSubscripting(void);
+	bool testContainsForSingleCharReturnsCorrectResult(void);
+	bool testFindForSingleCharReturnsCorrectIndex(void);
+	bool testFindUsingTemporaryStringReturnsCorrectIndex(void);
+	bool testFindUsingStringReturnsCorrectIndex(void);
 };
