@@ -69,5 +69,7 @@ string XmlElement::getValue(string key) {
 
 XmlElement::~XmlElement(void)
 {
-	delete this->children;
+	if (this->children_created) {
+		delete this->children;
+	}
 }
