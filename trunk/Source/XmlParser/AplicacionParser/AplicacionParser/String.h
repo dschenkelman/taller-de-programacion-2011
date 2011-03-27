@@ -16,5 +16,6 @@ public:
 	bool operator==(String&);
 	bool operator!=(const char*);
 	bool operator!=(String&);
+	char& operator[](size_t);
 	size_t length(void);
 };
