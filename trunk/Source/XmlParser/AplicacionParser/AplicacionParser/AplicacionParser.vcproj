@@ -179,6 +179,22 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Bonus.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Camino.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Celda.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Grilla.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\ListTests.cpp"
 				>
 			</File>
@@ -188,6 +204,10 @@
 			</File>
 			<File
 				RelativePath=".\LoggerTests.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Obstaculo.cpp"
 				>
 			</File>
 			<File
@@ -223,6 +243,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\TipoBonus.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\TipoObstaculo.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\XmlAttribute.cpp"
 				>
 			</File>
@@ -249,6 +277,22 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
+				RelativePath=".\Bonus.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Camino.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Celda.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Grilla.h"
+				>
+			</File>
+			<File
 				RelativePath=".\List.h"
 				>
 			</File>
@@ -262,6 +306,10 @@
 			</File>
 			<File
 				RelativePath=".\LoggerTests.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Obstaculo.h"
 				>
 			</File>
 			<File
@@ -282,6 +330,14 @@
 			</File>
 			<File
 				RelativePath=".\StringTests.h"
+				>
+			</File>
+			<File
+				RelativePath=".\TipoBonus.h"
+				>
+			</File>
+			<File
+				RelativePath=".\TipoObstaculo.h"
 				>
 			</File>
 			<File
