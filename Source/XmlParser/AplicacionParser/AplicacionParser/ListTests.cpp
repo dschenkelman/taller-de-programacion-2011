@@ -47,6 +47,8 @@ void ListTests::run()
 	printResult("testElementAtIndexCanBeAccessedThroughSubscriptOperatorForReadPurposes", testElementAtIndexCanBeAccessedThroughSubscriptOperatorForReadPurposes());
 	printResult("testElementAtIndexCanBeAccessedThroughSubscriptOperatorForWritePurposes", testElementAtIndexCanBeAccessedThroughSubscriptOperatorForWritePurposes());
 	printResult("testElementAtNonExistingIndexThrowsExceptionWhenAccessedThroughSubscripting", testElementAtNonExistingIndexThrowsExceptionWhenAccessedThroughSubscripting());
+	printResult("testCopyConstructorWorksCorrectly", testCopyConstructorWorksCorrectly());
+	printResult("testAssignmentOperatorWorksCorrectly", testAssignmentOperatorWorksCorrectly());
 
 	//dump memory leaks to VS Output Window
 	int leaks = _CrtDumpMemoryLeaks();
@@ -383,4 +385,46 @@ bool ListTests::testElementAtNonExistingIndexThrowsExceptionWhenAccessedThroughS
 	}
 
 	return successCondition1 && successCondition2;
+}
+
+bool ListTests::testCopyConstructorWorksCorrectly(void)
+{
+	List<int> list1;
+	list1.add(5);
+	list1.add(6);
+	list1.add(7);
+	
+	List<int> list2(list1);
+	bool successCondition1 = list2.at(0) == 5;
+	bool successCondition2 = list2.at(1) == 6;
+	bool successCondition3 = list2.at(2) == 7;
+	bool successCondition4 = list2.length() == 3;
+
+	return successCondition1 && successCondition2 && successCondition3 && successCondition4;
+}
+
+bool ListTests::testAssignmentOperatorWorksCorrectly(void)
+{
+	List<int> list1;	
+	List<int> list2;
+
+	list1.add(5);
+	list1.add(6);
+	list1.add(7);
+	list2.add(1);
+	list2.add(2);
+	list2.add(3);
+	list2.add(4);
+
+	list1 = list2;
+
+	bool successCondition1 = list1.at(0) == 1;
+	bool successCondition2 = list1.at(1) == 2;
+	bool successCondition3 = list1.at(2) == 3;
+	bool successCondition4 = list1.at(3) == 4;
+	bool successCondition5 = list1.length() == 4;
+
+	return successCondition1 && successCondition2 &&
+			successCondition3 && successCondition4 &&
+			successCondition5;
 }

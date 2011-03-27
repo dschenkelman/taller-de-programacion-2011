@@ -46,26 +46,32 @@ void StringTests::printLeaks(int leaks)
 bool StringTests::testCreatedStringIsEqualToTemporaryStringIfTheyAreEqual(void)
 {
 	String s("TestString");
-	bool successCondition = s == "TestString";
-	return successCondition;
+	bool successCondition1 = s == "TestString";
+	bool successCondition2 = !(s != "TestString");
+	return successCondition1 && successCondition2;
 }
 
 bool StringTests::testCreatedStringIsNotEqualToTemporaryStringIfTheyAreNotEqual(void)
 {
 	String s("TestString");
 	bool successCondition1 = !(s == "TestStrong");
+	bool successCondition2 = (s != "TestStrong");
 
-	bool successCondition2 = !(s == "TestStringer");
+	bool successCondition3 = !(s == "TestStringer");
+	bool successCondition4 = (s != "TestStringer");
 
-	bool successCondition3 = !(s == "Testing");
-	return successCondition1 && successCondition2 && successCondition3;
+	bool successCondition5 = !(s == "Testing");
+	bool successCondition6 = (s != "Testing");
+	return successCondition1 && successCondition2 && successCondition3
+		&& successCondition4 && successCondition5 && successCondition6;
 }
 
 bool StringTests::testCreatedEmptyStringIsEqualToEmptyString(void)
 {
 	String s("");
-	bool successCondition = s == "";
-	return successCondition;
+	bool successCondition1 = s == "";
+	bool successCondition2 = !(s != "");
+	return successCondition1 && successCondition2;
 }
 
 bool StringTests::testCanCompareStringThatAreEqualAndReturnEqual(void)
@@ -73,8 +79,9 @@ bool StringTests::testCanCompareStringThatAreEqualAndReturnEqual(void)
 	String s1("TestString");
 	String s2("TestString");
 
-	bool successCondition = (s1 == s2);
-	return successCondition;
+	bool successCondition1 = (s1 == s2);
+	bool successCondition2 = !(s1 != s2);
+	return successCondition1 && successCondition2;
 }
 
 bool StringTests::testCreatedStringIsNotEqualToAnotherStringIfTheyAreNotEqual(void)
@@ -82,13 +89,17 @@ bool StringTests::testCreatedStringIsNotEqualToAnotherStringIfTheyAreNotEqual(vo
 	String s("TestString");
 	String s1("TestStrong");
 	bool successCondition1 = !(s == s1);
+	bool successCondition4 = (s != s1);
 
 	String s2("TestStringer");
 	bool successCondition2 = !(s == s2);
+	bool successCondition5 = (s != s2);
 
 	String s3("Testing");
 	bool successCondition3 = !(s == s3);
-	return successCondition1 && successCondition2 && successCondition3;
+	bool successCondition6 = (s != s3);
+	return successCondition1 && successCondition2 && successCondition3
+		&& successCondition4 && successCondition5 && successCondition6;
 }
 
 bool StringTests::testCorrectlyComparesTwoEmptyStrings(void)
@@ -96,9 +107,10 @@ bool StringTests::testCorrectlyComparesTwoEmptyStrings(void)
 	String s1("");
 	String s2("");
 
-	bool successCondition = (s1 == s2);
+	bool successCondition1 = (s1 == s2);
+	bool successCondition2 = !(s1 != s2);
 
-	return successCondition;
+	return successCondition1 && successCondition2;
 }
 
 bool StringTests::testReturnsCorrectStringLength(void)

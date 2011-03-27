@@ -12,6 +12,45 @@ String::~String(void)
 
 bool String::operator ==(const char* s)
 {
+	return this->equals(s);
+}
+
+bool String::operator ==(String& s)
+{
+	return this->equals(s);
+}
+
+bool String::operator !=(const char* s)
+{
+	return !this->equals(s);
+}
+
+bool String::operator !=(String& s)
+{
+	return !this->equals(s);
+}
+
+size_t String::length(void)
+{
+	return this->characters.length() - 1;
+}
+
+//private methods
+void String::copyToCharacters(const char *s)
+{
+	int i = 0;
+	char currentChar = s[0];
+	while(currentChar != END_CHAR)
+	{
+		this->characters.add(currentChar);
+		i++;
+		currentChar = s[i];
+	}
+	this->characters.add(END_CHAR);
+}
+
+bool String::equals(const char* s)
+{
 	int i = 0;
 	char externalChar = s[i];
 	char internalChar = this->characters.at(i);
@@ -32,10 +71,10 @@ bool String::operator ==(const char* s)
 		return true;
 	}
 
-	return false;
+	return false;	
 }
 
-bool String::operator ==(String& s)
+bool String::equals(String& s)
 {
 	int i = 0;
 	char externalChar = s.characters.at(i);
@@ -58,23 +97,4 @@ bool String::operator ==(String& s)
 	}
 
 	return false;
-}
-
-//private methods
-void String::copyToCharacters(const char *s)
-{
-	int i = 0;
-	char currentChar = s[0];
-	while(currentChar != END_CHAR)
-	{
-		this->characters.add(currentChar);
-		i++;
-		currentChar = s[i];
-	}
-	this->characters.add(END_CHAR);
-}
-
-size_t String::length(void)
-{
-	return this->characters.length() - 1;
 }

@@ -49,14 +49,24 @@ private:
 		this->resize(-this->sizeDifferential);
 	}
 
-	bool shouldDecreaseSize()
+	bool shouldDecreaseSize() const
 	{
 		return this->count < (this->currentSize - this->sizeDifferential);
 	}
 
-	bool isWithinBounds(size_t index)
+	bool isWithinBounds(size_t index) const
 	{
 		return !(index < 0 || index >= this->count);
+	}
+
+	void populateItemsFromList(const List& l)
+	{
+		this->items = new T[l.capacity()];
+
+		for (size_t i = 0; i < l.length(); i++)
+		{
+			this->items[i] = l.at(i);
+		}
 	}
 
 public:
@@ -65,9 +75,31 @@ public:
 		this->items = new T[initialItems];
 	}
 
+	List(List& l) : count(l.length()), currentSize(l.capacity())
+	{
+		this->populateItemsFromList(l);
+	}
+
 	~List(void)
 	{
 		delete []items;
+	}
+
+	List& operator=(const List& l)
+	{
+		if (this == &l) 
+		{
+			return *this;
+		}
+		// reset list
+		delete []items;
+		
+		// initialize
+		currentSize = l.capacity();
+		count = l.length();
+		populateItemsFromList(l);
+
+		return *this;
 	}
 
 	void add(const T& item)
@@ -110,7 +142,7 @@ public:
 		return this->removeAt(this->count - 1);
 	}
 
-	T& at(size_t position)
+	T& at(size_t position) const
 	{
 		if (!this->isWithinBounds(position))
 		{
@@ -119,17 +151,17 @@ public:
 		return this->items[position];
 	}
 
-	size_t length()
+	size_t length() const
 	{
 		return this->count;
 	}
 
-	size_t capacity()
+	size_t capacity() const
 	{
 		return this->currentSize;
 	}
 
-	T& operator[](size_t index)
+	T& operator[](size_t index) const
 	{
 		return this->at(index);
 	}
