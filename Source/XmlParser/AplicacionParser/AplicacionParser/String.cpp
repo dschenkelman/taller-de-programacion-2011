@@ -10,34 +10,86 @@ String::~String(void)
 {
 }
 
-bool String::operator ==(const char* s)
+bool String::operator ==(const char* s) const
 {
 	return this->equals(s);
 }
 
-bool String::operator ==(String& s)
+bool String::operator ==(String& s) const
 {
 	return this->equals(s);
 }
 
-bool String::operator !=(const char* s)
+bool String::operator !=(const char* s) const
 {
 	return !this->equals(s);
 }
 
-bool String::operator !=(String& s)
+bool String::operator !=(String& s) const
 {
 	return !this->equals(s);
 }
 
-char& String::operator [](size_t index)
+char& String::operator [](size_t index) const
 {
 	return this->characters.at(index);
 }
 
-size_t String::length(void)
+size_t String::length(void) const
 {
 	return this->characters.length() - 1;
+}
+
+bool String::contains(char c) const
+{
+	return this->find(c) != -1;
+}
+
+long String::find(char c) const
+{
+	for (size_t i = 0; i < this->characters.length(); i++)
+	{
+		if (this->characters.at(i) == c)
+		{
+			return i;
+		}
+	}
+
+	return -1;
+}
+
+long String::find(const char* s) const
+{
+	return this->find(String(s));
+}
+
+long String::find(const String& otherString) const
+{
+	size_t itemsToFind = otherString.length();
+	size_t itemsFound = 0;
+	size_t initialIndex = 0;
+	for (size_t i = 0; i < this->length(); i++)
+	{		
+		if (this->characters.at(i) == otherString[itemsFound])
+		{
+			if (itemsFound == 0)
+			{
+				initialIndex = i;
+			}
+			itemsFound++;
+		}
+		else
+		{
+			itemsFound = 0;
+		}
+
+		if (itemsFound == itemsToFind)
+		{
+			return initialIndex;
+		}
+	}
+
+	return -1;
 }
 
 //private methods
@@ -54,33 +106,18 @@ void String::copyToCharacters(const char *s)
 	this->characters.add(END_CHAR);
 }
 
-bool String::equals(const char* s)
+bool String::equals(const char* s) const
 {
-	int i = 0;
-	char externalChar = s[i];
-	char internalChar = this->characters.at(i);
-	while(internalChar != END_CHAR && internalChar != END_CHAR)
-	{
-		if (internalChar != externalChar)
-		{
-			return false;
-		}
-
-		i++;
-		externalChar = s[i];
-		internalChar = this->characters.at(i);
-	}
-
-	if (externalChar == internalChar)
-	{
-		return true;
-	}
-
-	return false;	
+	String aux(s);
+	return this->equals(aux);
 }
 
-bool String::equals(String& s)
+bool String::equals(String& s) const
 {
+	if (s.length() != this->length())
+	{
+		return false;
+	}
 	int i = 0;
 	char externalChar = s.characters.at(i);
 	char internalChar = this->characters.at(i);

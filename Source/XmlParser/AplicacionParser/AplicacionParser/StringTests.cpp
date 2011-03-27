@@ -30,6 +30,10 @@ void StringTests::run(void)
 	printResult("testCharacterAtIndexCanBeAccessedForReadPurposes", testCharacterAtIndexCanBeAccessedForReadPurposes());
 	printResult("testCharacterAtIndexCanBeAccessedForWritePurposes", testCharacterAtIndexCanBeAccessedForWritePurposes());
 	printResult("testElementAtNonExistingIndexThrowsExceptionWhenAccessedThroughSubscripting", testElementAtNonExistingIndexThrowsExceptionWhenAccessedThroughSubscripting());
+	printResult("testContainsForSingleCharReturnsCorrectResult", testContainsForSingleCharReturnsCorrectResult());
+	printResult("testFindForSingleCharReturnsCorrectIndex", testFindForSingleCharReturnsCorrectIndex());
+	printResult("testFindUsingTemporaryStringReturnsCorrectIndex", testFindUsingTemporaryStringReturnsCorrectIndex());
+	printResult("testFindUsingStringReturnsCorrectIndex", testFindUsingStringReturnsCorrectIndex());
 
 	//dump memory leaks to VS Output Window
 	int leaks = _CrtDumpMemoryLeaks();
@@ -186,4 +190,84 @@ bool StringTests::testElementAtNonExistingIndexThrowsExceptionWhenAccessedThroug
 	}
 
 	return successCondition1 && successCondition2;
+}
+
+bool StringTests::testContainsForSingleCharReturnsCorrectResult(void)
+{
+	String s("TestString#");
+	bool successCondition1 = s.contains('#');
+	bool successCondition2 = s.contains('T');
+	bool successCondition3 = s.contains('s');
+	bool successCondition4 = s.contains('S');
+	bool successCondition5 = !s.contains('I');
+	bool successCondition6 = !s.contains('a');
+	bool successCondition7 = !s.contains('*');
+
+	return successCondition1 &&
+		   successCondition2 &&
+		   successCondition3 &&
+		   successCondition4 &&
+		   successCondition5 &&
+		   successCondition6 && 
+		   successCondition7;
+}
+
+bool StringTests::testFindForSingleCharReturnsCorrectIndex(void)
+{
+	String s("TestString#");
+	bool successCondition1 = s.find('#') == 10;
+	bool successCondition2 = s.find('T') == 0;
+	bool successCondition3 = s.find('s') == 2;
+	bool successCondition4 = s.find('S') == 4;
+	bool successCondition5 = s.find('I') == -1;
+	bool successCondition6 = s.find('a') == -1;
+	bool successCondition7 = s.find('*') == -1;
+
+	return successCondition1 &&
+		   successCondition2 &&
+		   successCondition3 &&
+		   successCondition4 &&
+		   successCondition5 &&
+		   successCondition6 && 
+		   successCondition7;
+}
+
+bool StringTests::testFindUsingTemporaryStringReturnsCorrectIndex(void)
+{
+	String s("Test String");
+	bool successCondition1 = s.find("ring") == 7;
+	bool successCondition2 = s.find("Te") == 0;
+	bool successCondition3 = s.find("st ") == 2;
+	bool successCondition4 = s.find("RING") == -1;
+	bool successCondition5 = s.find("Rest") == -1;
+	bool successCondition6 = s.find("estS") == -1;
+	bool successCondition7 = s.find("") == 0;
+
+	return successCondition1 && 
+			successCondition2 &&
+			successCondition3 && 
+			successCondition4 &&
+			successCondition5 &&
+			successCondition6 &&
+			successCondition7;
+}
+
+bool StringTests::testFindUsingStringReturnsCorrectIndex(void)
+{
+	String s("Test String");
+	bool successCondition1 = s.find(String("ring")) == 7;
+	bool successCondition2 = s.find(String("Te")) == 0;
+	bool successCondition3 = s.find(String("st ")) == 2;
+	bool successCondition4 = s.find(String("RING")) == -1;
+	bool successCondition5 = s.find(String("Rest")) == -1;
+	bool successCondition6 = s.find(String("estS")) == -1;
+	bool successCondition7 = s.find(String("")) == 0;
+
+	return successCondition1 && 
+			successCondition2 &&
+			successCondition3 && 
+			successCondition4 &&
+			successCondition5 &&
+			successCondition6 &&
+			successCondition7;
 }
