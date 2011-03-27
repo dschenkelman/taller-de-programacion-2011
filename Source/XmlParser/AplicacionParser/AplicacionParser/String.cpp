@@ -1,6 +1,11 @@
 #include "StdAfx.h"
 #include "String.h"
 
+String::String()
+{
+
+}
+
 String::String(const char* s)
 {
 	this->copyToCharacters(s);
@@ -126,6 +131,77 @@ String String::substring(size_t startIndex, size_t subLen) const
 	return aux;
 }
 
+List<String> String::split(char c) const
+{
+	size_t times = 0;
+	List<size_t> indexes;
+	for (size_t i = 0; i < this->length(); i++)
+	{
+		if (this->characters.at(i) == c)
+		{
+			indexes.add(i);
+		}
+	}
+
+	List<String> tokens;
+	size_t initialIndex = 0;
+	for (size_t i = 0; i < indexes.length(); i++)
+	{
+		size_t finalIndex = indexes.at(i);
+		tokens.add(this->substring(initialIndex, finalIndex - initialIndex));
+		initialIndex = finalIndex + 1;
+	}
+
+	if (initialIndex == this->length())
+	{
+		tokens.add(String(""));
+	}
+	else
+	{
+		tokens.add(this->substring(initialIndex, this->length() - initialIndex));
+	}
+
+	return tokens;
+}
+
+List<String> String::split(const char* delimiters) const
+{
+	return this->split(String(delimiters));
+}
+
+List<String> String::split(String& delimiters) const
+{
+	size_t times = 0;
+	List<size_t> indexes;
+	for (size_t i = 0; i < this->length(); i++)
+	{
+		if (delimiters.contains(this->characters.at(i)))
+		{
+			indexes.add(i);
+		}
+	}
+
+	List<String> tokens;
+	size_t initialIndex = 0;
+	for (size_t i = 0; i < indexes.length(); i++)
+	{
+		size_t finalIndex = indexes.at(i);
+		tokens.add(this->substring(initialIndex, finalIndex - initialIndex));
+		initialIndex = finalIndex + 1;
+	}
+
+	if (initialIndex == this->length())
+	{
+		tokens.add(String(""));
+	}
+	else
+	{
+		tokens.add(this->substring(initialIndex, this->length() - initialIndex));
+	}
+
+	return tokens;
+}
+
 //private methods
 void String::copyToCharacters(const char *s)
 {
@@ -173,9 +249,4 @@ bool String::equals(String& s) const
 	}
 
 	return false;
-}
-
-String::String()
-{
-
 }

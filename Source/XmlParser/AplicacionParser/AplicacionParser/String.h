@@ -9,8 +9,9 @@ private:
 	void copyToCharacters(const char* s);
 	bool equals(const char*) const;
 	bool equals(String&) const;
-	String();
+
 public:
+	String();
 	String(const char*);
 	~String(void);
 	bool operator==(const char*) const;
@@ -27,4 +28,7 @@ public:
 	size_t length(void) const;
 	String substring(size_t startIndex) const;
 	String substring(size_t startIndex, size_t len) const;
+	List<String> split(char) const;
+	List<String> split(const char*) const;
+	List<String> split(String&) const;
 };

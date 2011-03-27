@@ -40,6 +40,8 @@ void StringTests::run(void)
 	printResult("testSubstringMethodThrowsExceptionWithNotValidIndex", testSubstringMethodThrowsExceptionWithNotValidIndex());
 	printResult("testSubstringMethodReturnsExpectedResultsWithValidStartingIndexAndAmountOfElements", testSubstringMethodReturnsExpectedResultsWithValidStartingIndexAndAmountOfElements());
 	printResult("testSubstringMethodThrowsExceptionWithNotValidStartingIndex", testSubstringMethodThrowsExceptionWithNotValidStartingIndex());
+	printResult("testSplitWorksWithSingleCharacter", testSplitWorksWithSingleCharacter());
+	printResult("testSplitWorksWithTemporalString", testSplitWorksWithTemporalString());
 
 	//dump memory leaks to VS Output Window
 	int leaks = _CrtDumpMemoryLeaks();
@@ -406,4 +408,104 @@ bool StringTests::testSubstringMethodThrowsExceptionWithNotValidStartingIndex(vo
 	}
 
 	return successCondition1 && successCondition2;
+}
+
+bool StringTests::testSplitWorksWithSingleCharacter(void)
+{
+	String s("A,B,C,D,");
+	List<String> strings1 = s.split(',');
+
+	bool successCondition1 = strings1.length() == 5;
+	bool successCondition2 = strings1.at(0) == "A";
+	bool successCondition3 = strings1.at(1) == "B";
+	bool successCondition4 = strings1.at(2) == "C";
+	bool successCondition5 = strings1.at(3) == "D";
+	bool successCondition6 = strings1.at(4) == "";
+
+	List<String> strings2 = s.split('C');
+	bool successCondition7 = strings2.length() == 2;
+	bool successCondition8 = strings2.at(0) == "A,B,";
+	bool successCondition9 = strings2.at(1) == ",D,";
+
+	List<String> strings3 = s.split('A');
+	bool successCondition10 = strings3.length() == 2;
+	bool successCondition11 = strings3.at(0) == "";
+	bool successCondition12 = strings3.at(1) == ",B,C,D,";
+
+	return successCondition1 &&
+			successCondition2 &&
+			successCondition3 &&
+			successCondition4 &&
+			successCondition5 &&
+			successCondition6 &&
+			successCondition7 &&
+			successCondition8 &&
+			successCondition9 &&
+			successCondition10 &&
+			successCondition11 &&
+			successCondition12;
+}
+
+bool StringTests::testSplitWorksWithTemporalString(void)
+{
+	String s("A,B/C&D,E$F*G,H,I#");
+	List<String> strings1 = s.split(",/&$*#");
+
+	bool successCondition1 = strings1.length() == 10;
+	successCondition1 = successCondition1 && strings1.at(0) == "A";
+	successCondition1 = successCondition1 && strings1.at(1) == "B";
+	successCondition1 = successCondition1 && strings1.at(2) == "C";
+	successCondition1 = successCondition1 && strings1.at(3) == "D";
+	successCondition1 = successCondition1 && strings1.at(4) == "E";
+	successCondition1 = successCondition1 && strings1.at(5) == "F";
+	successCondition1 = successCondition1 && strings1.at(6) == "G";
+	successCondition1 = successCondition1 && strings1.at(7) == "H";
+	successCondition1 = successCondition1 && strings1.at(8) == "I";
+	successCondition1 = successCondition1 && strings1.at(9) == "";
+
+	List<String> strings2 = s.split("C");
+	bool successCondition2 = strings2.length() == 2;
+	successCondition2 = successCondition2 && strings2.at(0) == "A,B/";
+	successCondition2 = successCondition2 && strings2.at(1) == "&D,E$F*G,H,I#";
+
+	List<String> strings3 = s.split("A");
+	bool successCondition3 = strings3.length() == 2;
+	successCondition3 = successCondition3 && strings3.at(0) == "";
+	successCondition3 = successCondition3 && strings3.at(1) == ",B/C&D,E$F*G,H,I#";
+
+	return successCondition1 &&
+			successCondition2 &&
+			successCondition3;
+}
+
+bool StringTests::testSplitWorksWithString(void)
+{
+	String s("A,B/C&D,E$F*G,H,I#");
+	List<String> strings1 = s.split(String(",/&$*#"));
+
+	bool successCondition1 = strings1.length() == 10;
+	successCondition1 = successCondition1 && strings1.at(0) == "A";
+	successCondition1 = successCondition1 && strings1.at(1) == "B";
+	successCondition1 = successCondition1 && strings1.at(2) == "C";
+	successCondition1 = successCondition1 && strings1.at(3) == "D";
+	successCondition1 = successCondition1 && strings1.at(4) == "E";
+	successCondition1 = successCondition1 && strings1.at(5) == "F";
+	successCondition1 = successCondition1 && strings1.at(6) == "G";
+	successCondition1 = successCondition1 && strings1.at(7) == "H";
+	successCondition1 = successCondition1 && strings1.at(8) == "I";
+	successCondition1 = successCondition1 && strings1.at(9) == "";
+
+	List<String> strings2 = s.split(String("C"));
+	bool successCondition2 = strings2.length() == 2;
+	successCondition2 = successCondition2 && strings2.at(0) == "A,B/";
+	successCondition2 = successCondition2 && strings2.at(1) == "&D,E$F*G,H,I#";
+
+	List<String> strings3 = s.split(String("A"));
+	bool successCondition3 = strings3.length() == 2;
+	successCondition3 = successCondition3 && strings3.at(0) == "";
+	successCondition3 = successCondition3 && strings3.at(1) == ",B/C&D,E$F*G,H,I#";
+
+	return successCondition1 &&
+			successCondition2 &&
+			successCondition3;
 }
