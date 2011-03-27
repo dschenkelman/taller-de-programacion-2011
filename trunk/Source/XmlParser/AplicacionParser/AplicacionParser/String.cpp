@@ -45,6 +45,16 @@ bool String::contains(char c) const
 	return this->find(c) != -1;
 }
 
+bool String::contains(const char* s) const
+{
+	return this->find(s) != -1;
+}
+
+bool String::contains(String& s) const
+{
+	return this->find(s) != -1;
+}
+
 long String::find(char c) const
 {
 	for (size_t i = 0; i < this->characters.length(); i++)

@@ -23,4 +23,7 @@ public:
 	bool testFindForSingleCharReturnsCorrectIndex(void);
 	bool testFindUsingTemporaryStringReturnsCorrectIndex(void);
 	bool testFindUsingStringReturnsCorrectIndex(void);
+	bool testContainsUsingTemporaryStringReturnsCorrectResult(void);
+	bool testContainsUsingStringReturnsCorrectResult(void);
 };
+

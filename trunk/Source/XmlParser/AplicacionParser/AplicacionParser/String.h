@@ -18,6 +18,8 @@ public:
 	bool operator!=(String&) const;
 	char& operator[](size_t) const;
 	bool contains(char) const;
+	bool contains(const char*) const;
+	bool contains(String&) const;
 	long find(char) const;
 	long find(const char*) const;
 	long find(const String&) const;
