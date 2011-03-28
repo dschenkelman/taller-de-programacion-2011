@@ -3,12 +3,12 @@
 class Celda
 {
 protected:
-	size_t fila;
-	size_t columna;
+	int fila;
+	int columna;
 public:
-	Celda(size_t f, size_t c);
+	Celda(int f, int c);
 	Celda(void);
-	size_t getFila();
-	size_t getColumna();
+	int getFila();
+	int getColumna();
 	~Celda(void);
 };

@@ -1,5 +1,5 @@
 #pragma once
-# include "XmlElement.h"
+#include "XmlElement.h"
 
 class TipoBonus
 {
@@ -8,6 +8,7 @@ class TipoBonus
 public:
 	TipoBonus(XmlElement e);
 	TipoBonus(std::string n, char t);
+	TipoBonus(void);
 	std::string getNombre(void);
 	char getTextura(void);
 	~TipoBonus(void);

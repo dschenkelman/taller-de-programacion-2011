@@ -1,6 +1,10 @@
 #include "StdAfx.h"
 #include "Bonus.h"
 
+Bonus::Bonus(void)
+{
+}
+
 Bonus::Bonus(XmlElement e)
 {
 	if (e.hasAttribute("tipo"))
@@ -14,13 +18,19 @@ Bonus::Bonus(std::string t)
 	tipo = t;
 }
 
-Bonus::Bonus(void)
-{
-}
-
 std::string Bonus::getTipo()
 {
 	return tipo;
+}
+
+void Bonus::setTipoBonus(TipoBonus tb)
+{
+	tipoBonus = tb;
+}
+
+TipoBonus Bonus::getTipoBonus()
+{
+	return tipoBonus;
 }
 
 Bonus::~Bonus(void)

@@ -1,7 +1,7 @@
 #include "StdAfx.h"
 #include "Obstaculo.h"
 
-Obstaculo::Obstaculo(std::string t, size_t f, size_t c)
+Obstaculo::Obstaculo(std::string t, int f, int c)
 {
 	tipo = t;
 	fila = f;
@@ -10,11 +10,35 @@ Obstaculo::Obstaculo(std::string t, size_t f, size_t c)
 
 Obstaculo::Obstaculo(XmlElement e)
 {
-	if (e.hasAttribute("fila") && e.hasAttribute("columna") && e.hasAttribute("tipo"))
+	if (e.hasAttribute("tipo"))
 	{
 		tipo = e.getValue("tipo");
-		//fila = e.getValue("fila");
-		//columna = e.getValue("columna");
+	}
+
+	if (e.hasAttribute("fila"))
+	{
+		std::string filaString = e.getValue("fila");
+		int f = atoi(filaString.c_str());
+
+		if(f < 0)
+		{
+			throw std::exception();
+		}
+
+		fila = f;
+	}
+
+	if(e.hasAttribute("columna"))
+	{
+		std::string columnaString = e.getValue("columna");
+		int c = atoi(columnaString.c_str());
+
+		if (c < 0)
+		{
+			throw std::exception();
+		}
+
+		columna = c;
 	}
 }
 
