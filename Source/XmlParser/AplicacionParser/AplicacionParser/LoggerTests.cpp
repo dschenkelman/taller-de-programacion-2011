@@ -28,9 +28,10 @@ void LoggerTests::printResult(std::string testName, bool result)
 
 void LoggerTests::run()
 {
-	std::cout << ("\n ::LoggerTests::\n");
 	printResult("testLogWarning", testLogWarning());
 	printResult("testLogError", testLogError());
+	printResult("testLogWarningConstructorSoloRuta", testLogWarningConstructorSoloRuta());
+	printResult("testLogErrorConstructorSoloRuta", testLogErrorConstructorSoloRuta());
 	
 	//dump memory leaks to VS Output Window
 	int leaks = _CrtDumpMemoryLeaks();
@@ -73,6 +74,41 @@ bool LoggerTests::testLogWarning(void)
 
 }
 
+
+bool LoggerTests::testLogWarningConstructorSoloRuta(void)
+{
+	bool successCondition1 = false;
+
+	const char* ruta = "log.txt";
+	const char* mensaje;
+	
+	// Nuevo logger
+	Logger loggerInstance(ruta);
+	
+	// Obtengo el tamanio inicial del archivo
+	fseek (loggerInstance.obetenerArchivo(), 0, SEEK_END);
+	size_t tamanioArchivoAntes = ftell(loggerInstance.obetenerArchivo());
+	
+	mensaje = "el la cantidad de obstaculos es superior a la esperada.\0";
+
+	// Loggeo el warning
+	loggerInstance.logWarning(mensaje);
+
+	// Obtengo el tamanio despues de loggear
+	fseek (loggerInstance.obetenerArchivo(), 0, SEEK_END);
+	size_t tamanioArchivoDespues = ftell(loggerInstance.obetenerArchivo());
+	
+	// Comparo el tamanio esperado con el actual
+	if (tamanioArchivoDespues > tamanioArchivoAntes) successCondition1 = true;
+
+	// Destruyo el logger
+	loggerInstance.~Logger();
+
+	return successCondition1;
+
+}
+
+
 bool LoggerTests::testLogError(void)
 {
 	bool successCondition1 = false;
@@ -101,6 +137,40 @@ bool LoggerTests::testLogError(void)
 	// Comparo el tamanio esperado con el actual
 	size_t tamanioEsperado = tamanioArchivoAntes + strlen(mensaje) + strlen(mensajeError) + 1;
 	if (tamanioEsperado == tamanioArchivoDespues) successCondition1 = true;
+
+	// Destruyo el logger
+	loggerInstance.~Logger();
+
+	return successCondition1;
+
+}
+
+
+bool LoggerTests::testLogErrorConstructorSoloRuta(void)
+{
+	bool successCondition1 = false;
+
+	const char* ruta = "log.txt";
+	const char* mensaje;
+	
+	// Nuevo logger
+	Logger loggerInstance(ruta);
+	
+	// Obtengo el tamanio inicial del archivo
+	fseek (loggerInstance.obetenerArchivo(), 0, SEEK_END);
+	size_t tamanioArchivoAntes = ftell(loggerInstance.obetenerArchivo());
+	
+	mensaje = "Linea 30 -> El tamaño de la grilla es superior al posible.\0";
+
+	// Loggeo el warning
+	loggerInstance.logError(mensaje);
+
+	// Obtengo el tamanio despues de loggear
+	fseek (loggerInstance.obetenerArchivo(), 0, SEEK_END);
+	size_t tamanioArchivoDespues = ftell(loggerInstance.obetenerArchivo());
+	
+	// Comparo el tamanio esperado con el actual
+	if (tamanioArchivoDespues > tamanioArchivoAntes) successCondition1 = true;
 
 	// Destruyo el logger
 	loggerInstance.~Logger();
