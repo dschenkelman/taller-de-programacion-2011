@@ -2,7 +2,7 @@
 #include "Grilla.h"
 #include <exception>
 
-Grilla::Grilla(size_t an, size_t al, std::string topd)
+Grilla::Grilla(int an, int al, std::string topd)
 {
 	if (an < 0 || al < 0)
 	{
@@ -16,22 +16,46 @@ Grilla::Grilla(size_t an, size_t al, std::string topd)
 
 Grilla::Grilla(XmlElement e)
 {
-	if (e.hasAttribute("ancho") && e.hasAttribute("alto") && e.hasAttribute("tipoObstaculoPorDefecto"))
+	if (e.hasAttribute("ancho")) 
 	{
-		//ancho = e.getValue("ancho");
-		//alto = e.getValue("alto");
+		std::string anchoString = e.getValue("ancho");
+		int an = atoi(anchoString.c_str());
+		
+		if (an < 0)
+		{
+			throw std::exception();
+		}
+
+		ancho = an;
+	}
+
+	if(e.hasAttribute("alto"))
+	{
+		std::string altoString = e.getValue("alto");
+		int al = atoi(altoString.c_str());
+		
+		if (al < 0)
+		{
+			throw std::exception();
+		}
+
+		alto = al;
+	}
+
+	if (e.hasAttribute("tipoObstaculoPorDefecto"))
+	{
 		tipoObstaculoPorDefecto = e.getValue("tipoObstaculoPorDefecto");
 	}
 
 	//generarMatriz(e.getChildren());
 }
 
-size_t Grilla::getAlto()
+int Grilla::getAlto()
 {
 	return alto;
 }
 
-size_t Grilla::getAncho()
+int Grilla::getAncho()
 {
 	return ancho;
 }

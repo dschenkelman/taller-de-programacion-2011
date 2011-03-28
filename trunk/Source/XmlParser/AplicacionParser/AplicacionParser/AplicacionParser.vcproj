@@ -187,11 +187,19 @@
 				>
 			</File>
 			<File
+				RelativePath=".\CaminoTests.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Celda.cpp"
 				>
 			</File>
 			<File
 				RelativePath=".\Grilla.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\GrillaTests.cpp"
 				>
 			</File>
 			<File
@@ -208,6 +216,10 @@
 			</File>
 			<File
 				RelativePath=".\Obstaculo.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\ObstaculoTests.cpp"
 				>
 			</File>
 			<File
@@ -247,7 +259,15 @@
 				>
 			</File>
 			<File
+				RelativePath=".\TipoBonusTests.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\TipoObstaculo.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\TipoObstaculoTests.cpp"
 				>
 			</File>
 			<File
@@ -285,11 +305,19 @@
 				>
 			</File>
 			<File
+				RelativePath=".\CaminoTests.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Celda.h"
 				>
 			</File>
 			<File
 				RelativePath=".\Grilla.h"
+				>
+			</File>
+			<File
+				RelativePath=".\GrillaTests.h"
 				>
 			</File>
 			<File
@@ -310,6 +338,10 @@
 			</File>
 			<File
 				RelativePath=".\Obstaculo.h"
+				>
+			</File>
+			<File
+				RelativePath=".\ObstaculoTests.h"
 				>
 			</File>
 			<File
@@ -337,7 +369,15 @@
 				>
 			</File>
 			<File
+				RelativePath=".\TipoBonusTests.h"
+				>
+			</File>
+			<File
 				RelativePath=".\TipoObstaculo.h"
+				>
+			</File>
+			<File
+				RelativePath=".\TipoObstaculoTests.h"
 				>
 			</File>
 			<File

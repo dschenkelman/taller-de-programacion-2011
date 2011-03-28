@@ -2,7 +2,7 @@
 #include "Celda.h"
 #include <exception>
 
-Celda::Celda(size_t f, size_t c)
+Celda::Celda(int f, int c)
 {
 	if(f < 0 || c < 0)
 	{
@@ -16,12 +16,12 @@ Celda::Celda(void)
 {
 }
 
-size_t Celda::getColumna()
+int Celda::getColumna()
 {
 	return columna;
 }
 
-size_t Celda::getFila()
+int Celda::getFila()
 {
 	return fila;
 }

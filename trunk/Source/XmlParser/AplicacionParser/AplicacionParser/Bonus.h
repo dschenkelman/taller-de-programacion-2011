@@ -1,13 +1,16 @@
 #pragma once
-#include "XmlElement.h"
+#include "TipoBonus.h"
 
 class Bonus
 {
 	std::string tipo;
+	TipoBonus tipoBonus;
 public:
+	Bonus(void);
 	Bonus(XmlElement e);
 	Bonus(std::string tipo);
-	Bonus(void);
 	std::string getTipo();
+	void setTipoBonus(TipoBonus tb);
+	TipoBonus getTipoBonus();
 	~Bonus(void);
 };

@@ -2,7 +2,7 @@
 #include "Camino.h"
 #include "List.h"
 
-Camino::Camino(size_t f, size_t c)
+Camino::Camino(int f, int c)
 {
 	fila = f;
 	columna = c;
@@ -10,15 +10,35 @@ Camino::Camino(size_t f, size_t c)
 
 Camino::Camino(XmlElement e)
 {
-	if (e.hasAttribute("fila") && e.hasAttribute("columna"))
+	if (e.hasAttribute("fila"))
 	{
-		//fila = e.getValue("fila");
-		//columna = e.getValue("columna");
+		std::string filaString = e.getValue("fila"); 
+		int f = atoi(filaString.c_str());
+
+		if (f < 0)
+		{
+			throw std::exception();
+		}
+
+		fila = f;
+	}
+
+	if(e.hasAttribute("columna"))
+	{
+		std::string columnaString = e.getValue("columna");
+		int c = atoi(columnaString.c_str());
+
+		if (c < 0)
+		{
+			throw std::exception();
+		}
+
+		columna = c;
 	}
 
 	/*List<XmlElement> listaHijos = e.getChildren();
-	
-	for(size_t i = 0; i < listaHijos.length(); i++)
+
+	for(int i = 0; i < listaHijos.length(); i++)
 	{
 		if (listaHijos[i].hasAttribute("tipo"))
 		{

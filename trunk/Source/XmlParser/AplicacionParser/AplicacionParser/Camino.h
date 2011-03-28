@@ -2,12 +2,13 @@
 #include "Celda.h"
 #include "Bonus.h"
 
-class Camino : Celda
+
+class Camino : public Celda
 {
 	Bonus bonus;
 public:
 	Camino(XmlElement e);
-	Camino(size_t f, size_t c);
+	Camino(int f, int c);
 	Bonus getBonus();
 	~Camino(void);
 };
