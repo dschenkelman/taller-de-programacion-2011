@@ -9,11 +9,11 @@
 #include "StringTests.h"
 #include "XmlParserTest.h"
 #include "XmlElementTests.h"
-//#include "TipoObstaculoTests.h"
-//#include "TipoBonusTests.h"
-//#include "ObstaculoTests.h"
-//#include "CaminoTests.h"
-//#include "GrillaTests.h"
+#include "TipoObstaculoTests.h"
+#include "TipoBonusTests.h"
+#include "ObstaculoTests.h"
+#include "CaminoTests.h"
+#include "GrillaTests.h"
 #include <iostream>
 using namespace std;
 
