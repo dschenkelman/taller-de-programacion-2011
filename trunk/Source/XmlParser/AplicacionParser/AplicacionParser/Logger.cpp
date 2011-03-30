@@ -19,6 +19,9 @@ Logger::Logger(const char* ruta, const char* mensajeWarning, const char* mensaje
 	this->mensajeError = mensajeError;
 }
 
+bool Logger::loggerCreated = false;
+
+
 
 Logger::~Logger()
 {
