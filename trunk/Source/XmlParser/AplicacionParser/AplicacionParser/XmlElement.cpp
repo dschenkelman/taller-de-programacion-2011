@@ -16,21 +16,43 @@ XmlElement::XmlElement(void)
 {
 }
 
-XmlElement::XmlElement(XmlElement* other) {
-	this->name = other->name;
-	this->start_line = other->start_line;
-	this->end_line = other->end_line;
-	this->children_created = other->children_created;
+XmlElement::XmlElement(XmlElement& other) {
+	this->name = other.name;
+	this->start_line = other.start_line;
+	this->end_line = other.end_line;
+
+	for(size_t i = 0; i < other.attributes.length(); i++)
+	{
+		this->attributes.add(other.attributes.at(i));
+	}
+
+	if (other.children_created == true) {
+		this->children = new List<XmlElement>;
+
+		for (size_t i = 0; i < other.getChildren().length(); i++){
+			this->children->add(other.getChildren().at(i));
+		}
+
+		this->children_created = true;
+	}
 }
 
 string XmlElement::getName() {
 	return this->name;
 }
 
+List<XmlElement> XmlElement::getChildren() {
+	if(!this->children_created) {
+		throw std::exception();
+	}
+
+	return *(this->children);
+}
+
 void XmlElement::addChild(XmlElement child) {
 	if (!this->children_created) {
-		this->children = new List<XmlElement>;
 		this->children_created = true;
+		this->children = new List<XmlElement>;
 	}
 	this->children->add(child);
 }
@@ -70,6 +92,6 @@ string XmlElement::getValue(string key) {
 XmlElement::~XmlElement(void)
 {
 	if (this->children_created) {
-		delete this->children;
+		delete []this->children;
 	}
 }
