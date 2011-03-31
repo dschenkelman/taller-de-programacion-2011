@@ -28,6 +28,8 @@ void XmlElementTests::printLeaks(int leaks)
 
 void XmlElementTests::run(void) {
 	printResult("initialConstructionTest",initialConstructionTest());
+	printResult("testGetChildrenWithoutAnyChildThrowsException", testGetChildrenWithoutAnyChildThrowsException());
+	printResult("testGetChildren", testGetChildren());
 
 	/*int leaks = _CrtDumpMemoryLeaks();
 	printLeaks(leaks);*/
@@ -39,6 +41,45 @@ bool XmlElementTests::initialConstructionTest(void) {
 		return false;
 	}
 	return true;
+}
+
+bool XmlElementTests::testGetChildren(void) {
+	XmlElement xmlElement("Name", 1, 100);
+	
+	XmlElement child1("Child 1", 2, 99);
+	XmlElement child2("Child 2", 3, 98);
+	XmlElement child3("Child 3", 4, 97);
+
+	xmlElement.addChild(child1);
+	xmlElement.addChild(child2);
+	xmlElement.addChild(child3);
+
+	List<XmlElement> xmlElementChildren = xmlElement.getChildren();
+
+	for(size_t i = 0; i < xmlElementChildren.length(); i++) {
+	
+		if(!(xmlElementChildren.at(i).getName() == "Child 1" ||
+			xmlElementChildren.at(i).getName() == "Child 2" ||
+			xmlElementChildren.at(i).getName() == "Child 3")) {
+
+				return false;
+		}
+	}	
+
+	return true;
+}
+
+bool XmlElementTests::testGetChildrenWithoutAnyChildThrowsException(void) {
+	XmlElement xmlElement("Name", 1, 100);
+
+	try {
+		xmlElement.getChildren();
+	}
+	catch(exception& e) {
+		return true;
+	}
+
+	return false;
 }
 
 XmlElementTests::~XmlElementTests(void)
