@@ -47,10 +47,10 @@ List<XmlElement> XmlElement::getChildren() {
 		throw std::exception();
 	}
 
-	return *(this->children);
+	return List<XmlElement>(*(this->children));
 }
 
-void XmlElement::addChild(XmlElement child) {
+void XmlElement::addChild(XmlElement& child) {
 	if (!this->children_created) {
 		this->children_created = true;
 		this->children = new List<XmlElement>;
@@ -70,7 +70,7 @@ bool XmlElement::hasAttribute(string key) {
 	return false;
 }
 
-bool XmlElement::addAttribute(XmlAttribute attribute) {
+bool XmlElement::addAttribute(XmlAttribute& attribute) {
 	if (this->hasAttribute(attribute.getKey())) {
 		return false;
 	}
