@@ -14,6 +14,7 @@ XmlElement::XmlElement(std::string name, int start_line, int end_line)
 
 XmlElement::XmlElement(void)
 {
+	this->children_created = false;
 }
 
 XmlElement::XmlElement(XmlElement& other) {
@@ -89,9 +90,14 @@ string XmlElement::getValue(string key) {
 	return "";
 }
 
+bool XmlElement::hasChild()
+{
+	return this->children_created;
+}
+
 XmlElement::~XmlElement(void)
 {
 	if (this->children_created) {
-		delete []this->children;
+		delete this->children;
 	}
 }
