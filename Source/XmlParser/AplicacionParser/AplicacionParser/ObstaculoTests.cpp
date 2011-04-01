@@ -8,7 +8,7 @@ using namespace std;
 
 void ObstaculoTests::printLeaks(int leaks)
 {
-	std::cout << "List Tests: Hubo " << leaks << " memory leaks." << endl << endl;
+	std::cout << "Obstaculo Tests: Hubo " << leaks << " memory leaks." << endl << endl;
 }
 
 ObstaculoTests::ObstaculoTests(void)

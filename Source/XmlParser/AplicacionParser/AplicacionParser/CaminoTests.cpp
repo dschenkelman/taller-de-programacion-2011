@@ -17,7 +17,7 @@ CaminoTests::~CaminoTests(void)
 
 void CaminoTests::printLeaks(int leaks)
 {
-	std::cout << "List Tests: Hubo " << leaks << " memory leaks." << endl << endl;
+	std::cout << "Camino Tests: Hubo " << leaks << " memory leaks." << endl << endl;
 }
 
 void CaminoTests::run(void)

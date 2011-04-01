@@ -14,6 +14,7 @@ public:
 	bool testGetChildren(void);
 	bool testGetChildrenWithoutAnyChildThrowsException(void);
 	bool testHasChildrenWithoutAnyChildReturnsFalse(void);
-	bool testHasChildrenWithChildReturnsTrue(void);
+	bool testGetNameGetStartLineAndEndLineWorkCorrectly(void);
+	bool testCopyConstructorWorksCorrectlyWithNoChildElements(void);
 	~XmlElementTests(void);
 };

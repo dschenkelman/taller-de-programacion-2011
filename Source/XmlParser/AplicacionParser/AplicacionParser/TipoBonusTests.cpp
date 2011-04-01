@@ -10,7 +10,7 @@ using namespace std;
 
 void TipoBonusTests::printLeaks(int leaks)
 {
-	std::cout << "List Tests: Hubo " << leaks << " memory leaks." << endl << endl;
+	std::cout << "TipoBonus Tests: Hubo " << leaks << " memory leaks." << endl << endl;
 }
 
 TipoBonusTests::TipoBonusTests(void)

@@ -23,15 +23,15 @@ void XmlElementTests::printResult(std::string testName, bool result)
 
 void XmlElementTests::printLeaks(int leaks)
 {
-	std::cout << "List Tests: Hubo " << leaks << " memory leaks." << endl << endl;
+	std::cout << "XmlElement Tests: Hubo " << leaks << " memory leaks." << endl << endl;
 }
 
 void XmlElementTests::run(void) {
 	printResult("initialConstructionTest",initialConstructionTest());
 	printResult("testGetChildrenWithoutAnyChildThrowsException", testGetChildrenWithoutAnyChildThrowsException());
 	printResult("testGetChildren", testGetChildren());
-	printResult("testHasChildrenWithoutAnyChildReturnsFalse", testHasChildrenWithoutAnyChildReturnsFalse());
-	printResult("testHasChildrenWithChildReturnsTrue", testHasChildrenWithChildReturnsTrue());
+	printResult("testGetNameGetStartLineAndEndLineWorkCorrectly", testGetNameGetStartLineAndEndLineWorkCorrectly());
+	printResult("testCopyConstructorWorksCorrectlyWithNoChildElements",testCopyConstructorWorksCorrectlyWithNoChildElements());
 
 	int leaks = _CrtDumpMemoryLeaks();
 	printLeaks(leaks);
@@ -84,35 +84,27 @@ bool XmlElementTests::testGetChildrenWithoutAnyChildThrowsException(void) {
 	return false;
 }
 
-bool XmlElementTests::testHasChildrenWithoutAnyChildReturnsFalse()
+bool XmlElementTests::testGetNameGetStartLineAndEndLineWorkCorrectly(void)
 {
-	XmlElement xmlElement("Name", 1, 20);
+	XmlElement element1("TestName", 1, 2);
+	
+	bool successCondition1 = element1.getName() == "TestName";
+	bool successCondition2 = element1.getEndLine() == 2;
+	bool successCondition3 = element1.getStartLine() == 1;
 
-	bool result = xmlElement.hasChildren();
-
-	if (!result)
-	{
-		return true;
-	}
-
-	return false;
+	return successCondition1 && successCondition2 && successCondition3;
 }
 
-bool XmlElementTests::testHasChildrenWithChildReturnsTrue()
+bool XmlElementTests::testCopyConstructorWorksCorrectlyWithNoChildElements(void)
 {
-	XmlElement xmlElement("Name", 1, 30);
-	XmlElement xmlElementChild("Child", 1, 29);
+	XmlElement element1("TestName", 1, 2);
+	XmlElement element2(element1);
 
-	xmlElement.addChild(xmlElementChild);
+	bool successCondition1 = element2.getName() == "TestName";
+	bool successCondition2 = element2.getEndLine() == 2;
+	bool successCondition3 = element2.getStartLine() == 1;
 
-	bool result = xmlElement.hasChildren();
-
-	if(result)
-	{
-		return true;
-	}
-
-	return false;
+	return successCondition1 && successCondition2 && successCondition3;
 }
 
 XmlElementTests::~XmlElementTests(void)

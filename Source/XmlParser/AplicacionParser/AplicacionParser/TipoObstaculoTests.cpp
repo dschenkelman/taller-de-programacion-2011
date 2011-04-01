@@ -11,7 +11,7 @@ using namespace std;
 
 void TipoObstaculoTests::printLeaks(int leaks)
 {
-	std::cout << "List Tests: Hubo " << leaks << " memory leaks." << endl << endl;
+	std::cout << "TipoObstaculo Tests: Hubo " << leaks << " memory leaks." << endl << endl;
 }
 
 TipoObstaculoTests::TipoObstaculoTests(void)
