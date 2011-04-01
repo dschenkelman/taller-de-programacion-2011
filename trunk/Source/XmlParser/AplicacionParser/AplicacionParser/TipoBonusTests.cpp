@@ -3,6 +3,15 @@
 #include <exception>
 #include <iostream>
 using namespace std;
+//useful to detect memory leaks
+#define _CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+#include <crtdbg.h>
+
+void TipoBonusTests::printLeaks(int leaks)
+{
+	std::cout << "List Tests: Hubo " << leaks << " memory leaks." << endl << endl;
+}
 
 TipoBonusTests::TipoBonusTests(void)
 {
@@ -16,6 +25,8 @@ void TipoBonusTests::run(void)
 {
 	printResult("testAtributoTexturaDeMasDeUnCaracterTiraExcepcion", testAtributoTexturaDeMasDeUnCaracterTiraExcepcion());
 	printResult("testAtributoTexturaCorrectoGuardaCorrectamente", testAtributoTexturaCorrectoGuardaCorrectamente());
+	int leaks = _CrtDumpMemoryLeaks();
+	printLeaks(leaks);
 }
 
 void TipoBonusTests::printResult(std::string testName, bool result)

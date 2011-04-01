@@ -6,6 +6,7 @@ class GrillaTests
 public:
 	GrillaTests(void);
 	~GrillaTests(void);
+	void printLeaks(int);
 	void run(void);
 	void printResult(std::string testName, bool result);
 	bool testAtributoAnchoConValorNegativoTiraExcepcion();

@@ -3,6 +3,16 @@
 #include <exception>
 #include <iostream>
 using namespace std;
+//useful to detect memory leaks
+#define _CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+#include <crtdbg.h>
+
+
+void GrillaTests::printLeaks(int leaks)
+{
+	std::cout << "List Tests: Hubo " << leaks << " memory leaks." << endl << endl;
+}
 
 GrillaTests::GrillaTests(void)
 {
@@ -19,6 +29,9 @@ void GrillaTests::run(void)
 	printResult("testAtributoAltoCorrectoGuardaCorrectamente", testAtributoAltoCorrectoGuardaCorrectamente());
 	printResult("testAtributoAnchoCorrectoGuardaCorrectamente", testAtributoAnchoCorrectoGuardaCorrectamente());
 	printResult("testGenerarMatrizGeneraCorrectamente", testGenerarMatrizGeneraCorrectamente());
+
+	int leaks = _CrtDumpMemoryLeaks();
+	printLeaks(leaks);
 }
 
 void GrillaTests::printResult(std::string testName, bool result)

@@ -2,6 +2,11 @@
 #include "CaminoTests.h"
 using namespace std;
 
+//useful to detect memory leaks
+#define _CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+#include <crtdbg.h>
+
 CaminoTests::CaminoTests(void)
 {
 }
@@ -10,12 +15,20 @@ CaminoTests::~CaminoTests(void)
 {
 }
 
+void CaminoTests::printLeaks(int leaks)
+{
+	std::cout << "List Tests: Hubo " << leaks << " memory leaks." << endl << endl;
+}
+
 void CaminoTests::run(void)
 {
 	printResult("testAtributoFilaConValorNegativoTiraExcepcion", testAtributoFilaConValorNegativoTiraExcepcion());
 	printResult("testAtributoColumnaConValorNegativoTiraExcepcion", testAtributoColumnaConValorNegativoTiraExcepcion());
 	printResult("testAtributoFilaCorrectoGuardaCorrectamente", testAtributoFilaCorrectoGuardaCorrectamente());
 	printResult("testAtributoColumnaCorrectoGuardaCorrectamente",testAtributoColumnaCorrectoGuardaCorrectamente());
+
+	int leaks = _CrtDumpMemoryLeaks();
+	printLeaks(leaks);
 }
 
 void CaminoTests::printResult(std::string testName, bool result)
