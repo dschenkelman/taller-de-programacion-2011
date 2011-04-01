@@ -49,7 +49,10 @@ Grilla::Grilla(XmlElement& e)
 		tipoObstaculoPorDefecto = e.getValue("tipoObstaculoPorDefecto");
 	}
 
-	//generarMatriz(e.getChildren());
+	if (e.hasChild())
+	{
+		generarMatriz(e.getChildren());
+	}
 }
 
 int Grilla::getAlto()
@@ -79,6 +82,17 @@ Grilla::~Grilla(void)
 // método privado
 void Grilla::generarMatriz(List<XmlElement>& listaElementos)
 {
+	for (size_t i = 0; i < this->alto; i++)
+	{
+		//agrego fila
+		this->matriz.add(List<Celda>());
+		for (size_t j = 0; j < this->ancho; j++)
+		{
+			//lleno fila
+			this->matriz.at(i).add(Celda());
+		}	
+	}
+	
 	for (size_t i = 0; i < listaElementos.length(); i++)
 	{
 		if (listaElementos.at(i).getName() == "camino")
