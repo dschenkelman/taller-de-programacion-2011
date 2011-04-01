@@ -9,10 +9,11 @@ class Grilla
 	int alto;
 	std::string tipoObstaculoPorDefecto;
 	List<List<Celda>> matriz;
-	bool generarMatriz(List<XmlElement> le);
+	void generarMatriz(List<XmlElement>& le);
+	bool colocarCeldaEnMatriz(Celda& c);
 public:
-	Grilla(XmlElement e);
-	Grilla(int an, int al, std::string topd);
+	Grilla(XmlElement& e);
+	Grilla(int an, int al, std::string& topd);
 	int getAncho();
 	int getAlto();
 	std::string getTipoObstaculoPorDefecto();

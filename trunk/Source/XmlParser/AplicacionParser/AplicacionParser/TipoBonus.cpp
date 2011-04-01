@@ -5,13 +5,13 @@ TipoBonus::TipoBonus(void)
 {
 }
 
-TipoBonus::TipoBonus(std::string n, char t)
+TipoBonus::TipoBonus(std::string& n, char t)
 {
 	nombre = n;
 	textura = t;
 }
 
-TipoBonus::TipoBonus(XmlElement e)
+TipoBonus::TipoBonus(XmlElement& e)
 {
 	if(e.hasAttribute("nombre"))
 	{
