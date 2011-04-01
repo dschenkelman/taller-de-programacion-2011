@@ -36,6 +36,10 @@ XmlElement::XmlElement(XmlElement& other) {
 
 		this->children_created = true;
 	}
+	else
+	{
+		this->children_created = false;
+	}
 }
 
 string XmlElement::getName() {
@@ -93,6 +97,16 @@ string XmlElement::getValue(string key) {
 bool XmlElement::hasChildren()
 {
 	return this->children_created && this->children->length() > 0;
+}
+
+int XmlElement::getStartLine()
+{
+	return this->start_line;
+}
+
+int XmlElement::getEndLine()
+{
+	return this->end_line;
 }
 
 XmlElement::~XmlElement(void)

@@ -21,6 +21,8 @@ public:
 	bool addAttribute(XmlAttribute& attribute);
 	bool hasAttribute(std::string key);
 	bool hasChildren();
+	int getStartLine();
+	int getEndLine();
 	std::string getValue(std::string key);
 	~XmlElement(void);
 };

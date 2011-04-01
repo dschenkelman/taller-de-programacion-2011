@@ -11,7 +11,7 @@ using namespace std;
 
 void GrillaTests::printLeaks(int leaks)
 {
-	std::cout << "List Tests: Hubo " << leaks << " memory leaks." << endl << endl;
+	std::cout << "Grilla Tests: Hubo " << leaks << " memory leaks." << endl << endl;
 }
 
 GrillaTests::GrillaTests(void)

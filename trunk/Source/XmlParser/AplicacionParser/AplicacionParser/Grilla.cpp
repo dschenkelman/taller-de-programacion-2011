@@ -49,7 +49,7 @@ Grilla::Grilla(XmlElement& e)
 		tipoObstaculoPorDefecto = e.getValue("tipoObstaculoPorDefecto");
 	}
 
-	if (e.hasChild())
+	if (e.hasChildren())
 	{
 		generarMatriz(e.getChildren());
 	}

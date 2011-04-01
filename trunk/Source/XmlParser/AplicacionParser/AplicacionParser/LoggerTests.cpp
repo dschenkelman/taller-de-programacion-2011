@@ -18,7 +18,7 @@ LoggerTests::~LoggerTests(void)
 
 void LoggerTests::printLeaks(int leaks)
 {
-	std::cout << "List Tests: Hubo " << leaks << " memory leaks." << endl << endl;
+	std::cout << "Logger Tests: Hubo " << leaks << " memory leaks." << endl << endl;
 }
 
 void LoggerTests::printResult(std::string testName, bool result)
