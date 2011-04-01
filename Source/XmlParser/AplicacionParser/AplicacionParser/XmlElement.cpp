@@ -90,9 +90,9 @@ string XmlElement::getValue(string key) {
 	return "";
 }
 
-bool XmlElement::hasChild()
+bool XmlElement::hasChildren()
 {
-	return this->children_created;
+	return this->children_created && this->children->length() > 0;
 }
 
 XmlElement::~XmlElement(void)

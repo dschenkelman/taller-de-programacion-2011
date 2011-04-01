@@ -13,5 +13,7 @@ public:
 	bool initialConstructionTest(void);
 	bool testGetChildren(void);
 	bool testGetChildrenWithoutAnyChildThrowsException(void);
+	bool testHasChildrenWithoutAnyChildReturnsFalse(void);
+	bool testHasChildrenWithChildReturnsTrue(void);
 	~XmlElementTests(void);
 };
