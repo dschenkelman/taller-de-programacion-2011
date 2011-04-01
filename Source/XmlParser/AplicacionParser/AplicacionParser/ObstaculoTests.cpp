@@ -1,6 +1,15 @@
 #include "StdAfx.h"
 #include "ObstaculoTests.h"
 using namespace std;
+//useful to detect memory leaks
+#define _CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+#include <crtdbg.h>
+
+void ObstaculoTests::printLeaks(int leaks)
+{
+	std::cout << "List Tests: Hubo " << leaks << " memory leaks." << endl << endl;
+}
 
 ObstaculoTests::ObstaculoTests(void)
 {
@@ -16,6 +25,9 @@ void ObstaculoTests::run(void)
 	printResult("testAtributoColumnaConValorNegativoTiraExcepcion", testAtributoColumnaConValorNegativoTiraExcepcion());
 	printResult("testAtributoFilaCorrectoGuardaCorrectamente", testAtributoFilaCorrectoGuardaCorrectamente());
 	printResult("testAtributoColumnaCorrectoGuardaCorrectamente",testAtributoColumnaCorrectoGuardaCorrectamente());
+
+	int leaks = _CrtDumpMemoryLeaks();
+	printLeaks(leaks);
 }
 
 void ObstaculoTests::printResult(std::string testName, bool result)

@@ -7,6 +7,7 @@ public:
 	CaminoTests(void);
 	~CaminoTests(void);
 	void run(void);
+	void printLeaks(int leaks);
 	void printResult(std::string testName, bool result);
 	bool testAtributoFilaConValorNegativoTiraExcepcion();
 	bool testAtributoColumnaConValorNegativoTiraExcepcion();

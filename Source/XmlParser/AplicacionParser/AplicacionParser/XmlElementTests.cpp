@@ -31,8 +31,8 @@ void XmlElementTests::run(void) {
 	printResult("testGetChildrenWithoutAnyChildThrowsException", testGetChildrenWithoutAnyChildThrowsException());
 	printResult("testGetChildren", testGetChildren());
 
-	/*int leaks = _CrtDumpMemoryLeaks();
-	printLeaks(leaks);*/
+	int leaks = _CrtDumpMemoryLeaks();
+	printLeaks(leaks);
 }
 
 bool XmlElementTests::initialConstructionTest(void) {
