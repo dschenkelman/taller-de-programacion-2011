@@ -1,8 +1,10 @@
 #include "StdAfx.h"
 #include "Grilla.h"
+#include "Camino.h"
+#include "Obstaculo.h"
 #include <exception>
 
-Grilla::Grilla(int an, int al, std::string topd)
+Grilla::Grilla(int an, int al, std::string& topd)
 {
 	if (an < 0 || al < 0)
 	{
@@ -14,7 +16,7 @@ Grilla::Grilla(int an, int al, std::string topd)
 	tipoObstaculoPorDefecto = topd;
 }
 
-Grilla::Grilla(XmlElement e)
+Grilla::Grilla(XmlElement& e)
 {
 	if (e.hasAttribute("ancho")) 
 	{
@@ -75,7 +77,57 @@ Grilla::~Grilla(void)
 }
 
 // método privado
-bool Grilla::generarMatriz(List<XmlElement> listaElementos)
+void Grilla::generarMatriz(List<XmlElement>& listaElementos)
 {
+	for (size_t i = 0; i < listaElementos.length(); i++)
+	{
+		if (listaElementos.at(i).getName() == "camino")
+		{
+			Camino cam(listaElementos.at(i));
+			bool result = colocarCeldaEnMatriz(cam);
+
+			if(!result)
+			{
+				//Logger no se pudo meter elemento porque ya esta ocupada la posicion
+			}
+		}
+
+		if (listaElementos.at(i).getName() == "obstaculo")
+		{
+			Obstaculo obs(listaElementos.at(i));
+			bool result = colocarCeldaEnMatriz(obs);
+
+			if(!result)
+			{
+				//Logger no se pudo meter elemento porque ya está ocupada la posicion
+			}
+		}
+
+		else
+		{
+			//Logger (tag con nombre incorrecto) y sigue
+		}
+	}
+}
+
+bool Grilla::colocarCeldaEnMatriz(Celda& c)
+{
+	int fila = c.getFila();
+	int columna = c.getColumna();
+
+	if (fila > alto)
+	{
+		//Logger y valor por defecto
+	}
+
+	if (columna > ancho)
+	{
+		//Logger y valor por defecto
+	}
+
+	//verificar si está ocupada
+
+	matriz.at(fila).at(columna) = c;
+
 	return true;
 }

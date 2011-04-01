@@ -27,9 +27,9 @@ int _tmain(int argc, _TCHAR* argv[])
 	StackTests stackTests;
 	stackTests.run();
 
-	cout<<"Test de String"<<endl;
-	StringTests stringTests;
-	stringTests.run();
+	//cout<<"Test de String"<<endl;
+	//StringTests stringTests;
+	//stringTests.run();
 
 	cout<<"Test de Logger"<<endl;
 	LoggerTests loggerTests;
@@ -43,7 +43,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	XmlElementTests xmlElementTests;
 	xmlElementTests.run();
 
-	/*cout<<"Test de TipoObstaculo"<<endl;
+	cout<<"Test de TipoObstaculo"<<endl;
 	TipoObstaculoTests tipoObstaculoTests;
 	tipoObstaculoTests.run();
 
@@ -61,7 +61,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	cout<<"Test de Grilla"<<endl;
 	GrillaTests grillaTests;
-	grillaTests.run();*/
+	grillaTests.run();
 
 	char aux;
 	cin >> aux;

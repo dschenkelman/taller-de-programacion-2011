@@ -1,7 +1,7 @@
 #include "StdAfx.h"
 #include "TipoObstaculo.h"
 
-TipoObstaculo::TipoObstaculo(XmlElement e)
+TipoObstaculo::TipoObstaculo(XmlElement& e)
 {
 	if(e.hasAttribute("nombre"))
 	{
@@ -21,7 +21,7 @@ TipoObstaculo::TipoObstaculo(XmlElement e)
 	}
 }
 
-TipoObstaculo::TipoObstaculo(std::string n, char t)
+TipoObstaculo::TipoObstaculo(std::string& n, char t)
 {
 	nombre = n;
 	textura = t;

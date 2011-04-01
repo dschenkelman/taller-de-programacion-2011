@@ -1,14 +1,14 @@
 #include "StdAfx.h"
 #include "Obstaculo.h"
 
-Obstaculo::Obstaculo(std::string t, int f, int c)
+Obstaculo::Obstaculo(std::string& t, int f, int c)
 {
 	tipo = t;
 	fila = f;
 	columna = c;
 }
 
-Obstaculo::Obstaculo(XmlElement e)
+Obstaculo::Obstaculo(XmlElement& e)
 {
 	if (e.hasAttribute("tipo"))
 	{

@@ -8,7 +8,7 @@ Camino::Camino(int f, int c)
 	columna = c;
 }
 
-Camino::Camino(XmlElement e)
+Camino::Camino(XmlElement& e)
 {
 	if (e.hasAttribute("fila"))
 	{
