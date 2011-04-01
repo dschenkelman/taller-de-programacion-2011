@@ -30,6 +30,8 @@ void XmlElementTests::run(void) {
 	printResult("initialConstructionTest",initialConstructionTest());
 	printResult("testGetChildrenWithoutAnyChildThrowsException", testGetChildrenWithoutAnyChildThrowsException());
 	printResult("testGetChildren", testGetChildren());
+	printResult("testHasChildrenWithoutAnyChildReturnsFalse", testHasChildrenWithoutAnyChildReturnsFalse());
+	printResult("testHasChildrenWithChildReturnsTrue", testHasChildrenWithChildReturnsTrue());
 
 	int leaks = _CrtDumpMemoryLeaks();
 	printLeaks(leaks);
@@ -76,6 +78,37 @@ bool XmlElementTests::testGetChildrenWithoutAnyChildThrowsException(void) {
 		xmlElement.getChildren();
 	}
 	catch(exception& e) {
+		return true;
+	}
+
+	return false;
+}
+
+bool XmlElementTests::testHasChildrenWithoutAnyChildReturnsFalse()
+{
+	XmlElement xmlElement("Name", 1, 20);
+
+	bool result = xmlElement.hasChildren();
+
+	if (!result)
+	{
+		return true;
+	}
+
+	return false;
+}
+
+bool XmlElementTests::testHasChildrenWithChildReturnsTrue()
+{
+	XmlElement xmlElement("Name", 1, 30);
+	XmlElement xmlElementChild("Child", 1, 29);
+
+	xmlElement.addChild(xmlElementChild);
+
+	bool result = xmlElement.hasChildren();
+
+	if(result)
+	{
 		return true;
 	}
 
