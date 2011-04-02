@@ -275,6 +275,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Tokenizer.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\XmlAttribute.cpp"
 				>
 			</File>
@@ -386,6 +390,10 @@
 			</File>
 			<File
 				RelativePath=".\TipoObstaculoTests.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Tokenizer.h"
 				>
 			</File>
 			<File

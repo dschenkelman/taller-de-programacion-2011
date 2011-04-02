@@ -82,5 +82,5 @@ bool XmlParserTest::testFileNotExists(void){
 	XmlParser xmlParser;
 	xmlParser.openFile("sarasa.xml");
 	
-	return (xmlParser.isFileOpen() == false && xmlParser.getXmlLine() == false);
+	return (!xmlParser.isFileOpen());
 }
