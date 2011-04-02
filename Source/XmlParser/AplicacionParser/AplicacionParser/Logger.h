@@ -19,8 +19,8 @@ private:
 public:
 	static Logger* getInstance(void);
 	static void closeLog(void);
-	void logWarning(const char* mensaje);
-	void logError(const char* mensaje);
+	void logWarning(std::string msg);
+	void logError(std::string msg);
 	FILE* obetenerArchivo(void);
 
 };
