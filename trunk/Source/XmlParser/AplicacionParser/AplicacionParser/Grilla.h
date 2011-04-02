@@ -4,6 +4,10 @@
 #include "Celda.h"
 #include "TipoObstaculo.h"
 #include "TipoBonus.h"
+#include "Logger.h"
+
+const int defGridAncho = 10;
+const int defGridAlto = 10;
 
 class Grilla
 {

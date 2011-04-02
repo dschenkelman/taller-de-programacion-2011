@@ -11,8 +11,8 @@ public:
 	void printLeaks(int);
 	void run(void);
 	void printResult(std::string testName, bool result);
-	bool testAtributoAnchoConValorNegativoTiraExcepcion();
-	bool testAtributoAltoConValorNegativoTiraExcepcion();
+	bool testAtributoAnchoConValorNegativoTomaValorPorDefecto();
+	bool testAtributoAltoConValorNegativoTomaValorPorDefecto();
 	bool testAtributoAltoCorrectoGuardaCorrectamente();
 	bool testAtributoAnchoCorrectoGuardaCorrectamente();
 	bool testGenerarMatrizGeneraCorrectamente();
