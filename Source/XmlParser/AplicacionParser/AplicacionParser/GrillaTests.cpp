@@ -152,5 +152,27 @@ bool GrillaTests::testGenerarMatrizGeneraCorrectamente()
 
 	Grilla grilla(elementoGrilla);
 
+	List<List<Celda>> matrizObtenida = grilla.getMatriz();
+
+	if (matrizObtenida.at(2).at(9).getFila() != 2 || matrizObtenida.at(2).at(9).getColumna() != 9)
+	{
+		return false;
+	}
+
+	if (matrizObtenida.at(1).at(5).getFila() != 1 || matrizObtenida.at(1).at(5).getColumna() != 5)
+	{
+		return false;
+	}
+
+	if (matrizObtenida.at(7).at(4).getFila() != 7 || matrizObtenida.at(7).at(4).getColumna() != 4)
+	{
+		return false;
+	}
+
+	if (matrizObtenida.at(4).at(6).getFila() != 4 || matrizObtenida.at(4).at(6).getColumna() != 6)
+	{
+		return false;
+	}
+
 	return true;
 }

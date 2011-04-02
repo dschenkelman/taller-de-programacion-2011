@@ -195,6 +195,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Escenario.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Grilla.cpp"
 				>
 			</File>
@@ -310,6 +314,10 @@
 			</File>
 			<File
 				RelativePath=".\Celda.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Escenario.h"
 				>
 			</File>
 			<File
