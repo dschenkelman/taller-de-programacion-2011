@@ -8,7 +8,7 @@ private:
 public:
 	XmlAttribute(void);
 	XmlAttribute(std::string key, std::string value);
-	std::string getKey(void);
-	std::string getValue(void);
+	std::string getKey(void) const;
+	std::string getValue(void) const;
 	~XmlAttribute(void);
 };

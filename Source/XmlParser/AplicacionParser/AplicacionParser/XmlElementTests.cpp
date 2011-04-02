@@ -32,6 +32,9 @@ void XmlElementTests::run(void) {
 	printResult("testGetChildren", testGetChildren());
 	printResult("testGetNameGetStartLineAndEndLineWorkCorrectly", testGetNameGetStartLineAndEndLineWorkCorrectly());
 	printResult("testCopyConstructorWorksCorrectlyWithNoChildElements",testCopyConstructorWorksCorrectlyWithNoChildElements());
+	printResult("testAssignmentOperatorWorkCorrectlyWithNoChildElements", testAssignmentOperatorWorkCorrectlyWithNoChildElements());
+	printResult("testAssignmentOperatorWorkCorrectlyWithChildElements", testAssignmentOperatorWorkCorrectlyWithChildElements());
+	printResult("testAssignmentOperatorWorkCorrectlyWithAttributes", testAssignmentOperatorWorkCorrectlyWithAttributes());
 
 	int leaks = _CrtDumpMemoryLeaks();
 	printLeaks(leaks);
@@ -105,6 +108,49 @@ bool XmlElementTests::testCopyConstructorWorksCorrectlyWithNoChildElements(void)
 	bool successCondition3 = element2.getStartLine() == 1;
 
 	return successCondition1 && successCondition2 && successCondition3;
+}
+
+bool XmlElementTests::testAssignmentOperatorWorkCorrectlyWithNoChildElements(void)
+{
+	XmlElement element1("TestName", 1, 2);
+	XmlElement element2("t", 5, 6);
+	element2 = element1;
+
+	bool successCondition1 = element2.getName() == "TestName";
+	bool successCondition2 = element2.getEndLine() == 2;
+	bool successCondition3 = element2.getStartLine() == 1;
+
+	return successCondition1 && successCondition2 && successCondition3;
+}
+
+bool XmlElementTests::testAssignmentOperatorWorkCorrectlyWithChildElements(void)
+{
+	XmlElement element1("TestName", 1, 2);
+	XmlElement child("TestChild", 3, 4);
+	XmlElement element2("t", 5, 6);
+	element1.addChild(child);
+	element2 = element1;
+
+	bool successCondition1 = element2.getChildren().at(0).getName() == "TestChild";
+	bool successCondition2 = element2.getChildren().at(0).getEndLine() == 4;
+	bool successCondition3 = element2.getChildren().at(0).getStartLine() == 3;
+
+	return successCondition1 && successCondition2 && successCondition3;
+}
+
+bool XmlElementTests::testAssignmentOperatorWorkCorrectlyWithAttributes(void)
+{
+	XmlElement element1("TestName", 1, 2);
+	XmlAttribute attribute("Key", "Value");
+	XmlElement element2("t", 5, 6);
+	element1.addAttribute(attribute);
+	element2 = element1;
+
+	element2.getValue("Key") == "Value";
+	
+	bool successCondition1 = element2.getValue("Key") == "Value";
+
+	return successCondition1;
 }
 
 XmlElementTests::~XmlElementTests(void)
