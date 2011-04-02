@@ -29,6 +29,7 @@ void GrillaTests::run(void)
 	printResult("testAtributoAltoCorrectoGuardaCorrectamente", testAtributoAltoCorrectoGuardaCorrectamente());
 	printResult("testAtributoAnchoCorrectoGuardaCorrectamente", testAtributoAnchoCorrectoGuardaCorrectamente());
 	printResult("testGenerarMatrizGeneraCorrectamente", testGenerarMatrizGeneraCorrectamente());
+//	printResult("testTipoBonusInvalidoNoSeAgregaALaMatriz", testTipoBonusInvalidoNoSeAgregaALaMatriz());
 
 	int leaks = _CrtDumpMemoryLeaks();
 	printLeaks(leaks);
@@ -45,9 +46,12 @@ bool GrillaTests::testAtributoAnchoConValorNegativoTiraExcepcion()
 	XmlAttribute atributo("ancho", "-4");
 	elemento.addAttribute(atributo);
 
+	List<TipoObstaculo> lo;
+	List<TipoBonus> lb;
+
 	try
 	{
-		Grilla grilla(elemento);
+		Grilla grilla(elemento, lo, lb);
 	}
 	catch(exception& e)
 	{
@@ -63,9 +67,12 @@ bool GrillaTests::testAtributoAltoConValorNegativoTiraExcepcion()
 	XmlAttribute atributo("alto", "-6");
 	elemento.addAttribute(atributo);
 
+	List<TipoObstaculo> lo;
+	List<TipoBonus> lb;
+
 	try
 	{
-		Grilla grilla(elemento);
+		Grilla grilla(elemento, lo, lb);
 	}
 	catch(exception& e)
 	{
@@ -81,7 +88,10 @@ bool GrillaTests::testAtributoAltoCorrectoGuardaCorrectamente()
 	XmlAttribute atributo("alto", "10");
 	elemento.addAttribute(atributo);
 
-	Grilla grilla(elemento);
+	List<TipoObstaculo> lo;
+	List<TipoBonus> lb;
+
+	Grilla grilla(elemento, lo, lb);
 
 	int alto = grilla.getAlto();
 
@@ -99,7 +109,10 @@ bool GrillaTests::testAtributoAnchoCorrectoGuardaCorrectamente()
 	XmlAttribute atributo("ancho", "8");
 	elemento.addAttribute(atributo);
 
-	Grilla grilla(elemento);
+	List<TipoObstaculo> lo;
+	List<TipoBonus> lb;
+
+	Grilla grilla(elemento, lo, lb);
 
 	int ancho = grilla.getAncho();
 
@@ -150,9 +163,14 @@ bool GrillaTests::testGenerarMatrizGeneraCorrectamente()
 	elementoGrilla.addChild(elementoObstaculoUno);
 	elementoGrilla.addChild(elementoObstaculoDos);
 
-	Grilla grilla(elementoGrilla);
+	List<TipoObstaculo> lo;
+	List<TipoBonus> lb;
+
+	Grilla grilla(elementoGrilla, lo, lb);
 
 	List<List<Celda>> matrizObtenida = grilla.getMatriz();
+
+	int prueba = matrizObtenida.at(2).at(9).getFila();
 
 	if (matrizObtenida.at(2).at(9).getFila() != 2 || matrizObtenida.at(2).at(9).getColumna() != 9)
 	{
@@ -170,6 +188,50 @@ bool GrillaTests::testGenerarMatrizGeneraCorrectamente()
 	}
 
 	if (matrizObtenida.at(4).at(6).getFila() != 4 || matrizObtenida.at(4).at(6).getColumna() != 6)
+	{
+		return false;
+	}
+
+	return true;
+}
+
+bool GrillaTests::testTipoBonusInvalidoNoSeAgregaALaMatriz()
+{
+	XmlElement elementoGrilla("Grilla", 1, 1000);
+	XmlAttribute atributoAlto("alto", "10");
+	XmlAttribute atributoAncho("ancho", "10");
+	XmlAttribute atributoTipo("tipoObstaculoPorDefecto", "obstaculoDef");
+	elementoGrilla.addAttribute(atributoAlto);
+	elementoGrilla.addAttribute(atributoAncho);
+	elementoGrilla.addAttribute(atributoTipo);
+
+	XmlElement elementoCaminoUno("camino", 3, 800);
+	XmlAttribute atributoFilaC1("fila", "1");
+	XmlAttribute atributoColumnaC1("columna", "5");
+	elementoCaminoUno.addAttribute(atributoFilaC1);
+	elementoCaminoUno.addAttribute(atributoColumnaC1);
+
+	XmlElement bonusCaminoUno("bonus", 1, 20);
+	XmlAttribute atributoBonus("tipo", "naranja");
+	bonusCaminoUno.addAttribute(atributoBonus);
+
+	elementoCaminoUno.addChild(bonusCaminoUno);
+
+	elementoGrilla.addChild(elementoCaminoUno);
+
+	List<TipoObstaculo> lo;
+
+	std::string tipo = "uva";
+
+	TipoBonus tb(tipo, '+');
+	List<TipoBonus> lb;
+	lb.add(tb);
+
+	Grilla grilla(elementoGrilla, lo, lb);
+
+	Celda c = grilla.getMatriz().at(1).at(5);
+
+	if(c.esOcupada())
 	{
 		return false;
 	}

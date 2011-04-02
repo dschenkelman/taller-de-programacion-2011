@@ -9,5 +9,6 @@ public:
 	Obstaculo(std::string& tipo, int f, int c);
 	Obstaculo(XmlElement& e);
 	std::string getTipo();
+	void setTipo(std::string t);
 	~Obstaculo(void);
 };

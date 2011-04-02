@@ -36,16 +36,30 @@ Camino::Camino(XmlElement& e)
 		columna = c;
 	}
 
-	/*List<XmlElement> listaHijos = e.getChildren();
+	tieneBonus = false;
 
-	for(int i = 0; i < listaHijos.length(); i++)
+	if (e.hasChildren())
 	{
-		if (listaHijos[i].hasAttribute("tipo"))
+		List<XmlElement> listaHijos = e.getChildren();
+		
+		if(listaHijos.length() == 1)
 		{
-			Bonus b(listaHijos[i]);
+			Bonus b = Bonus(listaHijos.at(0));
 			bonus = b;
+			tieneBonus = true;
 		}
-	}*/
+
+		else
+		{
+			//un camino con más de un bonus, por ahi hay que meter advertencia y usar un solo bonus
+			throw std::exception();
+		}
+	}
+}
+
+bool Camino::hasBonus()
+{
+	return tieneBonus;
 }
 
 Bonus Camino::getBonus()

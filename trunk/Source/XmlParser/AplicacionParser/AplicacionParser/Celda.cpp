@@ -14,6 +14,17 @@ Celda::Celda(int f, int c)
 
 Celda::Celda(void)
 {
+	ocupada = false;
+}
+
+bool Celda::esOcupada()
+{
+	return ocupada;
+}
+
+void Celda::Ocupar()
+{
+	ocupada = true;
 }
 
 int Celda::getColumna()
