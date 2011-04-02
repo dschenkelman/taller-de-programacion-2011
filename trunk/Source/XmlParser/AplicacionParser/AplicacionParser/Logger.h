@@ -22,5 +22,6 @@ public:
 	void logWarning(std::string msg);
 	void logError(std::string msg);
 	FILE* obetenerArchivo(void);
+	size_t obtenerTamanioArchivo(void);
 
 };

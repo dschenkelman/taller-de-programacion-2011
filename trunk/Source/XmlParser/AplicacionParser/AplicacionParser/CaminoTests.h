@@ -10,6 +10,8 @@ public:
 	void run(void);
 	void printLeaks(int leaks);
 	void printResult(std::string testName, bool result);
+	bool testAtributoFilaConValorNegativoLoggeaError();
+	bool testAtributoColumnaConValorNegativoLoggeaError();
 	bool testAtributoFilaCorrectoGuardaCorrectamente();
 	bool testAtributoColumnaCorrectoGuardaCorrectamente();
 	bool testCaminoConBonusCreaCorrectamente();
