@@ -8,11 +8,18 @@ Grilla::Grilla(int an, int al, std::string& topd)
 {
 	if (an < 0 || al < 0)
 	{
+		Logger::getInstance()->logWarning("En Grilla, ancho o alto menores que cero; se setean valores por defecto. \0");
+		// Se setean valores por defecto
+		ancho	= defGridAncho;
+		alto	= defGridAlto;
 		throw std::exception();
 	}
-
-	ancho = an;
-	alto = al;
+	else
+	{
+		ancho = an;
+		alto = al;
+	}
+	
 	tipoObstaculoPorDefecto = topd;
 }
 
@@ -28,10 +35,16 @@ Grilla::Grilla(XmlElement& e, List<TipoObstaculo>& lo, List<TipoBonus>& lb)
 		
 		if (an < 0)
 		{
-			throw std::exception();
+			// Se loguea el warning y se setea ancho por defecto
+			Logger::getInstance()->logWarning("En Grilla, ancho menor a cero; se setea valor por defecto. \0");
+			ancho = defGridAncho;
+		}
+		else
+		{
+			ancho = an;
 		}
 
-		ancho = an;
+		
 	}
 
 	if(e.hasAttribute("alto"))
@@ -41,10 +54,14 @@ Grilla::Grilla(XmlElement& e, List<TipoObstaculo>& lo, List<TipoBonus>& lb)
 		
 		if (al < 0)
 		{
-			throw std::exception();
+			// Se loguea el warning y se setea alto por defecto
+			Logger::getInstance()->logWarning("En Grilla, alto menor a cero; se setea valor por defecto. \0");
+			alto = defGridAlto;
 		}
-
-		alto = al;
+		else
+		{
+			alto = al;
+		}
 	}
 
 	if (e.hasAttribute("tipoObstaculoPorDefecto"))
@@ -55,6 +72,7 @@ Grilla::Grilla(XmlElement& e, List<TipoObstaculo>& lo, List<TipoBonus>& lb)
 	else
 	{
 		// Logger, el tipo obstaculo por defecto es necesario.
+		Logger::getInstance()->logWarning("En Grilla, el tipo obstaculo no fue definido; se toma tipo obstáculo por defecto. \0");
 	}
 
 	if (e.hasChildren())
@@ -85,6 +103,7 @@ std::string Grilla::getTipoObstaculoPorDefecto()
 
 Grilla::~Grilla(void)
 {
+	Logger::getInstance()->closeLog();
 }
 
 // métodos privados
@@ -116,6 +135,7 @@ void Grilla::generarMatriz(List<XmlElement>& listaElementos)
 				if(!bonusValido)
 				{
 					//Logger bonus inexistente
+					Logger::getInstance()->logError("En Grilla, bonus inexistente; se ignora el bonus. \0");
 					continue;
 				}
 			}
@@ -124,6 +144,7 @@ void Grilla::generarMatriz(List<XmlElement>& listaElementos)
 			if(!result)
 			{
 				//Logger no se pudo meter elemento porque ya esta ocupada la posicion
+				Logger::getInstance()->logError("En Grilla, no se pudo colocar el camino; posicion ya ocupada. \0");
 			}
 		}
 
@@ -140,6 +161,7 @@ void Grilla::generarMatriz(List<XmlElement>& listaElementos)
 				if(!obstaculoValido)
 				{
 					//Logger obstaculo inexistente
+					Logger::getInstance()->logError("En Grilla, obstaculo inexistente; se ignora el obstaculo. \0");
 					continue;
 				}
 			}
@@ -154,12 +176,14 @@ void Grilla::generarMatriz(List<XmlElement>& listaElementos)
 			if(!result)
 			{
 				//Logger no se pudo meter elemento porque ya está ocupada la posicion
+				Logger::getInstance()->logError("En Grilla, no se pudo colocar el obstaculo; posicion ya ocupada.");
 			}
 		}
 
 		else
 		{
 			//Logger (tag con nombre incorrecto) y sigue
+			Logger::getInstance()->logError("En Grilla, se ignora tag desconocido '"+listaElementos.at(i).getName()+"'.");
 		}
 	}
 }
@@ -172,11 +196,13 @@ bool Grilla::colocarCeldaEnMatriz(Celda& c)
 	if (fila > alto)
 	{
 		//Logger y valor por defecto
+		Logger::getInstance()->logWarning("En Grilla, celda con fila mayor al alto de la grilla; se asigna valor por defecto.");
 	}
 
 	if (columna > ancho)
 	{
 		//Logger y valor por defecto
+		Logger::getInstance()->logWarning("En Grilla, celda con  columna mayor al ancho de la grilla; se asigna columna por defecto.");
 	}
 
 	if (c.esOcupada())

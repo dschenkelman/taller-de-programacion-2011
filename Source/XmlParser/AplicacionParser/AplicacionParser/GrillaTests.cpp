@@ -24,8 +24,8 @@ GrillaTests::~GrillaTests(void)
 
 void GrillaTests::run(void)
 {
-	printResult("testAtributoAnchoConValorNegativoTiraExcepcion", testAtributoAnchoConValorNegativoTiraExcepcion());
-	printResult("testAtributoAltoConValorNegativoTiraExcepcion", testAtributoAltoConValorNegativoTiraExcepcion());
+	printResult("testAtributoAnchoConValorNegativoTomaValorPorDefecto", testAtributoAnchoConValorNegativoTomaValorPorDefecto());
+	printResult("testAtributoAltoConValorNegativoTomaValorPorDefecto", testAtributoAltoConValorNegativoTomaValorPorDefecto());
 	printResult("testAtributoAltoCorrectoGuardaCorrectamente", testAtributoAltoCorrectoGuardaCorrectamente());
 	printResult("testAtributoAnchoCorrectoGuardaCorrectamente", testAtributoAnchoCorrectoGuardaCorrectamente());
 	printResult("testGenerarMatrizGeneraCorrectamente", testGenerarMatrizGeneraCorrectamente());
@@ -40,7 +40,7 @@ void GrillaTests::printResult(std::string testName, bool result)
 	std::cout << (testName.append(result ? ": Passed\n" : ": Failed!!!\n"));
 }
 
-bool GrillaTests::testAtributoAnchoConValorNegativoTiraExcepcion()
+bool GrillaTests::testAtributoAnchoConValorNegativoTomaValorPorDefecto()
 {
 	XmlElement elemento("Nombre", 1, 100);
 	XmlAttribute atributo("ancho", "-4");
@@ -49,19 +49,12 @@ bool GrillaTests::testAtributoAnchoConValorNegativoTiraExcepcion()
 	List<TipoObstaculo> lo;
 	List<TipoBonus> lb;
 
-	try
-	{
-		Grilla grilla(elemento, lo, lb);
-	}
-	catch(exception& e)
-	{
-		return true;
-	}
+	Grilla grilla(elemento, lo, lb);
 
-	return false;
+	return (grilla.getAncho() == defGridAncho) ? true:false;
 }
 
-bool GrillaTests::testAtributoAltoConValorNegativoTiraExcepcion()
+bool GrillaTests::testAtributoAltoConValorNegativoTomaValorPorDefecto()
 {
 	XmlElement elemento("Nombre", 1, 100);
 	XmlAttribute atributo("alto", "-6");
@@ -70,16 +63,9 @@ bool GrillaTests::testAtributoAltoConValorNegativoTiraExcepcion()
 	List<TipoObstaculo> lo;
 	List<TipoBonus> lb;
 
-	try
-	{
-		Grilla grilla(elemento, lo, lb);
-	}
-	catch(exception& e)
-	{
-		return true;
-	}
+	Grilla grilla(elemento, lo, lb);
 
-	return false;
+	return (grilla.getAlto() == defGridAlto) ? true:false;
 }
 
 bool GrillaTests::testAtributoAltoCorrectoGuardaCorrectamente()
