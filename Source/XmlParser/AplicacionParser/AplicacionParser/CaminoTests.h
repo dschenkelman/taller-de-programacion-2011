@@ -1,5 +1,6 @@
 #pragma once
 #include "Camino.h"
+#include "Bonus.h"
 
 class CaminoTests
 {
@@ -13,4 +14,6 @@ public:
 	bool testAtributoColumnaConValorNegativoTiraExcepcion();
 	bool testAtributoFilaCorrectoGuardaCorrectamente();
 	bool testAtributoColumnaCorrectoGuardaCorrectamente();
+	bool testCaminoConBonusCreaCorrectamente();
+	bool testCaminoConDosBonusTiraExcepcion();
 };

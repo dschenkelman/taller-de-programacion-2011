@@ -1,5 +1,7 @@
 #pragma once
 #include "Grilla.h"
+#include "Camino.h"
+#include "Obstaculo.h"
 
 class GrillaTests
 {
@@ -13,8 +15,7 @@ public:
 	bool testAtributoAltoConValorNegativoTiraExcepcion();
 	bool testAtributoAltoCorrectoGuardaCorrectamente();
 	bool testAtributoAnchoCorrectoGuardaCorrectamente();
-	// falta implementar
 	bool testGenerarMatrizGeneraCorrectamente();
-	bool testGenerarMatrizConCeldaConFilaIncorrectaTiraExcepcion();
-	bool testGenerarMatrizConCeldaConColumnaIncorrectaTiraExcepcion();
+	bool testTipoBonusInvalidoNoSeAgregaALaMatriz();
+	
 };

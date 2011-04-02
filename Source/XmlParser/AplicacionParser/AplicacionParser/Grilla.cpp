@@ -16,8 +16,11 @@ Grilla::Grilla(int an, int al, std::string& topd)
 	tipoObstaculoPorDefecto = topd;
 }
 
-Grilla::Grilla(XmlElement& e)
+Grilla::Grilla(XmlElement& e, List<TipoObstaculo>& lo, List<TipoBonus>& lb)
 {
+	tiposObstaculos = lo;
+	tiposBonus = lb;
+
 	if (e.hasAttribute("ancho")) 
 	{
 		std::string anchoString = e.getValue("ancho");
@@ -47,6 +50,11 @@ Grilla::Grilla(XmlElement& e)
 	if (e.hasAttribute("tipoObstaculoPorDefecto"))
 	{
 		tipoObstaculoPorDefecto = e.getValue("tipoObstaculoPorDefecto");
+	}
+
+	else
+	{
+		// Logger, el tipo obstaculo por defecto es necesario.
 	}
 
 	if (e.hasChildren())
@@ -79,7 +87,7 @@ Grilla::~Grilla(void)
 {
 }
 
-// método privado
+// métodos privados
 void Grilla::generarMatriz(List<XmlElement>& listaElementos)
 {
 	for (size_t i = 0; i < this->alto; i++)
@@ -98,6 +106,19 @@ void Grilla::generarMatriz(List<XmlElement>& listaElementos)
 		if (listaElementos.at(i).getName() == "camino")
 		{
 			Camino cam(listaElementos.at(i));
+			
+			if(cam.hasBonus())
+			{
+				std::string tipoBonus = cam.getBonus().getTipo();
+
+				bool bonusValido = verificarTipoBonusExistente(tipoBonus);
+
+				if(!bonusValido)
+				{
+					//Logger bonus inexistente
+					continue;
+				}
+			}
 			bool result = colocarCeldaEnMatriz(cam);
 
 			if(!result)
@@ -109,6 +130,25 @@ void Grilla::generarMatriz(List<XmlElement>& listaElementos)
 		if (listaElementos.at(i).getName() == "obstaculo")
 		{
 			Obstaculo obs(listaElementos.at(i));
+
+			if(obs.getTipo() != "")
+			{
+				std::string tipoObstaculo = obs.getTipo();
+
+				bool obstaculoValido = verificarTipoObstaculoExistente(tipoObstaculo);
+
+				if(!obstaculoValido)
+				{
+					//Logger obstaculo inexistente
+					continue;
+				}
+			}
+
+			else
+			{
+				obs.setTipo(tipoObstaculoPorDefecto);
+			}
+
 			bool result = colocarCeldaEnMatriz(obs);
 
 			if(!result)
@@ -139,9 +179,40 @@ bool Grilla::colocarCeldaEnMatriz(Celda& c)
 		//Logger y valor por defecto
 	}
 
-	//verificar si está ocupada
+	if (c.esOcupada())
+	{
+		return false;
+	}
 
 	matriz.at(fila).at(columna) = c;
 
+	c.Ocupar();
+
 	return true;
+}
+
+bool Grilla::verificarTipoBonusExistente(std::string tb)
+{
+	for (size_t i = 0; i < tiposBonus.length(); i++)
+	{
+		if (tb == tiposBonus.at(i).getNombre())
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
+bool Grilla::verificarTipoObstaculoExistente(std::string to)
+{
+	for(size_t i = 0; i < tiposObstaculos.length(); i++)
+	{
+		if (to == tiposObstaculos.at(i).getNombre())
+		{
+			return true;
+		}
+	}
+
+	return false;
 }

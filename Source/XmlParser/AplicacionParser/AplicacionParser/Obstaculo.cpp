@@ -47,6 +47,11 @@ std::string Obstaculo::getTipo()
 	return tipo;
 }
 
+void Obstaculo::setTipo(std::string t)
+{
+	tipo = t;
+}
+
 Obstaculo::~Obstaculo(void)
 {
 }

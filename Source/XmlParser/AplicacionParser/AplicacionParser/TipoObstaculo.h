@@ -8,6 +8,7 @@ class TipoObstaculo
 public:
 	TipoObstaculo(XmlElement& e);
 	TipoObstaculo(std::string& n, char t);
+	TipoObstaculo(void);
 	std::string getNombre();
 	char getTextura();
 	~TipoObstaculo(void);

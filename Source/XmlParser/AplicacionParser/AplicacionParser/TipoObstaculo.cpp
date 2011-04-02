@@ -21,6 +21,10 @@ TipoObstaculo::TipoObstaculo(XmlElement& e)
 	}
 }
 
+TipoObstaculo::TipoObstaculo(void)
+{
+}
+
 TipoObstaculo::TipoObstaculo(std::string& n, char t)
 {
 	nombre = n;
