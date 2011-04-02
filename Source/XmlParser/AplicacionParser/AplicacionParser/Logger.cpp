@@ -88,3 +88,9 @@ FILE* Logger::obetenerArchivo()
 {
 	return this->archivoFisico;
 }
+
+size_t Logger::obtenerTamanioArchivo(void)
+{
+	fseek (this->archivoFisico, 0, SEEK_END);
+	return ftell(this->archivoFisico);
+}
