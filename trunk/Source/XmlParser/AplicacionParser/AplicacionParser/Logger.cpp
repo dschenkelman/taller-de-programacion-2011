@@ -2,6 +2,9 @@
 #include "Logger.h"
 
 
+bool Logger::loggerCreated = false;
+Logger* Logger::instance = NULL;
+
 Logger::Logger(const char* ruta)
 {
 	// Abro el archivo y lo dejo listo para escribir
@@ -19,14 +22,27 @@ Logger::Logger(const char* ruta, const char* mensajeWarning, const char* mensaje
 	this->mensajeError = mensajeError;
 }
 
-bool Logger::loggerCreated = false;
-
-
-
 Logger::~Logger()
 {
 	// Cierro el archivo
 	int exito = fclose(this->archivoFisico);
+}
+
+
+Logger* Logger::getInstance(void) {
+	if (!loggerCreated)
+	{
+		instance = new Logger("log.txt");
+		loggerCreated = true;
+	}
+	return instance;
+}
+
+
+void Logger::closeLog(void) {
+	instance->~Logger();
+	delete instance;
+	loggerCreated = false;
 }
 
 
