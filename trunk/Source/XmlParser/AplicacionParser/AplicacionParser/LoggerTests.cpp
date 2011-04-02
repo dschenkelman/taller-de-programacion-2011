@@ -51,7 +51,7 @@ bool LoggerTests::testLogWarning(void)
 	fseek (loggerInstance->obetenerArchivo(), 0, SEEK_END);
 	size_t tamanioArchivoAntes = ftell(Logger::getInstance()->obetenerArchivo());
 	
-	mensaje = "el la cantidad de obstaculos es superior a la esperada.\0";
+	mensaje = "La cantidad de obstaculos es superior a la esperada.";
 
 	// Loggeo el warning
 	loggerInstance->logWarning(mensaje);
@@ -85,7 +85,7 @@ bool LoggerTests::testLogError(void)
 	fseek (logger->obetenerArchivo(), 0, SEEK_END);
 	size_t tamanioArchivoAntes = ftell(logger->obetenerArchivo());
 	
-	mensaje = "Linea 30 -> El tamaño de la grilla es superior al posible.\0";
+	mensaje = "Linea 30 -> El tamaño de la grilla es superior al posible.";
 
 	// Loggeo el warning
 	logger->logError(mensaje);
