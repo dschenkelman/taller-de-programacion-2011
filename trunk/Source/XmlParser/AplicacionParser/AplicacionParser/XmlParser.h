@@ -1,34 +1,34 @@
 #include <iostream>
 #include <fstream>
-#include <string.h>
+#include <string>
 #include <stdio.h>
 #include "List.h"
-#include "String.h"
 
-#define LINE_SIZE 200
 #pragma once
 
 class XmlParser
 {
 private:
 	long lineNumber;
-	FILE *xmlFile;
-	char lineRead[LINE_SIZE];
-	void parseAttribute(char *);
-	String tagName;
+	std::ifstream xmlFile;
+	std::string lineRead;
+	void parseAttribute(std::string attName);
+	std::string tagName;
 	//Por ahora dejo una lista de strings de la siguiente forma (Clave,Valor,Clave,Valor...)
-	List<String> tagAtt;
+	List<std::string> tagAtt;
+	std::string& preParseString(std::string& context, char char1, char char2 );
+	void trim(std::string& str);
 
 public:
 
 	XmlParser(void);
 	~XmlParser(void);
-	void openFile(char *filename);
+	void openFile(std::string filename);
 	void closeFile(void);
 	bool getXmlLine(void);
-	String getLineTagName(void);
-	List<String> getLineTagAttributes(void);
-	char * getLineRead(void);
+	std::string getLineTagName(void);
+	List<std::string> getLineTagAttributes(void);
+	std::string getLineRead(void);
 	long getLineNumber(void);
 	void parseLine(void);
 	bool isFileOpen(void);
