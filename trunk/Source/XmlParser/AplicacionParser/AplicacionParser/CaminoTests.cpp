@@ -22,8 +22,6 @@ void CaminoTests::printLeaks(int leaks)
 
 void CaminoTests::run(void)
 {
-	printResult("testAtributoFilaConValorNegativoTiraExcepcion", testAtributoFilaConValorNegativoTiraExcepcion());
-	printResult("testAtributoColumnaConValorNegativoTiraExcepcion", testAtributoColumnaConValorNegativoTiraExcepcion());
 	printResult("testAtributoFilaCorrectoGuardaCorrectamente", testAtributoFilaCorrectoGuardaCorrectamente());
 	printResult("testAtributoColumnaCorrectoGuardaCorrectamente",testAtributoColumnaCorrectoGuardaCorrectamente());
 	printResult("testCaminoConBonusCreaCorrectamente", testCaminoConBonusCreaCorrectamente());
@@ -36,44 +34,6 @@ void CaminoTests::run(void)
 void CaminoTests::printResult(std::string testName, bool result)
 {
 	std::cout << (testName.append(result ? ": Passed\n" : ": Failed!!!\n"));
-}
-
-bool CaminoTests::testAtributoFilaConValorNegativoTiraExcepcion()
-{
-	XmlElement elemento("Nombre", 1, 100);
-	XmlAttribute atributo("fila", "-5");
-	elemento.addAttribute(atributo);
-
-	try
-	{
-		Camino camino(elemento);
-	}
-	catch(exception& e)
-	{
-		return true;
-	}
-	
-	Logger::getInstance()->closeLog();
-	return false;
-}
-
-bool CaminoTests::testAtributoColumnaConValorNegativoTiraExcepcion()
-{
-	XmlElement elemento("Nombre", 1, 100);
-	XmlAttribute atributo("columna", "-9");
-	elemento.addAttribute(atributo);
-
-	try
-	{
-		Camino camino(elemento);
-	}
-	catch(exception& e)
-	{
-		return true;
-	}
-	
-	Logger::getInstance()->closeLog();
-	return false;
 }
 
 bool CaminoTests::testAtributoFilaCorrectoGuardaCorrectamente()

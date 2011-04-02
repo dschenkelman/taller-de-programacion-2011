@@ -29,7 +29,7 @@ void GrillaTests::run(void)
 	printResult("testAtributoAltoCorrectoGuardaCorrectamente", testAtributoAltoCorrectoGuardaCorrectamente());
 	printResult("testAtributoAnchoCorrectoGuardaCorrectamente", testAtributoAnchoCorrectoGuardaCorrectamente());
 	printResult("testGenerarMatrizGeneraCorrectamente", testGenerarMatrizGeneraCorrectamente());
-//	printResult("testTipoBonusInvalidoNoSeAgregaALaMatriz", testTipoBonusInvalidoNoSeAgregaALaMatriz());
+	printResult("testTipoBonusInvalidoNoSeAgregaALaMatriz", testTipoBonusInvalidoNoSeAgregaALaMatriz());
 
 	int leaks = _CrtDumpMemoryLeaks();
 	printLeaks(leaks);

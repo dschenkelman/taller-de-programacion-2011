@@ -12,11 +12,11 @@ XmlAttribute::XmlAttribute(std::string key, std::string value)
 	this->value = value;
 }
 
-string XmlAttribute::getKey(void) {
+string XmlAttribute::getKey(void) const {
 	return this->key;
 }
 
-string XmlAttribute::getValue(void) {
+string XmlAttribute::getValue(void) const {
 	return this->value;
 }
 
