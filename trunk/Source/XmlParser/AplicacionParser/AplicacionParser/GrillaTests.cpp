@@ -50,6 +50,7 @@ bool GrillaTests::testAtributoAnchoConValorNegativoTomaValorPorDefecto()
 	List<TipoBonus> lb;
 
 	Grilla grilla(elemento, lo, lb);
+	Logger::getInstance()->closeLog();
 
 	return (grilla.getAncho() == defGridAncho) ? true:false;
 }
@@ -65,6 +66,8 @@ bool GrillaTests::testAtributoAltoConValorNegativoTomaValorPorDefecto()
 
 	Grilla grilla(elemento, lo, lb);
 
+	Logger::getInstance()->closeLog();
+	
 	return (grilla.getAlto() == defGridAlto) ? true:false;
 }
 
@@ -80,7 +83,8 @@ bool GrillaTests::testAtributoAltoCorrectoGuardaCorrectamente()
 	Grilla grilla(elemento, lo, lb);
 
 	int alto = grilla.getAlto();
-
+	Logger::getInstance()->closeLog();
+	
 	if(alto != 10)
 	{
 		return false;
@@ -101,7 +105,8 @@ bool GrillaTests::testAtributoAnchoCorrectoGuardaCorrectamente()
 	Grilla grilla(elemento, lo, lb);
 
 	int ancho = grilla.getAncho();
-
+	
+	Logger::getInstance()->closeLog();
 	if(ancho != 8)
 	{
 		return false;
@@ -157,6 +162,8 @@ bool GrillaTests::testGenerarMatrizGeneraCorrectamente()
 	List<List<Celda>> matrizObtenida = grilla.getMatriz();
 
 	int prueba = matrizObtenida.at(2).at(9).getFila();
+
+	Logger::getInstance()->closeLog();
 
 	if (matrizObtenida.at(2).at(9).getFila() != 2 || matrizObtenida.at(2).at(9).getColumna() != 9)
 	{
@@ -216,7 +223,8 @@ bool GrillaTests::testTipoBonusInvalidoNoSeAgregaALaMatriz()
 	Grilla grilla(elementoGrilla, lo, lb);
 
 	Celda c = grilla.getMatriz().at(1).at(5);
-
+	
+	Logger::getInstance()->closeLog();
 	if(c.esOcupada())
 	{
 		return false;

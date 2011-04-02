@@ -52,7 +52,8 @@ bool CaminoTests::testAtributoFilaConValorNegativoTiraExcepcion()
 	{
 		return true;
 	}
-
+	
+	Logger::getInstance()->closeLog();
 	return false;
 }
 
@@ -70,7 +71,8 @@ bool CaminoTests::testAtributoColumnaConValorNegativoTiraExcepcion()
 	{
 		return true;
 	}
-
+	
+	Logger::getInstance()->closeLog();
 	return false;
 }
 
@@ -83,7 +85,8 @@ bool CaminoTests::testAtributoFilaCorrectoGuardaCorrectamente()
 	Camino camino(elemento);
 
 	int fila = camino.getFila();
-
+	
+	Logger::getInstance()->closeLog();
 	if (fila != 9)
 	{
 		return false;

@@ -1,6 +1,7 @@
 #include "StdAfx.h"
 #include "Camino.h"
 #include "List.h"
+#include <sstream>
 
 Camino::Camino(int f, int c)
 {
@@ -17,7 +18,9 @@ Camino::Camino(XmlElement& e)
 
 		if (f < 0)
 		{
-			throw std::exception();
+			// Loggeo como Error que la fila sea menor a cero
+			std::stringstream nroLinea;	nroLinea << e.getStartLine();
+			Logger::getInstance()->logError("Línea " + nroLinea.str() + " -> En Camino, fila menor a cero.");
 		}
 
 		fila = f;
@@ -30,7 +33,9 @@ Camino::Camino(XmlElement& e)
 
 		if (c < 0)
 		{
-			throw std::exception();
+			// Loggeo como Error que la columna sea menor a cero
+			std::stringstream nroLinea;	nroLinea << e.getStartLine();
+			Logger::getInstance()->logError("Línea " + nroLinea.str() + " -> En Camino, columna menor a cero.");
 		}
 
 		columna = c;
@@ -69,4 +74,5 @@ Bonus Camino::getBonus()
 
 Camino::~Camino(void)
 {
+	//Logger::closeLog();
 }

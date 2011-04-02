@@ -1,6 +1,7 @@
 #pragma once
 #include "Celda.h"
 #include "Bonus.h"
+#include "Logger.h"
 
 
 class Camino : public Celda
