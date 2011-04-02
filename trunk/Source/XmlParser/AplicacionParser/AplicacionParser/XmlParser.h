@@ -3,6 +3,7 @@
 #include <string>
 #include <stdio.h>
 #include "List.h"
+#include "Logger.h"
 
 #pragma once
 
@@ -18,6 +19,9 @@ private:
 	List<std::string> tagAtt;
 	std::string& preParseString(std::string& context, char char1, char char2 );
 	void trim(std::string& str);
+	Logger *log;
+	bool noChildren;
+	bool hasErrors;
 
 public:
 
@@ -32,4 +36,6 @@ public:
 	long getLineNumber(void);
 	void parseLine(void);
 	bool isFileOpen(void);
+	bool tagHasNoChildren(void);
+	bool lineHasErrors(void);
 };

@@ -16,5 +16,9 @@ public:
 	bool testTagNameNotNull(void);
 	bool testTagAttributeListNotNULL(void);
 	bool testFileNotExists(void);
+	bool testMissingGTSymbol(void);
+	bool testMissingLTSymbol(void);
+	bool testNoChildrenTag(void);
+	bool testMissingQuotes(void);
 	~XmlParserTest(void);
 };
