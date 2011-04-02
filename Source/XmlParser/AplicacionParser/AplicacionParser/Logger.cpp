@@ -25,7 +25,8 @@ Logger::Logger(const char* ruta, const char* mensajeWarning, const char* mensaje
 Logger::~Logger()
 {
 	// Cierro el archivo
-	int exito = fclose(this->archivoFisico);
+	if (this->archivoFisico != NULL)
+		int exito = fclose(this->archivoFisico);
 }
 
 

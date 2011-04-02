@@ -103,7 +103,6 @@ std::string Grilla::getTipoObstaculoPorDefecto()
 
 Grilla::~Grilla(void)
 {
-	Logger::getInstance()->closeLog();
 }
 
 // métodos privados
