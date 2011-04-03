@@ -1,5 +1,7 @@
 #include "StdAfx.h"
 #include "Obstaculo.h"
+#include "Logger.h"
+#include <sstream>
 
 Obstaculo::Obstaculo(std::string& t, int f, int c)
 {
@@ -22,7 +24,9 @@ Obstaculo::Obstaculo(XmlElement& e)
 
 		if(f < 0)
 		{
-			throw std::exception();
+			// Loggeo como Error que la fila sea menor a cero
+			std::stringstream nroLinea;	nroLinea << e.getStartLine();
+			Logger::getInstance()->logError("Línea " + nroLinea.str() + " -> En Obstaculo, fila menor a cero.");
 		}
 
 		fila = f;
@@ -35,7 +39,9 @@ Obstaculo::Obstaculo(XmlElement& e)
 
 		if (c < 0)
 		{
-			throw std::exception();
+			// Loggeo como Error que la fila sea menor a cero
+			std::stringstream nroLinea;	nroLinea << e.getStartLine();
+			Logger::getInstance()->logError("Línea " + nroLinea.str() + " -> En Obstaculo, columna menor a cero.");
 		}
 
 		columna = c;
