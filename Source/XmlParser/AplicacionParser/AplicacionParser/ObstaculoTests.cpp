@@ -1,5 +1,6 @@
 #include "StdAfx.h"
 #include "ObstaculoTests.h"
+#include "Logger.h"
 using namespace std;
 //useful to detect memory leaks
 #define _CRTDBG_MAP_ALLOC
@@ -21,8 +22,8 @@ ObstaculoTests::~ObstaculoTests(void)
 
 void ObstaculoTests::run(void)
 {
-	printResult("testAtributoFilaConValorNegativoTiraExcepcion", testAtributoFilaConValorNegativoTiraExcepcion());
-	printResult("testAtributoColumnaConValorNegativoTiraExcepcion", testAtributoColumnaConValorNegativoTiraExcepcion());
+	printResult("testAtributoFilaConValorNegativoLoggeaError", testAtributoFilaConValorNegativoLoggeaError());
+	printResult("testAtributoColumnaConValorNegativoLoggeaError", testAtributoColumnaConValorNegativoLoggeaError());
 	printResult("testAtributoFilaCorrectoGuardaCorrectamente", testAtributoFilaCorrectoGuardaCorrectamente());
 	printResult("testAtributoColumnaCorrectoGuardaCorrectamente",testAtributoColumnaCorrectoGuardaCorrectamente());
 
@@ -35,40 +36,46 @@ void ObstaculoTests::printResult(std::string testName, bool result)
 	std::cout << (testName.append(result ? ": Passed\n" : ": Failed!!!\n"));
 }
 
-bool ObstaculoTests::testAtributoFilaConValorNegativoTiraExcepcion()
+bool ObstaculoTests::testAtributoFilaConValorNegativoLoggeaError()
 {
 	XmlElement elemento("Nombre", 1, 100);
 	XmlAttribute atributo("fila", "-5");
 	elemento.addAttribute(atributo);
+	
+	// Obtengo el tamanio antes de crear el obstaculo
+	size_t tamanioAntes = Logger::getInstance()->obtenerTamanioArchivo();
 
-	try
-	{
-		Obstaculo obstaculo(elemento);
-	}
-	catch(exception& e)
-	{
-		return true;
-	}
+	// creo el obstaculo
+	Obstaculo obstaculo(elemento);
 
-	return false;
+	// Tamanio despues de crear el obstaculo
+	size_t tamanioDespues = Logger::getInstance()->obtenerTamanioArchivo();
+
+	// finalizo el logger
+	Logger::getInstance()->closeLog();
+
+	return (tamanioAntes<tamanioDespues)?true:false;
 }
 
-bool ObstaculoTests::testAtributoColumnaConValorNegativoTiraExcepcion()
+bool ObstaculoTests::testAtributoColumnaConValorNegativoLoggeaError()
 {
 	XmlElement elemento("Nombre", 1, 100);
 	XmlAttribute atributo("columna", "-9");
 	elemento.addAttribute(atributo);
 
-	try
-	{
-		Obstaculo obstaculo(elemento);
-	}
-	catch(exception& e)
-	{
-		return true;
-	}
+	// Obtengo el tamanio antes de crear el obstaculo
+	size_t tamanioAntes = Logger::getInstance()->obtenerTamanioArchivo();
 
-	return false;
+	// creo el obstaculo
+	Obstaculo obstaculo(elemento);
+
+	// Tamanio despues de crear el obstaculo
+	size_t tamanioDespues = Logger::getInstance()->obtenerTamanioArchivo();
+	
+	// finalizo el logger
+	Logger::getInstance()->closeLog();
+
+	return (tamanioAntes<tamanioDespues)?true:false;
 }
 
 bool ObstaculoTests::testAtributoFilaCorrectoGuardaCorrectamente()
