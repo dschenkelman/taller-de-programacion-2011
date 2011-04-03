@@ -14,6 +14,7 @@
 #include "ObstaculoTests.h"
 #include "CaminoTests.h"
 #include "GrillaTests.h"
+#include "EscenarioTests.h"
 #include <iostream>
 using namespace std;
 
@@ -62,6 +63,10 @@ int _tmain(int argc, _TCHAR* argv[])
 	cout<<"Test de Grilla"<<endl;
 	GrillaTests grillaTests;
 	grillaTests.run();
+
+	cout<<"Test de Escenario"<<endl;
+	EscenarioTests escenarioTests;
+	escenarioTests.run();
 
 	char aux;
 	cin >> aux;

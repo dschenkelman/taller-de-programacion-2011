@@ -24,6 +24,7 @@ class Grilla
 public:
 	Grilla(XmlElement& e, List<TipoObstaculo>& to, List<TipoBonus>& tb);
 	Grilla(int an, int al, std::string& topd);
+	Grilla(void);
 	int getAncho();
 	int getAlto();
 	std::string getTipoObstaculoPorDefecto();

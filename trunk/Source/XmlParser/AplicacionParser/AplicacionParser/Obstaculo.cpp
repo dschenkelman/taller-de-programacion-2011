@@ -17,6 +17,11 @@ Obstaculo::Obstaculo(XmlElement& e)
 		tipo = e.getValue("tipo");
 	}
 
+	else
+	{
+		tipo = "";
+	}
+
 	if (e.hasAttribute("fila"))
 	{
 		std::string filaString = e.getValue("fila");

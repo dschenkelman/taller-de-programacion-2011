@@ -81,6 +81,10 @@ Grilla::Grilla(XmlElement& e, List<TipoObstaculo>& lo, List<TipoBonus>& lb)
 	}
 }
 
+Grilla::Grilla(void)
+{
+}
+
 int Grilla::getAlto()
 {
 	return alto;
@@ -134,7 +138,7 @@ void Grilla::generarMatriz(List<XmlElement>& listaElementos)
 				if(!bonusValido)
 				{
 					//Logger bonus inexistente
-					Logger::getInstance()->logError("En Grilla, bonus inexistente; se ignora el bonus. \0");
+					Logger::getInstance()->logError("En Grilla, bonus inexistente; se ignora el camino. \0");
 					continue;
 				}
 			}
@@ -147,7 +151,7 @@ void Grilla::generarMatriz(List<XmlElement>& listaElementos)
 			}
 		}
 
-		if (listaElementos.at(i).getName() == "obstaculo")
+		else if (listaElementos.at(i).getName() == "obstaculo")
 		{
 			Obstaculo obs(listaElementos.at(i));
 
@@ -211,7 +215,8 @@ bool Grilla::colocarCeldaEnMatriz(Celda& c)
 
 	matriz.at(fila).at(columna) = c;
 
-	c.Ocupar();
+	matriz.at(fila).at(columna).Ocupar();
+
 
 	return true;
 }
