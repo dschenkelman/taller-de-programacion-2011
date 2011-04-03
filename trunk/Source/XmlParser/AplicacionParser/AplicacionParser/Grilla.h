@@ -5,6 +5,7 @@
 #include "TipoObstaculo.h"
 #include "TipoBonus.h"
 #include "Logger.h"
+#include "CellMatrix.h"
 
 const int defGridAncho = 10;
 const int defGridAlto = 10;
