@@ -11,6 +11,7 @@ class Camino : public Celda
 public:
 	Camino(XmlElement& e);
 	Camino(int f, int c);
+	Camino(void);
 	Bonus getBonus();
 	bool hasBonus();
 	~Camino(void);

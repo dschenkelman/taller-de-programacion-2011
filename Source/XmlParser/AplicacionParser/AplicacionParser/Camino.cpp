@@ -63,6 +63,10 @@ Camino::Camino(XmlElement& e)
 	}
 }
 
+Camino::Camino(void)
+{
+}
+
 bool Camino::hasBonus()
 {
 	return tieneBonus;

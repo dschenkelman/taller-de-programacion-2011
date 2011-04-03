@@ -195,6 +195,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Escenario.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\EscenarioTests.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Grapher.cpp"
 				>
 			</File>
@@ -318,6 +326,14 @@
 			</File>
 			<File
 				RelativePath=".\Celda.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Escenario.h"
+				>
+			</File>
+			<File
+				RelativePath=".\EscenarioTests.h"
 				>
 			</File>
 			<File
