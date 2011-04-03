@@ -9,6 +9,6 @@ public:
 	void printLeaks(int);
 	void run(void);
 	void printResult(std::string testName, bool result);
-	bool testAtributoTexturaDeMasDeUnCaracterTiraExcepcion();
+	bool testAtributoTexturaDeMasDeUnCaracterLoggeaWarning();
 	bool testAtributoTexturaCorrectoGuardaCorrectamente();
 };

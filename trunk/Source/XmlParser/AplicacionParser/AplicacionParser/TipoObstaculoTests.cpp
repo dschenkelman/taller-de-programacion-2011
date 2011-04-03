@@ -1,5 +1,6 @@
 #include "StdAfx.h"
 #include "TipoObstaculoTests.h"
+#include "Logger.h"
 #include <iostream>
 #include <exception>
 using namespace std;
@@ -24,7 +25,7 @@ TipoObstaculoTests::~TipoObstaculoTests(void)
 
 void TipoObstaculoTests::run(void)
 {
-	printResult("testAtributoTexturaDeMasDeUnCaracterTiraExcepcion", testAtributoTexturaDeMasDeUnCaracterTiraExcepcion());
+	printResult("testAtributoTexturaDeMasDeUnCaracterLoggeaWarning", testAtributoTexturaDeMasDeUnCaracterLoggeaWarning());
 	printResult("testAtributoTexturaCorrectoGuardaCorrectamente", testAtributoTexturaCorrectoGuardaCorrectamente());
 
 	int leaks = _CrtDumpMemoryLeaks();
@@ -36,22 +37,25 @@ void TipoObstaculoTests::printResult(std::string testName, bool result)
 	std::cout << (testName.append(result ? ": Passed\n" : ": Failed!!!\n"));
 }
 
-bool TipoObstaculoTests::testAtributoTexturaDeMasDeUnCaracterTiraExcepcion()
+bool TipoObstaculoTests::testAtributoTexturaDeMasDeUnCaracterLoggeaWarning()
 {
 	XmlElement elemento("Nombre", 1, 100);
 	XmlAttribute atributo("textura", "*+");
 	elemento.addAttribute(atributo);
 
-	try
-	{
-		TipoObstaculo tipoObstaculo(elemento);
-	}
-	catch (exception& e)
-	{
-		return true;
-	}
+	// Obtengo el tamanio antes de crear el obstaculo
+	size_t tamanioAntes = Logger::getInstance()->obtenerTamanioArchivo();
 
-	return false;
+	// creo el obstaculo
+	TipoObstaculo tipoObstaculo(elemento);
+
+	// Tamanio despues de crear el obstaculo
+	size_t tamanioDespues = Logger::getInstance()->obtenerTamanioArchivo();
+
+	// finalizo el logger
+	Logger::getInstance()->closeLog();
+
+	return (tamanioAntes<tamanioDespues)?true:false;
 }
 
 bool TipoObstaculoTests::testAtributoTexturaCorrectoGuardaCorrectamente()

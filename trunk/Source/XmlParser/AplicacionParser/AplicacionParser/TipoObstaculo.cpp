@@ -1,5 +1,7 @@
 #include "StdAfx.h"
 #include "TipoObstaculo.h"
+#include "Logger.h"
+#include <sstream>
 
 TipoObstaculo::TipoObstaculo(XmlElement& e)
 {
@@ -14,7 +16,9 @@ TipoObstaculo::TipoObstaculo(XmlElement& e)
 
 		if(t.length() != 1)
 		{
-			throw std::exception();
+			// Loggeo como warning que la textura tenga mas de un caracter
+			std::stringstream nroLinea;	nroLinea << e.getStartLine();
+			Logger::getInstance()->logError("Línea " + nroLinea.str() + " -> En TipoObstaculo, textura con mas de un caracter.");
 		}
 
 		textura = t.at(0);
