@@ -3,6 +3,7 @@
 #include <exception>
 #include "Logger.h"
 
+
 Celda::Celda(int f, int c)
 {
 	if(f < 0 || c < 0)
@@ -41,4 +42,10 @@ int Celda::getFila()
 
 Celda::~Celda(void)
 {
+}
+
+
+std::string Celda::obtenerRepresentacion(void)
+{
+	return "?";
 }

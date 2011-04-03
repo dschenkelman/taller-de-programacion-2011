@@ -1,10 +1,10 @@
 #pragma once
-#include "Grilla.h"
+#include "Escenario.h"
 
 class Grapher
 {
 public:
-	void draw(Grilla &grid);
+	void draw(Escenario &escenario);
 	Grapher();
 	~Grapher();
 };

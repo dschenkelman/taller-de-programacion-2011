@@ -207,6 +207,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\GrapherTests.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Grilla.cpp"
 				>
 			</File>
@@ -338,6 +342,10 @@
 			</File>
 			<File
 				RelativePath=".\Grapher.h"
+				>
+			</File>
+			<File
+				RelativePath=".\GrapherTests.h"
 				>
 			</File>
 			<File

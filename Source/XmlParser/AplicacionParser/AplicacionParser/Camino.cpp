@@ -80,3 +80,15 @@ Bonus Camino::getBonus()
 Camino::~Camino(void)
 {
 }
+
+std::string Camino::obtenerRepresentacion()
+{
+	std::string representacion = "c";
+	
+	if (this->hasBonus())
+	{
+		representacion = this->bonus.getTipoBonus().getTextura();
+	}
+
+	return representacion;
+}
