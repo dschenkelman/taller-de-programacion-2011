@@ -1,5 +1,7 @@
 #include "StdAfx.h"
+#include "Stack.h"
 #include "XmlParser.h"
+#include "XmlAttribute.h"
 #include "Tokenizer.h"
 #include "Logger.h"
 #include <string>
@@ -14,6 +16,7 @@ XmlParser::XmlParser(void)
 	this->log=Logger::getInstance();
 	this->noChildren=false;
 	this->hasErrors=false;
+	this->isOpeningLine = true;
 }
 
 XmlParser::~XmlParser(void)
@@ -43,11 +46,12 @@ bool  XmlParser::getXmlLine(void){
 	//Para encontrar < > y /> en el string
 	size_t foundLT,foundGT,closeGT;
 	std::stringstream out;
+	this->tagAtt.clear();
 		
 	if (this->xmlFile.is_open() && getline( this->xmlFile, this->lineRead ))
 	{
 		this->lineNumber++;
-		this->trim(this->lineRead);
+		this->trim(this->lineRead, ' ');
 		strMine=this->lineRead;
 	
 		closeGT=strMine.find("/>");
@@ -103,42 +107,19 @@ List<string> XmlParser::getLineTagAttributes(void){
 	return this->tagAtt;
 }
 
-void XmlParser::parseLine(void){
-
-	string token;
+void XmlParser::parseLine(void)
+{
 	string line;
-	size_t found;
-	stringstream out;
-	string logMessage;
-	string invalidTag="InvalidTagName_";
-	
-	line=this->getLineRead();
-	line=this->preParseString(line,' ', '&');
-	Tokenizer miTokenizer(line);
-	while (miTokenizer.NextToken()){
-		token=miTokenizer.GetToken();
-		//cout<<"Token: " << token <<endl;
-		found = token.find("=");
-		if (found!=string::npos){
-			
-			if (this->tagName.length() > 0) //Si ya levante el nombre entonces sigo con los atributos.
-				this->parseAttribute(token);
-			else
-			{ //si no le doy un nombre y hago el log del warning
-				logMessage= "Falta nombre del tag (por defecto: InvalidTagName) en linea: ";
-				out << logMessage;
-				out << this->lineNumber;
-				out << endl;
-				this->log->logWarning(out.str().c_str());
-				out.flush();
-				out << invalidTag;
-				out << this->lineNumber;
-				this->tagName=out.str();
-				this->hasErrors=true;
-			}
-		}
-		else
-			this->tagName=token;
+	line = this->getLineRead();
+	if (line[0] == '/')
+	{
+		this->isOpeningLine = false;
+		this->parseClosingLine(line);
+	}
+	else
+	{
+		this->isOpeningLine = true;
+		this->parseOpeningLine(line);
 	}
 }
 void XmlParser::parseAttribute(string myLine){
@@ -148,7 +129,7 @@ void XmlParser::parseAttribute(string myLine){
 	stringstream out;
 	string logMessage;
 
-	Tokenizer miTok(myLine,"=");
+	Tokenizer miTok(myLine,"=/");
 	string attName;
 	string attValue;
 
@@ -177,8 +158,8 @@ void XmlParser::parseAttribute(string myLine){
 			this->hasErrors=true;
 		}
 
-		this->getLineTagAttributes().add(attName);
-		this->getLineTagAttributes().add(attValue);
+		this->tagAtt.add(attName);
+		this->tagAtt.add(attValue);
 
 	}
 		
@@ -208,12 +189,12 @@ string& XmlParser::preParseString(string& context, char char1, char char2 )
 }
 
 //Remuevo espacios antes del comienzo del string y luego del comienzo del string
-void XmlParser::trim(string& str)
+void XmlParser::trim(string& str, char c)
 {
-  string::size_type pos = str.find_last_not_of(' ');
+  string::size_type pos = str.find_last_not_of(c);
   if(pos != string::npos) {
     str.erase(pos + 1);
-    pos = str.find_first_not_of(' ');
+    pos = str.find_first_not_of(c);
     if(pos != string::npos) str.erase(0, pos);
   }
   else str.erase(str.begin(), str.end());
@@ -229,4 +210,140 @@ bool  XmlParser::tagHasNoChildren(void){
 
 bool XmlParser::lineHasErrors(void){
 	return this->hasErrors;
+}
+
+XmlElement XmlParser::parse()
+{
+	Stack<XmlElement> previousParents;
+	XmlElement currentParent;
+	XmlElement currentElement;
+	bool parentSet = false;
+
+	while (this->getXmlLine())
+	{
+		long lineNumber = this->getLineNumber();
+		string name = this->getLineTagName();
+		if (this->isOpeningLine)
+		{
+			XmlElement currentElement = XmlElement(name, lineNumber, 0);
+			List<string> attributes = this->getLineTagAttributes();
+
+			for (size_t i = 0; i < attributes.length(); i = i + 2)
+			{
+				string key = attributes.at(i);
+				string value = attributes.at(i+1);
+				
+				//remove ""
+				trim(value, '"');
+				
+				XmlAttribute att(key, value);
+				currentElement.addAttribute(att);
+			}
+			
+			// si el atributo no cierra en la misma linea apilo al padre anterior y currentParent = currentElement
+			if (this->tagHasNoChildren())
+			{
+				currentElement.setEndLine(lineNumber);				
+				if (parentSet)
+				{
+					currentParent.addChild(currentElement);
+				}
+			}
+			else
+			{
+				if (parentSet)
+				{
+					previousParents.push(currentParent);
+				}
+				currentParent = currentElement;
+				parentSet = true;
+			}
+		}
+		else
+		{
+			//loop in case there are incorrect elements closing
+			while (name != currentParent.getName() && previousParents.count() != 0)
+			{
+				//loggear que no se cerro bien el tag
+				
+				XmlElement previousParent = previousParents.pop();
+				previousParent.addChild(currentParent);
+				currentParent = previousParent;
+			}
+
+			if (name == currentParent.getName())
+			{
+				if (previousParents.count() != 0)
+				{
+					XmlElement previousParent = previousParents.pop();
+					currentParent.setEndLine(lineNumber);
+					previousParent.addChild(currentParent);
+					currentParent = previousParent;
+				}
+				else
+				{
+					currentParent.setEndLine(lineNumber);
+				}
+			}
+		}
+	}
+	return currentParent;
+}
+
+void XmlParser::parseOpeningLine(string line)
+{
+	string token;
+	size_t found;
+	stringstream out;
+	string logMessage;
+	string invalidTag="InvalidTagName_";
+
+	
+	line=this->preParseString(line,' ', '&');
+	Tokenizer miTokenizer(line);
+	while (miTokenizer.NextToken()){
+		token=miTokenizer.GetToken();
+		//cout<<"Token: " << token <<endl;
+		found = token.find("=");
+		if (found!=string::npos){
+			
+			if (this->tagName.length() > 0) //Si ya levante el nombre entonces sigo con los atributos.
+				this->parseAttribute(token);
+			else
+			{ //si no le doy un nombre y hago el log del warning
+				logMessage= "Falta nombre del tag (por defecto: InvalidTagName) en linea: ";
+				out << logMessage;
+				out << this->lineNumber;
+				out << endl;
+				this->log->logWarning(out.str().c_str());
+				out.flush();
+				out << invalidTag;
+				out << this->lineNumber;
+				this->tagName=out.str();
+				this->hasErrors=true;
+			}
+		}
+		else
+			this->tagName=token;
+	}
+}
+
+void XmlParser::parseClosingLine(std::string line)
+{
+	line.erase(line.find(13), 1);
+	size_t len = line.length();
+	size_t nameInitialPos = line.find_first_of("/");
+	if (line.at(len - 1) == '>')
+	{
+		this->tagName = line.substr(nameInitialPos + 1, len - (nameInitialPos + 1));
+	}
+	else
+	{
+		this->tagName = line.substr(nameInitialPos + 1, len - (nameInitialPos));
+	}
+}
+
+bool XmlParser::getIsOpeningLine() const
+{
+	return this->isOpeningLine;
 }

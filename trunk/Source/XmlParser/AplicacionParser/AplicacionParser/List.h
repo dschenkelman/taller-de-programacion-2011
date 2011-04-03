@@ -35,7 +35,7 @@ private:
 		}
 
 		//delete previous container
-		delete aux;
+		delete []aux;
 	}
 
 
@@ -75,7 +75,7 @@ public:
 		this->items = new T[initialItems];
 	}
 
-	List(List& l) : count(l.length()), currentSize(l.capacity())
+	List(const List& l) : count(l.length()), currentSize(l.capacity())
 	{
 		this->populateItemsFromList(l);
 	}
@@ -165,4 +165,12 @@ public:
 	{
 		return this->at(index);
 	}
+
+	void clear(void)
+	{
+		while (this->count != 0)
+		{
+			this->removeLast();
+		}
+	}	
 };

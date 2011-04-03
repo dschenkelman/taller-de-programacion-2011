@@ -31,4 +31,5 @@ public:
 	bool testTwoListsCanBeInstantiatedAtTheSameTime(void);
 	bool testCopyConstructorWorksCorrectly(void);
 	bool testAssignmentOperatorWorksCorrectly(void);
+	bool testClearRemovesAllElementsFromList(void);
 };
