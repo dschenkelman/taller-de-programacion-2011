@@ -23,5 +23,6 @@ public:
 	bool testParseReturnsXmlRootElement(void);
 	bool testElementWithUnknownNameIsIgnored(void);
 	bool testElementThatIsNotClosedIsAutomaticallyClosed(void);
+	bool testNotOpeninigOrClosingQuotesDoesNotAddAnyAttributesToElement(void);
 	~XmlParserTest(void);
 };

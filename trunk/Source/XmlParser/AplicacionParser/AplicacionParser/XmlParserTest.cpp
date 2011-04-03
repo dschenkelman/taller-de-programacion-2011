@@ -42,6 +42,7 @@ void XmlParserTest::run(void) {
 	printResult("testParseReturnsXmlRootElement", testParseReturnsXmlRootElement());
 	printResult("testElementWithUnknownNameIsIgnored", testElementWithUnknownNameIsIgnored());
 	printResult("testElementThatIsNotClosedIsAutomaticallyClosed", testElementThatIsNotClosedIsAutomaticallyClosed());
+	printResult("testNotOpeninigOrClosingQuotesDoesNotAddAnyAttributesToElement", testNotOpeninigOrClosingQuotesDoesNotAddAnyAttributesToElement());
 
 	int leaks = _CrtDumpMemoryLeaks();
 	printLeaks(leaks);
@@ -231,3 +232,44 @@ bool XmlParserTest::testElementThatIsNotClosedIsAutomaticallyClosed(void)
 
 	return successCondition;	
 }
+
+bool XmlParserTest::testNotOpeninigOrClosingQuotesDoesNotAddAnyAttributesToElement(void)
+{
+	XmlParser xmlParser;
+	xmlParser.openFile("Files/escenarioMissingQuotes2.xml");
+	XmlElement root = xmlParser.parse();
+
+	//testing root
+	bool successCondition = root.getName() == "ESCENARIO";
+	successCondition = successCondition && root.getValue("nombre") == "Escenario numero 1";
+	successCondition = successCondition && root.getAttributes().length() == 1;
+	successCondition = successCondition && root.getChildren().length() == 2;
+
+	//testing grilla
+	XmlElement grilla = root.getChildren().at(0);
+	successCondition = successCondition && grilla.getAttributes().length() == 0;
+	successCondition = successCondition && grilla.getChildren().length() == 2;
+
+	//testing obstaculo
+	XmlElement obstaculo = grilla.getChildren().at(0);
+	successCondition = successCondition && obstaculo.getAttributes().length() == 0;
+
+	XmlElement camino = grilla.getChildren().at(1);
+	successCondition = successCondition && camino.getValue("fila") == "5";
+	successCondition = successCondition && camino.getValue("columna") == "3";
+	successCondition = successCondition && camino.getAttributes().length() == 2;
+	successCondition = successCondition && camino.getChildren().length() == 1;
+
+	XmlElement bonus = camino.getChildren().at(0);
+	successCondition = successCondition && bonus.getValue("tipo") == "Frutillita";
+
+	XmlElement tiposObstaculo = root.getChildren().at(1);
+	successCondition = successCondition && tiposObstaculo.getChildren().length() == 1;
+
+	XmlElement tipoObstaculo = tiposObstaculo.getChildren().at(0);
+	successCondition = successCondition && tipoObstaculo.getValue("nombreObstaculo") == "OBS1";
+	successCondition = successCondition && tipoObstaculo.getValue("textura") == "*";
+
+	return successCondition;	
+}
+

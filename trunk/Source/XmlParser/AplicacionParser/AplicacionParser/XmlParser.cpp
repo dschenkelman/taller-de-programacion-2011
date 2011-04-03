@@ -27,6 +27,7 @@ XmlParser::XmlParser(void)
 	this->log=Logger::getInstance();
 	this->noChildren=false;
 	this->hasErrors=false;
+	this->hasAttributeErrors = false;
 	this->isOpeningLine = true;
 }
 
@@ -58,6 +59,8 @@ bool  XmlParser::getXmlLine(void){
 	size_t foundLT,foundGT,closeGT;
 	std::stringstream out;
 	this->tagAtt.clear();
+	this->hasErrors = false;
+	this->hasAttributeErrors = false;
 		
 	if (this->xmlFile.is_open() && getline( this->xmlFile, this->lineRead ))
 	{
@@ -167,6 +170,7 @@ void XmlParser::parseAttribute(string myLine){
 			this->log->logWarning(out.str().c_str());
 			out.flush();
 			this->hasErrors=true;
+			this->hasAttributeErrors = true;
 		}
 
 		this->tagAtt.add(attName);
@@ -236,21 +240,23 @@ XmlElement XmlParser::parse()
 		if (this->isOpeningLine)
 		{
 			XmlElement currentElement = XmlElement(name, this->lineNumber, 0);
-			List<string> attributes = this->getLineTagAttributes();
-
-			for (size_t i = 0; i < attributes.length(); i = i + 2)
+			if (!this->hasAttributeErrors)
 			{
-				string key = attributes.at(i);
-				string value = attributes.at(i+1);
+				List<string> attributes = this->getLineTagAttributes();
+
+				for (size_t i = 0; i < attributes.length(); i = i + 2)
+				{
+					string key = attributes.at(i);
+					string value = attributes.at(i+1);
 				
-				//remove ""
-				trim(value, '"');
+					//remove ""
+					trim(value, '"');
 				
-				XmlAttribute att(key, value);
-				currentElement.addAttribute(att);
+					XmlAttribute att(key, value);
+					currentElement.addAttribute(att);
+				}
 			}
-			
-			// si el atributo no cierra en la misma linea apilo al padre anterior y currentParent = currentElement
+			// si el tag no cierra en la misma linea apilo al padre anterior y currentParent = currentElement
 			if (this->tagHasNoChildren())
 			{
 				currentElement.setEndLine(this->lineNumber);				
