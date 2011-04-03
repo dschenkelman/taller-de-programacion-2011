@@ -195,6 +195,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\CellMatrix.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\CellMatrixTests.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Escenario.cpp"
 				>
 			</File>
@@ -330,6 +338,14 @@
 			</File>
 			<File
 				RelativePath=".\Celda.h"
+				>
+			</File>
+			<File
+				RelativePath=".\CellMatrix.h"
+				>
+			</File>
+			<File
+				RelativePath=".\CellMatrixTests.h"
 				>
 			</File>
 			<File
