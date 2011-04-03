@@ -40,6 +40,7 @@ void XmlParserTest::run(void) {
 	printResult("testNoChildrenTag",testNoChildrenTag());
 	printResult("testMissingQuotes",testMissingQuotes());
 	printResult("testParseReturnsXmlRootElement", testParseReturnsXmlRootElement());
+	printResult("testElementWithUnknownNameIsIgnored", testElementWithUnknownNameIsIgnored());
 
 	int leaks = _CrtDumpMemoryLeaks();
 	printLeaks(leaks);
@@ -48,7 +49,7 @@ void XmlParserTest::run(void) {
 bool XmlParserTest::testLineNumberEqualsTwo(void){
 
 	XmlParser xmlParser;
-	xmlParser.openFile("escenario.xml");
+	xmlParser.openFile("Files/escenario.xml");
 	xmlParser.getXmlLine();
 
 	return (xmlParser.getLineNumber() == 2);
@@ -57,7 +58,7 @@ bool XmlParserTest::testLineNumberEqualsTwo(void){
 bool XmlParserTest::testLineNumberEqualsThree(void){
 
 	XmlParser xmlParser;
-	xmlParser.openFile("escenario.xml");
+	xmlParser.openFile("Files/escenario.xml");
 	xmlParser.getXmlLine();
 	xmlParser.getXmlLine();
 
@@ -67,7 +68,7 @@ bool XmlParserTest::testLineNumberEqualsThree(void){
 bool XmlParserTest::testTagNameNotNull(void){
 
 	XmlParser xmlParser;
-	xmlParser.openFile("escenario.xml");
+	xmlParser.openFile("Files/escenario.xml");
 	xmlParser.getXmlLine();
 
 	return (xmlParser.getLineTagName().length() > 0);
@@ -76,7 +77,7 @@ bool XmlParserTest::testTagNameNotNull(void){
 bool XmlParserTest::testTagAttributeListNotNULL(void){
 
 	XmlParser xmlParser;
-	xmlParser.openFile("escenario.xml");
+	xmlParser.openFile("Files/escenario.xml");
 	xmlParser.getXmlLine();
 	return (xmlParser.getLineTagAttributes().capacity() > 0);
 }
@@ -84,7 +85,7 @@ bool XmlParserTest::testTagAttributeListNotNULL(void){
 bool XmlParserTest::testFileNotExists(void){
 
 	XmlParser xmlParser;
-	xmlParser.openFile("sarasa.xml");
+	xmlParser.openFile("Files/sarasa.xml");
 	
 	return (!xmlParser.isFileOpen());
 }
@@ -92,7 +93,7 @@ bool XmlParserTest::testFileNotExists(void){
 bool XmlParserTest::testMissingGTSymbol(void){
 
 	XmlParser xmlParser;
-	xmlParser.openFile("testLogger.xml");
+	xmlParser.openFile("Files/testLogger.xml");
 	xmlParser.getXmlLine();
 	
 	return (xmlParser.lineHasErrors() == true);
@@ -101,7 +102,7 @@ bool XmlParserTest::testMissingGTSymbol(void){
 bool XmlParserTest::testMissingLTSymbol(void){
 
 	XmlParser xmlParser;
-	xmlParser.openFile("testLogger2.xml");
+	xmlParser.openFile("Files/testLogger2.xml");
 	xmlParser.getXmlLine();
 	
 	return (xmlParser.lineHasErrors() == true);
@@ -109,7 +110,7 @@ bool XmlParserTest::testMissingLTSymbol(void){
 
 bool XmlParserTest::testNoChildrenTag(void){
 	XmlParser xmlParser;
-	xmlParser.openFile("escenario.xml");
+	xmlParser.openFile("Files/escenario.xml");
 	xmlParser.getXmlLine();
 	xmlParser.getXmlLine();
 	xmlParser.getXmlLine(); //La tercera linea de escenario tiene un tag sin hijos
@@ -118,7 +119,7 @@ bool XmlParserTest::testNoChildrenTag(void){
 
 bool XmlParserTest::testMissingQuotes(void){
 	XmlParser xmlParser;
-	xmlParser.openFile("escenarioMissingQuotes.xml");
+	xmlParser.openFile("Files/escenarioMissingQuotes.xml");
 	xmlParser.getXmlLine();
 	xmlParser.getXmlLine();
 	xmlParser.getXmlLine(); 
@@ -129,7 +130,7 @@ bool XmlParserTest::testMissingQuotes(void){
 bool XmlParserTest::testParseReturnsXmlRootElement(void)
 {
 	XmlParser xmlParser;
-	xmlParser.openFile("escenario.xml");
+	xmlParser.openFile("Files/escenario.xml");
 	XmlElement root = xmlParser.parse();
 
 	//testing root
@@ -168,6 +169,17 @@ bool XmlParserTest::testParseReturnsXmlRootElement(void)
 	XmlElement tipoObstaculo = tiposObstaculo.getChildren().at(0);
 	successCondition = successCondition && tipoObstaculo.getValue("nombreObstaculo") == "OBS1";
 	successCondition = successCondition && tipoObstaculo.getValue("textura") == "*";
+
+	return successCondition;
+}
+
+bool XmlParserTest::testElementWithUnknownNameIsIgnored(void)
+{
+	XmlParser xmlParser;
+	xmlParser.openFile("Files/escenarioInvalidElement.xml");
+	XmlElement root = xmlParser.parse();
+
+	bool successCondition = !root.hasChildren();
 
 	return successCondition;
 }

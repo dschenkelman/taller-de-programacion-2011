@@ -21,5 +21,6 @@ public:
 	bool testNoChildrenTag(void);
 	bool testMissingQuotes(void);
 	bool testParseReturnsXmlRootElement(void);
+	bool testElementWithUnknownNameIsIgnored(void);
 	~XmlParserTest(void);
 };
