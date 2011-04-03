@@ -7,11 +7,22 @@
 #include <string>
 #include <iostream>
 #include <sstream>
+#include <algorithm>
 
 using namespace std;
 
 XmlParser::XmlParser(void)
 {
+	this->validTags[0] = "escenario";
+	this->validTags[1] = "grilla";
+	this->validTags[2] = "obstaculo";
+	this->validTags[3] = "camino";
+	this->validTags[4] = "bonus";
+	this->validTags[5] = "tiposbonus";
+	this->validTags[6] = "tipobonus";
+	this->validTags[7] = "tiposobstaculos";
+	this->validTags[8] = "tipoobstaculo";
+
 	this->lineNumber=1; //Las líneas del archivo comienzan en 1.
 	this->log=Logger::getInstance();
 	this->noChildren=false;
@@ -264,7 +275,7 @@ XmlElement XmlParser::parse()
 			//loop in case there are incorrect elements closing
 			while (name != currentParent.getName() && previousParents.count() != 0)
 			{
-				//loggear que no se cerro bien el tag
+				//TODO: loggear que no se cerro bien el tag
 				
 				XmlElement previousParent = previousParents.pop();
 				previousParent.addChild(currentParent);
@@ -277,7 +288,10 @@ XmlElement XmlParser::parse()
 				{
 					XmlElement previousParent = previousParents.pop();
 					currentParent.setEndLine(lineNumber);
-					previousParent.addChild(currentParent);
+					if (this->isValidTagName(name))
+					{
+						previousParent.addChild(currentParent);
+					}
 					currentParent = previousParent;
 				}
 				else
@@ -346,4 +360,21 @@ void XmlParser::parseClosingLine(std::string line)
 bool XmlParser::getIsOpeningLine() const
 {
 	return this->isOpeningLine;
+}
+
+bool XmlParser::isValidTagName(std::string n)
+{
+	//string to lower
+	std::transform(n.begin(), n.end(), n.begin(), ::tolower);
+
+	size_t len = sizeof(this->validTags) / sizeof(*this->validTags);
+	for (size_t i = 0; i < len; i++)
+	{
+		if (n == this->validTags[i])
+		{
+			return true;
+		}
+	}
+
+	return false;
 }

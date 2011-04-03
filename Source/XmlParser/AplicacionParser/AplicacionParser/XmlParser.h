@@ -26,6 +26,8 @@ private:
 	bool noChildren;
 	bool hasErrors;
 	bool isOpeningLine;
+	bool isValidTagName(std::string tagName);
+	std::string validTags[9];
 public:
 
 	XmlParser(void);
