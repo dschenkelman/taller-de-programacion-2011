@@ -66,3 +66,8 @@ void Obstaculo::setTipo(std::string t)
 Obstaculo::~Obstaculo(void)
 {
 }
+
+std::string Obstaculo::obtenerRepresentacion(void)
+{
+	return "o";
+}

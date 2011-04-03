@@ -15,6 +15,7 @@
 #include "CaminoTests.h"
 #include "GrillaTests.h"
 #include "EscenarioTests.h"
+#include "GrapherTests.h"
 #include <iostream>
 using namespace std;
 
@@ -67,6 +68,10 @@ int _tmain(int argc, _TCHAR* argv[])
 	cout<<"Test de XmlParser"<<endl;
 	XmlParserTest xmlParserTest;
 	xmlParserTest.run();
+
+	cout<<"Test de Grapher"<<endl;
+	GrapherTests grapherTest;
+	grapherTest.run();
 
 	char aux;
 	cin >> aux;

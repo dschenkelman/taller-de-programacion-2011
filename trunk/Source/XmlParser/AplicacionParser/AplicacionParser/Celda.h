@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 
 class Celda
 {
@@ -14,4 +15,5 @@ public:
 	bool esOcupada();
 	void Ocupar();
 	~Celda(void);
+	virtual std::string obtenerRepresentacion(void);
 };

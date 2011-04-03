@@ -15,4 +15,5 @@ public:
 	Bonus getBonus();
 	bool hasBonus();
 	~Camino(void);
+	std::string obtenerRepresentacion(void);
 };

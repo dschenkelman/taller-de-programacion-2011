@@ -11,4 +11,5 @@ public:
 	std::string getTipo();
 	void setTipo(std::string t);
 	~Obstaculo(void);
+	std::string obtenerRepresentacion(void);
 };
