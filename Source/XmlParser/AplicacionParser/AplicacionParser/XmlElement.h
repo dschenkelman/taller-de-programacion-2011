@@ -13,18 +13,20 @@ private:
 	List<XmlAttribute> attributes;
 	void populateChildrenFromList(List<XmlElement>& children);
 public:
-	XmlElement(const std::string name, int start_line, int end_line);
+	XmlElement(const std::string& name, int start_line, int end_line);
 	XmlElement(void);
-	XmlElement::XmlElement(XmlElement& other);
+	XmlElement::XmlElement(const XmlElement& other);
 	std::string getName(void) const;
 	List<XmlElement> getChildren() const;
+	List<XmlAttribute> getAttributes() const;
 	void addChild(const XmlElement& child);
 	bool addAttribute(const XmlAttribute& attribute);
-	bool hasAttribute(const std::string key) const;
+	bool hasAttribute(const std::string& key) const;
 	bool hasChildren() const;
 	int getStartLine() const;
+	void setEndLine(int);
 	int getEndLine() const;
 	XmlElement& operator=(const XmlElement& other);
-	std::string getValue(std::string key) const;
+	std::string getValue(const std::string& key) const;
 	~XmlElement(void);
 };

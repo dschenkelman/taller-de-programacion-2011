@@ -39,6 +39,7 @@ void XmlParserTest::run(void) {
 	printResult("testMissingLTSymbol",testMissingLTSymbol());
 	printResult("testNoChildrenTag",testNoChildrenTag());
 	printResult("testMissingQuotes",testMissingQuotes());
+	printResult("testParseReturnsXmlRootElement", testParseReturnsXmlRootElement());
 
 	int leaks = _CrtDumpMemoryLeaks();
 	printLeaks(leaks);
@@ -117,10 +118,56 @@ bool XmlParserTest::testNoChildrenTag(void){
 
 bool XmlParserTest::testMissingQuotes(void){
 	XmlParser xmlParser;
-	xmlParser.openFile("escenario.xml");
+	xmlParser.openFile("escenarioMissingQuotes.xml");
 	xmlParser.getXmlLine();
 	xmlParser.getXmlLine();
 	xmlParser.getXmlLine(); 
 	xmlParser.getXmlLine();
 	return (xmlParser.lineHasErrors() == true);
+}
+
+bool XmlParserTest::testParseReturnsXmlRootElement(void)
+{
+	XmlParser xmlParser;
+	xmlParser.openFile("escenario.xml");
+	XmlElement root = xmlParser.parse();
+
+	//testing root
+	bool successCondition = root.getName() == "ESCENARIO";
+	successCondition = successCondition && root.getValue("nombre") == "Escenario numero 1";
+	successCondition = successCondition && root.getAttributes().length() == 1;
+	successCondition = successCondition && root.getChildren().length() == 2;
+
+	//testing grilla
+	XmlElement grilla = root.getChildren().at(0);
+	successCondition = successCondition && grilla.getValue("ancho") == "10";
+	successCondition = successCondition && grilla.getValue("alto") == "15";
+	successCondition = successCondition && grilla.getValue("tipoObstaculoPorDefault") == "OBS1";
+	successCondition = successCondition && grilla.getAttributes().length() == 3;
+	successCondition = successCondition && grilla.getChildren().length() == 2;
+
+	//testing obstaculo
+	XmlElement obstaculo = grilla.getChildren().at(0);
+	successCondition = successCondition && obstaculo.getValue("fila") == "1";
+	successCondition = successCondition && obstaculo.getValue("columna") == "5";
+	successCondition = successCondition && obstaculo.getValue("tipo") == "OBS1";
+	successCondition = successCondition && obstaculo.getAttributes().length() == 3;
+
+	XmlElement camino = grilla.getChildren().at(1);
+	successCondition = successCondition && camino.getValue("fila") == "5";
+	successCondition = successCondition && camino.getValue("columna") == "3";
+	successCondition = successCondition && camino.getAttributes().length() == 2;
+	successCondition = successCondition && camino.getChildren().length() == 1;
+
+	XmlElement bonus = camino.getChildren().at(0);
+	successCondition = successCondition && bonus.getValue("tipo") == "Frutillita";
+
+	XmlElement tiposObstaculo = root.getChildren().at(1);
+	successCondition = successCondition && tiposObstaculo.getChildren().length() == 1;
+
+	XmlElement tipoObstaculo = tiposObstaculo.getChildren().at(0);
+	successCondition = successCondition && tipoObstaculo.getValue("nombreObstaculo") == "OBS1";
+	successCondition = successCondition && tipoObstaculo.getValue("textura") == "*";
+
+	return successCondition;
 }

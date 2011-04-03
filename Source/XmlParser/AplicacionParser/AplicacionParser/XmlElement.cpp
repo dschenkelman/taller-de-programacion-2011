@@ -4,20 +4,16 @@
 #include "List.h"
 using namespace std;
 
-XmlElement::XmlElement(std::string name, int start_line, int end_line)
+XmlElement::XmlElement(const std::string& n, int startLine, int endLine) : name(n), start_line(startLine), end_line(endLine), children_created(false)
 {
-	this->name = name;
-	this->start_line = start_line;
-	this->end_line = end_line;
-	this->children_created = false;
 }
 
-XmlElement::XmlElement(void)
+XmlElement::XmlElement(void) : children_created(false)
 {
-	this->children_created = false;
+	
 }
 
-XmlElement::XmlElement(XmlElement& other) {
+XmlElement::XmlElement(const XmlElement& other) {
 	this->name = other.name;
 	this->start_line = other.start_line;
 	this->end_line = other.end_line;
@@ -54,6 +50,11 @@ List<XmlElement> XmlElement::getChildren() const {
 	return List<XmlElement>(*(this->children));
 }
 
+List<XmlAttribute> XmlElement::getAttributes() const
+{
+	return this->attributes;
+}
+	
 void XmlElement::addChild(const XmlElement& child) {
 	if (!this->children_created) {
 		this->children_created = true;
@@ -62,7 +63,7 @@ void XmlElement::addChild(const XmlElement& child) {
 	this->children->add(child);
 }
 
-bool XmlElement::hasAttribute(string key) const {
+bool XmlElement::hasAttribute(const string& key) const {
 	size_t len_list = this->attributes.length();
 	XmlAttribute my_attr;
 	for(size_t i=0;i<len_list;i++) {
@@ -82,7 +83,7 @@ bool XmlElement::addAttribute(const XmlAttribute& attribute) {
 	return true;
 }
 
-string XmlElement::getValue(string key) const {
+string XmlElement::getValue(const string& key) const {
 	size_t len_list = this->attributes.length();
 	XmlAttribute my_attr;
 	for(size_t i=0;i<len_list;i++) {
@@ -149,6 +150,11 @@ void XmlElement::populateChildrenFromList(List<XmlElement>& elements)
 	{
 		this->children->add(elements.at(i));
 	}	
+}
+
+void XmlElement::setEndLine(int n)
+{
+	this->end_line = n;
 }
 
 XmlElement::~XmlElement(void)

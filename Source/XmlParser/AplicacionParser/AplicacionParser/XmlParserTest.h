@@ -20,5 +20,6 @@ public:
 	bool testMissingLTSymbol(void);
 	bool testNoChildrenTag(void);
 	bool testMissingQuotes(void);
+	bool testParseReturnsXmlRootElement(void);
 	~XmlParserTest(void);
 };

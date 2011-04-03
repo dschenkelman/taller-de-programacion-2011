@@ -49,6 +49,7 @@ void ListTests::run()
 	printResult("testElementAtNonExistingIndexThrowsExceptionWhenAccessedThroughSubscripting", testElementAtNonExistingIndexThrowsExceptionWhenAccessedThroughSubscripting());
 	printResult("testCopyConstructorWorksCorrectly", testCopyConstructorWorksCorrectly());
 	printResult("testAssignmentOperatorWorksCorrectly", testAssignmentOperatorWorksCorrectly());
+	printResult("testClearRemovesAllElementsFromList", testClearRemovesAllElementsFromList());
 
 	//dump memory leaks to VS Output Window
 	int leaks = _CrtDumpMemoryLeaks();
@@ -427,4 +428,18 @@ bool ListTests::testAssignmentOperatorWorksCorrectly(void)
 	return successCondition1 && successCondition2 &&
 			successCondition3 && successCondition4 &&
 			successCondition5;
+}
+
+bool ListTests::testClearRemovesAllElementsFromList(void)
+{
+	List<int> list;
+	
+	list.add(5);
+	list.add(6);
+	list.add(7);
+	list.clear();
+
+	bool successCondition = list.length() == 0;
+
+	return successCondition;
 }

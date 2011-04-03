@@ -36,10 +36,6 @@ int _tmain(int argc, _TCHAR* argv[])
 	LoggerTests loggerTests;
 	loggerTests.run();
 
-	cout<<"Test de XmlParser"<<endl;
-	XmlParserTest xmlParserTest;
-	xmlParserTest.run();
-
 	cout<<"Test de XmlElement"<<endl;
 	XmlElementTests xmlElementTests;
 	xmlElementTests.run();
@@ -67,6 +63,10 @@ int _tmain(int argc, _TCHAR* argv[])
 	cout<<"Test de Escenario"<<endl;
 	EscenarioTests escenarioTests;
 	escenarioTests.run();
+
+	cout<<"Test de XmlParser"<<endl;
+	XmlParserTest xmlParserTest;
+	xmlParserTest.run();
 
 	char aux;
 	cin >> aux;

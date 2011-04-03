@@ -6,10 +6,8 @@ XmlAttribute::XmlAttribute(void)
 {
 }
 
-XmlAttribute::XmlAttribute(std::string key, std::string value)
+XmlAttribute::XmlAttribute(const std::string& k, const std::string& v) : key(k), value(v)
 {
-	this->key = key;
-	this->value = value;
 }
 
 string XmlAttribute::getKey(void) const {
