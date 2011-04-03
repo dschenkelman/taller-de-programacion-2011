@@ -1,5 +1,6 @@
 #include "StdAfx.h"
 #include "TipoBonusTests.h"
+#include "Logger.h"
 #include <exception>
 #include <iostream>
 using namespace std;
@@ -23,7 +24,7 @@ TipoBonusTests::~TipoBonusTests(void)
 
 void TipoBonusTests::run(void)
 {
-	printResult("testAtributoTexturaDeMasDeUnCaracterTiraExcepcion", testAtributoTexturaDeMasDeUnCaracterTiraExcepcion());
+	printResult("testAtributoTexturaDeMasDeUnCaracterLoggeaWarning", testAtributoTexturaDeMasDeUnCaracterLoggeaWarning());
 	printResult("testAtributoTexturaCorrectoGuardaCorrectamente", testAtributoTexturaCorrectoGuardaCorrectamente());
 	int leaks = _CrtDumpMemoryLeaks();
 	printLeaks(leaks);
@@ -34,22 +35,25 @@ void TipoBonusTests::printResult(std::string testName, bool result)
 	std::cout << (testName.append(result ? ": Passed\n" : ": Failed!!!\n"));
 }
 
-bool TipoBonusTests::testAtributoTexturaDeMasDeUnCaracterTiraExcepcion()
+bool TipoBonusTests::testAtributoTexturaDeMasDeUnCaracterLoggeaWarning()
 {
 	XmlElement elemento("Nombre", 1, 100);
 	XmlAttribute atributo("textura", "*+");
 	elemento.addAttribute(atributo);
 
-	try
-	{
-		TipoBonus tipoBonus(elemento);
-	}
-	catch (exception& e)
-	{
-		return true;
-	}
+	// Obtengo el tamanio antes de crear el tipo bonus
+	size_t tamanioAntes = Logger::getInstance()->obtenerTamanioArchivo();
 
-	return false;
+	// creo el obstaculo
+	TipoBonus tipoBonus(elemento);
+
+	// Tamanio despues de crear el obstaculo
+	size_t tamanioDespues = Logger::getInstance()->obtenerTamanioArchivo();
+
+	// finalizo el logger
+	Logger::getInstance()->closeLog();
+
+	return (tamanioAntes<tamanioDespues)?true:false;
 }
 
 bool TipoBonusTests::testAtributoTexturaCorrectoGuardaCorrectamente()
