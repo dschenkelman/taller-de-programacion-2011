@@ -22,5 +22,6 @@ public:
 	bool testMissingQuotes(void);
 	bool testParseReturnsXmlRootElement(void);
 	bool testElementWithUnknownNameIsIgnored(void);
+	bool testElementThatIsNotClosedIsAutomaticallyClosed(void);
 	~XmlParserTest(void);
 };
