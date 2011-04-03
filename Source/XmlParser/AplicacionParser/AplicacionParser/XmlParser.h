@@ -25,6 +25,7 @@ private:
 	Logger *log;
 	bool noChildren;
 	bool hasErrors;
+	bool hasAttributeErrors;
 	bool isOpeningLine;
 	bool isValidTagName(std::string tagName);
 	std::string validTags[9];
