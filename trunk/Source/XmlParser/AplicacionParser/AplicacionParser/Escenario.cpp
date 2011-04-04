@@ -19,7 +19,7 @@ Escenario::Escenario(XmlElement& e)
 	}
 }
 
-Grilla Escenario::getGrilla()
+Grilla& Escenario::getGrilla()
 {
 	return grilla;
 }
@@ -41,6 +41,7 @@ List<TipoObstaculo> Escenario::getTiposObstaculos()
 
 Escenario::~Escenario(void)
 {
+	this->grilla.destruir();
 }
 
 //metodos privados

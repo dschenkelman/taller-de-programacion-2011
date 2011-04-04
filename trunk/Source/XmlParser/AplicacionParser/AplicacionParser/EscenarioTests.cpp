@@ -121,17 +121,17 @@ bool EscenarioTests::testCrearEscenarioCreaCorrectamente(void)
 	// se crea el escenario
 	Escenario escenario(elementoEscenario);
 
-	if (! escenario.getGrilla().getMatriz().at(4).at(9).esOcupada())
+	if (! escenario.getGrilla().getMatriz().at(4).at(9)->esOcupada())
 	{
 		return false;
 	}
 
-	if (! escenario.getGrilla().getMatriz().at(8).at(4).esOcupada())
+	if (! escenario.getGrilla().getMatriz().at(8).at(4)->esOcupada())
 	{
 		return false;
 	}
 
-	if (! escenario.getGrilla().getMatriz().at(2).at(7).esOcupada())
+	if (! escenario.getGrilla().getMatriz().at(2).at(7)->esOcupada())
 	{
 		return false;
 	}

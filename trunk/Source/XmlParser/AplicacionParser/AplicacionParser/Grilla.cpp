@@ -4,7 +4,7 @@
 #include "Obstaculo.h"
 #include <exception>
 
-Grilla::Grilla(int an, int al, std::string& topd)
+Grilla::Grilla(int an, int al, std::string& topd) : matrizGenerada(false)
 {
 	if (an < 0 || al < 0)
 	{
@@ -23,7 +23,7 @@ Grilla::Grilla(int an, int al, std::string& topd)
 	tipoObstaculoPorDefecto = topd;
 }
 
-Grilla::Grilla(XmlElement& e, List<TipoObstaculo>& lo, List<TipoBonus>& lb)
+Grilla::Grilla(XmlElement& e, List<TipoObstaculo>& lo, List<TipoBonus>& lb) : matrizGenerada(false)
 {
 	tiposObstaculos = lo;
 	tiposBonus = lb;
@@ -81,7 +81,7 @@ Grilla::Grilla(XmlElement& e, List<TipoObstaculo>& lo, List<TipoBonus>& lb)
 	}
 }
 
-Grilla::Grilla(void)
+Grilla::Grilla(void) : matrizGenerada(false)
 {
 }
 
@@ -95,9 +95,9 @@ int Grilla::getAncho()
 	return ancho;
 }
 
-List<List<Celda>> Grilla::getMatriz()
+List<List<Celda*>>& Grilla::getMatriz()
 {
-	return matriz;
+	return this->matriz;
 }
 
 std::string Grilla::getTipoObstaculoPorDefecto()
@@ -105,8 +105,21 @@ std::string Grilla::getTipoObstaculoPorDefecto()
 	return tipoObstaculoPorDefecto;
 }
 
-Grilla::~Grilla(void)
+Grilla::~Grilla(){}
+
+void Grilla::destruir(void)
 {
+	if (this->matrizGenerada)
+	{
+		for (size_t i = 0; i < this->alto; i++)
+		{
+			for (size_t j = 0; j < this->ancho; j++)
+			{
+				//borro celda
+				delete this->matriz.at(i).at(j);
+			}	
+		}
+	}
 }
 
 // métodos privados
@@ -115,23 +128,25 @@ void Grilla::generarMatriz(List<XmlElement>& listaElementos)
 	for (size_t i = 0; i < this->alto; i++)
 	{
 		//agrego fila
-		this->matriz.add(List<Celda>());
+		this->matriz.add(List<Celda*>());
 		for (size_t j = 0; j < this->ancho; j++)
 		{
 			//lleno fila
-			this->matriz.at(i).add(Celda());
+			this->matriz.at(i).add(new Celda(0,0));
 		}	
 	}
+
+	this->matrizGenerada = true;
 	
 	for (size_t i = 0; i < listaElementos.length(); i++)
 	{
 		if (listaElementos.at(i).getName() == "camino")
 		{
-			Camino cam(listaElementos.at(i));
+			Camino* cam = new Camino(listaElementos.at(i));
 			
-			if(cam.hasBonus())
+			if(cam->hasBonus())
 			{
-				std::string tipoBonus = cam.getBonus().getTipo();
+				std::string tipoBonus = cam->getBonus().getTipo();
 
 				bool bonusValido = verificarTipoBonusExistente(tipoBonus);
 
@@ -139,6 +154,7 @@ void Grilla::generarMatriz(List<XmlElement>& listaElementos)
 				{
 					//Logger bonus inexistente
 					Logger::getInstance()->logError("En Grilla, bonus inexistente; se ignora el camino. \0");
+					delete cam;
 					continue;
 				}
 			}
@@ -153,11 +169,11 @@ void Grilla::generarMatriz(List<XmlElement>& listaElementos)
 
 		else if (listaElementos.at(i).getName() == "obstaculo")
 		{
-			Obstaculo obs(listaElementos.at(i));
+			Obstaculo* obs = new Obstaculo(listaElementos.at(i));
 
-			if(obs.getTipo() != "")
+			if(obs->getTipo() != "")
 			{
-				std::string tipoObstaculo = obs.getTipo();
+				std::string tipoObstaculo = obs->getTipo();
 
 				bool obstaculoValido = verificarTipoObstaculoExistente(tipoObstaculo);
 
@@ -165,13 +181,14 @@ void Grilla::generarMatriz(List<XmlElement>& listaElementos)
 				{
 					//Logger obstaculo inexistente
 					Logger::getInstance()->logError("En Grilla, obstaculo inexistente; se ignora el obstaculo. \0");
+					delete obs;
 					continue;
 				}
 			}
 
 			else
 			{
-				obs.setTipo(tipoObstaculoPorDefecto);
+				obs->setTipo(tipoObstaculoPorDefecto);
 			}
 
 			bool result = colocarCeldaEnMatriz(obs);
@@ -191,10 +208,10 @@ void Grilla::generarMatriz(List<XmlElement>& listaElementos)
 	}
 }
 
-bool Grilla::colocarCeldaEnMatriz(Celda& c)
+bool Grilla::colocarCeldaEnMatriz(Celda* c)
 {
-	int fila = c.getFila();
-	int columna = c.getColumna();
+	int fila = c->getFila();
+	int columna = c->getColumna();
 
 	if (fila > alto)
 	{
@@ -208,15 +225,15 @@ bool Grilla::colocarCeldaEnMatriz(Celda& c)
 		Logger::getInstance()->logWarning("En Grilla, celda con  columna mayor al ancho de la grilla; se asigna columna por defecto.");
 	}
 
-	if (c.esOcupada())
+	if (c->esOcupada())
 	{
 		return false;
 	}
 
+	delete matriz.at(fila).at(columna);
 	matriz.at(fila).at(columna) = c;
 
-	matriz.at(fila).at(columna).Ocupar();
-
+	matriz.at(fila).at(columna)->Ocupar();
 
 	return true;
 }

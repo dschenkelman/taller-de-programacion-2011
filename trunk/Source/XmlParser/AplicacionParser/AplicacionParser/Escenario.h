@@ -18,7 +18,7 @@ public:
 	Escenario(XmlElement& e);
 	List<TipoBonus> getTiposBonus(void);
 	List<TipoObstaculo> getTiposObstaculos(void);
-	Grilla getGrilla(void);
+	Grilla& getGrilla(void);
 	std::string getNombre(void);
 	~Escenario(void);
 };

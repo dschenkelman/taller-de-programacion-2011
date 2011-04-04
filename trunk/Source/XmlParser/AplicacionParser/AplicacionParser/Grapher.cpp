@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "Grapher.h"
 #include "Grilla.h"
+#include "Obstaculo.h"
+#include "Camino.h"
 
 Grapher::Grapher()
 {
@@ -10,11 +12,9 @@ Grapher::~Grapher()
 {
 }
 
-void Grapher::draw(Escenario escenario)
+void Grapher::draw(Escenario& escenario)
 {
-	Grilla pGrid = escenario.getGrilla();
-
-	List<List<Celda>> pMatriz = pGrid.getMatriz();
+	List<List<Celda*>> pMatriz = escenario.getGrilla().getMatriz();
 
 	// Se muestra el nombre del Escenario
 	std::cout << "Escenario: "+escenario.getNombre()+" \n";
@@ -25,10 +25,26 @@ void Grapher::draw(Escenario escenario)
 		for(unsigned int j=0; j<pMatriz.at(i).length(); j++)
 		{
 			// A cada celda le pido su representacion y la muestro por consola
-			Celda* cel = &(pMatriz.at(i).at(j));
-			if(cel->esOcupada())
+			Celda* c = pMatriz.at(i).at(j);
+			if(c->esOcupada())
 			{
-				std::cout << cel->obtenerRepresentacion();
+				Obstaculo* obs = dynamic_cast<Obstaculo*>(c);
+				if (obs != 0)
+				{
+					std::cout << obs->obtenerRepresentacion();
+				}
+				else
+				{
+						Camino* cam = dynamic_cast<Camino*>(c);
+						if (cam != 0)
+						{
+							std::cout << cam->obtenerRepresentacion();
+						}
+						else
+						{
+							std::cout << c->obtenerRepresentacion();
+						}
+				}
 			}
 			else
 			{

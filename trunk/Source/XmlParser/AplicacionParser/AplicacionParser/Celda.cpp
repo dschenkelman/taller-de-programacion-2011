@@ -4,7 +4,7 @@
 #include "Logger.h"
 
 
-Celda::Celda(int f, int c)
+Celda::Celda(int f, int c) : ocupada(false)
 {
 	if(f < 0 || c < 0)
 	{
