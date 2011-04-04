@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mapa>
+  <ancho>5</ancho>
+  <alto>10</alto>
+  <obstaculos>
+    <obstaculo></obstaculo>
+    <obstaculo></obstaculo>
+    <obstaculo></obstaculo>
+  </obstaculos>
+</mapa>
