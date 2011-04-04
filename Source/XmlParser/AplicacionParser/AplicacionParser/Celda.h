@@ -15,5 +15,5 @@ public:
 	bool esOcupada();
 	void Ocupar();
 	~Celda(void);
-	virtual std::string obtenerRepresentacion(void);
+	virtual std::string obtenerRepresentacion(Celda* celSup, Celda* celInf, Celda* celDer, Celda* celIzq);
 };
