@@ -10,12 +10,11 @@ Grapher::~Grapher()
 {
 }
 
-void Grapher::draw(Escenario &escenario)
+void Grapher::draw(Escenario escenario)
 {
-	Grilla* pGrid = NULL;
-	*pGrid = escenario.getGrilla();
+	Grilla pGrid = escenario.getGrilla();
 
-	List<List<Celda>> pMatriz = pGrid->getMatriz();
+	List<List<Celda>> pMatriz = pGrid.getMatriz();
 
 	// Se muestra el nombre del Escenario
 	std::cout << "Escenario: "+escenario.getNombre()+" \n";
@@ -23,10 +22,18 @@ void Grapher::draw(Escenario &escenario)
 	// Se dibuja fila por fila de la matriz
 	for(unsigned int i=0; i<pMatriz.length(); i++)
 	{
-		for(unsigned int j=0; j<pMatriz.length(); i++)
+		for(unsigned int j=0; j<pMatriz.at(i).length(); j++)
 		{
 			// A cada celda le pido su textura y la muestro por consola
-			std::cout << pMatriz.at(j).at(i).obtenerRepresentacion();
+			Celda cel = pMatriz.at(i).at(j);
+			if(pMatriz.at(i).at(j).esOcupada())
+			{
+				std::cout << cel.obtenerRepresentacion();
+			}
+			else
+			{
+				std::cout << "m";
+			}
 		}
 		// Despues de imprimir la fila imprimo  un salto de linea
 		std::cout << '\n';

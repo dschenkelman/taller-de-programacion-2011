@@ -81,7 +81,7 @@ Camino::~Camino(void)
 {
 }
 
-std::string Camino::obtenerRepresentacion()
+std::string Camino::obtenerRepresentacion(void)
 {
 	std::string representacion = "c";
 	
