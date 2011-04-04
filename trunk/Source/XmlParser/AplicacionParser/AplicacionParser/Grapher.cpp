@@ -24,11 +24,11 @@ void Grapher::draw(Escenario escenario)
 	{
 		for(unsigned int j=0; j<pMatriz.at(i).length(); j++)
 		{
-			// A cada celda le pido su textura y la muestro por consola
-			Celda cel = pMatriz.at(i).at(j);
-			if(pMatriz.at(i).at(j).esOcupada())
+			// A cada celda le pido su representacion y la muestro por consola
+			Celda* cel = &(pMatriz.at(i).at(j));
+			if(cel->esOcupada())
 			{
-				std::cout << cel.obtenerRepresentacion();
+				std::cout << cel->obtenerRepresentacion();
 			}
 			else
 			{
