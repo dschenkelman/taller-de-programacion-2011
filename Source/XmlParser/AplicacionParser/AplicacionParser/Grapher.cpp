@@ -28,23 +28,7 @@ void Grapher::draw(Escenario& escenario)
 			Celda* c = pMatriz.at(i).at(j);
 			if(c->esOcupada())
 			{
-				Obstaculo* obs = dynamic_cast<Obstaculo*>(c);
-				if (obs != 0)
-				{
-					std::cout << obs->obtenerRepresentacion();
-				}
-				else
-				{
-						Camino* cam = dynamic_cast<Camino*>(c);
-						if (cam != 0)
-						{
-							std::cout << cam->obtenerRepresentacion();
-						}
-						else
-						{
-							std::cout << c->obtenerRepresentacion();
-						}
-				}
+				std::cout << c->obtenerRepresentacion();
 			}
 			else
 			{
