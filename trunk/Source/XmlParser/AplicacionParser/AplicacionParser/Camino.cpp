@@ -81,14 +81,29 @@ Camino::~Camino(void)
 {
 }
 
-std::string Camino::obtenerRepresentacion(void)
+std::string Camino::obtenerRepresentacion(Celda* celSup, Celda* celInf, Celda* celDer, Celda* celIzq)
 {
-	std::string representacion = "c";
+	std::string repres = "+";
+	// Intento castear las celdas 
+	Camino* camSup = dynamic_cast<Camino*>(celSup);
+	Camino* camInf = dynamic_cast<Camino*>(celInf);
+	Camino* camDer = dynamic_cast<Camino*>(celDer);
+	Camino* camIzq = dynamic_cast<Camino*>(celIzq);
 	
-	if (this->hasBonus())
-	{
-		representacion = this->bonus.getTipoBonus().getTextura();
+	if(( camSup != 0 || camInf != 0 )&&( camDer == 0 || camIzq == 0 )){
+		repres = "|";
+	}else{
+		if(( camDer != 0 || camIzq != 0 )&&( camSup == 0 || camInf == 0 )){
+			repres = "-";
+		}else{
+			repres = ".";
+		}
 	}
 
-	return representacion;
+	if (this->hasBonus())
+	{
+		repres = this->bonus.getTipoBonus().getTextura();
+	}
+
+	return repres;
 }

@@ -11,5 +11,5 @@ public:
 	std::string getTipo();
 	void setTipo(std::string t);
 	~Obstaculo(void);
-	std::string obtenerRepresentacion(void);
+	std::string obtenerRepresentacion(Celda* celSup, Celda* celInf, Celda* celDer, Celda* celIzq);
 };

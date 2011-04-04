@@ -51,7 +51,7 @@ XmlElement elementoEscenario("escenario", 1, 1000);
 
 	XmlElement elementoTipoBonus("tipoBonus", 201, 202);
 	XmlAttribute atributoNombre("nombre", "uva");
-	XmlAttribute atributoTextura("textura", "+");
+	XmlAttribute atributoTextura("textura", "=");
 	elementoTipoBonus.addAttribute(atributoNombre);
 	elementoTipoBonus.addAttribute(atributoTextura);
 
@@ -68,7 +68,7 @@ XmlElement elementoEscenario("escenario", 1, 1000);
 
 	XmlElement elementoTipoObstaculoDos("tipoObstaculos", 605, 620);
 	XmlAttribute atributoNombreDos("nombre", "ladrillo");
-	XmlAttribute atributoTexturaDos("textura", "-");
+	XmlAttribute atributoTexturaDos("textura", "#");
 	elementoTipoObstaculoDos.addAttribute(atributoNombreDos);
 	elementoTipoObstaculoDos.addAttribute(atributoTexturaDos);
 
@@ -119,10 +119,12 @@ XmlElement elementoEscenario("escenario", 1, 1000);
 	Escenario escenario(elementoEscenario);
 
 	// Creo un graficador
-	Grapher grapher;
+	Grapher* grapher = new Grapher();
 	
 	// Dibujo el escenario
-	grapher.draw(escenario);
+	grapher->draw(escenario);
+
+	delete grapher;
 
 	return true;
 }
