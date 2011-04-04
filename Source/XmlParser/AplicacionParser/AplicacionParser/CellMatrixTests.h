@@ -11,4 +11,6 @@ public:
 	void run (void);
 	void printResult(std::string testName, bool result);
 	void printLeaks(int leaks);
+	bool testCellMatrixWithNoElements();
+	bool testReturnCorrectCell();
 };

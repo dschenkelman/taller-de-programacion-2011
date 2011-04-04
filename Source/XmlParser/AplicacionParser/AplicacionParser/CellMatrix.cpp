@@ -4,11 +4,19 @@
 
 CellMatrix::CellMatrix(int width, int height)
 {
-	for (int i=0;i<height;i++) {
-		this->rows[i] = new Celda[];
-	}
+	this->cells = new Celda[width*height];
 	this->width = width;
 	this->height = height;
+}
+
+int CellMatrix::getWidth()
+{
+	return this->width;
+}
+
+int CellMatrix::getHeight()
+{
+	return this->height;
 }
 
 bool CellMatrix::insert(Celda c)
@@ -18,7 +26,7 @@ bool CellMatrix::insert(Celda c)
 	if (row > height || column > width) {
 		return false;
 	}
-	this->rows[row][column] = c;
+	this->cells[row*this->getWidth()+column] = c;
 	return true;
 }
 
@@ -27,10 +35,15 @@ bool CellMatrix::getCelda(int row, int column, Celda* c)
 	if (row > height || column > width) {
 		return false;
 	}
-	*c = this->rows[row][column];
+	Celda obt = this->cells[row*this->getWidth()+column];
+	if (!obt.esOcupada()) {
+		return false;
+	}
+	*c = obt;
 	return true;
 }
 
 CellMatrix::~CellMatrix(void)
 {
+	delete []cells;
 }
