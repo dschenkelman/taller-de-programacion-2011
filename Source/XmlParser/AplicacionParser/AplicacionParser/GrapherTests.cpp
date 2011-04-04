@@ -119,12 +119,10 @@ XmlElement elementoEscenario("escenario", 1, 1000);
 	Escenario escenario(elementoEscenario);
 
 	// Creo un graficador
-	Grapher* grapher = new Grapher();
+	Grapher grapher;
 	
 	// Dibujo el escenario
-	grapher->draw(escenario);
-
-	delete grapher;
+	grapher.draw(escenario);
 
 	return true;
 }

@@ -12,12 +12,13 @@ const int defGridAlto = 10;
 
 class Grilla
 {
+	bool matrizGenerada;
 	int ancho;
 	int alto;
 	std::string tipoObstaculoPorDefecto;
-	List<List<Celda>> matriz;
+	List<List<Celda*>> matriz;
 	void generarMatriz(List<XmlElement>& le);
-	bool colocarCeldaEnMatriz(Celda& c);
+	bool colocarCeldaEnMatriz(Celda* c);
 	bool verificarTipoBonusExistente(std::string tb);
 	bool verificarTipoObstaculoExistente(std::string to);
 	List<TipoObstaculo> tiposObstaculos;
@@ -29,6 +30,7 @@ public:
 	int getAncho();
 	int getAlto();
 	std::string getTipoObstaculoPorDefecto();
-	List<List<Celda>> getMatriz();
+	List<List<Celda*>>& getMatriz();
+	void destruir(void);
 	~Grilla(void);
 };
