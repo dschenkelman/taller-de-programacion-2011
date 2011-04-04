@@ -102,7 +102,7 @@ std::string Camino::obtenerRepresentacion(Celda* celSup, Celda* celInf, Celda* c
 
 	if (this->hasBonus())
 	{
-		repres = this->bonus.getTipoBonus().getTextura();
+		repres = ""+this->getBonus().getTipoBonus().getTextura();
 	}
 
 	return repres;

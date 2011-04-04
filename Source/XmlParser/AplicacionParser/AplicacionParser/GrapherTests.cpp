@@ -51,7 +51,7 @@ XmlElement elementoEscenario("escenario", 1, 1000);
 
 	XmlElement elementoTipoBonus("tipoBonus", 201, 202);
 	XmlAttribute atributoNombre("nombre", "uva");
-	XmlAttribute atributoTextura("textura", "=");
+	XmlAttribute atributoTextura("textura", "#");
 	elementoTipoBonus.addAttribute(atributoNombre);
 	elementoTipoBonus.addAttribute(atributoTextura);
 
@@ -116,14 +116,16 @@ XmlElement elementoEscenario("escenario", 1, 1000);
 	elementoEscenario.addChild(elementoListaTiposObstaculo);
 	
 	// se crea el escenario
-	Escenario escenario(elementoEscenario);
+	Escenario* escenario = new Escenario(elementoEscenario);
 
 	// Creo un graficador
 	Grapher* grapher = new Grapher();
 	
 	// Dibujo el escenario
-	grapher->draw(escenario);
+	grapher->draw(*escenario);
 
+	//escenario->getGrilla().destruir();
+	//delete escenario;
 	delete grapher;
 
 	return true;
