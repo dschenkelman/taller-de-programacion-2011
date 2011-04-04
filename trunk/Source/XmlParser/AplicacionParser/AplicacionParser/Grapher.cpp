@@ -27,19 +27,19 @@ void Grapher::draw(Escenario escenario)
 			
 			Celda* celSup = 0; 
 			int posSup = i-1;
-			//if( posSup >= 0) Celda* celSup = pMatriz.at(i-1).at(j);
+			if( posSup >= 0) Celda* celSup = pMatriz.at(i-1).at(j);
 			
 			Celda* celInf = 0; 
 			int posInf = i+1;
-			//if( posInf < pMatriz.length() ) Celda* celInf = pMatriz.at(i+1).at(j);
+			if( posInf < pMatriz.length() ) Celda* celInf = pMatriz.at(i+1).at(j);
 			
 			Celda* celDer = 0; 
 			int posDer = j+1;
-			//if( posDer < pMatriz.at(i).length()) Celda* celDer = pMatriz.at(i).at(j+1);
+			if( posDer < pMatriz.at(i).length()) Celda* celDer = pMatriz.at(i).at(j+1);
 			
 			Celda* celIzq = 0; 
 			int posIzq = j-1;
-			//if( posIzq > 0) Celda* celIzq = pMatriz.at(i).at(j-1);
+			if( posIzq > 0) Celda* celIzq = pMatriz.at(i).at(j-1);
 
 
 			if(celda->esOcupada()){
@@ -48,7 +48,7 @@ void Grapher::draw(Escenario escenario)
 				std::cout << "x";
 			}
 
-			delete celda, celSup, celInf, celDer, celIzq;
+			delete celSup, celInf, celDer, celIzq, pMatriz;
 		}
 		// Despues de imprimir la fila imprimo  un salto de linea
 		std::cout << '\n';
