@@ -1,5 +1,6 @@
 #include "StdAfx.h"
 #include "Escenario.h"
+#include <sstream>	
 
 Escenario::Escenario(void)
 {
@@ -76,6 +77,9 @@ List<TipoBonus> Escenario::obtenerTiposBonus(List<XmlElement>& listaElementos)
 				else
 				{
 					//Logger, tipo bonus invalido.
+					std::stringstream nroLinea;	nroLinea << listaBonusXml.at(j).getStartLine();
+					Logger::getInstance()->logWarning("El tipo bonus en la linea " + nroLinea.str() + 
+						" es inválido, no tiene asignados correctamente los atributos \0");
 				}
 			}
 		}
@@ -83,6 +87,7 @@ List<TipoBonus> Escenario::obtenerTiposBonus(List<XmlElement>& listaElementos)
 		else
 		{
 			//Logger, no hay lista de tipos bonus
+			Logger::getInstance()->logWarning("No existe lista de tipo bonus \0");
 		}
 	}
 
@@ -118,6 +123,9 @@ List<TipoObstaculo> Escenario::obtenerTiposObstaculos(List<XmlElement>& listaEle
 				else
 				{
 					//Logger, tipo obstaculo invalido, le falta un atributo.
+					std::stringstream nroLinea; nroLinea << listaObstaculosXml.at(j).getStartLine();
+					Logger::getInstance()->logWarning("El tipo obstaculo en la linea " + nroLinea.str() +
+						" es inválido. No tiene asignado correctamente los atributos \0");
 				}
 			}
 		}
@@ -125,6 +133,7 @@ List<TipoObstaculo> Escenario::obtenerTiposObstaculos(List<XmlElement>& listaEle
 		else
 		{
 			//Logger, no hay lista de tipo obstaculo
+			Logger::getInstance()->logWarning("No existe lista de tipos obstaculos \0");
 		}
 	}
 
