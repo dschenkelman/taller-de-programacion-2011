@@ -90,19 +90,25 @@ std::string Camino::obtenerRepresentacion(Celda* celSup, Celda* celInf, Celda* c
 	Camino* camDer = dynamic_cast<Camino*>(celDer);
 	Camino* camIzq = dynamic_cast<Camino*>(celIzq);
 	
-	if(( camSup != 0 || camInf != 0 )&&( camDer == 0 || camIzq == 0 )){
+	// Ningun vecino es un camino
+	if( camSup == 0 && camInf == 0 && camDer == 0 && camIzq == 0 ){
+		repres = ".";
+	}
+	
+	// Solo vecinos superior e inferior son caminos
+	if(( camSup != 0 || camInf != 0 )&&( camDer == 0 && camIzq == 0 )){
 		repres = "|";
-	}else{
-		if(( camDer != 0 || camIzq != 0 )&&( camSup == 0 || camInf == 0 )){
-			repres = "-";
-		}else{
-			repres = ".";
-		}
+	}
+
+	// Solo vecinos derecho e izquierdo son caminos
+	if(( camDer != 0 || camIzq != 0 )&&( camSup == 0 && camInf == 0 )){
+		repres = "-";
 	}
 
 	if (this->hasBonus())
 	{
-		repres = ""+this->getBonus().getTipoBonus().getTextura();
+		//repres = ""+this->getBonus().getTipoBonus().getTextura();
+		repres = "#";
 	}
 
 	return repres;
