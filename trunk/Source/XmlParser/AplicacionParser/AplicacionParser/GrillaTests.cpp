@@ -165,6 +165,12 @@ bool GrillaTests::testGenerarMatrizGeneraCorrectamente()
 	List<TipoObstaculo> lo;
 	List<TipoBonus> lb;
 
+	// se crea el tipo obstaculo por defecto y se agrega a la lista de tipos obstaculos
+	std::string nombreTipoO = "obstaculoDef";
+
+	TipoObstaculo tipoO(nombreTipoO, '´');
+	lo.add(tipoO);
+
 	Grilla grilla(elementoGrilla, lo, lb);
 
 	List<List<Celda*>> matrizObtenida = grilla.getMatriz();
@@ -226,11 +232,12 @@ bool GrillaTests::testTipoBonusInvalidoNoSeAgregaALaMatriz()
 	elementoGrilla.addChild(elementoCaminoUno);
 
 	List<TipoObstaculo> lo;
+	List<TipoBonus> lb;
 
+	// se crea el tipo bonus y se agrega a la lista de tipos bonus
 	std::string tipo = "uva";
 
 	TipoBonus tb(tipo, '+');
-	List<TipoBonus> lb;
 	lb.add(tb);
 
 	Grilla grilla(elementoGrilla, lo, lb);
@@ -276,6 +283,13 @@ bool GrillaTests::testColocarDosObjetosEnMismaPosicionGuardaElPrimero(void)
 	List<TipoBonus> tb;
 	List<TipoObstaculo> to;
 
+	// Se agrega el obstaculo por defecto a la lista obstaculos
+	std::string nombreTipoO = "obstaculoDef";
+
+	TipoObstaculo tipoO(nombreTipoO, '´');
+	to.add(tipoO);
+
+	// Se crea la grilla
 	Grilla grilla(elementoGrilla, to, tb);
 
 	Celda* c = grilla.getMatriz().at(1).at(5);
