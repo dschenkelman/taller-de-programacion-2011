@@ -39,8 +39,8 @@ XmlElement elementoEscenario("escenario", 1, 1000);
 
 	// se crea el xmlElement de grilla
 	XmlElement elementoGrilla("grilla", 2, 999);
-	XmlAttribute atributoAncho("ancho", "10");
-	XmlAttribute atributoAlto("alto", "10");
+	XmlAttribute atributoAncho("ancho", "4");
+	XmlAttribute atributoAlto("alto", "4");
 	XmlAttribute atributoTipo("tipoObstaculoPorDefecto", "ladrillo");
 	elementoGrilla.addAttribute(atributoAlto);
 	elementoGrilla.addAttribute(atributoAncho);
@@ -77,8 +77,8 @@ XmlElement elementoEscenario("escenario", 1, 1000);
 
 	// se crea un camino con bonus para la grilla
 	XmlElement elementoCamino("camino", 2, 8);
-	XmlAttribute atributoFila("fila", "4");
-	XmlAttribute atributoColumna("columna", "9");
+	XmlAttribute atributoFila("fila", "2");
+	XmlAttribute atributoColumna("columna", "2");
 	elementoCamino.addAttribute(atributoFila);
 	elementoCamino.addAttribute(atributoColumna);
 
@@ -90,17 +90,57 @@ XmlElement elementoEscenario("escenario", 1, 1000);
 
 	elementoGrilla.addChild(elementoCamino);
 
-	// se crean dos obstaculos para la grilla
+	// segundo camino
+	XmlElement elementoCamino2("camino", 2, 8);
+	XmlAttribute atributoFila2("fila", "1");
+	XmlAttribute atributoColumna2("columna", "0");
+	elementoCamino2.addAttribute(atributoFila2);
+	elementoCamino2.addAttribute(atributoColumna2);
+	elementoGrilla.addChild(elementoCamino2);
 
+	// tercer camino
+	XmlElement elementoCamino3("camino", 2, 8);
+	XmlAttribute atributoFila3("fila", "1");
+	XmlAttribute atributoColumna3("columna", "1");
+	elementoCamino3.addAttribute(atributoFila3);
+	elementoCamino3.addAttribute(atributoColumna3);
+	elementoGrilla.addChild(elementoCamino3);
+
+	// cuarto camino
+	XmlElement elementoCamino4("camino", 2, 8);
+	XmlAttribute atributoFila4("fila", "1");
+	XmlAttribute atributoColumna4("columna", "2");
+	elementoCamino4.addAttribute(atributoFila4);
+	elementoCamino4.addAttribute(atributoColumna4);
+	elementoGrilla.addChild(elementoCamino4);
+
+	// quinto camino
+	XmlElement elementoCamino5("camino", 2, 8);
+	XmlAttribute atributoFila5("fila", "1");
+	XmlAttribute atributoColumna5("columna", "3");
+	elementoCamino5.addAttribute(atributoFila5);
+	elementoCamino5.addAttribute(atributoColumna5);
+	elementoGrilla.addChild(elementoCamino5);
+
+	// sexto camino
+	XmlElement elementoCamino6("camino", 2, 8);
+	XmlAttribute atributoFila6("fila", "2");
+	XmlAttribute atributoColumna6("columna", "2");
+	elementoCamino6.addAttribute(atributoFila6);
+	elementoCamino6.addAttribute(atributoColumna6);
+	elementoGrilla.addChild(elementoCamino6);
+
+
+	// se crean dos obstaculos para la grilla
 	XmlElement elementoObstaculoUno("obstaculo", 4, 9);
-	XmlAttribute atributoFilaO1("fila", "8");
-	XmlAttribute atributoColumnaO1("columna", "4");
+	XmlAttribute atributoFilaO1("fila", "3");
+	XmlAttribute atributoColumnaO1("columna", "0");
 	elementoObstaculoUno.addAttribute(atributoFilaO1);
 	elementoObstaculoUno.addAttribute(atributoColumnaO1);
 
 	XmlElement elementoObstaculoDos("obstaculo", 9, 18);
-	XmlAttribute atributoFilaO2("fila", "9");
-	XmlAttribute atributoColumnaO2("columna", "7");
+	XmlAttribute atributoFilaO2("fila", "3");
+	XmlAttribute atributoColumnaO2("columna", "3");
 	XmlAttribute atributoTipoO2("tipo", "yunque");
 	elementoObstaculoDos.addAttribute(atributoFilaO2);
 	elementoObstaculoDos.addAttribute(atributoColumnaO2);
@@ -126,6 +166,7 @@ XmlElement elementoEscenario("escenario", 1, 1000);
 
 	//escenario->getGrilla().destruir();
 	//delete escenario;
+	
 	delete grapher;
 
 	return true;
