@@ -10,6 +10,8 @@
 
 const int defGridAncho = 10;
 const int defGridAlto = 10;
+const int defFila = 5;
+const int defColumna = 5;
 
 class Grilla
 {
@@ -22,6 +24,7 @@ class Grilla
 	bool colocarCeldaEnMatriz(Celda* c);
 	bool verificarTipoBonusExistente(std::string tb);
 	bool verificarTipoObstaculoExistente(std::string to);
+	void verificarTiposUtilizados();
 	TipoBonus obtenerTipoBonus(std::string tb);
 	TipoObstaculo obtenerTipoObstaculo(std::string to);
 	List<TipoObstaculo> tiposObstaculos;

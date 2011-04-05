@@ -79,6 +79,8 @@ Grilla::Grilla(XmlElement& e, List<TipoObstaculo>& lo, List<TipoBonus>& lb) : ma
 	{
 		generarMatriz(e.getChildren());
 	}
+
+	verificarTiposUtilizados();
 }
 
 Grilla::Grilla(void) : matrizGenerada(false)
@@ -165,7 +167,7 @@ void Grilla::generarMatriz(List<XmlElement>& listaElementos)
 			if(!result)
 			{
 				//Logger no se pudo meter elemento porque ya esta ocupada la posicion
-				Logger::getInstance()->logError("En Grilla, no se pudo colocar el camino; posicion ya ocupada. \0");
+				Logger::getInstance()->logWarning("En Grilla, no se pudo colocar el camino; posicion ya ocupada. \0");
 			}
 		}
 
@@ -197,7 +199,7 @@ void Grilla::generarMatriz(List<XmlElement>& listaElementos)
 			if(!result)
 			{
 				//Logger no se pudo meter elemento porque ya está ocupada la posicion
-				Logger::getInstance()->logError("En Grilla, no se pudo colocar el obstaculo; posicion ya ocupada.");
+				Logger::getInstance()->logWarning("En Grilla, no se pudo colocar el obstaculo; posicion ya ocupada.");
 			}
 		}
 
@@ -218,12 +220,14 @@ bool Grilla::colocarCeldaEnMatriz(Celda* c)
 	{
 		//Logger y valor por defecto
 		Logger::getInstance()->logWarning("En Grilla, celda con fila mayor al alto de la grilla; se asigna valor por defecto.");
+		fila = defFila;
 	}
 
 	if (columna > ancho)
 	{
 		//Logger y valor por defecto
-		Logger::getInstance()->logWarning("En Grilla, celda con  columna mayor al ancho de la grilla; se asigna columna por defecto.");
+		Logger::getInstance()->logWarning("En Grilla, celda con columna mayor al ancho de la grilla; se asigna columna por defecto.");
+		columna = defColumna;
 	}
 
 	if (matriz.at(fila).at(columna)->esOcupada())
@@ -271,6 +275,11 @@ TipoBonus Grilla::obtenerTipoBonus(std::string tb)
 	{
 		if (tb == tiposBonus.at(i).getNombre())
 		{
+			if (!tiposBonus.at(i).esUtilizado())
+			{
+				tiposBonus.at(i).utilizarTipo();
+			}
+
 			return tiposBonus.at(i);
 		}
 	}
@@ -282,7 +291,31 @@ TipoObstaculo Grilla::obtenerTipoObstaculo(std::string to)
 	{
 		if (to == tiposObstaculos.at(i).getNombre())
 		{
+			if (!tiposObstaculos.at(i).esUtilizado())
+			{
+				tiposObstaculos.at(i).utilizarTipo();
+			}
+
 			return tiposObstaculos.at(i);
+		}
+	}
+}
+
+void Grilla::verificarTiposUtilizados()
+{
+	for (size_t i = 0; i < tiposBonus.length(); i++)
+	{
+		if(!tiposBonus.at(i).esUtilizado())
+		{
+			Logger::getInstance()->logWarning("El tipo bonus " + tiposBonus.at(i).getNombre() + " no está siendo utilizado");
+		}
+	}
+
+	for (size_t i = 0; i < tiposObstaculos.length(); i++)
+	{
+		if(!tiposObstaculos.at(i).esUtilizado())
+		{
+			Logger::getInstance()->logWarning("El tipo obstaculo " + tiposObstaculos.at(i).getNombre() + " no está siendo utilizado");
 		}
 	}
 }

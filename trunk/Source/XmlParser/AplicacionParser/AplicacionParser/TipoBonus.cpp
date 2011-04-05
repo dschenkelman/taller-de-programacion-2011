@@ -5,16 +5,20 @@
 
 TipoBonus::TipoBonus(void)
 {
+	utilizado = false;
 }
 
 TipoBonus::TipoBonus(std::string& n, char t)
 {
+	utilizado = false;
 	nombre = n;
 	textura = t;
 }
 
 TipoBonus::TipoBonus(XmlElement& e)
 {
+	utilizado = false;
+
 	if(e.hasAttribute("nombre"))
 	{
 		nombre = e.getValue("nombre");
@@ -45,6 +49,16 @@ char TipoBonus::getTextura(void)
 	return textura;
 }
 
+void TipoBonus::utilizarTipo()
+{
+	utilizado = true;
+}
+
 TipoBonus::~TipoBonus(void)
 {
+}
+
+bool TipoBonus::esUtilizado()
+{
+	return utilizado;
 }
