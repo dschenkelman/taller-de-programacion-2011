@@ -6,6 +6,7 @@
 #include "TipoBonus.h"
 #include "Logger.h"
 #include "CellMatrix.h"
+#include "TipoBonus.h"
 
 const int defGridAncho = 10;
 const int defGridAlto = 10;
@@ -21,6 +22,8 @@ class Grilla
 	bool colocarCeldaEnMatriz(Celda* c);
 	bool verificarTipoBonusExistente(std::string tb);
 	bool verificarTipoObstaculoExistente(std::string to);
+	TipoBonus obtenerTipoBonus(std::string tb);
+	TipoObstaculo obtenerTipoObstaculo(std::string to);
 	List<TipoObstaculo> tiposObstaculos;
 	List<TipoBonus> tiposBonus;
 public:

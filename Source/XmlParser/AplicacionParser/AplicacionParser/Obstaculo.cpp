@@ -63,6 +63,16 @@ void Obstaculo::setTipo(std::string t)
 	tipo = t;
 }
 
+void Obstaculo::setTipoObstaculo(TipoObstaculo to)
+{
+	tipoObstaculo = to;
+}
+
+TipoObstaculo Obstaculo::getTipoObstaculo()
+{
+	return tipoObstaculo;
+}
+
 Obstaculo::~Obstaculo(void)
 {
 }

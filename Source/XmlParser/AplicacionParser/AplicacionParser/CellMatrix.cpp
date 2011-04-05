@@ -27,6 +27,7 @@ bool CellMatrix::insert(Celda c)
 		return false;
 	}
 	this->cells[row*this->getWidth()+column] = c;
+	this->cells[row*this->getWidth()+column].Ocupar();
 	return true;
 }
 

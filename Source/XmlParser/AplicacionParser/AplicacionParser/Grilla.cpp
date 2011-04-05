@@ -157,6 +157,8 @@ void Grilla::generarMatriz(List<XmlElement>& listaElementos)
 					delete cam;
 					continue;
 				}
+
+				cam->getBonus().setTipoBonus(obtenerTipoBonus(tipoBonus));
 			}
 			bool result = colocarCeldaEnMatriz(cam);
 
@@ -171,25 +173,24 @@ void Grilla::generarMatriz(List<XmlElement>& listaElementos)
 		{
 			Obstaculo* obs = new Obstaculo(listaElementos.at(i));
 
-			if(obs->getTipo() != "")
-			{
-				std::string tipoObstaculo = obs->getTipo();
-
-				bool obstaculoValido = verificarTipoObstaculoExistente(tipoObstaculo);
-
-				if(!obstaculoValido)
-				{
-					//Logger obstaculo inexistente
-					Logger::getInstance()->logError("En Grilla, obstaculo inexistente; se ignora el obstaculo. \0");
-					delete obs;
-					continue;
-				}
-			}
-
-			else
+			if(obs->getTipo() == "")
 			{
 				obs->setTipo(tipoObstaculoPorDefecto);
 			}
+			
+			std::string tipoObstaculo = obs->getTipo();
+
+			bool obstaculoValido = verificarTipoObstaculoExistente(tipoObstaculo);
+
+			if(!obstaculoValido)
+			{
+				//Logger obstaculo inexistente
+				Logger::getInstance()->logError("En Grilla, obstaculo inexistente; se ignora el obstaculo. \0");
+				delete obs;
+				continue;
+			}
+
+			obs->setTipoObstaculo(obtenerTipoObstaculo(tipoObstaculo));
 
 			bool result = colocarCeldaEnMatriz(obs);
 
@@ -262,4 +263,26 @@ bool Grilla::verificarTipoObstaculoExistente(std::string to)
 	}
 
 	return false;
+}
+
+TipoBonus Grilla::obtenerTipoBonus(std::string tb)
+{
+	for(size_t i = 0; i < tiposBonus.length(); i++)
+	{
+		if (tb == tiposBonus.at(i).getNombre())
+		{
+			return tiposBonus.at(i);
+		}
+	}
+}
+
+TipoObstaculo Grilla::obtenerTipoObstaculo(std::string to)
+{
+	for(size_t i = 0; i < tiposObstaculos.length(); i++)
+	{
+		if (to == tiposObstaculos.at(i).getNombre())
+		{
+			return tiposObstaculos.at(i);
+		}
+	}
 }
