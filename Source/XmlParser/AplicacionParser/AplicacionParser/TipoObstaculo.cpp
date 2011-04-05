@@ -5,6 +5,8 @@
 
 TipoObstaculo::TipoObstaculo(XmlElement& e)
 {
+	utilizado = false;
+
 	if(e.hasAttribute("nombre"))
 	{
 		nombre = e.getValue("nombre");
@@ -27,12 +29,14 @@ TipoObstaculo::TipoObstaculo(XmlElement& e)
 
 TipoObstaculo::TipoObstaculo(void)
 {
+	utilizado = false;
 }
 
 TipoObstaculo::TipoObstaculo(std::string& n, char t)
 {
 	nombre = n;
 	textura = t;
+	utilizado = false;
 }
 
 TipoObstaculo::~TipoObstaculo(void)
@@ -47,4 +51,14 @@ std::string TipoObstaculo::getNombre()
 char TipoObstaculo::getTextura()
 {
 	return textura;
+}
+
+void TipoObstaculo::utilizarTipo()
+{
+	utilizado = true;
+}
+
+bool TipoObstaculo::esUtilizado()
+{
+	return utilizado;
 }
