@@ -10,8 +10,8 @@ Grilla::Grilla(int an, int al, std::string& topd) : matrizGenerada(false)
 	{
 		Logger::getInstance()->logWarning("En Grilla, ancho o alto menores que cero; se setean valores por defecto. \0");
 		// Se setean valores por defecto
-		ancho	= defGridAncho;
-		alto	= defGridAlto;
+		ancho = defGridAncho;
+		alto = defGridAlto;
 		throw std::exception();
 	}
 	else
@@ -225,7 +225,7 @@ bool Grilla::colocarCeldaEnMatriz(Celda* c)
 		Logger::getInstance()->logWarning("En Grilla, celda con  columna mayor al ancho de la grilla; se asigna columna por defecto.");
 	}
 
-	if (c->esOcupada())
+	if (matriz.at(fila).at(columna)->esOcupada())
 	{
 		return false;
 	}

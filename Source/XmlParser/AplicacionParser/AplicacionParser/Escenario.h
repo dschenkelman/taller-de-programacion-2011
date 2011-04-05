@@ -4,6 +4,7 @@
 #include "List.h"
 #include "TipoObstaculo.h"
 #include "XmlElement.h"
+#include "Logger.h"
 
 class Escenario
 {
@@ -13,6 +14,7 @@ class Escenario
 	List<TipoObstaculo> tiposObstaculos;
 	List<TipoBonus> obtenerTiposBonus(List<XmlElement>& le);
 	List<TipoObstaculo> obtenerTiposObstaculos(List<XmlElement>& le);
+	bool verificarTexturaEnLista(List<char>& listaCaracteres, char t);
 public:
 	Escenario(void);
 	Escenario(XmlElement& e);

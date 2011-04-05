@@ -10,7 +10,7 @@ using namespace std;
 
 
 void GrillaTests::printLeaks(int leaks)
-{
+{	
 	std::cout << "Grilla Tests: Hubo " << leaks << " memory leaks." << endl << endl;
 }
 
@@ -30,6 +30,7 @@ void GrillaTests::run(void)
 	printResult("testAtributoAnchoCorrectoGuardaCorrectamente", testAtributoAnchoCorrectoGuardaCorrectamente());
 	printResult("testGenerarMatrizGeneraCorrectamente", testGenerarMatrizGeneraCorrectamente());
 	printResult("testTipoBonusInvalidoNoSeAgregaALaMatriz", testTipoBonusInvalidoNoSeAgregaALaMatriz());
+	printResult("testColocarDosObjetosEnMismaPosicionGuardaElPrimero", testColocarDosObjetosEnMismaPosicionGuardaElPrimero());
 
 	int leaks = _CrtDumpMemoryLeaks();
 	printLeaks(leaks);
@@ -244,5 +245,48 @@ bool GrillaTests::testTipoBonusInvalidoNoSeAgregaALaMatriz()
 	}
 
 	grilla.destruir();
+	return true;
+}
+
+bool GrillaTests::testColocarDosObjetosEnMismaPosicionGuardaElPrimero(void)
+{
+	XmlElement elementoGrilla("Grilla", 1, 1000);
+	XmlAttribute atributoAlto("alto", "10");
+	XmlAttribute atributoAncho("ancho", "10");
+	XmlAttribute atributoTipo("tipoObstaculoPorDefecto", "obstaculoDef");
+	elementoGrilla.addAttribute(atributoAlto);
+	elementoGrilla.addAttribute(atributoAncho);
+	elementoGrilla.addAttribute(atributoTipo);
+
+	XmlElement elementoCamino("camino", 3, 800);
+	XmlAttribute atributoFilaC1("fila", "1");
+	XmlAttribute atributoColumnaC1("columna", "5");
+	elementoCamino.addAttribute(atributoFilaC1);
+	elementoCamino.addAttribute(atributoColumnaC1);
+
+	XmlElement elementoObstaculo("obstaculo", 3, 800);
+	XmlAttribute atributoFilaO1("fila", "1");
+	XmlAttribute atributoColumnaO1("columna", "5");
+	elementoObstaculo.addAttribute(atributoFilaO1);
+	elementoObstaculo.addAttribute(atributoColumnaO1);
+
+	elementoGrilla.addChild(elementoObstaculo);
+	elementoGrilla.addChild(elementoCamino);
+
+	List<TipoBonus> tb;
+	List<TipoObstaculo> to;
+
+	Grilla grilla(elementoGrilla, to, tb);
+
+	Celda* c = grilla.getMatriz().at(1).at(5);
+	Obstaculo* obs = (Obstaculo*) c;
+
+	if(obs->getTipo() != "obstaculoDef")
+	{
+		return false;
+	}
+
+	grilla.destruir();
+
 	return true;
 }

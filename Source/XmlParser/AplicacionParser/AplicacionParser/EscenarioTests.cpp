@@ -136,5 +136,29 @@ bool EscenarioTests::testCrearEscenarioCreaCorrectamente(void)
 		return false;
 	}
 
+	Celda* celUno = escenario.getGrilla().getMatriz().at(4).at(9);
+	Camino* cam = (Camino*) celUno;
+
+	if (cam->getBonus().getTipo() != "uva")
+	{
+		return false;
+	}
+
+	Celda* celDos = escenario.getGrilla().getMatriz().at(8).at(4);
+	Obstaculo* obsUno = (Obstaculo*) celDos;
+
+	if (obsUno->getTipo() != "ladrillo")
+	{
+		return false;
+	}
+
+	Celda* celTres = escenario.getGrilla().getMatriz().at(2).at(7);
+	Obstaculo* obsDos = (Obstaculo*) celTres;
+
+	if (obsDos->getTipo() != "yunque")
+	{
+		return false;
+	}
+
 	return true;
 }

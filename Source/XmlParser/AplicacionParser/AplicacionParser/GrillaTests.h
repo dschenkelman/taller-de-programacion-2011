@@ -17,5 +17,5 @@ public:
 	bool testAtributoAnchoCorrectoGuardaCorrectamente();
 	bool testGenerarMatrizGeneraCorrectamente();
 	bool testTipoBonusInvalidoNoSeAgregaALaMatriz();
-	
+	bool testColocarDosObjetosEnMismaPosicionGuardaElPrimero();
 };
