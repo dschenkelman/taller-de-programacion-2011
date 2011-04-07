@@ -215,7 +215,13 @@ bool GrillaTests::testGenerarMatrizGeneraCorrectamente()
 	}
 
 	Camino* cam = (Camino*) matrizObtenida.at(1).at(5);
+	
 	if (cam->getBonus().getTipoBonus().getNombre() != "uva")
+	{
+		return false;
+	}
+
+	if (cam->getBonus().getTipoBonus().getTextura() != '+')
 	{
 		return false;
 	}
