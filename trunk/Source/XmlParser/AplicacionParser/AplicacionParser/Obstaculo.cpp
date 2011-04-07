@@ -79,9 +79,5 @@ Obstaculo::~Obstaculo(void)
 
 std::string Obstaculo::obtenerRepresentacion(Celda* celSup, Celda* celInf, Celda* celDer, Celda* celIzq)
 {
-	
-	// Cuando se implemente 
-	//return this->getTipoObstaculo()->getTextura();
-	
-	return "o";
+	return ""+this->getTipoObstaculo().getTextura();
 }

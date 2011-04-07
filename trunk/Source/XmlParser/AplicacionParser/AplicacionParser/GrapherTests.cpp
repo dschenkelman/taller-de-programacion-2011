@@ -150,7 +150,6 @@ XmlElement elementoEscenario("escenario", 1, 1000);
 	elementoGrilla.addChild(elementoObstaculoDos);
 
 	// se agregan la grilla y las listas al xml de escenario
-
 	elementoEscenario.addChild(elementoGrilla);
 	elementoEscenario.addChild(elementoListaTiposBonus);
 	elementoEscenario.addChild(elementoListaTiposObstaculo);
@@ -164,9 +163,9 @@ XmlElement elementoEscenario("escenario", 1, 1000);
 	// Dibujo el escenario
 	grapher->draw(*escenario);
 
-	//escenario->getGrilla().destruir();
+	//tareas de finalizacion del test
+	//Logger::getInstance()->closeLog();
 	//delete escenario;
-	
 	delete grapher;
 
 	return true;

@@ -95,20 +95,19 @@ std::string Camino::obtenerRepresentacion(Celda* celSup, Celda* celInf, Celda* c
 		repres = ".";
 	}
 	
-	// Solo vecinos superior e inferior son caminos
+	// Solo vecinos superior o inferior son caminos
 	if(( camSup != 0 || camInf != 0 )&&( camDer == 0 && camIzq == 0 )){
 		repres = "|";
 	}
 
-	// Solo vecinos derecho e izquierdo son caminos
+	// Solo vecinos derecho o izquierdo son caminos
 	if(( camDer != 0 || camIzq != 0 )&&( camSup == 0 && camInf == 0 )){
 		repres = "-";
 	}
 
 	if (this->hasBonus())
 	{
-		//repres = ""+this->getBonus().getTipoBonus().getTextura();
-		repres = "#";
+		repres = ""+this->getBonus().getTipoBonus().getTextura();
 	}
 
 	return repres;

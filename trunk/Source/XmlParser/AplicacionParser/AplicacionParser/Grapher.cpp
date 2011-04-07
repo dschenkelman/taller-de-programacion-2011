@@ -49,7 +49,7 @@ void Grapher::draw(Escenario escenario)
 			if(celda->esOcupada()){
 				std::cout << celda->obtenerRepresentacion(celSup, celInf, celDer, celIzq);
 			}else{
-				std::cout << " ";
+				std::cout << "?";
 			}
 
 			//delete celSup, celInf, celDer, celIzq;
