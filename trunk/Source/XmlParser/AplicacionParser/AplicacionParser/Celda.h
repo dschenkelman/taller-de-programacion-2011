@@ -14,6 +14,7 @@ public:
 	int getColumna();
 	bool esOcupada();
 	void Ocupar();
-	~Celda(void);
+	virtual Celda* copiar(void);
+	virtual ~Celda(void);
 	virtual std::string obtenerRepresentacion(Celda* celSup, Celda* celInf, Celda* celDer, Celda* celIzq);
 };

@@ -14,6 +14,7 @@ public:
 	Camino(void);
 	Bonus& getBonus();
 	bool hasBonus();
+	Celda* copiar(void);
 	~Camino(void);
 	std::string obtenerRepresentacion(Celda* celSup, Celda* celInf, Celda* celDer, Celda* celIzq);
 };
