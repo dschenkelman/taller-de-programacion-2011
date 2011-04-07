@@ -136,7 +136,8 @@ bool EscenarioTests::testCrearEscenarioCreaCorrectamente(void)
 		return false;
 	}
 
-	Celda* celUno = escenario.getGrilla().getMatriz().at(4).at(9);
+	Grilla& grilla = escenario.getGrilla();
+	Celda* celUno = grilla.getMatriz().at(4).at(9);
 	Camino* cam = (Camino*) celUno;
 
 	if (cam->getBonus().getTipo() != "uva")

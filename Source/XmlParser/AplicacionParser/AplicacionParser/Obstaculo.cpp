@@ -3,11 +3,9 @@
 #include "Logger.h"
 #include <sstream>
 
-Obstaculo::Obstaculo(std::string& t, int f, int c)
+Obstaculo::Obstaculo(std::string& t, int f, int c) : Celda(f, c)
 {
-	tipo = t;
-	fila = f;
-	columna = c;
+	this->tipo = t;
 }
 
 Obstaculo::Obstaculo(XmlElement& e)
@@ -80,4 +78,12 @@ Obstaculo::~Obstaculo(void)
 std::string Obstaculo::obtenerRepresentacion(Celda* celSup, Celda* celInf, Celda* celDer, Celda* celIzq)
 {
 	return ""+this->getTipoObstaculo().getTextura();
+}
+
+Celda* Obstaculo::copiar(void)
+{
+	Obstaculo* obstaculo = new Obstaculo(this->tipo, this->fila, this->columna);
+	obstaculo->ocupada = this->ocupada;
+	obstaculo->tipoObstaculo = this->tipoObstaculo;
+	return obstaculo;
 }

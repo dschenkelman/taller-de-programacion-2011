@@ -33,10 +33,11 @@ public:
 	Grilla(XmlElement& e, List<TipoObstaculo>& to, List<TipoBonus>& tb);
 	Grilla(int an, int al, std::string& topd);
 	Grilla(void);
+	Grilla(const Grilla& other);
+	Grilla& operator=(const Grilla& other);
 	int getAncho();
 	int getAlto();
 	std::string getTipoObstaculoPorDefecto();
 	List<List<Celda*>>& getMatriz();
-	void destruir(void);
 	~Grilla(void);
 };

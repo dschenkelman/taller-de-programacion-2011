@@ -15,9 +15,8 @@ Celda::Celda(int f, int c) : ocupada(false)
 	columna = c;
 }
 
-Celda::Celda(void)
+Celda::Celda(void) : ocupada(false), fila(0), columna(0)
 {
-	ocupada = false;
 }
 
 bool Celda::esOcupada()
@@ -49,4 +48,11 @@ std::string Celda::obtenerRepresentacion(Celda* celSup, Celda* celInf, Celda* ce
 {
 	// Esto no se debería imprimir nunca
 	return "?";
+}
+
+Celda* Celda::copiar(void)
+{
+	Celda* celda = new Celda(this->fila, this->columna);
+	celda->ocupada = this->ocupada;
+	return celda;
 }

@@ -3,10 +3,8 @@
 #include "List.h"
 #include <sstream>
 
-Camino::Camino(int f, int c)
+Camino::Camino(int f, int c) : Celda(f, c)
 {
-	fila = f;
-	columna = c;
 }
 
 Camino::Camino(XmlElement& e)
@@ -111,4 +109,13 @@ std::string Camino::obtenerRepresentacion(Celda* celSup, Celda* celInf, Celda* c
 	}
 
 	return repres;
+}
+
+Celda* Camino::copiar(void)
+{
+	Camino* camino = new Camino(this->fila, this->columna);
+	camino->ocupada = this->ocupada;
+	camino->tieneBonus = this->tieneBonus;
+	camino->bonus = this->bonus;
+	return camino;
 }

@@ -54,7 +54,6 @@ bool GrillaTests::testAtributoAnchoConValorNegativoTomaValorPorDefecto()
 	Logger::getInstance()->closeLog();
 	
 	bool res = grilla.getAncho() == defGridAncho;
-	grilla.destruir();
 	return (res) ? true:false;
 }
 
@@ -91,11 +90,9 @@ bool GrillaTests::testAtributoAltoCorrectoGuardaCorrectamente()
 	
 	if(alto != 10)
 	{
-		grilla.destruir();
 		return false;
 	}
 
-	grilla.destruir();
 	return true;
 }
 
@@ -115,11 +112,9 @@ bool GrillaTests::testAtributoAnchoCorrectoGuardaCorrectamente()
 	Logger::getInstance()->closeLog();
 	if(ancho != 8)
 	{
-		grilla.destruir();
 		return false;
 	}
 
-	grilla.destruir();
 	return true;
 }
 
@@ -192,29 +187,25 @@ bool GrillaTests::testGenerarMatrizGeneraCorrectamente()
 
 	if (matrizObtenida.at(2).at(9)->getFila() != 2 || matrizObtenida.at(2).at(9)->getColumna() != 9)
 	{
-		grilla.destruir();
 		return false;
 	}
 
 	if (matrizObtenida.at(1).at(5)->getFila() != 1 || matrizObtenida.at(1).at(5)->getColumna() != 5)
 	{
-		grilla.destruir();
 		return false;
 	}
 
 	if (matrizObtenida.at(7).at(4)->getFila() != 7 || matrizObtenida.at(7).at(4)->getColumna() != 4)
 	{
-		grilla.destruir();
 		return false;
 	}
 
 	if (matrizObtenida.at(4).at(6)->getFila() != 4 || matrizObtenida.at(4).at(6)->getColumna() != 6)
 	{
-		grilla.destruir();
 		return false;
 	}
 
-	Camino* cam = (Camino*) matrizObtenida.at(1).at(5);
+Camino* cam = (Camino*) matrizObtenida.at(1).at(5);
 	
 	if (cam->getBonus().getTipoBonus().getNombre() != "uva")
 	{
@@ -226,7 +217,6 @@ bool GrillaTests::testGenerarMatrizGeneraCorrectamente()
 		return false;
 	}
 
-	grilla.destruir();
 	return true;
 }
 
@@ -270,11 +260,9 @@ bool GrillaTests::testTipoBonusInvalidoNoSeAgregaALaMatriz()
 	Logger::getInstance()->closeLog();
 	if(c->esOcupada())
 	{
-		grilla.destruir();
 		return false;
 	}
 
-	grilla.destruir();
 	return true;
 }
 

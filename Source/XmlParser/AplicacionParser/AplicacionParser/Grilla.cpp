@@ -107,9 +107,7 @@ std::string Grilla::getTipoObstaculoPorDefecto()
 	return tipoObstaculoPorDefecto;
 }
 
-Grilla::~Grilla(){}
-
-void Grilla::destruir(void)
+Grilla::~Grilla()
 {
 	if (this->matrizGenerada)
 	{
@@ -232,13 +230,14 @@ bool Grilla::colocarCeldaEnMatriz(Celda* c)
 
 	if (matriz.at(fila).at(columna)->esOcupada())
 	{
+		delete c;
 		return false;
 	}
 
-	delete matriz.at(fila).at(columna);
+	Celda* celda = matriz.at(fila).at(columna);
+	c->Ocupar();
 	matriz.at(fila).at(columna) = c;
-
-	matriz.at(fila).at(columna)->Ocupar();
+	delete celda;
 
 	return true;
 }
@@ -318,4 +317,73 @@ void Grilla::verificarTiposUtilizados()
 			Logger::getInstance()->logWarning("El tipo obstaculo " + tiposObstaculos.at(i).getNombre() + " no está siendo utilizado");
 		}
 	}
+}
+ 
+Grilla::Grilla(const Grilla& other) : alto(other.alto), ancho(other.ancho),
+ tipoObstaculoPorDefecto(other.tipoObstaculoPorDefecto), 
+ tiposObstaculos(other.tiposObstaculos), 
+ tiposBonus(other.tiposBonus)
+{
+	if (other.matrizGenerada)
+	{
+		for (size_t i = 0; i < this->alto; i++)
+		{
+			//agrego fila
+			this->matriz.add(List<Celda*>());
+			for (size_t j = 0; j < this->ancho; j++)
+			{
+				//lleno fila
+				Celda* celda = other.matriz.at(i).at(j);
+				this->matriz.at(i).add(celda->copiar());
+			}	
+		}
+
+		this->matrizGenerada = true;
+	}
+}
+
+Grilla& Grilla::operator=(const Grilla& other)
+{
+	if (this == &other) 
+	{
+		return *this;
+	}
+
+	if (this->matrizGenerada)
+	{
+		for (size_t i = this->alto - 1; i >= 0; i--)
+		{
+			for (size_t j = 0; j < this->ancho; j++)
+			{
+				//borro celda
+				delete this->matriz.at(i).at(j);
+			}	
+			this->matriz.removeAt(i);
+		}
+	}
+
+	this->alto = other.alto;
+	this->ancho = other.ancho;
+	this->tipoObstaculoPorDefecto = other.tipoObstaculoPorDefecto; 
+	this->tiposObstaculos = other.tiposObstaculos;
+	this->tiposBonus = other.tiposBonus;
+	
+	if (other.matrizGenerada)
+	{
+		for (size_t i = 0; i < this->alto; i++)
+		{
+			//agrego fila
+			this->matriz.add(List<Celda*>());
+			for (size_t j = 0; j < this->ancho; j++)
+			{
+				//lleno fila
+				Celda* celda = other.matriz.at(i).at(j);
+				this->matriz.at(i).add(celda->copiar());
+			}	
+		}
+
+		this->matrizGenerada = true;
+	}
+
+	return *this;
 }
