@@ -72,7 +72,7 @@ bool Camino::hasBonus()
 	return tieneBonus;
 }
 
-Bonus Camino::getBonus()
+Bonus& Camino::getBonus()
 {
 	return bonus;
 }

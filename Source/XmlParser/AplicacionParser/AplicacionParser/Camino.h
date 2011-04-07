@@ -12,7 +12,7 @@ public:
 	Camino(XmlElement& e);
 	Camino(int f, int c);
 	Camino(void);
-	Bonus getBonus();
+	Bonus& getBonus();
 	bool hasBonus();
 	~Camino(void);
 	std::string obtenerRepresentacion(Celda* celSup, Celda* celInf, Celda* celDer, Celda* celIzq);

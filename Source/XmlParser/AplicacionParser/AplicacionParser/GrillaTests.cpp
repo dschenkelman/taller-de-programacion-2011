@@ -145,6 +145,11 @@ bool GrillaTests::testGenerarMatrizGeneraCorrectamente()
 	elementoCaminoUno.addAttribute(atributoFilaC1);
 	elementoCaminoUno.addAttribute(atributoColumnaC1);
 
+	XmlElement bonusCaminoUno("bonus", 1, 20);
+	XmlAttribute atributoBonus("tipo", "uva");
+	bonusCaminoUno.addAttribute(atributoBonus);
+	elementoCaminoUno.addChild(bonusCaminoUno);
+
 	XmlElement elementoObstaculoDos("obstaculo", 2, 900);
 	XmlAttribute atributoFilaO2("fila", "7");
 	XmlAttribute atributoColumnaO2("columna", "4");
@@ -164,6 +169,12 @@ bool GrillaTests::testGenerarMatrizGeneraCorrectamente()
 
 	List<TipoObstaculo> lo;
 	List<TipoBonus> lb;
+
+	// se crea el tipo bonus y se agrega a la lista de tipos bonus
+	std::string tipo = "uva";
+
+	TipoBonus tb(tipo, '+');
+	lb.add(tb);
 
 	// se crea el tipo obstaculo por defecto y se agrega a la lista de tipos obstaculos
 	std::string nombreTipoO = "obstaculoDef";
@@ -200,6 +211,12 @@ bool GrillaTests::testGenerarMatrizGeneraCorrectamente()
 	if (matrizObtenida.at(4).at(6)->getFila() != 4 || matrizObtenida.at(4).at(6)->getColumna() != 6)
 	{
 		grilla.destruir();
+		return false;
+	}
+
+	Camino* cam = (Camino*) matrizObtenida.at(1).at(5);
+	if (cam->getBonus().getTipoBonus().getNombre() != "uva")
+	{
 		return false;
 	}
 
@@ -299,8 +316,6 @@ bool GrillaTests::testColocarDosObjetosEnMismaPosicionGuardaElPrimero(void)
 	{
 		return false;
 	}
-
-	grilla.destruir();
 
 	return true;
 }
