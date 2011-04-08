@@ -13,7 +13,9 @@ class XmlParser
 private:
 	long lineNumber;
 	std::ifstream xmlFile;
+	std::string fileOrig;
 	std::string lineRead;
+	std::string parsingFileName;
 	void parseAttribute(std::string attName);
 	void parseOpeningLine(std::string line);
 	void parseClosingLine(std::string line);
@@ -28,7 +30,9 @@ private:
 	bool hasAttributeErrors;
 	bool isOpeningLine;
 	bool isValidTagName(std::string tagName);
+	std::string & replaceAll(std::string& context, const std::string& from,const std::string& to);
 	std::string validTags[9];
+	bool preParseFile(std::string filename);
 public:
 
 	XmlParser(void);
