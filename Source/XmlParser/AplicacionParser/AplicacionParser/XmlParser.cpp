@@ -29,6 +29,7 @@ XmlParser::XmlParser(void)
 	this->hasErrors=false;
 	this->hasAttributeErrors = false;
 	this->isOpeningLine = true;
+	this->fileOrig=" ";
 }
 
 XmlParser::~XmlParser(void)
@@ -39,14 +40,68 @@ XmlParser::~XmlParser(void)
 }
 void XmlParser::openFile(std::string filename){
 
+	
 	if (!this->xmlFile.is_open()){
 		this->xmlFile.open(filename.c_str(), ios::in | ios::binary);
+		this->lineNumber=1;
 	}
+
+	//if (!this->xmlFile.is_open() && this->preParseFile(filename)){
+	//	this->xmlFile.open("auxiliar.xml", ios::in | ios::binary);
+	//	this->lineNumber=1;
+	//}
+
+	//this->parsingFileName=filename;
+
+	
 }
+
+bool XmlParser::preParseFile(std::string filename){
+	
+	std::string lineToRead;
+	std::string workLine;
+	std::string workAux;
+	std::string fileOrig;
+	std::ifstream xmlAuxFile;
+	std::ifstream xmlAux;
+
+	if (filename.compare(this->parsingFileName) == 0) //Si ya lo indente como quería no hago más nada.
+		return true;
+	
+	if (!xmlAuxFile.is_open()){
+		xmlAuxFile.open(filename.c_str(), ios::in | ios::binary);
+		if (xmlAuxFile.is_open() == false)
+			return false;
+	}
+	while (getline( xmlAuxFile, lineToRead )){
+		fileOrig+=lineToRead;
+		workLine+=lineToRead;
+	}
+
+	//Dejo el archivo original en un string para futuras referencias en el conteo de líneas y cierro.
+	this->fileOrig=fileOrig;
+	xmlAuxFile.close();
+
+	workLine.erase(std::remove(workLine.begin(), workLine.end(), '\n'), workLine.end());
+	workLine.erase(std::remove(workLine.begin(), workLine.end(), '\r'), workLine.end());
+	replaceAll(workLine, "<", "\n<");
+	replaceAll(workLine, ">", ">\n");
+	
+	ofstream file;
+	file.open("auxiliar.xml", ios::binary|ios::out);
+	file<<workLine;
+	file.close();
+	
+	return true;
+}
+
 void XmlParser::closeFile(void){
-	if (this->xmlFile.is_open())
+	if (this->xmlFile.is_open()){
 		this->xmlFile.close();
+		remove( "auxiliar.xml" );
+	}
 	this->lineNumber=0;
+
 }
 
 //Si el archivo no esta abierto o se acabaron las lineas, devuelve false.
@@ -61,9 +116,14 @@ bool  XmlParser::getXmlLine(void){
 	this->tagAtt.clear();
 	this->hasErrors = false;
 	this->hasAttributeErrors = false;
-		
-	if (this->xmlFile.is_open() && getline( this->xmlFile, this->lineRead ))
+	bool resp;
+
+	if ( (resp= this->xmlFile.is_open()) && getline( this->xmlFile, this->lineRead ))
 	{
+		//Si es una linea en blanco (producto del parseo) leo otra
+		if (this->lineRead.length() <= 0)
+			getline( this->xmlFile, this->lineRead );
+
 		this->lineNumber++;
 		this->trim(this->lineRead, ' ');
 		strMine=this->lineRead;
@@ -400,3 +460,16 @@ bool XmlParser::isValidTagName(std::string n)
 
 	return false;
 }
+
+string& XmlParser::replaceAll(string& context, const string& from,const string& to) {
+	size_t lookHere = 0;
+	size_t foundHere;
+	while((foundHere = context.find(from, lookHere)) != string::npos) {
+		context.replace(foundHere, from.size(), to);
+		lookHere = foundHere + to.size();
+	}
+	return context;
+} 
+
+
+
