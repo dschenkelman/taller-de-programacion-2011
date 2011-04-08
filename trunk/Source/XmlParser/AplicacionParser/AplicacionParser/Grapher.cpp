@@ -10,7 +10,7 @@ Grapher::~Grapher()
 {
 }
 
-void Grapher::draw(Escenario escenario)
+void Grapher::draw(Escenario& escenario)
 {
 	Grilla& grilla = escenario.getGrilla();
 

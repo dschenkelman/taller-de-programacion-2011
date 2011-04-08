@@ -123,7 +123,7 @@ bool GrillaTests::testGenerarMatrizGeneraCorrectamente()
 	XmlElement elementoGrilla("Grilla", 1, 1000);
 	XmlAttribute atributoAlto("alto", "10");
 	XmlAttribute atributoAncho("ancho", "10");
-	XmlAttribute atributoTipo("tipoObstaculoPorDefecto", "obstaculoDef");
+	XmlAttribute atributoTipo("tipoobstaculopordefecto", "obstaculoDef");
 	elementoGrilla.addAttribute(atributoAlto);
 	elementoGrilla.addAttribute(atributoAncho);
 	elementoGrilla.addAttribute(atributoTipo);
@@ -269,7 +269,7 @@ bool GrillaTests::testColocarDosObjetosEnMismaPosicionGuardaElPrimero(void)
 	XmlElement elementoGrilla("Grilla", 1, 1000);
 	XmlAttribute atributoAlto("alto", "10");
 	XmlAttribute atributoAncho("ancho", "10");
-	XmlAttribute atributoTipo("tipoObstaculoPorDefecto", "obstaculoDef");
+	XmlAttribute atributoTipo("tipoobstaculopordefecto", "obstaculoDef");
 	elementoGrilla.addAttribute(atributoAlto);
 	elementoGrilla.addAttribute(atributoAncho);
 	elementoGrilla.addAttribute(atributoTipo);
