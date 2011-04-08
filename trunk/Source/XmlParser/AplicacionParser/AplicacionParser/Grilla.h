@@ -38,6 +38,6 @@ public:
 	int getAncho();
 	int getAlto();
 	std::string getTipoObstaculoPorDefecto();
-	List<List<Celda*>>& getMatriz();
+	Celda* getCelda(int fila, int columna);
 	~Grilla(void);
 };

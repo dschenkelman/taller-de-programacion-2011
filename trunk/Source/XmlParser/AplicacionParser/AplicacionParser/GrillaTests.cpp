@@ -179,33 +179,31 @@ bool GrillaTests::testGenerarMatrizGeneraCorrectamente()
 
 	Grilla grilla(elementoGrilla, lo, lb);
 
-	List<List<Celda*>> matrizObtenida = grilla.getMatriz();
-
-	int prueba = matrizObtenida.at(2).at(9)->getFila();
+	int prueba = grilla.getCelda(2,9)->getFila();
 
 	Logger::getInstance()->closeLog();
 
-	if (matrizObtenida.at(2).at(9)->getFila() != 2 || matrizObtenida.at(2).at(9)->getColumna() != 9)
+	if (grilla.getCelda(2, 9)->getFila() != 2 || grilla.getCelda(2, 9)->getColumna() != 9)
 	{
 		return false;
 	}
 
-	if (matrizObtenida.at(1).at(5)->getFila() != 1 || matrizObtenida.at(1).at(5)->getColumna() != 5)
+	if (grilla.getCelda(1, 5)->getFila() != 1 || grilla.getCelda(1, 5)->getColumna() != 5)
 	{
 		return false;
 	}
 
-	if (matrizObtenida.at(7).at(4)->getFila() != 7 || matrizObtenida.at(7).at(4)->getColumna() != 4)
+	if (grilla.getCelda(7, 4)->getFila() != 7 || grilla.getCelda(7, 4)->getColumna() != 4)
 	{
 		return false;
 	}
 
-	if (matrizObtenida.at(4).at(6)->getFila() != 4 || matrizObtenida.at(4).at(6)->getColumna() != 6)
+	if (grilla.getCelda(4, 6)->getFila() != 4 || grilla.getCelda(4, 6)->getColumna() != 6)
 	{
 		return false;
 	}
 
-Camino* cam = (Camino*) matrizObtenida.at(1).at(5);
+	Camino* cam = (Camino*) grilla.getCelda(1, 5);
 	
 	if (cam->getBonus().getTipoBonus().getNombre() != "uva")
 	{
@@ -255,7 +253,7 @@ bool GrillaTests::testTipoBonusInvalidoNoSeAgregaALaMatriz()
 
 	Grilla grilla(elementoGrilla, lo, lb);
 
-	Celda* c = grilla.getMatriz().at(1).at(5);
+	Celda* c = grilla.getCelda(1, 5);
 	
 	Logger::getInstance()->closeLog();
 	if(c->esOcupada())
@@ -303,7 +301,7 @@ bool GrillaTests::testColocarDosObjetosEnMismaPosicionGuardaElPrimero(void)
 	// Se crea la grilla
 	Grilla grilla(elementoGrilla, to, tb);
 
-	Celda* c = grilla.getMatriz().at(1).at(5);
+	Celda* c = grilla.getCelda(1, 5);
 	Obstaculo* obs = (Obstaculo*) c;
 
 	// se cierra el logger

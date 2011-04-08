@@ -97,9 +97,14 @@ int Grilla::getAncho()
 	return ancho;
 }
 
-List<List<Celda*>>& Grilla::getMatriz()
+Celda* Grilla::getCelda(int fila, int columna)
 {
-	return this->matriz;
+	if (this->alto < fila || this->ancho < columna)
+	{
+		throw std::exception();
+	}
+
+	return this->matriz.at(fila).getValueAt(columna);
 }
 
 std::string Grilla::getTipoObstaculoPorDefecto()
@@ -234,7 +239,7 @@ bool Grilla::colocarCeldaEnMatriz(Celda* c)
 		return false;
 	}
 
-	Celda* celda = matriz.at(fila).at(columna);
+	Celda* celda = matriz.at(fila).getValueAt(columna);
 	c->Ocupar();
 	matriz.at(fila).at(columna) = c;
 	delete celda;

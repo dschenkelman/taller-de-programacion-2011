@@ -172,5 +172,14 @@ public:
 		{
 			this->removeLast();
 		}
-	}	
+	}
+
+	T getValueAt(size_t position) const
+	{
+		if (!this->isWithinBounds(position))
+		{
+			throw std::exception();
+		}
+		return this->items[position];
+	}
 };
