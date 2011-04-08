@@ -121,6 +121,9 @@ bool EscenarioTests::testCrearEscenarioCreaCorrectamente(void)
 	// se crea el escenario
 	Escenario escenario(elementoEscenario);
 
+	// cierro el logger
+	Logger::getInstance()->closeLog();
+
 	if (! escenario.getGrilla().getMatriz().at(4).at(9)->esOcupada())
 	{
 		return false;

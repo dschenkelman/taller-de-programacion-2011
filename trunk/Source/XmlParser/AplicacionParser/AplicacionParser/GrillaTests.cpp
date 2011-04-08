@@ -306,6 +306,9 @@ bool GrillaTests::testColocarDosObjetosEnMismaPosicionGuardaElPrimero(void)
 	Celda* c = grilla.getMatriz().at(1).at(5);
 	Obstaculo* obs = (Obstaculo*) c;
 
+	// se cierra el logger
+	Logger::getInstance()->closeLog();
+
 	if(obs->getTipo() != "obstaculoDef")
 	{
 		return false;
