@@ -66,7 +66,7 @@ XmlElement elementoEscenario("escenario", 1, 1000);
 	elementoTipoObstaculoUno.addAttribute(atributoNombreUno);
 	elementoTipoObstaculoUno.addAttribute(atributoTexturaUno);
 
-	XmlElement elementoTipoObstaculoDos("tipoObstaculos", 605, 620);
+	XmlElement elementoTipoObstaculoDos("tipoObstaculo", 605, 620);
 	XmlAttribute atributoNombreDos("nombre", "ladrillo");
 	XmlAttribute atributoTexturaDos("textura", "#");
 	elementoTipoObstaculoDos.addAttribute(atributoNombreDos);
@@ -135,8 +135,10 @@ XmlElement elementoEscenario("escenario", 1, 1000);
 	XmlElement elementoObstaculoUno("obstaculo", 4, 9);
 	XmlAttribute atributoFilaO1("fila", "3");
 	XmlAttribute atributoColumnaO1("columna", "0");
+	XmlAttribute atributoTipoO1("tipo", "ladrillo");
 	elementoObstaculoUno.addAttribute(atributoFilaO1);
 	elementoObstaculoUno.addAttribute(atributoColumnaO1);
+	elementoObstaculoUno.addAttribute(atributoTipoO1);
 
 	XmlElement elementoObstaculoDos("obstaculo", 9, 18);
 	XmlAttribute atributoFilaO2("fila", "3");
@@ -164,8 +166,8 @@ XmlElement elementoEscenario("escenario", 1, 1000);
 	grapher->draw(*escenario);
 
 	//tareas de finalizacion del test
-	//Logger::getInstance()->closeLog();
-	//delete escenario;
+	Logger::getInstance()->closeLog();
+	delete escenario;
 	delete grapher;
 
 	return true;
