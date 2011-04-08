@@ -50,11 +50,13 @@ List<TipoBonus> Escenario::obtenerTiposBonus(List<XmlElement>& listaElementos)
 {
 	List<TipoBonus> listaBonus;
 	List<char> listaTexturas;
+	bool found = false;
 
 	for(size_t i = 0; i < listaElementos.length(); i++)
 	{
 		if(listaElementos.at(i).getName() == "tiposbonus")
 		{
+			found = true;
 			List<XmlElement> listaBonusXml = listaElementos.at(i).getChildren();
 			
 			for(size_t j = 0; j < listaBonusXml.length(); j++)
@@ -82,8 +84,8 @@ List<TipoBonus> Escenario::obtenerTiposBonus(List<XmlElement>& listaElementos)
 				}
 			}
 		}
-
-		else
+		
+		if (!found)
 		{
 			//Logger, no hay lista de tipos bonus
 			Logger::getInstance()->logWarning("No existe lista de tipo bonus \0");
@@ -97,11 +99,13 @@ List<TipoObstaculo> Escenario::obtenerTiposObstaculos(List<XmlElement>& listaEle
 {
 	List<TipoObstaculo> listaObstaculos;
 	List<char> listaTexturas;
+	bool found = false;
 
 	for(size_t i = 0; i < listaElementos.length(); i++)
 	{
 		if(listaElementos.at(i).getName() == "tiposobstaculos")
 		{
+			found = true;
 			List<XmlElement> listaObstaculosXml = listaElementos.at(i).getChildren();
 			
 			for(size_t j = 0; j < listaObstaculosXml.length(); j++)
@@ -129,7 +133,7 @@ List<TipoObstaculo> Escenario::obtenerTiposObstaculos(List<XmlElement>& listaEle
 			}
 		}
 
-		else
+		if (!found)
 		{
 			//Logger, no hay lista de tipo obstaculo
 			Logger::getInstance()->logWarning("No existe lista de tipos obstaculos \0");
