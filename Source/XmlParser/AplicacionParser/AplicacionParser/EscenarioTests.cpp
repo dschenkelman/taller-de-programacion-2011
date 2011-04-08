@@ -121,26 +121,25 @@ bool EscenarioTests::testCrearEscenarioCreaCorrectamente(void)
 	// se crea el escenario
 	Escenario escenario(elementoEscenario);
 
-	// cierro el logger
 	Logger::getInstance()->closeLog();
 
-	if (! escenario.getGrilla().getMatriz().at(4).at(9)->esOcupada())
+	if (! escenario.getGrilla().getCelda(4, 9)->esOcupada())
 	{
 		return false;
 	}
 
-	if (! escenario.getGrilla().getMatriz().at(8).at(4)->esOcupada())
+	if (! escenario.getGrilla().getCelda(8, 4)->esOcupada())
 	{
 		return false;
 	}
 
-	if (! escenario.getGrilla().getMatriz().at(2).at(7)->esOcupada())
+	if (! escenario.getGrilla().getCelda(2, 7)->esOcupada())
 	{
 		return false;
 	}
 
 	Grilla& grilla = escenario.getGrilla();
-	Celda* celUno = grilla.getMatriz().at(4).at(9);
+	Celda* celUno = grilla.getCelda(4,9);
 	Camino* cam = (Camino*) celUno;
 
 	if (cam->getBonus().getTipo() != "uva")
@@ -148,7 +147,7 @@ bool EscenarioTests::testCrearEscenarioCreaCorrectamente(void)
 		return false;
 	}
 
-	Celda* celDos = escenario.getGrilla().getMatriz().at(8).at(4);
+	Celda* celDos = escenario.getGrilla().getCelda(8, 4);
 	Obstaculo* obsUno = (Obstaculo*) celDos;
 
 	if (obsUno->getTipo() != "ladrillo")
@@ -156,7 +155,7 @@ bool EscenarioTests::testCrearEscenarioCreaCorrectamente(void)
 		return false;
 	}
 
-	Celda* celTres = escenario.getGrilla().getMatriz().at(2).at(7);
+	Celda* celTres = escenario.getGrilla().getCelda(2, 7);
 	Obstaculo* obsDos = (Obstaculo*) celTres;
 
 	if (obsDos->getTipo() != "yunque")
