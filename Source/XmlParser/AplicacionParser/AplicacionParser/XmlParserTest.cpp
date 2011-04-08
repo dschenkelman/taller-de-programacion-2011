@@ -136,16 +136,16 @@ bool XmlParserTest::testParseReturnsXmlRootElement(void)
 	XmlElement root = xmlParser.parse();
 
 	//testing root
-	bool successCondition = root.getName() == "ESCENARIO";
+	bool successCondition = root.getName() == "escenario";
 	successCondition = successCondition && root.getValue("nombre") == "Escenario numero 1";
 	successCondition = successCondition && root.getAttributes().length() == 1;
-	successCondition = successCondition && root.getChildren().length() == 2;
+	successCondition = successCondition && root.getChildren().length() == 3;
 
 	//testing grilla
 	XmlElement grilla = root.getChildren().at(0);
 	successCondition = successCondition && grilla.getValue("ancho") == "10";
 	successCondition = successCondition && grilla.getValue("alto") == "15";
-	successCondition = successCondition && grilla.getValue("tipoObstaculoPorDefault") == "OBS1";
+	successCondition = successCondition && grilla.getValue("tipoobstaculopordefault") == "OBS1";
 	successCondition = successCondition && grilla.getAttributes().length() == 3;
 	successCondition = successCondition && grilla.getChildren().length() == 2;
 
@@ -169,7 +169,7 @@ bool XmlParserTest::testParseReturnsXmlRootElement(void)
 	successCondition = successCondition && tiposObstaculo.getChildren().length() == 1;
 
 	XmlElement tipoObstaculo = tiposObstaculo.getChildren().at(0);
-	successCondition = successCondition && tipoObstaculo.getValue("nombreObstaculo") == "OBS1";
+	successCondition = successCondition && tipoObstaculo.getValue("nombre") == "OBS1";
 	successCondition = successCondition && tipoObstaculo.getValue("textura") == "*";
 
 	return successCondition;
@@ -194,7 +194,7 @@ bool XmlParserTest::testElementThatIsNotClosedIsAutomaticallyClosed(void)
 	XmlElement root = xmlParser.parse();
 
 	//testing root
-	bool successCondition = root.getName() == "ESCENARIO";
+	bool successCondition = root.getName() == "escenario";
 	successCondition = successCondition && root.getValue("nombre") == "Escenario numero 1";
 	successCondition = successCondition && root.getAttributes().length() == 1;
 	successCondition = successCondition && root.getChildren().length() == 2;
@@ -203,7 +203,7 @@ bool XmlParserTest::testElementThatIsNotClosedIsAutomaticallyClosed(void)
 	XmlElement grilla = root.getChildren().at(0);
 	successCondition = successCondition && grilla.getValue("ancho") == "10";
 	successCondition = successCondition && grilla.getValue("alto") == "15";
-	successCondition = successCondition && grilla.getValue("tipoObstaculoPorDefault") == "OBS1";
+	successCondition = successCondition && grilla.getValue("tipoobstaculopordefault") == "OBS1";
 	successCondition = successCondition && grilla.getAttributes().length() == 3;
 	successCondition = successCondition && grilla.getChildren().length() == 2;
 
@@ -227,7 +227,7 @@ bool XmlParserTest::testElementThatIsNotClosedIsAutomaticallyClosed(void)
 	successCondition = successCondition && tiposObstaculo.getChildren().length() == 1;
 
 	XmlElement tipoObstaculo = tiposObstaculo.getChildren().at(0);
-	successCondition = successCondition && tipoObstaculo.getValue("nombreObstaculo") == "OBS1";
+	successCondition = successCondition && tipoObstaculo.getValue("nombreobstaculo") == "OBS1";
 	successCondition = successCondition && tipoObstaculo.getValue("textura") == "*";
 
 	return successCondition;	
@@ -240,7 +240,7 @@ bool XmlParserTest::testNotOpeninigOrClosingQuotesDoesNotAddAnyAttributesToEleme
 	XmlElement root = xmlParser.parse();
 
 	//testing root
-	bool successCondition = root.getName() == "ESCENARIO";
+	bool successCondition = root.getName() == "escenario";
 	successCondition = successCondition && root.getValue("nombre") == "Escenario numero 1";
 	successCondition = successCondition && root.getAttributes().length() == 1;
 	successCondition = successCondition && root.getChildren().length() == 2;
@@ -267,7 +267,7 @@ bool XmlParserTest::testNotOpeninigOrClosingQuotesDoesNotAddAnyAttributesToEleme
 	successCondition = successCondition && tiposObstaculo.getChildren().length() == 1;
 
 	XmlElement tipoObstaculo = tiposObstaculo.getChildren().at(0);
-	successCondition = successCondition && tipoObstaculo.getValue("nombreObstaculo") == "OBS1";
+	successCondition = successCondition && tipoObstaculo.getValue("nombreobstaculo") == "OBS1";
 	successCondition = successCondition && tipoObstaculo.getValue("textura") == "*";
 
 	return successCondition;	

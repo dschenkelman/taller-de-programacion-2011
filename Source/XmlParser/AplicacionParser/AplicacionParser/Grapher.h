@@ -4,7 +4,7 @@
 class Grapher
 {
 public:
-	void draw(Escenario escenario);
+	void draw(Escenario& escenario);
 	Grapher();
 	~Grapher();
 };

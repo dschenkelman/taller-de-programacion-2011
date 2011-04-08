@@ -237,6 +237,10 @@ XmlElement XmlParser::parse()
 	while (this->getXmlLine())
 	{
 		string name = this->getLineTagName();
+		
+		//to lower
+		std::transform(name.begin(), name.end(), name.begin(), ::tolower);
+
 		if (this->isOpeningLine)
 		{
 			XmlElement currentElement = XmlElement(name, this->lineNumber, 0);
@@ -247,6 +251,10 @@ XmlElement XmlParser::parse()
 				for (size_t i = 0; i < attributes.length(); i = i + 2)
 				{
 					string key = attributes.at(i);
+					
+					//to lower
+					std::transform(key.begin(), key.end(), key.begin(), ::tolower);
+					
 					string value = attributes.at(i+1);
 				
 					//remove ""

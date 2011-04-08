@@ -6,6 +6,9 @@
     </CAMINO>
    </GRILLA>
   <TIPOSOBSTACULOS>
-    <TIPOOBSTACULO nombreObstaculo="OBS1" textura="*"/>
+    <TIPOOBSTACULO nombre="OBS1" textura="*"/>
   </TIPOSOBSTACULOS>
+  <TIPOSBONUS>
+    <TIPOBONUS nombre="Frutillita" textura="F"/>
+  <TIPOSBONUS>
 </ESCENARIO>

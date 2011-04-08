@@ -53,7 +53,7 @@ List<TipoBonus> Escenario::obtenerTiposBonus(List<XmlElement>& listaElementos)
 
 	for(size_t i = 0; i < listaElementos.length(); i++)
 	{
-		if(listaElementos.at(i).getName() == "tiposBonus")
+		if(listaElementos.at(i).getName() == "tiposbonus")
 		{
 			List<XmlElement> listaBonusXml = listaElementos.at(i).getChildren();
 			
@@ -100,7 +100,7 @@ List<TipoObstaculo> Escenario::obtenerTiposObstaculos(List<XmlElement>& listaEle
 
 	for(size_t i = 0; i < listaElementos.length(); i++)
 	{
-		if(listaElementos.at(i).getName() == "tiposObstaculos")
+		if(listaElementos.at(i).getName() == "tiposobstaculos")
 		{
 			List<XmlElement> listaObstaculosXml = listaElementos.at(i).getChildren();
 			

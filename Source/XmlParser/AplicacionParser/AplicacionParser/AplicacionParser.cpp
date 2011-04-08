@@ -20,6 +20,28 @@
 #include <iostream>
 using namespace std;
 
+//int main(int argc, char* argv[])
+//{
+//	if (argc != 2)
+//	{
+//		cout<<"Debe proveer el nombre del archivo a leer como argumento"<<endl;
+//	}
+//	
+//	string fileName = argv[1];
+//
+//	XmlParser parser;
+//	parser.openFile(fileName);
+//	XmlElement root = parser.parse();
+//	Escenario escenario(root);
+//	Grapher grapher;
+//	grapher.draw(escenario);
+//
+//	char aux;
+//	cin >> aux;
+//
+//	return 0;
+//}
+
 int _tmain(int argc, _TCHAR* argv[])
 {
 	cout<<"Test de List<T>"<<endl;

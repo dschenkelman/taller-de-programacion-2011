@@ -64,9 +64,9 @@ Grilla::Grilla(XmlElement& e, List<TipoObstaculo>& lo, List<TipoBonus>& lb) : ma
 		}
 	}
 
-	if (e.hasAttribute("tipoObstaculoPorDefecto"))
+	if (e.hasAttribute("tipoobstaculopordefecto"))
 	{
-		tipoObstaculoPorDefecto = e.getValue("tipoObstaculoPorDefecto");
+		tipoObstaculoPorDefecto = e.getValue("tipoobstaculopordefecto");
 	}
 
 	else
