@@ -101,8 +101,11 @@ int _tmain(int argc, _TCHAR* argv[])
 	GrapherTests grapherTest;
 	grapherTest.run();
 
-	char aux;
-	cin >> aux;
+	/*char aux;
+	cin >> aux;*/
+	
+	printf( "Press ENTER to continue... " );
+	char c = getchar();
 
 	return 0;
 }
