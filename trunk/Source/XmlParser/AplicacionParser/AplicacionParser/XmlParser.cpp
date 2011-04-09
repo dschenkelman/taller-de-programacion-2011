@@ -62,7 +62,6 @@ bool XmlParser::preParseFile(std::string filename){
 	std::string lineToRead;
 	std::string workLine;
 	std::string workAux;
-	std::string fileOrig;
 	std::ifstream xmlAuxFile;
 	std::ifstream xmlAux;
 
@@ -75,12 +74,11 @@ bool XmlParser::preParseFile(std::string filename){
 			return false;
 	}
 	while (getline( xmlAuxFile, lineToRead )){
-		fileOrig+=lineToRead;
 		workLine+=lineToRead;
 	}
 
 	//Dejo el archivo original en un string para futuras referencias en el conteo de líneas y cierro.
-	this->fileOrig=fileOrig;
+	this->fileOrig=workLine;
 	xmlAuxFile.close();
 
 	workLine.erase(std::remove(workLine.begin(), workLine.end(), '\n'), workLine.end());
@@ -97,29 +95,20 @@ bool XmlParser::preParseFile(std::string filename){
 }
 
 bool XmlParser::removeBlankLines(void){
-
 	ifstream initialFile(AUX, ios::in|ios::binary);	
 	ofstream outputFile(PARSING, ios::out|ios::binary);	
 	string lineToRead;
-	
-	if(initialFile.is_open() && outputFile.is_open())	
-	{		
-		while (getline( initialFile, lineToRead )){
-			trim(lineToRead,'\n');
-			trim(lineToRead,' ');
-			if (lineToRead.length() > 0){
-				outputFile<<lineToRead<<"\n";
-			}
-		}
 
-	}
-	
-	else if(!outputFile.is_open())	
-	{		
+	if ( !outputFile.is_open() || !initialFile.is_open() ) {
 		return false;
 	}
-	else if(!initialFile.is_open())	{
-		return false;	
+
+	while (getline( initialFile, lineToRead )){
+		trim(lineToRead,'\n');
+		trim(lineToRead,' ');
+		if (lineToRead.length() > 0){
+			outputFile<<lineToRead<<"\n";
+		}
 	}
 
 	initialFile.close();	
