@@ -5,6 +5,8 @@
 #include "List.h"
 #include "Logger.h"
 #include "XmlElement.h"
+#define AUX "auxiliar.xml"
+#define PARSING "texto.xml"
 
 #pragma once
 
@@ -33,6 +35,7 @@ private:
 	std::string & replaceAll(std::string& context, const std::string& from,const std::string& to);
 	std::string validTags[9];
 	bool preParseFile(std::string filename);
+	bool removeBlankLines(void);
 public:
 
 	XmlParser(void);

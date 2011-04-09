@@ -8,6 +8,7 @@
 #include <iostream>
 #include <sstream>
 #include <algorithm>
+#include <fstream>
 
 using namespace std;
 
@@ -41,17 +42,17 @@ XmlParser::~XmlParser(void)
 void XmlParser::openFile(std::string filename){
 
 	
-	if (!this->xmlFile.is_open()){
-		this->xmlFile.open(filename.c_str(), ios::in | ios::binary);
-		this->lineNumber=1;
-	}
-
-	//if (!this->xmlFile.is_open() && this->preParseFile(filename)){
-	//	this->xmlFile.open("auxiliar.xml", ios::in | ios::binary);
+	//if (!this->xmlFile.is_open()){
+	//	this->xmlFile.open(filename.c_str(), ios::in | ios::binary);
 	//	this->lineNumber=1;
 	//}
 
-	//this->parsingFileName=filename;
+	if (!this->xmlFile.is_open() && this->preParseFile(filename)){
+		this->xmlFile.open(PARSING, ios::in | ios::binary);
+		this->lineNumber=1;
+	}
+	remove(AUX);
+	this->parsingFileName=filename;
 
 	
 }
@@ -88,17 +89,49 @@ bool XmlParser::preParseFile(std::string filename){
 	replaceAll(workLine, ">", ">\n");
 	
 	ofstream file;
-	file.open("auxiliar.xml", ios::binary|ios::out);
+	file.open(AUX, ios::binary|ios::out);
 	file<<workLine;
 	file.close();
+	return removeBlankLines();
+
+}
+
+bool XmlParser::removeBlankLines(void){
+
+	ifstream initialFile(AUX, ios::in|ios::binary);	
+	ofstream outputFile(PARSING, ios::out|ios::binary);	
+	string lineToRead;
 	
+	if(initialFile.is_open() && outputFile.is_open())	
+	{		
+		while (getline( initialFile, lineToRead )){
+			trim(lineToRead,'\n');
+			trim(lineToRead,' ');
+			if (lineToRead.length() > 0){
+				outputFile<<lineToRead<<"\n";
+			}
+		}
+
+	}
+	
+	else if(!outputFile.is_open())	
+	{		
+		return false;
+	}
+	else if(!initialFile.is_open())	{
+		return false;	
+	}
+
+	initialFile.close();	
+	outputFile.close();	
 	return true;
+
 }
 
 void XmlParser::closeFile(void){
 	if (this->xmlFile.is_open()){
 		this->xmlFile.close();
-		remove( "auxiliar.xml" );
+		remove( AUX );
 	}
 	this->lineNumber=0;
 
@@ -120,10 +153,6 @@ bool  XmlParser::getXmlLine(void){
 
 	if ( (resp= this->xmlFile.is_open()) && getline( this->xmlFile, this->lineRead ))
 	{
-		//Si es una linea en blanco (producto del parseo) leo otra
-		if (this->lineRead.length() <= 0)
-			getline( this->xmlFile, this->lineRead );
-
 		this->lineNumber++;
 		this->trim(this->lineRead, ' ');
 		strMine=this->lineRead;
@@ -426,7 +455,7 @@ void XmlParser::parseOpeningLine(string line)
 
 void XmlParser::parseClosingLine(std::string line)
 {
-	line.erase(line.find(13), 1);
+	trim(line,'\n');
 	size_t len = line.length();
 	size_t nameInitialPos = line.find_first_of("/");
 	if (line.at(len - 1) == '>')
