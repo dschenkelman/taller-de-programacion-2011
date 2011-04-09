@@ -38,6 +38,8 @@ XmlParser::~XmlParser(void)
 	if (this->xmlFile.is_open())
 		this->xmlFile.close();
 	this->log->closeLog();
+	remove(AUX);
+	remove(PARSING);
 }
 void XmlParser::openFile(std::string filename){
 
@@ -75,10 +77,14 @@ bool XmlParser::preParseFile(std::string filename){
 	}
 	while (getline( xmlAuxFile, lineToRead )){
 		workLine+=lineToRead;
+		lineToRead.erase(std::remove(lineToRead.begin(), lineToRead.end(), '\n'), lineToRead.end());
+	    lineToRead.erase(std::remove(lineToRead.begin(), lineToRead.end(), '\r'), lineToRead.end());
+		lineToRead.append("&");
+		this->fileOrig+=lineToRead;
+
 	}
 
-	//Dejo el archivo original en un string para futuras referencias en el conteo de líneas y cierro.
-	this->fileOrig=workLine;
+	this->fileOrig.append("\n");
 	xmlAuxFile.close();
 
 	workLine.erase(std::remove(workLine.begin(), workLine.end(), '\n'), workLine.end());
@@ -126,6 +132,26 @@ void XmlParser::closeFile(void){
 
 }
 
+
+//Dada un string a buscar, devuelve en que linea esta del archivo original.
+long XmlParser::getOrigLineNumber(string search){
+
+	int longitud=search.find(' ');
+	int len=(longitud > 10)? 10 : longitud;
+	string pattern=search.substr(0,len );
+	size_t pos=this->fileOrig.find(pattern);
+	long saltosDeLinea=1;
+	if (pos != string::npos){
+		for (int i=0; i < pos; i++){
+			if (this->fileOrig[i] == '&')
+				saltosDeLinea++;
+		}
+	}
+
+	return saltosDeLinea;
+}
+
+
 //Si el archivo no esta abierto o se acabaron las lineas, devuelve false.
 
 bool  XmlParser::getXmlLine(void){
@@ -142,7 +168,8 @@ bool  XmlParser::getXmlLine(void){
 
 	if ( (resp= this->xmlFile.is_open()) && getline( this->xmlFile, this->lineRead ))
 	{
-		this->lineNumber++;
+		//this->lineNumber++;
+		this->lineNumber=this->getOrigLineNumber(this->lineRead);
 		this->trim(this->lineRead, ' ');
 		strMine=this->lineRead;
 	
@@ -169,6 +196,7 @@ bool  XmlParser::getXmlLine(void){
 		}
 
 		if ( (foundLT == string::npos)){
+			this->lineNumber=this->getOrigLineNumber(strMine.substr(1,strMine.length()));
 			logMessage="Falta caracter < en linea: ";
 			out << logMessage;
 			out << this->lineNumber;

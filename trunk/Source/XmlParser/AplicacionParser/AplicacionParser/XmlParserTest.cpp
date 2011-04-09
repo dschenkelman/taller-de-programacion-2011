@@ -30,8 +30,8 @@ void XmlParserTest::printLeaks(int leaks)
 
 void XmlParserTest::run(void) {
 	
+	printResult("testLineNumberEqualsOne",testLineNumberEqualsOne());
 	printResult("testLineNumberEqualsTwo",testLineNumberEqualsTwo());
-	printResult("testLineNumberEqualsThree",testLineNumberEqualsThree());
 	printResult("testTagNameNotNull",testTagNameNotNull());
 	printResult("testTagAttributeListNotNULL",testTagAttributeListNotNULL());
 	printResult("testFileNotExists",testFileNotExists());
@@ -48,23 +48,23 @@ void XmlParserTest::run(void) {
 	printLeaks(leaks);
 }
 
+bool XmlParserTest::testLineNumberEqualsOne(void){
+
+	XmlParser xmlParser;
+	xmlParser.openFile("Files/escenario.xml");
+	xmlParser.getXmlLine();
+
+	return (xmlParser.getLineNumber() == 1);
+}
+
 bool XmlParserTest::testLineNumberEqualsTwo(void){
 
 	XmlParser xmlParser;
 	xmlParser.openFile("Files/escenario.xml");
 	xmlParser.getXmlLine();
+	xmlParser.getXmlLine();
 
 	return (xmlParser.getLineNumber() == 2);
-}
-
-bool XmlParserTest::testLineNumberEqualsThree(void){
-
-	XmlParser xmlParser;
-	xmlParser.openFile("Files/escenario.xml");
-	xmlParser.getXmlLine();
-	xmlParser.getXmlLine();
-
-	return (xmlParser.getLineNumber() == 3);
 }
 
 bool XmlParserTest::testTagNameNotNull(void){
