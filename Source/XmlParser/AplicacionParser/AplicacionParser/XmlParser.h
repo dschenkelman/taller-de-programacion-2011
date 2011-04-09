@@ -53,4 +53,5 @@ public:
 	bool lineHasErrors(void);
 	bool getIsOpeningLine(void) const;
 	XmlElement parse(void);
+	long getOrigLineNumber(std::string search);
 };
