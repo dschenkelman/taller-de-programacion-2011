@@ -1,5 +1,8 @@
 #include "StdAfx.h"
 #include "Bonus.h"
+#include "Logger.h"
+#include <sstream>
+using namespace std;
 
 Bonus::Bonus(void) : tieneError(false)
 {
@@ -26,6 +29,9 @@ bool Bonus::validateAttributes(XmlElement& e)
 		XmlAttribute att = attributes[i];
 		if (!this->validAttributes.contains(att.getKey()))
 		{
+			stringstream msg;
+			msg << "Clave de atributo: " << att.getKey() << " no es válida para el Bonus. Linea: " << e.getStartLine();
+			Logger::getInstance()->logError(msg.str());
 			return false;
 		}
 	}
