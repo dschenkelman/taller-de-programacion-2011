@@ -28,6 +28,7 @@ void CaminoTests::run(void)
 	printResult("testAtributoColumnaCorrectoGuardaCorrectamente",testAtributoColumnaCorrectoGuardaCorrectamente());
 	printResult("testCaminoConBonusCreaCorrectamente", testCaminoConBonusCreaCorrectamente());
 	printResult("testCaminoConDosBonusTiraExcepcion", testCaminoConDosBonusTiraExcepcion());
+	printResult("testNonValidAttributeMakesHasErrorTrue", testNonValidAttributeMakesHasErrorTrue());
 
 	int leaks = _CrtDumpMemoryLeaks();
 	printLeaks(leaks);
@@ -182,4 +183,24 @@ bool CaminoTests::testCaminoConDosBonusTiraExcepcion()
 	Logger::getInstance()->closeLog();
 
 	return (tamanioAntes<tamanioDespues)?true:false;
+}
+
+bool CaminoTests::testNonValidAttributeMakesHasErrorTrue(void)
+{
+	XmlElement element("Camino", 1, 2);
+	XmlAttribute att1("fila", "1");
+	XmlAttribute att2("columna", "1");
+	XmlAttribute att3("invalido", "invalido");
+
+	element.addAttribute(att1);
+	element.addAttribute(att2);
+	element.addAttribute(att3);
+
+	Camino camino(element);
+
+	bool successCondition = camino.hasError();
+
+	Logger::closeLog();
+
+	return successCondition;
 }

@@ -16,4 +16,5 @@ public:
 	bool testAtributoColumnaCorrectoGuardaCorrectamente();
 	bool testCaminoConBonusCreaCorrectamente();
 	bool testCaminoConDosBonusTiraExcepcion();
+	bool testNonValidAttributeMakesHasErrorTrue(void);
 };

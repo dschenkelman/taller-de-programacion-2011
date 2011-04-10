@@ -3,12 +3,18 @@
 #include "List.h"
 #include <sstream>
 
-Camino::Camino(int f, int c) : Celda(f, c), tieneBonus(false)
+using namespace std;
+
+Camino::Camino(int f, int c) : Celda(f, c), tieneBonus(false), tieneError(false)
 {
+	this->populateValidAttributes();
 }
 
-Camino::Camino(XmlElement& e)
+Camino::Camino(XmlElement& e) : tieneBonus(false), tieneError(false)
 {
+	this->populateValidAttributes();
+	this->tieneError = !this->validateAttributes(e);
+
 	if (e.hasAttribute("fila"))
 	{
 		std::string filaString = e.getValue("fila"); 
@@ -122,4 +128,35 @@ Celda* Camino::copiar(void)
 	camino->tieneBonus = this->tieneBonus;
 	camino->bonus = this->bonus;
 	return camino;
+}
+
+bool Camino::hasError(void)
+{
+	return this->tieneError;
+}
+
+bool Camino::validateAttributes(XmlElement& e)
+{
+	List<XmlAttribute> attributes = e.getAttributes();
+	size_t len = attributes.length();
+
+	for (size_t i = 0; i < len; i++)
+	{
+		XmlAttribute att = attributes[i];
+		if (!this->validAttributes.contains(att.getKey()))
+		{
+			stringstream msg;
+			msg << "Clave de atributo: " << att.getKey() << " no es válida para el Camino. Linea: " << e.getStartLine();
+			Logger::getInstance()->logError(msg.str());
+			return false;
+		}
+	}
+
+	return true;
+}
+
+void Camino::populateValidAttributes(void)
+{
+	this->validAttributes.add("fila");
+	this->validAttributes.add("columna");
 }
