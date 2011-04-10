@@ -26,6 +26,7 @@ void ObstaculoTests::run(void)
 	printResult("testAtributoColumnaConValorNegativoLoggeaError", testAtributoColumnaConValorNegativoLoggeaError());
 	printResult("testAtributoFilaCorrectoGuardaCorrectamente", testAtributoFilaCorrectoGuardaCorrectamente());
 	printResult("testAtributoColumnaCorrectoGuardaCorrectamente",testAtributoColumnaCorrectoGuardaCorrectamente());
+	printResult("testNonValidAttributeMakesHasErrorTrue", testNonValidAttributeMakesHasErrorTrue());
 
 	int leaks = _CrtDumpMemoryLeaks();
 	printLeaks(leaks);
@@ -112,4 +113,26 @@ bool ObstaculoTests::testAtributoColumnaCorrectoGuardaCorrectamente()
 	}
 
 	return true;
+}
+
+bool ObstaculoTests::testNonValidAttributeMakesHasErrorTrue(void)
+{
+	XmlElement element("Obstaculo", 1, 2);
+	XmlAttribute att1("fila", "1");
+	XmlAttribute att2("columna", "1");
+	XmlAttribute att3("tipo", "Piedra");
+	XmlAttribute att4("invalido", "invalido");
+
+	element.addAttribute(att1);
+	element.addAttribute(att2);
+	element.addAttribute(att3);
+	element.addAttribute(att4);
+
+	Obstaculo obstaculo(element);
+
+	bool successCondition = obstaculo.hasError();
+
+	Logger::closeLog();
+
+	return successCondition;
 }

@@ -3,13 +3,17 @@
 #include "Logger.h"
 #include <sstream>
 
-Obstaculo::Obstaculo(std::string& t, int f, int c) : Celda(f, c)
+using namespace std;
+
+Obstaculo::Obstaculo(std::string& t, int f, int c) : Celda(f, c), tipo(t), tieneError(false)
 {
-	this->tipo = t;
+	this->populateValidAttributes();
 }
 
-Obstaculo::Obstaculo(XmlElement& e)
+Obstaculo::Obstaculo(XmlElement& e) : tieneError(false)
 {
+	this->populateValidAttributes();
+	this->tieneError = !this->validateAttributes(e);
 	if (e.hasAttribute("tipo"))
 	{
 		tipo = e.getValue("tipo");
@@ -90,4 +94,36 @@ Celda* Obstaculo::copiar(void)
 	obstaculo->ocupada = this->ocupada;
 	obstaculo->tipoObstaculo = this->tipoObstaculo;
 	return obstaculo;
+}
+
+bool Obstaculo::validateAttributes(XmlElement& e)
+{
+	List<XmlAttribute> attributes = e.getAttributes();
+	size_t len = attributes.length();
+
+	for (size_t i = 0; i < len; i++)
+	{
+		XmlAttribute att = attributes[i];
+		if (!this->validAttributes.contains(att.getKey()))
+		{
+			stringstream msg;
+			msg << "Clave de atributo: " << att.getKey() << " no es válida para el Obstaculo. Linea: " << e.getStartLine();
+			Logger::getInstance()->logError(msg.str());
+			return false;
+		}
+	}
+
+	return true;
+}
+
+void Obstaculo::populateValidAttributes(void)
+{
+	this->validAttributes.add("fila");
+	this->validAttributes.add("columna");
+	this->validAttributes.add("tipo");
+}
+
+bool Obstaculo::hasError(void)
+{
+	return this->tieneError;
 }

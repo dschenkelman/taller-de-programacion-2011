@@ -13,4 +13,5 @@ public:
 	bool testAtributoColumnaConValorNegativoLoggeaError();
 	bool testAtributoFilaCorrectoGuardaCorrectamente();
 	bool testAtributoColumnaCorrectoGuardaCorrectamente();
+	bool testNonValidAttributeMakesHasErrorTrue(void);
 };
