@@ -3,9 +3,12 @@
 #include "Logger.h"
 #include <sstream>
 
-TipoObstaculo::TipoObstaculo(XmlElement& e)
+using namespace std;
+
+TipoObstaculo::TipoObstaculo(XmlElement& e) : tieneError(false), utilizado(false)
 {
-	utilizado = false;
+	this->populateValidAttributes();
+	this->tieneError = !this->validateAttributes(e);
 
 	if(e.hasAttribute("nombre"))
 	{
@@ -27,16 +30,12 @@ TipoObstaculo::TipoObstaculo(XmlElement& e)
 	}
 }
 
-TipoObstaculo::TipoObstaculo(void)
+TipoObstaculo::TipoObstaculo(void) : tieneError(false), utilizado(false)
 {
-	utilizado = false;
 }
 
-TipoObstaculo::TipoObstaculo(std::string& n, char t)
+TipoObstaculo::TipoObstaculo(std::string& n, char t) : tieneError(false), utilizado(false), nombre(n), textura(t)
 {
-	nombre = n;
-	textura = t;
-	utilizado = false;
 }
 
 TipoObstaculo::~TipoObstaculo(void)
@@ -61,4 +60,35 @@ void TipoObstaculo::utilizarTipo()
 bool TipoObstaculo::esUtilizado()
 {
 	return utilizado;
+}
+
+bool TipoObstaculo::hasError(void)
+{
+	return this->tieneError;
+}
+
+bool TipoObstaculo::validateAttributes(XmlElement& e)
+{
+	List<XmlAttribute> attributes = e.getAttributes();
+	size_t len = attributes.length();
+
+	for (size_t i = 0; i < len; i++)
+	{
+		XmlAttribute att = attributes[i];
+		if (!this->validAttributes.contains(att.getKey()))
+		{
+			stringstream msg;
+			msg << "Clave de atributo: " << att.getKey() << " no es válida para el TipoObstaculo. Linea: " << e.getStartLine();
+			Logger::getInstance()->logError(msg.str());
+			return false;
+		}
+	}
+
+	return true;
+}
+
+void TipoObstaculo::populateValidAttributes(void)
+{
+	this->validAttributes.add("nombre");
+	this->validAttributes.add("textura");
 }

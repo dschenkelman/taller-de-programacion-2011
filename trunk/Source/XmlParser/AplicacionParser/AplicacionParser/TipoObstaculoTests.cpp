@@ -27,6 +27,7 @@ void TipoObstaculoTests::run(void)
 {
 	printResult("testAtributoTexturaDeMasDeUnCaracterLoggeaWarning", testAtributoTexturaDeMasDeUnCaracterLoggeaWarning());
 	printResult("testAtributoTexturaCorrectoGuardaCorrectamente", testAtributoTexturaCorrectoGuardaCorrectamente());
+	printResult("testNonValidAttributeMakesHasErrorTrue", testNonValidAttributeMakesHasErrorTrue());
 
 	int leaks = _CrtDumpMemoryLeaks();
 	printLeaks(leaks);
@@ -74,4 +75,24 @@ bool TipoObstaculoTests::testAtributoTexturaCorrectoGuardaCorrectamente()
 	}
 
 	return true;
+}
+
+bool TipoObstaculoTests::testNonValidAttributeMakesHasErrorTrue(void)
+{
+	XmlElement element("TipoObstaculo", 1, 2);
+	XmlAttribute att1("nombre", "Piedra");
+	XmlAttribute att2("textura", "P");
+	XmlAttribute att3("invalido", "invalido");
+
+	element.addAttribute(att1);
+	element.addAttribute(att2);
+	element.addAttribute(att3);
+
+	TipoObstaculo tipoObstaculo(element);
+
+	bool successCondition = tipoObstaculo.hasError();
+
+	Logger::closeLog();
+
+	return successCondition;
 }

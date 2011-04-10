@@ -41,8 +41,8 @@ Logger* Logger::getInstance(void) {
 
 
 void Logger::closeLog(void) {
-	instance->~Logger();
 	delete instance;
+	instance = NULL;
 	loggerCreated = false;
 }
 

@@ -11,4 +11,5 @@ public:
 	void printResult(std::string testName, bool result);
 	bool testAtributoTexturaDeMasDeUnCaracterLoggeaWarning();
 	bool testAtributoTexturaCorrectoGuardaCorrectamente();
+	bool testNonValidAttributeMakesHasErrorTrue(void);
 };
