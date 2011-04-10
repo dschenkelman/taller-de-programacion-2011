@@ -24,6 +24,7 @@ void BonusTests::printLeaks(int leaks)
 
 void BonusTests::run(void)
 {
+	printResult("testNonValidAttributeMakesHasErrorTrue", testNonValidAttributeMakesHasErrorTrue());
 	int leaks = _CrtDumpMemoryLeaks();
 	printLeaks(leaks);
 }
@@ -33,9 +34,9 @@ void BonusTests::printResult(std::string testName, bool result)
 	std::cout << (testName.append(result ? ": Passed\n" : ": Failed!!!\n"));
 }
 
-bool testNonValidAttributeMakesHasErrorTrue(void)
+bool BonusTests::testNonValidAttributeMakesHasErrorTrue(void)
 {
-	XmlElement element;
+	XmlElement element("Bonus", 1, 2);
 	XmlAttribute att1("tipo", "Pizza");
 	XmlAttribute att2("invalido", "invalido");
 
