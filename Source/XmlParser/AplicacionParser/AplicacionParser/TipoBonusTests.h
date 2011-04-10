@@ -10,5 +10,6 @@ public:
 	void run(void);
 	void printResult(std::string testName, bool result);
 	bool testAtributoTexturaDeMasDeUnCaracterLoggeaWarning();
+	bool testNonValidAttributeMakesHasErrorTrue(void);
 	bool testAtributoTexturaCorrectoGuardaCorrectamente();
 };
