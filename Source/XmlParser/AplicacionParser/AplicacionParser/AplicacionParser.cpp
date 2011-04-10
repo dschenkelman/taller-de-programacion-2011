@@ -44,9 +44,12 @@ int execute(int argc, char* argv[])
 	XmlElement root = parser.parse();
 	parser.closeFile();
 	Escenario escenario(root);
-	Grapher grapher;
-	grapher.draw(escenario);
-
+	if (!escenario.hasError())
+	{
+		Grapher grapher;
+		grapher.draw(escenario);
+	}
+	
 	return 0;
 }
 

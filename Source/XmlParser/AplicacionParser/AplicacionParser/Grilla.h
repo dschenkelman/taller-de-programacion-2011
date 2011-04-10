@@ -15,6 +15,7 @@ const int defColumna = 5;
 
 class Grilla
 {
+	bool tieneError;
 	bool matrizGenerada;
 	int ancho;
 	int alto;
@@ -39,5 +40,6 @@ public:
 	int getAlto();
 	std::string getTipoObstaculoPorDefecto();
 	Celda* getCelda(int fila, int columna);
+	bool hasError(void);
 	~Grilla(void);
 };
