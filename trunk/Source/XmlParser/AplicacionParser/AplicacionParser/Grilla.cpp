@@ -137,7 +137,7 @@ void Grilla::generarMatriz(List<XmlElement>& listaElementos)
 		for (size_t j = 0; j < this->ancho; j++)
 		{
 			//lleno fila
-			this->matriz.at(i).add(new Celda(0,0));
+			this->matriz.at(i).add(new Camino(0,0));
 		}	
 	}
 

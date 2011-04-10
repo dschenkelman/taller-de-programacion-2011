@@ -46,11 +46,7 @@ void Grapher::draw(Escenario& escenario)
 				celIzq = grilla.getCelda(i, posIzq);
 
 
-			if(celda->esOcupada()){
-				std::cout << celda->obtenerRepresentacion(celSup, celInf, celDer, celIzq);
-			}else{
-				std::cout << "?";
-			}
+			std::cout << celda->obtenerRepresentacion(celSup, celInf, celDer, celIzq);
 
 			//delete celSup, celInf, celDer, celIzq;
 		}
