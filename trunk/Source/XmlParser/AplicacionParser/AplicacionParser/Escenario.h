@@ -22,5 +22,6 @@ public:
 	List<TipoObstaculo> getTiposObstaculos(void);
 	Grilla& getGrilla(void);
 	std::string getNombre(void);
+	bool hasError(void);
 	~Escenario(void);
 };

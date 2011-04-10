@@ -155,3 +155,8 @@ bool Escenario::verificarTexturaEnLista(List<char>& listaCaracteres, char t)
 
 	return false;
 }
+
+bool Escenario::hasError(void)
+{
+	return this->grilla.hasError();
+}

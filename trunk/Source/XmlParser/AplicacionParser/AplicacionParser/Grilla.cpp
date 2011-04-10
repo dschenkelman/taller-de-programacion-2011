@@ -4,7 +4,7 @@
 #include "Obstaculo.h"
 #include <exception>
 
-Grilla::Grilla(int an, int al, std::string& topd) : matrizGenerada(false)
+Grilla::Grilla(int an, int al, std::string& topd) : matrizGenerada(false), tieneError(false)
 {
 	if (an < 0 || al < 0)
 	{
@@ -23,7 +23,7 @@ Grilla::Grilla(int an, int al, std::string& topd) : matrizGenerada(false)
 	tipoObstaculoPorDefecto = topd;
 }
 
-Grilla::Grilla(XmlElement& e, List<TipoObstaculo>& lo, List<TipoBonus>& lb) : matrizGenerada(false)
+Grilla::Grilla(XmlElement& e, List<TipoObstaculo>& lo, List<TipoBonus>& lb) : matrizGenerada(false), tieneError(false)
 {
 	tiposObstaculos = lo;
 	tiposBonus = lb;
@@ -83,7 +83,7 @@ Grilla::Grilla(XmlElement& e, List<TipoObstaculo>& lo, List<TipoBonus>& lb) : ma
 	verificarTiposUtilizados();
 }
 
-Grilla::Grilla(void) : matrizGenerada(false)
+Grilla::Grilla(void) : matrizGenerada(false), tieneError(false)
 {
 }
 
@@ -158,7 +158,8 @@ void Grilla::generarMatriz(List<XmlElement>& listaElementos)
 				if(!bonusValido)
 				{
 					//Logger bonus inexistente
-					Logger::getInstance()->logError("En Grilla, bonus inexistente; se ignora el camino. \0");
+					Logger::getInstance()->logError("En Grilla, bonus inexistente; no se puede imprimir. \0");
+					this->tieneError = true;
 					delete cam;
 					continue;
 				}
@@ -190,7 +191,8 @@ void Grilla::generarMatriz(List<XmlElement>& listaElementos)
 			if(!obstaculoValido)
 			{
 				//Logger obstaculo inexistente
-				Logger::getInstance()->logError("En Grilla, obstaculo inexistente; se ignora el obstaculo. \0");
+				Logger::getInstance()->logError("En Grilla, obstaculo inexistente; no se puede imprimir. \0");
+				this->tieneError = true;
 				delete obs;
 				continue;
 			}
@@ -209,7 +211,7 @@ void Grilla::generarMatriz(List<XmlElement>& listaElementos)
 		else
 		{
 			//Logger (tag con nombre incorrecto) y sigue
-			Logger::getInstance()->logError("En Grilla, se ignora tag desconocido '"+listaElementos.at(i).getName()+"'.");
+			Logger::getInstance()->logWarning("En Grilla, se ignora tag desconocido '"+listaElementos.at(i).getName()+"'.");
 		}
 	}
 }
@@ -327,7 +329,7 @@ void Grilla::verificarTiposUtilizados()
 Grilla::Grilla(const Grilla& other) : alto(other.alto), ancho(other.ancho),
  tipoObstaculoPorDefecto(other.tipoObstaculoPorDefecto), 
  tiposObstaculos(other.tiposObstaculos), 
- tiposBonus(other.tiposBonus)
+ tiposBonus(other.tiposBonus), tieneError(other.tieneError)
 {
 	if (other.matrizGenerada)
 	{
@@ -391,4 +393,9 @@ Grilla& Grilla::operator=(const Grilla& other)
 	}
 
 	return *this;
+}
+
+bool Grilla::hasError(void)
+{
+	return this->tieneError;
 }
