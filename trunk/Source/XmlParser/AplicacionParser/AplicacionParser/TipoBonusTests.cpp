@@ -26,6 +26,7 @@ void TipoBonusTests::run(void)
 {
 	printResult("testAtributoTexturaDeMasDeUnCaracterLoggeaWarning", testAtributoTexturaDeMasDeUnCaracterLoggeaWarning());
 	printResult("testAtributoTexturaCorrectoGuardaCorrectamente", testAtributoTexturaCorrectoGuardaCorrectamente());
+	printResult("testNonValidAttributeMakesHasErrorTrue", testNonValidAttributeMakesHasErrorTrue());
 	int leaks = _CrtDumpMemoryLeaks();
 	printLeaks(leaks);
 }
@@ -72,4 +73,24 @@ bool TipoBonusTests::testAtributoTexturaCorrectoGuardaCorrectamente()
 	}
 
 	return true;
+}
+
+bool TipoBonusTests::testNonValidAttributeMakesHasErrorTrue(void)
+{
+	XmlElement element("TipoBonus", 1, 2);
+	XmlAttribute att1("nombre", "Pizza");
+	XmlAttribute att2("textura", "Z");
+	XmlAttribute att3("invalido", "invalido");
+
+	element.addAttribute(att1);
+	element.addAttribute(att2);
+	element.addAttribute(att3);
+
+	TipoBonus tipoBonus(element);
+
+	bool successCondition = tipoBonus.hasError();
+
+	Logger::closeLog();
+
+	return successCondition;
 }
