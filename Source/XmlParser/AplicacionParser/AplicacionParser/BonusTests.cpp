@@ -3,6 +3,7 @@
 #include <iostream>
 #include "XmlElement.h"
 #include "Bonus.h"
+#include "Logger.h"
 //useful to detect memory leaks
 #define _CRTDBG_MAP_ALLOC
 #include <stdlib.h>
@@ -46,6 +47,8 @@ bool BonusTests::testNonValidAttributeMakesHasErrorTrue(void)
 	Bonus bonus(element);
 
 	bool successCondition = bonus.hasError();
+
+	Logger::closeLog();
 
 	return successCondition;
 }
