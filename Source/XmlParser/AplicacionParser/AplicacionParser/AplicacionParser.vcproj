@@ -183,6 +183,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\BonusTests.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Camino.cpp"
 				>
 			</File>
@@ -326,6 +330,10 @@
 			>
 			<File
 				RelativePath=".\Bonus.h"
+				>
+			</File>
+			<File
+				RelativePath=".\BonusTests.h"
 				>
 			</File>
 			<File

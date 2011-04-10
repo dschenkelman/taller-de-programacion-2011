@@ -50,6 +50,8 @@ void ListTests::run()
 	printResult("testCopyConstructorWorksCorrectly", testCopyConstructorWorksCorrectly());
 	printResult("testAssignmentOperatorWorksCorrectly", testAssignmentOperatorWorksCorrectly());
 	printResult("testClearRemovesAllElementsFromList", testClearRemovesAllElementsFromList());
+	printResult("testContainsReturnsTrueWhenElementIsInList", testContainsReturnsTrueWhenElementIsInList());
+	printResult("testContainsReturnsFalseWhenElementIsInNotList", testContainsReturnsFalseWhenElementIsInNotList());
 
 	//dump memory leaks to VS Output Window
 	int leaks = _CrtDumpMemoryLeaks();
@@ -443,3 +445,33 @@ bool ListTests::testClearRemovesAllElementsFromList(void)
 
 	return successCondition;
 }
+
+bool ListTests::testContainsReturnsTrueWhenElementIsInList(void)
+{
+	List<int> list;
+	
+	list.add(5);
+	list.add(6);
+	list.add(7);
+
+	bool successCondition1 = list.contains(6);
+	bool successCondition2 = list.contains(7);
+	bool successCondition3 = list.contains(5);
+
+	return successCondition1 && successCondition2 && successCondition3;
+}
+
+bool ListTests::testContainsReturnsFalseWhenElementIsInNotList(void)
+{
+	List<int> list;
+	
+	list.add(5);
+	list.add(6);
+	list.add(7);
+
+	bool successCondition1 = !list.contains(0);
+	bool successCondition2 = !list.contains(10);
+
+	return successCondition1 && successCondition2;
+}
+

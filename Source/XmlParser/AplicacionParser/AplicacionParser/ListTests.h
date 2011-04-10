@@ -32,4 +32,6 @@ public:
 	bool testCopyConstructorWorksCorrectly(void);
 	bool testAssignmentOperatorWorksCorrectly(void);
 	bool testClearRemovesAllElementsFromList(void);
+	bool testContainsReturnsTrueWhenElementIsInList(void);
+	bool testContainsReturnsFalseWhenElementIsInNotList(void);
 };
