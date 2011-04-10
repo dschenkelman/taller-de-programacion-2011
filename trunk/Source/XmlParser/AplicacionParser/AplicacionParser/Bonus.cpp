@@ -9,10 +9,10 @@ Bonus::Bonus(void) : tieneError(false)
 	this->populateValidAttributes();
 }
 
-Bonus::Bonus(XmlElement e) : tieneError(false)
+Bonus::Bonus(XmlElement& e) : tieneError(false)
 {
 	this->populateValidAttributes();
-	bool tieneError = this->validateAttributes(e);
+	this->tieneError = !this->validateAttributes(e);
 	if (e.hasAttribute("tipo"))
 	{
 		tipo = e.getValue("tipo");

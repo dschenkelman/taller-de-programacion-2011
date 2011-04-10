@@ -11,7 +11,7 @@ class Bonus
 	TipoBonus tipoBonus;
 public:
 	Bonus(void);
-	Bonus(XmlElement e);
+	Bonus(XmlElement& e);
 	Bonus(std::string tipo);
 	std::string getTipo();
 	void setTipoBonus(TipoBonus tb);
