@@ -3,7 +3,7 @@
 #include "List.h"
 #include <sstream>
 
-Camino::Camino(int f, int c) : Celda(f, c)
+Camino::Camino(int f, int c) : Celda(f, c), tieneBonus(false)
 {
 }
 
