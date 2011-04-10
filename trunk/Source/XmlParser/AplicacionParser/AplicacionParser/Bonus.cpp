@@ -1,16 +1,36 @@
 #include "StdAfx.h"
 #include "Bonus.h"
 
-Bonus::Bonus(void)
+Bonus::Bonus(void) : tieneError(false)
 {
+	this->populateValidAttributes();
 }
 
-Bonus::Bonus(XmlElement e)
+Bonus::Bonus(XmlElement e) : tieneError(false)
 {
+	this->populateValidAttributes();
+	bool tieneError = this->validateAttributes(e);
 	if (e.hasAttribute("tipo"))
 	{
 		tipo = e.getValue("tipo");
 	}	
+}
+
+bool Bonus::validateAttributes(XmlElement& e)
+{
+	List<XmlAttribute> attributes = e.getAttributes();
+	size_t len = attributes.length();
+
+	for (size_t i = 0; i < len; i++)
+	{
+		XmlAttribute att = attributes[i];
+		if (!this->validAttributes.contains(att.getKey()))
+		{
+			return false;
+		}
+	}
+
+	return true;
 }
 
 Bonus::Bonus(std::string t)
@@ -31,6 +51,16 @@ void Bonus::setTipoBonus(TipoBonus tb)
 TipoBonus Bonus::getTipoBonus()
 {
 	return tipoBonus;
+}
+
+void Bonus::populateValidAttributes(void)
+{
+	this->validAttributes.add("tipo");
+}
+
+bool Bonus::hasError(void)
+{
+	return this->tieneError;
 }
 
 Bonus::~Bonus(void)

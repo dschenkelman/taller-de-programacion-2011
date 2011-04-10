@@ -182,4 +182,17 @@ public:
 		}
 		return this->items[position];
 	}
+
+	bool contains(T value) const
+	{
+		for (size_t i = 0; i < this->count; i++)
+		{
+			if (this->items[i] == value)
+			{
+				return true;
+			}
+		}
+
+		return false;
+	}
 };

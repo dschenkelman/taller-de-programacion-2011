@@ -52,7 +52,7 @@ List<XmlElement> XmlElement::getChildren() const {
 
 List<XmlAttribute> XmlElement::getAttributes() const
 {
-	return this->attributes;
+	return List<XmlAttribute>(this->attributes);
 }
 	
 void XmlElement::addChild(const XmlElement& child) {
