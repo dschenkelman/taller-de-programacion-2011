@@ -1,7 +1,7 @@
 <ESCENARIO nombre="Escenario numero 1">
   <GRILLA ancho="10" 
 		  alto="15" 
-		  tipoObstaculoPorDefault="OBS1">
+		  tipoObstaculoPorDefecto="OBS1">
     <OBSTACULO  fila="1" columna="5" tipo="OBS1"/>
     <CAMINO fila="5" columna="3">
     <BONUS tipo="Frutillita"/>
@@ -12,5 +12,5 @@
   </TIPOSOBSTACULOS>
   <TIPOSBONUS>
     <TIPOBONUS nombre="Frutillita" textura="F"/>
-  <TIPOSBONUS>
+  </TIPOSBONUS>
 </ESCENARIO>
