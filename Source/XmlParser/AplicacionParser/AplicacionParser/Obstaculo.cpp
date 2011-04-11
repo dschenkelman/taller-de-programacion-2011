@@ -125,5 +125,5 @@ void Obstaculo::populateValidAttributes(void)
 
 bool Obstaculo::hasError(void)
 {
-	return this->tieneError;
+	return this->tieneError || this->tipoObstaculo.hasError();
 }
