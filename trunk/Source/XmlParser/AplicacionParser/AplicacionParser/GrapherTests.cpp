@@ -157,18 +157,16 @@ XmlElement elementoEscenario("escenario", 1, 1000);
 	elementoEscenario.addChild(elementoListaTiposObstaculo);
 	
 	// se crea el escenario
-	Escenario* escenario = new Escenario(elementoEscenario);
+	Escenario escenario(elementoEscenario);
 
 	// Creo un graficador
-	Grapher* grapher = new Grapher();
+	Grapher grapher;
 	
 	// Dibujo el escenario
-	grapher->draw(*escenario);
+	grapher.draw(escenario);
 
 	//tareas de finalizacion del test
 	Logger::getInstance()->closeLog();
-	delete escenario;
-	delete grapher;
 
 	return true;
 }

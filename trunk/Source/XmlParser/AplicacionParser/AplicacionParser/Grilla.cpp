@@ -27,7 +27,7 @@ Grilla::Grilla(int an, int al, std::string& topd) : matrizGenerada(false), tiene
 	populateValidAttributes();
 }
 
-Grilla::Grilla(XmlElement& e, List<TipoObstaculo>& lo, List<TipoBonus>& lb) : matrizGenerada(false), tieneError(false)
+Grilla::Grilla(XmlElement& e, List<TipoObstaculo>& lo, List<TipoBonus>& lb) : matrizGenerada(false), tieneError(false), tipoObstaculoPorDefecto("")
 {
 	this->populateValidAttributes();
 	this->tieneError = !this->validateAttributes(e);
@@ -43,7 +43,9 @@ Grilla::Grilla(XmlElement& e, List<TipoObstaculo>& lo, List<TipoBonus>& lb) : ma
 		if (an < 0)
 		{
 			// Se loguea el warning y se setea ancho por defecto
-			Logger::getInstance()->logWarning("En Grilla, ancho menor a cero; se setea valor por defecto. \0");
+			stringstream msg;
+			msg << "En Grilla, ancho menor a cero; se setea valor por defecto. Linea: " << e.getStartLine();
+			Logger::getInstance()->logWarning(msg.str());
 			ancho = defGridAncho;
 		}
 		else
@@ -61,7 +63,9 @@ Grilla::Grilla(XmlElement& e, List<TipoObstaculo>& lo, List<TipoBonus>& lb) : ma
 		if (al < 0)
 		{
 			// Se loguea el warning y se setea alto por defecto
-			Logger::getInstance()->logWarning("En Grilla, alto menor a cero; se setea valor por defecto. \0");
+			stringstream msg;
+			msg << "En Grilla, alto menor a cero; se setea valor por defecto. Linea: " << e.getStartLine();
+			Logger::getInstance()->logWarning(msg.str());
 			alto = defGridAlto;
 		}
 		else
@@ -72,13 +76,14 @@ Grilla::Grilla(XmlElement& e, List<TipoObstaculo>& lo, List<TipoBonus>& lb) : ma
 
 	if (e.hasAttribute("tipoobstaculopordefecto"))
 	{
-		tipoObstaculoPorDefecto = e.getValue("tipoobstaculopordefecto");
+		this->tipoObstaculoPorDefecto = e.getValue("tipoobstaculopordefecto");
 	}
-
 	else
 	{
 		// Logger, el tipo obstaculo por defecto es necesario.
-		Logger::getInstance()->logWarning("En Grilla, el tipo obstaculo no fue definido; se toma tipo obstáculo por defecto. \0");
+		stringstream msg;
+		msg << "En Grilla, el tipo obstaculo por defecto no fue definido. No se puede graficar. Linea: " << e.getStartLine();
+		Logger::getInstance()->logError(msg.str());
 	}
 
 	if (e.hasChildren())
@@ -143,7 +148,13 @@ void Grilla::generarMatriz(List<XmlElement>& listaElementos)
 		for (size_t j = 0; j < this->ancho; j++)
 		{
 			//lleno fila
-			this->matriz.at(i).add(new Camino(0,0));
+			Obstaculo* o = new Obstaculo(this->tipoObstaculoPorDefecto, 0,0);
+			bool obstaculoValido = verificarTipoObstaculoExistente(o->getTipo());
+			if (obstaculoValido)
+			{
+				o->setTipoObstaculo(this->obtenerTipoObstaculo(o->getTipo()));
+			}
+			this->matriz.at(i).add(o);
 		}	
 	}
 
