@@ -27,113 +27,113 @@ using namespace std;
 #include <crtdbg.h>
 
 
-void printLeaks(int leaks)
-{
-	std::cout << "Camino Tests: Hubo " << leaks << " memory leaks." << endl << endl;
-}
-
-int execute(int argc, char* argv[])
-{
-	if (argc != 2)
-	{
-		cout<<"Debe proveer el nombre del archivo a leer como argumento"<<endl;
-	}
-	
-	string fileName = argv[1];
-
-	XmlParser parser;
-	parser.openFile(fileName);
-	XmlElement root = parser.parse();
-	parser.closeFile();
-	Escenario escenario(root);
-	if (!escenario.hasError())
-	{
-		Grapher grapher;
-		grapher.draw(escenario);
-	}
-	
-	return 0;
-}
-
-int main(int argc, char* argv[])
-{
-	int res = execute(argc, argv);
-	int leaks = _CrtDumpMemoryLeaks();
-	printLeaks(leaks);
-
-	char aux;
-	cin >> aux;
-	return res;
-}
-
-//int _tmain(int argc, _TCHAR* argv[])
+//void printLeaks(int leaks)
 //{
-//	cout<<"Test de List<T>"<<endl;
-//	ListTests listTests;
-//	listTests.run();
+//	std::cout << "Camino Tests: Hubo " << leaks << " memory leaks." << endl << endl;
+//}
+//
+//int execute(int argc, char* argv[])
+//{
+//	if (argc != 2)
+//	{
+//		cout<<"Debe proveer el nombre del archivo a leer como argumento"<<endl;
+//	}
 //	
-//	cout<<"Test de Stack<T>"<<endl;
-//	StackTests stackTests;
-//	stackTests.run();
+//	string fileName = argv[1];
 //
-//	//cout<<"Test de String"<<endl;
-//	//StringTests stringTests;
-//	//stringTests.run();
-//
-//	cout<<"Test de Logger"<<endl;
-//	LoggerTests loggerTests;
-//	loggerTests.run();
-//
-//	cout<<"Test de XmlElement"<<endl;
-//	XmlElementTests xmlElementTests;
-//	xmlElementTests.run();
-//
-//	cout<<"Test de TipoObstaculo"<<endl;
-//	TipoObstaculoTests tipoObstaculoTests;
-//	tipoObstaculoTests.run();
-//
-//	cout<<"Test de TipoBonus"<<endl;
-//	TipoBonusTests tipoBonusTests;
-//	tipoBonusTests.run();
-//
-//	cout<<"Test de Bonus"<<endl;
-//	BonusTests bonusTets;
-//	bonusTets.run();
-//
-//	cout<<"Test de Obstaculo"<<endl;
-//	ObstaculoTests obstaculoTests;
-//	obstaculoTests.run();
-//
-//	cout<<"Test de Camino"<<endl;
-//	CaminoTests caminoTests;
-//	caminoTests.run();
-//
-//	cout<<"Test de CellMatrix"<<endl;
-//	CellMatrixTests cellMatrixTests;
-//	cellMatrixTests.run();
-//
-//	cout<<"Test de Grilla"<<endl;
-//	GrillaTests grillaTests;
-//	grillaTests.run();
-//
-//	cout<<"Test de Escenario"<<endl;
-//	EscenarioTests escenarioTests;
-//	escenarioTests.run();
-//
-//	cout<<"Test de XmlParser"<<endl;
-//	XmlParserTest xmlParserTest;
-//	xmlParserTest.run();
-//
-//	cout<<"Test de Grapher"<<endl;
-//	GrapherTests grapherTest;
-//	grapherTest.run();
-//
-//	/*char aux;
-//	cin >> aux;*/
+//	XmlParser parser;
+//	parser.openFile(fileName);
+//	XmlElement root = parser.parse();
+//	parser.closeFile();
+//	Escenario escenario(root);
+//	if (!escenario.hasError())
+//	{
+//		Grapher grapher;
+//		grapher.draw(escenario);
+//	}
 //	
-//	printf( "Press ENTER to continue... " );
-//	char c = getchar();
-//
 //	return 0;
 //}
 //
+//int main(int argc, char* argv[])
+//{
+//	int res = execute(argc, argv);
+//	int leaks = _CrtDumpMemoryLeaks();
+//	printLeaks(leaks);
+//
+//	char aux;
+//	cin >> aux;
+//	return res;
+//}
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+	cout<<"Test de List<T>"<<endl;
+	ListTests listTests;
+	listTests.run();
+	
+	cout<<"Test de Stack<T>"<<endl;
+	StackTests stackTests;
+	stackTests.run();
+
+	//cout<<"Test de String"<<endl;
+	//StringTests stringTests;
+	//stringTests.run();
+
+	cout<<"Test de Logger"<<endl;
+	LoggerTests loggerTests;
+	loggerTests.run();
+
+	cout<<"Test de XmlElement"<<endl;
+	XmlElementTests xmlElementTests;
+	xmlElementTests.run();
+
+	cout<<"Test de TipoObstaculo"<<endl;
+	TipoObstaculoTests tipoObstaculoTests;
+	tipoObstaculoTests.run();
+
+	cout<<"Test de TipoBonus"<<endl;
+	TipoBonusTests tipoBonusTests;
+	tipoBonusTests.run();
+
+	cout<<"Test de Bonus"<<endl;
+	BonusTests bonusTets;
+	bonusTets.run();
+
+	cout<<"Test de Obstaculo"<<endl;
+	ObstaculoTests obstaculoTests;
+	obstaculoTests.run();
+
+	cout<<"Test de Camino"<<endl;
+	CaminoTests caminoTests;
+	caminoTests.run();
+
+	cout<<"Test de CellMatrix"<<endl;
+	CellMatrixTests cellMatrixTests;
+	cellMatrixTests.run();
+
+	cout<<"Test de Grilla"<<endl;
+	GrillaTests grillaTests;
+	grillaTests.run();
+
+	cout<<"Test de Escenario"<<endl;
+	EscenarioTests escenarioTests;
+	escenarioTests.run();
+
+	cout<<"Test de XmlParser"<<endl;
+	XmlParserTest xmlParserTest;
+	xmlParserTest.run();
+
+	cout<<"Test de Grapher"<<endl;
+	GrapherTests grapherTest;
+	grapherTest.run();
+
+	/*char aux;
+	cin >> aux;*/
+	
+	printf( "Press ENTER to continue... " );
+	char c = getchar();
+
+	return 0;
+}
+

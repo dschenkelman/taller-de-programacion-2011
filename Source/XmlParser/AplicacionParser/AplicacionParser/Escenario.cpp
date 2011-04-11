@@ -162,7 +162,7 @@ bool Escenario::verificarTexturaEnLista(List<char>& listaCaracteres, char t)
 
 bool Escenario::hasError(void)
 {
-	return this->grilla.hasError() || tieneError;
+	return tieneError || this->grilla.hasError();
 }
 
 void Escenario::populateValidAttributes(void)

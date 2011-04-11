@@ -145,7 +145,7 @@ bool XmlParserTest::testParseReturnsXmlRootElement(void)
 	XmlElement grilla = root.getChildren().at(0);
 	successCondition = successCondition && grilla.getValue("ancho") == "10";
 	successCondition = successCondition && grilla.getValue("alto") == "15";
-	successCondition = successCondition && grilla.getValue("tipoobstaculopordefault") == "OBS1";
+	successCondition = successCondition && grilla.getValue("tipoobstaculopordefecto") == "OBS1";
 	successCondition = successCondition && grilla.getAttributes().length() == 3;
 	successCondition = successCondition && grilla.getChildren().length() == 2;
 
