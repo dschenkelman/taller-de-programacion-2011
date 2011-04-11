@@ -10,8 +10,12 @@ class Escenario
 {
 	std::string nombre;
 	Grilla grilla;
+	bool tieneError;
+	List<std::string> validAttributes;
 	List<TipoBonus> tiposBonus;
 	List<TipoObstaculo> tiposObstaculos;
+	void populateValidAttributes(void);
+	bool validateAttributes(XmlElement& e);
 	List<TipoBonus> obtenerTiposBonus(List<XmlElement>& le);
 	List<TipoObstaculo> obtenerTiposObstaculos(List<XmlElement>& le);
 	bool verificarTexturaEnLista(List<char>& listaCaracteres, char t);

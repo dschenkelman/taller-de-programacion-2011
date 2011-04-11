@@ -31,6 +31,7 @@ void GrillaTests::run(void)
 	printResult("testGenerarMatrizGeneraCorrectamente", testGenerarMatrizGeneraCorrectamente());
 	printResult("testTipoBonusInvalidoNoSeAgregaALaMatriz", testTipoBonusInvalidoNoSeAgregaALaMatriz());
 	printResult("testColocarDosObjetosEnMismaPosicionGuardaElPrimero", testColocarDosObjetosEnMismaPosicionGuardaElPrimero());
+	printResult("testNonValidAttributeMakesHasErrorTrue", testNonValidAttributeMakesHasErrorTrue());
 
 	int leaks = _CrtDumpMemoryLeaks();
 	printLeaks(leaks);
@@ -313,4 +314,34 @@ bool GrillaTests::testColocarDosObjetosEnMismaPosicionGuardaElPrimero(void)
 	}
 
 	return true;
+}
+
+bool GrillaTests::testNonValidAttributeMakesHasErrorTrue(void)
+{
+	XmlElement elementoGrilla("Grilla", 1, 1000);
+	XmlAttribute atributoAlto("alto", "10");
+	XmlAttribute atributoAncho("ancho", "10");
+	XmlAttribute atributoTipo("tipoobstaculopordefecto", "obstaculoDef");
+	XmlAttribute atributoInvalido("invalido", "invalido");
+	elementoGrilla.addAttribute(atributoAlto);
+	elementoGrilla.addAttribute(atributoAncho);
+	elementoGrilla.addAttribute(atributoTipo);
+	elementoGrilla.addAttribute(atributoInvalido);
+
+	XmlElement elementoCaminoUno("camino", 3, 800);
+	XmlAttribute atributoFilaC1("fila", "1");
+	XmlAttribute atributoColumnaC1("columna", "5");
+	elementoCaminoUno.addAttribute(atributoFilaC1);
+	elementoCaminoUno.addAttribute(atributoColumnaC1);
+
+	elementoGrilla.addChild(elementoCaminoUno);
+
+	List<TipoObstaculo> lo;
+	List<TipoBonus> lb;
+
+	Grilla grilla(elementoGrilla, lo, lb);
+	
+	Logger::closeLog();
+
+	return grilla.hasError();
 }
