@@ -441,7 +441,7 @@ bool Grilla::validateAttributes(XmlElement& e)
 
 bool Grilla::hasError(void)
 {
-	/*for(size_t i = 0; i < this->alto; i++)
+	for(size_t i = 0; i < this->alto; i++)
 	{
 		for(size_t j = 0; j < this->ancho; j++)
 		{
@@ -450,7 +450,7 @@ bool Grilla::hasError(void)
 				return true;
 			}
 		}
-	}*/
+	}
 
 	return this->tieneError;
 }
