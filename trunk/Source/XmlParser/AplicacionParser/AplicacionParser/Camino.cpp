@@ -132,7 +132,12 @@ Celda* Camino::copiar(void)
 
 bool Camino::hasError(void)
 {
-	return this->tieneError;
+	bool bonusError = false;
+	if (this->tieneBonus)
+	{
+		bonusError = this->bonus.hasError();
+	}
+	return this->tieneError || bonusError;
 }
 
 bool Camino::validateAttributes(XmlElement& e)

@@ -66,7 +66,7 @@ void Bonus::populateValidAttributes(void)
 
 bool Bonus::hasError(void)
 {
-	return this->tieneError;
+	return this->tieneError || this->tipoBonus.hasError();
 }
 
 Bonus::~Bonus(void)
