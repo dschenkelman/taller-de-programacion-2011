@@ -18,4 +18,5 @@ public:
 	bool testGenerarMatrizGeneraCorrectamente();
 	bool testTipoBonusInvalidoNoSeAgregaALaMatriz();
 	bool testColocarDosObjetosEnMismaPosicionGuardaElPrimero();
+	bool testNonValidAttributeMakesHasErrorTrue(void);
 };

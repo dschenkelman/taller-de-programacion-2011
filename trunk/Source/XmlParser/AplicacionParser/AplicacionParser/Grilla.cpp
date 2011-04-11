@@ -3,6 +3,8 @@
 #include "Camino.h"
 #include "Obstaculo.h"
 #include <exception>
+#include <sstream>
+using namespace std;
 
 Grilla::Grilla(int an, int al, std::string& topd) : matrizGenerada(false), tieneError(false)
 {
@@ -21,10 +23,15 @@ Grilla::Grilla(int an, int al, std::string& topd) : matrizGenerada(false), tiene
 	}
 	
 	tipoObstaculoPorDefecto = topd;
+
+	populateValidAttributes();
 }
 
 Grilla::Grilla(XmlElement& e, List<TipoObstaculo>& lo, List<TipoBonus>& lb) : matrizGenerada(false), tieneError(false)
 {
+	this->populateValidAttributes();
+	this->tieneError = !this->validateAttributes(e);
+
 	tiposObstaculos = lo;
 	tiposBonus = lb;
 
@@ -44,7 +51,6 @@ Grilla::Grilla(XmlElement& e, List<TipoObstaculo>& lo, List<TipoBonus>& lb) : ma
 			ancho = an;
 		}
 
-		
 	}
 
 	if(e.hasAttribute("alto"))
@@ -395,7 +401,45 @@ Grilla& Grilla::operator=(const Grilla& other)
 	return *this;
 }
 
+void Grilla::populateValidAttributes(void)
+{
+	this->validAttributes.add("ancho");
+	this->validAttributes.add("alto");
+	this->validAttributes.add("tipoobstaculopordefecto");
+}
+
+bool Grilla::validateAttributes(XmlElement& e)
+{
+	List<XmlAttribute> attributes = e.getAttributes();
+
+	for(size_t i = 0; i < attributes.length(); i++)
+	{
+		XmlAttribute att = attributes.at(i);
+		
+		if(!this->validAttributes.contains(att.getKey()))
+		{
+			stringstream msg;
+			msg << "Clave de atributo: " << att.getKey() << " no es valida para la grilla. Linea: " << e.getStartLine();
+			Logger::getInstance()->logError(msg.str());
+			return false;
+		}
+	}
+
+	return true;
+}
+
 bool Grilla::hasError(void)
 {
+	/*for(size_t i = 0; i < this->alto; i++)
+	{
+		for(size_t j = 0; j < this->ancho; j++)
+		{
+			if(this->getCelda(i, j)->hasError())
+			{
+				return true;
+			}
+		}
+	}*/
+
 	return this->tieneError;
 }

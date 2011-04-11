@@ -21,6 +21,9 @@ class Grilla
 	int alto;
 	std::string tipoObstaculoPorDefecto;
 	List<List<Celda*>> matriz;
+	void populateValidAttributes(void);
+	bool validateAttributes(XmlElement& e);
+	List<std::string> validAttributes;
 	void generarMatriz(List<XmlElement>& le);
 	bool colocarCeldaEnMatriz(Celda* c);
 	bool verificarTipoBonusExistente(std::string tb);

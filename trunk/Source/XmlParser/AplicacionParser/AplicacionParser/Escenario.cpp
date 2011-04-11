@@ -1,13 +1,17 @@
 #include "StdAfx.h"
 #include "Escenario.h"
-#include <sstream>	
+#include <sstream>
+using namespace std;
 
-Escenario::Escenario(void)
+Escenario::Escenario(void): tieneError(false)
 {
 }
 
-Escenario::Escenario(XmlElement& e)
+Escenario::Escenario(XmlElement& e) : tieneError(false)
 {
+	this->populateValidAttributes();
+	this->tieneError = !this->validateAttributes(e);
+
 	tiposBonus = obtenerTiposBonus(e.getChildren());
 	tiposObstaculos = obtenerTiposObstaculos(e.getChildren());
 	
@@ -158,5 +162,30 @@ bool Escenario::verificarTexturaEnLista(List<char>& listaCaracteres, char t)
 
 bool Escenario::hasError(void)
 {
-	return this->grilla.hasError();
+	return this->grilla.hasError() || tieneError;
+}
+
+void Escenario::populateValidAttributes(void)
+{
+	this->validAttributes.add("nombre");
+}
+
+bool Escenario::validateAttributes(XmlElement& e)
+{
+	List<XmlAttribute> attributes = e.getAttributes();
+
+	for(size_t i = 0; i < attributes.length(); i++)
+	{
+		XmlAttribute att = attributes.at(i);
+
+		if (!validAttributes.contains(att.getKey()))
+		{
+			stringstream msg;
+			msg << "Clave de atributo: " << att.getKey() << " no es válida para el Escenario. Linea: " << e.getStartLine();
+			Logger::getInstance()->logError(msg.str());
+			return false;
+		}
+	}
+
+	return true;
 }
