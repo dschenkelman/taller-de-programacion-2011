@@ -41,13 +41,13 @@ XmlElement elementoEscenario("escenario", 1, 1000);
 	XmlElement elementoGrilla("grilla", 2, 999);
 	XmlAttribute atributoAncho("ancho", "4");
 	XmlAttribute atributoAlto("alto", "4");
-	XmlAttribute atributoTipo("tipoObstaculoPorDefecto", "ladrillo");
+	XmlAttribute atributoTipo("tipoobstaculopordefecto", "ladrillo");
 	elementoGrilla.addAttribute(atributoAlto);
 	elementoGrilla.addAttribute(atributoAncho);
 	elementoGrilla.addAttribute(atributoTipo);
 
 	// se crea el xmlElement de la lista de tipos bonus
-	XmlElement elementoListaTiposBonus("tiposBonus", 200, 600);
+	XmlElement elementoListaTiposBonus("tiposbonus", 200, 600);
 
 	XmlElement elementoTipoBonus("tipoBonus", 201, 202);
 	XmlAttribute atributoNombre("nombre", "uva");
@@ -58,15 +58,15 @@ XmlElement elementoEscenario("escenario", 1, 1000);
 	elementoListaTiposBonus.addChild(elementoTipoBonus);
 
 	// se crea el xmlElement de la lista de tipos obstaculos
-	XmlElement elementoListaTiposObstaculo("tiposObstaculos", 600, 700);
+	XmlElement elementoListaTiposObstaculo("tiposobstaculos", 600, 700);
 	
-	XmlElement elementoTipoObstaculoUno("tipoObstaculo", 600, 605);
+	XmlElement elementoTipoObstaculoUno("tipoobstaculo", 600, 605);
 	XmlAttribute atributoNombreUno("nombre", "yunque");
 	XmlAttribute atributoTexturaUno("textura", "*");
 	elementoTipoObstaculoUno.addAttribute(atributoNombreUno);
 	elementoTipoObstaculoUno.addAttribute(atributoTexturaUno);
 
-	XmlElement elementoTipoObstaculoDos("tipoObstaculo", 605, 620);
+	XmlElement elementoTipoObstaculoDos("tipoobstaculo", 605, 620);
 	XmlAttribute atributoNombreDos("nombre", "ladrillo");
 	XmlAttribute atributoTexturaDos("textura", "#");
 	elementoTipoObstaculoDos.addAttribute(atributoNombreDos);
