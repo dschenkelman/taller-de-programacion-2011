@@ -56,3 +56,7 @@ Celda* Celda::copiar(void)
 	celda->ocupada = this->ocupada;
 	return celda;
 }
+bool Celda::hasError(void)
+{
+	return false;
+}
