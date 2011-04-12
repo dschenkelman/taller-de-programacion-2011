@@ -390,7 +390,7 @@ XmlElement XmlParser::parse()
 					else
 					{
 						stringstream msg;
-						msg << "Nombre de tag: " << name << " no reconocido. Linea: " << currentParent.getStartLine();
+						msg << "Nombre de tag: " << name << " no reconocido. Linea: " << currentElement.getStartLine();
 						this->log->logWarning(msg.str());
 					}
 				}
