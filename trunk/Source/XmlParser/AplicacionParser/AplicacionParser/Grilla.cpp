@@ -186,14 +186,6 @@ void Grilla::generarMatriz(List<XmlElement>& listaElementos)
 				cam->getBonus().setTipoBonus(obtenerTipoBonus(tipoBonus));
 			}
 			bool result = colocarCeldaEnMatriz(cam, listaElementos.at(i).getStartLine());
-
-			if(!result)
-			{
-				//Logger no se pudo meter elemento porque ya esta ocupada la posicion
-				stringstream msg;
-				msg << "En Grilla, no se pudo colocar el camino; posicion ya ocupada. Linea: " << listaElementos.at(i).getStartLine();
-				Logger::getInstance()->logWarning(msg.str());
-			}
 		}
 
 		else if (listaElementos.at(i).getName() == "obstaculo")
@@ -252,9 +244,10 @@ bool Grilla::colocarCeldaEnMatriz(Celda* c, int linea)
 	{
 		//Logger y valor por defecto
 		stringstream msg;
-		msg << "En Grilla, celda con fila mayor al alto de la grilla; se asigna valor por defecto. Linea:" << linea;
+		msg << "En Grilla, celda con fila mayor al alto de la grilla; no se agrega a matriz. Linea:" << linea;
 		Logger::getInstance()->logWarning(msg.str());
-		fila = defFila;
+		delete c;
+		return false;
 	}
 
 	if (columna > ancho)
@@ -263,11 +256,15 @@ bool Grilla::colocarCeldaEnMatriz(Celda* c, int linea)
 		stringstream msg;
 		msg << "En Grilla, celda con columna mayor al ancho de la grilla; se asigna columna por defecto. Linea" << linea;
 		Logger::getInstance()->logWarning(msg.str());
-		columna = defColumna;
+		delete c;
+		return false;
 	}
 
 	if (matriz.at(fila).at(columna)->esOcupada())
 	{
+		stringstream msg;
+		msg << "En Grilla, no se pudo colocar el camino; posicion ya ocupada. Linea: " << linea;
+		Logger::getInstance()->logWarning(msg.str());
 		delete c;
 		return false;
 	}
