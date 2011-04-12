@@ -409,6 +409,7 @@ Grilla& Grilla::operator=(const Grilla& other)
 	this->tipoObstaculoPorDefecto = other.tipoObstaculoPorDefecto; 
 	this->tiposObstaculos = other.tiposObstaculos;
 	this->tiposBonus = other.tiposBonus;
+	this->tieneError = other.tieneError;
 	
 	if (other.matrizGenerada)
 	{
