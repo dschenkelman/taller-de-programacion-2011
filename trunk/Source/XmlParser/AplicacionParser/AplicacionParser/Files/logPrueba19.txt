@@ -1,0 +1,3 @@
+12/04/11 20:38:58  Warning: Nombre de tag: ecenario no reconocido. Linea: 1
+12/04/11 20:38:58  Warning: El tag: ecenario no se cerro correctamente. Linea apertura: 1. Linea error: 14
+12/04/11 20:38:58  Warning: El nombre del elemento raiz no es escenario. Al ser fundamental se lo considera como tal. Linea: 1

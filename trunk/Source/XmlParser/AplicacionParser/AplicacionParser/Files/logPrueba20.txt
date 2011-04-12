@@ -1,0 +1,2 @@
+12/04/11 20:39:30  Warning: Nombre de tag: grila no reconocido. Linea: 2
+12/04/11 20:39:30  Warning: El tag: grila no se cerro correctamente. Linea apertura: 2. Linea error: 7
