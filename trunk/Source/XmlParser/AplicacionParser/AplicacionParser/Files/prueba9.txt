@@ -1,0 +1,1 @@
+12/04/11 02:16:34  Error: En Grilla, el tipo obstaculo por defecto no fue definido. No se puede graficar. Linea: 2
