@@ -12,7 +12,7 @@
 
 using namespace std;
 
-XmlParser::XmlParser(void)
+XmlParser::XmlParser(void) : lastIndex(0), lastJumpAmount(0)
 {
 	this->validTags[0] = "escenario";
 	this->validTags[1] = "grilla";
@@ -142,16 +142,18 @@ long XmlParser::getOrigLineNumber(string search){
 	int longitud=search.find(' ');
 	int len=(longitud > 10)? 10 : longitud;
 	string pattern=search.substr(0,len );
-	size_t pos=this->fileOrig.find(pattern);
+	size_t pos=this->fileOrig.find(pattern, this->lastIndex);
 	long saltosDeLinea=1;
 	if (pos != string::npos){
-		for (int i=0; i < pos; i++){
+		this->lastIndex = pos;	
+		for (int i=this->lastIndex; i < pos; i++){
 			if (this->fileOrig[i] == '&')
 				saltosDeLinea++;
 		}
 	}
 
-	return saltosDeLinea;
+	this->lastJumpAmount += saltosDeLinea;
+	return this->lastJumpAmount;
 }
 
 
