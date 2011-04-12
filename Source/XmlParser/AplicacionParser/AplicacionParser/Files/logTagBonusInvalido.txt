@@ -1,0 +1,5 @@
+12/04/11 18:42:23  Warning: Nombre de tag: bones no reconocido. Linea: 4
+12/04/11 18:42:23  Warning: El tipo bonus en la linea 8 es inválido, no tiene asignados correctamente los atributos 
+12/04/11 18:42:23  Warning: El tipo obstaculo en la linea 11 es inválido. No tiene asignado correctamente los atributos. Linea: 11
+12/04/11 18:42:23  Warning: En Grilla, el obstaculo por defecto definido no esta en la lista de obstaculos. Si es usado en algun casillero no se podra graficar. Linea: 2
+12/04/11 18:42:23  Warning: En Grilla, se ignora tag desconocido 'grilla'. Linea: 2
