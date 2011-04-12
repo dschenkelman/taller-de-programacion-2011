@@ -408,16 +408,19 @@ XmlElement XmlParser::parse()
 		else
 		{
 			//in case there are incorrect elements closing
-			if (name != currentParent.getName() && previousParents.count() != 0)
+			if (name != currentParent.getName())
 			{
 				//TODO: loggear que no se cerro bien el tag
 				stringstream msg;
 				msg << "El tag: " << currentParent.getName() << " no se cerro correctamente. Linea apertura: " << currentParent.getStartLine() << ". Linea error: " << this->lineNumber;
 				this->log->logWarning(msg.str());
 				
-				XmlElement previousParent = previousParents.pop();
-				previousParent.addChild(currentParent);
-				currentParent = previousParent;
+				if (previousParents.count() != 0)
+				{
+					XmlElement previousParent = previousParents.pop();
+					previousParent.addChild(currentParent);
+					currentParent = previousParent;
+				}
 			}
 
 			if (name == currentParent.getName())

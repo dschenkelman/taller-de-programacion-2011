@@ -9,6 +9,13 @@ Escenario::Escenario(void): tieneError(false)
 
 Escenario::Escenario(XmlElement& e) : tieneError(false)
 {
+	if (e.getName() != "escenario")
+	{
+		stringstream msg;
+		msg << "El nombre del elemento raiz no es escenario. Al ser fundamental se lo considera como tal. Linea: " << e.getStartLine();
+		Logger::getInstance()->logWarning(msg.str());		
+	}
+
 	this->populateValidAttributes();
 	this->tieneError = !this->validateAttributes(e);
 	Grilla miGrilla;
