@@ -1,0 +1,2 @@
+12/04/11 02:16:11  Warning: En Grilla, celda con fila mayor al alto de la grilla; no se agrega a matriz. Linea:7
+12/04/11 02:16:11  Warning: En Grilla, no se pudo colocar el camino; posicion ya ocupada. Linea: 7
