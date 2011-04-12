@@ -91,12 +91,12 @@ List<TipoBonus> Escenario::obtenerTiposBonus(List<XmlElement>& listaElementos)
 				}
 			}
 		}
-		
-		if (!found)
-		{
-			//Logger, no hay lista de tipos bonus
-			Logger::getInstance()->logWarning("No existe lista de tipo bonus \0");
-		}
+	}
+
+	if (!found)
+	{
+		//Logger, no hay lista de tipos bonus
+		Logger::getInstance()->logWarning("No existe lista de tipo bonus \0");
 	}
 
 	return listaBonus;
@@ -143,12 +143,12 @@ List<TipoObstaculo> Escenario::obtenerTiposObstaculos(List<XmlElement>& listaEle
 				}
 			}
 		}
+	}
 
-		if (!found)
-		{
-			//Logger, no hay lista de tipo obstaculo
-			Logger::getInstance()->logWarning("No existe lista de tipos obstaculos \0");
-		}
+	if (!found)
+	{
+		//Logger, no hay lista de tipo obstaculo
+		Logger::getInstance()->logWarning("No existe lista de tipos obstaculos \0");
 	}
 
 	return listaObstaculos;
