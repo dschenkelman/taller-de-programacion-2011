@@ -4,7 +4,7 @@
 	<CAMINO fila="5" columna="3">
 		<BONUS tipo="Frutillita"/>
     </CAMINO>
-	<CAMINO fila="5" columna="3">
+	<CAMINO fila="2" columna="3">
 		<BONUS tipo="Manzana"/>
     </CAMINO>	
   </GRILLA>
@@ -14,7 +14,6 @@
   </TIPOSOBSTACULOS>  
   <TIPOSBONUS>
 	<TIPOBONUS nombre="Manzana" textura="M"/>
-    <TIPOBONUS nombre="Frutillita" textura="F"/>
-	<TIPOBONUS nombre="Pera" textura="F"/>
+    <TIPOBONUS nombre="Frutillita" textura="M"/>
   </TIPOSBONUS>
 </ESCENARIO>

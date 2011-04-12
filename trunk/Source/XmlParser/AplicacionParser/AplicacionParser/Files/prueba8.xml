@@ -1,18 +1,12 @@
 <ESCENARIO nombre="Escenario-numero-2" >
-  <GRILLA ancho="10" alto="15" tipoObstaculoPorDefecto="OBS1" >
-    <OBSTACULO  fila="1" columna="5" tipo="OBS2"/>
-	<OBSTACULO  fila="1" columna="5" tipo="OBS1"/>
-	<OBSTACULO  fila="1" columna="5" tipo="OBS2"/>
-	<OBSTACULO  fila="1" columna="5" tipo="OBS1"/>
-	<CAMINO fila="3" columna="3">
-		<BONUS tipo="Frutillita"/>
-    </CAMINO>	
+  <GRILLA ancho="8" alto="8" tipoObstaculoPorDefecto="OBS5" >
+    <OBSTACULO  fila="1" columna="5" tipo="OBS1"/>
   </GRILLA>
-  <TIPOSOBSTACULOS>
-    <TIPOOBSTACULO nombre="OBS1" textura="*"/>
-	<TIPOOBSTACULO nombre="OBS2" textura="&"/>
-  </TIPOSOBSTACULOS>
   <TIPOSBONUS>
     <TIPOBONUS nombre="Frutillita" textura="F"/>
   </TIPOSBONUS>  
+  <TIPOSOBSTACULOS>
+    <TIPOOBSTACULO nombre="OBS1" textura="*"/>
+	<TIPOOBSTACULO nombre="OBS5" textura="9"/>
+  </TIPOSOBSTACULOS>
 </ESCENARIO>
