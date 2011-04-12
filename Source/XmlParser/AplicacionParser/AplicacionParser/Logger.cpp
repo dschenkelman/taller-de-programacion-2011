@@ -33,7 +33,7 @@ Logger::~Logger()
 Logger* Logger::getInstance(void) {
 	if (!loggerCreated)
 	{
-		instance = new Logger("log.txt");
+		instance = new Logger("parser.log.txt");
 		loggerCreated = true;
 	}
 	return instance;

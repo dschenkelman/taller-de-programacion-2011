@@ -68,6 +68,7 @@ List<TipoBonus> Escenario::obtenerTiposBonus(List<XmlElement>& listaElementos)
 				if(listaBonusXml.at(j).hasAttribute("nombre") && listaBonusXml.at(j).hasAttribute("textura"))
 				{
 					TipoBonus tb(listaBonusXml.at(j));
+					tb.setLinea(listaBonusXml.at(j).getStartLine());
 					listaBonus.add(tb);
 
 					bool texturaExistente = verificarTexturaEnLista(listaTexturas, tb.getTextura());
@@ -119,6 +120,7 @@ List<TipoObstaculo> Escenario::obtenerTiposObstaculos(List<XmlElement>& listaEle
 				if(listaObstaculosXml.at(j).hasAttribute("nombre") && listaObstaculosXml.at(j).hasAttribute("textura"))
 				{
 					TipoObstaculo to(listaObstaculosXml.at(j));
+					to.setLinea(listaObstaculosXml.at(j).getStartLine());
 					listaObstaculos.add(to);
 
 					bool texturaExistente = verificarTexturaEnLista(listaTexturas, to.getTextura());

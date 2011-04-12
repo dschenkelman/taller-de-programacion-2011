@@ -92,3 +92,13 @@ void TipoObstaculo::populateValidAttributes(void)
 	this->validAttributes.add("nombre");
 	this->validAttributes.add("textura");
 }
+
+void TipoObstaculo::setLinea(int l)
+{
+	this->numeroLinea = l;
+}
+
+int TipoObstaculo::getLinea(void)
+{
+	return this->numeroLinea;
+}
