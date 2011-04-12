@@ -20,6 +20,7 @@ public:
 	TipoObstaculo getTipoObstaculo();
 	Celda* copiar(void);
 	bool hasError(void);
+	void setError(void);
 	~Obstaculo(void);
 	std::string obtenerRepresentacion(Celda* celSup, Celda* celInf, Celda* celDer, Celda* celIzq);
 };

@@ -35,6 +35,15 @@ Grilla::Grilla(XmlElement& e, List<TipoObstaculo>& lo, List<TipoBonus>& lb) : ma
 	tiposObstaculos = lo;
 	tiposBonus = lb;
 
+	bool obstaculoValido = verificarTipoObstaculoExistente(this->tipoObstaculoPorDefecto);
+
+	if (!obstaculoValido)
+	{
+		stringstream msg;
+		msg << "En Grilla, el obstaculo por defecto definido no esta en la lista de obstaculos. Si es usado en algun casillero no se podra graficar. Linea: " << e.getStartLine();
+		Logger::getInstance()->logWarning(msg.str());
+	}
+
 	if (e.hasAttribute("ancho")) 
 	{
 		std::string anchoString = e.getValue("ancho");
@@ -153,6 +162,10 @@ void Grilla::generarMatriz(List<XmlElement>& listaElementos)
 			if (obstaculoValido)
 			{
 				o->setTipoObstaculo(this->obtenerTipoObstaculo(o->getTipo()));
+			}
+			else
+			{
+				o->setError();
 			}
 			this->matriz.at(i).add(o);
 		}	
