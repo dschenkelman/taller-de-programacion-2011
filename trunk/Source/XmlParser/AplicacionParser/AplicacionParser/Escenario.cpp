@@ -74,13 +74,17 @@ List<TipoBonus> Escenario::obtenerTiposBonus(List<XmlElement>& listaElementos)
 					tb.setLinea(listaBonusXml.at(j).getStartLine());
 					listaBonus.add(tb);
 
-					bool texturaExistente = verificarTexturaEnLista(listaTexturas, tb.getTextura());
+					bool texturaExistente = listaTexturas.contains(tb.getTextura());
 					if(texturaExistente)
 					{
 						stringstream msg;
 						msg << "La textura asignada para el tipo bonus " <<
 							tb.getNombre() + " está repetida. Linea: " << listaBonusXml.at(j).getStartLine();
 						Logger::getInstance()->logWarning(msg.str());
+					}
+					else
+					{
+						listaTexturas.add(tb.getTextura());
 					}
 
 				}
@@ -126,13 +130,17 @@ List<TipoObstaculo> Escenario::obtenerTiposObstaculos(List<XmlElement>& listaEle
 					to.setLinea(listaObstaculosXml.at(j).getStartLine());
 					listaObstaculos.add(to);
 
-					bool texturaExistente = verificarTexturaEnLista(listaTexturas, to.getTextura());
+					bool texturaExistente = listaTexturas.contains(to.getTextura());
 					if(texturaExistente)
 					{
 						stringstream msg;
 						msg << "La textura asignada para el tipo obstaculo " + 
 							to.getNombre() + " está repetida. Linea: " << listaObstaculosXml.at(j).getStartLine();
 						Logger::getInstance()->logWarning(msg.str());
+					}
+					else
+					{
+						listaTexturas.add(to.getTextura());
 					}
 				}
 
