@@ -251,14 +251,18 @@ bool Grilla::colocarCeldaEnMatriz(Celda* c, int linea)
 	if (fila > alto)
 	{
 		//Logger y valor por defecto
-		Logger::getInstance()->logWarning("En Grilla, celda con fila mayor al alto de la grilla; se asigna valor por defecto. Linea:" + linea);
+		stringstream msg;
+		msg << "En Grilla, celda con fila mayor al alto de la grilla; se asigna valor por defecto. Linea:" << linea;
+		Logger::getInstance()->logWarning(msg.str());
 		fila = defFila;
 	}
 
 	if (columna > ancho)
 	{
 		//Logger y valor por defecto
-		Logger::getInstance()->logWarning("En Grilla, celda con columna mayor al ancho de la grilla; se asigna columna por defecto. Linea" + linea);
+		stringstream msg;
+		msg << "En Grilla, celda con columna mayor al ancho de la grilla; se asigna columna por defecto. Linea" << linea;
+		Logger::getInstance()->logWarning(msg.str());
 		columna = defColumna;
 	}
 
