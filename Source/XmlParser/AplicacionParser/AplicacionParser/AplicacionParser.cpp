@@ -37,6 +37,7 @@ int execute(int argc, char* argv[])
 	if (argc != 2)
 	{
 		cout<<"Debe proveer el nombre del archivo a leer como argumento"<<endl;
+		return 0;
 	}
 	
 	string fileName = argv[1];
