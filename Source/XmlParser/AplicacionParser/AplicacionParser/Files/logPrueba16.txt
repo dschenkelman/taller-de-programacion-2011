@@ -1,0 +1,3 @@
+12/04/11 19:29:13  Warning: Nombre de tag: tipobonu no reconocido. Linea: 9
+12/04/11 19:29:13  Warning: La lista de tipos bonus esta vacia. Linea: 8
+12/04/11 19:29:13  Error: En Grilla, camino con bonus inexistente; no se puede imprimir. Linea: 4
