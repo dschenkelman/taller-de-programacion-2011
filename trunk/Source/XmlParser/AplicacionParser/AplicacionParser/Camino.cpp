@@ -128,6 +128,7 @@ Celda* Camino::copiar(void)
 	camino->ocupada = this->ocupada;
 	camino->tieneBonus = this->tieneBonus;
 	camino->bonus = this->bonus;
+	camino->tieneError = this->tieneError;
 	return camino;
 }
 

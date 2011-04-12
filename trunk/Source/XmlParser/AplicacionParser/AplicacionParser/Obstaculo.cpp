@@ -93,6 +93,7 @@ Celda* Obstaculo::copiar(void)
 	Obstaculo* obstaculo = new Obstaculo(this->tipo, this->fila, this->columna);
 	obstaculo->ocupada = this->ocupada;
 	obstaculo->tipoObstaculo = this->tipoObstaculo;
+	obstaculo->tieneError = this->tieneError;
 	return obstaculo;
 }
 
@@ -126,4 +127,9 @@ void Obstaculo::populateValidAttributes(void)
 bool Obstaculo::hasError(void)
 {
 	return this->tieneError || this->tipoObstaculo.hasError();
+}
+
+void Obstaculo::setError(void)
+{
+	this->tieneError = true;
 }
