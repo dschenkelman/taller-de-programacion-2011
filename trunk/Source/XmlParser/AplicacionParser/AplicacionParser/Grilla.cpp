@@ -344,7 +344,9 @@ void Grilla::verificarTiposUtilizados()
 	{
 		if(!tiposBonus.at(i).esUtilizado())
 		{
-			Logger::getInstance()->logWarning("El tipo bonus " + tiposBonus.at(i).getNombre() + " no está siendo utilizado.");
+			stringstream msg;
+			msg << "El tipo bonus " << tiposBonus.at(i).getNombre() << " no está siendo utilizado. Linea: " << tiposBonus.at(i).getLinea();
+			Logger::getInstance()->logWarning(msg.str());
 		}
 	}
 
@@ -352,7 +354,9 @@ void Grilla::verificarTiposUtilizados()
 	{
 		if(!tiposObstaculos.at(i).esUtilizado())
 		{
-			Logger::getInstance()->logWarning("El tipo obstaculo " + tiposObstaculos.at(i).getNombre() + " no está siendo utilizado");
+			stringstream msg;
+			msg << "El tipo obstaculo " << tiposObstaculos.at(i).getNombre() << " no está siendo utilizado. Linea: " << tiposObstaculos.at(i).getLinea();
+			Logger::getInstance()->logWarning(msg.str());
 		}
 	}
 }

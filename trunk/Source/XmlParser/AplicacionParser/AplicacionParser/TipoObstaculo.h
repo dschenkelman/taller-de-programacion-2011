@@ -4,6 +4,7 @@
 
 class TipoObstaculo
 {
+	int numeroLinea;
 	std::string nombre;
 	List<std::string> validAttributes;
 	bool tieneError;
@@ -20,5 +21,7 @@ public:
 	std::string getNombre();
 	bool hasError(void);
 	char getTextura();
+	int getLinea(void);
+	void setLinea(int);
 	~TipoObstaculo(void);
 };

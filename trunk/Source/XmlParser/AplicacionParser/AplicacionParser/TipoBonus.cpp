@@ -94,3 +94,13 @@ void TipoBonus::populateValidAttributes(void)
 	this->validAttributes.add("nombre");
 	this->validAttributes.add("textura");
 }
+
+void TipoBonus::setLinea(int l)
+{
+	this->numeroLinea = l;
+}
+
+int TipoBonus::getLinea(void)
+{
+	return this->numeroLinea;
+}

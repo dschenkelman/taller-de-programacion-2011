@@ -5,6 +5,7 @@
 
 class TipoBonus
 {
+	int numeroLinea;
 	std::string nombre;
 	List<std::string> validAttributes;
 	char textura;
@@ -21,6 +22,7 @@ public:
 	std::string getNombre(void);
 	bool hasError(void);
 	char getTextura(void);
+	void setLinea(int);
+	int getLinea(void);
 	~TipoBonus(void);
-
 };
