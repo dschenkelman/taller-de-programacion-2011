@@ -143,12 +143,8 @@ long XmlParser::getOrigLineNumber(string search){
 	int longitud=search.find_first_of(' ');
 	int len=(longitud > 10)? 10 : longitud;
 	string pattern=search.substr(0,len );
-	size_t pos=this->fileOrig.find(pattern, this->lastIndex);
-	stringAux = this->fileOrig;
-	while (pos < this->lastPos && pos!= string::npos){
-		stringAux=this->fileOrig.substr(this->lastPos,this->fileOrig.length());
-		pos=this->lastPos+stringAux.find(pattern);
-	}
+	size_t pos=this->fileOrig.find(pattern, this->lastIndex + 1);
+	
 	long saltosDeLinea=1;
 	if (pos != string::npos){
 		for (int i=this->lastIndex; i < pos; i++){
@@ -157,7 +153,7 @@ long XmlParser::getOrigLineNumber(string search){
 		}
 		this->lastIndex = pos;	
 	}
-	this->lastPos = pos;
+
 	this->lastJumpAmount += saltosDeLinea;
 	return this->lastJumpAmount--;
 }
