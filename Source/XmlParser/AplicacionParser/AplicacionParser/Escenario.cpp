@@ -73,8 +73,10 @@ List<TipoBonus> Escenario::obtenerTiposBonus(List<XmlElement>& listaElementos)
 					bool texturaExistente = verificarTexturaEnLista(listaTexturas, tb.getTextura());
 					if(texturaExistente)
 					{
-						Logger::getInstance()->logWarning("La textura asignada para el tipo bonus " + 
-							tb.getNombre() + " está repetida \0");
+						stringstream msg;
+						msg << "La textura asignada para el tipo bonus " <<
+							tb.getNombre() + " está repetida. Linea: " << listaBonusXml.at(j).getStartLine();
+						Logger::getInstance()->logWarning(msg.str());
 					}
 
 				}
@@ -122,17 +124,20 @@ List<TipoObstaculo> Escenario::obtenerTiposObstaculos(List<XmlElement>& listaEle
 					bool texturaExistente = verificarTexturaEnLista(listaTexturas, to.getTextura());
 					if(texturaExistente)
 					{
-						Logger::getInstance()->logWarning("La textura asignada para el tipo obstaculo " + 
-							to.getNombre() + " está repetida \0");
+						stringstream msg;
+						msg << "La textura asignada para el tipo obstaculo " + 
+							to.getNombre() + " está repetida. Linea: " << listaObstaculosXml.at(j).getStartLine();
+						Logger::getInstance()->logWarning(msg.str());
 					}
 				}
 
 				else
 				{
 					//Logger, tipo obstaculo invalido, le falta un atributo.
-					std::stringstream nroLinea; nroLinea << listaObstaculosXml.at(j).getStartLine();
-					Logger::getInstance()->logWarning("El tipo obstaculo en la linea " + nroLinea.str() +
-						" es inválido. No tiene asignado correctamente los atributos \0");
+					stringstream msg;
+					msg << "El tipo obstaculo en la linea " << listaObstaculosXml.at(j).getStartLine() <<
+						" es inválido. No tiene asignado correctamente los atributos. Linea: " << listaObstaculosXml.at(j).getStartLine();
+					Logger::getInstance()->logWarning(msg.str());
 				}
 			}
 		}

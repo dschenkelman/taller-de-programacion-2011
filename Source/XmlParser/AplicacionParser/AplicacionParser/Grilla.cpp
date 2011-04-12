@@ -175,7 +175,9 @@ void Grilla::generarMatriz(List<XmlElement>& listaElementos)
 				if(!bonusValido)
 				{
 					//Logger bonus inexistente
-					Logger::getInstance()->logError("En Grilla, bonus inexistente; no se puede imprimir. \0");
+					stringstream msg;
+					msg << "En Grilla, bonus inexistente; no se puede imprimir. Linea: " << listaElementos.at(i).getStartLine();
+					Logger::getInstance()->logError(msg.str());
 					this->tieneError = true;
 					delete cam;
 					continue;
@@ -183,12 +185,14 @@ void Grilla::generarMatriz(List<XmlElement>& listaElementos)
 
 				cam->getBonus().setTipoBonus(obtenerTipoBonus(tipoBonus));
 			}
-			bool result = colocarCeldaEnMatriz(cam);
+			bool result = colocarCeldaEnMatriz(cam, listaElementos.at(i).getStartLine());
 
 			if(!result)
 			{
 				//Logger no se pudo meter elemento porque ya esta ocupada la posicion
-				Logger::getInstance()->logWarning("En Grilla, no se pudo colocar el camino; posicion ya ocupada. \0");
+				stringstream msg;
+				msg << "En Grilla, no se pudo colocar el camino; posicion ya ocupada. Linea: " << listaElementos.at(i).getStartLine();
+				Logger::getInstance()->logWarning(msg.str());
 			}
 		}
 
@@ -208,7 +212,9 @@ void Grilla::generarMatriz(List<XmlElement>& listaElementos)
 			if(!obstaculoValido)
 			{
 				//Logger obstaculo inexistente
-				Logger::getInstance()->logError("En Grilla, obstaculo inexistente; no se puede imprimir. \0");
+				stringstream msg;
+				msg << "En Grilla, obstaculo inexistente; no se puede imprimir. Linea: " << listaElementos.at(i).getStartLine();
+				Logger::getInstance()->logError(msg.str());
 				this->tieneError = true;
 				delete obs;
 				continue;
@@ -216,24 +222,28 @@ void Grilla::generarMatriz(List<XmlElement>& listaElementos)
 
 			obs->setTipoObstaculo(obtenerTipoObstaculo(tipoObstaculo));
 
-			bool result = colocarCeldaEnMatriz(obs);
+			bool result = colocarCeldaEnMatriz(obs, listaElementos.at(i).getStartLine());
 
 			if(!result)
 			{
 				//Logger no se pudo meter elemento porque ya está ocupada la posicion
-				Logger::getInstance()->logWarning("En Grilla, no se pudo colocar el obstaculo; posicion ya ocupada.");
+				stringstream msg;
+				msg << "En Grilla, no se pudo colocar el obstaculo; posicion ya ocupada. Linea:" << listaElementos.at(i).getStartLine();
+				Logger::getInstance()->logWarning(msg.str());
 			}
 		}
 
 		else
 		{
 			//Logger (tag con nombre incorrecto) y sigue
-			Logger::getInstance()->logWarning("En Grilla, se ignora tag desconocido '"+listaElementos.at(i).getName()+"'.");
+			stringstream msg;
+			msg << "En Grilla, se ignora tag desconocido '" << listaElementos.at(i).getName() << "'. Linea: " << listaElementos.at(i).getStartLine();
+			Logger::getInstance()->logWarning(msg.str());
 		}
 	}
 }
 
-bool Grilla::colocarCeldaEnMatriz(Celda* c)
+bool Grilla::colocarCeldaEnMatriz(Celda* c, int linea)
 {
 	int fila = c->getFila();
 	int columna = c->getColumna();
@@ -241,14 +251,14 @@ bool Grilla::colocarCeldaEnMatriz(Celda* c)
 	if (fila > alto)
 	{
 		//Logger y valor por defecto
-		Logger::getInstance()->logWarning("En Grilla, celda con fila mayor al alto de la grilla; se asigna valor por defecto.");
+		Logger::getInstance()->logWarning("En Grilla, celda con fila mayor al alto de la grilla; se asigna valor por defecto. Linea:" + linea);
 		fila = defFila;
 	}
 
 	if (columna > ancho)
 	{
 		//Logger y valor por defecto
-		Logger::getInstance()->logWarning("En Grilla, celda con columna mayor al ancho de la grilla; se asigna columna por defecto.");
+		Logger::getInstance()->logWarning("En Grilla, celda con columna mayor al ancho de la grilla; se asigna columna por defecto. Linea" + linea);
 		columna = defColumna;
 	}
 
@@ -330,7 +340,7 @@ void Grilla::verificarTiposUtilizados()
 	{
 		if(!tiposBonus.at(i).esUtilizado())
 		{
-			Logger::getInstance()->logWarning("El tipo bonus " + tiposBonus.at(i).getNombre() + " no está siendo utilizado");
+			Logger::getInstance()->logWarning("El tipo bonus " + tiposBonus.at(i).getNombre() + " no está siendo utilizado.");
 		}
 	}
 
