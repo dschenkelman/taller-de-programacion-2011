@@ -13,6 +13,8 @@
 class XmlParser
 {
 private:
+	size_t lastIndex;
+	long lastJumpAmount;
 	long lineNumber;
 	std::ifstream xmlFile;
 	std::string fileOrig;

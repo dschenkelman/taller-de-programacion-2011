@@ -189,7 +189,7 @@ void Grilla::generarMatriz(List<XmlElement>& listaElementos)
 				{
 					//Logger bonus inexistente
 					stringstream msg;
-					msg << "En Grilla, bonus inexistente; no se puede imprimir. Linea: " << listaElementos.at(i).getStartLine();
+					msg << "En Grilla, camino con bonus inexistente; no se puede imprimir. Linea: " << listaElementos.at(i).getStartLine();
 					Logger::getInstance()->logError(msg.str());
 					this->tieneError = true;
 					delete cam;
