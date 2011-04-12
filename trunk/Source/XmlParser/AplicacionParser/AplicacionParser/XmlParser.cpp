@@ -383,7 +383,16 @@ XmlElement XmlParser::parse()
 				currentElement.setEndLine(this->lineNumber);				
 				if (parentSet)
 				{
-					currentParent.addChild(currentElement);
+					if (this->isValidTagName(name))
+					{
+						currentParent.addChild(currentParent);
+					}
+					else
+					{
+						stringstream msg;
+						msg << "Nombre de tag: " << name << " no reconocido. Linea: " << currentParent.getStartLine();
+						this->log->logWarning(msg.str());
+					}
 				}
 			}
 			else
