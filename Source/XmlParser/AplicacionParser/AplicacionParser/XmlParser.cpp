@@ -407,8 +407,8 @@ XmlElement XmlParser::parse()
 		}
 		else
 		{
-			//loop in case there are incorrect elements closing
-			while (name != currentParent.getName() && previousParents.count() != 0)
+			//in case there are incorrect elements closing
+			if (name != currentParent.getName() && previousParents.count() != 0)
 			{
 				//TODO: loggear que no se cerro bien el tag
 				stringstream msg;
