@@ -1,0 +1,6 @@
+11/04/11 23:41:55  Warning: En Grilla, no se pudo colocar el camino; posicion ya ocupada. Linea: 3
+11/04/11 23:41:55  Warning: En Grilla, no se pudo colocar el obstaculo; posicion ya ocupada. Linea:3
+11/04/11 23:41:55  Warning: En Grilla, no se pudo colocar el camino; posicion ya ocupada. Linea: 3
+11/04/11 23:41:55  Warning: En Grilla, no se pudo colocar el obstaculo; posicion ya ocupada. Linea:3
+11/04/11 23:41:55  Warning: En Grilla, no se pudo colocar el camino; posicion ya ocupada. Linea: 3
+11/04/11 23:41:55  Warning: En Grilla, no se pudo colocar el obstaculo; posicion ya ocupada. Linea:3
