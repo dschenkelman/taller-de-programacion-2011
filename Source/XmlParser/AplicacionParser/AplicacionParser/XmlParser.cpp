@@ -397,12 +397,21 @@ XmlElement XmlParser::parse()
 			}
 			else
 			{
-				if (parentSet)
+				if (!this->isValidTagName(name))
 				{
-					previousParents.push(currentParent);
+					stringstream msg;
+					msg << "Nombre de tag: " << name << " no reconocido. Linea: " << currentElement.getStartLine();
+					this->log->logWarning(msg.str());
 				}
-				currentParent = currentElement;
-				parentSet = true;
+				else
+				{
+					if (parentSet)
+					{
+						previousParents.push(currentParent);
+					}
+					currentParent = currentElement;
+					parentSet = true;
+				}
 			}
 		}
 		else
