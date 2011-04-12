@@ -69,38 +69,47 @@ List<TipoBonus> Escenario::obtenerTiposBonus(List<XmlElement>& listaElementos)
 		if(listaElementos.at(i).getName() == "tiposbonus")
 		{
 			found = true;
-			List<XmlElement> listaBonusXml = listaElementos.at(i).getChildren();
-			
-			for(size_t j = 0; j < listaBonusXml.length(); j++)
+			if (listaElementos.at(i).hasChildren())
 			{
-				if(listaBonusXml.at(j).hasAttribute("nombre") && listaBonusXml.at(j).hasAttribute("textura"))
+				List<XmlElement> listaBonusXml = listaElementos.at(i).getChildren();
+			
+				for(size_t j = 0; j < listaBonusXml.length(); j++)
 				{
-					TipoBonus tb(listaBonusXml.at(j));
-					tb.setLinea(listaBonusXml.at(j).getStartLine());
-					listaBonus.add(tb);
-
-					bool texturaExistente = listaTexturas.contains(tb.getTextura());
-					if(texturaExistente)
+					if(listaBonusXml.at(j).hasAttribute("nombre") && listaBonusXml.at(j).hasAttribute("textura"))
 					{
-						stringstream msg;
-						msg << "La textura asignada para el tipo bonus " <<
-							tb.getNombre() + " está repetida. Linea: " << listaBonusXml.at(j).getStartLine();
-						Logger::getInstance()->logWarning(msg.str());
+						TipoBonus tb(listaBonusXml.at(j));
+						tb.setLinea(listaBonusXml.at(j).getStartLine());
+						listaBonus.add(tb);
+
+						bool texturaExistente = listaTexturas.contains(tb.getTextura());
+						if(texturaExistente)
+						{
+							stringstream msg;
+							msg << "La textura asignada para el tipo bonus " <<
+								tb.getNombre() + " está repetida. Linea: " << listaBonusXml.at(j).getStartLine();
+							Logger::getInstance()->logWarning(msg.str());
+						}
+						else
+						{
+							listaTexturas.add(tb.getTextura());
+						}
+
 					}
+
 					else
 					{
-						listaTexturas.add(tb.getTextura());
+						//Logger, tipo bonus invalido.
+						std::stringstream nroLinea;	nroLinea << listaBonusXml.at(j).getStartLine();
+						Logger::getInstance()->logWarning("El tipo bonus en la linea " + nroLinea.str() + 
+							" es inválido, no tiene asignados correctamente los atributos \0");
 					}
-
-				}
-
-				else
-				{
-					//Logger, tipo bonus invalido.
-					std::stringstream nroLinea;	nroLinea << listaBonusXml.at(j).getStartLine();
-					Logger::getInstance()->logWarning("El tipo bonus en la linea " + nroLinea.str() + 
-						" es inválido, no tiene asignados correctamente los atributos \0");
-				}
+				}	
+			}
+			else
+			{
+				stringstream msg;
+				msg << "La lista de tipos bonus esta vacia. Linea: " << listaElementos.at(i).getStartLine();
+				Logger::getInstance()->logWarning(msg.str());
 			}
 		}
 	}
@@ -125,38 +134,47 @@ List<TipoObstaculo> Escenario::obtenerTiposObstaculos(List<XmlElement>& listaEle
 		if(listaElementos.at(i).getName() == "tiposobstaculos")
 		{
 			found = true;
-			List<XmlElement> listaObstaculosXml = listaElementos.at(i).getChildren();
-			
-			for(size_t j = 0; j < listaObstaculosXml.length(); j++)
-			{
-				if(listaObstaculosXml.at(j).hasAttribute("nombre") && listaObstaculosXml.at(j).hasAttribute("textura"))
+			if (listaElementos.at(i).hasChildren())
+			{			
+				List<XmlElement> listaObstaculosXml = listaElementos.at(i).getChildren();
+				
+				for(size_t j = 0; j < listaObstaculosXml.length(); j++)
 				{
-					TipoObstaculo to(listaObstaculosXml.at(j));
-					to.setLinea(listaObstaculosXml.at(j).getStartLine());
-					listaObstaculos.add(to);
-
-					bool texturaExistente = listaTexturas.contains(to.getTextura());
-					if(texturaExistente)
+					if(listaObstaculosXml.at(j).hasAttribute("nombre") && listaObstaculosXml.at(j).hasAttribute("textura"))
 					{
-						stringstream msg;
-						msg << "La textura asignada para el tipo obstaculo " + 
-							to.getNombre() + " está repetida. Linea: " << listaObstaculosXml.at(j).getStartLine();
-						Logger::getInstance()->logWarning(msg.str());
+						TipoObstaculo to(listaObstaculosXml.at(j));
+						to.setLinea(listaObstaculosXml.at(j).getStartLine());
+						listaObstaculos.add(to);
+
+						bool texturaExistente = listaTexturas.contains(to.getTextura());
+						if(texturaExistente)
+						{
+							stringstream msg;
+							msg << "La textura asignada para el tipo obstaculo " + 
+								to.getNombre() + " está repetida. Linea: " << listaObstaculosXml.at(j).getStartLine();
+							Logger::getInstance()->logWarning(msg.str());
+						}
+						else
+						{
+							listaTexturas.add(to.getTextura());
+						}
 					}
+
 					else
 					{
-						listaTexturas.add(to.getTextura());
+						//Logger, tipo obstaculo invalido, le falta un atributo.
+						stringstream msg;
+						msg << "El tipo obstaculo en la linea " << listaObstaculosXml.at(j).getStartLine() <<
+							" es inválido. No tiene asignado correctamente los atributos. Linea: " << listaObstaculosXml.at(j).getStartLine();
+						Logger::getInstance()->logWarning(msg.str());
 					}
 				}
-
-				else
-				{
-					//Logger, tipo obstaculo invalido, le falta un atributo.
-					stringstream msg;
-					msg << "El tipo obstaculo en la linea " << listaObstaculosXml.at(j).getStartLine() <<
-						" es inválido. No tiene asignado correctamente los atributos. Linea: " << listaObstaculosXml.at(j).getStartLine();
-					Logger::getInstance()->logWarning(msg.str());
-				}
+			}
+			else
+			{
+				stringstream msg;
+				msg << "La lista de tipos obstaculos esta vacia. Linea: " << listaElementos.at(i).getStartLine();
+				Logger::getInstance()->logWarning(msg.str());
 			}
 		}
 	}
