@@ -38,8 +38,8 @@ XmlParser::~XmlParser(void)
 	if (this->xmlFile.is_open())
 		this->xmlFile.close();
 	this->log->closeLog();
-	remove(AUX);
-	remove(PARSING);
+	/*remove(AUX);
+	remove(PARSING);*/
 }
 void XmlParser::openFile(std::string filename){
 
@@ -53,7 +53,7 @@ void XmlParser::openFile(std::string filename){
 		this->xmlFile.open(PARSING, ios::in | ios::binary);
 		this->lineNumber=1;
 	}
-	remove(AUX);
+	//remove(AUX);
 	this->parsingFileName=filename;
 
 	
@@ -67,9 +67,9 @@ bool XmlParser::preParseFile(std::string filename){
 	std::ifstream xmlAuxFile;
 	std::ifstream xmlAux;
 
-	if (filename.compare(this->parsingFileName) == 0) //Si ya lo indente como quería no hago más nada.
-		return true;
-	
+	//if (filename.compare(this->parsingFileName) == 0) //Si ya lo indente como quería no hago más nada.
+	//	return true;
+	//
 	if (!xmlAuxFile.is_open()){
 		xmlAuxFile.open(filename.c_str(), ios::in | ios::binary);
 		if (xmlAuxFile.is_open() == false)
@@ -104,16 +104,19 @@ bool XmlParser::removeBlankLines(void){
 	ifstream initialFile(AUX, ios::in|ios::binary);	
 	ofstream outputFile(PARSING, ios::out|ios::binary);	
 	string lineToRead;
+	string test;
 
 	if ( !outputFile.is_open() || !initialFile.is_open() ) {
 		return false;
 	}
 
 	while (getline( initialFile, lineToRead )){
-		trim(lineToRead,'\n');
 		trim(lineToRead,' ');
+		trim(lineToRead,'\n');
+		trim(lineToRead,'\t');
 		if (lineToRead.length() > 0){
-			outputFile<<lineToRead<<"\n";
+			outputFile<<lineToRead<<'\n';
+			test+=lineToRead.append("\n");
 		}
 	}
 
