@@ -151,15 +151,15 @@ long XmlParser::getOrigLineNumber(string search){
 	}
 	long saltosDeLinea=1;
 	if (pos != string::npos){
-		this->lastIndex = pos;	
 		for (int i=this->lastIndex; i < pos; i++){
 			if (this->fileOrig[i] == '&')
 				saltosDeLinea++;
 		}
+		this->lastIndex = pos;	
 	}
 	this->lastPos = pos;
 	this->lastJumpAmount += saltosDeLinea;
-	return this->lastJumpAmount;
+	return this->lastJumpAmount--;
 }
 
 
