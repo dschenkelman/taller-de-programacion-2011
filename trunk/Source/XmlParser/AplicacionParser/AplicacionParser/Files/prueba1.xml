@@ -2,7 +2,7 @@
   <GRILLA ancho="10" alto="15" tipoObstaculoPorDefecto="OBS1" >
     <OBSTACULO  fila="1" columna="5" tipo="OBS1"/>
     <CAMINO fila="5" columna="3" >
-		<BONUS tipo="Frutillitas"/>
+	<BONUS tipo="Frutillitas"/>
     </CAMINO>
   </GRILLA>
   <TIPOSOBSTACULOS>
