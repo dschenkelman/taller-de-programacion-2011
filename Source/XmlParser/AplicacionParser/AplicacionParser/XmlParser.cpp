@@ -385,7 +385,7 @@ XmlElement XmlParser::parse()
 				{
 					if (this->isValidTagName(name))
 					{
-						currentParent.addChild(currentParent);
+						currentParent.addChild(currentElement);
 					}
 					else
 					{
