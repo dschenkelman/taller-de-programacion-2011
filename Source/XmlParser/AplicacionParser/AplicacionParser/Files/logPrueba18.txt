@@ -1,0 +1,6 @@
+12/04/11 20:01:18  Warning: El tag: caino no se cerro correctamente. Linea apertura: 5. Linea error: 7
+12/04/11 20:01:18  Warning: En Grilla, se ignora tag desconocido 'caino'. Linea: 5
+12/04/11 20:01:18  Warning: El tipo bonus Frutillita no está siendo utilizado. Linea: 11
+12/04/11 20:03:37  Warning: El tag: caino no se cerro correctamente. Linea apertura: 5. Linea error: 7
+12/04/11 20:03:37  Warning: En Grilla, se ignora tag desconocido 'caino'. Linea: 5
+12/04/11 20:03:37  Warning: El tipo bonus Frutillita no está siendo utilizado. Linea: 11
