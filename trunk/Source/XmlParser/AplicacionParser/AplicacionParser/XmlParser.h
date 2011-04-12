@@ -16,6 +16,7 @@ private:
 	size_t lastIndex;
 	long lastJumpAmount;
 	long lineNumber;
+	size_t lastPos;
 	std::ifstream xmlFile;
 	std::string fileOrig;
 	std::string lineRead;

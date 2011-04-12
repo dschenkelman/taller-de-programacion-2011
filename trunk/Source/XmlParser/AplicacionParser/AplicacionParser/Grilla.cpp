@@ -54,6 +54,8 @@ Grilla::Grilla(XmlElement& e, List<TipoObstaculo>& lo, List<TipoBonus>& lb) : ma
 		}
 
 	}
+	else
+		ancho=0;
 
 	if(e.hasAttribute("alto"))
 	{
@@ -73,6 +75,8 @@ Grilla::Grilla(XmlElement& e, List<TipoObstaculo>& lo, List<TipoBonus>& lb) : ma
 			alto = al;
 		}
 	}
+	else
+		alto=0;
 
 	if (e.hasAttribute("tipoobstaculopordefecto"))
 	{
@@ -105,6 +109,8 @@ Grilla::Grilla(XmlElement& e, List<TipoObstaculo>& lo, List<TipoBonus>& lb) : ma
 
 Grilla::Grilla(void) : matrizGenerada(false), tieneError(false)
 {
+	this->ancho=0;
+	this->alto=0;
 }
 
 int Grilla::getAlto()

@@ -31,6 +31,7 @@ XmlParser::XmlParser(void) : lastIndex(0), lastJumpAmount(0)
 	this->hasAttributeErrors = false;
 	this->isOpeningLine = true;
 	this->fileOrig=" ";
+	this->lastPos=0;
 }
 
 XmlParser::~XmlParser(void)
@@ -67,9 +68,9 @@ bool XmlParser::preParseFile(std::string filename){
 	std::ifstream xmlAuxFile;
 	std::ifstream xmlAux;
 
-	//if (filename.compare(this->parsingFileName) == 0) //Si ya lo indente como quería no hago más nada.
-	//	return true;
-	//
+	if (filename.compare(this->parsingFileName) == 0) //Si ya lo indente como quería no hago más nada.
+		return true;
+	
 	if (!xmlAuxFile.is_open()){
 		xmlAuxFile.open(filename.c_str(), ios::in | ios::binary);
 		if (xmlAuxFile.is_open() == false)
@@ -115,8 +116,7 @@ bool XmlParser::removeBlankLines(void){
 		trim(lineToRead,'\n');
 		trim(lineToRead,'\t');
 		if (lineToRead.length() > 0){
-			outputFile<<lineToRead<<'\n';
-			test+=lineToRead.append("\n");
+			outputFile<<lineToRead<<"\n";
 		}
 	}
 
@@ -139,10 +139,16 @@ void XmlParser::closeFile(void){
 //Dada un string a buscar, devuelve en que linea esta del archivo original.
 long XmlParser::getOrigLineNumber(string search){
 
-	int longitud=search.find(' ');
+	string stringAux;
+	int longitud=search.find_first_of(' ');
 	int len=(longitud > 10)? 10 : longitud;
 	string pattern=search.substr(0,len );
 	size_t pos=this->fileOrig.find(pattern, this->lastIndex);
+	stringAux = this->fileOrig;
+	while (pos < this->lastPos && pos!= string::npos){
+		stringAux=this->fileOrig.substr(this->lastPos,this->fileOrig.length());
+		pos=this->lastPos+stringAux.find(pattern);
+	}
 	long saltosDeLinea=1;
 	if (pos != string::npos){
 		this->lastIndex = pos;	
@@ -151,7 +157,7 @@ long XmlParser::getOrigLineNumber(string search){
 				saltosDeLinea++;
 		}
 	}
-
+	this->lastPos = pos;
 	this->lastJumpAmount += saltosDeLinea;
 	return this->lastJumpAmount;
 }

@@ -11,6 +11,7 @@ Escenario::Escenario(XmlElement& e) : tieneError(false)
 {
 	this->populateValidAttributes();
 	this->tieneError = !this->validateAttributes(e);
+	Grilla miGrilla;
 
 	if (e.hasChildren())
 	{
@@ -25,6 +26,10 @@ Escenario::Escenario(XmlElement& e) : tieneError(false)
 			}
 		}
 	}
+	else{
+		this->grilla = miGrilla;
+	}
+
 }
 
 Grilla& Escenario::getGrilla()
