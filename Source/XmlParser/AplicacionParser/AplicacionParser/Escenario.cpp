@@ -12,14 +12,17 @@ Escenario::Escenario(XmlElement& e) : tieneError(false)
 	this->populateValidAttributes();
 	this->tieneError = !this->validateAttributes(e);
 
-	tiposBonus = obtenerTiposBonus(e.getChildren());
-	tiposObstaculos = obtenerTiposObstaculos(e.getChildren());
-	
-	for(size_t i = 0; i < e.getChildren().length(); i++)
+	if (e.hasChildren())
 	{
-		if (e.getChildren().at(i).getName() == "grilla")
+		tiposBonus = obtenerTiposBonus(e.getChildren());
+		tiposObstaculos = obtenerTiposObstaculos(e.getChildren());
+
+		for(size_t i = 0; i < e.getChildren().length(); i++)
 		{
-			this->grilla = Grilla(e.getChildren().at(i), tiposObstaculos, tiposBonus);
+			if (e.getChildren().at(i).getName() == "grilla")
+			{
+				this->grilla = Grilla(e.getChildren().at(i), tiposObstaculos, tiposBonus);
+			}
 		}
 	}
 }
