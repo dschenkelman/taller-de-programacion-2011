@@ -92,7 +92,7 @@ Grilla::Grilla(XmlElement& e, List<TipoObstaculo>& lo, List<TipoBonus>& lb) : ma
 
 	bool obstaculoValido = verificarTipoObstaculoExistente(this->tipoObstaculoPorDefecto);
 
-	if (!obstaculoValido)
+	if (!obstaculoValido && e.hasAttribute("tipoobstaculopordefecto")) //Si no es válido pero esta definido
 	{
 		stringstream msg;
 		msg << "En Grilla, el obstaculo por defecto definido no esta en la lista de obstaculos. Si es usado en algun casillero no se podra graficar. Linea: " << e.getStartLine();
