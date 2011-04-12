@@ -4,7 +4,7 @@
 	<CAMINO fila="5" columna="3">
 		<BONUS tipo="Frutillita"/>
     </CAMINO>
-	<CAMINO fila="5" columna="3">
+	<CAMINO fila="2" columna="3">
 		<BONUS tipo="Manzana"/>
     </CAMINO>	
   </GRILLA>
