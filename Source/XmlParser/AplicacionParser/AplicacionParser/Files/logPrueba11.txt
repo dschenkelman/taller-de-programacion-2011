@@ -1,0 +1,2 @@
+12/04/11 02:04:32  Warning: En Grilla, celda con columna mayor al ancho de la grilla; no se agrega a la matriz. Linea: 3
+12/04/11 02:04:32  Warning: El tipo bonus Frutillita no está siendo utilizado. Linea: 8
