@@ -61,8 +61,9 @@ Camino::Camino(XmlElement& e) : tieneBonus(false), tieneError(false)
 		else
 		{
 			//un camino con más de un bonus, por ahi hay que meter advertencia y usar un solo bonus
-			std::stringstream nroLinea;	nroLinea << e.getStartLine();
-			Logger::getInstance()->logWarning("Línea "+nroLinea.str()+" -> En Camino, la cantidad de bonus es mayor a uno.");
+			stringstream msg;
+			msg << "En Camino, la cantidad de bonus es mayor a uno. Linea: " << e.getStartLine();
+			Logger::getInstance()->logWarning(msg.str());
 		}
 	}
 }

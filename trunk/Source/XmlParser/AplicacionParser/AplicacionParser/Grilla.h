@@ -25,7 +25,7 @@ class Grilla
 	bool validateAttributes(XmlElement& e);
 	List<std::string> validAttributes;
 	void generarMatriz(List<XmlElement>& le);
-	bool colocarCeldaEnMatriz(Celda* c);
+	bool colocarCeldaEnMatriz(Celda* c, int linea);
 	bool verificarTipoBonusExistente(std::string tb);
 	bool verificarTipoObstaculoExistente(std::string to);
 	void verificarTiposUtilizados();
