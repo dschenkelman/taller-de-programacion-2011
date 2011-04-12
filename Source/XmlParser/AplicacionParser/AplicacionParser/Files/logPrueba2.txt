@@ -1,0 +1,4 @@
+11/04/11 21:07:34  Warning: No existe lista de tipo bonus 
+11/04/11 21:07:34  Warning: No existe lista de tipo bonus 
+11/04/11 21:07:34  Warning: No existe lista de tipos obstaculos 
+11/04/11 21:07:34  Error: En Grilla, obstaculo inexistente; no se puede imprimir. 

@@ -1,0 +1,34 @@
+11/04/11 21:12:51  Warning: Falta caracter > en linea: 3
+
+11/04/11 21:12:51  Warning: Falta caracter > en linea: 3
+Falta caracter < en linea: 1
+
+11/04/11 21:12:51  Warning: Falta caracter > en linea: 4
+
+11/04/11 21:12:51  Warning: Falta caracter > en linea: 4
+Falta caracter < en linea: 3
+
+11/04/11 21:12:51  Warning: Falta caracter > en linea: 4
+
+11/04/11 21:12:51  Warning: Falta caracter > en linea: 4
+Falta caracter < en linea: 3
+
+11/04/11 21:12:51  Warning: Falta caracter > en linea: 3
+
+11/04/11 21:12:51  Warning: Falta caracter > en linea: 3
+Falta caracter < en linea: 1
+
+11/04/11 21:12:51  Warning: El tag: camino no se cerro correctamente. Linea apertura: 1. Linea error: 9
+11/04/11 21:12:51  Warning: El tag: camino no se cerro correctamente. Linea apertura: 3. Linea error: 9
+11/04/11 21:12:51  Warning: El tag: camino no se cerro correctamente. Linea apertura: 3. Linea error: 9
+11/04/11 21:12:51  Warning: Falta caracter > en linea: 3
+
+11/04/11 21:12:51  Warning: Falta caracter > en linea: 3
+Falta caracter < en linea: 1
+
+11/04/11 21:12:51  Warning: El tag: tipobonus no se cerro correctamente. Linea apertura: 1. Linea error: 13
+11/04/11 21:12:51  Warning: El tag: grilla no se cerro correctamente. Linea apertura: 2. Linea error: 14
+11/04/11 21:12:51  Warning: No existe lista de tipo bonus 
+11/04/11 21:12:51  Warning: No existe lista de tipos obstaculos 
+11/04/11 21:12:51  Warning: En Grilla, se ignora tag desconocido 'grilla'.
+11/04/11 21:12:51  Warning: En Grilla, se ignora tag desconocido 'tiposbonus'.

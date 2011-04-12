@@ -1,0 +1,11 @@
+11/04/11 20:58:52  Warning: Falta caracter > en linea: 5
+
+11/04/11 20:58:52  Warning: Falta caracter > en linea: 5
+Falta caracter < en linea: 5
+
+11/04/11 20:58:52  Warning: El tag: camino no se cerro correctamente. Linea apertura: 4. Linea error: 7
+11/04/11 20:58:52  Warning: No existe lista de tipo bonus 
+11/04/11 20:58:52  Warning: No existe lista de tipo bonus 
+11/04/11 20:58:52  Warning: No existe lista de tipos obstaculos 
+11/04/11 20:58:52  Error: En Grilla, bonus inexistente; no se puede imprimir. 
+11/04/11 20:58:52  Warning: El tipo bonus Frutillita no está siendo utilizado
