@@ -403,15 +403,13 @@ XmlElement XmlParser::parse()
 					msg << "Nombre de tag: " << name << " no reconocido. Linea: " << currentElement.getStartLine();
 					this->log->logWarning(msg.str());
 				}
-				else
+				
+				if (parentSet)
 				{
-					if (parentSet)
-					{
-						previousParents.push(currentParent);
-					}
-					currentParent = currentElement;
-					parentSet = true;
+					previousParents.push(currentParent);
 				}
+				currentParent = currentElement;
+				parentSet = true;
 			}
 		}
 		else
