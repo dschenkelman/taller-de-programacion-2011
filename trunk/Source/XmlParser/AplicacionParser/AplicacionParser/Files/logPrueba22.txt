@@ -1,0 +1,3 @@
+12/04/11 21:06:03  Warning: El tag: obstaculo no se cerro correctamente. Linea apertura: 3. Linea error: 7
+12/04/11 21:06:03  Warning: Elemento Obstaculo tiene hijos, lo cual no es posible. Linea: 3
+12/04/11 21:06:03  Warning: El tipo bonus Frutillita no está siendo utilizado. Linea: 9
