@@ -29,7 +29,7 @@ using namespace std;
 
 void printLeaks(int leaks)
 {
-	std::cout << "Camino Tests: Hubo " << leaks << " memory leaks." << endl << endl;
+	std::cout << "MAIN: Hubo " << leaks << " memory leaks." << endl << endl;
 }
 
 int execute(int argc, char* argv[])
@@ -40,17 +40,34 @@ int execute(int argc, char* argv[])
 		return 0;
 	}
 	
-	string fileName = argv[1];
+	char* fileName = argv[1];
 
-	XmlParser parser;
-	parser.openFile(fileName);
-	XmlElement root = parser.parse();
-	parser.closeFile();
-	Escenario escenario(root);
-	if (!escenario.hasError())
+	ifstream ifile(fileName);
+	if (ifile) 
 	{
-		Grapher grapher;
-		grapher.draw(escenario);
+		// The file exists, and is open for input
+		ifile.close();
+		XmlParser parser;
+		string name = fileName;
+		parser.openFile(name);
+		XmlElement root = parser.parse();
+		parser.closeFile();
+		Escenario escenario(root);
+		if (!escenario.hasError())
+		{
+			Grapher grapher;
+			grapher.draw(escenario);
+		}
+		else
+		{
+			cout << "Error al imprimir el Escenario. Referirse a parser.log.txt para mas detalles." << endl;
+			return -1;
+		}
+	}
+	else
+	{
+		cout << "El archivo: " << fileName << " no existe." << endl;
+		return -1;
 	}
 	
 	return 0;
@@ -59,8 +76,8 @@ int execute(int argc, char* argv[])
 int main(int argc, char* argv[])
 {
 	int res = execute(argc, argv);
-	int leaks = _CrtDumpMemoryLeaks();
-	printLeaks(leaks);
+	//int leaks = _CrtDumpMemoryLeaks();
+	//printLeaks(leaks);
 
 	char aux;
 	cin >> aux;
