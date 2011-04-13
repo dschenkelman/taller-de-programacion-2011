@@ -11,6 +11,13 @@ Bonus::Bonus(void) : tieneError(false)
 
 Bonus::Bonus(XmlElement& e) : tieneError(false)
 {
+	if (e.hasChildren())
+	{
+		stringstream msg;
+		msg << "Elemento Bonus tiene hijos, lo cual no es posible. Linea: " << e.getStartLine();
+		Logger::getInstance()->logWarning(msg.str());
+	}
+	
 	this->populateValidAttributes();
 	this->tieneError = !this->validateAttributes(e);
 	if (e.hasAttribute("tipo"))

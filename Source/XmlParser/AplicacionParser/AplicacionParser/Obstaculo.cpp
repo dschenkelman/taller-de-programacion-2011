@@ -12,6 +12,13 @@ Obstaculo::Obstaculo(std::string& t, int f, int c) : Celda(f, c), tipo(t), tiene
 
 Obstaculo::Obstaculo(XmlElement& e) : tieneError(false)
 {
+	if (e.hasChildren())
+	{
+		stringstream msg;
+		msg << "Elemento Obstaculo tiene hijos, lo cual no es posible. Linea: " << e.getStartLine();
+		Logger::getInstance()->logWarning(msg.str());
+	}
+	
 	this->populateValidAttributes();
 	this->tieneError = !this->validateAttributes(e);
 	if (e.hasAttribute("tipo"))
