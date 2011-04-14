@@ -250,7 +250,7 @@ bool Grilla::colocarCeldaEnMatriz(Celda* c, int linea)
 	int fila = c->getFila();
 	int columna = c->getColumna();
 
-	if (fila > alto)
+	if (fila >= alto)
 	{
 		//Logger y valor por defecto
 		stringstream msg;
@@ -260,7 +260,7 @@ bool Grilla::colocarCeldaEnMatriz(Celda* c, int linea)
 		return false;
 	}
 
-	if (columna > ancho)
+	if (columna >= ancho)
 	{
 		//Logger y valor por defecto
 		stringstream msg;
