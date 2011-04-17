@@ -58,8 +58,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="&quot;$(VCInstallDir)lib\sdl.lib&quot;"
+				AdditionalOptions="lib\SDL.lib lib\SDLmain.lib"
 				LinkIncremental="2"
+				AdditionalLibraryDirectories=""
 				GenerateDebugInformation="true"
 				AssemblyDebug="1"
 				EntryPointSymbol=""
@@ -136,6 +137,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="$(NoInherit)"
 				LinkIncremental="1"
+				AdditionalLibraryDirectories="&quot;C:\Users\Alejandro\Documents\taller-de-programacion-2011\Source\PruebasJuanMa\Prueba\lib&quot;"
 				GenerateDebugInformation="true"
 				TargetMachine="1"
 			/>
@@ -281,42 +283,10 @@
 			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav"
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
-			<File
-				RelativePath=".\app.ico"
-				>
-			</File>
-			<File
-				RelativePath=".\app.rc"
-				>
-			</File>
-			<File
-				RelativePath=".\smile.bmp"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="config"
 			>
-			<File
-				RelativePath=".\mapa.xml"
-				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					ExcludedFromBuild="true"
-					>
-					<Tool
-						Name="VCXMLDataGeneratorTool"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release|Win32"
-					ExcludedFromBuild="true"
-					>
-					<Tool
-						Name="VCXMLDataGeneratorTool"
-					/>
-				</FileConfiguration>
-			</File>
 		</Filter>
 		<File
 			RelativePath=".\ReadMe.txt"
