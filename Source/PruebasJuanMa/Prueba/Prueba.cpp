@@ -120,7 +120,7 @@ int main(int argc, char* argv[])
 
 	SDL_Surface *screen;
 	 
-	screen = SDL_SetVideoMode(640, 480, 16, SDL_DOUBLEBUF | SDL_FULLSCREEN);
+	screen = SDL_SetVideoMode(640, 480, 16, SDL_DOUBLEBUF);
 	if (screen == NULL) {
 		printf("Unable to set video mode: %s\n", SDL_GetError());
 		return 1;
