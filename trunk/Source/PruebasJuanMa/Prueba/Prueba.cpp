@@ -11,75 +11,196 @@
 #include "Camino.h"
 #include "Mapa.h"
 #include "ScreenLogger.h"
+#include <math.h>
+#include "sdl/sdl.h"
 
-using namespace std;
-using namespace System;
 
-int main(array<System::String ^> ^args)
+#define SDL_main main 
+
+int rotateX(int xInicial, int yInicial,int xEje, int yEje, int grados){
+	// corrijo el eje de referencia
+	int xi = xInicial-xEje;
+	int yi = yInicial-yEje;
+
+	// roto los angulos
+	int xf = ((xi*cos(double(grados)))-(yi*sin(double(grados))));
+	
+	// devuelvo el punto con su eje de coordenadas original
+	return (xf+xEje);
+}
+
+int rotateY(int xInicial, int yInicial,int xEje, int yEje, int grados){
+	// corrijo el eje de referencia
+	int xi = xInicial-xEje;
+	int yi = yInicial-yEje;
+
+	// roto los angulos
+	int yf = ((xi*sin(double(grados)))+(yi*cos(double(grados))));
+	
+	// devuelvo el punto con su eje de coordenadas original
+	return (yf+yEje);
+}
+
+
+/*
+ * Return the pixel value at (x, y)
+ * NOTE: The surface must be locked before calling this!
+ */
+Uint32 getpixel(SDL_Surface *surface, int x, int y)
 {
-	XMLParser parser;
+    int bpp = surface->format->BytesPerPixel;
+    /* Here p is the address to the pixel we want to retrieve */
+    Uint8 *p = (Uint8 *)surface->pixels + y * surface->pitch + x * bpp;
 
-	Mapa mapaNuevo;
+    switch(bpp) {
+    case 1:
+        return *p;
 
-	// Prueba polimorfismo
-	Celda listaCeldas[5];
-	
-	Camino cam1;
-	listaCeldas[0] = cam1;
-	
-	Obstaculo obs1;
-	listaCeldas[1] = obs1;
-	
-	Camino cam2;
-	listaCeldas[2] = cam2;
-	
-	Obstaculo obs2;
-	listaCeldas[3] = obs2;
-	
-	Camino cam3;
-	listaCeldas[4] = cam3;
+    case 2:
+        return *(Uint16 *)p;
 
-	for(int i=0; i<5; i++)
-	{
-		Celda* c = &(listaCeldas[i]);
-		Obstaculo* obs = dynamic_cast<Obstaculo*>(c);
-		if (obs != 0){
-			std::cout << obs->obtenerRepresentacion();
-		}else{
-			Camino* cam = dynamic_cast<Camino*>(c);
-			if (cam != 0){
-				std::cout << cam->obtenerRepresentacion();
-			}else{
-				std::cout << c->obtenerRepresentacion();
-			}
-		}
-		
+    case 3:
+        if(SDL_BYTEORDER == SDL_BIG_ENDIAN)
+            return p[0] << 16 | p[1] << 8 | p[2];
+        else
+            return p[0] | p[1] << 8 | p[2] << 16;
+
+    case 4:
+        return *(Uint32 *)p;
+
+    default:
+        return 0;       /* shouldn't happen, but avoids warnings */
+    }
+}
+
+/*
+ * Set the pixel at (x, y) to the given value
+ * NOTE: The surface must be locked before calling this!
+ */
+void putpixel(SDL_Surface *surface, int x, int y, Uint32 pixel)
+{
+    int bpp = surface->format->BytesPerPixel;
+    /* Here p is the address to the pixel we want to set */
+    Uint8 *p = (Uint8 *)surface->pixels + y * surface->pitch + x * bpp;
+
+    switch(bpp) {
+    case 1:
+        *p = pixel;
+        break;
+
+    case 2:
+        *(Uint16 *)p = pixel;
+        break;
+
+    case 3:
+        if(SDL_BYTEORDER == SDL_BIG_ENDIAN) {
+            p[0] = (pixel >> 16) & 0xff;
+            p[1] = (pixel >> 8) & 0xff;
+            p[2] = pixel & 0xff;
+        } else {
+            p[0] = pixel & 0xff;
+            p[1] = (pixel >> 8) & 0xff;
+            p[2] = (pixel >> 16) & 0xff;
+        }
+        break;
+
+    case 4:
+        *(Uint32 *)p = pixel;
+        break;
+    }
+}
+
+int main(int argc, char* argv[])
+{
+	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
+		printf("Unable to initialize SDL: %s\n", SDL_GetError());
+		return 1;
 	}
-	std::cout << '\n';
+	atexit(SDL_Quit);
 
+	SDL_Surface *screen;
+	 
+	screen = SDL_SetVideoMode(640, 480, 16, SDL_DOUBLEBUF | SDL_FULLSCREEN);
+	if (screen == NULL) {
+		printf("Unable to set video mode: %s\n", SDL_GetError());
+		return 1;
+	}
 
-
-	// Prueba del logger
-	ScreenLogger* logger = ScreenLogger::getInstance();
+	// bitmap
+	SDL_Surface *image;
+	SDL_Surface *temp;
+	temp = SDL_LoadBMP("smile.bmp");
+	if (temp == NULL) {
+		printf("Unable to load bitmap: %s\n", SDL_GetError());
+		return 1;
+	}
+	image = SDL_DisplayFormat(temp);
+	SDL_FreeSurface(temp);
 	
-	istringstream buffer(parser.parsear("ancho"));
-	int ancho_int;
-	buffer >> ancho_int;
+	SDL_Rect src, dest;
+	src.x = 0;
+	src.y = 0;
+	src.w = image->w;
+	src.h = image->h;
+	dest.x = 100;
+	dest.y = 100;
+	dest.w = image->w;
+	dest.h = image->h;
+	SDL_BlitSurface(image, &src, screen, &dest);
+	SDL_Flip(screen);
 	
-	mapaNuevo.setAncho(ancho_int);
+	SDL_Delay(1000);
 
-	istringstream buffer2(parser.parsear("alto"));
-	int alto_int;
-	buffer2 >> alto_int;
-	mapaNuevo.setAlto(alto_int);
+	int x, y;
+    
+    x = screen->w / 2;
+    y = screen->h / 2;
+
+    /* Lock the screen for direct access to the pixels */
+    if ( SDL_MUSTLOCK(screen) ) {
+        if ( SDL_LockSurface(screen) < 0 ) {
+            fprintf(stderr, "Can't lock screen: %s\n", SDL_GetError());
+            return 0;
+        }
+    }
+
+	// borro la imagen anterior
+	SDL_FillRect(screen,&dest,SDL_MapRGB(screen->format,0,0,0));
 	
-	//cout << "ancho: ";
-	logger->logIn("ancho: ");
+	// Rotación de la imagen
+	int i = 0;
+	while( i < 20 ){
+		int j = 0;
+		while( j < 20){
+			
+			int xInicial = i;
+			int yInicial = j;
 
-	cout << mapaNuevo.getAncho();
-	cout << "\nalto: ";
-	cout << mapaNuevo.getAlto();
-    cout << "\nHola a todos\n";
-	Console::Read();
-    return 0;
+			int xRot = rotateX(xInicial, yInicial, 10, 10, 10);
+			int yRot = rotateY(xInicial, yInicial, 10, 10, 10);
+			
+			// Obtengo el pixel de la imagen
+			Uint32 pixelImg = getpixel(image, xInicial, yInicial);
+
+			// Pongo el pixel en la posicion rotada
+			putpixel(screen, (100+xRot), (100+yRot), pixelImg);
+
+			j++;
+		}
+		i++;
+	}
+
+	
+	// actualizo la pantalla
+	SDL_UpdateRect(screen, 0, 0, 600, 400);
+
+    
+	if ( SDL_MUSTLOCK(screen) ) {
+        SDL_UnlockSurface(screen);
+    }
+
+	SDL_Delay(3000);
+	SDL_FreeSurface(image);
+ 
+	return 0;
 }
