@@ -283,6 +283,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Textura.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\TexturaTests.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\TipoBonus.cpp"
 				>
 			</File>
@@ -422,6 +430,14 @@
 			</File>
 			<File
 				RelativePath=".\StringTests.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Textura.h"
+				>
+			</File>
+			<File
+				RelativePath=".\TexturaTests.h"
 				>
 			</File>
 			<File
