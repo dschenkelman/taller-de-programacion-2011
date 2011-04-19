@@ -10,12 +10,34 @@ Textura::Textura(void)
 {
 }
 
-Textura::Textura(XmlElement &element) : archivo(""), nombre("")
+Textura::Textura(XmlElement &element) : archivo(""), nombre(""), tieneError(false)
 {
 	this->populateValidAttributes();
 	this->tieneError = !this->validateAttributes(element);
-	this->nombre = element.getValue("nombre");
-	this->archivo = element.getValue("archivo");
+	
+	if (element.hasAttribute("nombre"))
+	{
+		this->nombre = element.getValue("nombre");
+	}
+	else
+	{
+		stringstream msg;
+		msg << "La textura no tiene el atributo 'nombre'. Linea: " << element.getStartLine();
+		Logger::getInstance()->logError(msg.str());
+		this->tieneError = true;
+	}
+
+	if (element.hasAttribute("archivo"))
+	{
+		this->archivo = element.getValue("archivo");
+	}
+	else
+	{
+		stringstream msg;
+		msg << "La textura no tiene el atributo 'archivo'. Linea: " << element.getStartLine();
+		Logger::getInstance()->logError(msg.str());
+		this->tieneError = true;
+	}
 }
 
 string Textura::getArchivo()

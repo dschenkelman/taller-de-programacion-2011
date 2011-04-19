@@ -30,6 +30,8 @@ void TexturaTests::run()
 {
 	printResult("testIsCreatedFromElementWithNameTextura", testIsCreatedFromElementWithNameTextura());
 	printResult("testHasErrorIfAttributeNameIsNotValid", testHasErrorIfAttributeNameIsNotValid());
+	printResult("testHasErrorIfItDoesNotHaveArchivoAttribute", testHasErrorIfItDoesNotHaveArchivoAttribute());
+	printResult("testHasErrorIfItDoesNotHaveNombreAttribute", testHasErrorIfItDoesNotHaveNombreAttribute());
 	
 	int leaks = _CrtDumpMemoryLeaks();
 	printLeaks(leaks);
@@ -54,7 +56,6 @@ bool TexturaTests::testIsCreatedFromElementWithNameTextura(void)
 
 bool TexturaTests::testHasErrorIfAttributeNameIsNotValid(void)
 {
-
 	XmlElement elemento("Textura", 1, 100);
 	XmlAttribute atributo1("nombre", "Frutilla");
 	XmlAttribute atributo2("archivo", "Images/Frutilla");
@@ -69,6 +70,36 @@ bool TexturaTests::testHasErrorIfAttributeNameIsNotValid(void)
 	Logger::closeLog();
 
 	return successCondition;
+}
+
+bool TexturaTests::testHasErrorIfItDoesNotHaveArchivoAttribute(void)
+{
+	XmlElement elemento("Textura", 1, 100);
+	XmlAttribute atributo1("nombre", "Frutilla");
+	elemento.addAttribute(atributo1);
+
+	Textura textura(elemento);
+	bool successCondition1 = textura.hasError();
+	bool successCondition2 = textura.getNombre() == "Frutilla";
+
+	Logger::closeLog();
+
+	return successCondition1 && successCondition2;
+}
+
+bool TexturaTests::testHasErrorIfItDoesNotHaveNombreAttribute(void)
+{
+	XmlElement elemento("Textura", 1, 100);
+	XmlAttribute atributo1("archivo", "Images/Frutilla");
+	elemento.addAttribute(atributo1);
+
+	Textura textura(elemento);
+	bool successCondition1 = textura.hasError();
+	bool successCondition2 = textura.getArchivo() == "Images/Frutilla";
+
+	Logger::closeLog();
+
+	return successCondition1 && successCondition2;
 }
 
 TexturaTests::~TexturaTests(void)
