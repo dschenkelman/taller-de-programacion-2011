@@ -120,7 +120,7 @@ int main(int argc, char* argv[])
 
 	SDL_Surface *screen;
 	 
-	screen = SDL_SetVideoMode(640, 480, 16, SDL_DOUBLEBUF);
+	screen = SDL_SetVideoMode(640, 480, 24, SDL_DOUBLEBUF);
 	if (screen == NULL) {
 		printf("Unable to set video mode: %s\n", SDL_GetError());
 		return 1;
@@ -129,6 +129,8 @@ int main(int argc, char* argv[])
 	// bitmap
 	SDL_Surface *image;
 	SDL_Surface *temp;
+	SDL_Surface *landImage;
+
 	temp = SDL_LoadBMP("smile.bmp");
 	if (temp == NULL) {
 		printf("Unable to load bitmap: %s\n", SDL_GetError());
@@ -232,6 +234,53 @@ int main(int argc, char* argv[])
 	
 	SDL_FreeSurface(image);
 
+
+	//Cargo la otra imagen
+	temp = SDL_LoadBMP("paisaje.bmp");
+	if (temp == NULL) {
+		printf("Unable to load bitmap: %s\n", SDL_GetError());
+		return 1;
+	}
+
+	// borro la imagen anterior
+	SDL_FillRect(screen,&dest,SDL_MapRGB(screen->format,0,0,0));
+
+	landImage = SDL_DisplayFormat(temp);
+	SDL_FreeSurface(temp);
+
+
+	SDL_Rect origen, destino;
+	origen.x = 0;
+	origen.y = 0;
+	origen.w = landImage->w;
+	origen.h = landImage->h;
+	destino.x = 0;
+	destino.y = 0;
+	destino.w = landImage->w;
+	destino.h = landImage->h;
+	SDL_BlitSurface(image, &origen, screen, &destino);
+	SDL_Flip(screen);
+	SDL_Delay(5000);
+
+
+	//This performs a fast blit from the source surface to the destination surface.
+	//The width and height in srcrect determine the size of the copied rectangle. Only the position is used in the dstrect (the width and height are ignored). Blits with negative dstrect coordinates will be clipped properly.
+	//If srcrect is NULL, the entire surface is copied. If dstrect is NULL, then the destination position (upper left corner) is (0, 0).
+	//The final blit rectangle is saved in dstrect after all clipping is performed (srcrect is not modified).
+
+	//Recorto la imagen a una figura de 200 x 100 desde el punto (0,100) de la figura original.
+	origen.x = 0;
+	origen.y = 100;
+	origen.w = 200;
+	origen.h = 200;
+
+	SDL_Rect destrect = {300,100, 0, 0}; 
+	SDL_BlitSurface(landImage, &origen, screen, &destrect); 
+	SDL_Flip(screen);
+	
+
+	SDL_FreeSurface(landImage);
+	SDL_Delay(5000);
 
  
 	return 0;
