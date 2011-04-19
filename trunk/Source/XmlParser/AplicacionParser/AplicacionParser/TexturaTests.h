@@ -10,5 +10,7 @@ public:
 	void printResult(std::string testName, bool result);
 	bool testIsCreatedFromElementWithNameTextura(void);
 	bool testHasErrorIfAttributeNameIsNotValid(void);
+	bool testHasErrorIfItDoesNotHaveArchivoAttribute(void);
+	bool testHasErrorIfItDoesNotHaveNombreAttribute(void);
 	~TexturaTests(void);
 };
