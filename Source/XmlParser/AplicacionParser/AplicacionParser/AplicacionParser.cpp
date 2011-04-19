@@ -13,6 +13,7 @@
 #include "TipoObstaculoTests.h"
 #include "TipoBonusTests.h"
 #include "ObstaculoTests.h"
+#include "TexturaTests.h"
 #include "CaminoTests.h"
 #include "CellMatrixTests.h"
 #include "GrillaTests.h"
@@ -113,6 +114,10 @@ int _tmain(int argc, _TCHAR* argv[])
 	cout<<"Test de TipoBonus"<<endl;
 	TipoBonusTests tipoBonusTests;
 	tipoBonusTests.run();
+
+	cout<<"Test de Textura"<<endl;
+	TexturaTests texturaTests;
+	texturaTests.run();
 
 	cout<<"Test de Bonus"<<endl;
 	BonusTests bonusTets;
