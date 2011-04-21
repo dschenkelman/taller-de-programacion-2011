@@ -200,6 +200,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Image.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Mapa.cpp"
 				>
 			</File>
@@ -236,6 +240,10 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath=".\String.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\XMLParser.cpp"
 				>
 			</File>
@@ -251,6 +259,14 @@
 			</File>
 			<File
 				RelativePath=".\Celda.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Image.h"
+				>
+			</File>
+			<File
+				RelativePath=".\List.h"
 				>
 			</File>
 			<File
@@ -271,6 +287,10 @@
 			</File>
 			<File
 				RelativePath=".\stdafx.h"
+				>
+			</File>
+			<File
+				RelativePath=".\String.h"
 				>
 			</File>
 			<File

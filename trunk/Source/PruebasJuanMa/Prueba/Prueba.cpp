@@ -151,7 +151,7 @@ int main(int argc, char* argv[])
 	SDL_BlitSurface(image, &src, screen, &dest);
 	SDL_Flip(screen);
 	
-	SDL_Delay(1000);
+	SDL_Delay(500);
 
 	int x, y;
     
@@ -201,7 +201,7 @@ int main(int argc, char* argv[])
         SDL_UnlockSurface(screen);
     }
 
-	SDL_Delay(1000);
+	SDL_Delay(100);
 	
 	// Agrandar imagen
 	SDL_PixelFormat* format = image->format;
@@ -228,7 +228,7 @@ int main(int argc, char* argv[])
 	SDL_Flip(screen);
 
 
-	SDL_Delay(5000);
+	SDL_Delay(500);
 
 	SDL_FreeSurface(biggerImage);
 	
@@ -260,7 +260,7 @@ int main(int argc, char* argv[])
 	destino.h = landImage->h;
 	SDL_BlitSurface(image, &origen, screen, &destino);
 	SDL_Flip(screen);
-	SDL_Delay(5000);
+	SDL_Delay(500);
 
 
 	//This performs a fast blit from the source surface to the destination surface.
@@ -280,6 +280,9 @@ int main(int argc, char* argv[])
 	
 
 	SDL_FreeSurface(landImage);
+
+	SDL_FillRect(screen,&dest,SDL_MapRGB(screen->format,0,0,0));
+
 	SDL_Delay(5000);
 
  
