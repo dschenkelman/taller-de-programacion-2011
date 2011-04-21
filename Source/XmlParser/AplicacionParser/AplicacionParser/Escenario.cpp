@@ -68,7 +68,7 @@ Escenario::~Escenario(void)
 List<TipoBonus> Escenario::obtenerTiposBonus(List<XmlElement>& listaElementos)
 {
 	List<TipoBonus> listaBonus;
-	List<char> listaTexturas;
+	List<string> listaTexturas;
 	bool found = false;
 
 	for(size_t i = 0; i < listaElementos.length(); i++)
@@ -133,7 +133,7 @@ List<TipoBonus> Escenario::obtenerTiposBonus(List<XmlElement>& listaElementos)
 List<TipoObstaculo> Escenario::obtenerTiposObstaculos(List<XmlElement>& listaElementos)
 {
 	List<TipoObstaculo> listaObstaculos;
-	List<char> listaTexturas;
+	List<string> listaTexturas;
 	bool found = false;
 
 	for(size_t i = 0; i < listaElementos.length(); i++)

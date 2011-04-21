@@ -5,28 +5,19 @@
 
 using namespace std;
 
-TipoObstaculo::TipoObstaculo(XmlElement& e) : tieneError(false), utilizado(false)
+TipoObstaculo::TipoObstaculo(XmlElement& e) : tieneError(false), utilizado(false), numeroLinea(e.getStartLine())
 {
 	this->populateValidAttributes();
 	this->tieneError = !this->validateAttributes(e);
 
 	if(e.hasAttribute("nombre"))
 	{
-		nombre = e.getValue("nombre");
+		this->nombre = e.getValue("nombre");
 	}
 
 	if(e.hasAttribute("textura"))
 	{
-		std::string t = e.getValue("textura");
-
-		if(t.length() != 1)
-		{
-			// Loggeo como warning que la textura tenga mas de un caracter
-			std::stringstream nroLinea;	nroLinea << e.getStartLine();
-			Logger::getInstance()->logError("Línea " + nroLinea.str() + " -> En TipoObstaculo, textura con mas de un caracter.");
-		}
-
-		textura = t.at(0);
+		this->textura = e.getValue("textura");
 	}
 }
 
@@ -34,7 +25,7 @@ TipoObstaculo::TipoObstaculo(void) : tieneError(false), utilizado(false)
 {
 }
 
-TipoObstaculo::TipoObstaculo(std::string& n, char t) : tieneError(false), utilizado(false), nombre(n), textura(t)
+TipoObstaculo::TipoObstaculo(std::string& n, std::string& t) : tieneError(false), utilizado(false), nombre(n), textura(t)
 {
 }
 
@@ -47,7 +38,7 @@ std::string TipoObstaculo::getNombre()
 	return nombre;
 }
 
-char TipoObstaculo::getTextura()
+std::string TipoObstaculo::getTextura()
 {
 	return textura;
 }

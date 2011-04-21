@@ -168,14 +168,15 @@ bool GrillaTests::testGenerarMatrizGeneraCorrectamente()
 
 	// se crea el tipo bonus y se agrega a la lista de tipos bonus
 	std::string tipo = "uva";
-
-	TipoBonus tb(tipo, '+');
+	std::string texturaBonus = "+";
+	TipoBonus tb(tipo, texturaBonus);
 	lb.add(tb);
 
 	// se crea el tipo obstaculo por defecto y se agrega a la lista de tipos obstaculos
 	std::string nombreTipoO = "obstaculoDef";
+	std::string texturaObs = "´";
 
-	TipoObstaculo tipoO(nombreTipoO, '´');
+	TipoObstaculo tipoO(nombreTipoO, texturaObs);
 	lo.add(tipoO);
 
 	Grilla grilla(elementoGrilla, lo, lb);
@@ -211,7 +212,7 @@ bool GrillaTests::testGenerarMatrizGeneraCorrectamente()
 		return false;
 	}
 
-	if (cam->getBonus().getTipoBonus().getTextura() != '+')
+	if (cam->getBonus().getTipoBonus().getTextura() != "+")
 	{
 		return false;
 	}
@@ -248,8 +249,8 @@ bool GrillaTests::testTipoBonusInvalidoNoSeAgregaALaMatriz()
 
 	// se crea el tipo bonus y se agrega a la lista de tipos bonus
 	std::string tipo = "uva";
-
-	TipoBonus tb(tipo, '+');
+	std::string texturaBonus = "+";
+	TipoBonus tb(tipo, texturaBonus);
 	lb.add(tb);
 
 	Grilla grilla(elementoGrilla, lo, lb);
@@ -296,7 +297,8 @@ bool GrillaTests::testColocarDosObjetosEnMismaPosicionGuardaElPrimero(void)
 	// Se agrega el obstaculo por defecto a la lista obstaculos
 	std::string nombreTipoO = "obstaculoDef";
 
-	TipoObstaculo tipoO(nombreTipoO, '´');
+	std::string textura = "´";
+	TipoObstaculo tipoO(nombreTipoO, textura);
 	to.add(tipoO);
 
 	// Se crea la grilla

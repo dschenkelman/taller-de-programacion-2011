@@ -8,20 +8,20 @@ class TipoBonus
 	int numeroLinea;
 	std::string nombre;
 	List<std::string> validAttributes;
-	char textura;
+	std::string textura;
 	bool utilizado;
 	bool tieneError;
 	void populateValidAttributes(void);
 	bool validateAttributes(XmlElement& e);
 public:
 	TipoBonus(XmlElement& e);
-	TipoBonus(std::string& n, char t);
+	TipoBonus(std::string& n, std::string& t);
 	TipoBonus(void);
 	void utilizarTipo();
 	bool esUtilizado();
 	std::string getNombre(void);
 	bool hasError(void);
-	char getTextura(void);
+	std::string getTextura(void);
 	void setLinea(int);
 	int getLinea(void);
 	~TipoBonus(void);
