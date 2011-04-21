@@ -12,5 +12,10 @@ public:
 	bool testHasErrorIfAttributeNameIsNotValid(void);
 	bool testHasErrorIfItDoesNotHaveArchivoAttribute(void);
 	bool testHasErrorIfItDoesNotHaveNombreAttribute(void);
+	bool testBoundsAreZeroAndMaxIntWhenNotSpecified(void);
+	bool testBoundsAreCorrectWhenSpecified(void);
+	bool testBoundStringValuesAreNotConsidered(void);
+	bool testBoundNegativeValuesAreNotConsidered(void);
+	bool testRightOrBottomLowerThanLeftOrTopUseDefaults(void);
 	~TexturaTests(void);
 };

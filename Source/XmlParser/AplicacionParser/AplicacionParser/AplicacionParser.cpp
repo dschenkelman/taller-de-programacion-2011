@@ -115,10 +115,6 @@ int _tmain(int argc, _TCHAR* argv[])
 	TipoBonusTests tipoBonusTests;
 	tipoBonusTests.run();
 
-	cout<<"Test de Textura"<<endl;
-	TexturaTests texturaTests;
-	texturaTests.run();
-
 	cout<<"Test de Bonus"<<endl;
 	BonusTests bonusTets;
 	bonusTets.run();
@@ -146,6 +142,10 @@ int _tmain(int argc, _TCHAR* argv[])
 	cout<<"Test de XmlParser"<<endl;
 	XmlParserTest xmlParserTest;
 	xmlParserTest.run();
+	
+	cout<<"Test de Textura"<<endl;
+	TexturaTests texturaTests;
+	texturaTests.run();
 
 	cout<<"Test de Grapher"<<endl;
 	GrapherTests grapherTest;
