@@ -17,5 +17,9 @@ public:
 	bool testBoundStringValuesAreNotConsidered(void);
 	bool testBoundNegativeValuesAreNotConsidered(void);
 	bool testRightOrBottomLowerThanLeftOrTopUseDefaults(void);
+	bool testDefaultAlfaIsFF00FF(void);
+	bool testGetsAlphaFromElementCorrectly(void);
+	bool testAlphaWithoutSharpUsesDefaultDueToInvalidFormat(void);
+	bool testAlphaWithInvalidHexCharacterUsesDefaultDueToInvalidFormat(void);
 	~TexturaTests(void);
 };
