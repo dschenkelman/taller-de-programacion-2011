@@ -25,9 +25,9 @@ TipoObstaculoTests::~TipoObstaculoTests(void)
 
 void TipoObstaculoTests::run(void)
 {
-	printResult("testAtributoTexturaDeMasDeUnCaracterLoggeaWarning", testAtributoTexturaDeMasDeUnCaracterLoggeaWarning());
 	printResult("testAtributoTexturaCorrectoGuardaCorrectamente", testAtributoTexturaCorrectoGuardaCorrectamente());
 	printResult("testNonValidAttributeMakesHasErrorTrue", testNonValidAttributeMakesHasErrorTrue());
+	printResult("testCanUseStringAsTextura", testCanUseStringAsTextura());
 
 	int leaks = _CrtDumpMemoryLeaks();
 	printLeaks(leaks);
@@ -38,27 +38,6 @@ void TipoObstaculoTests::printResult(std::string testName, bool result)
 	std::cout << (testName.append(result ? ": Passed\n" : ": Failed!!!\n"));
 }
 
-bool TipoObstaculoTests::testAtributoTexturaDeMasDeUnCaracterLoggeaWarning()
-{
-	XmlElement elemento("Nombre", 1, 100);
-	XmlAttribute atributo("textura", "*+");
-	elemento.addAttribute(atributo);
-
-	// Obtengo el tamanio antes de crear el obstaculo
-	size_t tamanioAntes = Logger::getInstance()->obtenerTamanioArchivo();
-
-	// creo el obstaculo
-	TipoObstaculo tipoObstaculo(elemento);
-
-	// Tamanio despues de crear el obstaculo
-	size_t tamanioDespues = Logger::getInstance()->obtenerTamanioArchivo();
-
-	// finalizo el logger
-	Logger::getInstance()->closeLog();
-
-	return (tamanioAntes<tamanioDespues)?true:false;
-}
-
 bool TipoObstaculoTests::testAtributoTexturaCorrectoGuardaCorrectamente()
 {
 	XmlElement elemento("Nombre", 1, 100);
@@ -67,9 +46,9 @@ bool TipoObstaculoTests::testAtributoTexturaCorrectoGuardaCorrectamente()
 
 	TipoObstaculo tipoObstaculo(elemento);
 	
-	char textura = tipoObstaculo.getTextura();
+	string textura = tipoObstaculo.getTextura();
 
-	if (textura != '+')
+	if (textura != "+")
 	{
 		return false;
 	}
@@ -91,6 +70,24 @@ bool TipoObstaculoTests::testNonValidAttributeMakesHasErrorTrue(void)
 	TipoObstaculo tipoObstaculo(element);
 
 	bool successCondition = tipoObstaculo.hasError();
+
+	Logger::closeLog();
+
+	return successCondition;
+}
+
+bool TipoObstaculoTests::testCanUseStringAsTextura(void)
+{
+	XmlElement element("TipoObstaculo", 1, 2);
+	XmlAttribute att1("nombre", "Piedra");
+	XmlAttribute att2("textura", "PiedraGrande");
+
+	element.addAttribute(att1);
+	element.addAttribute(att2);
+
+	TipoObstaculo tipoObstaculo(element);
+
+	bool successCondition = tipoObstaculo.getTextura() == "PiedraGrande";
 
 	Logger::closeLog();
 

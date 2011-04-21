@@ -2,6 +2,7 @@
 #include "TipoBonus.h"
 #include "Logger.h"
 #include <sstream>
+#include <string>
 
 using namespace std;
 
@@ -10,7 +11,7 @@ TipoBonus::TipoBonus(void) : tieneError(false), utilizado(false)
 	this->populateValidAttributes();
 }
 
-TipoBonus::TipoBonus(std::string& n, char t) : tieneError(false), utilizado(false), nombre(n), textura(t)
+TipoBonus::TipoBonus(std::string& n, std::string& t) : tieneError(false), utilizado(false), nombre(n), textura(t)
 {
 	this->populateValidAttributes();
 }
@@ -27,16 +28,7 @@ TipoBonus::TipoBonus(XmlElement& e) : tieneError(false), utilizado(false)
 
 	if(e.hasAttribute("textura"))
 	{
-		std::string t = e.getValue("textura");
-
-		if(t.length() != 1)
-		{
-			// Loggeo una advertencia por tener una textura de mas de un caracter
-			std::stringstream nroLinea;	nroLinea << e.getStartLine();
-			Logger::getInstance()->logWarning("Línea " + nroLinea.str() + " -> En TipoObstaculo, la textura tiene mas de un caracter.");
-		}
-
-		textura = t.at(0);
+		textura = e.getValue("textura");
 	}
 }
 
@@ -45,7 +37,7 @@ std::string TipoBonus::getNombre(void)
 	return nombre;
 }
 
-char TipoBonus::getTextura(void)
+std::string TipoBonus::getTextura(void)
 {
 	return textura;
 }
