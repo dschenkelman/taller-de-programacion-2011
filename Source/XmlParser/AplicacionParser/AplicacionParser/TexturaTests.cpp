@@ -46,6 +46,11 @@ void TexturaTests::run()
 	printResult("testGetsDeltaFromAttribute", testGetsDeltaFromAttribute());
 	printResult("testNegativeDeltaUsesZeroAsDefault", testNegativeDeltaUsesZeroAsDefault());
 	printResult("testAlphabeticDeltaUsesZeroAsDefault", testAlphabeticDeltaUsesZeroAsDefault());
+	printResult("testDefaultRotarionIsZero", testDefaultRotarionIsZero());
+	printResult("testGetsRotationFromAttribute", testGetsRotationFromAttribute());
+	printResult("testNegativeRotationUsesZeroAsDefault", testNegativeRotationUsesZeroAsDefault());
+	printResult("testRotationBiggerThan359UsesZeroAsDefault", testRotationBiggerThan359UsesZeroAsDefault());
+	printResult("testAlphabeticRotationUsesZeroAsDefault", testAlphabeticRotationUsesZeroAsDefault());
 
 	int leaks = _CrtDumpMemoryLeaks();
 	printLeaks(leaks);
@@ -430,6 +435,109 @@ bool TexturaTests::testAlphabeticDeltaUsesZeroAsDefault(void)
 	Logger::closeLog();
 
 	return successCondition1 && successCondition2;	
+}
+
+bool TexturaTests::testDefaultRotarionIsZero(void)
+{
+	XmlElement elemento("Textura", 1, 100);
+	XmlAttribute atributo1("nombre", "Frutilla");
+	XmlAttribute atributo2("path", "Images/Frutilla");
+
+	elemento.addAttribute(atributo1);
+	elemento.addAttribute(atributo2);
+
+	Textura textura(elemento);
+
+	bool successCondition1 = textura.getRotation() == 0;
+	bool successCondition2 = !textura.hasError();
+
+	Logger::closeLog();
+
+	return successCondition1 && successCondition2;	
+}
+
+bool TexturaTests::testGetsRotationFromAttribute(void)
+{
+	XmlElement elemento("Textura", 1, 100);
+	XmlAttribute atributo1("nombre", "Frutilla");
+	XmlAttribute atributo2("path", "Images/Frutilla");
+	XmlAttribute atributo3("rot", "44");
+
+	elemento.addAttribute(atributo1);
+	elemento.addAttribute(atributo2);
+	elemento.addAttribute(atributo3);
+
+	Textura textura(elemento);
+
+	bool successCondition1 = textura.getRotation() == 44;
+	bool successCondition2 = !textura.hasError();
+
+	Logger::closeLog();
+
+	return successCondition1 && successCondition2;	
+}
+
+bool TexturaTests::testNegativeRotationUsesZeroAsDefault(void)
+{
+	XmlElement elemento("Textura", 1, 100);
+	XmlAttribute atributo1("nombre", "Frutilla");
+	XmlAttribute atributo2("path", "Images/Frutilla");
+	XmlAttribute atributo3("rot", "-44");
+
+	elemento.addAttribute(atributo1);
+	elemento.addAttribute(atributo2);
+	elemento.addAttribute(atributo3);
+
+	Textura textura(elemento);
+
+	bool successCondition1 = textura.getRotation() == 0;
+	bool successCondition2 = !textura.hasError();
+
+	Logger::closeLog();
+
+	return successCondition1 && successCondition2;	
+}
+
+bool TexturaTests::testRotationBiggerThan359UsesZeroAsDefault(void)
+{
+	XmlElement elemento("Textura", 1, 100);
+	XmlAttribute atributo1("nombre", "Frutilla");
+	XmlAttribute atributo2("path", "Images/Frutilla");
+	XmlAttribute atributo3("rot", "360");
+
+	elemento.addAttribute(atributo1);
+	elemento.addAttribute(atributo2);
+	elemento.addAttribute(atributo3);
+
+	Textura textura(elemento);
+
+	bool successCondition1 = textura.getRotation() == 0;
+	bool successCondition2 = !textura.hasError();
+
+	Logger::closeLog();
+
+	return successCondition1 && successCondition2;	
+}
+
+bool TexturaTests::testAlphabeticRotationUsesZeroAsDefault(void)
+{
+	XmlElement elemento("Textura", 1, 100);
+	XmlAttribute atributo1("nombre", "Frutilla");
+	XmlAttribute atributo2("path", "Images/Frutilla");
+	XmlAttribute atributo3("rot", "A");
+
+	elemento.addAttribute(atributo1);
+	elemento.addAttribute(atributo2);
+	elemento.addAttribute(atributo3);
+
+	Textura textura(elemento);
+
+	bool successCondition1 = textura.getRotation() == 0;
+	bool successCondition2 = !textura.hasError();
+
+	Logger::closeLog();
+
+	return successCondition1 && successCondition2;
 }
 
 TexturaTests::~TexturaTests(void)

@@ -16,6 +16,7 @@ class Textura
 	int green;
 	int blue;
 	int delta;
+	int rotation;
 	void populateValidAttributes(void);
 	bool validateAttributes(XmlElement&);
 	bool validateHex(std::string& hex);
@@ -24,6 +25,7 @@ class Textura
 	void getBoundsFromElement(XmlElement&);
 	void getAlphaFromElement(XmlElement&);
 	void getDeltaFromElement(XmlElement&);
+	void getRotationFromElement(XmlElement&);
 public:
 	Textura(void);
 	Textura(XmlElement& element);
@@ -37,6 +39,7 @@ public:
 	int getGreen(void);
 	int getBlue(void);
 	int getDelta(void);
+	int getRotation(void);
 	bool hasError(void);
 	~Textura(void);
 };

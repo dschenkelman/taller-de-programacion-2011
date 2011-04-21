@@ -25,5 +25,10 @@ public:
 	bool testGetsDeltaFromAttribute(void);
 	bool testNegativeDeltaUsesZeroAsDefault(void);
 	bool testAlphabeticDeltaUsesZeroAsDefault(void);
+	bool testDefaultRotarionIsZero(void);
+	bool testGetsRotationFromAttribute(void);
+	bool testNegativeRotationUsesZeroAsDefault(void);
+	bool testRotationBiggerThan359UsesZeroAsDefault(void);
+	bool testAlphabeticRotationUsesZeroAsDefault(void);
 	~TexturaTests(void);
 };
