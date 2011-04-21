@@ -21,5 +21,9 @@ public:
 	bool testGetsAlphaFromElementCorrectly(void);
 	bool testAlphaWithoutSharpUsesDefaultDueToInvalidFormat(void);
 	bool testAlphaWithInvalidHexCharacterUsesDefaultDueToInvalidFormat(void);
+	bool testDefaultDeltaIsZero(void);
+	bool testGetsDeltaFromAttribute(void);
+	bool testNegativeDeltaUsesZeroAsDefault(void);
+	bool testAlphabeticDeltaUsesZeroAsDefault(void);
 	~TexturaTests(void);
 };

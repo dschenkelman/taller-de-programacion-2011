@@ -42,6 +42,10 @@ void TexturaTests::run()
 	printResult("testGetsAlphaFromElementCorrectly", testGetsAlphaFromElementCorrectly());
 	printResult("testAlphaWithoutSharpUsesDefaultDueToInvalidFormat", testAlphaWithoutSharpUsesDefaultDueToInvalidFormat());
 	printResult("testAlphaWithInvalidHexCharacterUsesDefaultDueToInvalidFormat", testAlphaWithInvalidHexCharacterUsesDefaultDueToInvalidFormat());
+	printResult("testDefaultDeltaIsZero", testDefaultDeltaIsZero());
+	printResult("testGetsDeltaFromAttribute", testGetsDeltaFromAttribute());
+	printResult("testNegativeDeltaUsesZeroAsDefault", testNegativeDeltaUsesZeroAsDefault());
+	printResult("testAlphabeticDeltaUsesZeroAsDefault", testAlphabeticDeltaUsesZeroAsDefault());
 
 	int leaks = _CrtDumpMemoryLeaks();
 	printLeaks(leaks);
@@ -347,6 +351,85 @@ bool TexturaTests::testAlphaWithInvalidHexCharacterUsesDefaultDueToInvalidFormat
 
 	return successCondition1 && successCondition2 &&  
 		successCondition3 && successCondition4;
+}
+
+bool TexturaTests::testDefaultDeltaIsZero(void)
+{
+	XmlElement elemento("Textura", 1, 100);
+	XmlAttribute atributo1("nombre", "Frutilla");
+	XmlAttribute atributo2("path", "Images/Frutilla");
+
+	elemento.addAttribute(atributo1);
+	elemento.addAttribute(atributo2);
+
+	Textura textura(elemento);
+	bool successCondition1 = textura.getDelta() == 0;
+	bool successCondition2 = !textura.hasError();
+
+	Logger::closeLog();
+
+	return successCondition1 && successCondition2;
+}
+
+
+bool TexturaTests::testGetsDeltaFromAttribute(void)
+{
+	XmlElement elemento("Textura", 1, 100);
+	XmlAttribute atributo1("nombre", "Frutilla");
+	XmlAttribute atributo2("path", "Images/Frutilla");
+	XmlAttribute atributo3("delta", "8");
+
+	elemento.addAttribute(atributo1);
+	elemento.addAttribute(atributo2);
+	elemento.addAttribute(atributo3);
+
+	Textura textura(elemento);
+	bool successCondition1 = textura.getDelta() == 8;
+	bool successCondition2 = !textura.hasError();
+
+	Logger::closeLog();
+
+	return successCondition1 && successCondition2;	
+}
+
+bool TexturaTests::testNegativeDeltaUsesZeroAsDefault(void)
+{
+	XmlElement elemento("Textura", 1, 100);
+	XmlAttribute atributo1("nombre", "Frutilla");
+	XmlAttribute atributo2("path", "Images/Frutilla");
+	XmlAttribute atributo3("delta", "-8");
+
+	elemento.addAttribute(atributo1);
+	elemento.addAttribute(atributo2);
+	elemento.addAttribute(atributo3);
+
+	Textura textura(elemento);
+	bool successCondition1 = textura.getDelta() == 0;
+	bool successCondition2 = !textura.hasError();
+
+	Logger::closeLog();
+
+	return successCondition1 && successCondition2;	
+}
+
+bool TexturaTests::testAlphabeticDeltaUsesZeroAsDefault(void)
+{
+	XmlElement elemento("Textura", 1, 100);
+	XmlAttribute atributo1("nombre", "Frutilla");
+	XmlAttribute atributo2("path", "Images/Frutilla");
+	XmlAttribute atributo3("delta", "A");
+
+	elemento.addAttribute(atributo1);
+	elemento.addAttribute(atributo2);
+	elemento.addAttribute(atributo3);
+
+	Textura textura(elemento);
+	bool successCondition1 = textura.getDelta() == 0;
+	bool successCondition2 = !textura.hasError();
+
+	Logger::closeLog();
+
+	return successCondition1 && successCondition2;	
 }
 
 TexturaTests::~TexturaTests(void)
