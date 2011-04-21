@@ -13,7 +13,7 @@ Textura::Textura(void)
 
 Textura::Textura(XmlElement &element) : path(""), nombre(""), tieneError(false),
 left(0), top(0), right(numeric_limits<int>::max()), bottom(numeric_limits<int>::max()),
-red(255), green(0), blue(255), delta(0)
+red(255), green(0), blue(255), delta(0), rotation(0)
 {
 	this->populateValidAttributes();
 	this->tieneError = !this->validateAttributes(element);
@@ -23,6 +23,7 @@ red(255), green(0), blue(255), delta(0)
 	this->getBoundsFromElement(element);
 	this->getAlphaFromElement(element);
 	this->getDeltaFromElement(element);
+	this->getRotationFromElement(element);
 }
 
 string Textura::getPath()
@@ -54,6 +55,7 @@ void Textura::populateValidAttributes()
 	this->validAttributes.add("top");
 	this->validAttributes.add("alpha");
 	this->validAttributes.add("delta");
+	this->validAttributes.add("rot");
 }
 
 bool Textura::validateAttributes(XmlElement& element)
@@ -115,6 +117,11 @@ int Textura::getBlue()
 int Textura::getDelta(void)
 {
 	return this->delta;
+}
+
+int Textura::getRotation(void)
+{
+	return this->rotation;
 }
 
 //private methods
@@ -300,7 +307,25 @@ void Textura::getDeltaFromElement(XmlElement& element)
 		else
 		{
 			stringstream msg;
-			msg << "El valor del atributo delta es inválido. Por defecto, se usará 0. Linea: " << element.getStartLine();
+			msg << "El valor del atributo delta es inválido. Debe ser un entero positivo. Por defecto, se usará 0. Linea: " << element.getStartLine();
+			Logger::getInstance()->logError(msg.str());
+		}
+	}
+}
+
+void Textura::getRotationFromElement(XmlElement& element)
+{
+	if (element.hasAttribute("rot"))
+	{
+		int temp = atoi(element.getValue("rot").c_str());
+		if (temp > 0 && temp < 360)
+		{
+			this->rotation = temp;
+		}
+		else
+		{
+			stringstream msg;
+			msg << "El valor del atributo rotación es inválido. Debe ser un entero entre 0 y 359. Por defecto, se usará 0. Linea: " << element.getStartLine();
 			Logger::getInstance()->logError(msg.str());
 		}
 	}
