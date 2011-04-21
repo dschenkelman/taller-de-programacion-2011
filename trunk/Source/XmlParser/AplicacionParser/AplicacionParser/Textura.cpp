@@ -13,7 +13,7 @@ Textura::Textura(void)
 
 Textura::Textura(XmlElement &element) : path(""), nombre(""), tieneError(false),
 left(0), top(0), right(numeric_limits<int>::max()), bottom(numeric_limits<int>::max()),
-red(255), green(0), blue(255)
+red(255), green(0), blue(255), delta(0)
 {
 	this->populateValidAttributes();
 	this->tieneError = !this->validateAttributes(element);
@@ -22,6 +22,7 @@ red(255), green(0), blue(255)
 	this->getPathFromElement(element);
 	this->getBoundsFromElement(element);
 	this->getAlphaFromElement(element);
+	this->getDeltaFromElement(element);
 }
 
 string Textura::getPath()
@@ -52,6 +53,7 @@ void Textura::populateValidAttributes()
 	this->validAttributes.add("left");
 	this->validAttributes.add("top");
 	this->validAttributes.add("alpha");
+	this->validAttributes.add("delta");
 }
 
 bool Textura::validateAttributes(XmlElement& element)
@@ -109,6 +111,12 @@ int Textura::getBlue()
 	return this->blue;
 }
 
+
+int Textura::getDelta(void)
+{
+	return this->delta;
+}
+
 //private methods
 void Textura::getNameFromElement(XmlElement &element)
 {
@@ -164,6 +172,13 @@ void Textura::getAlphaFromElement(XmlElement& element)
 			std::stringstream ssBlue;
 			ssBlue << std::hex << b;
 			ssBlue >> this->blue;
+		}
+		else
+		{
+			stringstream msg;
+			msg << "El formato del valor del atributo 'alpha' no es válido. Formato válido: #rrggbb." 
+				<< " Se usa el valor por defecto #FF00FF. Linea: " << element.getStartLine();
+			Logger::getInstance()->logError(msg.str());
 		}
 	}
 }
@@ -271,4 +286,22 @@ bool Textura::validateHex(std::string &hex)
 	}
 
 	return true;
+}
+
+void Textura::getDeltaFromElement(XmlElement& element)
+{
+	if (element.hasAttribute("delta"))
+	{
+		int temp = atoi(element.getValue("delta").c_str());
+		if (temp > 0)
+		{
+			this->delta = temp;
+		}
+		else
+		{
+			stringstream msg;
+			msg << "El valor del atributo delta es inválido. Por defecto, se usará 0. Linea: " << element.getStartLine();
+			Logger::getInstance()->logError(msg.str());
+		}
+	}
 }
