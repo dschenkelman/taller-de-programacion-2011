@@ -12,7 +12,8 @@ Textura::Textura(void)
 }
 
 Textura::Textura(XmlElement &element) : path(""), nombre(""), tieneError(false),
-left(0), top(0), right(numeric_limits<int>::max()), bottom(numeric_limits<int>::max())
+left(0), top(0), right(numeric_limits<int>::max()), bottom(numeric_limits<int>::max()),
+red(255), green(0), blue(255)
 {
 	this->populateValidAttributes();
 	this->tieneError = !this->validateAttributes(element);
@@ -20,6 +21,7 @@ left(0), top(0), right(numeric_limits<int>::max()), bottom(numeric_limits<int>::
 	this->getNameFromElement(element);
 	this->getPathFromElement(element);
 	this->getBoundsFromElement(element);
+	this->getAlphaFromElement(element);
 }
 
 string Textura::getPath()
@@ -49,6 +51,7 @@ void Textura::populateValidAttributes()
 	this->validAttributes.add("right");
 	this->validAttributes.add("left");
 	this->validAttributes.add("top");
+	this->validAttributes.add("alpha");
 }
 
 bool Textura::validateAttributes(XmlElement& element)
@@ -91,6 +94,21 @@ int Textura::getBottom()
 	return this->bottom;
 }
 
+int Textura::getRed()
+{
+	return this->red;
+}
+
+int Textura::getGreen()
+{
+	return this->green;
+}
+
+int Textura::getBlue()
+{
+	return this->blue;
+}
+
 //private methods
 void Textura::getNameFromElement(XmlElement &element)
 {
@@ -123,18 +141,63 @@ void Textura::getPathFromElement(XmlElement& element)
 	}
 }
 
+void Textura::getAlphaFromElement(XmlElement& element)
+{
+	if (element.hasAttribute("alpha"))
+	{
+		string hex = element.getValue("alpha");
+		
+		if (this->validateHex(hex))
+		{
+			string r = hex.substr(1,2);
+			string g = hex.substr(3,2);
+			string b = hex.substr(5,2);
+
+			std::stringstream ssRed;
+			ssRed << std::hex << r;
+			ssRed >> this->red;
+
+			std::stringstream ssGreen;
+			ssGreen << std::hex << g;
+			ssGreen >> this->green;
+
+			std::stringstream ssBlue;
+			ssBlue << std::hex << b;
+			ssBlue >> this->blue;
+		}
+	}
+}
+
 void Textura::getBoundsFromElement(XmlElement& element)
 {
 	if (element.hasAttribute("left"))
 	{
 		int temp = atoi(element.getValue("left").c_str());
-		this->left = temp > 0 ? temp : this->left;
+		if (temp > 0)
+		{
+			this->left = temp;
+		}
+		else
+		{
+			stringstream msg;
+			msg << "El atributo left tiene un valor inválido. Por defecto se usará 0. Linea: " << element.getStartLine();
+			Logger::getInstance()->logError(msg.str());
+		}
 	}
 
 	if (element.hasAttribute("top"))
 	{
 		int temp = atoi(element.getValue("top").c_str());
-		this->top = temp > 0 ? temp : this->top;
+		if (temp > 0)
+		{
+			this->top = temp;
+		}
+		else
+		{
+			stringstream msg;
+			msg << "El atributo top tiene un valor inválido. Por defecto se usará 0. Linea: " << element.getStartLine();
+			Logger::getInstance()->logError(msg.str());
+		}
 	}
 
 	if (element.hasAttribute("right"))
@@ -146,6 +209,18 @@ void Textura::getBoundsFromElement(XmlElement& element)
 			{
 				this->right = temp;
 			}
+			else
+			{
+				stringstream msg;
+				msg << "El atributo right es menor que left. Por defecto, se usará el ancho de la imágen. Linea: " << element.getStartLine();
+				Logger::getInstance()->logError(msg.str());
+			}
+		}
+		else
+		{
+			stringstream msg;
+			msg << "El atributo right tiene un valor inválido. Por defecto, se usará el ancho de la imágen. Linea: " << element.getStartLine();
+			Logger::getInstance()->logError(msg.str());
 		}
 	}
 	
@@ -158,6 +233,42 @@ void Textura::getBoundsFromElement(XmlElement& element)
 			{
 				this->bottom = temp;
 			}
+			else
+			{
+				stringstream msg;
+				msg << "El atributo bottom es menor que top. Por defecto, se usará el alto de la imágen. Linea: " << element.getStartLine();
+				Logger::getInstance()->logError(msg.str());
+			}
+		}
+		else
+		{
+			stringstream msg;
+			msg << "El atributo bottom es tiene un valor inválido. Por defecto, se usará el alto de la imágen. Linea: " << element.getStartLine();
+			Logger::getInstance()->logError(msg.str());
 		}
 	}
+}
+
+bool Textura::validateHex(std::string &hex)
+{
+	if (hex.at(0) != '#' || hex.length() != 7)
+	{
+		return false;
+	}
+
+	// get color part
+	string color = hex.substr(1);
+
+	for (size_t i = 0; i < color.length(); i++)
+	{
+		char c = color.at(i);
+		char lowerC = tolower(c);
+		if (!isdigit(lowerC) &&
+			!((lowerC >='a') && (lowerC <= 'f')))
+		{
+			return false;
+		}
+	}
+
+	return true;
 }

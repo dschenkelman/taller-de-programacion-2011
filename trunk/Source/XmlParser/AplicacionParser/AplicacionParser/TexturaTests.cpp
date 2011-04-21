@@ -38,6 +38,10 @@ void TexturaTests::run()
 	printResult("testBoundStringValuesAreNotConsidered", testBoundStringValuesAreNotConsidered());
 	printResult("testBoundNegativeValuesAreNotConsidered", testBoundNegativeValuesAreNotConsidered());
 	printResult("testRightOrBottomLowerThanLeftOrTopUseDefaults", testRightOrBottomLowerThanLeftOrTopUseDefaults());
+	printResult("testDefaultAlfaIsFF00FF", testDefaultAlfaIsFF00FF());
+	printResult("testGetsAlphaFromElementCorrectly", testGetsAlphaFromElementCorrectly());
+	printResult("testAlphaWithoutSharpUsesDefaultDueToInvalidFormat", testAlphaWithoutSharpUsesDefaultDueToInvalidFormat());
+	printResult("testAlphaWithInvalidHexCharacterUsesDefaultDueToInvalidFormat", testAlphaWithInvalidHexCharacterUsesDefaultDueToInvalidFormat());
 
 	int leaks = _CrtDumpMemoryLeaks();
 	printLeaks(leaks);
@@ -124,6 +128,8 @@ bool TexturaTests::testBoundsAreZeroAndMaxIntWhenNotSpecified(void)
 	bool successCondition4 = textura.getBottom() == numeric_limits<int>::max();
 	bool successCondition5 = !textura.hasError();
 
+	Logger::closeLog();
+
 	return successCondition1 && successCondition2 &&  
 		successCondition3 && successCondition4 && successCondition5;
 }
@@ -151,6 +157,8 @@ bool TexturaTests::testBoundsAreCorrectWhenSpecified(void)
 	bool successCondition3 = textura.getRight() == 300;
 	bool successCondition4 = textura.getBottom() == 400;
 	bool successCondition5 = !textura.hasError();
+
+	Logger::closeLog();	
 
 	return successCondition1 && successCondition2 &&  
 		successCondition3 && successCondition4 && successCondition5;
@@ -180,6 +188,8 @@ bool TexturaTests::testBoundStringValuesAreNotConsidered(void)
 	bool successCondition4 = textura.getBottom() == numeric_limits<int>::max();
 	bool successCondition5 = !textura.hasError();
 
+	Logger::closeLog();
+
 	return successCondition1 && successCondition2 &&  
 		successCondition3 && successCondition4 && successCondition5;
 }
@@ -207,6 +217,8 @@ bool TexturaTests::testBoundNegativeValuesAreNotConsidered(void)
 	bool successCondition3 = textura.getRight() == numeric_limits<int>::max();
 	bool successCondition4 = textura.getBottom() == numeric_limits<int>::max();
 	bool successCondition5 = !textura.hasError();
+
+	Logger::closeLog();
 
 	return successCondition1 && successCondition2 &&  
 		successCondition3 && successCondition4 && successCondition5;
@@ -236,8 +248,105 @@ bool TexturaTests::testRightOrBottomLowerThanLeftOrTopUseDefaults(void)
 	bool successCondition4 = textura.getBottom() == numeric_limits<int>::max();
 	bool successCondition5 = !textura.hasError();
 
+	Logger::closeLog();
+
 	return successCondition1 && successCondition2 &&  
 		successCondition3 && successCondition4 && successCondition5;
+}
+
+bool TexturaTests::testDefaultAlfaIsFF00FF(void)
+{
+	XmlElement elemento("Textura", 1, 100);
+	XmlAttribute atributo1("nombre", "Frutilla");
+	XmlAttribute atributo2("path", "Images/Frutilla");
+	elemento.addAttribute(atributo1);
+	elemento.addAttribute(atributo2);
+
+	Textura textura(elemento);
+	bool successCondition1 = textura.getRed() == 255;
+	bool successCondition2 = textura.getGreen() == 0;
+	bool successCondition3 = textura.getBlue() == 255;
+	bool successCondition4 = !textura.hasError();
+
+	Logger::closeLog();
+
+	return successCondition1 && successCondition2 &&  
+		successCondition3 && successCondition4;
+}
+
+bool TexturaTests::testGetsAlphaFromElementCorrectly()
+{
+	XmlElement elemento("Textura", 1, 100);
+	XmlAttribute atributo1("nombre", "Frutilla");
+	XmlAttribute atributo2("path", "Images/Frutilla");
+	
+	// r = 17, g = 34, b = 51
+	XmlAttribute atributo3("alpha", "#112233");
+
+	elemento.addAttribute(atributo1);
+	elemento.addAttribute(atributo2);
+	elemento.addAttribute(atributo3);
+
+	Textura textura(elemento);
+	bool successCondition1 = textura.getRed() == 17;
+	bool successCondition2 = textura.getGreen() == 34;
+	bool successCondition3 = textura.getBlue() == 51;
+	bool successCondition4 = !textura.hasError();
+
+	Logger::closeLog();
+
+	return successCondition1 && successCondition2 &&  
+		successCondition3 && successCondition4;
+}
+
+bool TexturaTests::testAlphaWithoutSharpUsesDefaultDueToInvalidFormat(void)
+{
+	XmlElement elemento("Textura", 1, 100);
+	XmlAttribute atributo1("nombre", "Frutilla");
+	XmlAttribute atributo2("path", "Images/Frutilla");
+	
+	// r = 17, g = 34, b = 51
+	XmlAttribute atributo3("alpha", "112233");
+
+	elemento.addAttribute(atributo1);
+	elemento.addAttribute(atributo2);
+	elemento.addAttribute(atributo3);
+
+	Textura textura(elemento);
+	bool successCondition1 = textura.getRed() == 255;
+	bool successCondition2 = textura.getGreen() == 0;
+	bool successCondition3 = textura.getBlue() == 255;
+	bool successCondition4 = !textura.hasError();
+
+	Logger::closeLog();
+
+	return successCondition1 && successCondition2 &&  
+		successCondition3 && successCondition4;
+}
+
+bool TexturaTests::testAlphaWithInvalidHexCharacterUsesDefaultDueToInvalidFormat(void)
+{
+	XmlElement elemento("Textura", 1, 100);
+	XmlAttribute atributo1("nombre", "Frutilla");
+	XmlAttribute atributo2("path", "Images/Frutilla");
+	
+	// G is not Hex
+	XmlAttribute atributo3("alpha", "#11G233");
+
+	elemento.addAttribute(atributo1);
+	elemento.addAttribute(atributo2);
+	elemento.addAttribute(atributo3);
+
+	Textura textura(elemento);
+	bool successCondition1 = textura.getRed() == 255;
+	bool successCondition2 = textura.getGreen() == 0;
+	bool successCondition3 = textura.getBlue() == 255;
+	bool successCondition4 = !textura.hasError();
+
+	Logger::closeLog();
+
+	return successCondition1 && successCondition2 &&  
+		successCondition3 && successCondition4;
 }
 
 TexturaTests::~TexturaTests(void)
