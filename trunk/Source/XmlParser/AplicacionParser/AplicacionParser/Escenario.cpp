@@ -16,6 +16,11 @@ Escenario::Escenario(XmlElement& e) : tieneError(false), texturaFondo("")
 		Logger::getInstance()->logWarning(msg.str());		
 	}
 
+	if (e.hasAttribute("nombre"))
+	{
+		this->nombre = e.getValue("nombre");
+	}
+
 	this->populateValidAttributes();
 	this->tieneError = !this->validateAttributes(e);
 	Grilla miGrilla;
@@ -57,6 +62,11 @@ std::string Escenario::getNombre()
 std::string Escenario::getTexturaFondo()
 {
 	return this->texturaFondo;
+}
+
+Textura Escenario::getTextura(void)
+{
+	return this->textura;
 }
 
 List<Textura> Escenario::getTexturas()
@@ -366,6 +376,7 @@ void Escenario::validarTexturaFondoExiste(int linea)
 		{
 			found = true;
 			this->texturas.at(i).use();
+			this->textura = this->texturas.at(i);
 		}
 	}
 

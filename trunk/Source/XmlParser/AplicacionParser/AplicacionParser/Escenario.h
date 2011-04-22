@@ -9,6 +9,7 @@
 
 class Escenario
 {
+	Textura textura;
 	std::string texturaFondo;
 	std::string nombre;
 	Grilla grilla;
@@ -37,5 +38,6 @@ public:
 	std::string getNombre(void);
 	std::string getTexturaFondo(void);
 	bool hasError(void);
+	Textura getTextura(void);
 	~Escenario(void);
 };

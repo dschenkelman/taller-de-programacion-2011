@@ -60,6 +60,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="&quot;SDL.lib&quot; &quot;SDLmain.lib&quot;"
 				LinkIncremental="2"
 				GenerateDebugInformation="true"
 				SubSystem="1"
@@ -231,6 +232,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Image.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\ListTests.cpp"
 				>
 			</File>
@@ -308,6 +313,10 @@
 			</File>
 			<File
 				RelativePath=".\Tokenizer.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Window.cpp"
 				>
 			</File>
 			<File
@@ -389,6 +398,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Image.h"
+				>
+			</File>
+			<File
 				RelativePath=".\List.h"
 				>
 			</File>
@@ -458,6 +471,10 @@
 			</File>
 			<File
 				RelativePath=".\Tokenizer.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Window.h"
 				>
 			</File>
 			<File

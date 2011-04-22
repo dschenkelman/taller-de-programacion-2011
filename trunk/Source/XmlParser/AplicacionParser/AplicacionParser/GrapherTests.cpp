@@ -35,7 +35,12 @@ void GrapherTests::printResult(std::string testName, bool result)
 
 bool GrapherTests::testGraficarEscenario(void)
 {
-XmlElement elementoEscenario("escenario", 1, 1000);
+	XmlElement elementoEscenario("escenario", 1, 1000);
+	XmlAttribute atributoNombreEscenario("nombre", "Nivel de Prueba");
+	elementoEscenario.addAttribute(atributoNombreEscenario);
+
+	XmlAttribute atributoTexturaFondoEscenario("texturafondo", "Fondo");
+	elementoEscenario.addAttribute(atributoTexturaFondoEscenario);
 
 	// se crea el xmlElement de grilla
 	XmlElement elementoGrilla("grilla", 2, 999);
@@ -155,7 +160,19 @@ XmlElement elementoEscenario("escenario", 1, 1000);
 	elementoEscenario.addChild(elementoGrilla);
 	elementoEscenario.addChild(elementoListaTiposBonus);
 	elementoEscenario.addChild(elementoListaTiposObstaculo);
-	
+
+	XmlElement elementoTexturas("texturas", 2, 4);
+	XmlElement elementoTextura("textura", 3, 3);
+	XmlAttribute atributoNombreTextura("nombre", "Fondo");
+	XmlAttribute atributoPathTextura("path", "Images/texturaFondo.bmp");
+
+	elementoTextura.addAttribute(atributoNombreTextura);
+	elementoTextura.addAttribute(atributoPathTextura);
+
+	elementoTexturas.addChild(elementoTextura);
+
+	elementoEscenario.addChild(elementoTexturas);
+
 	// se crea el escenario
 	Escenario escenario(elementoEscenario);
 
