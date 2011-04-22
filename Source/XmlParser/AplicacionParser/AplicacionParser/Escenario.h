@@ -26,6 +26,7 @@ class Escenario
 	void getTexturaFondoFromElement(XmlElement&);
 	void agregarTipoBonusSiExisteSuTextura(TipoBonus& tb, List<TipoBonus>&);
 	void agregarTipoObstaculoSiExisteSuTextura(TipoObstaculo& to, List<TipoObstaculo>&);
+	void validarTexturaFondoExiste(int linea);
 public:
 	Escenario(void);
 	Escenario(XmlElement& e);

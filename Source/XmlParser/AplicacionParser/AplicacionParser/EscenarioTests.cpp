@@ -32,6 +32,7 @@ void EscenarioTests::run(void)
 	printResult("testCorrectlyPopulatesTexturas", testCorrectlyPopulatesTexturas());
 	printResult("testEscenarioPuedeTenerTexturaFondo", testEscenarioPuedeTenerTexturaFondo());
 	printResult("testEscenarioWithoutTexturaFondoHasError", testEscenarioWithoutTexturaFondoHasError());
+	printResult("testEscenarioHasErrorIfTexturaFondoDoesNotExist", testEscenarioHasErrorIfTexturaFondoDoesNotExist());
 
 	int leaks = _CrtDumpMemoryLeaks();
 	printLeaks(leaks);
@@ -364,6 +365,18 @@ bool EscenarioTests::testEscenarioPuedeTenerTexturaFondo(void)
 	XmlAttribute texturaFondo("texturafondo", "Pizzeria");
 
 	elementoEscenario.addAttribute(texturaFondo);
+	
+	XmlElement elementoTexturas("texturas", 2, 4);
+	XmlElement elementoTextura("textura", 3, 3);
+	XmlAttribute atributoNombre("nombre", "Pizzeria");
+	XmlAttribute atributoPath("path", "p.bmp");
+
+	elementoTextura.addAttribute(atributoNombre);
+	elementoTextura.addAttribute(atributoPath);
+
+	elementoTexturas.addChild(elementoTextura);
+
+	elementoEscenario.addChild(elementoTexturas);
 	Escenario escenario(elementoEscenario);
 
 	bool successCondition1 = escenario.getTexturaFondo() == "Pizzeria";
@@ -386,4 +399,16 @@ bool EscenarioTests::testEscenarioWithoutTexturaFondoHasError(void)
 	Logger::closeLog();
 
 	return successCondition1 && successCondition2;
+}
+bool EscenarioTests::testEscenarioHasErrorIfTexturaFondoDoesNotExist(void)
+{
+	XmlElement elementoEscenario("escenario", 1, 1000);
+	XmlAttribute texturaFondo("texturafondo", "Pizzeria");
+
+	elementoEscenario.addAttribute(texturaFondo);
+	Escenario escenario(elementoEscenario);	
+
+	bool successCondition = escenario.hasError();
+
+	return successCondition;
 }
