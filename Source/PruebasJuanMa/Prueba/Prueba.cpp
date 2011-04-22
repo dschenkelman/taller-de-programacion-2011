@@ -216,7 +216,7 @@ int main(int argc, char* argv[])
 	
 	// Agrandar imagen
 	Resampler* resampler = new Resampler();
-	SDL_Surface *imgResampled = resampler->resample(image, 45, 31);
+	SDL_Surface *imgResampled = resampler->resize(image, 40, 40);
 
 	SDL_BlitSurface(imgResampled, NULL, screen, NULL);
 

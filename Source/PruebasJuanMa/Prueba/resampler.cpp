@@ -139,3 +139,32 @@ SDL_Surface* Resampler::resample(SDL_Surface* imgSrc, int dstWidth, int dstHeigh
 	
 	return imagenDestino;
 }
+
+SDL_Surface* Resampler::resize(SDL_Surface* img, int newH, int newW){
+
+	int width	= img->w;
+	int height	= img->h;
+	
+	SDL_Surface *imgDst = SDL_CreateRGBSurface(SDL_SWSURFACE,newW,newH,24,0,0,0,0);
+	
+	int fila = 0;	
+	while( fila < height ){
+		int columna = 0;
+		while( columna < width){
+
+			// Obtengo el pixel de la imagen
+			Uint32 pixelImg = getpixel(img, fila, columna);
+
+			int newX = (columna * newW) / width;
+			int newY = (fila * newH) / height;
+		
+			// Pongo el pixel en la posicion rotada
+			putpixel(imgDst, newY, newX, pixelImg);
+
+			columna++;
+		}
+		fila++;
+	}
+
+	return imgDst;
+}
