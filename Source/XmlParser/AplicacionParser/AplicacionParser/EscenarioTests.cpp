@@ -410,5 +410,7 @@ bool EscenarioTests::testEscenarioHasErrorIfTexturaFondoDoesNotExist(void)
 
 	bool successCondition = escenario.hasError();
 
+	Logger::closeLog();
+
 	return successCondition;
 }

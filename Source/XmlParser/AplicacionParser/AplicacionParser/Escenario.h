@@ -22,11 +22,11 @@ class Escenario
 	List<TipoBonus> obtenerTiposBonus(List<XmlElement>& le);
 	List<TipoObstaculo> obtenerTiposObstaculos(List<XmlElement>& le);
 	List<Textura> obtenerTexturas(List<XmlElement>& le);
-	bool verificarTexturaEnLista(List<char>& listaCaracteres, char t);
 	void getTexturaFondoFromElement(XmlElement&);
 	void agregarTipoBonusSiExisteSuTextura(TipoBonus& tb, List<TipoBonus>&);
 	void agregarTipoObstaculoSiExisteSuTextura(TipoObstaculo& to, List<TipoObstaculo>&);
 	void validarTexturaFondoExiste(int linea);
+	void verificarTexturasUtilizadas(void);
 public:
 	Escenario(void);
 	Escenario(XmlElement& e);
