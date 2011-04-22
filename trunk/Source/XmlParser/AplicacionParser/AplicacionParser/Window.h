@@ -13,6 +13,7 @@ class Window
 public:
 	Window(std::string, int h, int w);
 	void close(void);
+	void refresh(void);
 	void display(Image& image, int x, int y);
 	~Window(void);
 };

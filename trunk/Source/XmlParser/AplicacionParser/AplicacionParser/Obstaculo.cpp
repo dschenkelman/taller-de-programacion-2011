@@ -88,11 +88,7 @@ Obstaculo::~Obstaculo(void)
 
 std::string Obstaculo::obtenerRepresentacion(Celda* celSup, Celda* celInf, Celda* celDer, Celda* celIzq)
 {
-	std::stringstream ss;
-	std::string respuesta;
-	ss << this->getTipoObstaculo().getNombreTextura();
-	ss >> respuesta;
-	return respuesta;
+	return this->getTipoObstaculo().getTextura().getPath();
 }
 
 Celda* Obstaculo::copiar(void)

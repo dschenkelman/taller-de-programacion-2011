@@ -55,9 +55,12 @@ void Window::display(Image& image, int x, int y)
 	
 	//http://sdl.beuc.net/sdl.wiki/SDL_BlitSurface
 	SDL_BlitSurface(image.getSDLSurface(), &src, this->window, &dest);
-	SDL_Flip(this->window);
 }
 
+void Window::refresh(void)
+{
+	SDL_Flip(this->window);
+}
 Window::~Window(void)
 {
 	//no hay que hacer free lo hace el SDL_Quit

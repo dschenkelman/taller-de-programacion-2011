@@ -92,7 +92,7 @@ std::string Camino::obtenerRepresentacion(Celda* celSup, Celda* celInf, Celda* c
 	{
 		/*std::stringstream ss;
 		std::string repres;*/
-		return this->getBonus().getTipoBonus().getNombreTextura();
+		return this->getBonus().getTipoBonus().getTextura().getPath();
 		/*ss >> repres;*/
 	}
 	
@@ -110,7 +110,7 @@ std::string Camino::obtenerRepresentacion(Celda* celSup, Celda* celInf, Celda* c
 	
 	// Solo vecinos superior o inferior son caminos
 	if(( camSup != 0 || camInf != 0 )&&( camDer == 0 && camIzq == 0 )){
-		return"Images/vertical.bmp";
+		return "Images/vertical.bmp";
 	}
 
 	// Solo vecinos derecho o izquierdo son caminos
