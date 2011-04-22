@@ -44,6 +44,8 @@ public:
 	int getRotation(void);
 	bool hasError(void);
 	void setLine(int);
+	int getLine(void);
 	void use(void);
+	bool isUsed(void);
 	~Textura(void);
 };

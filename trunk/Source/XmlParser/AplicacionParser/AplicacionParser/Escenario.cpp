@@ -41,6 +41,7 @@ Escenario::Escenario(XmlElement& e) : tieneError(false), texturaFondo("")
 	}
 
 	this->validarTexturaFondoExiste(e.getStartLine());
+	this->verificarTexturasUtilizadas();
 }
 
 Grilla& Escenario::getGrilla()
@@ -311,11 +312,11 @@ void Escenario::agregarTipoBonusSiExisteSuTextura(TipoBonus& tb, List<TipoBonus>
 	
 	for (size_t i = 0; i < this->texturas.length(); i++)
 	{
-		Textura t = this->texturas.at(i);
-		if (t.getNombre() == tb.getNombreTextura())
+		if (this->texturas.at(i).getNombre() == tb.getNombreTextura())
 		{
 			found = true;
-			tb.setTextura(t);
+			this->texturas.at(i).use();
+			tb.setTextura(this->texturas.at(i));
 			listaBonus.add(tb);	
 			break;
 		}
@@ -336,11 +337,11 @@ void Escenario::agregarTipoObstaculoSiExisteSuTextura(TipoObstaculo& to, List<Ti
 	
 	for (size_t i = 0; i < this->texturas.length(); i++)
 	{
-		Textura t = this->texturas.at(i);
-		if (t.getNombre() == to.getNombreTextura())
+		if (this->texturas.at(i).getNombre() == to.getNombreTextura())
 		{
 			found = true;
-			to.setTextura(t);
+			this->texturas.at(i).use();
+			to.setTextura(this->texturas.at(i));
 			listaObstaculos.add(to);	
 			break;
 		}
@@ -374,5 +375,18 @@ void Escenario::validarTexturaFondoExiste(int linea)
 		msg << "La textura de fondo del escenario no existe. Esto es un error y no se puede imprimir. Linea: " << linea;
 		Logger::getInstance()->logError(msg.str());
 		this->tieneError = true;
+	}
+}
+
+void Escenario::verificarTexturasUtilizadas()
+{
+	for (size_t i = 0; i < texturas.length(); i++)
+	{
+		if(!texturas.at(i).isUsed())
+		{
+			stringstream msg;
+			msg << "La textura " << texturas.at(i).getNombre() << " no está siendo utilizada. Linea: " << texturas.at(i).getLine();
+			Logger::getInstance()->logWarning(msg.str());
+		}
 	}
 }

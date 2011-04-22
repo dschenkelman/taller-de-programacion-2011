@@ -31,6 +31,11 @@ void Textura::setLine(int l)
 	this->line = l;
 }
 
+int Textura::getLine(void)
+{
+	return this->line;
+}
+
 string Textura::getPath()
 {
 	return this->path;
@@ -39,6 +44,11 @@ string Textura::getPath()
 string Textura::getNombre()
 {
 	return this->nombre;
+}
+
+bool Textura::isUsed()
+{
+	return this->usada;
 }
 
 bool Textura::hasError()
