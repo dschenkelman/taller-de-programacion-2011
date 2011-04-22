@@ -17,7 +17,7 @@ TipoObstaculo::TipoObstaculo(XmlElement& e) : tieneError(false), utilizado(false
 
 	if(e.hasAttribute("textura"))
 	{
-		this->textura = e.getValue("textura");
+		this->nombreTextura = e.getValue("textura");
 	}
 }
 
@@ -25,7 +25,7 @@ TipoObstaculo::TipoObstaculo(void) : tieneError(false), utilizado(false)
 {
 }
 
-TipoObstaculo::TipoObstaculo(std::string& n, std::string& t) : tieneError(false), utilizado(false), nombre(n), textura(t)
+TipoObstaculo::TipoObstaculo(std::string& n, std::string& t) : tieneError(false), utilizado(false), nombre(n), nombreTextura(t)
 {
 }
 
@@ -38,9 +38,9 @@ std::string TipoObstaculo::getNombre()
 	return nombre;
 }
 
-std::string TipoObstaculo::getTextura()
+std::string TipoObstaculo::getNombreTextura()
 {
-	return textura;
+	return nombreTextura;
 }
 
 void TipoObstaculo::utilizarTipo()
@@ -92,4 +92,9 @@ void TipoObstaculo::setLinea(int l)
 int TipoObstaculo::getLinea(void)
 {
 	return this->numeroLinea;
+}
+
+void TipoObstaculo::setTextura(Textura & t)
+{
+	this->textura = t;
 }

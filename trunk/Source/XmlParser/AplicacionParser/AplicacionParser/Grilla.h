@@ -7,6 +7,7 @@
 #include "Logger.h"
 #include "CellMatrix.h"
 #include "TipoBonus.h"
+#include "Textura.h"
 
 const int defGridAncho = 10;
 const int defGridAlto = 10;

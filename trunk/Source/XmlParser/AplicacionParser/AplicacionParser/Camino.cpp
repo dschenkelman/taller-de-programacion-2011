@@ -92,7 +92,7 @@ std::string Camino::obtenerRepresentacion(Celda* celSup, Celda* celInf, Celda* c
 	{
 		/*std::stringstream ss;
 		std::string repres;*/
-		return this->getBonus().getTipoBonus().getTextura();
+		return this->getBonus().getTipoBonus().getNombreTextura();
 		/*ss >> repres;*/
 	}
 	

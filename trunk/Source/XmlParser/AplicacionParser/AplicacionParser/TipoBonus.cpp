@@ -11,7 +11,7 @@ TipoBonus::TipoBonus(void) : tieneError(false), utilizado(false)
 	this->populateValidAttributes();
 }
 
-TipoBonus::TipoBonus(std::string& n, std::string& t) : tieneError(false), utilizado(false), nombre(n), textura(t)
+TipoBonus::TipoBonus(std::string& n, std::string& t) : tieneError(false), utilizado(false), nombre(n), nombreTextura(t)
 {
 	this->populateValidAttributes();
 }
@@ -23,12 +23,12 @@ TipoBonus::TipoBonus(XmlElement& e) : tieneError(false), utilizado(false)
 	
 	if(e.hasAttribute("nombre"))
 	{
-		nombre = e.getValue("nombre");
+		this->nombre = e.getValue("nombre");
 	}
 
 	if(e.hasAttribute("textura"))
 	{
-		textura = e.getValue("textura");
+		this->nombreTextura = e.getValue("textura");
 	}
 }
 
@@ -37,9 +37,9 @@ std::string TipoBonus::getNombre(void)
 	return nombre;
 }
 
-std::string TipoBonus::getTextura(void)
+std::string TipoBonus::getNombreTextura(void)
 {
-	return textura;
+	return nombreTextura;
 }
 
 void TipoBonus::utilizarTipo()
@@ -95,4 +95,9 @@ void TipoBonus::setLinea(int l)
 int TipoBonus::getLinea(void)
 {
 	return this->numeroLinea;
+}
+
+void TipoBonus::setTextura(Textura & t)
+{
+	this->textura = t;
 }

@@ -24,9 +24,9 @@ Escenario::Escenario(XmlElement& e) : tieneError(false), texturaFondo("")
 
 	if (e.hasChildren())
 	{
+		this->texturas = obtenerTexturas(e.getChildren());
 		this->tiposBonus = obtenerTiposBonus(e.getChildren());
 		this->tiposObstaculos = obtenerTiposObstaculos(e.getChildren());
-		this->texturas = obtenerTexturas(e.getChildren());
 
 		for(size_t i = 0; i < e.getChildren().length(); i++)
 		{
@@ -99,9 +99,9 @@ List<TipoBonus> Escenario::obtenerTiposBonus(List<XmlElement>& listaElementos)
 					{
 						TipoBonus tb(listaBonusXml.at(j));
 						tb.setLinea(listaBonusXml.at(j).getStartLine());
-						listaBonus.add(tb);
+						this->agregarTipoBonusSiExisteSuTextura(tb, listaBonus);
 
-						bool texturaExistente = listaTexturas.contains(tb.getTextura());
+						bool texturaExistente = listaTexturas.contains(tb.getNombreTextura());
 						if(texturaExistente)
 						{
 							stringstream msg;
@@ -111,7 +111,7 @@ List<TipoBonus> Escenario::obtenerTiposBonus(List<XmlElement>& listaElementos)
 						}
 						else
 						{
-							listaTexturas.add(tb.getTextura());
+							listaTexturas.add(tb.getNombreTextura());
 						}
 
 					}
@@ -164,9 +164,9 @@ List<TipoObstaculo> Escenario::obtenerTiposObstaculos(List<XmlElement>& listaEle
 					{
 						TipoObstaculo to(listaObstaculosXml.at(j));
 						to.setLinea(listaObstaculosXml.at(j).getStartLine());
-						listaObstaculos.add(to);
+						this->agregarTipoObstaculoSiExisteSuTextura(to, listaObstaculos);
 
-						bool texturaExistente = listaTexturas.contains(to.getTextura());
+						bool texturaExistente = listaTexturas.contains(to.getNombreTextura());
 						if(texturaExistente)
 						{
 							stringstream msg;
@@ -176,7 +176,7 @@ List<TipoObstaculo> Escenario::obtenerTiposObstaculos(List<XmlElement>& listaEle
 						}
 						else
 						{
-							listaTexturas.add(to.getTextura());
+							listaTexturas.add(to.getNombreTextura());
 						}
 					}
 
@@ -300,6 +300,56 @@ void Escenario::getTexturaFondoFromElement(XmlElement & element)
 		stringstream msg;
 		msg << "El escenario no tiene textura de fondo. Esto es un error y no se puede imprimir. Linea: " << element.getStartLine();
 		Logger::getInstance()->logError(msg.str());
+		this->tieneError = true;		
+	}
+}
+
+void Escenario::agregarTipoBonusSiExisteSuTextura(TipoBonus& tb, List<TipoBonus>& listaBonus)
+{
+	bool found = false;
+	
+	for (size_t i = 0; i < this->texturas.length(); i++)
+	{
+		Textura t = this->texturas.at(i);
+		if (t.getNombre() == tb.getNombreTextura())
+		{
+			found = true;
+			tb.setTextura(t);
+			listaBonus.add(tb);	
+			break;
+		}
+	}
+
+	if (!found)
+	{
+		stringstream msg;
+		msg << "La textura asignada al tipo de bonus no existe. El tipo de bonus no será considerado. Linea: " << tb.getLinea();
+		Logger::getInstance()->logWarning(msg.str());
+		this->tieneError = true;		
+	}
+}
+
+void Escenario::agregarTipoObstaculoSiExisteSuTextura(TipoObstaculo& to, List<TipoObstaculo>& listaObstaculos)
+{
+	bool found = false;
+	
+	for (size_t i = 0; i < this->texturas.length(); i++)
+	{
+		Textura t = this->texturas.at(i);
+		if (t.getNombre() == to.getNombreTextura())
+		{
+			found = true;
+			to.setTextura(t);
+			listaObstaculos.add(to);	
+			break;
+		}
+	}
+
+	if (!found)
+	{
+		stringstream msg;
+		msg << "La textura asignada al tipo de bonus no existe. El tipo de bonus no será considerado. Linea: " << to.getLinea();
+		Logger::getInstance()->logWarning(msg.str());
 		this->tieneError = true;		
 	}
 }
