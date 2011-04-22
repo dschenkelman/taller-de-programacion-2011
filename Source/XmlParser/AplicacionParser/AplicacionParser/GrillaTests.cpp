@@ -212,7 +212,7 @@ bool GrillaTests::testGenerarMatrizGeneraCorrectamente()
 		return false;
 	}
 
-	if (cam->getBonus().getTipoBonus().getTextura() != "+")
+	if (cam->getBonus().getTipoBonus().getNombreTextura() != "+")
 	{
 		return false;
 	}

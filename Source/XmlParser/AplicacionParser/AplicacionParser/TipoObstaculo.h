@@ -1,6 +1,8 @@
 #pragma once
 #include "XmlElement.h"
+#include "List.h"
 #include <string>
+#include "Textura.h"
 
 class TipoObstaculo
 {
@@ -8,7 +10,8 @@ class TipoObstaculo
 	std::string nombre;
 	List<std::string> validAttributes;
 	bool tieneError;
-	std::string textura;
+	std::string nombreTextura;
+	Textura textura;
 	bool utilizado;
 	void populateValidAttributes(void);
 	bool validateAttributes(XmlElement& e);
@@ -20,7 +23,8 @@ public:
 	bool esUtilizado();
 	std::string getNombre();
 	bool hasError(void);
-	std::string getTextura();
+	std::string getNombreTextura();
+	void setTextura(Textura&);
 	int getLinea(void);
 	void setLinea(int);
 	~TipoObstaculo(void);

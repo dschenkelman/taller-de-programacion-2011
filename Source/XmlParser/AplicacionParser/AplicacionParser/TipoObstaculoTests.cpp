@@ -46,7 +46,7 @@ bool TipoObstaculoTests::testAtributoTexturaCorrectoGuardaCorrectamente()
 
 	TipoObstaculo tipoObstaculo(elemento);
 	
-	string textura = tipoObstaculo.getTextura();
+	string textura = tipoObstaculo.getNombreTextura();
 
 	if (textura != "+")
 	{
@@ -87,7 +87,7 @@ bool TipoObstaculoTests::testCanUseStringAsTextura(void)
 
 	TipoObstaculo tipoObstaculo(element);
 
-	bool successCondition = tipoObstaculo.getTextura() == "PiedraGrande";
+	bool successCondition = tipoObstaculo.getNombreTextura() == "PiedraGrande";
 
 	Logger::closeLog();
 

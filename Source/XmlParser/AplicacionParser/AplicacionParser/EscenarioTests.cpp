@@ -118,11 +118,32 @@ bool EscenarioTests::testCrearEscenarioCreaCorrectamente(void)
 	elementoGrilla.addChild(elementoObstaculoUno);
 	elementoGrilla.addChild(elementoObstaculoDos);
 
+	XmlElement elementoTexturas("texturas", 19, 22);
+	XmlElement elementoTextura1("textura", 20, 20);
+	XmlAttribute atributoNombreTextura1("nombre", "+");
+	XmlAttribute atributoPathTextura1("path", "Images/+");
+	XmlElement elementoTextura2("textura", 20, 20);
+	XmlAttribute atributoNombreTextura2("nombre", "*");
+	XmlAttribute atributoPathTextura2("path", "Images/*");
+	XmlElement elementoTextura3("textura", 20, 20);
+	XmlAttribute atributoNombreTextura3("nombre", "-");
+	XmlAttribute atributoPathTextura3("path", "Images/-");
+	elementoTextura1.addAttribute(atributoNombreTextura1);
+	elementoTextura2.addAttribute(atributoNombreTextura2);
+	elementoTextura3.addAttribute(atributoNombreTextura3);
+	elementoTextura1.addAttribute(atributoPathTextura1);
+	elementoTextura2.addAttribute(atributoPathTextura2);
+	elementoTextura3.addAttribute(atributoPathTextura3);
+	elementoTexturas.addChild(elementoTextura1);
+	elementoTexturas.addChild(elementoTextura2);
+	elementoTexturas.addChild(elementoTextura3);
+
 	// se agregan la grilla y las listas al xml de escenario
 
 	elementoEscenario.addChild(elementoGrilla);
 	elementoEscenario.addChild(elementoListaTiposBonus);
 	elementoEscenario.addChild(elementoListaTiposObstaculo);
+	elementoEscenario.addChild(elementoTexturas);
 
 	// se crea el escenario
 	Escenario escenario(elementoEscenario);

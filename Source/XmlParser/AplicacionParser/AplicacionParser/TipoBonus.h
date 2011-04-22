@@ -2,13 +2,15 @@
 #include "XmlElement.h"
 #include "List.h"
 #include <string>
+#include "Textura.h"
 
 class TipoBonus
 {
 	int numeroLinea;
 	std::string nombre;
 	List<std::string> validAttributes;
-	std::string textura;
+	std::string nombreTextura;
+	Textura textura;
 	bool utilizado;
 	bool tieneError;
 	void populateValidAttributes(void);
@@ -21,7 +23,8 @@ public:
 	bool esUtilizado();
 	std::string getNombre(void);
 	bool hasError(void);
-	std::string getTextura(void);
+	std::string getNombreTextura(void);
+	void setTextura(Textura&);
 	void setLinea(int);
 	int getLinea(void);
 	~TipoBonus(void);

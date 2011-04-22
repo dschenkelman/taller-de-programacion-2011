@@ -44,7 +44,7 @@ bool TipoBonusTests::testAtributoTexturaCorrectoGuardaCorrectamente()
 
 	TipoBonus tipoBonus(elemento);
 	
-	std::string textura = tipoBonus.getTextura();
+	std::string textura = tipoBonus.getNombreTextura();
 
 	if (textura != "+")
 	{
@@ -85,7 +85,7 @@ bool TipoBonusTests::testCanUseStringAsTextura(void)
 
 	TipoBonus tipoBonus(element);
 
-	bool successCondition = tipoBonus.getTextura() == "PizzaGrande";
+	bool successCondition = tipoBonus.getNombreTextura() == "PizzaGrande";
 
 	Logger::closeLog();
 

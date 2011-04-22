@@ -90,7 +90,7 @@ std::string Obstaculo::obtenerRepresentacion(Celda* celSup, Celda* celInf, Celda
 {
 	std::stringstream ss;
 	std::string respuesta;
-	ss << this->getTipoObstaculo().getTextura();
+	ss << this->getTipoObstaculo().getNombreTextura();
 	ss >> respuesta;
 	return respuesta;
 }
