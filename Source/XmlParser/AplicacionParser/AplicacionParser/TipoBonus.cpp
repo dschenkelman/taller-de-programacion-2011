@@ -101,3 +101,8 @@ void TipoBonus::setTextura(Textura & t)
 {
 	this->textura = t;
 }
+
+Textura TipoBonus::getTextura(void)
+{
+	return this->textura;
+}

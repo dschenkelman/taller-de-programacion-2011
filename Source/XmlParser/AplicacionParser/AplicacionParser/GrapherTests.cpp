@@ -44,8 +44,8 @@ bool GrapherTests::testGraficarEscenario(void)
 
 	// se crea el xmlElement de grilla
 	XmlElement elementoGrilla("grilla", 2, 999);
-	XmlAttribute atributoAncho("ancho", "4");
-	XmlAttribute atributoAlto("alto", "4");
+	XmlAttribute atributoAncho("ancho", "10");
+	XmlAttribute atributoAlto("alto", "10");
 	XmlAttribute atributoTipo("tipoobstaculopordefecto", "ladrillo");
 	elementoGrilla.addAttribute(atributoAlto);
 	elementoGrilla.addAttribute(atributoAncho);
@@ -56,7 +56,7 @@ bool GrapherTests::testGraficarEscenario(void)
 
 	XmlElement elementoTipoBonus("tipoBonus", 201, 202);
 	XmlAttribute atributoNombre("nombre", "uva");
-	XmlAttribute atributoTextura("textura", "#");
+	XmlAttribute atributoTextura("textura", "uva");
 	elementoTipoBonus.addAttribute(atributoNombre);
 	elementoTipoBonus.addAttribute(atributoTextura);
 
@@ -67,13 +67,13 @@ bool GrapherTests::testGraficarEscenario(void)
 	
 	XmlElement elementoTipoObstaculoUno("tipoobstaculo", 600, 605);
 	XmlAttribute atributoNombreUno("nombre", "yunque");
-	XmlAttribute atributoTexturaUno("textura", "*");
+	XmlAttribute atributoTexturaUno("textura", "yunque");
 	elementoTipoObstaculoUno.addAttribute(atributoNombreUno);
 	elementoTipoObstaculoUno.addAttribute(atributoTexturaUno);
 
 	XmlElement elementoTipoObstaculoDos("tipoobstaculo", 605, 620);
 	XmlAttribute atributoNombreDos("nombre", "ladrillo");
-	XmlAttribute atributoTexturaDos("textura", "#");
+	XmlAttribute atributoTexturaDos("textura", "ladrillo");
 	elementoTipoObstaculoDos.addAttribute(atributoNombreDos);
 	elementoTipoObstaculoDos.addAttribute(atributoTexturaDos);
 
@@ -162,14 +162,39 @@ bool GrapherTests::testGraficarEscenario(void)
 	elementoEscenario.addChild(elementoListaTiposObstaculo);
 
 	XmlElement elementoTexturas("texturas", 2, 4);
+	
 	XmlElement elementoTextura("textura", 3, 3);
 	XmlAttribute atributoNombreTextura("nombre", "Fondo");
 	XmlAttribute atributoPathTextura("path", "Images/texturaFondo.bmp");
+	
+	XmlElement elementoTextura1("textura", 20, 20);
+	XmlAttribute atributo1("nombre", "yunque");
+	XmlAttribute atributo2("path", "Images/yunque.bmp");
+	
+	XmlElement elementoTextura2("textura", 21, 21);
+	XmlAttribute atributo3("nombre", "ladrillo");
+	XmlAttribute atributo4("path", "Images/ladrillo.bmp");
+
+	XmlElement elementoTextura3("textura", 21, 21);
+	XmlAttribute atributo5("nombre", "uva");
+	XmlAttribute atributo6("path", "Images/uva.bmp");
 
 	elementoTextura.addAttribute(atributoNombreTextura);
 	elementoTextura.addAttribute(atributoPathTextura);
 
+	elementoTextura1.addAttribute(atributo1);
+	elementoTextura1.addAttribute(atributo2);
+
+	elementoTextura2.addAttribute(atributo3);
+	elementoTextura2.addAttribute(atributo4);
+
+	elementoTextura3.addAttribute(atributo5);
+	elementoTextura3.addAttribute(atributo6);
+
 	elementoTexturas.addChild(elementoTextura);
+	elementoTexturas.addChild(elementoTextura1);
+	elementoTexturas.addChild(elementoTextura2);
+	elementoTexturas.addChild(elementoTextura3);
 
 	elementoEscenario.addChild(elementoTexturas);
 

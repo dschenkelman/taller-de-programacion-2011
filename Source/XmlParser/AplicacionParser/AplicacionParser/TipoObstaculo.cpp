@@ -98,3 +98,8 @@ void TipoObstaculo::setTextura(Textura & t)
 {
 	this->textura = t;
 }
+
+Textura TipoObstaculo::getTextura(void)
+{
+	return this->textura;
+}

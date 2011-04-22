@@ -25,6 +25,7 @@ public:
 	bool hasError(void);
 	std::string getNombreTextura();
 	void setTextura(Textura&);
+	Textura getTextura(void);
 	int getLinea(void);
 	void setLinea(int);
 	~TipoObstaculo(void);
