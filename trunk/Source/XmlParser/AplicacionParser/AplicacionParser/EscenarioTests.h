@@ -14,4 +14,5 @@ public:
 	bool testCorrectlyPopulatesTexturas(void);
 	bool testEscenarioPuedeTenerTexturaFondo(void);
 	bool testEscenarioWithoutTexturaFondoHasError(void);
+	bool testEscenarioHasErrorIfTexturaFondoDoesNotExist(void);
 };

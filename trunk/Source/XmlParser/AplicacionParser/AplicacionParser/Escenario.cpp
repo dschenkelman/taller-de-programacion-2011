@@ -40,6 +40,7 @@ Escenario::Escenario(XmlElement& e) : tieneError(false), texturaFondo("")
 		this->grilla = miGrilla;
 	}
 
+	this->validarTexturaFondoExiste(e.getStartLine());
 }
 
 Grilla& Escenario::getGrilla()
@@ -351,5 +352,27 @@ void Escenario::agregarTipoObstaculoSiExisteSuTextura(TipoObstaculo& to, List<Ti
 		msg << "La textura asignada al tipo de bonus no existe. El tipo de bonus no será considerado. Linea: " << to.getLinea();
 		Logger::getInstance()->logWarning(msg.str());
 		this->tieneError = true;		
+	}
+}
+
+void Escenario::validarTexturaFondoExiste(int linea)
+{
+	bool found = false;
+
+	for(size_t i = 0; i < this->texturas.length(); i++)
+	{
+		if (this->texturas.at(i).getNombre() == this->texturaFondo)
+		{
+			found = true;
+			this->texturas.at(i).use();
+		}
+	}
+
+	if (!found)
+	{
+		stringstream msg;
+		msg << "La textura de fondo del escenario no existe. Esto es un error y no se puede imprimir. Linea: " << linea;
+		Logger::getInstance()->logError(msg.str());
+		this->tieneError = true;
 	}
 }
