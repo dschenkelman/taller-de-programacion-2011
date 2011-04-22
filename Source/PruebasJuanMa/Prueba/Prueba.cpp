@@ -13,7 +13,7 @@
 #include "ScreenLogger.h"
 #include <math.h>
 #include "sdl/sdl.h"
-
+#include "resampler.h"
 
 #define SDL_main main 
 
@@ -204,35 +204,16 @@ int main(int argc, char* argv[])
 	SDL_Delay(100);
 	
 	// Agrandar imagen
-	SDL_PixelFormat* format = image->format;
-	SDL_Surface* tmp = SDL_CreateRGBSurface(
-	  SDL_SWSURFACE | SDL_SRCALPHA,
-	  image->w*5, image->h*5,
-	  format->BitsPerPixel,
-	  format->Rmask, format->Gmask, format->Bmask, format->Amask
-	);
-	SDL_FillRect(tmp, NULL, SDL_MapRGBA(tmp->format, 0, 0, 0, 0));
-	SDL_SoftStretch(image, NULL, tmp, NULL);
-	SDL_Surface* biggerImage = SDL_DisplayFormatAlpha(tmp);
-	SDL_FreeSurface(tmp);
+	Resampler* resampler = new Resampler();
+	SDL_Surface *imgResampled = resampler->resample(image, 45, 31);
 
-	src.x = 0;
-	src.y = 0;
-	src.w = biggerImage->w;
-	src.h = biggerImage->h;
-	dest.x = 300;
-	dest.y = 300;
-	dest.w = biggerImage->w;
-	dest.h = biggerImage->h;
-	SDL_BlitSurface(biggerImage, &src, screen, &dest);
-	SDL_Flip(screen);
+	SDL_BlitSurface(imgResampled, NULL, screen, NULL);
 
+	// actualizo la pantalla
+	SDL_UpdateRect(screen, 0, 0, 600, 400);
 
-	SDL_Delay(500);
+	SDL_Delay(3000);
 
-	SDL_FreeSurface(biggerImage);
-	
-	SDL_FreeSurface(image);
 
 
 	//Cargo la otra imagen
