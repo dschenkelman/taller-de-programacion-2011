@@ -248,6 +248,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Window.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\XMLParser.cpp"
 				>
 			</File>
@@ -299,6 +303,10 @@
 			</File>
 			<File
 				RelativePath=".\String.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Window.h"
 				>
 			</File>
 			<File

@@ -14,6 +14,8 @@
 #include <math.h>
 #include "sdl/sdl.h"
 #include "resampler.h"
+#include "Window.h"
+#include "Image.h"
 
 #define SDL_main main 
 
@@ -112,7 +114,13 @@ void putpixel(SDL_Surface *surface, int x, int y, Uint32 pixel)
 
 int main(int argc, char* argv[])
 {
-	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
+	Window ventana = Window();
+
+	Image carita = Image("smile.bmp");
+
+	carita.paste(ventana,100,100);
+
+	/* if (SDL_Init(SDL_INIT_VIDEO) != 0) {
 		printf("Unable to initialize SDL: %s\n", SDL_GetError());
 		return 1;
 	}
@@ -150,7 +158,7 @@ int main(int argc, char* argv[])
 	dest.h = image->h;
 	SDL_BlitSurface(image, &src, screen, &dest);
 	SDL_Flip(screen);
-	
+	/*
 	SDL_Delay(500);
 
 	int x, y;
@@ -158,7 +166,7 @@ int main(int argc, char* argv[])
     x = screen->w / 2;
     y = screen->h / 2;
 
-    /* Lock the screen for direct access to the pixels */
+    // Lock the screen for direct access to the pixels 
     if ( SDL_MUSTLOCK(screen) ) {
         if ( SDL_LockSurface(screen) < 0 ) {
             fprintf(stderr, "Can't lock screen: %s\n", SDL_GetError());
@@ -263,7 +271,7 @@ int main(int argc, char* argv[])
 	SDL_FreeSurface(landImage);
 
 	SDL_FillRect(screen,&dest,SDL_MapRGB(screen->format,0,0,0));
-
+*/
 	SDL_Delay(5000);
 
  
