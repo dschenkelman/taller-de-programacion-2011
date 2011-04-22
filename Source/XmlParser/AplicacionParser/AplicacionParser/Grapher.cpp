@@ -44,6 +44,11 @@ void Grapher::draw(Escenario& escenario)
 		}
 	}
 
+	// va a truncar y es la idea. tiene que quedar mas chico porque sino,
+	// no entran todas las celdas
+	int imageHeight = windowHeight / grilla.getAlto();
+	int imageWidth = windowWidth / grilla.getAncho();
+
 	//// Se dibuja fila por fila de la matriz
 	//for(unsigned int i=0; i<grilla.getAlto(); i++)
 	//{

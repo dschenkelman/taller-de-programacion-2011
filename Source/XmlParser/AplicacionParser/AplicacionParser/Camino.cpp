@@ -96,7 +96,7 @@ std::string Camino::obtenerRepresentacion(Celda* celSup, Celda* celInf, Celda* c
 		/*ss >> repres;*/
 	}
 	
-	std::string repres = "+";
+	std::string repres = "Images/cross.bmp";
 	// Intento castear las celdas 
 	Camino* camSup = dynamic_cast<Camino*>(celSup);
 	Camino* camInf = dynamic_cast<Camino*>(celInf);
@@ -105,17 +105,17 @@ std::string Camino::obtenerRepresentacion(Celda* celSup, Celda* celInf, Celda* c
 	
 	// Ningun vecino es un camino
 	if( camSup == 0 && camInf == 0 && camDer == 0 && camIzq == 0 ){
-		return ".";
+		return "Images/circle.bmp";
 	}
 	
 	// Solo vecinos superior o inferior son caminos
 	if(( camSup != 0 || camInf != 0 )&&( camDer == 0 && camIzq == 0 )){
-		return"|";
+		return"Images/vertical.bmp";
 	}
 
 	// Solo vecinos derecho o izquierdo son caminos
 	if(( camDer != 0 || camIzq != 0 )&&( camSup == 0 && camInf == 0 )){
-		return "-";
+		return "Images/horizontal.bmp";
 	}
 
 	return repres;
