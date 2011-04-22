@@ -8,6 +8,7 @@ class Textura
 	List<std::string> validAttributes;
 	std::string nombre;
 	std::string path;
+	int line;
 	int left;
 	int top;
 	int bottom;
@@ -41,5 +42,6 @@ public:
 	int getDelta(void);
 	int getRotation(void);
 	bool hasError(void);
+	void setLine(int);
 	~Textura(void);
 };
