@@ -22,8 +22,9 @@ Escenario::Escenario(XmlElement& e) : tieneError(false)
 
 	if (e.hasChildren())
 	{
-		tiposBonus = obtenerTiposBonus(e.getChildren());
-		tiposObstaculos = obtenerTiposObstaculos(e.getChildren());
+		this->tiposBonus = obtenerTiposBonus(e.getChildren());
+		this->tiposObstaculos = obtenerTiposObstaculos(e.getChildren());
+		this->texturas = obtenerTexturas(e.getChildren());
 
 		for(size_t i = 0; i < e.getChildren().length(); i++)
 		{
@@ -47,6 +48,11 @@ Grilla& Escenario::getGrilla()
 std::string Escenario::getNombre()
 {
 	return nombre;
+}
+
+List<Textura> Escenario::getTexturas()
+{
+	return this->texturas;
 }
 
 List<TipoBonus> Escenario::getTiposBonus()
@@ -195,18 +201,56 @@ List<TipoObstaculo> Escenario::obtenerTiposObstaculos(List<XmlElement>& listaEle
 	return listaObstaculos;
 }
 
-bool Escenario::verificarTexturaEnLista(List<char>& listaCaracteres, char t)
+List<Textura> Escenario::obtenerTexturas(List<XmlElement>& listaElementos)
 {
-	for (size_t i = 0; i < listaCaracteres.length(); i++)
+	List<Textura> listaTexturas;
+	bool found = false;
+
+	for(size_t i = 0; i < listaElementos.length(); i++)
 	{
-		if (listaCaracteres.at(i) == t)
+		if(listaElementos.at(i).getName() == "texturas")
 		{
-			return true;
+			found = true;
+			if (listaElementos.at(i).hasChildren())
+			{			
+				List<XmlElement> listaTexturasXml = listaElementos.at(i).getChildren();
+				
+				for(size_t j = 0; j < listaTexturasXml.length(); j++)
+				{
+					if(listaTexturasXml.at(j).hasAttribute("nombre") && listaTexturasXml.at(j).hasAttribute("path"))
+					{
+						Textura t(listaTexturasXml.at(j));
+						t.setLine(listaTexturasXml.at(j).getStartLine());
+						listaTexturas.add(t);
+					}
+					else
+					{
+						//Logger, tipo obstaculo invalido, le falta un atributo.
+						stringstream msg;
+						msg << "La textura en la linea " << listaTexturasXml.at(j).getStartLine() <<
+							" es inválida. No tiene asignado correctamente los atributos. Linea: " << listaTexturasXml.at(j).getStartLine();
+						Logger::getInstance()->logWarning(msg.str());
+					}
+				}
+			}
+			else
+			{
+				stringstream msg;
+				msg << "La lista de texturas esta vacia. Linea: " << listaElementos.at(i).getStartLine();
+				Logger::getInstance()->logWarning(msg.str());
+			}
 		}
 	}
 
-	return false;
+	if (!found)
+	{
+		//Logger, no hay lista de tipo obstaculo
+		Logger::getInstance()->logWarning("No existe lista de texturas \0");
+	}
+
+	return listaTexturas;
 }
+
 
 bool Escenario::hasError(void)
 {

@@ -13,7 +13,7 @@ Textura::Textura(void)
 
 Textura::Textura(XmlElement &element) : path(""), nombre(""), tieneError(false),
 left(0), top(0), right(numeric_limits<int>::max()), bottom(numeric_limits<int>::max()),
-red(255), green(0), blue(255), delta(0), rotation(0)
+red(255), green(0), blue(255), delta(0), rotation(0), line(0)
 {
 	this->populateValidAttributes();
 	this->tieneError = !this->validateAttributes(element);
@@ -24,6 +24,11 @@ red(255), green(0), blue(255), delta(0), rotation(0)
 	this->getAlphaFromElement(element);
 	this->getDeltaFromElement(element);
 	this->getRotationFromElement(element);
+}
+
+void Textura::setLine(int l)
+{
+	this->line = l;
 }
 
 string Textura::getPath()

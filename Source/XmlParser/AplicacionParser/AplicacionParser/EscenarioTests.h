@@ -11,4 +11,5 @@ public:
 	void printResult(std::string testName, bool result);
 	bool testCrearEscenarioCreaCorrectamente(void);
 	bool testNonValidAttributeMakesHasErrorTrue(void);
+	bool testCorrectlyPopulatesTexturas(void);
 };

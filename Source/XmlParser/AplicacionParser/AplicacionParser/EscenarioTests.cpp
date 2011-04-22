@@ -5,6 +5,7 @@
 #include "Obstaculo.h"
 #include <exception>
 #include <iostream>
+#include <limits>
 using namespace std;
 //useful to detect memory leaks
 #define _CRTDBG_MAP_ALLOC
@@ -28,6 +29,7 @@ void EscenarioTests::run(void)
 {
 	printResult("testCrearEscenarioCreaCorrectamente", testCrearEscenarioCreaCorrectamente());
 	printResult("testNonValidAttributeMakesHasErrorTrue", testNonValidAttributeMakesHasErrorTrue());
+	printResult("testCorrectlyPopulatesTexturas", testCorrectlyPopulatesTexturas());
 
 	int leaks = _CrtDumpMemoryLeaks();
 	printLeaks(leaks);
@@ -260,4 +262,75 @@ bool EscenarioTests::testNonValidAttributeMakesHasErrorTrue()
 	Logger::closeLog();
 
 	return escenario.hasError();
+}
+
+
+bool EscenarioTests::testCorrectlyPopulatesTexturas()
+{
+	XmlElement elementoEscenario("escenario", 1, 1000);
+	XmlElement elementoTexturas("texturas", 19, 22);
+	XmlElement elementoTextura1("textura", 20, 20);
+	XmlAttribute atributo1("nombre", "Frutilla");
+	XmlAttribute atributo2("path", "Images/Frutilla");
+	XmlAttribute atributo3("top", "100");
+	XmlAttribute atributo4("left", "200");
+	XmlAttribute atributo5("right", "300");
+	XmlAttribute atributo6("bottom", "400");
+	XmlAttribute atributo7("alpha", "#112233");
+	XmlAttribute atributo8("delta", "10");
+	XmlAttribute atributo9("rot", "20");
+	
+	XmlElement elementoTextura2("textura", 21, 21);
+	XmlAttribute atributo10("nombre", "Pera");
+	XmlAttribute atributo11("path", "Images/Pera");
+
+	elementoTextura1.addAttribute(atributo1);
+	elementoTextura1.addAttribute(atributo2);
+	elementoTextura1.addAttribute(atributo3);
+	elementoTextura1.addAttribute(atributo4);
+	elementoTextura1.addAttribute(atributo5);
+	elementoTextura1.addAttribute(atributo6);
+	elementoTextura1.addAttribute(atributo7);
+	elementoTextura1.addAttribute(atributo8);
+	elementoTextura1.addAttribute(atributo9);
+
+	elementoTextura2.addAttribute(atributo10);
+	elementoTextura2.addAttribute(atributo11);
+
+	elementoTexturas.addChild(elementoTextura1);
+	elementoTexturas.addChild(elementoTextura2);
+	elementoEscenario.addChild(elementoTexturas);
+
+	Escenario escenario(elementoEscenario);
+
+	List<Textura> texturas = escenario.getTexturas();
+	
+	bool successCondition = texturas.length() == 2;
+	
+	Textura t1 = texturas.at(0);
+	Textura t2 = texturas.at(1);
+
+	successCondition = successCondition && t1.getTop() == 100;
+	successCondition = successCondition && t1.getLeft() == 200;
+	successCondition = successCondition && t1.getRight() == 300;
+	successCondition = successCondition && t1.getBottom() == 400;
+	successCondition = successCondition && t1.getDelta() == 10;
+	successCondition = successCondition && t1.getRotation() == 20;
+	successCondition = successCondition && t1.getRed() == 17;
+	successCondition = successCondition && t1.getGreen() == 34;
+	successCondition = successCondition && t1.getBlue() == 51;
+
+	successCondition = successCondition && t2.getTop() == 0;
+	successCondition = successCondition && t2.getLeft() == 0;
+	successCondition = successCondition && t2.getRight() == numeric_limits<int>::max();;
+	successCondition = successCondition && t2.getBottom() == numeric_limits<int>::max();;
+	successCondition = successCondition && t2.getDelta() == 0;
+	successCondition = successCondition && t2.getRotation() == 0;
+	successCondition = successCondition && t2.getRed() == 255;
+	successCondition = successCondition && t2.getGreen() == 0;
+	successCondition = successCondition && t2.getBlue() == 255;
+
+	Logger::closeLog();
+
+	return successCondition;
 }
