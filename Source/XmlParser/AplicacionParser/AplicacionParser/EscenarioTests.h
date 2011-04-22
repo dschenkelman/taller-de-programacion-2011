@@ -12,4 +12,6 @@ public:
 	bool testCrearEscenarioCreaCorrectamente(void);
 	bool testNonValidAttributeMakesHasErrorTrue(void);
 	bool testCorrectlyPopulatesTexturas(void);
+	bool testEscenarioPuedeTenerTexturaFondo(void);
+	bool testEscenarioWithoutTexturaFondoHasError(void);
 };
