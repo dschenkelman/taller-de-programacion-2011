@@ -7,7 +7,7 @@ Escenario::Escenario(void): tieneError(false)
 {
 }
 
-Escenario::Escenario(XmlElement& e) : tieneError(false)
+Escenario::Escenario(XmlElement& e) : tieneError(false), texturaFondo("")
 {
 	if (e.getName() != "escenario")
 	{
@@ -19,6 +19,8 @@ Escenario::Escenario(XmlElement& e) : tieneError(false)
 	this->populateValidAttributes();
 	this->tieneError = !this->validateAttributes(e);
 	Grilla miGrilla;
+
+	this->getTexturaFondoFromElement(e);
 
 	if (e.hasChildren())
 	{
@@ -48,6 +50,11 @@ Grilla& Escenario::getGrilla()
 std::string Escenario::getNombre()
 {
 	return nombre;
+}
+
+std::string Escenario::getTexturaFondo()
+{
+	return this->texturaFondo;
 }
 
 List<Textura> Escenario::getTexturas()
@@ -251,7 +258,6 @@ List<Textura> Escenario::obtenerTexturas(List<XmlElement>& listaElementos)
 	return listaTexturas;
 }
 
-
 bool Escenario::hasError(void)
 {
 	return tieneError || this->grilla.hasError();
@@ -260,6 +266,7 @@ bool Escenario::hasError(void)
 void Escenario::populateValidAttributes(void)
 {
 	this->validAttributes.add("nombre");
+	this->validAttributes.add("texturafondo");
 }
 
 bool Escenario::validateAttributes(XmlElement& e)
@@ -280,4 +287,19 @@ bool Escenario::validateAttributes(XmlElement& e)
 	}
 
 	return true;
+}
+
+void Escenario::getTexturaFondoFromElement(XmlElement & element)
+{
+	if (element.hasAttribute("texturafondo"))
+	{
+		this->texturaFondo = element.getValue("texturafondo");
+	}
+	else
+	{
+		stringstream msg;
+		msg << "El escenario no tiene textura de fondo. Esto es un error y no se puede imprimir. Linea: " << element.getStartLine();
+		Logger::getInstance()->logError(msg.str());
+		this->tieneError = true;		
+	}
 }

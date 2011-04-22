@@ -9,6 +9,7 @@
 
 class Escenario
 {
+	std::string texturaFondo;
 	std::string nombre;
 	Grilla grilla;
 	bool tieneError;
@@ -22,6 +23,7 @@ class Escenario
 	List<TipoObstaculo> obtenerTiposObstaculos(List<XmlElement>& le);
 	List<Textura> obtenerTexturas(List<XmlElement>& le);
 	bool verificarTexturaEnLista(List<char>& listaCaracteres, char t);
+	void getTexturaFondoFromElement(XmlElement&);
 public:
 	Escenario(void);
 	Escenario(XmlElement& e);
@@ -30,6 +32,7 @@ public:
 	List<Textura> getTexturas(void);
 	Grilla& getGrilla(void);
 	std::string getNombre(void);
+	std::string getTexturaFondo(void);
 	bool hasError(void);
 	~Escenario(void);
 };
