@@ -10,6 +10,10 @@
 Image::Image(char* uri)
 {
 	this->surface = SDL_LoadBMP(uri);
+	if (this->surface == NULL) {
+		printf("Unable to load bitmap: %s\n", SDL_GetError());
+	}
+
 }
 
 void Image::paste(SDL_Surface* board, int x, int y)
