@@ -7,7 +7,7 @@ class Image
 {
 public:
 	Image(void);
-	Image(String uri);
+	Image(std::string uri);
 	//Image(String uri, int x, int y, int width, int height);
 	~Image(void);
 private:
