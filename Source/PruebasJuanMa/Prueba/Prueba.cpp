@@ -183,24 +183,25 @@ int main(int argc, char* argv[])
 	/** Agrandar imagen */
 
 	// nueva imagen
-	Image imgSmile = Image("smile.bmp");
-	imgSmile.paste(screen, 100, 100);
+	Image* imgSmile = new Image("pi.bmp");
+	imgSmile->paste(screen, 50, 50);
 	// Instancio un resampler
 	Resampler* resampler = new Resampler();
 	
 	// Resampleo la imagen
-	//Image imgResampled = resampler->resize(imgSmile, 40, 40);
-
+	Image* imgResampled = resampler->resize(imgSmile, 100, 100);
+	
 	// Pego la imagen en la pantalla
-	//imgResampled.paste(screen, 0, 0);
-
-	// actualizo la pantalla
-	SDL_UpdateRect(screen, 0, 0, screen->w, screen->h);
+	imgResampled->paste(screen, 0, 0);
 
 	// ejemplo rotacion
 	//ejemploRotacion();
 
 	SDL_Delay(5000);
+	
+	// libero memoria
+	free(imgSmile);
+	free(imgResampled);
 	free(resampler);
 	 
 	return 0;
