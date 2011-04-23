@@ -64,164 +64,89 @@ void Resampler::putpixel(SDL_Surface *surface, int x, int y, Uint32 pixel)
 }
 
 
-SDL_Surface* Resampler::resample(SDL_Surface* imgSrc, int dstWidth, int dstHeight){
+
+Image Resampler::resize(Image imgSrc, int widthDst, int heightDst){
+
+	int width	= imgSrc.getWidth();
+	int height	= imgSrc.getHeight();
 	
-	// Por ahora no se usa la altura futura, solo el aumento general
-	int aumento = 1;
-
-	int ancho	= imgSrc->w;
-	int alto	= imgSrc->h;
-	int nuevoAncho		= (((aumento*2)+1)*ancho);
-	int nuevoAlto		= (((aumento*2)+1)*alto);
-
-	SDL_Surface *imagenDestino = SDL_CreateRGBSurface(SDL_SWSURFACE,nuevoAncho,nuevoAlto,24,0,0,0,0);
-
-
-	int nuevaFil = -1;
-	int nuevaCol = -1;
-	int anteriorFil = -1;
-	int anteriorCol = -1;
-	int fila = 0;	
-	while( fila < alto ){
-		int columna = 0;
-		
-		if(anteriorFil == -1) nuevaFil = aumento;
-		else nuevaFil = (anteriorFil + (aumento * 2)) + 1;
-		
-		while( columna < ancho){
-
-			if(anteriorCol == -1) nuevaCol = aumento;
-			else nuevaCol = (anteriorCol + (aumento * 2)) + 1;
-			
-			// Obtengo el pixel de la imagen
-			Uint32 pixelImg = getpixel(imgSrc, fila, columna);
-
-			if((columna != 0)){
-				// obtengo el pixel anterior
-				Uint32 pixelAnt = getpixel(imgSrc, anteriorFil, anteriorCol);
-				
-				// Obtengo las coordenadas rgb del pixel
-				Uint8 antR, antG, antB, futR, futG, futB;
-				SDL_GetRGB(pixelAnt, imgSrc->format, &antR, &antG, &antB);
-				SDL_GetRGB(pixelImg, imgSrc->format, &futR, &futG, &futB);
-				int steps = 4;
-				int range = steps-1;
-				
-				// Interpolo linealmente para obtener las nuevas coordenadas
-				for (int i=0; i < steps; i++)
-				{
-					int j = range - i;
-					int iR = ((antR * j) + (futR * i)) / range;
-					int iG = ((antG * j) + (futG * i)) / range;
-					int iB = ((antB * j) + (futB * i)) / range;
-					
-					// Obtengo el pixel de las coordenadas
-					Uint32 pixelFut = SDL_MapRGB(imagenDestino->format, iR, iG, iB);
-					
-					// Coloco el pixel interpolado
-					putpixel(imagenDestino, nuevaFil, anteriorCol+i, pixelFut);
-				}
-			}
-			
-			// Pongo el pixel en la posicion rotada
-			putpixel(imagenDestino, nuevaFil, nuevaCol, pixelImg);
-			anteriorCol = nuevaCol;
-			columna++;
-		}
-		anteriorCol = -1;
-		anteriorFil = nuevaFil;
-		fila++;
-	}
-	
-	return imagenDestino;
-}
-
-SDL_Surface* Resampler::resize(SDL_Surface* imgSrc, int newH, int newW){
-
-	int width	= imgSrc->w;
-	int height	= imgSrc->h;
-	
-	SDL_Surface *imgDst = SDL_CreateRGBSurface(SDL_SWSURFACE,newW,newH,24,0,0,0,0);
+	// Empty new image
+	Image imgDst = Image(widthDst, heightDst);
 	
 	int stepsX = 0;
-	int fila = 0;	
-	while( fila < height ){
+	int posYSrc;
+	for(posYSrc = 0; posYSrc < height ; posYSrc++){
 		
-		int newY = (fila * newH) / height;
-
-		int columna = 0;
-		while( columna < width){
+		int newY = (posYSrc * heightDst) / height;
+		int posXSrc;
+		for(posXSrc = 0; posXSrc < width; posXSrc++){
 
 			// Obtengo el pixel de la imagen
-			Uint32 pixelImg = getpixel(imgSrc, columna, fila);
+			Uint32 pixelImg = imgSrc.getPixel(posXSrc, posYSrc);
 
-			int newX = (columna * newW) / width;
-			int antX = ((columna-1) * newW) / width;
-			if( columna != 0 && newW > width ){
-				
-				
-				// obtengo el pixel anterior
-				Uint32 pixelAnt = getpixel(imgSrc, antX, newY);
-				
-				// Obtengo las coordenadas rgb del pixel
-				Uint8 antR, antG, antB, futR, futG, futB;
-				SDL_GetRGB(pixelAnt, imgSrc->format, &antR, &antG, &antB);
-				SDL_GetRGB(pixelImg, imgSrc->format, &futR, &futG, &futB);
-				stepsX = (newX-antX);
-				int range = stepsX-1;
-				
-				// Interpolo linealmente para obtener las nuevas coordenadas
-				for (int i=1; i < stepsX; i++)
-				{
-					int j = range - i;
-					int iR = ((antR * j) + (futR * i)) / range;
-					int iG = ((antG * j) + (futG * i)) / range;
-					int iB = ((antB * j) + (futB * i)) / range;
-					
-					// Obtengo el pixel de las coordenadas
-					Uint32 pixelFut = SDL_MapRGB(imgDst->format, iR, iG, iB);
-					
-					// Coloco el pixel interpolado
-					putpixel(imgDst, (antX+i), newY, pixelFut);
-				}
-			}
+			int newX = (posXSrc * widthDst) / width;
+			//int antX = ((posXSrc-1) * widthDst) / width;
+			//if( posXSrc != 0 && widthDst > width ){
+			//	
+			//	// obtengo el pixel anterior
+			//	Uint32 pixelAnt = imgSrc.getPixel(antX, newY);
+			//	
+			//	// Obtengo las coordenadas rgb del pixel
+			//	Uint8 antR, antG, antB, futR, futG, futB;
+			//	SDL_GetRGB(pixelAnt, imgSrc.getFormat(), &antR, &antG, &antB);
+			//	SDL_GetRGB(pixelImg, imgSrc.getFormat(), &futR, &futG, &futB);
+			//	stepsX = (newX-antX);
+			//	int range = stepsX-1;
+			//	
+			//	// Interpolo linealmente para obtener las nuevas coordenadas
+			//	for (int i=1; i < stepsX; i++)
+			//	{
+			//		int j = range - i;
+			//		int iR = ((antR * j) + (futR * i)) / range;
+			//		int iG = ((antG * j) + (futG * i)) / range;
+			//		int iB = ((antB * j) + (futB * i)) / range;
+			//		
+			//		// Obtengo el pixel de las coordenadas
+			//		Uint32 pixelFut = SDL_MapRGB(imgDst.getFormat(), iR, iG, iB);
+			//		
+			//		// Coloco el pixel interpolado
+			//		imgDst.putPixel( pixelFut,(antX+i), newY );
+			//	}
+			//}
 
-			if(fila != 0 && newH > height ){
-				int antY = ((fila-1) * newH) / height;
-				// obtengo el pixel anterior
-				Uint32 pixelAnt = getpixel(imgSrc, newX, antY);
-				
-				// Obtengo las coordenadas rgb del pixel
-				Uint8 antR, antG, antB, futR, futG, futB;
-				SDL_GetRGB(pixelAnt, imgSrc->format, &antR, &antG, &antB);
-				SDL_GetRGB(pixelImg, imgSrc->format, &futR, &futG, &futB);
-				int steps = (newY-antY);
-				int range = steps-1;
-				
-				// Interpolo linealmente para obtener las nuevas coordenadas
-				for (int i=1; i < steps; i++)
-				{
-					int j = range - i;
-					int iR = ((antR * j) + (futR * i)) / range;
-					int iG = ((antG * j) + (futG * i)) / range;
-					int iB = ((antB * j) + (futB * i)) / range;
-					
-					// Obtengo el pixel de las coordenadas
-					Uint32 pixelFut = SDL_MapRGB(imgDst->format, iR, iG, iB);
-					
-					// Coloco el pixel interpolado
-					for(int x = 0; x<stepsX; x++){
-						putpixel(imgDst, (antX+1+x), (antY+i), pixelFut);
-					}
-				}
-			}
+			//if(posYSrc != 0 && heightDst > height ){
+			//	int antY = ((posYSrc-1) * heightDst) / height;
+			//	// obtengo el pixel anterior
+			//	Uint32 pixelAnt = imgSrc.getPixel(newX, antY);
+			//	
+			//	// Obtengo las coordenadas rgb del pixel
+			//	Uint8 antR, antG, antB, futR, futG, futB;
+			//	SDL_GetRGB(pixelAnt, imgSrc.getFormat(), &antR, &antG, &antB);
+			//	SDL_GetRGB(pixelImg, imgSrc.getFormat(), &futR, &futG, &futB);
+			//	int steps = (newY-antY);
+			//	int range = steps-1;
+			//	
+			//	// Interpolo linealmente para obtener las nuevas coordenadas
+			//	for (int i=1; i < steps; i++)
+			//	{
+			//		int j = range - i;
+			//		int iR = ((antR * j) + (futR * i)) / range;
+			//		int iG = ((antG * j) + (futG * i)) / range;
+			//		int iB = ((antB * j) + (futB * i)) / range;
+			//		
+			//		// Obtengo el pixel de las coordenadas
+			//		Uint32 pixelFut = SDL_MapRGB(imgDst.getFormat(), iR, iG, iB);
+			//		
+			//		// Coloco el pixel interpolado
+			//		for(int x = 0; x<stepsX; x++){
+			//			imgDst.putPixel( pixelFut, (antX+1+x), (antY+i));
+			//		}
+			//	}
+			//}
 
 			// Pongo el pixel en las nuevas coordenadas
-			putpixel(imgDst, newX, newY, pixelImg);
-
-			columna++;
+			imgDst.putPixel( pixelImg, newX, newY);
 		}
-		fila++;
 	}
 
 	return imgDst;

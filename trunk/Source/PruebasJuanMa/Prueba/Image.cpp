@@ -92,8 +92,8 @@ Image::Image(SDL_Surface* surface)
 
 
 /** Empty Image constructor */
-Image::Image(int height, int width){
-	this->surface = SDL_CreateRGBSurface(SDL_SWSURFACE,height,width,24,0,0,0,0);
+Image::Image(int width, int height){
+	this->surface = SDL_CreateRGBSurface(SDL_SWSURFACE,width,height,24,0,0,0,0);
 }
 
 
@@ -164,6 +164,11 @@ void Image::putPixel(Uint32 pixel, int x, int y){
         *(Uint32 *)p = pixel;
         break;
     }
+}
+
+
+const SDL_PixelFormat* Image::getFormat(){
+	return this->surface->format;
 }
 
 void Image::paste(SDL_Surface* board, int x, int y)

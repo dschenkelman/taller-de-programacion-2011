@@ -10,7 +10,7 @@ public:
 	//Image(void);
 	Image(char* uri);
 	//Image(String uri, int x, int y, int width, int height);
-	Image(int height, int width); // Empty image constructor
+	Image(int width, int height); // Empty image constructor
 	
 	void paste(SDL_Surface* board, int x, int y);
 	void paste(Window board, int x, int y);
@@ -24,6 +24,8 @@ public:
 	
 	/** Put a pixel in this image at x and y */
 	void putPixel(Uint32 pixel, int x, int y);
+
+	const SDL_PixelFormat* getFormat();
 private:
 	Image(SDL_Surface* surface);
 	SDL_Surface* surface;
