@@ -220,6 +220,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Rotador.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\ScreenLogger.cpp"
 				>
 			</File>
@@ -291,6 +295,10 @@
 			</File>
 			<File
 				RelativePath=".\resource.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Rotador.h"
 				>
 			</File>
 			<File
