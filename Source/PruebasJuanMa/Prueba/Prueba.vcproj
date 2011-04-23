@@ -331,6 +331,10 @@
 				RelativePath=".\pi.bmp"
 				>
 			</File>
+			<File
+				RelativePath=".\smile.bmp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="config"
