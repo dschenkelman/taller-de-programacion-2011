@@ -16,6 +16,7 @@
 #include "resampler.h"
 #include "Window.h"
 #include "Image.h"
+#include "Rotador.h"
 
 #define SDL_main main 
 
@@ -110,6 +111,48 @@ void putpixel(SDL_Surface *surface, int x, int y, Uint32 pixel)
         *(Uint32 *)p = pixel;
         break;
     }
+}
+
+void ejemploRotacion()
+{
+	SDL_Delay(2000);
+
+	SDL_Surface* screen;
+	SDL_Surface* image;
+	SDL_Surface* temp;
+
+	if (SDL_Init(SDL_INIT_VIDEO) < 0) 
+	{
+		printf("No se pudo iniciar SDL: %s\n",SDL_GetError());
+		exit(1);
+	}
+
+	screen = SDL_SetVideoMode(640,480,24,SDL_HWSURFACE);
+	if (screen == NULL) {
+		printf("No se puede inicializar el modo gráfico: \n",SDL_GetError());
+		exit(1);
+	}
+
+	// Se carga la imagen
+	temp = SDL_LoadBMP("smile.bmp");
+	if (temp == NULL ) {
+		printf("No pude cargar gráfico: %s\n", SDL_GetError());
+		exit(1);
+	}
+
+	image = SDL_DisplayFormat(temp);
+	SDL_FreeSurface(temp);
+
+	SDL_Rect dest;
+
+	dest.x = 100;
+	dest.y = 100;
+	dest.h = image->h;
+	dest.w = image->w;
+
+	SDL_BlitSurface(image, NULL, screen, &dest);
+
+	Rotador().rotar(image, screen, 100, 100, PI);
 }
 
 int main(int argc, char* argv[])
@@ -226,6 +269,9 @@ int main(int argc, char* argv[])
 
 	// actualizo la pantalla
 	SDL_UpdateRect(screen, 0, 0, 600, 400);
+
+	// ejemplo rotacion
+	//ejemploRotacion();
 
 	SDL_Delay(5000);
 	free(resampler);
