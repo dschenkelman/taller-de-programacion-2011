@@ -114,8 +114,9 @@ int main(int argc, char* argv[])
 	/** Agrandar imagen */
 
 	// nueva imagen
-	Image* imgSmile = new Image("pi.bmp");
-	imgSmile->paste(screen, 50, 50);
+	Image* imgSmile = new Image("smile.bmp");
+	imgSmile->paste(screen, 100, 100);
+	
 	// Instancio un resampler
 	Resampler* resampler = new Resampler();
 	
