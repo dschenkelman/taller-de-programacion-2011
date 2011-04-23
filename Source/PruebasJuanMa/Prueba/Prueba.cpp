@@ -180,95 +180,22 @@ int main(int argc, char* argv[])
 
 	SDL_Delay(1000);
 	
-	// bitmap
-	SDL_Surface *image;
-	SDL_Surface *temp;
-	SDL_Surface *landImage;
+	/** Agrandar imagen */
 
-	temp = SDL_LoadBMP("smile.bmp");
-	if (temp == NULL) {
-		printf("Unable to load bitmap: %s\n", SDL_GetError());
-		return 1;
-	}
-	image = SDL_DisplayFormat(temp);
-	SDL_FreeSurface(temp);
-	
-	SDL_Rect src, dest;
-	src.x = 0;
-	src.y = 0;
-	src.w = image->w;
-	src.h = image->h;
-	dest.x = 100;
-	dest.y = 100;
-	dest.w = image->w;
-	dest.h = image->h;
-	SDL_BlitSurface(image, &src, screen, &dest);
-	SDL_Flip(screen);
-	
-	SDL_Delay(500);
-
-	int x, y;
-    
-    x = screen->w / 2;
-    y = screen->h / 2;
-
-    // Lock the screen for direct access to the pixels 
-    if ( SDL_MUSTLOCK(screen) ) {
-        if ( SDL_LockSurface(screen) < 0 ) {
-            fprintf(stderr, "Can't lock screen: %s\n", SDL_GetError());
-            return 0;
-        }
-    }
-
-	// borro la imagen anterior
-	SDL_FillRect(screen,&dest,SDL_MapRGB(screen->format,0,0,0));
-	
-	// Rotación de la imagen
-	int i = 0;
-	while( i < 20 ){
-		int j = 0;
-		while( j < 20){
-			
-			int xInicial = i;
-			int yInicial = j;
-
-			int xRot = rotateX(xInicial, yInicial, 10, 10, 10);
-			int yRot = rotateY(xInicial, yInicial, 10, 10, 10);
-			
-			// Obtengo el pixel de la imagen
-			Uint32 pixelImg = getpixel(image, xInicial, yInicial);
-
-			// Pongo el pixel en la posicion rotada
-			putpixel(screen, (100+xRot), (100+yRot), pixelImg);
-
-			j++;
-		}
-		i++;
-	}
-
-	
-	// actualizo la pantalla
-	SDL_UpdateRect(screen, 0, 0, 600, 400);
-
-    
-	if ( SDL_MUSTLOCK(screen) ) {
-        SDL_UnlockSurface(screen);
-    }
-
-	SDL_Delay(100);
-	
-	/* Agrandar imagen */
+	// nueva imagen
+	Image imgSmile = Image("smile.bmp");
+	imgSmile.paste(screen, 100, 100);
 	// Instancio un resampler
 	Resampler* resampler = new Resampler();
 	
 	// Resampleo la imagen
-	SDL_Surface *imgResampled = resampler->resize(image, 100, 100);
+	//Image imgResampled = resampler->resize(imgSmile, 40, 40);
 
-	// La pego en la pantalla
-	SDL_BlitSurface(imgResampled, NULL, screen, NULL);
+	// Pego la imagen en la pantalla
+	//imgResampled.paste(screen, 0, 0);
 
 	// actualizo la pantalla
-	SDL_UpdateRect(screen, 0, 0, 600, 400);
+	SDL_UpdateRect(screen, 0, 0, screen->w, screen->h);
 
 	// ejemplo rotacion
 	//ejemploRotacion();
