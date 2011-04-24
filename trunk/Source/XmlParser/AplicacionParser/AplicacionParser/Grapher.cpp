@@ -4,6 +4,7 @@
 #include "Window.h"
 #include "Image.h"
 #include <string>
+#include "Logger.h"
 
 using namespace std;
 
@@ -17,6 +18,7 @@ Grapher::~Grapher()
 
 void Grapher::draw(Escenario& escenario)
 {
+	bool error = false;
 	Grilla& grilla = escenario.getGrilla();
 
 	// Se muestra el nombre del Escenario
@@ -24,9 +26,17 @@ void Grapher::draw(Escenario& escenario)
 
 	Window w(escenario.getNombre(), windowHeight, windowWidth);
 	Image texturaFondo(escenario.getTextura().getPath());
-	
-	//despues habria que agrandar para que ocupe todo el fondo
-	w.display(texturaFondo, 0, 0);
+		
+	if (!texturaFondo.hasError())
+	{
+		//despues habria que agrandar para que ocupe todo el fondo
+		w.display(texturaFondo, 0, 0);
+	}
+	else
+	{
+		error = true;
+		Logger::getInstance()->logError(texturaFondo.getErrorMessage());
+	}
 
 	// va a truncar y es la idea. tiene que quedar mas chico porque sino,
 	// no entran todas las celdas
@@ -63,13 +73,24 @@ void Grapher::draw(Escenario& escenario)
 
 			string path = celda->obtenerRepresentacion(celSup, celInf, celDer, celIzq);
 			Image textura(path);
-			w.display(textura, imageWidth * j, imageHeight * i);
-			//delete celSup, celInf, celDer, celIzq;
+				
+			if (!textura.hasError())
+			{
+				w.display(textura, imageWidth * j, imageHeight * i);
+			}
+			else
+			{
+				//log
+				Logger::getInstance()->logError(textura.getErrorMessage());
+				error = true;
+			}
 		}
 	}
 
-	w.refresh();
-
+	if (!error)
+	{
+		w.refresh();
+	}
 	
 	//esperar para cerrar
 	SDL_Event e;
