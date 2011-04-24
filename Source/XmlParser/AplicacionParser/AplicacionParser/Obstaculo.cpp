@@ -2,6 +2,8 @@
 #include "Obstaculo.h"
 #include "Logger.h"
 #include <sstream>
+#include "Image.h"
+#include "Textura.h"
 
 using namespace std;
 
@@ -86,9 +88,12 @@ Obstaculo::~Obstaculo(void)
 {
 }
 
-Textura Obstaculo::obtenerRepresentacion(Celda* celSup, Celda* celInf, Celda* celDer, Celda* celIzq)
+Image Obstaculo::obtenerRepresentacion(Celda* celSup, Celda* celInf, Celda* celDer, Celda* celIzq)
 {
-	return this->getTipoObstaculo().getTextura();
+	Textura textura = this->getTipoObstaculo().getTextura();
+	Image imagen(textura.getPath());
+	imagen.crop(textura.getTop(), textura.getLeft(), textura.getRight(), textura.getBottom());
+	return imagen;
 }
 
 Celda* Obstaculo::copiar(void)

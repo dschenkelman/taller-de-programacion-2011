@@ -2,6 +2,7 @@
 #include "Celda.h"
 #include "XmlElement.h"
 #include "TipoObstaculo.h"
+#include "Image.h"
 
 class Obstaculo : public Celda
 {
@@ -22,5 +23,5 @@ public:
 	bool hasError(void);
 	void setError(void);
 	~Obstaculo(void);
-	Textura obtenerRepresentacion(Celda* celSup, Celda* celInf, Celda* celDer, Celda* celIzq);
+	Image obtenerRepresentacion(Celda* celSup, Celda* celInf, Celda* celDer, Celda* celIzq);
 };

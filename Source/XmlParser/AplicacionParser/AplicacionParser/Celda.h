@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include "Textura.h"
+#include "Image.h"
 
 class Celda
 {
@@ -17,6 +17,6 @@ public:
 	void Ocupar();
 	virtual Celda* copiar(void);
 	virtual ~Celda(void);
-	virtual Textura obtenerRepresentacion(Celda* celSup, Celda* celInf, Celda* celDer, Celda* celIzq);
+	virtual Image obtenerRepresentacion(Celda* celSup, Celda* celInf, Celda* celDer, Celda* celIzq);
 	virtual bool hasError(void);
 };

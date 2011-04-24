@@ -71,12 +71,10 @@ void Grapher::draw(Escenario& escenario)
 			if( posIzq > 0) 
 				celIzq = grilla.getCelda(i, posIzq);
 
-			Textura textura = celda->obtenerRepresentacion(celSup, celInf, celDer, celIzq);
-			Image imagen(textura.getPath());
+			Image imagen = celda->obtenerRepresentacion(celSup, celInf, celDer, celIzq);
 				
 			if (!imagen.hasError())
 			{
-				imagen.crop(textura.getTop(), textura.getLeft(), textura.getRight(), textura.getBottom());
 				w.display(imagen, imageWidth * j, imageHeight * i);
 			}
 			else

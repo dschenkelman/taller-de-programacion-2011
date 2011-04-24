@@ -1,5 +1,6 @@
 #pragma once
 #include "TipoBonus.h"
+#include "Image.h"
 
 class Bonus
 {
@@ -16,6 +17,7 @@ public:
 	std::string getTipo();
 	void setTipoBonus(TipoBonus tb);
 	TipoBonus getTipoBonus();
+	Image obtenerRepresentacion(void);
 	bool hasError(void);
 	~Bonus(void);
 };

@@ -3,6 +3,7 @@
 #include "Bonus.h"
 #include "Logger.h"
 #include <string>
+#include "Image.h"
 
 
 class Camino : public Celda
@@ -22,5 +23,5 @@ public:
 	Celda* copiar(void);
 	bool hasError(void);
 	~Camino(void);
-	Textura obtenerRepresentacion(Celda* celSup, Celda* celInf, Celda* celDer, Celda* celIzq);
+	Image obtenerRepresentacion(Celda* celSup, Celda* celInf, Celda* celDer, Celda* celIzq);
 };
