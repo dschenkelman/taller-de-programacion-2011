@@ -30,6 +30,7 @@ class Textura
 	void getRotationFromElement(XmlElement&);
 public:
 	Textura(void);
+	Textura(std::string imagePath);
 	Textura(XmlElement& element);
 	std::string getNombre(void);
 	std::string getPath(void);

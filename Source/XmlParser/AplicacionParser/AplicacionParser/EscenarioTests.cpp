@@ -346,8 +346,8 @@ bool EscenarioTests::testCorrectlyPopulatesTexturas()
 
 	successCondition = successCondition && t2.getTop() == 0;
 	successCondition = successCondition && t2.getLeft() == 0;
-	successCondition = successCondition && t2.getRight() == numeric_limits<int>::max();;
-	successCondition = successCondition && t2.getBottom() == numeric_limits<int>::max();;
+	successCondition = successCondition && t2.getRight() == numeric_limits<int>::max();
+	successCondition = successCondition && t2.getBottom() == numeric_limits<int>::max();
 	successCondition = successCondition && t2.getDelta() == 0;
 	successCondition = successCondition && t2.getRotation() == 0;
 	successCondition = successCondition && t2.getRed() == 255;

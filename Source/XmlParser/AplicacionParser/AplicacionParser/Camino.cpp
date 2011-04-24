@@ -86,17 +86,17 @@ Camino::~Camino(void)
 {
 }
 
-std::string Camino::obtenerRepresentacion(Celda* celSup, Celda* celInf, Celda* celDer, Celda* celIzq)
+Textura Camino::obtenerRepresentacion(Celda* celSup, Celda* celInf, Celda* celDer, Celda* celIzq)
 {
 	if (this->hasBonus())
 	{
 		/*std::stringstream ss;
 		std::string repres;*/
-		return this->getBonus().getTipoBonus().getTextura().getPath();
+		return this->getBonus().getTipoBonus().getTextura();
 		/*ss >> repres;*/
 	}
 	
-	std::string repres = "Images/cross.bmp";
+	Textura textura("Images/cross.bmp");
 	// Intento castear las celdas 
 	Camino* camSup = dynamic_cast<Camino*>(celSup);
 	Camino* camInf = dynamic_cast<Camino*>(celInf);
@@ -105,20 +105,20 @@ std::string Camino::obtenerRepresentacion(Celda* celSup, Celda* celInf, Celda* c
 	
 	// Ningun vecino es un camino
 	if( camSup == 0 && camInf == 0 && camDer == 0 && camIzq == 0 ){
-		return "Images/circle.bmp";
+		return Textura("Images/circle.bmp");
 	}
 	
 	// Solo vecinos superior o inferior son caminos
 	if(( camSup != 0 || camInf != 0 )&&( camDer == 0 && camIzq == 0 )){
-		return "Images/vertical.bmp";
+		return Textura("Images/vertical.bmp");
 	}
 
 	// Solo vecinos derecho o izquierdo son caminos
 	if(( camDer != 0 || camIzq != 0 )&&( camSup == 0 && camInf == 0 )){
-		return "Images/horizontal.bmp";
+		return Textura("Images/horizontal.bmp");
 	}
 
-	return repres;
+	return textura;
 }
 
 Celda* Camino::copiar(void)

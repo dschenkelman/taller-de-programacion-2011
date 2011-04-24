@@ -71,17 +71,18 @@ void Grapher::draw(Escenario& escenario)
 			if( posIzq > 0) 
 				celIzq = grilla.getCelda(i, posIzq);
 
-			string path = celda->obtenerRepresentacion(celSup, celInf, celDer, celIzq);
-			Image textura(path);
+			Textura textura = celda->obtenerRepresentacion(celSup, celInf, celDer, celIzq);
+			Image imagen(textura.getPath());
 				
-			if (!textura.hasError())
+			if (!imagen.hasError())
 			{
-				w.display(textura, imageWidth * j, imageHeight * i);
+				imagen.crop(textura.getTop(), textura.getLeft(), textura.getRight(), textura.getBottom());
+				w.display(imagen, imageWidth * j, imageHeight * i);
 			}
 			else
 			{
 				//log
-				Logger::getInstance()->logError(textura.getErrorMessage());
+				Logger::getInstance()->logError(imagen.getErrorMessage());
 				error = true;
 			}
 		}

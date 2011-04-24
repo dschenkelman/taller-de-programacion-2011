@@ -44,10 +44,10 @@ Celda::~Celda(void)
 }
 
 
-std::string Celda::obtenerRepresentacion(Celda* celSup, Celda* celInf, Celda* celDer, Celda* celIzq)
+Textura Celda::obtenerRepresentacion(Celda* celSup, Celda* celInf, Celda* celDer, Celda* celIzq)
 {
 	// Esto no se debería imprimir nunca
-	return "?";
+	return Textura();
 }
 
 Celda* Celda::copiar(void)
