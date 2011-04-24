@@ -84,6 +84,8 @@ Image Bonus::obtenerRepresentacion(void)
 	Textura textura = this->getTipoBonus().getTextura();
 	Image imagen(textura.getPath());
 	imagen.crop(textura.getTop(), textura.getLeft(), textura.getRight(), textura.getBottom());
+	Uint32 alphaPixel = textura.getRed() | textura.getGreen() << 8 | textura.getBlue() << 16;
+	imagen.rotate(textura.getRotation(), alphaPixel);
 	return imagen;	
 }
 

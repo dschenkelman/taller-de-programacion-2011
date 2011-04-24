@@ -3,6 +3,9 @@
 #include <string>
 #include <sstream>
 #include <limits>
+#include <math.h>
+#include <algorithm>
+#define PI 3.14159265
 
 using namespace std;
 
@@ -26,7 +29,7 @@ Image::Image(string path): height(0), width(0), error(false), errorMessage(""), 
 /** Empty Image constructor */
 Image::Image(int w, int h) : width(w), height(h), error(false), errorMessage(""), image(NULL)
 {
-	this->image = SDL_CreateRGBSurface(SDL_SWSURFACE,width,height,24,0,0,0,0);
+	this->image = SDL_CreateRGBSurface(SDL_HWSURFACE,width,height,24,0,0,0,0);
 }
 
 Image::Image(const Image& other) : height(0), width(0), error(false), errorMessage(""), image(NULL)
@@ -69,6 +72,7 @@ int Image::getWidth(void) const
 Image::~Image(void)
 {
 	SDL_FreeSurface(this->image);
+	this->image = NULL;
 }
 
 /** Get image's pixel at x and y */
@@ -141,6 +145,17 @@ void Image::putPixel(SDL_Surface *surface, Uint32 pixel, int x, int y)
 }
 
 
+
+int Image::xRotatePixel(double radians, int x, int y)
+{
+	return (cos(radians) * x - sin(radians) * y);
+}
+
+int Image::yRotatePixel(double radians, int x, int y)
+{
+	return sin(radians) * x + cos(radians) * y;
+}
+
 const SDL_PixelFormat* Image::getFormat() const{
 	return this->image->format;
 }
@@ -209,7 +224,86 @@ void Image::copy(const Image& other)
 	if (this->image != NULL)
 	{
 		SDL_FreeSurface(this->image);
+		this->image = NULL;
 	}
 
 	this->image = temp;
+}
+void Image::rotate(int degrees, Uint32 alpha)
+{
+	double radians = (degrees * PI) / 180;
+
+	int rotatedHeight = this->getRotatedHeight(radians);
+	int rotatedWidth = this->getRotatedWidth(radians);
+
+	Image temp(rotatedWidth, rotatedHeight);
+
+	int centerX = this->getWidth() / 2;		
+	int centerY = this->getHeight() / 2;
+
+	for (int i = 0; i < rotatedHeight; i++) 
+	{
+		for (int j = 0; j < rotatedWidth; j++) 
+		{
+			temp.putPixel(alpha, i, j);
+		}
+	}
+
+	int newCenterX = rotatedWidth / 2;
+	int newCenterY = rotatedHeight / 2;
+
+	for (int i = 0; i <  this->getWidth(); i++) 
+	{
+		for (int j = 0; j < this->getHeight(); j++) 
+		{
+			Uint32 pixelImg = this->getPixel(i, j);
+			int rotatedX = xRotatePixel(radians, i - centerX, j - centerY);
+			int rotatedY = yRotatePixel(radians, i - centerX, j - centerY);
+			temp.putPixel(pixelImg, rotatedX + newCenterX, rotatedY + newCenterY);
+		}
+	}
+		
+	this->copy(temp);
+}
+
+int Image::getRotatedWidth(double radians)
+{
+	int centerX = this->getWidth() / 2;		
+	int centerY = this->getHeight() / 2;
+
+	int rotatedTopLeftX = xRotatePixel(radians, -centerX, -centerY);
+	
+	int rotatedTopRightX = xRotatePixel(radians, centerX, -centerY);
+	
+	int rotatedBottomRightX = xRotatePixel(radians, centerX, centerY);
+	
+	int rotatedBottomLeftX = xRotatePixel(radians, -centerX, centerY);
+
+	int xValues[4] = {rotatedBottomLeftX, rotatedBottomRightX, rotatedTopLeftX, rotatedTopRightX};
+	
+	int xMax = *max_element(xValues, xValues + 4);
+	int xMin = *min_element(xValues, xValues + 4);
+
+	return xMax - xMin;
+}
+
+int Image::getRotatedHeight(double radians)
+{
+	int centerX = this->getWidth() / 2;		
+	int centerY = this->getHeight() / 2;
+
+	int rotatedTopLeftY = yRotatePixel(radians, -centerX, -centerY);
+	
+	int rotatedTopRightY = yRotatePixel(radians, centerX, -centerY);
+	
+	int rotatedBottomRightY = yRotatePixel(radians, centerX, centerY);
+	
+	int rotatedBottomLeftY = yRotatePixel(radians, -centerX, centerY);
+
+	int yValues[4] = {rotatedBottomLeftY, rotatedBottomRightY, rotatedTopLeftY, rotatedTopRightY};
+	
+	int yMax = *max_element(yValues, yValues + 4);
+	int yMin = *min_element(yValues, yValues + 4);
+
+	return yMax - yMin;
 }
