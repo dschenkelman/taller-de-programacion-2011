@@ -8,11 +8,11 @@ Rotador::Rotador(void)
 
 void Rotador::rotar(SDL_Surface* image, SDL_Surface* screen, int posX, int posY, double grados)
 {
-    if ( SDL_MUSTLOCK(screen) ) {
+    /*if ( SDL_MUSTLOCK(screen) ) {
         if ( SDL_LockSurface(screen) < 0 ) {
             fprintf(stderr, "Can't lock screen: %s\n", SDL_GetError());
         }
-    }
+    }*/
 
 	SDL_Flip(screen);
 

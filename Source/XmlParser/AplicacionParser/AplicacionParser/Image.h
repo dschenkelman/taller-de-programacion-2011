@@ -11,6 +11,10 @@ class Image
 	int height;
 	int width;
 	static void putPixel(SDL_Surface* surface, Uint32 pixel, int x, int y);
+	static int xRotatePixel(double radians, int x, int y);
+	static int yRotatePixel(double radians, int x, int y);
+	int getRotatedHeight(double radians);
+	int getRotatedWidth(double radians);
 public:
 	Image(std::string path);
 	Image(int width, int height); // Empty image constructor
@@ -27,4 +31,5 @@ public:
 	void putPixel(Uint32 pixel, int x, int y);
 	void copy(const Image& other);
 	const SDL_PixelFormat* getFormat() const;
+	void rotate(int degrees, Uint32 alpha);
 };

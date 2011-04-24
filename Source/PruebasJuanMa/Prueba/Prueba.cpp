@@ -127,7 +127,7 @@ int main(int argc, char* argv[])
 	imgResampled->paste(screen, 0, 0);
 
 	// ejemplo rotacion
-	//ejemploRotacion();
+	ejemploRotacion();
 
 	SDL_Delay(5000);
 	
