@@ -22,5 +22,5 @@ public:
 	Celda* copiar(void);
 	bool hasError(void);
 	~Camino(void);
-	std::string obtenerRepresentacion(Celda* celSup, Celda* celInf, Celda* celDer, Celda* celIzq);
+	Textura obtenerRepresentacion(Celda* celSup, Celda* celInf, Celda* celDer, Celda* celIzq);
 };

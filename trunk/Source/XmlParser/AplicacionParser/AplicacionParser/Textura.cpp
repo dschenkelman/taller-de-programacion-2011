@@ -7,7 +7,16 @@
 
 using namespace std;
 
-Textura::Textura(void)
+Textura::Textura(void) : path(""), nombre(""), tieneError(false),
+left(0), top(0), right(numeric_limits<int>::max()), bottom(numeric_limits<int>::max()),
+red(255), green(0), blue(255), delta(0), rotation(0), line(0), usada(false)
+{
+
+}
+
+Textura::Textura(string imagePath) : path(imagePath), nombre(""), tieneError(false),
+left(0), top(0), right(numeric_limits<int>::max()), bottom(numeric_limits<int>::max()),
+red(255), green(0), blue(255), delta(0), rotation(0), line(0), usada(false)
 {
 }
 

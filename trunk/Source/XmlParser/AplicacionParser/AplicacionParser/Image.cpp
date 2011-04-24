@@ -2,6 +2,7 @@
 #include "Image.h"
 #include <string>
 #include <sstream>
+#include <limits>
 
 using namespace std;
 
@@ -23,7 +24,8 @@ Image::Image(string& path): height(0), width(0), error(false), errorMessage("")
 }
 
 /** Empty Image constructor */
-Image::Image(int width, int height){
+Image::Image(int width, int height)
+{
 	this->image = SDL_CreateRGBSurface(SDL_SWSURFACE,width,height,24,0,0,0,0);
 }
 
@@ -75,34 +77,44 @@ Uint32 Image::getPixel(int x, int y){
 
 
 /** Put a pixel in this image at x and y */
-void Image::putPixel(Uint32 pixel, int x, int y){
-    int bpp = this->image->format->BytesPerPixel;
-    Uint8 *p = (Uint8 *)this->image->pixels + y * this->image->pitch + x * bpp;
+void Image::putPixel(Uint32 pixel, int x, int y)
+{
+	Image::putPixel(this->image, pixel, x, y);
+}
 
-    switch(bpp) {
-    case 1:
-        *p = pixel;
-        break;
+void Image::putPixel(SDL_Surface *surface, Uint32 pixel, int x, int y)
+{
+	int bpp = surface->format->BytesPerPixel;
+    Uint8 *p = (Uint8 *)surface->pixels + y * surface->pitch + x * bpp;
 
-    case 2:
-        *(Uint16 *)p = pixel;
-        break;
+    switch(bpp) 
+	{
+		case 1:
+			*p = pixel;
+			break;
 
-    case 3:
-        if(SDL_BYTEORDER == SDL_BIG_ENDIAN) {
-            p[0] = (pixel >> 16) & 0xff;
-            p[1] = (pixel >> 8) & 0xff;
-            p[2] = pixel & 0xff;
-        } else {
-            p[0] = pixel & 0xff;
-            p[1] = (pixel >> 8) & 0xff;
-            p[2] = (pixel >> 16) & 0xff;
-        }
-        break;
+		case 2:
+			*(Uint16 *)p = pixel;
+			break;
 
-    case 4:
-        *(Uint32 *)p = pixel;
-        break;
+		case 3:
+			if(SDL_BYTEORDER == SDL_BIG_ENDIAN) 
+			{
+				p[0] = (pixel >> 16) & 0xff;
+				p[1] = (pixel >> 8) & 0xff;
+				p[2] = pixel & 0xff;
+			}
+			else 
+			{
+				p[0] = pixel & 0xff;
+				p[1] = (pixel >> 8) & 0xff;
+				p[2] = (pixel >> 16) & 0xff;
+			}
+			break;
+
+		case 4:
+			*(Uint32 *)p = pixel;
+			break;
     }
 }
 
@@ -119,4 +131,40 @@ string Image::getErrorMessage(void)
 bool Image::hasError(void)
 {
 	return this->error;
+}
+
+void Image::crop(int top, int left, int right, int bottom)
+{
+	if(right == numeric_limits<int>::max())
+	{
+		right = this->image->w;
+	}
+
+	if(bottom == numeric_limits<int>::max())
+	{
+		bottom = this->image->h;
+	}
+
+
+	int width = right - left;
+	int height = bottom - top;
+
+
+	if (width != this->getWidth() || height != this->getHeight())
+	{
+		//needs to be resized
+		SDL_Surface* temp = SDL_CreateRGBSurface(SDL_HWSURFACE, width, height, 24, 0, 0, 0, 0);
+
+		for (int i = 0; i < width; i++) 
+		{
+			for (int j = 0; j < height; j++) 
+			{
+				Uint32 pixelImg = this->getPixel(left + i, top + j);
+				Image::putPixel(temp, pixelImg, i, j);
+			}
+		}
+
+		SDL_FreeSurface(this->image);
+		this->image = temp;
+	}
 }

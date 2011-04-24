@@ -3,11 +3,11 @@
 #include <sstream>
 using namespace std;
 
-Escenario::Escenario(void): tieneError(false)
+Escenario::Escenario(void): tieneError(false), textura("")
 {
 }
 
-Escenario::Escenario(XmlElement& e) : tieneError(false), texturaFondo("")
+Escenario::Escenario(XmlElement& e) : tieneError(false), texturaFondo(""), textura("")
 {
 	if (e.getName() != "escenario")
 	{
