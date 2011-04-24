@@ -78,7 +78,7 @@ Image::~Image(void)
 /** Get image's pixel at x and y */
 Uint32 Image::getPixel(int x, int y) const{
     int bpp = this->image->format->BytesPerPixel;
-    Uint8 *p = (Uint8 *)this->image->pixels + y * this->image->pitch + x * bpp;
+    Uint8 *p = (Uint8 *)this->image->pixels + ((this->image->w * y + x) * bpp);
 
     switch(bpp) {
     case 1:
@@ -111,7 +111,7 @@ void Image::putPixel(Uint32 pixel, int x, int y)
 void Image::putPixel(SDL_Surface *surface, Uint32 pixel, int x, int y)
 {
 	int bpp = surface->format->BytesPerPixel;
-    Uint8 *p = (Uint8 *)surface->pixels + y * surface->pitch + x * bpp;
+    Uint8 *p = (Uint8 *)surface->pixels + ((surface->w * y + x) * bpp);
 
     switch(bpp) 
 	{
@@ -241,9 +241,9 @@ void Image::rotate(int degrees, Uint32 alpha)
 	int centerX = this->getWidth() / 2;		
 	int centerY = this->getHeight() / 2;
 
-	for (int i = 0; i < rotatedHeight; i++) 
+	for (int i = 0; i < rotatedWidth; i++) 
 	{
-		for (int j = 0; j < rotatedWidth; j++) 
+		for (int j = 0; j < rotatedHeight; j++) 
 		{
 			temp.putPixel(alpha, i, j);
 		}
@@ -257,8 +257,8 @@ void Image::rotate(int degrees, Uint32 alpha)
 		for (int j = 0; j < this->getHeight(); j++) 
 		{
 			Uint32 pixelImg = this->getPixel(i, j);
-			int rotatedX = xRotatePixel(radians, i - centerX, j - centerY);
-			int rotatedY = yRotatePixel(radians, i - centerX, j - centerY);
+			int rotatedX = xRotatePixel(radians, i - centerX, j + 1 - centerY);
+			int rotatedY = yRotatePixel(radians, i - centerX, j + 1 - centerY);
 			temp.putPixel(pixelImg, rotatedX + newCenterX, rotatedY + newCenterY);
 		}
 	}
