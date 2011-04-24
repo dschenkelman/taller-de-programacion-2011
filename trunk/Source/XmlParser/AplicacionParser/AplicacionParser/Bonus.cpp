@@ -2,6 +2,9 @@
 #include "Bonus.h"
 #include "Logger.h"
 #include <sstream>
+#include "Image.h"
+#include "Textura.h"
+
 using namespace std;
 
 Bonus::Bonus(void) : tieneError(false)
@@ -74,6 +77,14 @@ void Bonus::populateValidAttributes(void)
 bool Bonus::hasError(void)
 {
 	return this->tieneError || this->tipoBonus.hasError();
+}
+
+Image Bonus::obtenerRepresentacion(void)
+{
+	Textura textura = this->getTipoBonus().getTextura();
+	Image imagen(textura.getPath());
+	imagen.crop(textura.getTop(), textura.getLeft(), textura.getRight(), textura.getBottom());
+	return imagen;	
 }
 
 Bonus::~Bonus(void)
