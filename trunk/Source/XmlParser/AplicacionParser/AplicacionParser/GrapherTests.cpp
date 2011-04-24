@@ -180,7 +180,7 @@ bool GrapherTests::testGraficarEscenario(void)
 	XmlElement elementoTextura3("textura", 21, 21);
 	XmlAttribute atributo7("nombre", "uva");
 	XmlAttribute atributo8("path", "Images/uva.bmp");
-	XmlAttribute atributo9("rot", "90");
+	XmlAttribute atributo9("rot", "180");
 
 	elementoTextura.addAttribute(atributoNombreTextura);
 	elementoTextura.addAttribute(atributoPathTextura);
