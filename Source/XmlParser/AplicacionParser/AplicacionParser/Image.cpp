@@ -5,18 +5,21 @@
 
 using namespace std;
 
-Image::Image(string& path)
+Image::Image(string& path): height(0), width(0), error(false), errorMessage("")
 {
 	this->image = SDL_LoadBMP(path.c_str());
 	if (this->image == NULL) 
 	{
+		this->error = true;
 		stringstream msg;
-		msg << "Unable to load bitmap: " << SDL_GetError();
-		throw std::exception(msg.str().c_str());	
+		msg << "Error al abrir la imagen: " << SDL_GetError();
+		this->errorMessage = msg.str();
 	}
-
-	this->width = this->image->w;
-	this->height = this->image->h;
+	else
+	{
+		this->width = this->image->w;
+		this->height = this->image->h;
+	}
 }
 
 /** Empty Image constructor */
@@ -106,4 +109,14 @@ void Image::putPixel(Uint32 pixel, int x, int y){
 
 const SDL_PixelFormat* Image::getFormat(){
 	return this->image->format;
+}
+
+string Image::getErrorMessage(void)
+{
+	return this->errorMessage;
+}
+
+bool Image::hasError(void)
+{
+	return this->error;
 }

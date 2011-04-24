@@ -5,6 +5,8 @@
 class Image
 {
 	SDL_Surface* image;
+	bool error;
+	std::string errorMessage;
 	int height;
 	int width;
 public:
@@ -14,6 +16,8 @@ public:
 	SDL_Surface* getSDLSurface(void);
 	int getWidth(void);
 	int getHeight(void);
+	std::string getErrorMessage(void);
+	bool hasError(void);
 	Uint32 getPixel(int x, int y);
 	void putPixel(Uint32 pixel, int x, int y);
 	const SDL_PixelFormat* getFormat();
