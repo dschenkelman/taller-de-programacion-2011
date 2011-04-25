@@ -28,6 +28,7 @@ public:
 	bool hasError(void) const;
 	Uint32 getPixel(int x, int y) const;
 	void crop(int top, int left, int right, int bottom);
+	void resize(int newWidth, int newHeight);
 	void putPixel(Uint32 pixel, int x, int y);
 	void copy(const Image& other);
 	const SDL_PixelFormat* getFormat() const;
