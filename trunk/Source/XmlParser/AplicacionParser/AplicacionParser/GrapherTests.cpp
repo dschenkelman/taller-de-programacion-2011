@@ -173,14 +173,14 @@ bool GrapherTests::testGraficarEscenario(void)
 	
 	XmlElement elementoTextura2("textura", 21, 21);
 	XmlAttribute atributo3("nombre", "ladrillo");
-	XmlAttribute atributo4("path", "Images/ladrilloGrande.bmp");
+	XmlAttribute atributo4("path", "Images/ladrillo.bmp");
 	XmlAttribute atributo5("left", "32");
 	XmlAttribute atributo6("right", "96");
 
 	XmlElement elementoTextura3("textura", 21, 21);
 	XmlAttribute atributo7("nombre", "uva");
 	XmlAttribute atributo8("path", "Images/uva.bmp");
-	XmlAttribute atributo9("rot", "10");
+	XmlAttribute atributo9("rot", "45");
 
 	elementoTextura.addAttribute(atributoNombreTextura);
 	elementoTextura.addAttribute(atributoPathTextura);
