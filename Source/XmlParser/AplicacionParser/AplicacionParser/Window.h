@@ -10,6 +10,9 @@ class Window
 	int width;
 	SDL_Surface* window;	
 	std::string title;
+	Uint32 getPixel(int x, int y) const;
+	void putPixel(Uint32 pixel, int x, int y);
+	void putPixel(SDL_Surface *surface, Uint32 pixel, int x, int y);
 public:
 	Window(std::string, int h, int w);
 	void close(void);

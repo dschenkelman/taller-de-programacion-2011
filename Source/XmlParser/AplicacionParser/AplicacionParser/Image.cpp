@@ -230,7 +230,7 @@ void Image::copy(const Image& other)
 }
 void Image::rotate(int degrees, Uint32 alpha)
 {
-	double radians = (degrees * PI) / 180;
+	double radians = ((degrees / 180.0) * PI);
 
 	int rotatedHeight = this->getRotatedHeight(radians);
 	int rotatedWidth = this->getRotatedWidth(radians);
@@ -256,9 +256,33 @@ void Image::rotate(int degrees, Uint32 alpha)
 		for (int j = 0; j < this->getHeight(); j++) 
 		{
 			Uint32 pixelImg = this->getPixel(i, j);
-			int rotatedX = xRotatePixel(radians, i - centerX, j + 1 - centerY);
-			int rotatedY = yRotatePixel(radians, i - centerX, j + 1 - centerY);
-			temp.putPixel(pixelImg, rotatedX + newCenterX, rotatedY + newCenterY);
+		
+			int rotatedX = xRotatePixel(radians, i - centerX, j - centerY);
+			int rotatedY = yRotatePixel(radians, i - centerX, j - centerY);
+			int yPosition = rotatedY + newCenterY;
+			int xPosition = rotatedX + newCenterX;
+
+			if (yPosition < 0)
+			{
+				yPosition = 0;
+			}
+
+			if (xPosition < 0)
+			{
+				xPosition = 0;
+			}
+
+			if (xPosition >= rotatedWidth)
+			{
+				xPosition = rotatedWidth - 1;
+			}
+
+			if (yPosition >= rotatedHeight)
+			{
+				yPosition = rotatedHeight - 1;
+			}
+
+			temp.putPixel(pixelImg, xPosition, yPosition);
 		}
 	}
 		
