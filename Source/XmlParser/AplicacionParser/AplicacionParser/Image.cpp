@@ -148,14 +148,13 @@ void Image::putPixel(SDL_Surface *surface, Uint32 pixel, int x, int y)
 
 int Image::xRotatePixel(double radians, int x, int y)
 {
-	return (cos(radians) * x - sin(radians) * y);
+	return cos(radians) * x + sin(radians) * y;
 }
 
 int Image::yRotatePixel(double radians, int x, int y)
 {
-	return sin(radians) * x + cos(radians) * y;
+	return cos(radians) * y - sin(radians) * x;
 }
-
 const SDL_PixelFormat* Image::getFormat() const{
 	return this->image->format;
 }
