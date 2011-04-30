@@ -142,5 +142,5 @@ void  Grapher::setVideoMode(int mode){
 
 }
 int  Grapher::getVideoMode(void){
-	return this->windowHeight;
+	return this->windowWidth;
 }
