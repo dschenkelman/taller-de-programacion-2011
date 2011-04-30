@@ -19,6 +19,8 @@
 #include "GrillaTests.h"
 #include "EscenarioTests.h"
 #include "GrapherTests.h"
+#include "Image.h"
+#include "Window.h"
 #include <iostream>
 using namespace std;
 
@@ -151,12 +153,19 @@ int _tmain(int argc, _TCHAR* argv[])
 	GrapherTests grapherTest;
 	grapherTest.run();
 
-	/*char aux;
-	cin >> aux;*/
+	/*Window w("Ventana", 480, 640);
+	Image im("Images/smile.bmp");
+	w.display(im, 100, 100);
+	w.refresh();
 	
-	printf( "Press ENTER to continue... " );
-	char c = getchar();
+	SDL_Delay(1000);
 
+	im.rotate(19, 2);
+	w.display(im, 100, 100);
+	w.refresh();*/
+
+	printf( "Press ENTER to continue... " );
+
+	char c = getchar();
 	return 0;
 }
-
