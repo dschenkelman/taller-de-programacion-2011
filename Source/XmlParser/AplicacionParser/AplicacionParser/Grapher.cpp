@@ -10,6 +10,10 @@ using namespace std;
 
 Grapher::Grapher()
 {
+	//default 640x480
+	this->windowWidth=640;
+	this->windowHeight=480;
+	
 }
 
 Grapher::~Grapher()
@@ -109,4 +113,34 @@ void Grapher::draw(Escenario& escenario)
 		}
 	}
 
+}
+
+void  Grapher::setVideoMode(int mode){
+
+	switch(mode){
+		case 640:{
+			this->windowHeight=480;
+			this->windowWidth=640;
+			break;
+		}
+		case 800:{
+			this->windowHeight=600;
+			this->windowWidth=800;
+			break;
+				 }
+		case 1024:{
+			this->windowHeight=768;
+			this->windowWidth=1024;
+			break;
+	    }
+		default:{
+			this->windowHeight=480;
+			this->windowWidth=640;
+		}
+	}		
+
+
+}
+int  Grapher::getVideoMode(void){
+	return this->windowHeight;
 }

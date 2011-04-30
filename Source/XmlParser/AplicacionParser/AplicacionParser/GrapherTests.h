@@ -10,4 +10,7 @@ public:
 	void run(void);
 	void printResult(std::string testName, bool result);
 	bool testGraficarEscenario(void);
+	bool testGraficarEscenario800x600(void);
+	bool testGraficarEscenario1024x768(void);
+	
 };
