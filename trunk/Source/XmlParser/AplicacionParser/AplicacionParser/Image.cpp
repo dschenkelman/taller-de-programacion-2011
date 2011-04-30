@@ -148,7 +148,7 @@ void Image::putPixel(SDL_Surface *surface, Uint32 pixel, int x, int y)
 
 int Image::xRotatePixel(double radians, int x, int y)
 {
-	return cos(radians) * x + sin(radians) * y;
+	return cos(radians) * x + sin(radians) * y;                                                                                                                                                                                                                                                                                                                   
 }
 
 int Image::yRotatePixel(double radians, int x, int y)
@@ -228,7 +228,65 @@ void Image::copy(const Image& other)
 
 	this->image = temp;
 }
+
 void Image::rotate(int degrees, Uint32 alpha)
+{
+	double radians = ((degrees / 180.0) * PI);
+
+	int originalCenterX = this->getWidth() / 2;
+	int originalCenterY = this->getHeight() / 2;
+
+	int rotatedHeight = this->getRotatedHeight(radians);
+	int rotatedWidth = this->getRotatedWidth(radians);
+	int rotatedCenterX = rotatedWidth / 2;
+	int rotatedCenterY = rotatedHeight / 2;
+
+	Image temp(rotatedWidth, rotatedHeight);
+
+	for (int i = 0; i < rotatedWidth; i++) 
+	{
+		for (int j = 0; j < rotatedHeight; j++) 
+		{
+			int originalX = xRotatePixel(-radians, i - rotatedCenterX, j - rotatedCenterY);
+			int originalY = yRotatePixel(-radians, i - rotatedCenterX, j - rotatedCenterY);
+
+			originalX += originalCenterX;
+			originalY += originalCenterY;
+
+			if(!validLimits(originalX, originalY))
+			{
+				temp.putPixel(alpha, i, j);
+				continue;
+			}
+
+			Uint32 pixelImg = this->getPixel(originalX, originalY);
+			temp.putPixel(pixelImg, i, j);
+		}
+	}
+
+	int originalHeight = this->getHeight();
+	int originalWidth = this->getWidth();
+
+	this->copy(temp);
+	//this->resize(originalWidth, originalHeight);
+}
+
+bool Image::validLimits(int x, int y)
+{
+	if (x < 0 || x > this->width)
+	{
+		return false;
+	}
+
+	if (y < 0 || y > this->height)
+	{
+		return false;
+	}
+
+	return true;
+}
+
+/*void Image::rotate(int degrees, Uint32 alpha)
 {
 	double radians = ((degrees / 180.0) * PI);
 
@@ -291,7 +349,7 @@ void Image::rotate(int degrees, Uint32 alpha)
 
 	this->copy(temp);
 	this->resize(originalWidth, originalHeight);
-}
+}*/
 
 
 void Image::resize(int newWidth, int newHeight)

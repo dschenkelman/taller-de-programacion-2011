@@ -26,6 +26,7 @@ public:
 	int getHeight(void) const;
 	std::string getErrorMessage(void) const;
 	bool hasError(void) const;
+	bool validLimits(int x, int y);
 	Uint32 getPixel(int x, int y) const;
 	void crop(int top, int left, int right, int bottom);
 	void resize(int newWidth, int newHeight);
