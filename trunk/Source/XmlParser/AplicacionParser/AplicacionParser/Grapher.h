@@ -3,10 +3,13 @@
 
 class Grapher
 {
-	static const int windowHeight = 480;
-	static const int windowWidth = 640;
+private:
+	int windowHeight;
+	int windowWidth;
 public:
 	void draw(Escenario& escenario);
+	void setVideoMode(int mode);
+	int getVideoMode(void);
 	Grapher();
 	~Grapher();
 };
