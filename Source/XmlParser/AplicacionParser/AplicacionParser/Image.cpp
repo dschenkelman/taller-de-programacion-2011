@@ -491,3 +491,22 @@ int Image::getRotatedHeight(double radians)
 
 	return yMax - yMin;
 }
+
+void Image::superImpose(Image imageToImpose){
+
+	//Caso feliz:
+	//Una imagen es mas grande que la otra por superfice ya que siempre son cuadradas.
+	//Si se da el caso de que la nueva es mas grande que la actual, hago un resize de la nueva y se la 
+	//asigno pixel a pixel a la vieja.
+
+	long areaToImpose=imageToImpose.getHeight() * imageToImpose.getWidth();
+	long currentImageArea= this->getHeight() * this->getWidth();
+
+
+	if (areaToImpose > currentImageArea){
+		//resize de la imagen a transparentar
+		imageToImpose.resize(this->getWidth(), this->getHeight());
+		this->copy(imageToImpose);
+	}
+
+}
