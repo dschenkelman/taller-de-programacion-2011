@@ -38,7 +38,7 @@ void GrapherTests::printResult(std::string testName, bool result)
 
 bool GrapherTests::testGraficarEscenario(void)
 {
-	XmlElement elementoEscenario("escenario", 1, 1000);
+XmlElement elementoEscenario("escenario", 1, 1000);
 	XmlAttribute atributoNombreEscenario("nombre", "Nivel de Prueba 640x480");
 	elementoEscenario.addAttribute(atributoNombreEscenario);
 
@@ -63,7 +63,15 @@ bool GrapherTests::testGraficarEscenario(void)
 	elementoTipoBonus.addAttribute(atributoNombre);
 	elementoTipoBonus.addAttribute(atributoTextura);
 
+	//Agrego un tipo bonus anana.
+	XmlElement elementoTipoBonusAnana("tipoBonus", 201, 202);
+	XmlAttribute atributoNombreAnana("nombre", "anana");
+	XmlAttribute atributoTexturaAnana("textura", "anana");
+	elementoTipoBonus.addAttribute(atributoNombreAnana);
+	elementoTipoBonusAnana.addAttribute(atributoTexturaAnana);	
+
 	elementoListaTiposBonus.addChild(elementoTipoBonus);
+	elementoListaTiposBonus.addChild(elementoTipoBonusAnana);
 
 	// se crea el xmlElement de la lista de tipos obstaculos
 	XmlElement elementoListaTiposObstaculo("tiposobstaculos", 600, 700);
@@ -97,6 +105,22 @@ bool GrapherTests::testGraficarEscenario(void)
 	elementoCamino.addChild(elementoBonus);
 
 	elementoGrilla.addChild(elementoCamino);
+
+
+	// se crea un camino con bonus Anana para la grilla
+	XmlElement elementoCaminoE("camino", 2, 8);
+	XmlAttribute atributoFilaE("fila", "4");
+	XmlAttribute atributoColumnaE("columna", "4");
+	elementoCaminoE.addAttribute(atributoFilaE);
+	elementoCaminoE.addAttribute(atributoColumnaE);
+
+	XmlElement elementoBonusE("bonus", 4, 5);
+	XmlAttribute atributoAnana("tipo", "anana");
+	elementoBonusE.addAttribute(atributoAnana);
+
+	elementoCaminoE.addChild(elementoBonusE);
+
+	elementoGrilla.addChild(elementoCaminoE);
 
 	// segundo camino
 	XmlElement elementoCamino2("camino", 2, 8);
@@ -137,6 +161,14 @@ bool GrapherTests::testGraficarEscenario(void)
 	elementoCamino6.addAttribute(atributoFila6);
 	elementoCamino6.addAttribute(atributoColumna6);
 	elementoGrilla.addChild(elementoCamino6);
+
+	// septimo camino
+	XmlElement elementoCamino7("camino", 2, 8);
+	XmlAttribute atributoFila7("fila", "4");
+	XmlAttribute atributoColumna7("columna", "4");
+	elementoCamino7.addAttribute(atributoFila7);
+	elementoCamino7.addAttribute(atributoColumna7);
+	elementoGrilla.addChild(elementoCamino7);
 
 
 	// se crean dos obstaculos para la grilla
@@ -185,6 +217,10 @@ bool GrapherTests::testGraficarEscenario(void)
 	XmlAttribute atributo8("path", "Images/uva.bmp");
 	XmlAttribute atributo9("rot", "45");
 
+	XmlElement elementoTextura4("textura", 21, 21);
+	XmlAttribute atributo10("nombre", "anana");
+	XmlAttribute atributo11("path", "Images/anana.bmp");
+
 	elementoTextura.addAttribute(atributoNombreTextura);
 	elementoTextura.addAttribute(atributoPathTextura);
 
@@ -200,10 +236,14 @@ bool GrapherTests::testGraficarEscenario(void)
 	elementoTextura3.addAttribute(atributo8);
 	elementoTextura3.addAttribute(atributo9);
 
+	elementoTextura4.addAttribute(atributo10);
+	elementoTextura4.addAttribute(atributo11);
+
 	elementoTexturas.addChild(elementoTextura);
 	elementoTexturas.addChild(elementoTextura1);
 	elementoTexturas.addChild(elementoTextura2);
 	elementoTexturas.addChild(elementoTextura3);
+	elementoTexturas.addChild(elementoTextura4);
 
 	elementoEscenario.addChild(elementoTexturas);
 

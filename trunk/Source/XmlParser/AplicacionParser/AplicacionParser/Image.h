@@ -34,4 +34,5 @@ public:
 	void copy(const Image& other);
 	const SDL_PixelFormat* getFormat() const;
 	void rotate(int degrees, Uint32 alpha);
+	void superImpose(Image imageToImpose);
 };
