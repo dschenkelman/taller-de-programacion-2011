@@ -495,18 +495,60 @@ int Image::getRotatedHeight(double radians)
 void Image::superImpose(Image imageToImpose){
 
 	//Caso feliz:
-	//Una imagen es mas grande que la otra por superfice ya que siempre son cuadradas.
+	//Una imagen es mas grande que la otra por superfice, ya que siempre son cuadradas.
 	//Si se da el caso de que la nueva es mas grande que la actual, hago un resize de la nueva y se la 
 	//asigno pixel a pixel a la vieja.
 
-	long areaToImpose=imageToImpose.getHeight() * imageToImpose.getWidth();
-	long currentImageArea= this->getHeight() * this->getWidth();
 
+	int anchoImagen,altoImagen,altoPantalla,anchoPantalla,inicioAnchoPantalla,inicioAltoPantalla;
+	
+	anchoImagen=altoImagen=altoPantalla=anchoPantalla=0;
+	
+	anchoPantalla=this->getWidth();
+	altoPantalla=this->getHeight();
+
+	altoImagen=imageToImpose.getHeight();
+	anchoImagen=imageToImpose.getWidth();
+
+
+	long areaToImpose=altoImagen * anchoImagen;
+	long currentImageArea= anchoPantalla * altoPantalla;
 
 	if (areaToImpose > currentImageArea){
-		//resize de la imagen a transparentar
+		//resize de la imagen a transparentar en caso de que sea mayor en area que la actual.
 		imageToImpose.resize(this->getWidth(), this->getHeight());
 		this->copy(imageToImpose);
 	}
+	else{
+
+		//Calculo el x e y inicial donde ubicar la imagen para centrarlo.
+		//Lo ubico pixela pixel.
+		inicioAnchoPantalla= (anchoPantalla - anchoImagen) / 2;
+		inicioAltoPantalla= (altoPantalla - altoImagen) / 2;
+
+		for (int i = 0; i < anchoPantalla; i++) 
+		{
+			for (int j = 0; j < altoPantalla; j++) 
+			{
+				if ( (inicioAnchoPantalla >= i) &&
+					(i <= (inicioAnchoPantalla + anchoImagen)) &&
+					(inicioAltoPantalla >= j) &&
+					(j <= (inicioAltoPantalla + altoImagen))
+				
+					)
+					
+				{
+					//Pixel de la imagen a sobreimponer
+					Uint32 pixelAImponer=imageToImpose.getPixel(i-inicioAltoPantalla,j-inicioAltoPantalla);
+					this->putPixel(pixelAImponer, i, j);
+
+				}
+			}
+		}
+
+	}
+
+	return;
+
 
 }
