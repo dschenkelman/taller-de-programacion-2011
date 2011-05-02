@@ -19,6 +19,7 @@
 #include "GrillaTests.h"
 #include "EscenarioTests.h"
 #include "GrapherTests.h"
+#include "ImageTests.h"
 #include "Image.h"
 #include "Window.h"
 #include <iostream>
@@ -148,6 +149,10 @@ int _tmain(int argc, _TCHAR* argv[])
 	cout<<"Test de Textura"<<endl;
 	TexturaTests texturaTests;
 	texturaTests.run();
+
+	cout<<"Test de Image"<<endl;
+	ImageTests imageTest;
+	imageTest.run();
 
 	cout<<"Test de Grapher"<<endl;
 	GrapherTests grapherTest;
