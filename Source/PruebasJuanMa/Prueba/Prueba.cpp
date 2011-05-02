@@ -83,7 +83,7 @@ void ejemploRotacion()
 
 	SDL_BlitSurface(image, NULL, screen, &dest);
 
-	Rotador().rotar(image, screen, 100, 100, PI);
+	Rotador().rotar(image, screen, 100, 100, 110);
 }
 
 int main(int argc, char* argv[])
@@ -115,7 +115,7 @@ int main(int argc, char* argv[])
 
 	// nueva imagen
 	Image* imgSmile = new Image("smile.bmp");
-	imgSmile->paste(screen, 100, 100);
+	imgSmile->paste(screen, 200, 50);
 	
 	// Instancio un resampler
 	Resampler* resampler = new Resampler();
@@ -124,12 +124,12 @@ int main(int argc, char* argv[])
 	Image* imgResampled = resampler->resize(imgSmile, 100, 100);
 	
 	// Pego la imagen en la pantalla
-	imgResampled->paste(screen, 0, 0);
+	imgResampled->paste(screen, 50, 50);
 
-	// ejemplo rotacion
-	ejemploRotacion();
+	//// ejemplo rotacion
+	//ejemploRotacion();
 
-	SDL_Delay(5000);
+	SDL_Delay(7000);
 	
 	// libero memoria
 	free(imgSmile);
