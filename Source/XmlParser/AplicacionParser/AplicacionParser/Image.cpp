@@ -358,7 +358,7 @@ void Image::resize(int newWidth, int newHeight)
 	int heightSrc	= this->getHeight();
 	
 	// Empty new image
-	Image temp(newWidth, newHeight);
+	Image* temp = new Image(newWidth, newHeight);
 	
 	// posiciones en la nueva imagen
 	int posXDst = 0;
@@ -378,8 +378,8 @@ void Image::resize(int newWidth, int newHeight)
 			Uint32 pixelImg = this->getPixel(posXSrc, posYSrc);
 
 			// interpolacion
-			if( posXSrc > 0 && posYSrc > 0 ){
-			//if( posXSrc > 0 && posYSrc > 0 && newWidth > widthSrc && newHeight > heightSrc ){
+			//if( posXSrc > 0 && posYSrc > 0 ){
+			if( posXSrc > 0 && posYSrc > 0 && newWidth > widthSrc && newHeight > heightSrc ){
 				
 				int fromY = (((posYSrc-1) * newHeight) / heightSrc);
 				int fromX = (((posXSrc-1) * newWidth) / widthSrc);
@@ -406,23 +406,24 @@ void Image::resize(int newWidth, int newHeight)
 																			pixelSD, xSD, ySD, 
 																			pixelII, xII, yII, 
 																			pixelImg, posXDst, posYDst, 
-																			x, y);
+																			x, y, temp->getFormat());
 						
 						// coloco el pixel en la imagen destino
-						temp.putPixel( interpolatedPixel, x, y );
+						temp->putPixel( interpolatedPixel, x, y );
 					}
 				}
 			}
 
 			// Pongo el pixel en las nuevas coordenadas
-			temp.putPixel( pixelImg, posXDst, posYDst);
+			temp->putPixel( pixelImg, posXDst, posYDst);
 		}
 	}
-
-	this->copy(temp);
+	
+	this->copy(*temp);
+	free(temp);
 }
 
-Uint32 Image::getInterpolatedPixel(Uint32 pixelSI, double xSI, double ySI, Uint32 pixelSD, double xSD, double ySD, Uint32 pixelII, double xII, double yII, Uint32 pixelID, double xID, double yID, double xNow, double yNow){
+Uint32 Image::getInterpolatedPixel(Uint32 pixelSI, double xSI, double ySI, Uint32 pixelSD, double xSD, double ySD, Uint32 pixelII, double xII, double yII, Uint32 pixelID, double xID, double yID, double xNow, double yNow, const SDL_PixelFormat* newFormat){
 	
 	// coordenadas RGB
 	Uint8 rSI, gSI, bSI;
@@ -432,10 +433,10 @@ Uint32 Image::getInterpolatedPixel(Uint32 pixelSI, double xSI, double ySI, Uint3
 	Uint8 rAfter, gAfter, bAfter;
 
 	// obtengo las coordenadas RGB de los pixeles
-	SDL_GetRGB(pixelSI, this->getFormat(), &rSI, &gSI, &bSI);
-	SDL_GetRGB(pixelSD, this->getFormat(), &rSD, &gSD, &bSD);
-	SDL_GetRGB(pixelII, this->getFormat(), &rII, &gII, &bII);
-	SDL_GetRGB(pixelID, this->getFormat(), &rID, &gID, &bID);
+	SDL_GetRGB(pixelSI, newFormat, &rSI, &gSI, &bSI);
+	SDL_GetRGB(pixelSD, newFormat, &rSD, &gSD, &bSD);
+	SDL_GetRGB(pixelII, newFormat, &rII, &gII, &bII);
+	SDL_GetRGB(pixelID, newFormat, &rID, &gID, &bID);
 	
 	// interpolacion en y
 	double	rYAfter1 = ( ((yII-yNow)/(yII-ySI))*rSI + ((yNow-ySI)/(yII-ySI))*rII );
@@ -453,7 +454,7 @@ Uint32 Image::getInterpolatedPixel(Uint32 pixelSI, double xSI, double ySI, Uint3
 	bAfter = ((xSD-xNow)/(xSD-xSI))*bYAfter1 + ((xNow-xSI)/(xSD-xSI))*bYAfter2;
 		
 	// Obtengo el pixel de las coordenadas
-	Uint32 pixelFut = SDL_MapRGB(this->getFormat(), rAfter, gAfter, bAfter);
+	Uint32 pixelFut = SDL_MapRGB(newFormat, rAfter, gAfter, bAfter);
 	
 	return pixelFut;
 }
