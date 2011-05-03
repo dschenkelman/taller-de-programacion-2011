@@ -7,6 +7,7 @@
 #define _CRTDBG_MAP_ALLOC
 #include <stdlib.h>
 #include <crtdbg.h>
+#include "Window.h"
 using namespace std;
 
 ImageTests::ImageTests(void)
@@ -30,6 +31,9 @@ void ImageTests::run()
 {
 	printResult("testResizeToSmaller", testResizeToSmaller());
 	printResult("testResizeToBigger", testResizeToBigger());
+	printResult("testSuperImposeSmallInsideBig", testSuperImposeSmallInsideBig());
+	printResult("testSuperImposeBigInsideSmall", testSuperImposeBigInsideSmall());
+	
 	
 	//dump memory leaks to VS Output Window
 	int leaks = _CrtDumpMemoryLeaks();
@@ -192,4 +196,73 @@ bool ImageTests::testResizeToBigger(void)
 	successCondition = true;
 	
 	return successCondition;
+}
+bool ImageTests::testSuperImposeSmallInsideBig(void)
+{
+	Window w("Ventana", 480, 640);
+	//Smaller
+	Image im("Images/smile.bmp");
+	//Bigger
+	Image im2("Images/anana.bmp");
+	w.display(im, 100, 100);
+	w.display(im2, 100, 300);
+	w.refresh();
+	//superponer la imagen 1 dentro de la 2.
+	im2.superImpose(im);
+	
+	w.display(im2, 200,50);
+	w.refresh();
+	
+	SDL_Event e;
+	bool running = true;
+ 
+	while(running) 
+	{
+		while(SDL_PollEvent(&e)) 
+		{
+			switch(e.type)
+			{
+				case SDL_QUIT:
+					running = false;
+					SDL_Quit();
+					break;
+			}
+		}
+	}
+	return true;
+}
+
+bool ImageTests::testSuperImposeBigInsideSmall(void)
+{
+	Window w("Ventana", 480, 640);
+	//Smaller
+	Image im("Images/smile.bmp");
+	//Bigger
+	Image im2("Images/anana.bmp");
+	w.display(im, 100, 100);
+	w.display(im2, 100, 300);
+	w.refresh();
+	//Superponer la imagen 2 dentro de la 1.
+	im.superImpose(im2);
+	
+	w.display(im, 200,50);
+	w.refresh();
+	
+	SDL_Event e;
+	bool running = true;
+ 
+	while(running) 
+	{
+		while(SDL_PollEvent(&e)) 
+		{
+			switch(e.type)
+			{
+				case SDL_QUIT:
+					running = false;
+					SDL_Quit();
+					break;
+			}
+		}
+	}
+	return true;
 }

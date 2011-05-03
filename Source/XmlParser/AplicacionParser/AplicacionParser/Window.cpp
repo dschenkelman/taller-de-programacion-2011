@@ -39,8 +39,19 @@ void Window::display(Image& image, int x, int y)
 {
 	//Medida de seguridad, si se trata
 	//de sacar la imagen de pantalla, la trato como circular.
-	/*x %= this->height;
-	y %= this->width;*/
+	/*if ((x + image.getHeight()) > this->height){
+		x-=image.getHeight();
+	}
+	if ((y + image.getWidth()) > this->width){
+		y-=image.getWidth();
+	}
+	if ((x - image.getHeight()) < 0){
+		x=0;
+	}
+	if ((y - image.getWidth()) < 0){
+		y=0;
+	}*/
+
 
 	for (int i = 0; i < image.getWidth(); i++)
 	{
