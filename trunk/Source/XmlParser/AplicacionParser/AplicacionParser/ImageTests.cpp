@@ -63,26 +63,30 @@ bool ImageTests::testResizeToSmaller(void)
 	src.y = 0;
 	src.w = imgSmile->getWidth();
 	src.h = imgSmile->getHeight();
-	dest.x = 200;
-	dest.y = 50;
+	dest.x = 50;
+	dest.y = 20;
 	dest.w = imgSmile->getWidth();
 	dest.h = imgSmile->getHeight();
 	SDL_BlitSurface(imgSmile->getSDLSurface(), &src, screen, &dest);
 	SDL_Flip(screen);
 	
+	// nueva imagen
+	Image* imgSmileRe = new Image("Images/smile.bmp");
+
+
 	// Achico la imagen
-	imgSmile->resize(15, 15);
+	imgSmileRe->resize(18, 18);
 	
 	// Pego la imagen en la pantalla
 	src.x = 0;
 	src.y = 0;
-	src.w = imgSmile->getWidth();
-	src.h = imgSmile->getHeight();
-	dest.x = 20;
+	src.w = imgSmileRe->getWidth();
+	src.h = imgSmileRe->getHeight();
+	dest.x = 100;
 	dest.y = 20;
-	dest.w = imgSmile->getWidth();
-	dest.h = imgSmile->getHeight();
-	SDL_BlitSurface(imgSmile->getSDLSurface(), &src, screen, &dest);
+	dest.w = imgSmileRe->getWidth();
+	dest.h = imgSmileRe->getHeight();
+	SDL_BlitSurface(imgSmileRe->getSDLSurface(), &src, screen, &dest);
 	SDL_Flip(screen);
 
 
@@ -106,6 +110,7 @@ bool ImageTests::testResizeToSmaller(void)
 	
 	// libero memoria
 	free(imgSmile);
+	free(imgSmileRe);
 	
 	successCondition = true;
 	
@@ -141,8 +146,8 @@ bool ImageTests::testResizeToBigger(void)
 	src.y = 0;
 	src.w = imgSmile->getWidth();
 	src.h = imgSmile->getHeight();
-	dest.x = 200;
-	dest.y = 50;
+	dest.x = 50;
+	dest.y = 20;
 	dest.w = imgSmile->getWidth();
 	dest.h = imgSmile->getHeight();
 	SDL_BlitSurface(imgSmile->getSDLSurface(), &src, screen, &dest);
@@ -156,7 +161,7 @@ bool ImageTests::testResizeToBigger(void)
 	src.y = 0;
 	src.w = imgSmile->getWidth();
 	src.h = imgSmile->getHeight();
-	dest.x = 20;
+	dest.x = 100;
 	dest.y = 20;
 	dest.w = imgSmile->getWidth();
 	dest.h = imgSmile->getHeight();
