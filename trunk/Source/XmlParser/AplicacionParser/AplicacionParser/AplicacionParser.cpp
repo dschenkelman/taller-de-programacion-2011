@@ -19,8 +19,8 @@
 #include "GrillaTests.h"
 #include "EscenarioTests.h"
 #include "GrapherTests.h"
-#include "ImageTests.h"
 #include "Image.h"
+#include "ImageTests.h"
 #include "Window.h"
 #include <iostream>
 using namespace std;
@@ -160,14 +160,22 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	/*Window w("Ventana", 480, 640);
 	Image im("Images/smile.bmp");
+	Image im2("Images/anana.bmp");
+	Image im3("Images/anana.bmp");
 	w.display(im, 100, 100);
+	w.display(im2, 100, 300);
 	w.refresh();
+	im2.superImpose(im);
+	
+	w.display(im2, 200,50);
+	w.refresh();
+
+	im.superImpose(im3);
+	w.display(im, 400,50);
+	w.refresh();*/
+
 	
 	SDL_Delay(1000);
-
-	im.rotate(19, 2);
-	w.display(im, 100, 100);
-	w.refresh();*/
 
 	printf( "Press ENTER to continue... " );
 

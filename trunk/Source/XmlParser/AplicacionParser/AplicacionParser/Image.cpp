@@ -539,20 +539,15 @@ void Image::superImpose(Image imageToImpose){
 		{
 			for (int j = 0; j < altoPantalla; j++) 
 			{
-				if ( (i >= inicioAnchoPantalla) &&
-					(i <= (inicioAnchoPantalla + anchoImagen)) &&
-					(j >= inicioAltoPantalla) &&
-					(j <= (inicioAltoPantalla + altoImagen))
-				
-					)
+				if ( (i >= inicioAnchoPantalla) &&	(i < (inicioAnchoPantalla + anchoImagen)) &&
+					(j >= inicioAltoPantalla) && (j < (inicioAltoPantalla + altoImagen)) )
 					
 				{
 					//Pixel de la imagen a sobreimponer
 					Uint32 pixelAImponer=imageToImpose.getPixel(i-inicioAnchoPantalla,j-inicioAltoPantalla);
-					//Image::putPixel|(pixelAImponer, i, j);
+					Image::putPixel(pixelAImponer, i, j);
 
 				}
-				//this->putPixel(this->getPixel(i, j),i,j);
 			}
 		}
 
