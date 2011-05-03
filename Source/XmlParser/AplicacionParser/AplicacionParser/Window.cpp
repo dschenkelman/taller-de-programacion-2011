@@ -37,12 +37,17 @@ void Window::close(void)
 
 void Window::display(Image& image, int x, int y)
 {
+	//Medida de seguridad, si se trata
+	//de sacar la imagen de pantalla, la trato como circular.
+	/*x %= this->height;
+	y %= this->width;*/
+
 	for (int i = 0; i < image.getWidth(); i++)
 	{
 		for (int j = 0; j < image.getHeight(); j++)
 		{
 			Uint32 pixel = image.getPixel(i, j);
-			this->putPixel(pixel, x + i, y + j);
+			this->putPixel(pixel, (x + i), (y + j));
 		}
 	}
 }
