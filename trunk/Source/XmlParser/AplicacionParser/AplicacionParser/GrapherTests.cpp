@@ -57,20 +57,24 @@ XmlElement elementoEscenario("escenario", 1, 1000);
 	// se crea el xmlElement de la lista de tipos bonus
 	XmlElement elementoListaTiposBonus("tiposbonus", 200, 600);
 
+	
+	//Agrego tipo bonus UVA
 	XmlElement elementoTipoBonus("tipoBonus", 201, 202);
 	XmlAttribute atributoNombre("nombre", "uva");
 	XmlAttribute atributoTextura("textura", "uva");
 	elementoTipoBonus.addAttribute(atributoNombre);
 	elementoTipoBonus.addAttribute(atributoTextura);
+	
+	elementoListaTiposBonus.addChild(elementoTipoBonus);
+
 
 	//Agrego un tipo bonus anana.
-	XmlElement elementoTipoBonusAnana("tipoBonus", 201, 202);
+	XmlElement elementoTipoBonusAnana("tipoBonus", 205, 206);
 	XmlAttribute atributoNombreAnana("nombre", "anana");
 	XmlAttribute atributoTexturaAnana("textura", "anana");
-	elementoTipoBonus.addAttribute(atributoNombreAnana);
+	elementoTipoBonusAnana.addAttribute(atributoNombreAnana);
 	elementoTipoBonusAnana.addAttribute(atributoTexturaAnana);	
 
-	elementoListaTiposBonus.addChild(elementoTipoBonus);
 	elementoListaTiposBonus.addChild(elementoTipoBonusAnana);
 
 	// se crea el xmlElement de la lista de tipos obstaculos
@@ -105,22 +109,6 @@ XmlElement elementoEscenario("escenario", 1, 1000);
 	elementoCamino.addChild(elementoBonus);
 
 	elementoGrilla.addChild(elementoCamino);
-
-
-	// se crea un camino con bonus Anana para la grilla
-	XmlElement elementoCaminoE("camino", 2, 8);
-	XmlAttribute atributoFilaE("fila", "4");
-	XmlAttribute atributoColumnaE("columna", "4");
-	elementoCaminoE.addAttribute(atributoFilaE);
-	elementoCaminoE.addAttribute(atributoColumnaE);
-
-	XmlElement elementoBonusE("bonus", 4, 5);
-	XmlAttribute atributoAnana("tipo", "anana");
-	elementoBonusE.addAttribute(atributoAnana);
-
-	elementoCaminoE.addChild(elementoBonusE);
-
-	elementoGrilla.addChild(elementoCaminoE);
 
 	// segundo camino
 	XmlElement elementoCamino2("camino", 2, 8);
@@ -163,12 +151,20 @@ XmlElement elementoEscenario("escenario", 1, 1000);
 	elementoGrilla.addChild(elementoCamino6);
 
 	// septimo camino
-	XmlElement elementoCamino7("camino", 2, 8);
-	XmlAttribute atributoFila7("fila", "4");
-	XmlAttribute atributoColumna7("columna", "4");
-	elementoCamino7.addAttribute(atributoFila7);
-	elementoCamino7.addAttribute(atributoColumna7);
-	elementoGrilla.addChild(elementoCamino7);
+	XmlElement elementocamino7("camino", 2, 8);
+	XmlAttribute atributofila7("fila", "4");
+	XmlAttribute atributocolumna7("columna", "4");
+	elementocamino7.addAttribute(atributofila7);
+	elementocamino7.addAttribute(atributocolumna7);
+
+	XmlElement elementoBonusAnana("bonus", 4, 5);
+	XmlAttribute atributoTAnana("tipo", "anana");
+	elementoBonusAnana.addAttribute(atributoTAnana);
+
+	elementocamino7.addChild(elementoBonusAnana);
+
+	elementoGrilla.addChild(elementocamino7);
+
 
 
 	// se crean dos obstaculos para la grilla
@@ -217,7 +213,7 @@ XmlElement elementoEscenario("escenario", 1, 1000);
 	XmlAttribute atributo8("path", "Images/uva.bmp");
 	XmlAttribute atributo9("rot", "45");
 
-	XmlElement elementoTextura4("textura", 21, 21);
+	XmlElement elementoTextura4("textura", 23, 23);
 	XmlAttribute atributo10("nombre", "anana");
 	XmlAttribute atributo11("path", "Images/anana.bmp");
 

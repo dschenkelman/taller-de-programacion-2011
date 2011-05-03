@@ -89,14 +89,6 @@ Camino::~Camino(void)
 
 Image Camino::obtenerRepresentacion(Celda* celSup, Celda* celInf, Celda* celDer, Celda* celIzq)
 {
-	if (this->hasBonus())
-	{
-		/*std::stringstream ss;
-		std::string repres;*/
-		return this->getBonus().obtenerRepresentacion();
-		/*ss >> repres;*/
-	}
-	
 	Image imagen("Images/cross.bmp");
 	// Intento castear las celdas 
 	Camino* camSup = dynamic_cast<Camino*>(celSup);
@@ -106,17 +98,25 @@ Image Camino::obtenerRepresentacion(Celda* celSup, Celda* celInf, Celda* celDer,
 	
 	// Ningun vecino es un camino
 	if( camSup == 0 && camInf == 0 && camDer == 0 && camIzq == 0 ){
-		return Image("Images/circle.bmp");
+		imagen=Image("Images/circle.bmp");
 	}
 	
 	// Solo vecinos superior o inferior son caminos
 	if(( camSup != 0 || camInf != 0 )&&( camDer == 0 && camIzq == 0 )){
-		return Image("Images/vertical.bmp");
+		imagen=Image("Images/vertical.bmp");
 	}
 
 	// Solo vecinos derecho o izquierdo son caminos
 	if(( camDer != 0 || camIzq != 0 )&&( camSup == 0 && camInf == 0 )){
-		return Image("Images/horizontal.bmp");
+		imagen=Image("Images/horizontal.bmp");
+	}
+
+	if (this->hasBonus())
+	{
+		/*std::stringstream ss;
+		std::string repres;*/
+		imagen.superImpose(this->getBonus().obtenerRepresentacion());
+		/*ss >> repres;*/
 	}
 
 	return imagen;
