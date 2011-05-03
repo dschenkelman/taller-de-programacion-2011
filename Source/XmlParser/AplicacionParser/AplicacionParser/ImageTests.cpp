@@ -79,7 +79,7 @@ bool ImageTests::testResizeToSmaller(void)
 
 
 	// Achico la imagen
-	imgSmileRe->resize(18, 18);
+	imgSmileRe->resize(10, 10);
 	
 	// Pego la imagen en la pantalla
 	src.x = 0;
@@ -203,7 +203,7 @@ bool ImageTests::testSuperImposeSmallInsideBig(void)
 	//Smaller
 	Image im("Images/smile.bmp");
 	//Bigger
-	Image im2("Images/anana.bmp");
+	Image im2("Images/ananaGrande.bmp");
 	w.display(im, 100, 100);
 	w.display(im2, 100, 300);
 	w.refresh();
@@ -238,7 +238,7 @@ bool ImageTests::testSuperImposeBigInsideSmall(void)
 	//Smaller
 	Image im("Images/smile.bmp");
 	//Bigger
-	Image im2("Images/anana.bmp");
+	Image im2("Images/ananaGrande.bmp");
 	w.display(im, 100, 100);
 	w.display(im2, 100, 300);
 	w.refresh();
