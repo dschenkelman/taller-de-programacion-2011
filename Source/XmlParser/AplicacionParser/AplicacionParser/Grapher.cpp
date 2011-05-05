@@ -34,7 +34,7 @@ void Grapher::draw(Escenario& escenario)
 	if (!texturaFondo.hasError())
 	{
 		//despues habria que agrandar para que ocupe todo el fondo
-		//texturaFondo.resize(windowHeight,windowWidth);
+		texturaFondo.resize(windowWidth, windowHeight);
 		w.display(texturaFondo, 0, 0);
 	}
 	else

@@ -501,7 +501,7 @@ int Image::getRotatedHeight(double radians)
 	return yMax - yMin;
 }
 
-void Image::superImpose(Image imageToImpose){
+void Image::superImpose(Image imageToImpose, int alphaRed, int alphaGreen, int alphaBlue, int delta){
 
 	//Caso feliz:
 	//Una imagen es mas grande que la otra por superfice, ya que siempre son cuadradas.
@@ -523,37 +523,63 @@ void Image::superImpose(Image imageToImpose){
 	long areaToImpose=altoImagen * anchoImagen;
 	long currentImageArea= anchoPantalla * altoPantalla;
 
-	if (areaToImpose > currentImageArea){
+	if (areaToImpose > currentImageArea)
+	{
 		//resize de la imagen a transparentar en caso de que sea mayor en area que la actual.
 		imageToImpose.resize(this->getWidth(), this->getHeight());
-		this->copy(imageToImpose);
+		altoImagen = this->getHeight();
+		anchoImagen = this->getWidth();
+	//	this->copy(imageToImpose);
 	}
-	else{
+	/*else{*/
 
-		//Calculo el x e y inicial donde ubicar la imagen para centrarlo.
-		//Lo ubico pixela pixel.
-		inicioAnchoPantalla= (anchoPantalla - anchoImagen) / 2;
-		inicioAltoPantalla= (altoPantalla - altoImagen) / 2;
+	//Calculo el x e y inicial donde ubicar la imagen para centrarlo.
+	//Lo ubico pixela pixel.
+	inicioAnchoPantalla= (anchoPantalla - anchoImagen) / 2;
+	inicioAltoPantalla= (altoPantalla - altoImagen) / 2;
 
-		for (int i = 0; i < anchoPantalla; i++) 
+	for (int i = 0; i < anchoPantalla; i++) 
+	{
+		for (int j = 0; j < altoPantalla; j++) 
 		{
-			for (int j = 0; j < altoPantalla; j++) 
+			if ( (i >= inicioAnchoPantalla) &&	(i < (inicioAnchoPantalla + anchoImagen)) &&
+				(j >= inicioAltoPantalla) && (j < (inicioAltoPantalla + altoImagen)) )
+				
 			{
-				if ( (i >= inicioAnchoPantalla) &&	(i < (inicioAnchoPantalla + anchoImagen)) &&
-					(j >= inicioAltoPantalla) && (j < (inicioAltoPantalla + altoImagen)) )
-					
+				//Pixel de la imagen a sobreimponer
+				Uint32 pixelAImponer=imageToImpose.getPixel(i-inicioAnchoPantalla,j-inicioAltoPantalla);
+				int deltaPixel = Image::getDeltaBetweenPixels(alphaRed, alphaGreen, alphaBlue, pixelAImponer);
+				if (deltaPixel > delta)
 				{
-					//Pixel de la imagen a sobreimponer
-					Uint32 pixelAImponer=imageToImpose.getPixel(i-inicioAnchoPantalla,j-inicioAltoPantalla);
 					Image::putPixel(pixelAImponer, i, j);
-
 				}
 			}
 		}
+		//}
 
 	}
 
 	return;
+}
 
+int Image::getDeltaBetweenPixels(int red, int green, int blue, Uint32 p)
+{
+	int imposeRed;
+	int imposeGreen;
+	int imposeBlue;
 
+	if(SDL_BYTEORDER == SDL_BIG_ENDIAN)
+	{
+			imposeRed = (p >> 16) & 255;
+			imposeGreen = (p >> 8) & 255;
+			imposeBlue = p & 255;
+	}
+	else
+	{
+            imposeRed = p & 255;
+			imposeGreen = (p >> 8) & 255;
+			imposeBlue = (p >> 16) & 255;
+	}
+
+	return abs(red - imposeRed) + abs(green-imposeGreen) + abs(blue - imposeBlue);
 }

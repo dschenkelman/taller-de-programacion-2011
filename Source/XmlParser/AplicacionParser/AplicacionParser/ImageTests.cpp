@@ -208,7 +208,7 @@ bool ImageTests::testSuperImposeSmallInsideBig(void)
 	w.display(im2, 100, 300);
 	w.refresh();
 	//superponer la imagen 1 dentro de la 2.
-	im2.superImpose(im);
+	im2.superImpose(im, 255, 255, 255, 50);
 	
 	w.display(im2, 200,50);
 	w.refresh();
@@ -243,7 +243,7 @@ bool ImageTests::testSuperImposeBigInsideSmall(void)
 	w.display(im2, 100, 300);
 	w.refresh();
 	//Superponer la imagen 2 dentro de la 1.
-	im.superImpose(im2);
+	im.superImpose(im2, 255, 255, 255, 25);
 	
 	w.display(im, 200,50);
 	w.refresh();

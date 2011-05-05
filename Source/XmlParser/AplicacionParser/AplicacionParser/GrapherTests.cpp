@@ -592,7 +592,10 @@ bool GrapherTests::testGraficarEscenario1024x768(void)
 
 	XmlElement elementoTextura3("textura", 21, 21);
 	XmlAttribute atributo7("nombre", "uva");
-	XmlAttribute atributo8("path", "Images/uva.bmp");
+	XmlAttribute atributo8("path", "Images/uvaFondoVerde.bmp");
+	/*XmlAttribute atributoA("bottom", "10");
+	XmlAttribute atributoB("right", "10");
+	XmlAttribute atributoC("alpha", "#000000");*/
 	XmlAttribute atributo9("rot", "45");
 
 	elementoTextura.addAttribute(atributoNombreTextura);
@@ -609,6 +612,10 @@ bool GrapherTests::testGraficarEscenario1024x768(void)
 	elementoTextura3.addAttribute(atributo7);
 	elementoTextura3.addAttribute(atributo8);
 	elementoTextura3.addAttribute(atributo9);
+	//elementoTextura3.addAttribute(atributoA);
+	//elementoTextura3.addAttribute(atributoB);
+	//elementoTextura3.addAttribute(atributoC);
+
 
 	elementoTexturas.addChild(elementoTextura);
 	elementoTexturas.addChild(elementoTextura1);
