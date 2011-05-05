@@ -13,6 +13,7 @@ class Image
 	static void putPixel(SDL_Surface* surface, Uint32 pixel, int x, int y);
 	static int xRotatePixel(double radians, int x, int y);
 	static int yRotatePixel(double radians, int x, int y);
+	int getDeltaBetweenPixels(int red, int green, int blue, Uint32 pixelAImponer);
 	int getRotatedHeight(double radians);
 	int getRotatedWidth(double radians);
 	Uint32 getInterpolatedPixel(Uint32 pixelSI, double xSI, double ySI, Uint32 pixelSD, double xSD, double ySD, Uint32 pixelII, double xII, double yII, Uint32 pixelID, double xID, double yID, double xNow, double yNow, const SDL_PixelFormat* newFormat);
@@ -35,5 +36,5 @@ public:
 	void copy(const Image& other);
 	const SDL_PixelFormat* getFormat() const;
 	void rotate(int degrees, Uint32 alpha);
-	void superImpose(Image imageToImpose);
+	void superImpose(Image imageToImpose, int red, int green, int blue, int delta);
 };

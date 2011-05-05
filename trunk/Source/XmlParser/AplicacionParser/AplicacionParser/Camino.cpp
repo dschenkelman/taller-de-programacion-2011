@@ -115,7 +115,11 @@ Image Camino::obtenerRepresentacion(Celda* celSup, Celda* celInf, Celda* celDer,
 	{
 		/*std::stringstream ss;
 		std::string repres;*/
-		imagen.superImpose(this->getBonus().obtenerRepresentacion());
+		TipoBonus tb = this->getBonus().getTipoBonus();
+		int red = tb.getTextura().getRed();
+		int green = tb.getTextura().getGreen();
+		int blue = tb.getTextura().getBlue();
+		imagen.superImpose(this->getBonus().obtenerRepresentacion(), red, green, blue, tb.getTextura().getDelta());
 		/*ss >> repres;*/
 	}
 
