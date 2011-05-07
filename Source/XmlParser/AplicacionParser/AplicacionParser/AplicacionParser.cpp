@@ -150,9 +150,9 @@ int _tmain(int argc, _TCHAR* argv[])
 	TexturaTests texturaTests;
 	texturaTests.run();
 
-	cout<<"Test de Image"<<endl;
-	ImageTests imageTest;
-	imageTest.run();
+	//cout<<"Test de Image"<<endl;
+	//ImageTests imageTest;
+	//imageTest.run();
 
 	cout<<"Test de Grapher"<<endl;
 	GrapherTests grapherTest;
@@ -177,8 +177,8 @@ int _tmain(int argc, _TCHAR* argv[])
 	
 	SDL_Delay(1000);
 
-	printf( "Press ENTER to continue... " );
+	//printf( "Press ENTER to continue... " );
 
-	char c = getchar();
+	//char c = getchar();
 	return 0;
 }
