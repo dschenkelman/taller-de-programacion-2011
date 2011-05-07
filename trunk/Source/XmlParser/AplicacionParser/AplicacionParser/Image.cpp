@@ -423,7 +423,7 @@ void Image::resize(int newWidth, int newHeight)
 
 			// interpolacion
 			//if( posXSrc > 0 && posYSrc > 0 ){
-			if( posXSrc > 0 && posYSrc > 0 && newWidth > widthSrc && newHeight > heightSrc ){
+			if( posXSrc > 0 && posYSrc > 0 ){
 				
 				int fromY = (((posYSrc-1) * newHeight) / heightSrc);
 				int fromX = (((posXSrc-1) * newWidth) / widthSrc);
