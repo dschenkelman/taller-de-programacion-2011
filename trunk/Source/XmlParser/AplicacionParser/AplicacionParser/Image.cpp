@@ -150,7 +150,17 @@ int Image::xRotatePixel(double radians, int x, int y)
 	int entera= int(real);
 	int ret=entera;
 	//double dif=abs(real-entera);
-	//if (dif > 0.6){
+	//if (abs(dif-0.5) <= 0.01){
+	//	//Si la diferencia es casi 0,5 tengo que usar un desempate (Redondeo gaussiano).
+	//	//Utilizo el par mas cercano al número.
+	//	if (entera < 0 && (entera % 2) != 0){
+	//		ret=entera-1;
+	//	}
+	//	if (entera > 0 && (entera % 2) != 0){
+	//		ret=entera+1;
+	//	}
+	//}
+	//if (dif > 0.51){
 	//		if (entera >= 0)
 	//			ret=entera+1;
 	//		else 
@@ -166,7 +176,17 @@ int Image::yRotatePixel(double radians, int x, int y)
 	int entera= int(real);
 	int ret=entera;
 	//double dif=abs(real-entera);
-	//if (dif > 0.6){
+	//if (abs(dif-0.5) <= 0.01){
+	//	//Si la diferencia es casi 0,5 tengo que usar un desempate (Redondeo gaussiano).
+	//	//Utilizo el par mas cercano al número.
+	//	if (entera < 0 && (entera % 2) != 0){
+	//		ret=entera-1;
+	//	}
+	//	if (entera > 0 && (entera % 2) != 0){
+	//		ret=entera+1;
+	//	}
+	//}
+	//if (dif > 0.51){
 	//		if (entera >= 0)
 	//			ret=entera+1;
 	//		else 
