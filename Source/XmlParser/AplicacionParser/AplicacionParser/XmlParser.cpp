@@ -93,34 +93,42 @@ bool XmlParser::preParseFile(std::string filename){
 	replaceAll(workLine, "<", "\n<");
 	replaceAll(workLine, ">", ">\n");
 	
-	ofstream file;
-	file.open(AUX, ios::binary|ios::out);
-	file<<workLine;
-	file.close();
+	//ofstream file;
+	//file.open(AUX, ios::binary|ios::out);
+	//file<<workLine;
+	//file.close();
+	this->aParsearWorkLine=workLine;
 	return removeBlankLines();
 
 }
 
 bool XmlParser::removeBlankLines(void){
-	ifstream initialFile(AUX, ios::in|ios::binary);	
+	//ifstream initialFile(AUX, ios::in|ios::binary);	
 	ofstream outputFile(PARSING, ios::out|ios::binary);	
+	string work;
 	string lineToRead;
 	string test;
 
-	if ( !outputFile.is_open() || !initialFile.is_open() ) {
+	if ( !outputFile.is_open() ){// || !initialFile.is_open() ) {
 		return false;
 	}
 
-	while (getline( initialFile, lineToRead )){
+	work=this->aParsearWorkLine;
+	Tokenizer miTok(work,"\n");
+
+	while (miTok.NextToken() ){
+		
+		lineToRead=miTok.GetToken();
 		trim(lineToRead,' ');
 		trim(lineToRead,'\n');
 		trim(lineToRead,'\t');
 		if (lineToRead.length() > 0){
 			outputFile<<lineToRead<<"\n";
 		}
+		
 	}
 
-	initialFile.close();	
+	//initialFile.close();	
 	outputFile.close();	
 	return true;
 
