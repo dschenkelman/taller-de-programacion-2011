@@ -5,6 +5,7 @@
 #include <limits>
 #include <math.h>
 #include <algorithm>
+#include "PixelHelpers.h"
 #define PI 3.14159265
 
 using namespace std;
@@ -548,7 +549,7 @@ void Image::superImpose(Image imageToImpose, int alphaRed, int alphaGreen, int a
 			{
 				//Pixel de la imagen a sobreimponer
 				Uint32 pixelAImponer=imageToImpose.getPixel(i-inicioAnchoPantalla,j-inicioAltoPantalla);
-				int deltaPixel = Image::getDeltaBetweenPixels(alphaRed, alphaGreen, alphaBlue, pixelAImponer);
+				int deltaPixel = PixelHelpers::getDeltaBetweenPixels(alphaRed, alphaGreen, alphaBlue, pixelAImponer);
 				if (deltaPixel > delta)
 				{
 					Image::putPixel(pixelAImponer, i, j);
@@ -560,26 +561,4 @@ void Image::superImpose(Image imageToImpose, int alphaRed, int alphaGreen, int a
 	}
 
 	return;
-}
-
-int Image::getDeltaBetweenPixels(int red, int green, int blue, Uint32 p)
-{
-	int imposeRed;
-	int imposeGreen;
-	int imposeBlue;
-
-	if(SDL_BYTEORDER == SDL_BIG_ENDIAN)
-	{
-			imposeRed = (p >> 16) & 255;
-			imposeGreen = (p >> 8) & 255;
-			imposeBlue = p & 255;
-	}
-	else
-	{
-            imposeRed = p & 255;
-			imposeGreen = (p >> 8) & 255;
-			imposeBlue = (p >> 16) & 255;
-	}
-
-	return abs(red - imposeRed) + abs(green-imposeGreen) + abs(blue - imposeBlue);
 }

@@ -264,6 +264,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\PixelHelpers.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\StackTests.cpp"
 				>
 			</File>
@@ -439,6 +443,10 @@
 			</File>
 			<File
 				RelativePath=".\ObstaculoTests.h"
+				>
+			</File>
+			<File
+				RelativePath=".\PixelHelpers.h"
 				>
 			</File>
 			<File

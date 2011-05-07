@@ -5,6 +5,7 @@
 #include <exception>
 #include <sstream>
 #include "SDL.h"
+#include "PixelHelpers.h"
 
 using namespace std;
 
@@ -35,30 +36,18 @@ void Window::close(void)
 	SDL_Quit();
 }
 
-void Window::display(Image& image, int x, int y)
+void Window::display(Image& image, int x, int y, int red, int blue, int green, int delta)
 {
-	//Medida de seguridad, si se trata
-	//de sacar la imagen de pantalla, la trato como circular.
-	/*if ((x + image.getHeight()) > this->height){
-		x-=image.getHeight();
-	}
-	if ((y + image.getWidth()) > this->width){
-		y-=image.getWidth();
-	}
-	if ((x - image.getHeight()) < 0){
-		x=0;
-	}
-	if ((y - image.getWidth()) < 0){
-		y=0;
-	}*/
-
-
 	for (int i = 0; i < image.getWidth(); i++)
 	{
 		for (int j = 0; j < image.getHeight(); j++)
 		{
-			Uint32 pixel = image.getPixel(i, j);
-			this->putPixel(pixel, (x + i), (y + j));
+			Uint32 overPixel = image.getPixel(i, j);
+			int deltaPixel = PixelHelpers::getDeltaBetweenPixels(red, green, blue, overPixel);
+			if (deltaPixel > delta)
+			{
+				this->putPixel(overPixel, (x + i), (y + j));
+			}
 		}
 	}
 }
@@ -150,4 +139,3 @@ Window::~Window(void)
 		this->close();
 	}
 }
-

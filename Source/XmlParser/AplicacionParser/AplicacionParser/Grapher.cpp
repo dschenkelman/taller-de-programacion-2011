@@ -8,12 +8,9 @@
 
 using namespace std;
 
-Grapher::Grapher()
+Grapher::Grapher() : windowHeight(480), windowWidth(640)
 {
 	//default 640x480
-	this->windowWidth=640;
-	this->windowHeight=480;
-	
 }
 
 Grapher::~Grapher()
@@ -34,8 +31,12 @@ void Grapher::draw(Escenario& escenario)
 	if (!texturaFondo.hasError())
 	{
 		//despues habria que agrandar para que ocupe todo el fondo
+		Textura t = escenario.getTextura();
+		texturaFondo.crop(t.getTop(), t.getLeft(), t.getRight(), t.getBottom());
+		Uint32 alphaPixel = t.getRed() | t.getGreen() << 8 | t.getBlue() << 16;
+		texturaFondo.rotate(t.getRotation(), alphaPixel);
 		texturaFondo.resize(windowWidth, windowHeight);
-		w.display(texturaFondo, 0, 0);
+		w.display(texturaFondo, 0, 0, 0, 0, 0, -1);
 	}
 	else
 	{
@@ -80,7 +81,9 @@ void Grapher::draw(Escenario& escenario)
 				
 			if (!imagen.hasError())
 			{
-				w.display(imagen, imageWidth * j, imageHeight * i);
+				imagen.resize(imageWidth, imageHeight);
+				Textura t = celda->obtenerTextura();
+				w.display(imagen, imageWidth * j, imageHeight * i, t.getRed(), t.getGreen(), t.getBlue(), t.getDelta());
 			}
 			else
 			{
