@@ -20,71 +20,6 @@
 
 #define SDL_main main 
 
-int rotateX(int xInicial, int yInicial,int xEje, int yEje, int grados){
-	// corrijo el eje de referencia
-	int xi = xInicial-xEje;
-	int yi = yInicial-yEje;
-
-	// roto los angulos
-	int xf = ((xi*cos(double(grados)))-(yi*sin(double(grados))));
-	
-	// devuelvo el punto con su eje de coordenadas original
-	return (xf+xEje);
-}
-
-int rotateY(int xInicial, int yInicial,int xEje, int yEje, int grados){
-	// corrijo el eje de referencia
-	int xi = xInicial-xEje;
-	int yi = yInicial-yEje;
-
-	// roto los angulos
-	int yf = ((xi*sin(double(grados)))+(yi*cos(double(grados))));
-	
-	// devuelvo el punto con su eje de coordenadas original
-	return (yf+yEje);
-}
-
-void ejemploRotacion()
-{
-	SDL_Delay(2000);
-
-	SDL_Surface* screen;
-	SDL_Surface* image;
-	SDL_Surface* temp;
-
-	if (SDL_Init(SDL_INIT_VIDEO) < 0) 
-	{
-		printf("No se pudo iniciar SDL: %s\n",SDL_GetError());
-		exit(1);
-	}
-
-	screen = SDL_SetVideoMode(640,480,24,SDL_HWSURFACE);
-	if (screen == NULL) {
-		printf("No se puede inicializar el modo gráfico: \n",SDL_GetError());
-		exit(1);
-	}
-
-	// Se carga la imagen
-	temp = SDL_LoadBMP("smile.bmp");
-	if (temp == NULL ) {
-		printf("No pude cargar gráfico: %s\n", SDL_GetError());
-		exit(1);
-	}
-
-	image = SDL_DisplayFormat(temp);
-	SDL_FreeSurface(temp);
-
-	SDL_Rect dest;
-
-	dest.x = 100;
-	dest.y = 100;
-	dest.h = image->h;
-	dest.w = image->w;
-
-	SDL_BlitSurface(image, NULL, screen, &dest);
-
-	Rotador().rotar(image, screen, 100, 100, 110);
-}
 
 int main(int argc, char* argv[])
 {
@@ -104,37 +39,30 @@ int main(int argc, char* argv[])
 		return 1;
 	}
 
-	Image sprite = Image("sprite.bmp");
-	sprite.cropAndPaste(0,0,75,75,100,200,screen);
-	sprite.cropAndPaste(85,75,75,75,200,200,screen);
-	sprite.cropAndPaste(85,150,75,75,300,200,screen);
-
 	SDL_Delay(1000);
 	
 	/** Agrandar imagen */
 
 	// nueva imagen
-	Image* imgSmile = new Image("smile.bmp");
-	imgSmile->paste(screen, 200, 50);
+	Image* imgSmile = new Image("uva.bmp");
 	
-	// Instancio un resampler
-	Resampler* resampler = new Resampler();
+	int origW = imgSmile->getWidth();
+	int origH = imgSmile->getHeight();
 	
-	// Resampleo la imagen
-	Image* imgResampled = resampler->resize(imgSmile, 100, 100);
+	// Rotacion
+	Uint32 pixelAlpha = SDL_MapRGB(imgSmile->getFormat(), 255, 0, 0);
+	imgSmile->rotate(45, pixelAlpha);
 	
-	// Pego la imagen en la pantalla
-	imgResampled->paste(screen, 50, 50);
+	imgSmile->resize(origW, origH);
 
-	//// ejemplo rotacion
-	//ejemploRotacion();
+	// Pego la imagen en la pantalla
+	SDL_BlitSurface(imgSmile->getSDLSurface(), NULL, screen, NULL);
+	SDL_Flip(screen);
 
 	SDL_Delay(7000);
 	
 	// libero memoria
 	free(imgSmile);
-	free(imgResampled);
-	free(resampler);
 	 
 	return 0;
 }
