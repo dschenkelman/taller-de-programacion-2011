@@ -143,7 +143,7 @@ bool ImageTests::testResizeToBigger(void)
 	}
 	
 	// nueva imagen
-	Image* imgSmile = new Image("Images/smile.bmp");
+	Image* imgSmile = new Image("Images/texturas/-.bmp");
 
 	SDL_Rect src, dest;
 	src.x = 0;
@@ -158,14 +158,14 @@ bool ImageTests::testResizeToBigger(void)
 	SDL_Flip(screen);
 	
 	// Achico la imagen
-	imgSmile->resize(100, 100);
+	imgSmile->resize(100, 50);
 	
 	// Pego la imagen en la pantalla
 	src.x = 0;
 	src.y = 0;
 	src.w = imgSmile->getWidth();
 	src.h = imgSmile->getHeight();
-	dest.x = 100;
+	dest.x = 300;
 	dest.y = 20;
 	dest.w = imgSmile->getWidth();
 	dest.h = imgSmile->getHeight();
