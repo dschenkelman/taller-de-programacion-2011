@@ -1,32 +1,39 @@
-#include "sdl/sdl.h"
-#include "Window.h"
-
 #pragma once
+#include <string>
+#include "sdl/SDL.h"
+#include <limits>
 
 class Image
 {
+	SDL_Surface* image;
+	bool error;
+	std::string errorMessage;
+	int height;
+	int width;
+	static void putPixel(SDL_Surface* surface, Uint32 pixel, int x, int y);
+	static double xRotatePixel(double radians, int x, int y);
+	static double yRotatePixel(double radians, int x, int y);
+	int getRotatedHeight(double radians);
+	int getRotatedWidth(double radians);
+	Uint32 getInterpolatedPixel(Uint32 pixelSI, double xSI, double ySI, Uint32 pixelSD, double xSD, double ySD, Uint32 pixelII, double xII, double yII, Uint32 pixelID, double xID, double yID, double xNow, double yNow, const SDL_PixelFormat* newFormat);
 public:
-	/** Constructors */
-	//Image(void);
-	Image(char* uri);
-	//Image(String uri, int x, int y, int width, int height);
+	Image(std::string path);
 	Image(int width, int height); // Empty image constructor
-	
-	void paste(SDL_Surface* board, int x, int y);
-	void paste(Window board, int x, int y);
-	void cropAndPaste(int x0, int y0, int width, int height, int x1, int y2, SDL_Surface* board);
+	Image(const Image& other);
+	Image& operator=(const Image& other);
 	~Image(void);
-	int getHeight();
-	int getWidth();
-	
-	/** Get image's pixel at x and y */
-	Uint32 getPixel(int x, int y);
-	
-	/** Put a pixel in this image at x and y */
+	SDL_Surface* getSDLSurface(void) const;
+	int getWidth(void) const;
+	int getHeight(void) const;
+	std::string getErrorMessage(void) const;
+	bool hasError(void) const;
+	bool validLimits(int x, int y);
+	Uint32 getPixel(int x, int y) const;
+	void crop(int top, int left, int right, int bottom);
+	void resize(int newWidth, int newHeight);
 	void putPixel(Uint32 pixel, int x, int y);
-
-	const SDL_PixelFormat* getFormat();
-private:
-	Image(SDL_Surface* surface);
-	SDL_Surface* surface;
+	void copy(const Image& other);
+	const SDL_PixelFormat* getFormat() const;
+	void rotate(int degrees, Uint32 alpha);
+	void superImpose(Image imageToImpose, int red, int green, int blue, int delta);
 };
