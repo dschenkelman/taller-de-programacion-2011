@@ -149,12 +149,34 @@ void Image::putPixel(SDL_Surface *surface, Uint32 pixel, int x, int y)
 
 int Image::xRotatePixel(double radians, int x, int y)
 {
-	return cos(radians) * x + sin(radians) * y;                                                                                                                                                                                                                                                                                                                   
+	double real=(cos(radians) * x + sin(radians) * y);
+	int entera= int(real);
+	int ret=entera;
+	//double dif=abs(real-entera);
+	//if (dif > 0.6){
+	//		if (entera >= 0)
+	//			ret=entera+1;
+	//		else 
+	//			ret=entera-1;
+	//}
+	return ret;
+
 }
 
 int Image::yRotatePixel(double radians, int x, int y)
 {
-	return cos(radians) * y - sin(radians) * x;
+	double real= cos(radians) * y - sin(radians) * x;
+	int entera= int(real);
+	int ret=entera;
+	//double dif=abs(real-entera);
+	//if (dif > 0.6){
+	//		if (entera >= 0)
+	//			ret=entera+1;
+	//		else 
+	//			ret=entera-1;
+	//}
+	return ret;
+	
 }
 const SDL_PixelFormat* Image::getFormat() const{
 	return this->image->format;
@@ -232,6 +254,10 @@ void Image::copy(const Image& other)
 
 void Image::rotate(int degrees, Uint32 alpha)
 {
+	int originalHeight = this->getHeight();
+	int originalWidth = this->getWidth();
+
+	//this->resize(originalWidth*(2), originalHeight*(2));
 	double radians = ((degrees / 180.0) * PI);
 
 	int originalCenterX = this->getWidth() / 2;
@@ -265,8 +291,8 @@ void Image::rotate(int degrees, Uint32 alpha)
 		}
 	}
 
-	int originalHeight = this->getHeight();
-	int originalWidth = this->getWidth();
+	//int originalHeight = this->getHeight();
+	//int originalWidth = this->getWidth();
 
 	this->copy(temp);
 	this->resize(originalWidth, originalHeight);
