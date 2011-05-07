@@ -20,6 +20,7 @@ private:
 	std::ifstream xmlFile;
 	std::string fileOrig;
 	std::string lineRead;
+	std::string aParsearWorkLine;
 	std::string parsingFileName;
 	void parseAttribute(std::string attName);
 	void parseOpeningLine(std::string line);
@@ -39,6 +40,7 @@ private:
 	std::string validTags[9];
 	bool preParseFile(std::string filename);
 	bool removeBlankLines(void);
+
 public:
 
 	XmlParser(void);
