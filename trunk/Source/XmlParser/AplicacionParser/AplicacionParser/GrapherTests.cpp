@@ -592,7 +592,7 @@ bool GrapherTests::testGraficarEscenario1024x768(void)
 
 	XmlElement elementoTextura3("textura", 21, 21);
 	XmlAttribute atributo7("nombre", "uva");
-	XmlAttribute atributo8("path", "Images/uvaFondoVerde.bmp");
+	XmlAttribute atributo8("path", "Images/uva.bmp");
 	/*XmlAttribute atributoA("bottom", "10");
 	XmlAttribute atributoB("right", "10");
 	XmlAttribute atributoC("alpha", "#000000");*/

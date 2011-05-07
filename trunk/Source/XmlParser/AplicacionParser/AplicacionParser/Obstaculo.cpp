@@ -143,3 +143,8 @@ void Obstaculo::setError(void)
 {
 	this->tieneError = true;
 }
+
+Textura Obstaculo::obtenerTextura()
+{
+	return this->getTipoObstaculo().getTextura();
+}

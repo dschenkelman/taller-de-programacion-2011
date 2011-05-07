@@ -61,3 +61,8 @@ bool Celda::hasError(void)
 {
 	return false;
 }
+
+Textura Celda::obtenerTextura(void)
+{
+	return Textura();
+}
