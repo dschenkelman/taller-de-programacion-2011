@@ -287,12 +287,12 @@ void Image::rotate(int degrees, Uint32 alpha)
 
 	Image temp(rotatedWidth, rotatedHeight);
 
-	for (int i = 0; i < rotatedWidth; i++) 
+	for (int j = 0; j < rotatedHeight; j++) 
 	{
-		for (int j = 0; j < rotatedHeight; j++) 
+		for (int i = 0; i < rotatedWidth; i++) 
 		{
-			int originalX = xRotatePixel(-radians, i - rotatedCenterX, j - rotatedCenterY);
-			int originalY = yRotatePixel(-radians, i - rotatedCenterX, j - rotatedCenterY);
+			double originalX = xRotatePixel(-radians, i - rotatedCenterX, j - rotatedCenterY);
+			double originalY = yRotatePixel(-radians, i - rotatedCenterX, j - rotatedCenterY);
 
 			originalX += originalCenterX;
 			originalY += originalCenterY;
@@ -303,15 +303,17 @@ void Image::rotate(int degrees, Uint32 alpha)
 				continue;
 			}
 
-			// obtengo el pixel interpolado
-			Uint32 interpolatedPixel = this->getInterpolatedPixel( this->getPixel(originalX-1, originalY-1), originalX-1, originalY-1, 
-																this->getPixel(originalX+1, originalY-1), originalX+1, originalY-1, 
-																this->getPixel(originalX-1, originalY+1), originalX-1, originalY+1, 
-																this->getPixel(originalX+1, originalY+1), originalX+1, originalY+1, 
+			//// obtengo el pixel interpolado
+			Uint32 interpolatedPixel = this->getInterpolatedPixel( this->getPixel(originalX, originalY-2), originalX, originalY-2, 
+																this->getPixel(originalX+2, originalY), originalX+2, originalY, 
+																this->getPixel(originalX-2, originalY), originalX-2, originalY, 
+																this->getPixel(originalX, originalY+2), originalX, originalY+2, 
 																originalX, originalY, this->getFormat());
 
-			Uint32 pixelImg = this->getPixel(originalX, originalY);
 			temp.putPixel(interpolatedPixel, i, j);
+			
+			/*Uint32 pixelImg = this->getPixel(originalX, originalY);
+			temp.putPixel(pixelImg, i, j);*/
 		}
 	}
 
@@ -319,7 +321,7 @@ void Image::rotate(int degrees, Uint32 alpha)
 	//int originalWidth = this->getWidth();
 
 	this->copy(temp);
-	//this->resize(originalWidth, originalHeight);
+	this->resize(originalWidth, originalHeight);
 }
 
 bool Image::validLimits(int x, int y)
@@ -366,7 +368,7 @@ void Image::resize(int newWidth, int newHeight)
 
 			// interpolacion
 			//if( posXSrc > 0 && posYSrc > 0 ){
-			if( posXSrc > 0 && posYSrc > 0 && newWidth > widthSrc && newHeight > heightSrc ){
+			if( posXSrc > 0 && posYSrc > 0 ){
 				
 				int fromY = (((posYSrc-1) * newHeight) / heightSrc);
 				int fromX = (((posXSrc-1) * newWidth) / widthSrc);
