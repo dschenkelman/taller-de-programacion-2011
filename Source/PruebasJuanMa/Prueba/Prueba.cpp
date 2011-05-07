@@ -52,9 +52,9 @@ int main(int argc, char* argv[])
 	// Rotacion
 	Uint32 pixelAlpha = SDL_MapRGB(imgSmile->getFormat(), 255, 0, 0);
 	imgSmile->rotate(45, pixelAlpha);
-	
-	imgSmile->resize(origW, origH);
 
+	imgSmile->resize(100, 40);
+	
 	// Pego la imagen en la pantalla
 	SDL_BlitSurface(imgSmile->getSDLSurface(), NULL, screen, NULL);
 	SDL_Flip(screen);
