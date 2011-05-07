@@ -4,7 +4,7 @@
 #include <string>
 #include <exception>
 #include <sstream>
-#include "sdl/sdl.h"
+#include "sdl.h"
 #include "PixelHelpers.h"
 
 using namespace std;
