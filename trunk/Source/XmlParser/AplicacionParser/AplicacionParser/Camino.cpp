@@ -89,7 +89,7 @@ Camino::~Camino(void)
 
 Image Camino::obtenerRepresentacion(Celda* celSup, Celda* celInf, Celda* celDer, Celda* celIzq)
 {
-	Image imagen("Images/cross.bmp");
+	Image imagen("Images/texturas/+.bmp");
 	// Intento castear las celdas 
 	Camino* camSup = dynamic_cast<Camino*>(celSup);
 	Camino* camInf = dynamic_cast<Camino*>(celInf);
@@ -98,17 +98,57 @@ Image Camino::obtenerRepresentacion(Celda* celSup, Celda* celInf, Celda* celDer,
 	
 	// Ningun vecino es un camino
 	if( camSup == 0 && camInf == 0 && camDer == 0 && camIzq == 0 ){
-		imagen=Image("Images/circle.bmp");
+		imagen=Image("Images/texturas/..bmp");
 	}
 	
 	// Solo vecinos superior o inferior son caminos
 	if(( camSup != 0 || camInf != 0 )&&( camDer == 0 && camIzq == 0 )){
-		imagen=Image("Images/vertical.bmp");
+		imagen=Image("Images/texturas/i.bmp");
 	}
 
 	// Solo vecinos derecho o izquierdo son caminos
 	if(( camDer != 0 || camIzq != 0 )&&( camSup == 0 && camInf == 0 )){
-		imagen=Image("Images/horizontal.bmp");
+		imagen=Image("Images/texturas/-.bmp");
+	}
+
+	// Derecho, izquierdo, y abajo
+	if(camSup==0 && camDer!=0 && camIzq!=0 && camInf!=0){
+		imagen=Image("Images/texturas/t0.bmp");
+	}
+
+	// Derecho, arriba, y abajo
+	if(camSup!=0 && camDer!=0 && camIzq==0 && camInf!=0){
+		imagen=Image("Images/texturas/t1.bmp");
+	}
+
+	// Derecho, izquierdo, y arriba
+	if(camSup!=0 && camDer!=0 && camIzq!=0 && camInf==0){
+		imagen=Image("Images/texturas/t2.bmp");
+	}
+
+	// Arriba, izquierdo, y abajo
+	if(camSup!=0 && camDer==0 && camIzq!=0 && camInf!=0){
+		imagen=Image("Images/texturas/t3.bmp");
+	}
+
+	// Arriba, y derecho
+	if(camSup!=0 && camDer!=0 && camIzq==0 && camInf==0){
+		imagen=Image("Images/texturas/l0.bmp");
+	}
+
+	// Arriba, e izquierdo
+	if(camSup!=0 && camDer==0 && camIzq!=0 && camInf==0){
+		imagen=Image("Images/texturas/l1.bmp");
+	}
+
+	// Abajo, e izquierda
+	if(camSup==0 && camDer==0 && camIzq!=0 && camInf!=0){
+		imagen=Image("Images/texturas/l2.bmp");
+	}
+
+	// Abajo, y derecha
+	if(camSup==0 && camDer!=0 && camIzq==0 && camInf!=0){
+		imagen=Image("Images/texturas/l3.bmp");
 	}
 
 	if (this->hasBonus())

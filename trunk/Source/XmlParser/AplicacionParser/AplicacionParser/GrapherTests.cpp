@@ -23,9 +23,9 @@ void GrapherTests::printLeaks(int leaks)
 
 void GrapherTests::run(void)
 {
-	printResult("testGraficarEscenario", testGraficarEscenario());
+	//printResult("testGraficarEscenario", testGraficarEscenario());
 	printResult("testGraficarEscenario800x600", testGraficarEscenario800x600());
-	printResult("testGraficarEscenario1024x768", testGraficarEscenario1024x768());
+	//printResult("testGraficarEscenario1024x768", testGraficarEscenario1024x768());
 	
 	int leaks = _CrtDumpMemoryLeaks();
 	printLeaks(leaks);
