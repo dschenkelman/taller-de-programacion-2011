@@ -1,5 +1,5 @@
 #pragma once
-#include "SDL.h"
+#include "sdl/sdl.h"
 
 class PixelHelpers
 {
