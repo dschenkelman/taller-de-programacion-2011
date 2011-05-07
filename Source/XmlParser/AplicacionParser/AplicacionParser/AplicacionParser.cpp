@@ -150,9 +150,9 @@ int _tmain(int argc, _TCHAR* argv[])
 	TexturaTests texturaTests;
 	texturaTests.run();
 
-	//cout<<"Test de Image"<<endl;
-	//ImageTests imageTest;
-	//imageTest.run();
+	cout<<"Test de Image"<<endl;
+	ImageTests imageTest;
+	imageTest.run();
 
 	cout<<"Test de Grapher"<<endl;
 	GrapherTests grapherTest;
