@@ -19,7 +19,6 @@ Image::Image(void) : width(0), height(0), error(false), errorMessage(""), image(
 Image::Image(string path): height(0), width(0), error(false), errorMessage(""), image(NULL)
 {
 	this->image = SDL_LoadBMP(path.c_str());
-//FILE * pFile = fopen ("myfile.txt","w");
 	if (this->image == NULL) 
 	{
 		this->error = true;
@@ -193,6 +192,8 @@ bool Image::hasError(void) const
 
 void Image::crop(int top, int left, int right, int bottom)
 {
+	if (this->hasError())
+		return;
 	if(right == numeric_limits<int>::max())
 	{
 		right = this->image->w;
@@ -271,6 +272,9 @@ bool Image::validLimits(int x, int y)
 
 void Image::rotate(int degrees, Uint32 alpha)
 {
+	if (this->hasError())
+		return;
+
 	if (degrees == 0)
 	{
 		return;
@@ -372,6 +376,9 @@ void Image::rotate(int degrees, Uint32 alpha)
 
 void Image::resize(int newWidth, int newHeight)
 {
+	if (this->hasError())
+		return;
+
 	int widthSrc	= this->getWidth();
 	int heightSrc	= this->getHeight();
 	
@@ -530,6 +537,8 @@ void Image::superImpose(Image& imageToImpose, int alphaRed, int alphaGreen, int 
 	//Si se da el caso de que la nueva es mas grande que la actual, hago un resize de la nueva y se la 
 	//asigno pixel a pixel a la vieja.
 
+	if (this->hasError())
+		return;
 
 	int anchoImagen,altoImagen,altoPantalla,anchoPantalla,inicioAnchoPantalla,inicioAltoPantalla;
 	

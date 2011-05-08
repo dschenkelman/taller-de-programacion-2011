@@ -2,7 +2,7 @@
   <GRILLA ancho="10" 
 		  alto="10" 
 		  tipoObstaculoPorDefecto="ladrillo">
-   </GRILLA>
+  </GRILLA>
   <TIPOSOBSTACULOS>
     <TIPOOBSTACULO nombre="OBS1" textura="yunque"/>
 	<TIPOOBSTACULO nombre="ladrillo" textura="ladrillo"/>
