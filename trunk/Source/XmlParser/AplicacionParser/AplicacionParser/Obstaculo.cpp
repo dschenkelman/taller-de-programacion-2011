@@ -92,9 +92,12 @@ Image Obstaculo::obtenerRepresentacion(Celda* celSup, Celda* celInf, Celda* celD
 {
 	Textura textura = this->getTipoObstaculo().getTextura();
 	Image imagen(textura.getPath());
-	imagen.crop(textura.getTop(), textura.getLeft(), textura.getRight(), textura.getBottom());
-	Uint32 alphaPixel = textura.getRed() | textura.getGreen() << 8 | textura.getBlue() << 16;
-	imagen.rotate(textura.getRotation(), alphaPixel);
+	if (!imagen.hasError())
+	{
+		imagen.crop(textura.getTop(), textura.getLeft(), textura.getRight(), textura.getBottom());
+		Uint32 alphaPixel = textura.getRed() | textura.getGreen() << 8 | textura.getBlue() << 16;
+		imagen.rotate(textura.getRotation(), alphaPixel);
+	}
 	return imagen;
 }
 
