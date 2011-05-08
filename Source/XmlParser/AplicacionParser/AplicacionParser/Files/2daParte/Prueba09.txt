@@ -1,0 +1,3 @@
+08/05/11 17:46:40  Warning: El tipo bonus uva no está siendo utilizado. Linea: 27
+08/05/11 17:46:40  Warning: El tipo obstaculo OBS1 no está siendo utilizado. Linea: 23
+08/05/11 17:46:40  Warning: La textura anana no está siendo utilizada. Linea: 34
