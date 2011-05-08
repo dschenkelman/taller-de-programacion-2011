@@ -79,8 +79,13 @@ Image::~Image(void)
 
 /** Get image's pixel at x and y */
 Uint32 Image::getPixel(int x, int y) const{
-	int bpp = this->image->format->BytesPerPixel;
-    Uint8 *p = (Uint8 *)this->image->pixels + y * this->image->pitch + x * bpp;
+	return Image::getPixel(this->image, x, y);
+}
+
+Uint32 Image::getPixel(SDL_Surface* surface, int x, int y)
+{
+	int bpp = surface->format->BytesPerPixel;
+    Uint8 *p = (Uint8 *)surface->pixels + y * surface->pitch + x * bpp;
 
     switch(bpp) {
     case 1:
@@ -193,25 +198,28 @@ void Image::crop(int top, int left, int right, int bottom)
 	}
 
 
-	int width = right - left;
-	int height = bottom - top;
+	int newWidth = right - left;
+	int newHeight = bottom - top;
 
 
-	if (width != this->getWidth() || height != this->getHeight())
+	if (newWidth != this->getWidth() || newHeight != this->getHeight())
 	{
 		//needs to be resized
-		Image temp(width, height);
+		SDL_Surface* temp = SDL_CreateRGBSurface(SDL_HWSURFACE, newWidth, newHeight, 24, 0, 0, 0, 0);
 
-		for (int i = 0; i < width; i++) 
+		for (int i = 0; i < newWidth; i++) 
 		{
-			for (int j = 0; j < height; j++) 
+			for (int j = 0; j < newHeight; j++) 
 			{
 				Uint32 pixelImg = this->getPixel(left + i, top + j);
-				temp.putPixel(pixelImg, i, j);
+				Image::putPixel(temp, pixelImg, i, j);
 			}
 		}
 
-		this->copy(temp);
+		SDL_FreeSurface(this->image);
+		this->image = temp;
+		this->width = newWidth;
+		this->height = newHeight;
 	}
 }
 
@@ -276,8 +284,8 @@ void Image::rotate(int degrees, Uint32 alpha)
 	int rotatedCenterX = (rotatedWidth - 1) / 2.0;
 	int rotatedCenterY = (rotatedHeight - 1) / 2.0;
 
-	Image temp(rotatedWidth, rotatedHeight);
-
+	SDL_Surface* temp = SDL_CreateRGBSurface(SDL_HWSURFACE, rotatedWidth, rotatedHeight,24,0,0,0,0);
+	
 	for (int j = 0; j < rotatedHeight; j++) 
 	{
 		for (int i = 0; i < rotatedWidth; i++) 
@@ -302,12 +310,12 @@ void Image::rotate(int degrees, Uint32 alpha)
 						originalY--;
 					}
 
-					temp.putPixel(this->getPixel(originalX, originalY), i, j);
+					Image::putPixel(temp, this->getPixel(originalX, originalY), i, j);
 					continue;
 				}
 				else
 				{
-					temp.putPixel(alpha, i, j);
+					Image::putPixel(temp, alpha, i, j);
 				}
 				continue;
 			}
@@ -342,14 +350,17 @@ void Image::rotate(int degrees, Uint32 alpha)
 				izq, originalX, originalY, 
 				originalX, originalY, this->getFormat());
 
-			temp.putPixel(interpolatedPixel, i, j);
+			Image::putPixel(temp, interpolatedPixel, i, j);
 		}
 	}
 
 	//int originalHeight = this->getHeight();
 	//int originalWidth = this->getWidth();
 
-	this->copy(temp);
+	SDL_FreeSurface(this->image);
+	this->image = temp;
+	this->width = rotatedWidth;
+	this->height = rotatedHeight;
 	/*this->resize(originalWidth, originalHeight);*/
 }
 
@@ -359,7 +370,7 @@ void Image::resize(int newWidth, int newHeight)
 	int heightSrc	= this->getHeight();
 	
 	// Empty new image
-	Image* temp = new Image(newWidth, newHeight);
+	SDL_Surface* temp = SDL_CreateRGBSurface(SDL_HWSURFACE,newWidth,newHeight,24,0,0,0,0);
 	
 	// posiciones en la nueva imagen
 	int posXDst = 0;
@@ -407,21 +418,25 @@ void Image::resize(int newWidth, int newHeight)
 																			pixelSD, xSD, ySD, 
 																			pixelII, xII, yII, 
 																			pixelImg, posXDst, posYDst, 
-																			x, y, temp->getFormat());
+																			x, y, this->getFormat());
 						
 						// coloco el pixel en la imagen destino
-						temp->putPixel( interpolatedPixel, x, y );
+						Image::putPixel(temp, interpolatedPixel, x, y);
+						/*temp.putPixel( interpolatedPixel, x, y );*/
 					}
 				}
 			}
 
 			// Pongo el pixel en las nuevas coordenadas
-			temp->putPixel( pixelImg, posXDst, posYDst);
+			Image::putPixel(temp, pixelImg, posXDst, posYDst);		
+			/*temp.putPixel( pixelImg, posXDst, posYDst);*/
 		}
 	}
 	
-	this->copy(*temp);
-	free(temp);
+	SDL_FreeSurface(this->image);
+	this->image = temp;
+	this->width = newWidth;
+	this->height = newHeight;
 }
 
 Uint32 Image::getInterpolatedPixel(Uint32 pixelSI, double xSI, double ySI, Uint32 pixelSD, double xSD, double ySD, Uint32 pixelII, double xII, double yII, Uint32 pixelID, double xID, double yID, double xNow, double yNow, const SDL_PixelFormat* newFormat){
@@ -502,7 +517,7 @@ int Image::getRotatedHeight(double radians)
 	return yMax - yMin;
 }
 
-void Image::superImpose(Image imageToImpose, int alphaRed, int alphaGreen, int alphaBlue, int delta){
+void Image::superImpose(Image& imageToImpose, int alphaRed, int alphaGreen, int alphaBlue, int delta){
 
 	//Caso feliz:
 	//Una imagen es mas grande que la otra por superfice, ya que siempre son cuadradas.
