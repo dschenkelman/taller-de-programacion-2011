@@ -5,7 +5,6 @@
 #include <string>
 #include "Image.h"
 
-
 class Camino : public Celda
 {
 	List<std::string> validAttributes;
@@ -23,5 +22,6 @@ public:
 	Celda* copiar(void);
 	bool hasError(void);
 	~Camino(void);
+	Textura obtenerTextura(Celda* celSup, Celda* celInf, Celda* celDer, Celda* celIzq);
 	Image obtenerRepresentacion(Celda* celSup, Celda* celInf, Celda* celDer, Celda* celIzq);
 };

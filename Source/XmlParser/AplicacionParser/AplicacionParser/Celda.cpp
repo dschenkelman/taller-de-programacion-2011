@@ -62,7 +62,7 @@ bool Celda::hasError(void)
 	return false;
 }
 
-Textura Celda::obtenerTextura(void)
+Textura Celda::obtenerTextura(Celda* , Celda*, Celda*, Celda*)
 {
 	return Textura();
 }

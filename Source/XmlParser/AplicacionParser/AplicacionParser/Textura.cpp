@@ -55,6 +55,11 @@ string Textura::getNombre()
 	return this->nombre;
 }
 
+void Textura::setNombre(string n)
+{
+	this->nombre = n;
+}
+
 bool Textura::isUsed()
 {
 	return this->usada;

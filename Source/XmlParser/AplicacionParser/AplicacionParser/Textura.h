@@ -33,6 +33,7 @@ public:
 	Textura(std::string imagePath);
 	Textura(XmlElement& element);
 	std::string getNombre(void);
+	void setNombre(std::string);
 	std::string getPath(void);
 	int getLeft(void);
 	int getTop(void);

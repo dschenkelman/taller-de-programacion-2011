@@ -147,7 +147,8 @@ void Obstaculo::setError(void)
 	this->tieneError = true;
 }
 
-Textura Obstaculo::obtenerTextura()
+Textura Obstaculo::obtenerTextura(Celda*, Celda*,Celda*,Celda*)
 {
+	//parameters not required
 	return this->getTipoObstaculo().getTextura();
 }
