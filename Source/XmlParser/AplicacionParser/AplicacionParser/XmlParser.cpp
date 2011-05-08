@@ -23,6 +23,8 @@ XmlParser::XmlParser(void) : lastIndex(0), lastJumpAmount(0)
 	this->validTags[6] = "tipobonus";
 	this->validTags[7] = "tiposobstaculos";
 	this->validTags[8] = "tipoobstaculo";
+	this->validTags[9] = "texturas";
+	this->validTags[10] = "textura";
 
 	this->lineNumber=1; //Las líneas del archivo comienzan en 1.
 	this->log=Logger::getInstance();
