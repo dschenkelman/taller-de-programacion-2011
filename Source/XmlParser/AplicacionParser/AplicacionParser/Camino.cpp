@@ -151,7 +151,7 @@ Image Camino::obtenerRepresentacion(Celda* celSup, Celda* celInf, Celda* celDer,
 		imagen=Image("Images/texturas/l3.bmp");
 	}
 
-	if (this->hasBonus())
+	if (this->hasBonus() && !imagen.hasError())
 	{
 		/*std::stringstream ss;
 		std::string repres;*/
