@@ -38,13 +38,15 @@ void printLeaks(int leaks)
 
 int execute(int argc, char* argv[])
 {
-	if (argc != 2)
+	if (argc != 3)
 	{
-		cout<<"Debe proveer el nombre del archivo a leer como argumento"<<endl;
+		cout<<"Sintaxis: ApplicationParser nombreArch.xml modoVideo (640 | 800 | 1024)"<<endl;
 		return 0;
 	}
 	
+	int videoMode =640;
 	char* fileName = argv[1];
+	videoMode = atoi(argv[2]);
 
 	ifstream ifile(fileName);
 	if (ifile) 
@@ -60,6 +62,7 @@ int execute(int argc, char* argv[])
 		if (!escenario.hasError())
 		{
 			Grapher grapher;
+			grapher.setVideoMode(videoMode);
 			grapher.draw(escenario);
 		}
 		else
