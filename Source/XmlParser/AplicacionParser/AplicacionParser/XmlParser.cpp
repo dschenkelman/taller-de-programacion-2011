@@ -209,7 +209,12 @@ bool  XmlParser::getXmlLine(void){
 			this->hasErrors=true;
 		}
 		else{
-			strMine=strMine.erase(foundGT,1);
+			//Si no tiene hijos borro los dos
+			if (closeGT != string::npos){
+				strMine=strMine.erase(closeGT,2);
+			}
+			else
+				strMine=strMine.erase(foundGT,1);
 		}
 
 		if ( (foundLT == string::npos)){
@@ -266,7 +271,7 @@ void XmlParser::parseAttribute(string myLine){
 	stringstream out;
 	string logMessage;
 
-	Tokenizer miTok(myLine,"=/");
+	Tokenizer miTok(myLine,"=");
 	string attName;
 	string attValue;
 
