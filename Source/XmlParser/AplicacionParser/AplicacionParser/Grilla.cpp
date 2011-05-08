@@ -101,7 +101,11 @@ Grilla::Grilla(XmlElement& e, List<TipoObstaculo>& lo, List<TipoBonus>& lb) : ma
 
 	if (e.hasChildren())
 	{
-		generarMatriz(e.getChildren());
+		this->generarMatriz(e.getChildren());
+	}
+	else
+	{
+		this->llenarMatrizDeObstaculosDefecto();
 	}
 
 	verificarTiposUtilizados();
@@ -156,28 +160,7 @@ Grilla::~Grilla()
 // métodos privados
 void Grilla::generarMatriz(List<XmlElement>& listaElementos)
 {
-	for (size_t i = 0; i < this->alto; i++)
-	{
-		//agrego fila
-		this->matriz.add(List<Celda*>());
-		for (size_t j = 0; j < this->ancho; j++)
-		{
-			//lleno fila
-			Obstaculo* o = new Obstaculo(this->tipoObstaculoPorDefecto, 0,0);
-			bool obstaculoValido = verificarTipoObstaculoExistente(o->getTipo());
-			if (obstaculoValido)
-			{
-				o->setTipoObstaculo(this->obtenerTipoObstaculo(o->getTipo()));
-			}
-			else
-			{
-				o->setError();
-			}
-			this->matriz.at(i).add(o);
-		}	
-	}
-
-	this->matrizGenerada = true;
+	this->llenarMatrizDeObstaculosDefecto();
 	
 	for (size_t i = 0; i < listaElementos.length(); i++)
 	{
@@ -479,4 +462,30 @@ bool Grilla::hasError(void)
 	}
 
 	return this->tieneError;
+}
+
+void Grilla::llenarMatrizDeObstaculosDefecto(void)
+{
+	for (size_t i = 0; i < this->alto; i++)
+	{
+		//agrego fila
+		this->matriz.add(List<Celda*>());
+		for (size_t j = 0; j < this->ancho; j++)
+		{
+			//lleno fila
+			Obstaculo* o = new Obstaculo(this->tipoObstaculoPorDefecto, 0,0);
+			bool obstaculoValido = verificarTipoObstaculoExistente(o->getTipo());
+			if (obstaculoValido)
+			{
+				o->setTipoObstaculo(this->obtenerTipoObstaculo(o->getTipo()));
+			}
+			else
+			{
+				o->setError();
+			}
+			this->matriz.at(i).add(o);
+		}	
+	}
+
+	this->matrizGenerada = true;
 }

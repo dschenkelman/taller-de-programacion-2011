@@ -41,7 +41,8 @@ Escenario::Escenario(XmlElement& e) : tieneError(false), texturaFondo(""), textu
 			}
 		}
 	}
-	else{
+	else
+	{
 		this->grilla = miGrilla;
 	}
 

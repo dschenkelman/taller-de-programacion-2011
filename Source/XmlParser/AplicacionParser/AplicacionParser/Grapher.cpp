@@ -65,7 +65,7 @@ void Grapher::draw(Escenario& escenario)
 			
 			Celda* celInf = 0; 
 			int posInf = i+1;
-			if( posInf < grilla.getAlto() ) 
+			if( posInf < grilla.getAlto()) 
 				celInf = grilla.getCelda(posInf, j);
 			
 			Celda* celDer = 0; 
