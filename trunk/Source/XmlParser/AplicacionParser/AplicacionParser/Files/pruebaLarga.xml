@@ -51,10 +51,10 @@
     <TIPOBONUS nombre="uva" textura="uva"/>
   </TIPOSBONUS>
   <TEXTURAS>
-	<TEXTURA nombre="Fondo" path="C:\SVNTaller\2011\XmlParser\AplicacionParser\AplicacionParser\Images\texturaFondo.bmp"/>
-	<TEXTURA nombre="yunque" path="C:\SVNTaller\2011\XmlParser\AplicacionParser\AplicacionParser\Images\yunque.bmp"/>
-	<TEXTURA nombre="ladrillo" path="C:\SVNTaller\2011\XmlParser\AplicacionParser\AplicacionParser\Images\ladrillo.bmp"/>
-	<TEXTURA nombre="uva" path="C:\SVNTaller\2011\XmlParser\AplicacionParser\AplicacionParser\Images\uva.bmp" rot="45" alpha="#FFFFFF"/>
-	<TEXTURA nombre="anana" path="C:\SVNTaller\2011\XmlParser\AplicacionParser\AplicacionParser\Images\anana.bmp"/>
+	<TEXTURA nombre="Fondo" path="Images\texturaFondo.bmp"/>
+	<TEXTURA nombre="yunque" path="Images\yunque.bmp"/>
+	<TEXTURA nombre="ladrillo" path="Images/ladrillo.bmp"/>
+	<TEXTURA nombre="uva" path="Images/uva.bmp" rot="45" alpha="#FFFFFF"/>
+	<TEXTURA nombre="anana" path="Images\anana.bmp"/>
   </TEXTURAS>
   </ESCENARIO>

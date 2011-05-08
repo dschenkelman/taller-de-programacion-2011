@@ -13,6 +13,7 @@ using namespace std;
 Image::Image(string path): height(0), width(0), error(false), errorMessage(""), image(NULL)
 {
 	this->image = SDL_LoadBMP(path.c_str());
+//FILE * pFile = fopen ("myfile.txt","w");
 	if (this->image == NULL) 
 	{
 		this->error = true;
