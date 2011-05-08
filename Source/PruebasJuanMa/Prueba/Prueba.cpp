@@ -50,16 +50,16 @@ int main(int argc, char* argv[])
 	int origH = imgSmile->getHeight();
 	
 	// Rotacion
-	Uint32 pixelAlpha = SDL_MapRGB(imgSmile->getFormat(), 255, 0, 0);
-	imgSmile->rotate(45, pixelAlpha);
+	Uint32 pixelAlpha = SDL_MapRGB(imgSmile->getFormat(), 0, 255, 0);
+	imgSmile->rotate(180, pixelAlpha);
 
-	imgSmile->resize(100, 40);
+	/*imgSmile->resize(800, 600);*/
 	
 	// Pego la imagen en la pantalla
 	SDL_BlitSurface(imgSmile->getSDLSurface(), NULL, screen, NULL);
 	SDL_Flip(screen);
 
-	SDL_Delay(7000);
+	SDL_Delay(20000);
 	
 	// libero memoria
 	free(imgSmile);
