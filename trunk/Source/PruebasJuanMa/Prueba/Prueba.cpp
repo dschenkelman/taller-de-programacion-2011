@@ -44,16 +44,17 @@ int main(int argc, char* argv[])
 	/** Agrandar imagen */
 
 	// nueva imagen
-	Image* imgSmile = new Image("uva.bmp");
+	Image* imgSmile = new Image("osama.bmp");
 	
 	int origW = imgSmile->getWidth();
 	int origH = imgSmile->getHeight();
 	
 	// Rotacion
 	Uint32 pixelAlpha = SDL_MapRGB(imgSmile->getFormat(), 0, 255, 0);
-	imgSmile->rotate(180, pixelAlpha);
+	/*imgSmile->resize(400, 300);*/
+	imgSmile->rotate(45, pixelAlpha);
 
-	/*imgSmile->resize(800, 600);*/
+	imgSmile->resize(200, 200);
 	
 	// Pego la imagen en la pantalla
 	SDL_BlitSurface(imgSmile->getSDLSurface(), NULL, screen, NULL);

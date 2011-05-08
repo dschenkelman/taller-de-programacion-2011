@@ -6,7 +6,7 @@
 #include <math.h>
 #include <algorithm>
 #include "PixelHelpers.h"
-#define PI 3.14159265
+#define PI 3.141592653589793238462643383279
 
 using namespace std;
 
@@ -144,56 +144,26 @@ void Image::putPixel(SDL_Surface *surface, Uint32 pixel, int x, int y)
 
 
 
-int Image::xRotatePixel(double radians, int x, int y)
+double Image::xRotatePixel(double radians, int x, int y)
 {
-	double real=(cos(radians) * x + sin(radians) * y);
-	int entera= int(real);
-	int ret=entera;
-	//double dif=abs(real-entera);
-	//if (abs(dif-0.5) <= 0.01){
-	//	//Si la diferencia es casi 0,5 tengo que usar un desempate (Redondeo gaussiano).
-	//	//Utilizo el par mas cercano al número.
-	//	if (entera < 0 && (entera % 2) != 0){
-	//		ret=entera-1;
-	//	}
-	//	if (entera > 0 && (entera % 2) != 0){
-	//		ret=entera+1;
-	//	}
-	//}
-	//if (dif > 0.51){
-	//		if (entera >= 0)
-	//			ret=entera+1;
-	//		else 
-	//			ret=entera-1;
-	//}
-	return ret;
-
+	double zero = 0.000000000001;
+	double c = cos(radians);
+	double s = sin(radians);
+	c = abs(c) < zero ? 0 : c;
+	s = abs(s) < zero ? 0 : s;
+	double real = (c * x + s * y);
+	return real;
 }
 
-int Image::yRotatePixel(double radians, int x, int y)
+double Image::yRotatePixel(double radians, int x, int y)
 {
-	double real= cos(radians) * y - sin(radians) * x;
-	int entera= int(real);
-	int ret=entera;
-	//double dif=abs(real-entera);
-	//if (abs(dif-0.5) <= 0.01){
-	//	//Si la diferencia es casi 0,5 tengo que usar un desempate (Redondeo gaussiano).
-	//	//Utilizo el par mas cercano al número.
-	//	if (entera < 0 && (entera % 2) != 0){
-	//		ret=entera-1;
-	//	}
-	//	if (entera > 0 && (entera % 2) != 0){
-	//		ret=entera+1;
-	//	}
-	//}
-	//if (dif > 0.51){
-	//		if (entera >= 0)
-	//			ret=entera+1;
-	//		else 
-	//			ret=entera-1;
-	//}
-	return ret;
-	
+	double zero = 0.000000000001;
+	double c = cos(radians);
+	double s = sin(radians);
+	c = abs(c) < zero ? 0 : c;
+	s = abs(s) < zero ? 0 : s;
+	double real = c * y - s * x;
+	return real;
 }
 const SDL_PixelFormat* Image::getFormat() const{
 	return this->image->format;
@@ -269,8 +239,28 @@ void Image::copy(const Image& other)
 	this->image = temp;
 }
 
+bool Image::validLimits(int x, int y)
+{
+	if (x < 0 || x >= this->width)
+	{
+		return false;
+	}
+
+	if (y < 0 || y >= this->height)
+	{
+		return false;
+	}
+
+	return true;
+}
+
 void Image::rotate(int degrees, Uint32 alpha)
 {
+	if (degrees == 0)
+	{
+		return;
+	}
+	
 	int originalHeight = this->getHeight();
 	int originalWidth = this->getWidth();
 
@@ -282,29 +272,76 @@ void Image::rotate(int degrees, Uint32 alpha)
 
 	int rotatedHeight = this->getRotatedHeight(radians);
 	int rotatedWidth = this->getRotatedWidth(radians);
-	int rotatedCenterX = rotatedWidth / 2;
-	int rotatedCenterY = rotatedHeight / 2;
+	int rotatedCenterX = (rotatedWidth - 1) / 2.0;
+	int rotatedCenterY = (rotatedHeight - 1) / 2.0;
 
 	Image temp(rotatedWidth, rotatedHeight);
 
-	for (int i = 0; i < rotatedWidth; i++) 
+	for (int j = 0; j < rotatedHeight; j++) 
 	{
-		for (int j = 0; j < rotatedHeight; j++) 
+		for (int i = 0; i < rotatedWidth; i++) 
 		{
-			int originalX = xRotatePixel(-radians, i - rotatedCenterX, j - rotatedCenterY);
-			int originalY = yRotatePixel(-radians, i - rotatedCenterX, j - rotatedCenterY);
+			double originalX = xRotatePixel(-radians, i - rotatedCenterX, j - rotatedCenterY);
+			double originalY = yRotatePixel(-radians, i - rotatedCenterX, j - rotatedCenterY);
 
 			originalX += originalCenterX;
 			originalY += originalCenterY;
 
-			if(!validLimits(originalX, originalY))
+			if(!this->validLimits(originalX, originalY))
 			{
-				temp.putPixel(alpha, i, j);
+				if ((int)originalX == originalX && (int)originalY == originalY)
+				{
+					if(originalX == this->width)
+					{
+						originalX--;
+					}
+
+					if(originalY == this->height)
+					{
+						originalY--;
+					}
+
+					temp.putPixel(this->getPixel(originalX, originalY), i, j);
+					continue;
+				}
+				else
+				{
+					temp.putPixel(alpha, i, j);
+				}
 				continue;
 			}
 
-			Uint32 pixelImg = this->getPixel(originalX, originalY);
-			temp.putPixel(pixelImg, i, j);
+			Uint32 izq, der, inf, sup;
+			izq = this->getPixel(originalX, originalY);
+			sup = this->getPixel(originalX, originalY);
+
+			if (this->validLimits(originalX + 1, originalY))
+			{
+				der = this->getPixel(originalX+1, originalY);
+			}
+			else
+			{
+				der = this->getPixel(originalX, originalY);;
+			}					
+
+			if (this->validLimits(originalX, originalY + 1))
+			{
+				inf = this->getPixel(originalX, originalY + 1);
+			}
+			else
+			{
+				inf = this->getPixel(originalX, originalY);;
+			}
+
+			// obtengo el pixel interpolado
+			Uint32 interpolatedPixel = this->getInterpolatedPixel
+				(sup, originalX, originalY, 
+				der, originalX+1, originalY, 
+				inf, originalX, originalY+1, 
+				izq, originalX, originalY, 
+				originalX, originalY, this->getFormat());
+
+			temp.putPixel(interpolatedPixel, i, j);
 		}
 	}
 
@@ -312,89 +349,8 @@ void Image::rotate(int degrees, Uint32 alpha)
 	//int originalWidth = this->getWidth();
 
 	this->copy(temp);
-	this->resize(originalWidth, originalHeight);
+	/*this->resize(originalWidth, originalHeight);*/
 }
-
-bool Image::validLimits(int x, int y)
-{
-	if (x < 0 || x > this->width)
-	{
-		return false;
-	}
-
-	if (y < 0 || y > this->height)
-	{
-		return false;
-	}
-
-	return true;
-}
-
-/*void Image::rotate(int degrees, Uint32 alpha)
-{
-	double radians = ((degrees / 180.0) * PI);
-
-	int rotatedHeight = this->getRotatedHeight(radians);
-	int rotatedWidth = this->getRotatedWidth(radians);
-
-	Image temp(rotatedWidth, rotatedHeight);
-
-	int centerX = this->getWidth() / 2;		
-	int centerY = this->getHeight() / 2;
-
-	for (int i = 0; i < rotatedWidth; i++) 
-	{
-		for (int j = 0; j < rotatedHeight; j++) 
-		{
-			temp.putPixel(alpha, i, j);
-		}
-	}
-
-	int newCenterX = rotatedWidth / 2;
-	int newCenterY = rotatedHeight / 2;
-
-	for (int i = 0; i <  this->getWidth(); i++) 
-	{
-		for (int j = 0; j < this->getHeight(); j++) 
-		{
-			Uint32 pixelImg = this->getPixel(i, j);
-		
-			int rotatedX = xRotatePixel(radians, i - centerX, j - centerY);
-			int rotatedY = yRotatePixel(radians, i - centerX, j - centerY);
-			int yPosition = rotatedY + newCenterY;
-			int xPosition = rotatedX + newCenterX;
-
-			if (yPosition < 0)
-			{
-				yPosition = 0;
-			}
-
-			if (xPosition < 0)
-			{
-				xPosition = 0;
-			}
-
-			if (xPosition >= rotatedWidth)
-			{
-				xPosition = rotatedWidth - 1;
-			}
-
-			if (yPosition >= rotatedHeight)
-			{
-				yPosition = rotatedHeight - 1;
-			}
-
-			temp.putPixel(pixelImg, xPosition, yPosition);
-		}
-	}
-
-	int originalHeight = this->getHeight();
-	int originalWidth = this->getWidth();
-
-	this->copy(temp);
-	this->resize(originalWidth, originalHeight);
-}*/
-
 
 void Image::resize(int newWidth, int newHeight)
 {
