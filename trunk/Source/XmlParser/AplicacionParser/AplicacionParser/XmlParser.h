@@ -37,7 +37,7 @@ private:
 	bool isOpeningLine;
 	bool isValidTagName(std::string tagName);
 	std::string & replaceAll(std::string& context, const std::string& from,const std::string& to);
-	std::string validTags[9];
+	std::string validTags[11];
 	bool preParseFile(std::string filename);
 	bool removeBlankLines(void);
 
