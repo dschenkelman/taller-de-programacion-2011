@@ -78,7 +78,7 @@ void Grapher::draw(Escenario& escenario)
 			if( posIzq > 0) 
 				celIzq = grilla.getCelda(i, posIzq);
 
-			Textura t = celda->obtenerTextura();
+			Textura t = celda->obtenerTextura(celSup, celInf, celDer, celIzq);
 			string nombreTextura = t.getNombre();
 			Image imagen;
 			if (this->imageCache.find(nombreTextura) == this->imageCache.end())

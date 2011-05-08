@@ -23,7 +23,7 @@ public:
 	Celda* copiar(void);
 	bool hasError(void);
 	void setError(void);
-	Textura obtenerTextura(void);
+	Textura obtenerTextura(Celda* celSup, Celda* celInf, Celda* celDer, Celda* celIzq);
 	~Obstaculo(void);
 	Image obtenerRepresentacion(Celda* celSup, Celda* celInf, Celda* celDer, Celda* celIzq);
 };

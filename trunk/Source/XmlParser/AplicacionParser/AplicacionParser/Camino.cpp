@@ -211,3 +211,77 @@ void Camino::populateValidAttributes(void)
 	this->validAttributes.add("fila");
 	this->validAttributes.add("columna");
 }
+
+Textura Camino::obtenerTextura(Celda* celSup, Celda* celInf, Celda* celDer, Celda* celIzq)
+{
+	Textura textura;
+	textura.setNombre("Images/texturas/+.bmp");
+	// Intento castear las celdas 
+	Camino* camSup = dynamic_cast<Camino*>(celSup);
+	Camino* camInf = dynamic_cast<Camino*>(celInf);
+	Camino* camDer = dynamic_cast<Camino*>(celDer);
+	Camino* camIzq = dynamic_cast<Camino*>(celIzq);
+	
+	// Ningun vecino es un camino
+	if( camSup == 0 && camInf == 0 && camDer == 0 && camIzq == 0 ){
+		textura.setNombre("Images/texturas/..bmp");
+	}
+	
+	// Solo vecinos superior o inferior son caminos
+	if(( camSup != 0 || camInf != 0 )&&( camDer == 0 && camIzq == 0 )){
+		textura.setNombre("Images/texturas/i.bmp");
+	}
+
+	// Solo vecinos derecho o izquierdo son caminos
+	if(( camDer != 0 || camIzq != 0 )&&( camSup == 0 && camInf == 0 )){
+		textura.setNombre("Images/texturas/-.bmp");
+	}
+
+	// Derecho, izquierdo, y abajo
+	if(camSup==0 && camDer!=0 && camIzq!=0 && camInf!=0){
+		textura.setNombre("Images/texturas/t0.bmp");
+	}
+
+	// Derecho, arriba, y abajo
+	if(camSup!=0 && camDer!=0 && camIzq==0 && camInf!=0){
+		textura.setNombre("Images/texturas/t1.bmp");
+	}
+
+	// Derecho, izquierdo, y arriba
+	if(camSup!=0 && camDer!=0 && camIzq!=0 && camInf==0){
+		textura.setNombre("Images/texturas/t2.bmp");
+	}
+
+	// Arriba, izquierdo, y abajo
+	if(camSup!=0 && camDer==0 && camIzq!=0 && camInf!=0){
+		textura.setNombre("Images/texturas/t3.bmp");
+	}
+
+	// Arriba, y derecho
+	if(camSup!=0 && camDer!=0 && camIzq==0 && camInf==0){
+		textura.setNombre("Images/texturas/l0.bmp");
+	}
+
+	// Arriba, e izquierdo
+	if(camSup!=0 && camDer==0 && camIzq!=0 && camInf==0){
+		textura.setNombre("Images/texturas/l1.bmp");
+	}
+
+	// Abajo, e izquierda
+	if(camSup==0 && camDer==0 && camIzq!=0 && camInf!=0){
+		textura.setNombre("Images/texturas/l2.bmp");
+	}
+
+	// Abajo, y derecha
+	if(camSup==0 && camDer!=0 && camIzq==0 && camInf!=0){
+		textura.setNombre("Images/texturas/l3.bmp");
+	}
+
+	if (this->hasBonus())
+	{
+		string nombreTexturaBonus = this->getBonus().getTipoBonus().getTextura().getNombre();
+		textura.setNombre(textura.getNombre() + nombreTexturaBonus);
+	}
+
+	return textura;
+}
