@@ -29,11 +29,12 @@ public:
 	bool hasError(void) const;
 	bool validLimits(int x, int y);
 	Uint32 getPixel(int x, int y) const;
+	static Uint32 getPixel(SDL_Surface* surface, int x, int y);
 	void crop(int top, int left, int right, int bottom);
 	void resize(int newWidth, int newHeight);
 	void putPixel(Uint32 pixel, int x, int y);
 	void copy(const Image& other);
 	const SDL_PixelFormat* getFormat() const;
 	void rotate(int degrees, Uint32 alpha);
-	void superImpose(Image imageToImpose, int red, int green, int blue, int delta);
+	void superImpose(Image& imageToImpose, int red, int green, int blue, int delta);
 };
