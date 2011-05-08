@@ -6,7 +6,7 @@
 #include <math.h>
 #include <algorithm>
 //#include "PixelHelpers.h"
-#define PI 3.14159265
+#define PI 3.141592653589793238462643383279
 
 using namespace std;
 
@@ -146,7 +146,14 @@ void Image::putPixel(SDL_Surface *surface, Uint32 pixel, int x, int y)
 
 double Image::xRotatePixel(double radians, int x, int y)
 {
-	double real=(cos(radians) * x + sin(radians) * y);
+	double zero = 0.000000000001;
+	double c = cos(radians);
+	double s = sin(radians);
+	c = abs(c) < zero ? 0 : c;
+	s = abs(s) < zero ? 0 : s;
+	double real = (c * x + s * y);
+	return real;
+
 	/*int entera= int(real);
 	int ret=entera;*/
 	//double dif=abs(real-entera);
@@ -166,13 +173,17 @@ double Image::xRotatePixel(double radians, int x, int y)
 	//		else 
 	//			ret=entera-1;
 	//}
-	return real;
-
 }
 
 double Image::yRotatePixel(double radians, int x, int y)
 {
-	double real= cos(radians) * y - sin(radians) * x;
+	double zero = 0.000000000001;
+	double c = cos(radians);
+	double s = sin(radians);
+	c = abs(c) < zero ? 0 : c;
+	s = abs(s) < zero ? 0 : s;
+	double real = c * y - s * x;
+	return real;
 	/*int entera= int(real);
 	int ret=entera;*/
 	//double dif=abs(real-entera);
@@ -192,8 +203,6 @@ double Image::yRotatePixel(double radians, int x, int y)
 	//		else 
 	//			ret=entera-1;
 	//}
-	return real;
-	
 }
 const SDL_PixelFormat* Image::getFormat() const{
 	return this->image->format;
@@ -271,6 +280,11 @@ void Image::copy(const Image& other)
 
 void Image::rotate(int degrees, Uint32 alpha)
 {
+	if (degrees == 0)
+	{
+		return;
+	}
+	
 	int originalHeight = this->getHeight();
 	int originalWidth = this->getWidth();
 
@@ -297,23 +311,58 @@ void Image::rotate(int degrees, Uint32 alpha)
 			originalX += originalCenterX;
 			originalY += originalCenterY;
 
-			if(!validLimits(originalX, originalY))
+			if(!this->validLimits(originalX, originalY))
 			{
 				temp.putPixel(alpha, i, j);
 				continue;
 			}
 
+			Uint32 izq, der, inf, sup;
+			if (this->validLimits(originalX - 1, originalY))
+			{
+				izq = this->getPixel(originalX-1, originalY);
+			}
+			else
+			{
+				izq = this->getPixel(originalX, originalY);;
+			}
+
+			if (this->validLimits(originalX + 1, originalY))
+			{
+				der = this->getPixel(originalX+1, originalY);
+			}
+			else
+			{
+				der = this->getPixel(originalX, originalY);;
+			}	
+			
+			if (this->validLimits(originalX, originalY - 1))
+			{
+				sup = this->getPixel(originalX, originalY - 1);
+			}
+			else
+			{
+				sup = this->getPixel(originalX, originalY);;
+			}
+
+			if (this->validLimits(originalX, originalY + 1))
+			{
+				inf = this->getPixel(originalX, originalY + 1);
+			}
+			else
+			{
+				inf = this->getPixel(originalX, originalY);;
+			}
+
 			//// obtengo el pixel interpolado
-			Uint32 interpolatedPixel = this->getInterpolatedPixel( this->getPixel(originalX, originalY-2), originalX, originalY-2, 
-																this->getPixel(originalX+2, originalY), originalX+2, originalY, 
-																this->getPixel(originalX-2, originalY), originalX-2, originalY, 
-																this->getPixel(originalX, originalY+2), originalX, originalY+2, 
-																originalX, originalY, this->getFormat());
+			Uint32 interpolatedPixel = this->getInterpolatedPixel
+				(sup, originalX, originalY-1, 
+				der, originalX+1, originalY, 
+				inf, originalX, originalY+1, 
+				izq, originalX-1, originalY, 
+				originalX, originalY, this->getFormat());
 
 			temp.putPixel(interpolatedPixel, i, j);
-			
-			/*Uint32 pixelImg = this->getPixel(originalX, originalY);
-			temp.putPixel(pixelImg, i, j);*/
 		}
 	}
 
@@ -326,12 +375,12 @@ void Image::rotate(int degrees, Uint32 alpha)
 
 bool Image::validLimits(int x, int y)
 {
-	if (x < 0 || x > this->width)
+	if (x < 0 || x >= this->width)
 	{
 		return false;
 	}
 
-	if (y < 0 || y > this->height)
+	if (y < 0 || y >= this->height)
 	{
 		return false;
 	}
@@ -412,6 +461,27 @@ void Image::resize(int newWidth, int newHeight)
 	free(temp);
 }
 
+//Uint32 Image::getInterpolatedPixelForRotation(double x, double y)
+//{
+//	long xMayor = ceil(x);
+//	long xMenor = floor(x);
+//	long yMenor = floor(y);
+//	long yMayor = ceil(y);
+//
+//	Uint32 izqArriba = this->getPixel(xMenor, yMenor);
+//	Uint32 der = this->getPixel(xMayor, yMenor);
+//	Uint32 arriba = this->getPixel(xMenor, yMenor);
+//	Uint32 abajo = this->getPixel(xMenor, yMenor);
+//}
+/*izqarriba derarriba
+		centro 
+izqabajo derabajo*/
+// x = 15,6 y = 31,1 
+//(15, 31) -> peso = (0,4 + 0,9) / 4 = 1,3 / 4 = 0,325
+//(15, 32) -> peso = (0,4 + 0,1) / 4 = 0,5 / 4 = 0,125
+//(16, 31) -> peso = (0,6 + 0,9) / 4 = 1,5 / 4 = 0,375
+//(16, 32) -> peso = (0,6 + 0,1) / 4 = 0,7 / 4 = 0,175
+
 Uint32 Image::getInterpolatedPixel(Uint32 pixelSI, double xSI, double ySI, Uint32 pixelSD, double xSD, double ySD, Uint32 pixelII, double xII, double yII, Uint32 pixelID, double xID, double yID, double xNow, double yNow, const SDL_PixelFormat* newFormat){
 	
 	// coordenadas RGB
@@ -437,7 +507,7 @@ Uint32 Image::getInterpolatedPixel(Uint32 pixelSI, double xSI, double ySI, Uint3
 	double	bYAfter1 = ( ((yII-yNow)/(yII-ySI))*bSI + ((yNow-ySI)/(yII-ySI))*bII );
 	double	bYAfter2 = ( ((yII-yNow)/(yII-ySI))*bSD + ((yNow-ySI)/(yII-ySI))*bID );
 
-	// interpolacion en x
+	// interpolac5ion en x
 	rAfter = (((xSD-xNow)/(xSD-xSI))*rYAfter1) + (((xNow-xSI)/(xSD-xSI))*rYAfter2);
 	gAfter = ((xSD-xNow)/(xSD-xSI))*gYAfter1 + ((xNow-xSI)/(xSD-xSI))*gYAfter2;
 	bAfter = ((xSD-xNow)/(xSD-xSI))*bYAfter1 + ((xNow-xSI)/(xSD-xSI))*bYAfter2;
