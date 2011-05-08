@@ -5,10 +5,11 @@
 #include "Image.h"
 #include <string>
 #include "Logger.h"
+#include <map>
 
 using namespace std;
 
-Grapher::Grapher() : windowHeight(480), windowWidth(640)
+Grapher::Grapher() : windowHeight(480), windowWidth(640), imageCache()
 {
 	//default 640x480
 }
@@ -77,12 +78,26 @@ void Grapher::draw(Escenario& escenario)
 			if( posIzq > 0) 
 				celIzq = grilla.getCelda(i, posIzq);
 
-			Image imagen = celda->obtenerRepresentacion(celSup, celInf, celDer, celIzq);
-				
+			Textura t = celda->obtenerTextura();
+			string nombreTextura = t.getNombre();
+			Image imagen;
+			if (this->imageCache.find(nombreTextura) == this->imageCache.end())
+			{
+				//not in cache
+				imagen = celda->obtenerRepresentacion(celSup, celInf, celDer, celIzq);
+				imagen.resize(imageWidth, imageHeight);
+				if (nombreTextura != "")
+				{
+					this->imageCache[nombreTextura] = imagen;
+				}
+			}
+			else
+			{
+				imagen = this->imageCache[nombreTextura];
+			}
+			
 			if (!imagen.hasError())
 			{
-				imagen.resize(imageWidth, imageHeight);
-				Textura t = celda->obtenerTextura();
 				w.display(imagen, imageWidth * j, imageHeight * i, t.getRed(), t.getGreen(), t.getBlue(), t.getDelta());
 			}
 			else

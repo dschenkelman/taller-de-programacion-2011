@@ -18,6 +18,7 @@ class Image
 	Uint32 getInterpolatedPixel(Uint32 pixelSI, double xSI, double ySI, Uint32 pixelSD, double xSD, double ySD, Uint32 pixelII, double xII, double yII, Uint32 pixelID, double xID, double yID, double xNow, double yNow, const SDL_PixelFormat* newFormat);
 public:
 	Image(std::string path);
+	Image(void);
 	Image(int width, int height); // Empty image constructor
 	Image(const Image& other);
 	Image& operator=(const Image& other);

@@ -10,6 +10,12 @@
 
 using namespace std;
 
+Image::Image(void) : width(0), height(0), error(false), errorMessage(""), image(NULL)
+{
+	/*this->image = SDL_CreateRGBSurface(SDL_HWSURFACE,width,height,24,0,0,0,0);*/
+}
+
+
 Image::Image(string path): height(0), width(0), error(false), errorMessage(""), image(NULL)
 {
 	this->image = SDL_LoadBMP(path.c_str());
