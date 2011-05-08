@@ -296,8 +296,8 @@ void Image::rotate(int degrees, Uint32 alpha)
 
 	int rotatedHeight = this->getRotatedHeight(radians);
 	int rotatedWidth = this->getRotatedWidth(radians);
-	int rotatedCenterX = rotatedWidth / 2;
-	int rotatedCenterY = rotatedHeight / 2;
+	int rotatedCenterX = (rotatedWidth - 1) / 2.0;
+	int rotatedCenterY = (rotatedHeight - 1) / 2.0;
 
 	Image temp(rotatedWidth, rotatedHeight);
 
@@ -313,19 +313,31 @@ void Image::rotate(int degrees, Uint32 alpha)
 
 			if(!this->validLimits(originalX, originalY))
 			{
-				temp.putPixel(alpha, i, j);
+				if ((int)originalX == originalX && (int)originalY == originalY)
+				{
+					if(originalX == this->width)
+					{
+						originalX--;
+					}
+
+					if(originalY == this->height)
+					{
+						originalY--;
+					}
+
+					temp.putPixel(this->getPixel(originalX, originalY), i, j);
+					continue;
+				}
+				else
+				{
+					temp.putPixel(alpha, i, j);
+				}
 				continue;
 			}
 
 			Uint32 izq, der, inf, sup;
-			if (this->validLimits(originalX - 1, originalY))
-			{
-				izq = this->getPixel(originalX-1, originalY);
-			}
-			else
-			{
-				izq = this->getPixel(originalX, originalY);;
-			}
+			izq = this->getPixel(originalX, originalY);
+			sup = this->getPixel(originalX, originalY);
 
 			if (this->validLimits(originalX + 1, originalY))
 			{
@@ -334,16 +346,7 @@ void Image::rotate(int degrees, Uint32 alpha)
 			else
 			{
 				der = this->getPixel(originalX, originalY);;
-			}	
-			
-			if (this->validLimits(originalX, originalY - 1))
-			{
-				sup = this->getPixel(originalX, originalY - 1);
-			}
-			else
-			{
-				sup = this->getPixel(originalX, originalY);;
-			}
+			}					
 
 			if (this->validLimits(originalX, originalY + 1))
 			{
@@ -354,12 +357,12 @@ void Image::rotate(int degrees, Uint32 alpha)
 				inf = this->getPixel(originalX, originalY);;
 			}
 
-			//// obtengo el pixel interpolado
+			// obtengo el pixel interpolado
 			Uint32 interpolatedPixel = this->getInterpolatedPixel
-				(sup, originalX, originalY-1, 
+				(sup, originalX, originalY, 
 				der, originalX+1, originalY, 
 				inf, originalX, originalY+1, 
-				izq, originalX-1, originalY, 
+				izq, originalX, originalY, 
 				originalX, originalY, this->getFormat());
 
 			temp.putPixel(interpolatedPixel, i, j);
@@ -370,7 +373,7 @@ void Image::rotate(int degrees, Uint32 alpha)
 	//int originalWidth = this->getWidth();
 
 	this->copy(temp);
-	this->resize(originalWidth, originalHeight);
+	/*this->resize(originalWidth, originalHeight);*/
 }
 
 bool Image::validLimits(int x, int y)
