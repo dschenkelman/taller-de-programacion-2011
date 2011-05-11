@@ -1,0 +1,25 @@
+<ESCENARIO nombre="Escenario numero 1" texturaFondo="Fondo">
+  <GRILLA ancho="10" 
+		  alto="20" 
+		  tipoObstaculoPorDefecto="ladrillo">
+    <CAMINO fila="2" columna="2"></CAMINO>
+	<CAMINO fila="2" columna="3"></CAMINO>
+	<CAMINO fila="2" columna="4"></CAMINO>
+	<CAMINO fila="2" columna="5"></CAMINO>
+	<CAMINO fila="2" columna="6"></CAMINO>
+  </GRILLA>
+  <TIPOSOBSTACULOS>
+    <TIPOOBSTACULO nombre="OBS1" textura="yunque"/>
+	<TIPOOBSTACULO nombre="ladrillo" textura="ladrillo"/>
+  </TIPOSOBSTACULOS>
+  <TIPOSBONUS>
+    <TIPOBONUS nombre="uva" textura="uva"/>
+  </TIPOSBONUS>
+  <TEXTURAS>
+	<TEXTURA nombre="Fondo" path="Images\texturaFondos.bmp"/>
+	<TEXTURA nombre="yunque" path="Images\yunque.bmp"/>
+	<TEXTURA nombre="ladrillo" path="Images/ladrillo.bmp"/>
+	<TEXTURA nombre="uva" path="Images/uva.bmp" rot="45" alpha="#FFFFFF"/>
+	<TEXTURA nombre="anana" path="Images\anana.bmp"/>
+  </TEXTURAS>
+  </ESCENARIO>
