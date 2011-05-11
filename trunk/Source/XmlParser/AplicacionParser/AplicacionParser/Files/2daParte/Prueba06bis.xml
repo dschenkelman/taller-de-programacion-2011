@@ -4,9 +4,10 @@
 		  tipoObstaculoPorDefecto="ladrillo">
     <CAMINO fila="2" columna="2"></CAMINO>
 	<CAMINO fila="2" columna="3"></CAMINO>
-	<CAMINO fila="2" columna="4"></CAMINO>
+	<CAMINO fila="2" columna="4">
+		<BONUS tipo="uva"/>
+	</CAMINO>
 	<CAMINO fila="2" columna="5"></CAMINO>
-	<CAMINO fila="2" columna="6"></CAMINO>
 	<OBSTACULO fila="2" columna="6" tipo="OBS1"/>
   </GRILLA>
   <TIPOSOBSTACULOS>
@@ -18,9 +19,9 @@
   </TIPOSBONUS>
   <TEXTURAS>
 	<TEXTURA nombre="Fondo" path="Images\texturaFondo.bmp"/>
-	<TEXTURA nombre="yunque" path="Images\yunquenoexiste.bmp"/>
+	<TEXTURA nombre="yunque" path="Images\yunque.bmp"/>
 	<TEXTURA nombre="ladrillo" path="Images/ladrillo.bmp"/>
-	<TEXTURA nombre="uva" path="Images/uva.bmp" rot="45" alpha="#FFFFFF"/>
+	<TEXTURA nombre="uva" path="Images/uvaNoExiste.bmp" rot="45" alpha="#FFFFFF"/>
 	<TEXTURA nombre="anana" path="Images\anana.bmp"/>
   </TEXTURAS>
   </ESCENARIO>
