@@ -5,6 +5,7 @@
 #include <limits>
 #include <math.h>
 #include <algorithm>
+#include <fstream>
 #include "PixelHelpers.h"
 #define PI 3.141592653589793238462643383279
 
@@ -19,7 +20,8 @@ Image::Image(void) : width(0), height(0), error(false), errorMessage(""), image(
 Image::Image(string path): height(0), width(0), error(false), errorMessage(""), image(NULL)
 {
 	this->image = SDL_LoadBMP(path.c_str());
-	if (this->image == NULL) 
+
+	if (this->image == NULL ) 
 	{
 		this->error = true;
 		stringstream msg;
@@ -53,9 +55,6 @@ Image& Image::operator =(const Image& other)
 
 	this->height = other.getHeight();
 	this->width = other.getWidth();
-	this->error = other.hasError();
-	this->errorMessage = other.getErrorMessage();
-
 	this->copy(other);
 
 	return *this;
@@ -264,6 +263,8 @@ void Image::copy(const Image& other)
 
 	this->height = other.getHeight();
 	this->width = other.getWidth();
+	this->error=other.hasError();
+	this->errorMessage=other.getErrorMessage();
 
 	if (this->image != NULL)
 	{
@@ -556,9 +557,13 @@ void Image::superImpose(Image& imageToImpose, int alphaRed, int alphaGreen, int 
 	//Si se da el caso de que la nueva es mas grande que la actual, hago un resize de la nueva y se la 
 	//asigno pixel a pixel a la vieja.
 
-	if (this->hasError())
+	if (this->hasError() || imageToImpose.hasError()){
+		if ( imageToImpose.hasError()){
+			this->error=(this->error || imageToImpose.hasError());
+			this->errorMessage= "No se pudo abrir la imagen del bonus: "+imageToImpose.getErrorMessage();
+		}
 		return;
-
+	}
 	int anchoImagen,altoImagen,altoPantalla,anchoPantalla,inicioAnchoPantalla,inicioAltoPantalla;
 	
 	anchoImagen=altoImagen=altoPantalla=anchoPantalla=0;

@@ -14,7 +14,7 @@
 	<TEXTURA nombre="Fondo" path="Images\texturaFondo.bmp"/>
 	<TEXTURA nombre="yunque" path="Images\yunque.bmp"/>
 	<TEXTURA nombre="ladrillo" path="Images/ladrillo.bmp"/>
-	<TEXTURA nombre="uva" path="Images/uva.bmp" rot="45" alpha="#FFFFFF"/>
+	<TEXTURA nombre="uva" path="Images/uvaNoExiste.bmp" rot="45" alpha="#FFFFFF"/>
 	<TEXTURA nombre="anana" path="Images\anana.bmp"/>
   </TEXTURAS>
   </ESCENARIO>
