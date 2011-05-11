@@ -192,6 +192,8 @@ bool Image::hasError(void) const
 
 void Image::crop(int top, int left, int right, int bottom)
 {
+	stringstream out;
+
 	if (this->hasError())
 		return;
 	if(right == numeric_limits<int>::max())
@@ -204,11 +206,28 @@ void Image::crop(int top, int left, int right, int bottom)
 		bottom = this->image->h;
 	}
 
+//Para que no se pasa de los límites de la imagen
+	if (left < 0 )
+		left=0;
+	if (top < 0)
+		top=0;
+	if (right > this->image->w)
+		right=this->image->w;
+	if (bottom > this->image->h)
+		bottom= this->image->h;
+
+	//Acá esta mal los parametros
+	if ((left > right) || (right < left) || (top > bottom) || (bottom < top) )
+	{
+		this->error=true;
+		this->errorMessage="Coordenadas inválidas para relizar el recorte" ;
+	}
+
 
 	int newWidth = right - left;
 	int newHeight = bottom - top;
 
-
+	
 	if (newWidth != this->getWidth() || newHeight != this->getHeight())
 	{
 		//needs to be resized
