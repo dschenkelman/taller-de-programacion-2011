@@ -6,6 +6,7 @@
 #include <string>
 #include "Logger.h"
 #include <map>
+#include <iostream>
 
 using namespace std;
 
@@ -112,26 +113,29 @@ void Grapher::draw(Escenario& escenario)
 	if (!error)
 	{
 		w.refresh();
-	}
-	
-	//esperar para cerrar
-	SDL_Event e;
-	bool running = true;
- 
-	while(running) 
-	{
-		while(SDL_PollEvent(&e)) 
+		//esperar para cerrar
+		SDL_Event e;
+		bool running = true;
+	 
+		while(running) 
 		{
-			switch(e.type)
+			while(SDL_PollEvent(&e)) 
 			{
-				case SDL_QUIT:
-					running = false;
-					w.close();
-					break;
+				switch(e.type)
+				{
+					case SDL_QUIT:
+						running = false;
+						w.close();
+						break;
+				}
 			}
 		}
 	}
-
+	else
+	{
+		cout << "Error al graficar. Ver el archivo parser.log.txt";
+		w.close();
+	}
 }
 
 void  Grapher::setVideoMode(int mode){
