@@ -6,6 +6,8 @@
 #include <math.h>
 #include <algorithm>
 #include <fstream>
+#include <iostream>
+
 #include "PixelHelpers.h"
 #define PI 3.141592653589793238462643383279
 
@@ -394,6 +396,87 @@ void Image::rotate(int degrees, Uint32 alpha)
 	/*this->resize(originalWidth, originalHeight);*/
 }
 
+
+//void Image::resize(int newWidth, int newHeight)
+//{
+//	if (this->hasError())
+//		return;
+//
+//	int widthSrc	= this->getWidth();
+//	int heightSrc	= this->getHeight();
+//	
+//	// Empty new image
+//	SDL_Surface* temp = SDL_CreateRGBSurface(SDL_HWSURFACE,newWidth,newHeight,24,0,0,0,0);
+//	
+//	// posiciones en la nueva imagen
+//	int posXDst = 0;
+//	int posYDst = 0;
+//
+//	// iteracion filas
+//	for(int posYSrc = 0; posYSrc < heightSrc ; posYSrc++){
+//		
+//		// iteracion columnas
+//		for(int posXSrc = 0; posXSrc < widthSrc; posXSrc++){
+//			
+//			// obtengo las posiciones remappeadas en las nuevas dimensiones
+//			posXDst = (posXSrc * newWidth) / widthSrc;
+//			posYDst = (posYSrc * newHeight) / heightSrc;
+//
+//			// Obtengo el pixel de la imagen
+//			Uint32 pixelImg = this->getPixel(posXSrc, posYSrc);
+//
+//			// interpolacion
+//			//if( posXSrc > 0 && posYSrc > 0 ){
+//			if( posXSrc > 0 && posYSrc > 0 ){
+//				
+//				int fromY = (((posYSrc-1) * newHeight) / heightSrc);
+//				int fromX = (((posXSrc-1) * newWidth) / widthSrc);
+//				
+//				// interpolacion interna
+//				for (int y = fromY; y <= posYDst; y++){
+//					for (int x = fromX; x <= posXDst; x++){
+//						
+//						// pixel y posicion superior izquierdo
+//						Uint32 pixelSI = this->getPixel(posXSrc-1, posYSrc-1);
+//						int xSI = ((posXSrc-1) * newWidth) / widthSrc;
+//						int ySI = ((posYSrc-1) * newHeight) / heightSrc;
+//						// pixel y posicion superior derecho
+//						Uint32 pixelSD = this->getPixel(posXSrc, posYSrc-1);
+//						int xSD = (posXSrc * newWidth) / widthSrc;
+//						int ySD = ((posYSrc-1) * newHeight) / heightSrc;
+//						// pixel y posicion inferior izquierdo
+//						Uint32 pixelII = this->getPixel(posXSrc-1, posYSrc);
+//						int xII = ((posXSrc-1) * newWidth) / widthSrc;
+//						int yII = (posYSrc * newHeight) / heightSrc;
+//
+//						// obtengo el pixel interpolado
+//						Uint32 interpolatedPixel = this->getInterpolatedPixel( pixelSI, xSI, ySI, 
+//																			pixelSD, xSD, ySD, 
+//																			pixelII, xII, yII, 
+//																			pixelImg, posXDst, posYDst, 
+//																			x, y, this->getFormat());
+//						
+//						// coloco el pixel en la imagen destino
+//						Image::putPixel(temp, interpolatedPixel, x, y);
+//						/*temp.putPixel( interpolatedPixel, x, y );*/
+//					}
+//				}
+//			}
+//
+//			// Pongo el pixel en las nuevas coordenadas
+//			Image::putPixel(temp, pixelImg, posXDst, posYDst);		
+//			/*temp.putPixel( pixelImg, posXDst, posYDst);*/
+//		}
+//	}
+//	
+//	SDL_FreeSurface(this->image);
+//	this->image = temp;
+//	this->width = newWidth;
+//	this->height = newHeight;
+//}
+
+
+
 void Image::resize(int newWidth, int newHeight)
 {
 	if (this->hasError())
@@ -409,6 +492,19 @@ void Image::resize(int newWidth, int newHeight)
 	int posXDst = 0;
 	int posYDst = 0;
 
+	for (int i=0; i < newHeight; i++)
+	{
+		Uint32 pixelimg = -1;//this->getpixel(newwidth-1, i);
+		Image::putPixel(temp, pixelimg, 0, i);
+	}
+	
+	for (int i=0; i < newWidth; i++)
+	{
+		Uint32 pixelimg = -1;// this->getpixel(i, newheight-1 );
+		Image::putPixel(temp, pixelimg, i, 0);
+	}
+
+
 	// iteracion filas
 	for(int posYSrc = 0; posYSrc < heightSrc ; posYSrc++){
 		
@@ -416,8 +512,8 @@ void Image::resize(int newWidth, int newHeight)
 		for(int posXSrc = 0; posXSrc < widthSrc; posXSrc++){
 			
 			// obtengo las posiciones remappeadas en las nuevas dimensiones
-			posXDst = (posXSrc * newWidth) / widthSrc;
-			posYDst = (posYSrc * newHeight) / heightSrc;
+			posXDst = (posXSrc * newWidth) / (widthSrc - 1 ); //Debe ser una menos asi la division es correcta
+			posYDst = (posYSrc * newHeight) / (heightSrc - 1);
 
 			// Obtengo el pixel de la imagen
 			Uint32 pixelImg = this->getPixel(posXSrc, posYSrc);
@@ -426,25 +522,25 @@ void Image::resize(int newWidth, int newHeight)
 			//if( posXSrc > 0 && posYSrc > 0 ){
 			if( posXSrc > 0 && posYSrc > 0 ){
 				
-				int fromY = (((posYSrc-1) * newHeight) / heightSrc);
-				int fromX = (((posXSrc-1) * newWidth) / widthSrc);
+				int fromY = (((posYSrc-1) * newHeight) / (heightSrc-1));
+				int fromX = (((posXSrc-1) * newWidth) / (widthSrc-1));
 				
 				// interpolacion interna
-				for (int y = fromY; y <= posYDst; y++){
-					for (int x = fromX; x <= posXDst; x++){
+				for (int y = fromY; y < posYDst; y++){
+					for (int x = fromX; x < posXDst; x++){
 						
 						// pixel y posicion superior izquierdo
 						Uint32 pixelSI = this->getPixel(posXSrc-1, posYSrc-1);
-						int xSI = ((posXSrc-1) * newWidth) / widthSrc;
-						int ySI = ((posYSrc-1) * newHeight) / heightSrc;
+						int xSI = ((posXSrc-1) * newWidth) / (widthSrc-1);
+						int ySI = ((posYSrc-1) * newHeight) / (heightSrc-1);
 						// pixel y posicion superior derecho
 						Uint32 pixelSD = this->getPixel(posXSrc, posYSrc-1);
-						int xSD = (posXSrc * newWidth) / widthSrc;
-						int ySD = ((posYSrc-1) * newHeight) / heightSrc;
+						int xSD = (posXSrc * newWidth) / (widthSrc-1);
+						int ySD = ((posYSrc-1) * newHeight) / (heightSrc-1);
 						// pixel y posicion inferior izquierdo
 						Uint32 pixelII = this->getPixel(posXSrc-1, posYSrc);
-						int xII = ((posXSrc-1) * newWidth) / widthSrc;
-						int yII = (posYSrc * newHeight) / heightSrc;
+						int xII = ((posXSrc-1) * newWidth) / (widthSrc-1);
+						int yII = (posYSrc * newHeight) / (heightSrc -1);
 
 						// obtengo el pixel interpolado
 						Uint32 interpolatedPixel = this->getInterpolatedPixel( pixelSI, xSI, ySI, 
@@ -461,10 +557,26 @@ void Image::resize(int newWidth, int newHeight)
 			}
 
 			// Pongo el pixel en las nuevas coordenadas
-			Image::putPixel(temp, pixelImg, posXDst, posYDst);		
-			/*temp.putPixel( pixelImg, posXDst, posYDst);*/
+			/*for (int i=0; i < newWidth; i++)
+			{
+				if (posYDst == newHeight || posYDst == newHeight/2)
+					posYDst--;
+
+				Image::putPixel(temp, pixelImg, i, posYDst);		
+			}
+			*/
+			if (posYDst == newHeight)
+				posYDst--;
+
+			if (posXDst == newWidth)
+				posXDst--;
+
+			//cout<<"La PosXdestino: "<< posXDst <<" posicion y dest: "<<posYDst<<"\n";
+			Image::putPixel(temp, pixelImg, posXDst, posYDst);
 		}
+
 	}
+
 	
 	SDL_FreeSurface(this->image);
 	this->image = temp;

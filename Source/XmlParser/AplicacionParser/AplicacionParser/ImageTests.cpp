@@ -29,11 +29,11 @@ void ImageTests::printResult(std::string testName, bool result)
 
 void ImageTests::run()
 {
-	printResult("testResizeToSmaller", testResizeToSmaller());
+	//printResult("testResizeToSmaller", testResizeToSmaller());
 	printResult("testResizeToBigger", testResizeToBigger());
-	printResult("testSuperImposeSmallInsideBig", testSuperImposeSmallInsideBig());
+	/*printResult("testSuperImposeSmallInsideBig", testSuperImposeSmallInsideBig());
 	printResult("testSuperImposeBigInsideSmall", testSuperImposeBigInsideSmall());
-	
+	*/
 	
 	//dump memory leaks to VS Output Window
 	int leaks = _CrtDumpMemoryLeaks();
@@ -136,14 +136,14 @@ bool ImageTests::testResizeToBigger(void)
 
 	SDL_Surface *screen;
 	 
-	screen = SDL_SetVideoMode(640, 480, 24, SDL_DOUBLEBUF);
+	screen = SDL_SetVideoMode(1024, 768, 24, SDL_DOUBLEBUF);
 	if (screen == NULL) {
 		printf("Unable to set video mode: %s\n", SDL_GetError());
 		return 1;
 	}
 	
 	// nueva imagen
-	Image* imgSmile = new Image("Images/texturas/-.bmp");
+	Image* imgSmile = new Image("Images/texturas/l3.bmp");
 
 	SDL_Rect src, dest;
 	src.x = 0;
@@ -157,15 +157,14 @@ bool ImageTests::testResizeToBigger(void)
 	SDL_BlitSurface(imgSmile->getSDLSurface(), &src, screen, &dest);
 	SDL_Flip(screen);
 	
-	// Achico la imagen
-	imgSmile->resize(100, 50);
+	imgSmile->resize(600, 480);
 	
 	// Pego la imagen en la pantalla
 	src.x = 0;
 	src.y = 0;
 	src.w = imgSmile->getWidth();
 	src.h = imgSmile->getHeight();
-	dest.x = 300;
+	dest.x = 200;
 	dest.y = 20;
 	dest.w = imgSmile->getWidth();
 	dest.h = imgSmile->getHeight();
