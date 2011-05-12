@@ -36,7 +36,7 @@ void Window::close(void)
 	SDL_Quit();
 }
 
-void Window::display(Image& image, int x, int y, int red, int blue, int green, int delta)
+void Window::display(Image& image, int x, int y, int red, int green, int blue, int delta)
 {
 	for (int i = 0; i < image.getWidth(); i++)
 	{
