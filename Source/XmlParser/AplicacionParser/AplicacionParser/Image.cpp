@@ -492,17 +492,17 @@ void Image::resize(int newWidth, int newHeight)
 	int posXDst = 0;
 	int posYDst = 0;
 
-	for (int i=0; i < newHeight; i++)
-	{
-		Uint32 pixelimg = -1;//this->getpixel(newwidth-1, i);
-		Image::putPixel(temp, pixelimg, 0, i);
-	}
-	
-	for (int i=0; i < newWidth; i++)
-	{
-		Uint32 pixelimg = -1;// this->getpixel(i, newheight-1 );
-		Image::putPixel(temp, pixelimg, i, 0);
-	}
+	//for (int i=0; i < newHeight; i++)
+	//{
+	//	Uint32 pixelimg = -1;//this->getpixel(newwidth-1, i);
+	//	Image::putPixel(temp, pixelimg, 0, i);
+	//}
+	//
+	//for (int i=0; i < newWidth; i++)
+	//{
+	//	Uint32 pixelimg = -1;// this->getpixel(i, newheight-1 );
+	//	Image::putPixel(temp, pixelimg, i, 0);
+	//}
 
 
 	// iteracion filas
