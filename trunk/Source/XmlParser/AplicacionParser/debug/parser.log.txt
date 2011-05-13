@@ -1,0 +1,65 @@
+11/05/11 01:47:43  Warning: El tipo bonus uva no está siendo utilizado. Linea: 32
+11/05/11 01:47:43  Warning: El tipo bonus anana no está siendo utilizado. Linea: 33
+11/05/11 01:47:43  Warning: El tipo obstaculo OBS1 no está siendo utilizado. Linea: 26
+11/05/11 01:47:43  Warning: El tipo obstaculo gandalf no está siendo utilizado. Linea: 28
+11/05/11 19:44:42  Warning: La textura asignada al tipo de bonus no existe. El tipo de bonus no será considerado. Linea: 65
+11/05/11 19:44:42  Warning: El tipo bonus uva no está siendo utilizado. Linea: 69
+11/05/11 19:45:56  Warning: La textura asignada al tipo de bonus no existe. El tipo de bonus no será considerado. Linea: 36
+11/05/11 19:45:56  Warning: El tipo bonus uva no está siendo utilizado. Linea: 40
+11/05/11 19:50:12  Warning: La textura asignada al tipo de bonus no existe. El tipo de bonus no será considerado. Linea: 65
+11/05/11 19:50:12  Warning: El tipo bonus uva no está siendo utilizado. Linea: 69
+11/05/11 19:50:12  Warning: La textura uva no está siendo utilizada. Linea: 75
+11/05/11 19:51:12  Warning: El tipo bonus uva no está siendo utilizado. Linea: 69
+11/05/11 19:51:12  Warning: El tipo obstaculo OBS1 no está siendo utilizado. Linea: 65
+11/05/11 19:51:52  Warning: El tipo bonus uva no está siendo utilizado. Linea: 69
+11/05/11 19:51:52  Warning: El tipo obstaculo OBS1 no está siendo utilizado. Linea: 65
+11/05/11 19:52:54  Warning: No existe lista de tipo bonus 
+11/05/11 19:53:12  Warning: No existe lista de tipo bonus 
+11/05/11 19:53:47  Warning: No existe lista de tipo bonus 
+11/05/11 20:01:47  Warning: No existe lista de tipo bonus 
+11/05/11 20:05:56  Warning: No existe lista de tipo bonus 
+11/05/11 20:07:18  Warning: No existe lista de tipo bonus 
+11/05/11 20:08:12  Warning: No existe lista de tipo bonus 
+11/05/11 20:33:31  Warning: No existe lista de tipo bonus 
+11/05/11 20:33:31  Error: Error al abrir la imagen: Couldn't open Images\fondo_rgb2.bmp
+11/05/11 20:34:08  Warning: No existe lista de tipo bonus 
+11/05/11 20:46:27  Warning: No existe lista de tipo bonus 
+11/05/11 20:50:32  Warning: No existe lista de tipo bonus 
+11/05/11 20:52:36  Warning: No existe lista de tipo bonus 
+11/05/11 20:53:29  Warning: No existe lista de tipo bonus 
+11/05/11 20:54:21  Warning: No existe lista de tipo bonus 
+11/05/11 20:55:09  Error: El valor del atributo rotación es inválido. Debe ser un entero entre 0 y 359. Por defecto, se usará 0. Linea: 72
+11/05/11 20:55:09  Warning: No existe lista de tipo bonus 
+11/05/11 20:56:06  Error: El valor del atributo rotación es inválido. Debe ser un entero entre 0 y 359. Por defecto, se usará 0. Linea: 72
+11/05/11 20:56:06  Warning: No existe lista de tipo bonus 
+11/05/11 20:58:00  Error: El valor del atributo rotación es inválido. Debe ser un entero entre 0 y 359. Por defecto, se usará 0. Linea: 72
+11/05/11 20:58:00  Warning: No existe lista de tipo bonus 
+11/05/11 20:58:23  Error: El valor del atributo rotación es inválido. Debe ser un entero entre 0 y 359. Por defecto, se usará 0. Linea: 72
+11/05/11 20:58:23  Warning: No existe lista de tipo bonus 
+11/05/11 20:59:24  Error: El valor del atributo rotación es inválido. Debe ser un entero entre 0 y 359. Por defecto, se usará 0. Linea: 72
+11/05/11 20:59:24  Warning: No existe lista de tipo bonus 
+11/05/11 20:59:24  Warning: La textura Fondo no está siendo utilizada. Linea: 70
+11/05/11 21:00:11  Error: El valor del atributo rotación es inválido. Debe ser un entero entre 0 y 359. Por defecto, se usará 0. Linea: 72
+11/05/11 21:00:11  Warning: No existe lista de tipo bonus 
+11/05/11 21:00:11  Warning: La textura Fondo no está siendo utilizada. Linea: 70
+11/05/11 21:00:43  Warning: No existe lista de tipo bonus 
+11/05/11 21:00:43  Warning: La textura Fondo no está siendo utilizada. Linea: 70
+11/05/11 21:01:35  Warning: No existe lista de tipo bonus 
+11/05/11 21:01:35  Warning: La textura Fondo no está siendo utilizada. Linea: 70
+11/05/11 21:02:10  Warning: No existe lista de tipo bonus 
+11/05/11 21:02:10  Warning: La textura Fondo no está siendo utilizada. Linea: 70
+11/05/11 21:03:27  Warning: No existe lista de tipo bonus 
+11/05/11 21:03:27  Warning: La textura Fondo no está siendo utilizada. Linea: 70
+11/05/11 21:03:28  Error: Coordenadas inválidas para relizar el recorte
+11/05/11 21:03:44  Warning: No existe lista de tipo bonus 
+11/05/11 21:03:45  Warning: La textura Fondo no está siendo utilizada. Linea: 70
+11/05/11 21:05:04  Warning: No existe lista de tipo bonus 
+11/05/11 21:05:04  Warning: La textura Fondo no está siendo utilizada. Linea: 70
+11/05/11 21:05:05  Error: Error al abrir la imagen: Couldn't open Images/fondo_rg.bmp
+11/05/11 21:05:05  Error: Error al abrir la imagen: Couldn't open Images/fondo_rg.bmp
+11/05/11 21:05:41  Warning: No existe lista de tipo bonus 
+11/05/11 21:05:41  Warning: La textura Fondo no está siendo utilizada. Linea: 70
+11/05/11 21:06:30  Warning: No existe lista de tipo bonus 
+11/05/11 21:06:30  Warning: La textura Fondo no está siendo utilizada. Linea: 70
+11/05/11 21:06:45  Warning: No existe lista de tipo bonus 
+11/05/11 21:06:45  Warning: La textura Fondo no está siendo utilizada. Linea: 70
