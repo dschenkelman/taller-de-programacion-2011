@@ -11,8 +11,8 @@ class Image
 	int height;
 	int width;
 	static void putPixel(SDL_Surface* surface, Uint32 pixel, int x, int y);
-	static double xRotatePixel(double radians, int x, int y);
-	static double yRotatePixel(double radians, int x, int y);
+	static double xRotatePixel(double radians, double x, double y);
+	static double yRotatePixel(double radians, double x, double y);
 	int getRotatedHeight(double radians);
 	int getRotatedWidth(double radians);
 	void resizeOnePixelImage();

@@ -1,0 +1,74 @@
+<ESCENARIO nombre="Escenario A" texturaFondo="cara">
+  <GRILLA ancho="10" 
+		  alto="10" 
+		  tipoObstaculoPorDefecto="ladrillo">
+    <CAMINO fila="2" columna="2"></CAMINO>
+	<CAMINO fila="0" columna="1"></CAMINO>
+	<CAMINO fila="0" columna="2"></CAMINO>
+	<CAMINO fila="0" columna="3"></CAMINO>
+	<OBSTACULO fila="0" columna="0" tipo="cara"/>
+	<CAMINO fila="0" columna="4"></CAMINO>
+	<CAMINO fila="0" columna="5"></CAMINO>
+	<CAMINO fila="0" columna="6"></CAMINO>
+	<CAMINO fila="0" columna="7"></CAMINO>
+	<CAMINO fila="0" columna="8"></CAMINO>
+	<CAMINO fila="0" columna="9"></CAMINO>
+	
+    <CAMINO fila="5" columna="0"></CAMINO>
+	<CAMINO fila="5" columna="1"></CAMINO>
+	<CAMINO fila="5" columna="2"></CAMINO>
+	<CAMINO fila="5" columna="3"></CAMINO>
+	<CAMINO fila="5" columna="4"></CAMINO>
+	<CAMINO fila="5" columna="5"></CAMINO>
+	<CAMINO fila="5" columna="6"></CAMINO>
+	<CAMINO fila="5" columna="7"></CAMINO>
+	<CAMINO fila="5" columna="8"></CAMINO>
+	<CAMINO fila="5" columna="9"></CAMINO>
+
+    <CAMINO fila="9" columna="0"></CAMINO>
+	<CAMINO fila="9" columna="1"></CAMINO>
+	<CAMINO fila="9" columna="2"></CAMINO>
+	<CAMINO fila="9" columna="3"></CAMINO>
+	<CAMINO fila="9" columna="4"></CAMINO>
+	<CAMINO fila="9" columna="5"></CAMINO>
+	<CAMINO fila="9" columna="6"></CAMINO>
+	<CAMINO fila="9" columna="7"></CAMINO>
+	<CAMINO fila="9" columna="8"></CAMINO>
+	<CAMINO fila="9" columna="9"></CAMINO>
+
+	<CAMINO fila="1" columna="0"></CAMINO>
+	<CAMINO fila="2" columna="0"></CAMINO>
+	<CAMINO fila="3" columna="0"></CAMINO>
+	<CAMINO fila="4" columna="0"></CAMINO>
+	<CAMINO fila="6" columna="0"></CAMINO>
+	<CAMINO fila="7" columna="0"></CAMINO>
+	<CAMINO fila="8" columna="0"></CAMINO>
+
+	<CAMINO fila="1" columna="4"></CAMINO>
+	<CAMINO fila="2" columna="4"></CAMINO>
+	<CAMINO fila="3" columna="4"></CAMINO>
+	<CAMINO fila="4" columna="4"></CAMINO>
+	<CAMINO fila="6" columna="4"></CAMINO>
+	<CAMINO fila="7" columna="4"></CAMINO>
+	<CAMINO fila="8" columna="4"></CAMINO>
+
+	<CAMINO fila="1" columna="9"></CAMINO>
+	<CAMINO fila="2" columna="9"></CAMINO>
+	<CAMINO fila="3" columna="9"></CAMINO>
+	<CAMINO fila="4" columna="9"></CAMINO>
+	<CAMINO fila="6" columna="9"></CAMINO>
+	<CAMINO fila="7" columna="9"></CAMINO>
+	<CAMINO fila="8" columna="9"></CAMINO>
+
+
+  </GRILLA>
+  <TIPOSOBSTACULOS>
+	<TIPOOBSTACULO nombre="ladrillo" textura="ladrillo"/>
+	<TIPOOBSTACULO nombre="cara" textura="cara"/>
+  </TIPOSOBSTACULOS>
+  <TEXTURAS>
+	<TEXTURA nombre="Fondo" path="Images\chuck.bmp"/>
+	<TEXTURA nombre="ladrillo" path="Images/ladrillo.bmp" alpha="#FFFFFF" delta="800" />
+	<TEXTURA nombre="cara" rot="45" path="Images/smile.bmp" alpha="#666666" delta="0" rot="0" />
+  </TEXTURAS>
+  </ESCENARIO>
