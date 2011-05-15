@@ -156,7 +156,7 @@ void Image::putPixel(SDL_Surface *surface, Uint32 pixel, int x, int y)
 
 
 
-double Image::xRotatePixel(double radians, int x, int y)
+double Image::xRotatePixel(double radians, double x, double y)
 {
 	double zero = 0.000000000001;
 	double c = cos(radians);
@@ -167,7 +167,7 @@ double Image::xRotatePixel(double radians, int x, int y)
 	return real;
 }
 
-double Image::yRotatePixel(double radians, int x, int y)
+double Image::yRotatePixel(double radians, double x, double y)
 {
 	double zero = 0.000000000001;
 	double c = cos(radians);
@@ -308,13 +308,13 @@ void Image::rotate(int degrees, Uint32 alpha)
 	//this->resize(originalWidth*(2), originalHeight*(2));
 	double radians = ((degrees / 180.0) * PI);
 
-	int originalCenterX = this->getWidth() / 2;
-	int originalCenterY = this->getHeight() / 2;
+	double originalCenterX = (this->getWidth() - 1)/ 2.0 ;
+	double originalCenterY = (this->getHeight() -1) / 2.0;
 
 	int rotatedHeight = this->getRotatedHeight(radians);
 	int rotatedWidth = this->getRotatedWidth(radians);
-	int rotatedCenterX = (rotatedWidth - 1) / 2.0;
-	int rotatedCenterY = (rotatedHeight - 1) / 2.0;
+	double rotatedCenterX = (rotatedWidth - 1) / 2.0;
+	double rotatedCenterY = (rotatedHeight - 1) / 2.0;
 
 	SDL_Surface* temp = SDL_CreateRGBSurface(SDL_HWSURFACE, rotatedWidth, rotatedHeight,24,0,0,0,0);
 	
