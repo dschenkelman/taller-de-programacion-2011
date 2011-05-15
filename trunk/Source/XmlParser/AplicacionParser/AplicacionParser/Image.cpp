@@ -411,6 +411,13 @@ void Image::resize(int newWidth, int newHeight)
 	int widthSrc	= this->getWidth();
 	int heightSrc	= this->getHeight();
 	
+	if (widthSrc == 1 || heightSrc == 1)
+	{
+		this->resizeOnePixelImage();
+		widthSrc = this->getWidth();
+		heightSrc = this->getHeight();
+	} 
+
 	// Empty new image
 	SDL_Surface* temp = SDL_CreateRGBSurface(SDL_HWSURFACE,newWidth,newHeight,24,0,0,0,0);
 	
@@ -624,4 +631,55 @@ void Image::superImpose(Image& imageToImpose, int alphaRed, int alphaGreen, int 
 	}
 
 	return;
+}
+
+void Image::resizeOnePixelImage()
+{
+	int currentWidth = this->getWidth();
+	int currentHeight = this->getHeight();
+
+	if (currentWidth == 1)
+	{
+		SDL_Surface* temp = SDL_CreateRGBSurface(SDL_HWSURFACE, 2, currentHeight, 24,0,0,0,0);
+		for (int x = 0; x < 2; x++)
+		{
+			for (int y = 0; y < currentHeight; y++)
+			{
+				Uint32 p = this->getPixel(0, y);
+				this->putPixel(temp, p, x, y);
+			}
+		}
+
+		if (this->image != NULL)
+		{
+			SDL_FreeSurface(this->image);
+		}
+		this->image = temp;
+		this->width = temp->w;
+		this->height = temp->h;
+
+		currentWidth = this->getWidth();
+		currentHeight = this->getHeight();
+	}
+
+	if (currentHeight == 1)
+	{
+		SDL_Surface* temp = SDL_CreateRGBSurface(SDL_HWSURFACE, currentWidth, 2, 24,0,0,0,0);
+		for (int y = 0; y < 2; y++)
+		{
+			for (int x = 0; x < currentWidth; x++)
+			{
+				Uint32 p = this->getPixel(x, 0);
+				this->putPixel(temp, p, x, y);
+			}
+		}
+
+		if (this->image != NULL)
+		{
+			SDL_FreeSurface(this->image);
+		}
+		this->image = temp;
+		this->width = temp->w;
+		this->height = temp->h;
+	}
 }
