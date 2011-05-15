@@ -68,7 +68,7 @@
   </TIPOSOBSTACULOS>
   <TEXTURAS>
 	<TEXTURA nombre="Fondo" path="Images\chuck.bmp"/>
-	<TEXTURA nombre="ladrillo" path="Images/ladrillo.bmp" alpha="#FFFFFF" delta="800" />
-	<TEXTURA nombre="cara" rot="45" path="Images/smile.bmp" alpha="#666666" delta="0" rot="0" />
+	<TEXTURA nombre="ladrillo" path="Images/ladrillo.bmp" alpha="#FFFFFF" delta="20" />
+	<TEXTURA nombre="cara" rot="45" path="Images/cara.bmp" alpha="#666666" delta="0"/>
   </TEXTURAS>
   </ESCENARIO>

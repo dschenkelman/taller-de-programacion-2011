@@ -305,6 +305,11 @@ void Image::rotate(int degrees, Uint32 alpha)
 	int originalHeight = this->getHeight();
 	int originalWidth = this->getWidth();
 
+	if (originalHeight == 1 || originalWidth == 1)
+	{
+		this->resizeOnePixelImage();
+	}
+
 	//this->resize(originalWidth*(2), originalHeight*(2));
 	double radians = ((degrees / 180.0) * PI);
 
@@ -526,42 +531,42 @@ Uint32 Image::getInterpolatedPixel(Uint32 pixelSI, double xSI, double ySI, Uint3
 
 int Image::getRotatedWidth(double radians)
 {
-	int centerX = this->getWidth() / 2;		
-	int centerY = this->getHeight() / 2;
+	double centerX = this->getWidth() / 2.0;		
+	double centerY = this->getHeight() / 2.0;
 
-	int rotatedTopLeftX = xRotatePixel(radians, -centerX, -centerY);
+	double rotatedTopLeftX = xRotatePixel(radians, -centerX, -centerY);
 	
-	int rotatedTopRightX = xRotatePixel(radians, centerX, -centerY);
+	double rotatedTopRightX = xRotatePixel(radians, centerX, -centerY);
 	
-	int rotatedBottomRightX = xRotatePixel(radians, centerX, centerY);
+	double rotatedBottomRightX = xRotatePixel(radians, centerX, centerY);
 	
-	int rotatedBottomLeftX = xRotatePixel(radians, -centerX, centerY);
+	double rotatedBottomLeftX = xRotatePixel(radians, -centerX, centerY);
 
-	int xValues[4] = {rotatedBottomLeftX, rotatedBottomRightX, rotatedTopLeftX, rotatedTopRightX};
+	double xValues[4] = {rotatedBottomLeftX, rotatedBottomRightX, rotatedTopLeftX, rotatedTopRightX};
 	
-	int xMax = *max_element(xValues, xValues + 4);
-	int xMin = *min_element(xValues, xValues + 4);
+	double xMax = *max_element(xValues, xValues + 4);
+	double xMin = *min_element(xValues, xValues + 4);
 
 	return xMax - xMin;
 }
 
 int Image::getRotatedHeight(double radians)
 {
-	int centerX = this->getWidth() / 2;		
-	int centerY = this->getHeight() / 2;
+	double centerX = this->getWidth() / 2.0;		
+	double centerY = this->getHeight() / 2.0;
 
-	int rotatedTopLeftY = yRotatePixel(radians, -centerX, -centerY);
+	double rotatedTopLeftY = yRotatePixel(radians, -centerX, -centerY);
 	
-	int rotatedTopRightY = yRotatePixel(radians, centerX, -centerY);
+	double rotatedTopRightY = yRotatePixel(radians, centerX, -centerY);
 	
-	int rotatedBottomRightY = yRotatePixel(radians, centerX, centerY);
+	double rotatedBottomRightY = yRotatePixel(radians, centerX, centerY);
 	
-	int rotatedBottomLeftY = yRotatePixel(radians, -centerX, centerY);
+	double rotatedBottomLeftY = yRotatePixel(radians, -centerX, centerY);
 
-	int yValues[4] = {rotatedBottomLeftY, rotatedBottomRightY, rotatedTopLeftY, rotatedTopRightY};
+	double yValues[4] = {rotatedBottomLeftY, rotatedBottomRightY, rotatedTopLeftY, rotatedTopRightY};
 	
-	int yMax = *max_element(yValues, yValues + 4);
-	int yMin = *min_element(yValues, yValues + 4);
+	double yMax = *max_element(yValues, yValues + 4);
+	double yMin = *min_element(yValues, yValues + 4);
 
 	return yMax - yMin;
 }
