@@ -236,10 +236,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\ImageFx.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\ImageTests.cpp"
 				>
 			</File>
@@ -411,10 +407,6 @@
 			</File>
 			<File
 				RelativePath=".\Image.h"
-				>
-			</File>
-			<File
-				RelativePath=".\ImageFx.h"
 				>
 			</File>
 			<File
