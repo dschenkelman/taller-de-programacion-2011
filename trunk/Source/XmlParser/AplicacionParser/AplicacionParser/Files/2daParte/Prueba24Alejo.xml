@@ -1,4 +1,4 @@
-<ESCENARIO nombre="Escenario numero 1" texturaFondo="Fondo">
+<ESCENARIO nombre="Prueba24Alejo" texturaFondo="Fondo">
   <GRILLA ancho="10" 
 		  alto="20" 
 		  tipoObstaculoPorDefecto="ladrillo">

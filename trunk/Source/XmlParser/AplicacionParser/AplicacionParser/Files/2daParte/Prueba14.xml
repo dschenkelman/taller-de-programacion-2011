@@ -1,4 +1,4 @@
-<ESCENARIO nombre="Escenario numero 1" texturaFondo="Fondo">
+<ESCENARIO nombre="Prueba14" texturaFondo="Fondo">
   <GRILLA ancho="10" 
 		  alto="20" 
 		  tipoObstaculoPorDefecto="ladrillo">
@@ -39,6 +39,6 @@
 	<TEXTURA nombre="ladrillo" path="Images/ladrillo.bmp"/>
 	<TEXTURA nombre="uva" path="Images/uva.bmp" rot="45" alpha="#FFFFFF"/>
 	<TEXTURA nombre="anana" path="Images\anana.bmp" alpha="#FFFFFF" />
-	<TEXTURA nombre="ananaGrande" path="Images\ananaGrande.bmp" alpha="#FFFFFF"/>
+	<TEXTURA nombre="ananaGrande" path="Images\ananaGrande.bmp" />
   </TEXTURAS>
   </ESCENARIO>
