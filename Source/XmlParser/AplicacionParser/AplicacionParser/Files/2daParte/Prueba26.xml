@@ -1,4 +1,4 @@
-<ESCENARIO nombre="Prueba18" texturaFondo="Fondo">
+<ESCENARIO nombre="Prueba26" texturaFondo="Fondo">
   <GRILLA ancho="10" 
 		  alto="20" 
 		  tipoObstaculoPorDefecto="ladrillo">

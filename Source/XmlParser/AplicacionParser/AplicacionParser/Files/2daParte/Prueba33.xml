@@ -43,6 +43,6 @@
 	<TEXTURA nombre="anana" path="Images\pineapple.bmp" rot="45" alpha="#FFFFFF"/>
 	<TEXTURA nombre="gandalf" path="Images\no pasar.bmp" alpha="#FFFFFF"/>
 	<TEXTURA nombre="chuckCortado" path="Images\chuck.bmp" left="165" right="272" top="44" bottom="110"/>
-	<TEXTURA nombre="golpe" path="Images\chuck.bmp" left="261" right="357" top="157" bottom="259" rot="60"/>
+	<TEXTURA nombre="golpe" path="Images\chuck.bmp" left="261" right="357" top="157" bottom="259" rot="50" alpha="#FFFFFF"/>
   </TEXTURAS>
   </ESCENARIO>

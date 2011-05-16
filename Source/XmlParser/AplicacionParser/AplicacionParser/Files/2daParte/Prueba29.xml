@@ -1,4 +1,4 @@
-<ESCENARIO nombre="Prueba18" texturaFondo="Fondo">
+<ESCENARIO nombre="Prueba29" texturaFondo="Fondo">
   <GRILLA ancho="10" 
 		  alto="20" 
 		  tipoObstaculoPorDefecto="ladrillo">
@@ -21,7 +21,7 @@
 	<CAMINO fila="6" columna="5"></CAMINO>
 	<CAMINO fila="3" columna="4"></CAMINO>
 	<CAMINO fila="4" columna="4">
-		<BONUS tipo="anana"/>
+		<BONUS tipo="uva"/>
 	</CAMINO>
 	<CAMINO fila="5" columna="4"></CAMINO>
   </GRILLA>
@@ -38,7 +38,7 @@
 	<TEXTURA nombre="Fondo" path="Images\texturaFondo.bmp"/>
 	<TEXTURA nombre="yunque" path="Images\yunque.bmp"/>
 	<TEXTURA nombre="ladrillo" path="Images/ladrillo.bmp"/>
-	<TEXTURA nombre="uva" path="Images/uva.bmp" rot="90" alpha="#FFFFFF"/>
+	<TEXTURA nombre="uva" path="Images/uva.bmp" rot="90" alpha="#FFFFFF" delta="60"/>
 	<TEXTURA nombre="anana" path="Images\anana.bmp" alpha="#FFFFFF" />
 	<TEXTURA nombre="arboles" path="Images\arboles.bmp" rot="45" alpha="#FFFFFF" delta="0"/>
   </TEXTURAS>
