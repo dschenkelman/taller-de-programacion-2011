@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sqlite_test", "sqlite_test\sqlite_test.vcproj", "{0B1332EF-A08C-45DB-9FFD-8C2BB878558D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		DB Shell|Win32 = DB Shell|Win32
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0B1332EF-A08C-45DB-9FFD-8C2BB878558D}.DB Shell|Win32.ActiveCfg = DB Shell|Win32
+		{0B1332EF-A08C-45DB-9FFD-8C2BB878558D}.DB Shell|Win32.Build.0 = DB Shell|Win32
+		{0B1332EF-A08C-45DB-9FFD-8C2BB878558D}.Debug|Win32.ActiveCfg = Debug|Win32
+		{0B1332EF-A08C-45DB-9FFD-8C2BB878558D}.Debug|Win32.Build.0 = Debug|Win32
+		{0B1332EF-A08C-45DB-9FFD-8C2BB878558D}.Release|Win32.ActiveCfg = Release|Win32
+		{0B1332EF-A08C-45DB-9FFD-8C2BB878558D}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
