@@ -5,11 +5,10 @@
 
 using namespace std;
 
-Pacman::Pacman(string pathTextura, int h, int w, int x, int y) : x(x), y(y), 
-xDirection(0), yDirection(0), screenHeight(h), screenWidth(w), dir(Direction::RIGHT),
+Pacman::Pacman(string pathTextura, int h, int w, int x, int y) : 
+Character(pathTextura, h, w, x, y, 0, 0), dir(Direction::RIGHT),
 rightKey(SDLK_RIGHT),leftKey(SDLK_LEFT), upKey(SDLK_UP), downKey(SDLK_DOWN)
 {
-	this->textura = new Image(pathTextura);
 }
 
 void Pacman::changeKeyboardMappings(SDLKey up, SDLKey down, SDLKey left, SDLKey right)
@@ -42,46 +41,23 @@ void Pacman::handleKeyStroke(void)
 	}
 }
 
-void Pacman::updatePosition(void)
-{
-	this->x = (this->x + (this->speed * this->xDirection)) % this->screenWidth;
-	if (this->x < 0)
-	{
-		this->x = this->screenWidth - 1;
-	}
-
-	this->y = (this->y + (this->speed * this->yDirection)) % this->screenHeight;
-
-	if (this->y < 0)
-	{
-		this->y = this->screenHeight - 1;
-	}
-}
-
-Image* Pacman::getImage(void)
-{
-	return this->textura;
-}
-
 Pacman::~Pacman(void)
 {
-	delete this->textura;
 }
 
 void Pacman::moveLeft(void)
 {
-	this->xDirection = -1;
-	this->yDirection = 0;
+	Character::moveLeft();
 	switch(this->dir)
 	{
 		case Direction::DOWN:
-			this->textura->rotate(-90 ,0);
+			Character::textura->rotate(-90 ,0);
 			break;
 		case Direction::UP:
-			this->textura->rotate(90 ,0);
+			Character::textura->rotate(90 ,0);
 			break;
 		case Direction::RIGHT:
-			this->textura->rotate(180 ,0);
+			Character::textura->rotate(180 ,0);
 			break;
 		default:
 			break;
@@ -91,18 +67,17 @@ void Pacman::moveLeft(void)
 
 void Pacman::moveRight(void)
 {
-	this->xDirection = 1;
-	this->yDirection = 0;
+	Character::moveRight();
 	switch(this->dir)
 	{
 		case Direction::DOWN:
-			this->textura->rotate(90 ,0);
+			Character::textura->rotate(90 ,0);
 			break;
 		case Direction::LEFT:
-			this->textura->rotate(180 ,0);
+			Character::textura->rotate(180 ,0);
 			break;
 		case Direction::UP:
-			this->textura->rotate(-90 ,0);
+			Character::textura->rotate(-90 ,0);
 			break;
 		default:
 			break;
@@ -112,18 +87,17 @@ void Pacman::moveRight(void)
 
 void Pacman::moveDown(void)
 {
-	this->xDirection = 0;
-	this->yDirection = 1;
+	Character::moveDown();
 	switch(this->dir)
 	{
 		case Direction::RIGHT:
-			this->textura->rotate(-90 ,0);
+			Character::textura->rotate(-90 ,0);
 			break;
 		case Direction::LEFT:
-			this->textura->rotate(90 ,0);
+			Character::textura->rotate(90 ,0);
 			break;
 		case Direction::UP:
-			this->textura->rotate(180 ,0);
+			Character::textura->rotate(180 ,0);
 			break;
 		default:
 			break;
@@ -132,22 +106,21 @@ void Pacman::moveDown(void)
 }
 
 void Pacman::moveUp(void)
-{
-	this->xDirection = 0;
-		this->yDirection = -1;
-		switch(this->dir)
-		{
-			case Direction::DOWN:
-				this->textura->rotate(180 ,0);
-				break;
-			case Direction::LEFT:
-				this->textura->rotate(-90 ,0);
-				break;
-			case Direction::RIGHT:
-				this->textura->rotate(90 ,0);
-				break;
-			default:
-				break;
-		}
-		this->dir = Direction::UP;
+{	
+	Character::moveUp();
+	switch(this->dir)
+	{
+		case Direction::DOWN:
+			Character::textura->rotate(180 ,0);
+			break;
+		case Direction::LEFT:
+			Character::textura->rotate(-90 ,0);
+			break;
+		case Direction::RIGHT:
+			Character::textura->rotate(90 ,0);
+			break;
+		default:
+			break;
+	}
+	this->dir = Direction::UP;
 }

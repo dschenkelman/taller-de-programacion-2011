@@ -4,9 +4,12 @@
 #include "Pacman.h"
 #include "Window.h"
 #include <string>
+#include "Ghost.h"
+#include "List.h"
 
 class ScreenManager
 {
+	List<Ghost*> pacman1Ghosts;
 	Window* window;
 	Image* fondo;
 	Pacman* pacman1;
