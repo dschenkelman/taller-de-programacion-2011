@@ -10,6 +10,7 @@ class Ghost : public Character
 public:
 	Ghost(std::string pathTextura, int h, int w, int x, int y, Pacman* pacman);
 	double getDistanceToPacman(int x, int y);
+	void tryKillPacman(void);
 	virtual void updatePosition();
 	~Ghost(void);
 };
