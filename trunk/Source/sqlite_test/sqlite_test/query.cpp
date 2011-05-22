@@ -15,6 +15,7 @@ query::query(sqlite3* db, char* sql)
 		cout << "Selecting data from DB Failed" << endl;
 		//return -1;
 	}
+	this->next();
 }
 
 int query::getValue(int colNr)
