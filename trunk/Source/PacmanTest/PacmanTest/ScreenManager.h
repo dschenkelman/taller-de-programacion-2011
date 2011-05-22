@@ -10,6 +10,7 @@ class ScreenManager
 	Window* window;
 	Image* fondo;
 	Pacman* pacman1;
+	Pacman* pacman2;
 	Uint32 initialTime;
 public:
 	ScreenManager(Window* w, std::string pathFondo);
