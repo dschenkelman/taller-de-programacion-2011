@@ -7,6 +7,7 @@
 class Ghost : public Character
 {
 	Pacman* pacman;
+	static const int pacmanKillDelta = 5;
 public:
 	Ghost(std::string pathTextura, int h, int w, int x, int y, Pacman* pacman);
 	double getDistanceToPacman(int x, int y);

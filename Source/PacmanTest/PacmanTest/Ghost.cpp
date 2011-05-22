@@ -3,6 +3,7 @@
 #include <string>
 #include "math.h"
 #include <algorithm>
+#include "CollisionHelper.h"
 
 using namespace std;
 
@@ -38,6 +39,7 @@ void Ghost::updatePosition(void)
 	}
 
 	Character::updatePosition();
+	this->tryKillPacman();
 }
 
 double Ghost::getDistanceToPacman(int x, int y)
@@ -51,7 +53,16 @@ double Ghost::getDistanceToPacman(int x, int y)
 
 void Ghost::tryKillPacman(void)
 {
+	bool areInSamePosition = CollisionHelper::AreFullyCollisioned(Character::x, Character::y,
+		this->pacman->getX(), this->pacman->getY(), 2);
 
+	areInSamePosition = areInSamePosition || CollisionHelper::AreFullyCollisioned(Character::x + Character::textura->getWidth(), Character::y + Character::textura->getHeight(),
+		this->pacman->getX() + this->pacman->getImage()->getWidth(), this->pacman->getY() + this->pacman->getImage()->getHeight(), pacmanKillDelta);
+
+	if (areInSamePosition)
+	{
+		this->pacman->kill();
+	}
 }
 
 Ghost::~Ghost(void)

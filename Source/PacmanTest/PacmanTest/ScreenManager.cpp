@@ -21,8 +21,14 @@ ScreenManager::ScreenManager(Window* w, string pathFondo)
 	this->pacman1Ghosts.add(new Ghost("Images/redGhost.bmp", this->window->getHeight(), this->window->getWidth(),
 		0, this->window->getHeight() - (30 + 1), this->pacman1));
 
+	this->pacman1Ghosts.add(new Ghost("Images/redGhost.bmp", this->window->getHeight(), this->window->getWidth(),
+		this->window->getWidth() - (30 + 1), this->window->getHeight() - (30 + 1), this->pacman1));
+
 	this->pacman2Ghosts.add(new Ghost("Images/blueGhost.bmp", this->window->getHeight(), this->window->getWidth(),
 		0, this->window->getHeight() - (30 + 1), this->pacman2));
+
+	this->pacman2Ghosts.add(new Ghost("Images/blueGhost.bmp", this->window->getHeight(), this->window->getWidth(),
+		this->window->getWidth() - (30 + 1), this->window->getHeight() - (30 + 1), this->pacman2));
 
 	this->pacman2->changeKeyboardMappings(SDLK_w, SDLK_s, SDLK_a, SDLK_d);
 }
