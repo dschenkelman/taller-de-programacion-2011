@@ -10,6 +10,7 @@
 class ScreenManager
 {
 	List<Ghost*> pacman1Ghosts;
+	List<Ghost*> pacman2Ghosts;
 	Window* window;
 	Image* fondo;
 	Pacman* pacman1;
@@ -17,6 +18,8 @@ class ScreenManager
 	Uint32 initialTime;
 public:
 	ScreenManager(Window* w, std::string pathFondo);
+	void updatePacman(Pacman* pac);
+	void updateGhosts(List<Ghost*> ghosts);
 	void handleKeyStroke(void);
 	void updateScreen(void);
 	~ScreenManager(void);

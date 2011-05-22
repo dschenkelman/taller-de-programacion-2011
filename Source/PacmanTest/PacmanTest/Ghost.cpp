@@ -49,6 +49,11 @@ double Ghost::getDistanceToPacman(int x, int y)
 	return distance;
 }
 
+void Ghost::tryKillPacman(void)
+{
+
+}
+
 Ghost::~Ghost(void)
 {
 }
