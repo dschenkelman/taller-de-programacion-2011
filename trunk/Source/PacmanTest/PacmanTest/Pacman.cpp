@@ -7,7 +7,7 @@ using namespace std;
 
 Pacman::Pacman(string pathTextura, int h, int w, int x, int y) : 
 Character(pathTextura, h, w, x, y, 0, 0), dir(Direction::RIGHT),
-rightKey(SDLK_RIGHT),leftKey(SDLK_LEFT), upKey(SDLK_UP), downKey(SDLK_DOWN)
+rightKey(SDLK_RIGHT),leftKey(SDLK_LEFT), upKey(SDLK_UP), downKey(SDLK_DOWN), isDead(false)
 {
 }
 
@@ -123,4 +123,9 @@ void Pacman::moveUp(void)
 			break;
 	}
 	this->dir = Direction::UP;
+}
+
+void Pacman::kill(void)
+{
+	this->isDead = true;
 }

@@ -180,6 +180,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\CollisionHelper.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Ghost.cpp"
 				>
 			</File>
@@ -235,6 +239,10 @@
 			>
 			<File
 				RelativePath=".\Character.h"
+				>
+			</File>
+			<File
+				RelativePath=".\CollisionHelper.h"
 				>
 			</File>
 			<File
