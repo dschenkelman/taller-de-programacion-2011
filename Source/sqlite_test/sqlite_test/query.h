@@ -10,7 +10,8 @@ private:
 	int position;
 public:
 	query(sqlite3* db, char* sql);
-	int getValue(int colNr);
+	int getInt(int colNr);
+	char* getChars(int colNr);
 	int getPosition();
 	int next();
 public:
