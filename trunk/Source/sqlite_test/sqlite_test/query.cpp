@@ -18,9 +18,14 @@ query::query(sqlite3* db, char* sql)
 	this->next();
 }
 
-int query::getValue(int colNr)
+int query::getInt(int colNr)
 {
 	return sqlite3_column_int(this->stmt, colNr);
+}
+
+char* query::getChars(int colNr)
+{
+	return (char*) sqlite3_column_text(this->stmt, colNr);
 }
 
 int query::getPosition()
