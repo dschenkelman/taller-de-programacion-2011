@@ -17,6 +17,7 @@
 #include "Window.h"
 #include "Image.h"
 #include "Rotador.h"
+#include "RichText.h"
 
 #define SDL_main main 
 
@@ -39,31 +40,37 @@ int main(int argc, char* argv[])
 		return 1;
 	}
 
-	SDL_Delay(1000);
-	
-	/** Agrandar imagen */
+	RichText* text0 = new RichText("CABA", RichText::MENU_HEADER1);	
+	SDL_Rect* recText0 = new SDL_Rect();
+	recText0->h = text0->getImage()->getHeight();
+	recText0->w = text0->getImage()->getWidth();
+	recText0->x = 100;
+	recText0->y = 50;
 
-	// nueva imagen
-	Image* imgSmile = new Image("osama.bmp");
-	
-	int origW = imgSmile->getWidth();
-	int origH = imgSmile->getHeight();
-	
-	// Rotacion
-	Uint32 pixelAlpha = SDL_MapRGB(imgSmile->getFormat(), 0, 255, 0);
-	/*imgSmile->resize(400, 300);*/
-	imgSmile->rotate(45, pixelAlpha);
+	RichText* text1 = new RichText("ABA", RichText::MENU_HEADER2);	
+	SDL_Rect* recText1 = new SDL_Rect();
+	recText1->h = text1->getImage()->getHeight();
+	recText1->w = text1->getImage()->getWidth();
+	recText1->x = 100;
+	recText1->y = 150;
 
-	imgSmile->resize(200, 200);
+	RichText* text2 = new RichText("BAA", RichText::MENU_ITEM);	
+	SDL_Rect* recText2 = new SDL_Rect();
+	recText2->h = text2->getImage()->getHeight();
+	recText2->w = text2->getImage()->getWidth();
+	recText2->x = 100;
+	recText2->y = 200;
 	
 	// Pego la imagen en la pantalla
-	SDL_BlitSurface(imgSmile->getSDLSurface(), NULL, screen, NULL);
+	SDL_BlitSurface(text0->getImage()->getSDLSurface(), NULL, screen, recText0);
+	SDL_BlitSurface(text1->getImage()->getSDLSurface(), NULL, screen, recText1);
+	SDL_BlitSurface(text2->getImage()->getSDLSurface(), NULL, screen, recText2);
 	SDL_Flip(screen);
 
-	SDL_Delay(20000);
+	SDL_Delay(5000);
 	
 	// libero memoria
-	free(imgSmile);
+	free(text1);
 	 
 	return 0;
 }

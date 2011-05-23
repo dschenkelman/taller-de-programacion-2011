@@ -391,6 +391,10 @@ bool Image::validLimits(int x, int y)
 	return true;
 }
 
+int reMappedPos(int posSrc, int maxSrc, int maxDst){
+	int porcentaje = (posSrc*100)/maxSrc;
+	return ((porcentaje*maxDst)/100);
+}
 
 
 void Image::resize(int newWidth, int newHeight)
@@ -412,18 +416,21 @@ void Image::resize(int newWidth, int newHeight)
 		for(int posXSrc = 0; posXSrc < widthSrc; posXSrc++){
 			
 			// obtengo las posiciones remappeadas en las nuevas dimensiones
-			posXDst = (posXSrc * newWidth) / widthSrc;
-			posYDst = (posYSrc * newHeight) / heightSrc;
+			/*posXDst = (posXSrc * newWidth) / widthSrc;
+			posYDst = (posYSrc * newHeight) / heightSrc;*/
+			posXDst = reMappedPos(posXSrc, (widthSrc-1), (newWidth-1));
+			posYDst = reMappedPos(posYSrc, (heightSrc-1), (newHeight-1));
 
 			// Obtengo el pixel de la imagen
 			Uint32 pixelImg = this->getPixel(posXSrc, posYSrc);
 
 			// interpolacion
-			//if( posXSrc > 0 && posYSrc > 0 ){
 			if( posXSrc > 0 && posYSrc > 0 ){
 				
-				int fromY = (((posYSrc-1) * newHeight) / heightSrc);
-				int fromX = (((posXSrc-1) * newWidth) / widthSrc);
+				/*int fromY = (((posYSrc-1) * newHeight) / heightSrc);
+				int fromX = (((posXSrc-1) * newWidth) / widthSrc);*/
+				int fromX = reMappedPos((posXSrc-1), (widthSrc-1), (newWidth-1));
+				int fromY = reMappedPos((posYSrc-1), (heightSrc-1), (newHeight-1));
 				
 				// interpolacion interna
 				for (int y = fromY; y <= posYDst; y++){
@@ -431,16 +438,16 @@ void Image::resize(int newWidth, int newHeight)
 						
 						// pixel y posicion superior izquierdo
 						Uint32 pixelSI = this->getPixel(posXSrc-1, posYSrc-1);
-						int xSI = ((posXSrc-1) * newWidth) / widthSrc;
-						int ySI = ((posYSrc-1) * newHeight) / heightSrc;
+						int xSI = fromX;
+						int ySI = fromY;
 						// pixel y posicion superior derecho
 						Uint32 pixelSD = this->getPixel(posXSrc, posYSrc-1);
-						int xSD = (posXSrc * newWidth) / widthSrc;
-						int ySD = ((posYSrc-1) * newHeight) / heightSrc;
+						int xSD = posXDst;
+						int ySD = fromY;
 						// pixel y posicion inferior izquierdo
 						Uint32 pixelII = this->getPixel(posXSrc-1, posYSrc);
-						int xII = ((posXSrc-1) * newWidth) / widthSrc;
-						int yII = (posYSrc * newHeight) / heightSrc;
+						int xII = fromX;
+						int yII = posYDst;
 
 						// obtengo el pixel interpolado
 						Uint32 interpolatedPixel = this->getInterpolatedPixel( pixelSI, xSI, ySI, 
