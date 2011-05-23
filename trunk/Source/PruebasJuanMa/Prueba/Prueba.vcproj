@@ -220,6 +220,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\RichText.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Rotador.cpp"
 				>
 			</File>
@@ -295,6 +299,10 @@
 			</File>
 			<File
 				RelativePath=".\resource.h"
+				>
+			</File>
+			<File
+				RelativePath=".\RichText.h"
 				>
 			</File>
 			<File
