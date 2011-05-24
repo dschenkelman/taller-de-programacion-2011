@@ -17,6 +17,9 @@ Grapher::Grapher() : windowHeight(480), windowWidth(640), imageCache()
 
 Grapher::~Grapher()
 {
+	for (this->iter = this->imageCache.begin(); this->iter != this->imageCache.end(); this->iter++) {
+		delete(iter->second);
+	}
 }
 
 void Grapher::draw(Escenario& escenario)
@@ -82,24 +85,24 @@ void Grapher::draw(Escenario& escenario)
 			Textura t = celda->obtenerTextura(celSup, celInf, celDer, celIzq);
 			string nombreTextura = t.getNombre();
 			Image imagen;
+			Image *imagePtr;
 			if (this->imageCache.find(nombreTextura) == this->imageCache.end())
 			{
 				//not in cache
-				imagen = celda->obtenerRepresentacion(celSup, celInf, celDer, celIzq);
-				imagen.resize(imageWidth, imageHeight);
-				if (nombreTextura != "")
-				{
-					this->imageCache[nombreTextura] = imagen;
+				imagePtr=new Image(celda->obtenerRepresentacion(celSup, celInf, celDer, celIzq));
+				imagePtr->resize(imageWidth, imageHeight);
+				if (nombreTextura != ""){
+					this->imageCache[nombreTextura] = imagePtr;
 				}
 			}
 			else
 			{
-				imagen = this->imageCache[nombreTextura];
+				imagePtr = (this->imageCache[nombreTextura]);
 			}
 			
 			if (!imagen.hasError())
 			{
-				w.display(imagen, imageWidth * j, imageHeight * i, t.getRed(), t.getGreen(), t.getBlue(), t.getDelta());
+				w.display((*imagePtr), imageWidth * j, imageHeight * i, t.getRed(), t.getGreen(), t.getBlue(), t.getDelta());
 			}
 			else
 			{
