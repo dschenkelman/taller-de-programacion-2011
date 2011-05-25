@@ -2,14 +2,14 @@
 #include "RichText.h"
 
 std::string RichText::MENU_HEADER1	= "menu_header1";
-std::string RichText::MENU_HEADER2	= "normal";
+std::string RichText::NORMAL		= "normal";
 std::string RichText::MENU_ITEM		= "menu_item";
-std::string RichText::GAME_STATS	= "game_stats";
+
 
 RichText::RichText(std::string txt, std::string type){
 	
-	int letterWidth		= 54;
-	int letterHeight	= 54;
+	int letterWidth		= 17;
+	int letterHeight	= 17;
 	// nueva imagen
 	this->txtImg = new Image((letterWidth*txt.length()), letterHeight);
 

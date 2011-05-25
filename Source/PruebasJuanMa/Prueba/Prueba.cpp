@@ -40,37 +40,115 @@ int main(int argc, char* argv[])
 		return 1;
 	}
 
-	RichText* text0 = new RichText("CABA", RichText::MENU_HEADER1);	
+	// banner: dual
+	Image* dualBanner = new Image("images/dual.bmp");
+	SDL_Rect* recDualBanner = new SDL_Rect();
+	recDualBanner->h = dualBanner->getHeight();
+	recDualBanner->w = dualBanner->getWidth();
+	recDualBanner->x = 150;
+	recDualBanner->y = 5;
+	SDL_BlitSurface(dualBanner->getSDLSurface(), NULL, screen, recDualBanner);
+	
+	RichText* text0 = new RichText("pacman", RichText::NORMAL);	
 	SDL_Rect* recText0 = new SDL_Rect();
 	recText0->h = text0->getImage()->getHeight();
 	recText0->w = text0->getImage()->getWidth();
-	recText0->x = 100;
-	recText0->y = 50;
-
-	RichText* text1 = new RichText("ABA", RichText::MENU_HEADER2);	
-	SDL_Rect* recText1 = new SDL_Rect();
-	recText1->h = text1->getImage()->getHeight();
-	recText1->w = text1->getImage()->getWidth();
-	recText1->x = 100;
-	recText1->y = 150;
-
-	RichText* text2 = new RichText("BAA", RichText::MENU_ITEM);	
-	SDL_Rect* recText2 = new SDL_Rect();
-	recText2->h = text2->getImage()->getHeight();
-	recText2->w = text2->getImage()->getWidth();
-	recText2->x = 100;
-	recText2->y = 200;
-	
-	// Pego la imagen en la pantalla
+	recText0->x = 250;
+	recText0->y = 110;
 	SDL_BlitSurface(text0->getImage()->getSDLSurface(), NULL, screen, recText0);
-	SDL_BlitSurface(text1->getImage()->getSDLSurface(), NULL, screen, recText1);
-	SDL_BlitSurface(text2->getImage()->getSDLSurface(), NULL, screen, recText2);
+
+	// menu header
+	RichText* menuHeader = new RichText("Menu", RichText::NORMAL);	
+	SDL_Rect* recMenuHeader = new SDL_Rect();
+	recMenuHeader->h = menuHeader->getImage()->getHeight();
+	recMenuHeader->w = menuHeader->getImage()->getWidth();
+	recMenuHeader->x = 250;
+	recMenuHeader->y = 200;
+	SDL_BlitSurface(menuHeader->getImage()->getSDLSurface(), NULL, screen, recMenuHeader);
+
+	// menu item start
+	RichText* menuStart = new RichText("START", RichText::NORMAL);	
+	SDL_Rect* recMenuStart = new SDL_Rect();
+	recMenuStart->h = menuStart->getImage()->getHeight();
+	recMenuStart->w = menuStart->getImage()->getWidth();
+	recMenuStart->x = 250;
+	recMenuStart->y = 250;
+	SDL_BlitSurface(menuStart->getImage()->getSDLSurface(), NULL, screen, recMenuStart);
+
+	// menu item quit
+	RichText* menuQuit = new RichText("QUIT", RichText:: NORMAL);	
+	SDL_Rect* recMenuQuit = new SDL_Rect();
+	recMenuQuit->h = menuQuit->getImage()->getHeight();
+	recMenuQuit->w = menuQuit->getImage()->getWidth();
+	recMenuQuit->x = 250;
+	recMenuQuit->y = 300;
+	SDL_BlitSurface(menuQuit->getImage()->getSDLSurface(), NULL, screen, recMenuQuit);
+
+	// creo la flechita
+	Image* flechita = new Image("images/menu-arrow.bmp");
+	SDL_Rect* recFlechita = new SDL_Rect();
+	recFlechita->h = flechita->getHeight();
+	recFlechita->w = flechita->getWidth();
+	recFlechita->x = 200;
+	recFlechita->y = 250;
+	SDL_BlitSurface(flechita->getSDLSurface(), NULL, screen, recFlechita);
+	
 	SDL_Flip(screen);
 
-	SDL_Delay(5000);
+	// flechita de menu
+	SDL_Event e;
+	bool running = true;
+ 	bool keyup = false;
+	bool keydown = false;
+
+	while(running) 
+	{
+		while(SDL_PollEvent(&e)) 
+		{
+			switch(e.type)
+			{
+				case SDL_QUIT:
+					running = false;
+					break;
+				case SDL_KEYDOWN:
+					switch(e.key.keysym.sym){
+					  case SDLK_UP:
+						if(keydown){
+							for(int posY=0; posY<5; posY++){
+								SDL_FillRect(screen, recFlechita, 0);
+								recFlechita->y = 265-(5*posY);
+								SDL_BlitSurface(flechita->getSDLSurface(), NULL, screen, recFlechita);
+								SDL_Flip(screen);
+								SDL_Delay(30);
+							}
+						}
+						keyup = true;
+						keydown = false;
+						break;
+					  case SDLK_DOWN:
+						if(keyup){
+							for(int posY=0; posY<5; posY++){
+								SDL_FillRect(screen, recFlechita, 0);
+								recFlechita->y = 265+(5*posY);
+								SDL_BlitSurface(flechita->getSDLSurface(), NULL, screen, recFlechita);
+								SDL_Flip(screen);
+								SDL_Delay(30);
+							}
+						}
+						keydown = true;
+						keyup = false;
+						break;
+					}
+
+					break;
+			}
+		}
+	}
+
+	
 	
 	// libero memoria
-	free(text1);
+	//free(text1);
 	 
 	return 0;
 }

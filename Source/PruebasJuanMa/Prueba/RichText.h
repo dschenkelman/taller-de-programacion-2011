@@ -14,5 +14,5 @@ public:
 	static std::string MENU_HEADER1;
 	static std::string MENU_HEADER2;
 	static std::string MENU_ITEM;
-	static std::string GAME_STATS;
+	static std::string NORMAL;
 };
