@@ -6,10 +6,11 @@
 
 using namespace std;
 
-ScreenManager::ScreenManager(Window* w, string pathFondo)
+ScreenManager::ScreenManager(Window* w, string pathFondo) : deadCycles(0)
 {
 	this->window = w;
 	this->fondo = new Image(pathFondo);
+	this->gameOverImage = new Image("Images/gameOver.bmp");
 	this->pacman1 = new Pacman("Images/pacman.bmp", 
 		this->window->getHeight(), this->window->getWidth(),
 		0, 0, 5);
@@ -51,17 +52,52 @@ void ScreenManager::createGhostsForPacman2(void)
 
 void ScreenManager::handleKeyStroke(void)
 {
-	this->pacman1->handleKeyStroke();
-	this->pacman2->handleKeyStroke();
+	if (this->pacman1->isAlive() && this->pacman2->isAlive())
+	{
+		this->pacman1->handleKeyStroke();
+		this->pacman2->handleKeyStroke();
+	}
 }
 
 void ScreenManager::updateScreen(void)
 {
-	this->window->display(this->fondo, 0, 0, 0, 0, 0, -1);
-	this->updatePacman(this->pacman1);
-	this->updatePacman(this->pacman2);
-	this->updateGhosts(this->pacman1Ghosts);
-	this->updateGhosts(this->pacman2Ghosts);
+	if (this->pacman1->isAlive() && this->pacman2->isAlive())
+	{
+		this->window->display(this->fondo, 0, 0, 0, 0, 0, -1);
+		this->updatePacman(this->pacman1);
+		this->updatePacman(this->pacman2);
+		this->updateGhosts(this->pacman1Ghosts);
+		this->updateGhosts(this->pacman2Ghosts);
+	}
+	else
+	{
+		this->window->display(this->fondo, 0, 0, 0, 0, 0, -1);
+		if (this->deadCycles < 20)
+		{
+			// one of the pacmans is dead.
+			if (!pacman1->isAlive())
+			{
+				this->pacman1->rotateWhenDead();
+				this->updatePacman(this->pacman1);
+			}
+
+			if (!pacman2->isAlive())
+			{
+				this->pacman2->rotateWhenDead();
+				this->updatePacman(this->pacman2);
+			}
+		}
+		else
+		{
+			int x = (this->window->getWidth() - this->gameOverImage->getWidth()) / 2;
+			int y = (this->window->getHeight() - this->gameOverImage->getHeight()) / 2;
+
+			this->window->display(this->gameOverImage, x, y, 0, 0, 0, 20);
+		}
+
+
+		this->deadCycles++;
+	}
 	this->window->refresh();
 }
 
@@ -87,11 +123,16 @@ void ScreenManager::updatePacman(Pacman* pac)
 	this->window->display(i, x, y, 255, 255, 255, 10);
 }
 
+bool ScreenManager::gameOver(void)
+{
+	return this->deadCycles >= 40;
+}
 ScreenManager::~ScreenManager(void)
 {
 	delete this->fondo;
 	delete this->pacman1;
 	delete this->pacman2;
+	delete this->gameOverImage;
 
 	for (int i = 0; i < this->pacman1Ghosts.length(); i++)
 	{

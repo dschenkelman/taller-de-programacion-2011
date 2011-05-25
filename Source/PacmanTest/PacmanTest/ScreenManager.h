@@ -13,9 +13,11 @@ class ScreenManager
 	List<Ghost*> pacman2Ghosts;
 	Window* window;
 	Image* fondo;
+	Image* gameOverImage;
 	Pacman* pacman1;
 	Pacman* pacman2;
 	Uint32 initialTime;
+	int deadCycles;
 public:
 	ScreenManager(Window* w, std::string pathFondo);
 	void updatePacman(Pacman* pac);
@@ -24,5 +26,6 @@ public:
 	void createGhostsForPacman2(void);
 	void handleKeyStroke(void);
 	void updateScreen(void);
+	bool gameOver(void);
 	~ScreenManager(void);
 };
