@@ -212,11 +212,19 @@
 				>
 			</File>
 			<File
+				RelativePath=".\gamelog.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\query.cpp"
 				>
 			</File>
 			<File
 				RelativePath=".\sqlite_test.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\User.cpp"
 				>
 			</File>
 		</Filter>
@@ -230,11 +238,19 @@
 				>
 			</File>
 			<File
+				RelativePath=".\gamelog.h"
+				>
+			</File>
+			<File
 				RelativePath=".\query.h"
 				>
 			</File>
 			<File
 				RelativePath=".\sqlite_test.h"
+				>
+			</File>
+			<File
+				RelativePath=".\User.h"
 				>
 			</File>
 		</Filter>
