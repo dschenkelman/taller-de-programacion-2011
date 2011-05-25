@@ -24,6 +24,7 @@ Grapher::~Grapher()
 
 void Grapher::draw(Escenario& escenario)
 {
+	Image *imagePtr;
 	bool error = false;
 	Grilla& grilla = escenario.getGrilla();
 
@@ -84,12 +85,11 @@ void Grapher::draw(Escenario& escenario)
 
 			Textura t = celda->obtenerTextura(celSup, celInf, celDer, celIzq);
 			string nombreTextura = t.getNombre();
-			Image imagen;
-			Image *imagePtr;
+			//Image imagen;
 			if (this->imageCache.find(nombreTextura) == this->imageCache.end())
 			{
 				//not in cache
-				imagePtr=new Image(celda->obtenerRepresentacion(celSup, celInf, celDer, celIzq));
+				imagePtr=celda->obtenerRepresentacion(celSup, celInf, celDer, celIzq);
 				imagePtr->resize(imageWidth, imageHeight);
 				if (nombreTextura != ""){
 					this->imageCache[nombreTextura] = imagePtr;
@@ -99,15 +99,15 @@ void Grapher::draw(Escenario& escenario)
 			{
 				imagePtr = (this->imageCache[nombreTextura]);
 			}
-			
-			if (!imagen.hasError())
+			//imagen=*imagePtr;
+			if (!(imagePtr->hasError()))
 			{
 				w.display((*imagePtr), imageWidth * j, imageHeight * i, t.getRed(), t.getGreen(), t.getBlue(), t.getDelta());
 			}
 			else
 			{
 				//log
-				Logger::getInstance()->logError(imagen.getErrorMessage());
+				Logger::getInstance()->logError(imagePtr->getErrorMessage());
 				error = true;
 			}
 		}

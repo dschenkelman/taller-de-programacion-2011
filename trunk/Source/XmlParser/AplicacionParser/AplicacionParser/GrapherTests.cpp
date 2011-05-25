@@ -27,8 +27,6 @@ void GrapherTests::run(void)
 	printResult("testGraficarEscenario800x600", testGraficarEscenario800x600());
 	printResult("testGraficarEscenario1024x768", testGraficarEscenario1024x768());
 	
-	int leaks = _CrtDumpMemoryLeaks();
-	printLeaks(leaks);
 }
 
 void GrapherTests::printResult(std::string testName, bool result)

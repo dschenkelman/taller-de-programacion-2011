@@ -2,6 +2,7 @@
 #include <string>
 #include "Image.h"
 #include "Textura.h"
+#include "Image.h"
 
 class Celda
 {
@@ -18,7 +19,7 @@ public:
 	void Ocupar();
 	virtual Celda* copiar(void);
 	virtual ~Celda(void);
-	virtual Image obtenerRepresentacion(Celda* celSup, Celda* celInf, Celda* celDer, Celda* celIzq);
+	virtual Image* obtenerRepresentacion(Celda* celSup, Celda* celInf, Celda* celDer, Celda* celIzq);
 	virtual Textura obtenerTextura(Celda* celSup, Celda* celInf, Celda* celDer, Celda* celIzq);
 	virtual bool hasError(void);
 };

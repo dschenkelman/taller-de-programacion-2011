@@ -13,6 +13,7 @@ class Camino : public Celda
 	bool validateAttributes(XmlElement& e);
 	Bonus bonus;
 	bool tieneBonus;
+	Image * imagen;
 public:
 	Camino(XmlElement& e);
 	Camino(int f, int c);
@@ -23,5 +24,5 @@ public:
 	bool hasError(void);
 	~Camino(void);
 	Textura obtenerTextura(Celda* celSup, Celda* celInf, Celda* celDer, Celda* celIzq);
-	Image obtenerRepresentacion(Celda* celSup, Celda* celInf, Celda* celDer, Celda* celIzq);
+	Image* obtenerRepresentacion(Celda* celSup, Celda* celInf, Celda* celDer, Celda* celIzq);
 };

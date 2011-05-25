@@ -10,6 +10,7 @@ class Bonus
 	List<std::string> validAttributes;
 	std::string tipo;
 	TipoBonus tipoBonus;
+	Image *imagen;
 public:
 	Bonus(void);
 	Bonus(XmlElement& e);
@@ -17,7 +18,7 @@ public:
 	std::string getTipo();
 	void setTipoBonus(TipoBonus tb);
 	TipoBonus getTipoBonus();
-	Image obtenerRepresentacion(void);
+	Image* obtenerRepresentacion(void);
 	bool hasError(void);
 	~Bonus(void);
 };

@@ -45,10 +45,10 @@ Celda::~Celda(void)
 }
 
 
-Image Celda::obtenerRepresentacion(Celda* celSup, Celda* celInf, Celda* celDer, Celda* celIzq)
+Image* Celda::obtenerRepresentacion(Celda* celSup, Celda* celInf, Celda* celDer, Celda* celIzq)
 {
 	// Esto no se debería imprimir nunca
-	return Image(0,0);
+	return new Image(0,0);
 }
 
 Celda* Celda::copiar(void)

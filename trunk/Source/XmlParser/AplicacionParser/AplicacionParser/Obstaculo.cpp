@@ -10,10 +10,12 @@ using namespace std;
 Obstaculo::Obstaculo(std::string& t, int f, int c) : Celda(f, c), tipo(t), tieneError(false)
 {
 	this->populateValidAttributes();
+	this->imagen=NULL;
 }
 
 Obstaculo::Obstaculo(XmlElement& e) : tieneError(false)
 {
+	this->imagen=NULL;
 	if (e.hasChildren())
 	{
 		stringstream msg;
@@ -86,18 +88,21 @@ TipoObstaculo Obstaculo::getTipoObstaculo()
 
 Obstaculo::~Obstaculo(void)
 {
+	if (this->imagen == NULL)
+		delete (this->imagen);
 }
 
-Image Obstaculo::obtenerRepresentacion(Celda* celSup, Celda* celInf, Celda* celDer, Celda* celIzq)
+Image* Obstaculo::obtenerRepresentacion(Celda* celSup, Celda* celInf, Celda* celDer, Celda* celIzq)
 {
 	Textura textura = this->getTipoObstaculo().getTextura();
-	Image imagen(textura.getPath());
-	if (!imagen.hasError())
+	Image * imagen = new Image(textura.getPath());
+	if (!(imagen->hasError()))
 	{
-		imagen.crop(textura.getTop(), textura.getLeft(), textura.getRight(), textura.getBottom());
+		imagen->crop(textura.getTop(), textura.getLeft(), textura.getRight(), textura.getBottom());
 		Uint32 alphaPixel = textura.getRed() | textura.getGreen() << 8 | textura.getBlue() << 16;
-		imagen.rotate(textura.getRotation(), alphaPixel);
+		imagen->rotate(textura.getRotation(), alphaPixel);
 	}
+	this->imagen=imagen;
 	return imagen;
 }
 
