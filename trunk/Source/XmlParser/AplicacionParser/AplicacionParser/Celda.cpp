@@ -45,7 +45,7 @@ Celda::~Celda(void)
 }
 
 
-Image* Celda::obtenerRepresentacion(Celda* celSup, Celda* celInf, Celda* celDer, Celda* celIzq)
+Image* Celda::obtenerRepresentacion()
 {
 	// Esto no se debería imprimir nunca
 	return new Image(0,0);
@@ -62,7 +62,7 @@ bool Celda::hasError(void)
 	return false;
 }
 
-Textura Celda::obtenerTextura(Celda* , Celda*, Celda*, Celda*)
+Textura Celda::obtenerTextura()
 {
 	return Textura();
 }

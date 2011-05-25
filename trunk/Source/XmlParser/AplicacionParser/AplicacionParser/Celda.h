@@ -19,7 +19,7 @@ public:
 	void Ocupar();
 	virtual Celda* copiar(void);
 	virtual ~Celda(void);
-	virtual Image* obtenerRepresentacion(Celda* celSup, Celda* celInf, Celda* celDer, Celda* celIzq);
-	virtual Textura obtenerTextura(Celda* celSup, Celda* celInf, Celda* celDer, Celda* celIzq);
+	virtual Image* obtenerRepresentacion();
+	virtual Textura obtenerTextura();
 	virtual bool hasError(void);
 };

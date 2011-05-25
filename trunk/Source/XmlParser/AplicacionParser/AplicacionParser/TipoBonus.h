@@ -15,6 +15,10 @@ class TipoBonus
 	bool tieneError;
 	void populateValidAttributes(void);
 	bool validateAttributes(XmlElement& e);
+	int duracion;
+	int apariciones;
+	int probabilidad;
+	std::string unidad;
 public:
 	TipoBonus(XmlElement& e);
 	TipoBonus(std::string& n, std::string& t);
