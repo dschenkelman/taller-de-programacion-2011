@@ -30,6 +30,8 @@ public:
 	void handleKeyStroke(void);
 	void changeKeyboardMappings(SDLKey up, SDLKey down, SDLKey left, SDLKey right);
 	virtual void updatePosition(void);
+	void rotateWhenDead(void);
 	void kill(void);
+	bool isAlive(void);
 	~Pacman(void);
 };

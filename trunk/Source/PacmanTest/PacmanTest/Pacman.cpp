@@ -138,4 +138,17 @@ void Pacman::moveUp(void)
 void Pacman::kill(void)
 {
 	this->isDead = true;
+	this->xDirection = 0;
+	this->yDirection = 0;
+	Character::speed;
+}
+
+void Pacman::rotateWhenDead(void)
+{
+	Character::textura->rotate(90, 0);
+}
+
+bool Pacman::isAlive(void)
+{
+	return !this->isDead;
 }

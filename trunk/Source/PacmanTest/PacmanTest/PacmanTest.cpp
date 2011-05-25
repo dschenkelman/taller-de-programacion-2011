@@ -19,7 +19,7 @@ void Execute(void)
 	Uint32 period = 1000.0 / 60;
 	ScreenManager screenManager(w, "Images/fondo.bmp");
  
-	while(running) 
+	while(!screenManager.gameOver()) 
 	{
 		SDL_Delay(period);
 		screenManager.updateScreen();
