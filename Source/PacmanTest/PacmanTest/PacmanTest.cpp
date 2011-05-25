@@ -5,8 +5,12 @@
 #include "Window.h"
 #include "SDL.h"
 #include "ScreenManager.h"
+//useful to detect memory leaks
+#define _CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+#include <crtdbg.h>
 
-int _tmain(int argc, _TCHAR* argv[])
+void Execute(void)
 {
 	Window* w = new Window("Pacman", 480, 640);
 	//esperar para cerrar
@@ -33,6 +37,10 @@ int _tmain(int argc, _TCHAR* argv[])
 		}
 	}
 	delete w;
-	return 0;
 }
 
+int _tmain(int argc, _TCHAR* argv[])
+{
+	Execute();
+	int leaks = _CrtDumpMemoryLeaks();
+}

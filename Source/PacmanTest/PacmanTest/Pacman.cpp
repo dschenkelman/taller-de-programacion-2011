@@ -5,8 +5,8 @@
 
 using namespace std;
 
-Pacman::Pacman(string pathTextura, int h, int w, int x, int y) : 
-Character(pathTextura, h, w, x, y, 0, 0), dir(Direction::RIGHT),
+Pacman::Pacman(string pathTextura, int h, int w, int x, int y, int speed) : 
+Character(pathTextura, h, w, x, y, 0, 0, speed), dir(Direction::RIGHT),
 rightKey(SDLK_RIGHT),leftKey(SDLK_LEFT), upKey(SDLK_UP), downKey(SDLK_DOWN), isDead(false)
 {
 }

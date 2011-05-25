@@ -7,22 +7,35 @@
 
 using namespace std;
 
-Ghost::Ghost(string pathTextura, int h, int w, int x, int y, Pacman* pacman):
-Character(pathTextura, h, w, x, y, 0, 0), pacman(pacman)
+Ghost::Ghost(string pathTextura, string texturaVulnerable, int h, int w, int x, int y, int speed, Pacman* pacman):
+Character(pathTextura, h, w, x, y, 0, 0, speed), pacman(pacman), 
+pathTextura(pathTextura), texturaVulnerable(texturaVulnerable),
+isVulnerable(false), originalSpeed(speed), originalX(x), originalY(y)
 {
 }
 
 void Ghost::updatePosition(void)
 {
-	double distanceUp = this->getDistanceToPacman(Character::x, Character::y-1);
-	double distanceDown = this->getDistanceToPacman(Character::x, Character::y+1);
-	double distanceLeft = this->getDistanceToPacman(Character::x - 1, Character::y);
-	double distanceRight = this->getDistanceToPacman(Character::x + 1, Character::y);
+	double distanceUp = this->getDistanceToPacman(Character::x, Character::y - Character::speed);
+	double distanceDown = this->getDistanceToPacman(Character::x, Character::y + Character::speed);
+	double distanceLeft = this->getDistanceToPacman(Character::x - Character::speed, Character::y);
+	double distanceRight = this->getDistanceToPacman(Character::x + Character::speed, Character::y);
 
 	double distances[4] = {distanceUp, distanceDown, distanceLeft, distanceRight};
 
-	int minPosition = min_element(distances, distances + 4) - distances;
-	switch(minPosition)
+	int position;
+	if (this->isVulnerable)
+	{
+		// runaway
+		position = max_element(distances, distances + 4) - distances;
+	}
+	else
+	{
+		// chase
+		position = min_element(distances, distances + 4) - distances;
+	}
+
+	switch(position)
 	{
 		case 0:
 			Character::moveUp();
@@ -39,19 +52,48 @@ void Ghost::updatePosition(void)
 	}
 
 	Character::updatePosition();
-	this->tryKillPacman();
+	this->checkPacmanCollision();
 }
 
 double Ghost::getDistanceToPacman(int x, int y)
 {
-	int xDif = abs(x - this->pacman->getX());
-	int yDif = abs(y - this->pacman->getY());
+	if (x < 0)
+	{
+		x += Character::screenWidth;
+	}
+
+	if (y < 0)
+	{
+		y += Character::screenHeight;
+	}
+
+	int xDif = abs((x % Character::screenWidth) - this->pacman->getX());
+	int yDif = abs((y % Character::screenHeight) - this->pacman->getY());
 	double dif = xDif * xDif + yDif * yDif;
 	double distance = sqrt(dif);
 	return distance;
 }
 
-void Ghost::tryKillPacman(void)
+void Ghost::setIsVulnerable(bool value)
+{
+	if (value != this->isVulnerable)
+	{
+		this->isVulnerable = value;
+		delete Character::textura;
+		if (this->isVulnerable)
+		{
+			Character::textura = new Image(this->texturaVulnerable);
+			Character::speed = this->originalSpeed * 2 / 3;
+		}
+		else
+		{
+			Character::textura = new Image(this->pathTextura);
+			Character::speed = this->originalSpeed;
+		}
+	}
+}
+
+void Ghost::checkPacmanCollision(void)
 {
 	bool areInSamePosition = CollisionHelper::AreFullyCollisioned(Character::x, Character::y,
 		this->pacman->getX(), this->pacman->getY(), 2);
@@ -61,8 +103,22 @@ void Ghost::tryKillPacman(void)
 
 	if (areInSamePosition)
 	{
-		this->pacman->kill();
+		if (this->isVulnerable)
+		{
+			this->comeBackToLife();
+		}
+		else
+		{
+			this->pacman->kill();
+		}
 	}
+}
+
+void Ghost::comeBackToLife(void)
+{
+	Character::x = this->originalX;
+	Character::y = this->originalY;
+	this->setIsVulnerable(false);
 }
 
 Ghost::~Ghost(void)
