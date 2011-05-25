@@ -20,6 +20,7 @@ char* database::execute(char* sql)
 {
 	char* res;
 	sqlite3_exec(this->db, sql, NULL, 0, &res);
+	cout << sql << endl;
 	return res;
 }
 

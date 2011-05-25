@@ -1,6 +1,7 @@
 #include "database.h"
 #include "query.h"
 #include "sqlite_test.h"
+#include "gamelog.h"
 #include <iostream>
 using namespace std;
 
@@ -20,7 +21,13 @@ int main() {
 	char* t;
 	t = q.getChars(1);
 	cout << t << endl;
-	char c = getchar();
+	
+	remove("gamelog.sql");
+	gamelog glog = gamelog("gamelog.sql");
+	glog.createPlayer("ale","ale");
+	glog.insertGame("ale","ale",0,0,0,0);
+
+	getchar();
 	return 0;
 }
 
