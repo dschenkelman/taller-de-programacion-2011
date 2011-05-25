@@ -35,6 +35,12 @@ void Character::moveRight(void)
 	this->yDirection = 0;
 }
 
+bool Character::isNextPositionValid(void)
+{
+	// TODO: Implementar logica para ver si a donde me quiero mover no hay un obstaculo
+	return true;
+}
+
 void Character::updatePosition(void)
 {
 	Character::x = (Character::x + (Character::speed * Character::xDirection)) % Character::screenWidth;

@@ -20,6 +20,8 @@ public:
 	ScreenManager(Window* w, std::string pathFondo);
 	void updatePacman(Pacman* pac);
 	void updateGhosts(List<Ghost*> ghosts);
+	void createGhostsForPacman1(void);
+	void createGhostsForPacman2(void);
 	void handleKeyStroke(void);
 	void updateScreen(void);
 	~ScreenManager(void);
