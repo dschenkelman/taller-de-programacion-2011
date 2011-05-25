@@ -41,6 +41,16 @@ void Pacman::handleKeyStroke(void)
 	}
 }
 
+void Pacman::updatePosition(void)
+{
+	if (!Character::isNextPositionValid())
+	{
+		Character::xDirection = 0;
+		Character::yDirection = 0;
+	}
+	Character::updatePosition();
+}
+
 Pacman::~Pacman(void)
 {
 }

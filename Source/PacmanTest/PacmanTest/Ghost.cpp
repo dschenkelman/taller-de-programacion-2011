@@ -4,6 +4,8 @@
 #include "math.h"
 #include <algorithm>
 #include "CollisionHelper.h"
+#include <vector>
+#include <limits>
 
 using namespace std;
 
@@ -16,41 +18,7 @@ isVulnerable(false), originalSpeed(speed), originalX(x), originalY(y)
 
 void Ghost::updatePosition(void)
 {
-	double distanceUp = this->getDistanceToPacman(Character::x, Character::y - Character::speed);
-	double distanceDown = this->getDistanceToPacman(Character::x, Character::y + Character::speed);
-	double distanceLeft = this->getDistanceToPacman(Character::x - Character::speed, Character::y);
-	double distanceRight = this->getDistanceToPacman(Character::x + Character::speed, Character::y);
-
-	double distances[4] = {distanceUp, distanceDown, distanceLeft, distanceRight};
-
-	int position;
-	if (this->isVulnerable)
-	{
-		// runaway
-		position = max_element(distances, distances + 4) - distances;
-	}
-	else
-	{
-		// chase
-		position = min_element(distances, distances + 4) - distances;
-	}
-
-	switch(position)
-	{
-		case 0:
-			Character::moveUp();
-			break;
-		case 1:
-			Character::moveDown();
-			break;
-		case 2:
-			Character::moveLeft();
-			break;
-		case 3:
-			Character::moveRight();
-			break;
-	}
-
+	this->determineNextPosition();
 	Character::updatePosition();
 	this->checkPacmanCollision();
 }
@@ -112,6 +80,67 @@ void Ghost::checkPacmanCollision(void)
 			this->pacman->kill();
 		}
 	}
+}
+
+void Ghost::determineNextPosition(void)
+{
+	// 4 possible positions, array of 4
+	vector<double> distances = this->getDistanceForEachPosition();
+	int attempts = 0;
+	do
+	{
+		int position;	
+		if (this->isVulnerable)
+		{
+			// runaway
+			position = max_element(distances.begin(), distances.end()) - distances.begin();
+			
+			// to avoid taking this into account if the position is not valid
+			distances[position] = 0;
+		}
+		else
+		{
+			// chase
+			position = min_element(distances.begin(), distances.end()) - distances.begin();
+			
+			// to avoid taking this into account if the position is not valid
+			distances[position] = numeric_limits<double>::max();
+		}
+
+		switch(position)
+		{
+			case 0:
+				Character::moveUp();
+				break;
+			case 1:
+				Character::moveDown();
+				break;
+			case 2:
+				Character::moveLeft();
+				break;
+			case 3:
+				Character::moveRight();
+				break;
+		}
+
+		attempts++;
+	} while(!Character::isNextPositionValid() && attempts < 4);
+}
+
+vector<double> Ghost::getDistanceForEachPosition(void)
+{
+	vector<double> distances;
+	double distanceUp = this->getDistanceToPacman(Character::x, Character::y - Character::speed);
+	double distanceDown = this->getDistanceToPacman(Character::x, Character::y + Character::speed);
+	double distanceLeft = this->getDistanceToPacman(Character::x - Character::speed, Character::y);
+	double distanceRight = this->getDistanceToPacman(Character::x + Character::speed, Character::y);
+
+	distances.push_back(distanceUp);
+	distances.push_back(distanceDown);
+	distances.push_back(distanceLeft);
+	distances.push_back(distanceRight);
+
+	return distances;
 }
 
 void Ghost::comeBackToLife(void)

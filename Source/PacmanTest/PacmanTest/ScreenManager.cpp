@@ -18,6 +18,14 @@ ScreenManager::ScreenManager(Window* w, string pathFondo)
 		this->window->getHeight(), this->window->getWidth(),
 		this->window->getWidth() - (this->pacman1->getImage()->getWidth() + 1), 0, 5);
 
+	this->createGhostsForPacman1();
+	this->createGhostsForPacman2();
+
+	this->pacman2->changeKeyboardMappings(SDLK_w, SDLK_s, SDLK_a, SDLK_d);
+}
+
+void ScreenManager::createGhostsForPacman1(void)
+{
 	this->pacman1Ghosts.add(new Ghost("Images/redGhost.bmp", "Images/brownVGhost.bmp", this->window->getHeight(), this->window->getWidth(),
 		0, this->window->getHeight() - (30 + 1), 4, this->pacman1));
 
@@ -30,14 +38,15 @@ ScreenManager::ScreenManager(Window* w, string pathFondo)
 	g->setIsVulnerable(true);
 
 	this->pacman1Ghosts.add(g);
+}
 
-	//this->pacman2Ghosts.add(new Ghost("Images/blueGhost.bmp","Images/greenVGhost.bmp", this->window->getHeight(), this->window->getWidth(),
-	//	0, this->window->getHeight() - (30 + 1), 4, this->pacman2));
+void ScreenManager::createGhostsForPacman2(void)
+{
+	this->pacman2Ghosts.add(new Ghost("Images/blueGhost.bmp","Images/greenVGhost.bmp", this->window->getHeight(), this->window->getWidth(),
+		0, this->window->getHeight() - (30 + 1), 4, this->pacman2));
 
-	//this->pacman2Ghosts.add(new Ghost("Images/blueGhost.bmp", "Images/greenVGhost.bmp", this->window->getHeight(), this->window->getWidth(),
-	//	this->window->getWidth() - (30 + 1), this->window->getHeight() - (30 + 1), 4, this->pacman2));
-
-	this->pacman2->changeKeyboardMappings(SDLK_w, SDLK_s, SDLK_a, SDLK_d);
+	this->pacman2Ghosts.add(new Ghost("Images/blueGhost.bmp", "Images/greenVGhost.bmp", this->window->getHeight(), this->window->getWidth(),
+		this->window->getWidth() - (30 + 1), this->window->getHeight() - (30 + 1), 4, this->pacman2));
 }
 
 void ScreenManager::handleKeyStroke(void)
