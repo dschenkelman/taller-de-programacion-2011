@@ -23,6 +23,7 @@
 #include "ImageTests.h"
 #include "Window.h"
 #include <iostream>
+#include "time.h"
 using namespace std;
 
 //useful to detect memory leaks
@@ -31,68 +32,81 @@ using namespace std;
 #include <crtdbg.h>
 
 
-//void printLeaks(int leaks)
-//{
-//	std::cout << "MAIN: Hubo " << leaks << " memory leaks." << endl << endl;
-//}
-//
-//int execute(int argc, char* argv[])
-//{
-//	if (argc != 3)
-//	{
-//		cout<<"Sintaxis: ApplicationParser nombreArch.xml modoVideo (640 | 800 | 1024)"<<endl;
-//		return 0;
-//	}
-//	
-//	int videoMode =640;
-//	char* fileName = argv[1];
-//	videoMode = atoi(argv[2]);
-//
-//	ifstream ifile(fileName);
-//	if (ifile) 
-//	{
-//		// The file exists, and is open for input
-//		ifile.close();
-//		XmlParser parser;
-//		string name = fileName;
-//		parser.openFile(name);
-//		XmlElement root = parser.parse();
-//		parser.closeFile();
-//		Escenario escenario(root);
-//		if (!escenario.hasError())
-//		{
-//			Grapher grapher;
-//			grapher.setVideoMode(videoMode);
-//			grapher.draw(escenario);
-//		}
-//		else
-//		{
-//			cout << "Error al imprimir el Escenario. Referirse a parser.log.txt para mas detalles." << endl;
-//			return -1;
-//		}
-//	}
-//	else
-//	{
-//		cout << "El archivo: " << fileName << " no existe." << endl;
-//		return -1;
-//	}
-//	
-//	return 0;
-//}
-//
-//int main(int argc, char* argv[])
-//{
-//	int res = execute(argc, argv);
-//	//int leaks = _CrtDumpMemoryLeaks();
-//	//printLeaks(leaks);
-//
-//	char aux;
-//	cin >> aux;
-//	return res;
-//}
-
-int _tmain(int argc, _TCHAR* argv[])
+void printLeaks(int leaks)
 {
+	std::cout << "MAIN: Hubo " << leaks << " memory leaks." << endl << endl;
+}
+
+int execute(int argc, char* argv[])
+{
+	time_t start,end;
+	double diff;
+
+	if (argc != 3)
+	{
+		cout<<"Sintaxis: ApplicationParser nombreArch.xml modoVideo (640 | 800 | 1024)"<<endl;
+		return 0;
+	}
+	
+	int videoMode =640;
+	char* fileName = argv[1];
+	videoMode = atoi(argv[2]);
+
+	ifstream ifile(fileName);
+	if (ifile) 
+	{
+		// The file exists, and is open for input
+		ifile.close();
+		XmlParser parser;
+		cout<<"Inicio Parser\n";
+		time (&start);
+		string name = fileName;
+		parser.openFile(name);
+		XmlElement root = parser.parse();
+		parser.closeFile();
+		time (&end);
+		diff = difftime (end,start);
+		cout<<"Fin parser: "<<"tardando: "<<diff<<" segundos"<<endl;
+		Escenario escenario(root);
+		if (!escenario.hasError())
+		{
+			cout<<"Inicio grapher\n";
+			time (&start);
+			Grapher grapher;
+			grapher.setVideoMode(videoMode);
+			grapher.draw(escenario);
+			time (&end);
+			diff = difftime (end,start);
+			cout<<"Fin grapher: "<<"tardando: "<<diff<<" segundos"<<endl;
+		}
+		else
+		{
+			cout << "Error al imprimir el Escenario. Referirse a parser.log.txt para mas detalles." << endl;
+			return -1;
+		}
+	}
+	else
+	{
+		cout << "El archivo: " << fileName << " no existe." << endl;
+		return -1;
+	}
+	
+	return 0;
+}
+
+int main(int argc, char* argv[])
+{
+	int res = execute(argc, argv);
+	//int leaks = _CrtDumpMemoryLeaks();
+	//printLeaks(leaks);
+
+	char aux;
+	cin >> aux;
+	return res;
+}
+
+//int _tmain(int argc, _TCHAR* argv[])
+//{
 	/*cout<<"Test de List<T>"<<endl;
 	ListTests listTests;
 	listTests.run();
@@ -157,9 +171,9 @@ int _tmain(int argc, _TCHAR* argv[])
 	ImageTests imageTest;
 	imageTest.run();*/
 
-	cout<<"Test de Grapher"<<endl;
-	GrapherTests grapherTest;
-	grapherTest.run();
+	//cout<<"Test de Grapher"<<endl;
+	//GrapherTests grapherTest;
+	//grapherTest.run();
 
 	/*Window w("Ventana", 480, 640);
 	Image im("Images/smile.bmp");
@@ -178,10 +192,10 @@ int _tmain(int argc, _TCHAR* argv[])
 	w.refresh();*/
 
 	
-	SDL_Delay(1000);
+	//SDL_Delay(1000);
 
-	printf( "Press ENTER to continue... " );
+	//printf( "Press ENTER to continue... " );
 
-	char c = getchar();
-	return 0;
-}
+	//char c = getchar();
+	//return 0;
+//}
