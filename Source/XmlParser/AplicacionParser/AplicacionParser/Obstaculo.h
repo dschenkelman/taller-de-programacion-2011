@@ -13,6 +13,7 @@ class Obstaculo : public Celda
 	bool tieneError;
 	void populateValidAttributes(void);
 	bool validateAttributes(XmlElement& e);
+	Image * imagen;
 public:
 	Obstaculo(std::string& tipo, int f, int c);
 	Obstaculo(XmlElement& e);
@@ -25,5 +26,5 @@ public:
 	void setError(void);
 	Textura obtenerTextura(Celda* celSup, Celda* celInf, Celda* celDer, Celda* celIzq);
 	~Obstaculo(void);
-	Image obtenerRepresentacion(Celda* celSup, Celda* celInf, Celda* celDer, Celda* celIzq);
+	Image* obtenerRepresentacion(Celda* celSup, Celda* celInf, Celda* celDer, Celda* celIzq);
 };

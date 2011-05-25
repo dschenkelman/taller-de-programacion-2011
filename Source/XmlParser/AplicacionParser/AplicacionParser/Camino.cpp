@@ -9,10 +9,12 @@ using namespace std;
 Camino::Camino(int f, int c) : Celda(f, c), tieneBonus(false), tieneError(false)
 {
 	this->populateValidAttributes();
+	this->imagen=NULL;
 }
 
 Camino::Camino(XmlElement& e) : tieneBonus(false), tieneError(false)
 {
+	this->imagen=NULL;
 	this->populateValidAttributes();
 	this->tieneError = !this->validateAttributes(e);
 
@@ -71,6 +73,7 @@ Camino::Camino(XmlElement& e) : tieneBonus(false), tieneError(false)
 
 Camino::Camino(void)
 {
+	this->imagen=NULL;
 }
 
 bool Camino::hasBonus()
@@ -85,11 +88,13 @@ Bonus& Camino::getBonus()
 
 Camino::~Camino(void)
 {
+	if (this->imagen == NULL)
+		delete(this->imagen);
 }
 
-Image Camino::obtenerRepresentacion(Celda* celSup, Celda* celInf, Celda* celDer, Celda* celIzq)
+Image* Camino::obtenerRepresentacion(Celda* celSup, Celda* celInf, Celda* celDer, Celda* celIzq)
 {
-	Image imagen("Images/texturas/+.bmp");
+	string pathCamino="Images/texturas/+.bmp";
 	// Intento castear las celdas 
 	Camino* camSup = dynamic_cast<Camino*>(celSup);
 	Camino* camInf = dynamic_cast<Camino*>(celInf);
@@ -98,60 +103,62 @@ Image Camino::obtenerRepresentacion(Celda* celSup, Celda* celInf, Celda* celDer,
 	
 	// Ningun vecino es un camino
 	if( camSup == 0 && camInf == 0 && camDer == 0 && camIzq == 0 ){
-		imagen=Image("Images/texturas/..bmp");
+		pathCamino="Images/texturas/..bmp";
 	}
 	
 	// Solo vecinos superior o inferior son caminos
 	if(( camSup != 0 || camInf != 0 )&&( camDer == 0 && camIzq == 0 )){
-		imagen=Image("Images/texturas/i.bmp");
+		pathCamino="Images/texturas/i.bmp";
 	}
 
 	// Solo vecinos derecho o izquierdo son caminos
 	if(( camDer != 0 || camIzq != 0 )&&( camSup == 0 && camInf == 0 )){
-		imagen=Image("Images/texturas/-.bmp");
+		pathCamino="Images/texturas/-.bmp";
 	}
 
 	// Derecho, izquierdo, y abajo
 	if(camSup==0 && camDer!=0 && camIzq!=0 && camInf!=0){
-		imagen=Image("Images/texturas/t0.bmp");
+		pathCamino="Images/texturas/t0.bmp";
 	}
 
 	// Derecho, arriba, y abajo
 	if(camSup!=0 && camDer!=0 && camIzq==0 && camInf!=0){
-		imagen=Image("Images/texturas/t1.bmp");
+		pathCamino="Images/texturas/t1.bmp";
 	}
 
 	// Derecho, izquierdo, y arriba
 	if(camSup!=0 && camDer!=0 && camIzq!=0 && camInf==0){
-		imagen=Image("Images/texturas/t2.bmp");
+		pathCamino="Images/texturas/t2.bmp";
 	}
 
 	// Arriba, izquierdo, y abajo
 	if(camSup!=0 && camDer==0 && camIzq!=0 && camInf!=0){
-		imagen=Image("Images/texturas/t3.bmp");
+		pathCamino="Images/texturas/t3.bmp";
 	}
 
 	// Arriba, y derecho
 	if(camSup!=0 && camDer!=0 && camIzq==0 && camInf==0){
-		imagen=Image("Images/texturas/l0.bmp");
+		pathCamino="Images/texturas/l0.bmp";
 	}
 
 	// Arriba, e izquierdo
 	if(camSup!=0 && camDer==0 && camIzq!=0 && camInf==0){
-		imagen=Image("Images/texturas/l1.bmp");
+		pathCamino="Images/texturas/l1.bmp";
 	}
 
 	// Abajo, e izquierda
 	if(camSup==0 && camDer==0 && camIzq!=0 && camInf!=0){
-		imagen=Image("Images/texturas/l2.bmp");
+		pathCamino="Images/texturas/l2.bmp";
 	}
 
 	// Abajo, y derecha
 	if(camSup==0 && camDer!=0 && camIzq==0 && camInf!=0){
-		imagen=Image("Images/texturas/l3.bmp");
+		pathCamino="Images/texturas/l3.bmp";
 	}
 
-	if (this->hasBonus() && !imagen.hasError())
+	Image *imagenCamino= new Image(pathCamino);
+
+	if (this->hasBonus() && !(imagenCamino->hasError()))
 	{
 		/*std::stringstream ss;
 		std::string repres;*/
@@ -159,11 +166,11 @@ Image Camino::obtenerRepresentacion(Celda* celSup, Celda* celInf, Celda* celDer,
 		int red = tb.getTextura().getRed();
 		int green = tb.getTextura().getGreen();
 		int blue = tb.getTextura().getBlue();
-		imagen.superImpose(this->getBonus().obtenerRepresentacion(), red, green, blue, tb.getTextura().getDelta());
+		imagenCamino->superImpose(*(this->getBonus().obtenerRepresentacion()), red, green, blue, tb.getTextura().getDelta());
 		/*ss >> repres;*/
 	}
-
-	return imagen;
+	this->imagen=imagenCamino;
+	return imagenCamino;
 }
 
 Celda* Camino::copiar(void)

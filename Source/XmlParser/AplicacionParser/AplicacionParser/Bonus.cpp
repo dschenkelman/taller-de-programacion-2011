@@ -10,6 +10,7 @@ using namespace std;
 Bonus::Bonus(void) : tieneError(false)
 {
 	this->populateValidAttributes();
+	this->imagen=NULL;
 }
 
 Bonus::Bonus(XmlElement& e) : tieneError(false)
@@ -27,6 +28,7 @@ Bonus::Bonus(XmlElement& e) : tieneError(false)
 	{
 		tipo = e.getValue("tipo");
 	}	
+	this->imagen=NULL;
 }
 
 bool Bonus::validateAttributes(XmlElement& e)
@@ -79,19 +81,22 @@ bool Bonus::hasError(void)
 	return this->tieneError || this->tipoBonus.hasError();
 }
 
-Image Bonus::obtenerRepresentacion(void)
+Image* Bonus::obtenerRepresentacion(void)
 {
 	Textura textura = this->getTipoBonus().getTextura();
-	Image imagen(textura.getPath());
-	if (!imagen.hasError())
+	Image * imagen=new Image(textura.getPath());
+	if (!(imagen->hasError()))
 	{
-		imagen.crop(textura.getTop(), textura.getLeft(), textura.getRight(), textura.getBottom());
+		imagen->crop(textura.getTop(), textura.getLeft(), textura.getRight(), textura.getBottom());
 		Uint32 alphaPixel = textura.getRed() | textura.getGreen() << 8 | textura.getBlue() << 16;
-		imagen.rotate(textura.getRotation(), alphaPixel);
+		imagen->rotate(textura.getRotation(), alphaPixel);
 	}
+	this->imagen=imagen;
 	return imagen;	
 }
 
 Bonus::~Bonus(void)
 {
+	if (this->imagen == NULL)
+		delete (this->imagen);
 }

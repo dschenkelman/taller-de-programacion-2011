@@ -2,6 +2,7 @@
 //
 
 #include "stdafx.h"
+//#include "vld.h"
 #include "ListTests.h"
 #include "LoggerTests.h"
 #include "XmlParser.h"
@@ -30,6 +31,19 @@ using namespace std;
 #define _CRTDBG_MAP_ALLOC
 #include <stdlib.h>
 #include <crtdbg.h>
+
+//void testLeaks(void){
+//
+//	cout<<"Test de Grapher"<<endl;
+//	GrapherTests grapherTest;
+//	grapherTest.run();
+//	
+//	SDL_Delay(1000);
+//
+//	printf( "Press ENTER to continue... " );
+//
+//	char c = getchar();
+//}
 
 
 void printLeaks(int leaks)
@@ -97,8 +111,8 @@ int execute(int argc, char* argv[])
 int main(int argc, char* argv[])
 {
 	int res = execute(argc, argv);
-	//int leaks = _CrtDumpMemoryLeaks();
-	//printLeaks(leaks);
+	int leaks = _CrtDumpMemoryLeaks();
+	printLeaks(leaks);
 
 	char aux;
 	cin >> aux;
@@ -171,9 +185,7 @@ int main(int argc, char* argv[])
 	ImageTests imageTest;
 	imageTest.run();*/
 
-	//cout<<"Test de Grapher"<<endl;
-	//GrapherTests grapherTest;
-	//grapherTest.run();
+	
 
 	/*Window w("Ventana", 480, 640);
 	Image im("Images/smile.bmp");
@@ -190,12 +202,14 @@ int main(int argc, char* argv[])
 	im.superImpose(im3);
 	w.display(im, 400,50);
 	w.refresh();*/
-
 	
-	//SDL_Delay(1000);
+	/*testLeaks();
 
-	//printf( "Press ENTER to continue... " );
+	int leaks = _CrtDumpMemoryLeaks();
+	printLeaks(leaks);
+	char c = getchar();
 
-	//char c = getchar();
-	//return 0;
-//}
+
+	return 0;
+}*/
+

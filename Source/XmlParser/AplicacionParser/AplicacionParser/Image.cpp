@@ -43,10 +43,10 @@ Image::Image(int w, int h) : width(w), height(h), error(false), errorMessage("")
 	this->image = SDL_CreateRGBSurface(SDL_HWSURFACE,width,height,24,0,0,0,0);
 }
 
-Image::Image(const Image& other) : height(0), width(0), error(false), errorMessage(""), image(NULL)
-{
-	this->copy(other);
-}
+//Image::Image(const Image& other) : height(0), width(0), error(false), errorMessage(""), image(NULL)
+//{
+//	this->copy(other);
+//}
 
 Image& Image::operator =(const Image& other)
 {
