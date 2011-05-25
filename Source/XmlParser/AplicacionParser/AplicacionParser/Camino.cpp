@@ -88,77 +88,18 @@ Bonus& Camino::getBonus()
 
 Camino::~Camino(void)
 {
-	if (this->imagen == NULL)
+	/*if (this->imagen != NULL)
+	{
+		EL CAMINO NO BORRA SUS IMAGENES PORQUE EL CACHE LO HACE POR EL
 		delete(this->imagen);
+	}*/
 }
 
-Image* Camino::obtenerRepresentacion(Celda* celSup, Celda* celInf, Celda* celDer, Celda* celIzq)
+Image* Camino::obtenerRepresentacion()
 {
-	string pathCamino="Images/texturas/+.bmp";
-	// Intento castear las celdas 
-	Camino* camSup = dynamic_cast<Camino*>(celSup);
-	Camino* camInf = dynamic_cast<Camino*>(celInf);
-	Camino* camDer = dynamic_cast<Camino*>(celDer);
-	Camino* camIzq = dynamic_cast<Camino*>(celIzq);
-	
-	// Ningun vecino es un camino
-	if( camSup == 0 && camInf == 0 && camDer == 0 && camIzq == 0 ){
-		pathCamino="Images/texturas/..bmp";
-	}
-	
-	// Solo vecinos superior o inferior son caminos
-	if(( camSup != 0 || camInf != 0 )&&( camDer == 0 && camIzq == 0 )){
-		pathCamino="Images/texturas/i.bmp";
-	}
+	this->imagen = new Image("Images/texturas/camino.bmp");
 
-	// Solo vecinos derecho o izquierdo son caminos
-	if(( camDer != 0 || camIzq != 0 )&&( camSup == 0 && camInf == 0 )){
-		pathCamino="Images/texturas/-.bmp";
-	}
-
-	// Derecho, izquierdo, y abajo
-	if(camSup==0 && camDer!=0 && camIzq!=0 && camInf!=0){
-		pathCamino="Images/texturas/t0.bmp";
-	}
-
-	// Derecho, arriba, y abajo
-	if(camSup!=0 && camDer!=0 && camIzq==0 && camInf!=0){
-		pathCamino="Images/texturas/t1.bmp";
-	}
-
-	// Derecho, izquierdo, y arriba
-	if(camSup!=0 && camDer!=0 && camIzq!=0 && camInf==0){
-		pathCamino="Images/texturas/t2.bmp";
-	}
-
-	// Arriba, izquierdo, y abajo
-	if(camSup!=0 && camDer==0 && camIzq!=0 && camInf!=0){
-		pathCamino="Images/texturas/t3.bmp";
-	}
-
-	// Arriba, y derecho
-	if(camSup!=0 && camDer!=0 && camIzq==0 && camInf==0){
-		pathCamino="Images/texturas/l0.bmp";
-	}
-
-	// Arriba, e izquierdo
-	if(camSup!=0 && camDer==0 && camIzq!=0 && camInf==0){
-		pathCamino="Images/texturas/l1.bmp";
-	}
-
-	// Abajo, e izquierda
-	if(camSup==0 && camDer==0 && camIzq!=0 && camInf!=0){
-		pathCamino="Images/texturas/l2.bmp";
-	}
-
-	// Abajo, y derecha
-	if(camSup==0 && camDer!=0 && camIzq==0 && camInf!=0){
-		pathCamino="Images/texturas/l3.bmp";
-	}
-
-	Image *imagenCamino= new Image(pathCamino);
-
-	if (this->hasBonus() && !(imagenCamino->hasError()))
+	if (this->hasBonus() && !(this->imagen->hasError()))
 	{
 		/*std::stringstream ss;
 		std::string repres;*/
@@ -166,11 +107,15 @@ Image* Camino::obtenerRepresentacion(Celda* celSup, Celda* celInf, Celda* celDer
 		int red = tb.getTextura().getRed();
 		int green = tb.getTextura().getGreen();
 		int blue = tb.getTextura().getBlue();
-		imagenCamino->superImpose(*(this->getBonus().obtenerRepresentacion()), red, green, blue, tb.getTextura().getDelta());
+		this->imagen->superImpose(*(this->getBonus().obtenerRepresentacion()), red, green, blue, tb.getTextura().getDelta());
 		/*ss >> repres;*/
 	}
-	this->imagen=imagenCamino;
-	return imagenCamino;
+	return this->imagen;
+}
+
+Camino::Camino(const Camino& other)
+{
+
 }
 
 Celda* Camino::copiar(void)
@@ -219,71 +164,11 @@ void Camino::populateValidAttributes(void)
 	this->validAttributes.add("columna");
 }
 
-Textura Camino::obtenerTextura(Celda* celSup, Celda* celInf, Celda* celDer, Celda* celIzq)
+Textura Camino::obtenerTextura()
 {
 	Textura textura;
-	textura.setNombre("Images/texturas/+.bmp");
-	// Intento castear las celdas 
-	Camino* camSup = dynamic_cast<Camino*>(celSup);
-	Camino* camInf = dynamic_cast<Camino*>(celInf);
-	Camino* camDer = dynamic_cast<Camino*>(celDer);
-	Camino* camIzq = dynamic_cast<Camino*>(celIzq);
+	textura.setNombre("Images/texturas/camino.bmp");
 	
-	// Ningun vecino es un camino
-	if( camSup == 0 && camInf == 0 && camDer == 0 && camIzq == 0 ){
-		textura.setNombre("Images/texturas/..bmp");
-	}
-	
-	// Solo vecinos superior o inferior son caminos
-	if(( camSup != 0 || camInf != 0 )&&( camDer == 0 && camIzq == 0 )){
-		textura.setNombre("Images/texturas/i.bmp");
-	}
-
-	// Solo vecinos derecho o izquierdo son caminos
-	if(( camDer != 0 || camIzq != 0 )&&( camSup == 0 && camInf == 0 )){
-		textura.setNombre("Images/texturas/-.bmp");
-	}
-
-	// Derecho, izquierdo, y abajo
-	if(camSup==0 && camDer!=0 && camIzq!=0 && camInf!=0){
-		textura.setNombre("Images/texturas/t0.bmp");
-	}
-
-	// Derecho, arriba, y abajo
-	if(camSup!=0 && camDer!=0 && camIzq==0 && camInf!=0){
-		textura.setNombre("Images/texturas/t1.bmp");
-	}
-
-	// Derecho, izquierdo, y arriba
-	if(camSup!=0 && camDer!=0 && camIzq!=0 && camInf==0){
-		textura.setNombre("Images/texturas/t2.bmp");
-	}
-
-	// Arriba, izquierdo, y abajo
-	if(camSup!=0 && camDer==0 && camIzq!=0 && camInf!=0){
-		textura.setNombre("Images/texturas/t3.bmp");
-	}
-
-	// Arriba, y derecho
-	if(camSup!=0 && camDer!=0 && camIzq==0 && camInf==0){
-		textura.setNombre("Images/texturas/l0.bmp");
-	}
-
-	// Arriba, e izquierdo
-	if(camSup!=0 && camDer==0 && camIzq!=0 && camInf==0){
-		textura.setNombre("Images/texturas/l1.bmp");
-	}
-
-	// Abajo, e izquierda
-	if(camSup==0 && camDer==0 && camIzq!=0 && camInf!=0){
-		textura.setNombre("Images/texturas/l2.bmp");
-	}
-
-	// Abajo, y derecha
-	if(camSup==0 && camDer!=0 && camIzq==0 && camInf!=0){
-		textura.setNombre("Images/texturas/l3.bmp");
-	}
-
 	if (this->hasBonus())
 	{
 		string nombreTexturaBonus = this->getBonus().getTipoBonus().getTextura().getNombre();

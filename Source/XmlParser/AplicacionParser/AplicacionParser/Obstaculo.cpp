@@ -92,7 +92,7 @@ Obstaculo::~Obstaculo(void)
 		delete (this->imagen);
 }
 
-Image* Obstaculo::obtenerRepresentacion(Celda* celSup, Celda* celInf, Celda* celDer, Celda* celIzq)
+Image* Obstaculo::obtenerRepresentacion()
 {
 	Textura textura = this->getTipoObstaculo().getTextura();
 	Image * imagen = new Image(textura.getPath());
@@ -152,7 +152,7 @@ void Obstaculo::setError(void)
 	this->tieneError = true;
 }
 
-Textura Obstaculo::obtenerTextura(Celda*, Celda*,Celda*,Celda*)
+Textura Obstaculo::obtenerTextura()
 {
 	//parameters not required
 	return this->getTipoObstaculo().getTextura();

@@ -24,7 +24,7 @@ public:
 	Celda* copiar(void);
 	bool hasError(void);
 	void setError(void);
-	Textura obtenerTextura(Celda* celSup, Celda* celInf, Celda* celDer, Celda* celIzq);
+	Textura obtenerTextura();
 	~Obstaculo(void);
-	Image* obtenerRepresentacion(Celda* celSup, Celda* celInf, Celda* celDer, Celda* celIzq);
+	Image* obtenerRepresentacion();
 };

@@ -6,17 +6,20 @@
 
 using namespace std;
 
-TipoBonus::TipoBonus(void) : tieneError(false), utilizado(false)
+TipoBonus::TipoBonus(void) : tieneError(false), utilizado(false),
+unidad("pasos"), duracion(100), probabilidad(1), apariciones(1) 
 {
 	this->populateValidAttributes();
 }
 
-TipoBonus::TipoBonus(std::string& n, std::string& t) : tieneError(false), utilizado(false), nombre(n), nombreTextura(t)
+TipoBonus::TipoBonus(std::string& n, std::string& t) : tieneError(false), utilizado(false), nombre(n), nombreTextura(t),
+unidad("pasos"), duracion(100), probabilidad(1), apariciones(1)
 {
 	this->populateValidAttributes();
 }
 
-TipoBonus::TipoBonus(XmlElement& e) : tieneError(false), utilizado(false)
+TipoBonus::TipoBonus(XmlElement& e) : tieneError(false), utilizado(false),
+unidad("pasos"), duracion(100), probabilidad(1), apariciones(1)
 {
 	this->populateValidAttributes();
 	this->tieneError = !this->validateAttributes(e);
@@ -30,6 +33,47 @@ TipoBonus::TipoBonus(XmlElement& e) : tieneError(false), utilizado(false)
 	{
 		this->nombreTextura = e.getValue("textura");
 	}
+
+	if(e.hasAttribute("unidad"))
+	{
+		// default pasos
+		string u = e.getValue("unidad");
+		if (u == "tiempo")
+		{
+			this->unidad = u;
+		} 
+	}
+
+	if (e.hasAttribute("duracion"))
+	{
+		string d = e.getValue("duracion");
+		int dur = atoi(d.c_str());
+		if (dur > 0)
+		{
+			this->duracion = dur;
+		}
+	}
+
+	if (e.hasAttribute("probabilidad"))
+	{
+		string p = e.getValue("probabilidad");
+		int prob = atoi(p.c_str());
+		if (prob > 0)
+		{
+			this->probabilidad = prob;
+		}
+	}
+
+	if (e.hasAttribute("apariciones"))
+	{
+		string a = e.getValue("apariciones");
+		int ap = atoi(a.c_str());
+		if (ap > 0)
+		{
+			this->apariciones = ap;
+		}
+	}
+
 }
 
 std::string TipoBonus::getNombre(void)
@@ -85,6 +129,10 @@ void TipoBonus::populateValidAttributes(void)
 {
 	this->validAttributes.add("nombre");
 	this->validAttributes.add("textura");
+	this->validAttributes.add("duracion");
+	this->validAttributes.add("unidad");
+	this->validAttributes.add("probabilidad");
+	this->validAttributes.add("apariciones");
 }
 
 void TipoBonus::setLinea(int l)
