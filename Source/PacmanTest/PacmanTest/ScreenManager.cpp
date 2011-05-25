@@ -11,11 +11,11 @@ ScreenManager::ScreenManager(Window* w, string pathFondo) : deadCycles(0)
 	this->window = w;
 	this->fondo = new Image(pathFondo);
 	this->gameOverImage = new Image("Images/gameOver.bmp");
-	this->pacman1 = new Pacman("Images/pacman.bmp", 
+	this->pacman1 = new Pacman("Images/pacman.bmp","Images/pacmanClosed.bmp", 
 		this->window->getHeight(), this->window->getWidth(),
 		0, 0, 5);
 
-	this->pacman2 = new Pacman("Images/pacman2.bmp", 
+	this->pacman2 = new Pacman("Images/pacman2.bmp", "Images/pacman2Closed.bmp",
 		this->window->getHeight(), this->window->getWidth(),
 		this->window->getWidth() - (this->pacman1->getImage()->getWidth() + 1), 0, 5);
 
@@ -125,6 +125,7 @@ void ScreenManager::updatePacman(Pacman* pac)
 
 bool ScreenManager::gameOver(void)
 {
+	// eventually this will also include whether all bonuses have been eaten
 	return this->deadCycles >= 40;
 }
 ScreenManager::~ScreenManager(void)
