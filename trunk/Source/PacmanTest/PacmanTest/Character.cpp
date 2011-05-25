@@ -5,8 +5,8 @@
 
 using namespace std;
 
-Character::Character(string pathTextura, int h, int w, int x, int y, int xDir, int yDir):
-screenHeight(h), screenWidth(w), x(x), y(y), xDirection(xDir), yDirection(yDir)
+Character::Character(string pathTextura, int h, int w, int x, int y, int xDir, int yDir, int speed):
+screenHeight(h), screenWidth(w), x(x), y(y), xDirection(xDir), yDirection(yDir), speed(speed)
 {
 	this->textura = new Image(pathTextura);
 }
