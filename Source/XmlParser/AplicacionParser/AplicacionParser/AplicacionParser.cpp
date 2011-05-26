@@ -32,18 +32,18 @@ using namespace std;
 #include <stdlib.h>
 #include <crtdbg.h>
 
-//void testLeaks(void){
-//
-//	cout<<"Test de Grapher"<<endl;
-//	GrapherTests grapherTest;
-//	grapherTest.run();
-//	
-//	SDL_Delay(1000);
-//
-//	printf( "Press ENTER to continue... " );
-//
-//	char c = getchar();
-//}
+void testLeaks(void){
+
+	cout<<"Test de Grapher"<<endl;
+	GrapherTests grapherTest;
+	grapherTest.run();
+	
+	SDL_Delay(1000);
+
+	printf( "Press ENTER to continue... " );
+
+	char c = getchar();
+}
 
 
 void printLeaks(int leaks)
@@ -172,11 +172,11 @@ int main(int argc, char* argv[])
 	cout<<"Test de Escenario"<<endl;
 	EscenarioTests escenarioTests;
 	escenarioTests.run();
-
-	cout<<"Test de XmlParser"<<endl;
-	XmlParserTest xmlParserTest;
-	xmlParserTest.run();
 	*/
+	/*cout<<"Test de XmlParser"<<endl;
+	XmlParserTest xmlParserTest;
+	xmlParserTest.run();*/
+
 	/*cout<<"Test de Textura"<<endl;
 	TexturaTests texturaTests;
 	texturaTests.run();
@@ -204,12 +204,12 @@ int main(int argc, char* argv[])
 	w.refresh();*/
 	
 	/*testLeaks();
-
-	int leaks = _CrtDumpMemoryLeaks();
-	printLeaks(leaks);
-	char c = getchar();
-
-
-	return 0;
-}*/
+*/
+//	int leaks = _CrtDumpMemoryLeaks();
+//	printLeaks(leaks);
+//	char c = getchar();
+//
+//
+//	return 0;
+//}
 

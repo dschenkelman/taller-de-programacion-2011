@@ -9,6 +9,7 @@
 #include <sstream>
 #include <algorithm>
 #include <fstream>
+#include <time.h>
 
 using namespace std;
 
@@ -34,6 +35,7 @@ XmlParser::XmlParser(void) : lastIndex(0), lastJumpAmount(0)
 	this->isOpeningLine = true;
 	this->fileOrig=" ";
 	this->lastPos=0;
+	this->miToken=NULL;
 }
 
 XmlParser::~XmlParser(void)
@@ -41,6 +43,8 @@ XmlParser::~XmlParser(void)
 	if (this->xmlFile.is_open())
 		this->xmlFile.close();
 	this->log->closeLog();
+	if (this->miToken != NULL)
+		delete(this->miToken);
 	/*remove(AUX);
 	remove(PARSING);*/
 }
@@ -64,6 +68,10 @@ void XmlParser::openFile(std::string filename){
 
 bool XmlParser::preParseFile(std::string filename){
 	
+	time_t start,end;
+	double diff;
+	time(&start);
+	
 	std::string lineToRead;
 	std::string workLine;
 	std::string workAux;
@@ -79,17 +87,18 @@ bool XmlParser::preParseFile(std::string filename){
 			return false;
 	}
 	while (getline( xmlAuxFile, lineToRead )){
+		lineToRead.erase(std::remove(lineToRead.begin(), lineToRead.end(), '\t'), lineToRead.end());
+		trim(lineToRead,' ');
 		workLine+=lineToRead;
 		lineToRead.erase(std::remove(lineToRead.begin(), lineToRead.end(), '\n'), lineToRead.end());
 	    lineToRead.erase(std::remove(lineToRead.begin(), lineToRead.end(), '\r'), lineToRead.end());
-		lineToRead.append("&");
+		lineToRead.append(" & ");
 		this->fileOrig+=lineToRead;
 
 	}
 
 	this->fileOrig.append("\n");
 	xmlAuxFile.close();
-
 	workLine.erase(std::remove(workLine.begin(), workLine.end(), '\n'), workLine.end());
 	workLine.erase(std::remove(workLine.begin(), workLine.end(), '\r'), workLine.end());
 	replaceAll(workLine, "<", "\n<");
@@ -100,12 +109,19 @@ bool XmlParser::preParseFile(std::string filename){
 	//file<<workLine;
 	//file.close();
 	this->aParsearWorkLine=workLine;
+	
+	time (&end);
+	diff = difftime (end,start);
+	cout<<"Fin preParseFile: "<<"tardando: "<<diff<<" segundos"<<endl;
 	return removeBlankLines();
 
 }
 
 bool XmlParser::removeBlankLines(void){
 	//ifstream initialFile(AUX, ios::in|ios::binary);	
+	time_t start,end;
+	double diff;
+	time(&start);
 	ofstream outputFile(PARSING, ios::out|ios::binary);	
 	string work;
 	string lineToRead;
@@ -118,20 +134,26 @@ bool XmlParser::removeBlankLines(void){
 	work=this->aParsearWorkLine;
 	Tokenizer miTok(work,"\n");
 
+	this->aParsearWorkLine.clear();
+
 	while (miTok.NextToken() ){
 		
 		lineToRead=miTok.GetToken();
 		trim(lineToRead,' ');
-		trim(lineToRead,'\n');
-		trim(lineToRead,'\t');
 		if (lineToRead.length() > 0){
 			outputFile<<lineToRead<<"\n";
+			this->aParsearWorkLine+=lineToRead;
+			this->aParsearWorkLine+="\n";
+
 		}
 		
 	}
 
 	//initialFile.close();	
 	outputFile.close();	
+	time (&end);
+	diff = difftime (end,start);
+	cout<<"Fin removeBlankLines: "<<"tardando: "<<diff<<" segundos"<<endl;
 	return true;
 
 }
@@ -182,9 +204,16 @@ bool  XmlParser::getXmlLine(void){
 	this->hasErrors = false;
 	this->hasAttributeErrors = false;
 	bool resp;
+	time_t start,end;
+	double diff;
 
-	if ( (resp= this->xmlFile.is_open()) && getline( this->xmlFile, this->lineRead ))
+	if (this->miToken == NULL)
+		this->miToken=new Tokenizer(this->aParsearWorkLine,"\n");
+
+	this->lineRead.clear();
+	if ( getXmlLineFromString(this->lineRead ))
 	{
+		//cout<<this->lineRead;
 		//this->lineNumber++;
 		this->lineNumber=this->getOrigLineNumber(this->lineRead);
 		this->trim(this->lineRead, ' ');
@@ -251,6 +280,9 @@ List<string> XmlParser::getLineTagAttributes(void){
 
 void XmlParser::parseLine(void)
 {
+	//time_t start,end;
+	//double diff;
+	//time(&start);
 	string line;
 	line = this->getLineRead();
 	if (line[0] == '/')
@@ -263,6 +295,10 @@ void XmlParser::parseLine(void)
 		this->isOpeningLine = true;
 		this->parseOpeningLine(line);
 	}
+	
+	/*time(&end);
+	diff = difftime (end,start);
+	cout<<"Tiempo dentro de parseLine: "<<diff<<endl;*/
 }
 void XmlParser::parseAttribute(string myLine){
 
@@ -361,6 +397,10 @@ XmlElement XmlParser::parse()
 	XmlElement currentParent;
 	XmlElement currentElement;
 	bool parentSet = false;
+
+    clock_t t1=clock();
+	int contador=0;
+	
 
 	while (this->getXmlLine())
 	{
@@ -469,8 +509,13 @@ XmlElement XmlParser::parse()
 				}
 			}
 		}
+		contador++;
 	}
+		clock_t t2=clock();
+        printf("%.4lf seconds of processing\n", (t2-t1)/(double)CLOCKS_PER_SEC);
+		cout<<"Contador: "<<contador<<endl;
 	return currentParent;
+	
 }
 
 void XmlParser::parseOpeningLine(string line)
@@ -558,5 +603,13 @@ string& XmlParser::replaceAll(string& context, const string& from,const string& 
 	return context;
 } 
 
-
+bool  XmlParser::getXmlLineFromString(string &linea){
+	while(this->miToken->NextToken()){
+		linea=this->miToken->GetToken();
+		if (linea.length() == 0)
+			continue;
+		return true;
+	}
+		return false;
+}
 
