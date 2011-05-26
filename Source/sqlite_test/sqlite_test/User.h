@@ -1,14 +1,16 @@
-using namespace std;
 #include <string>
-
 #pragma once
+
+using namespace std;
 
 class User
 {
 private:
-	string name;
-	int points;
+	std::string name;
+	std::string password;
 public:
-	User(string name, int points);
+	User(string name, std::string password);
+	std::string getPassword();
+	std::string getName();
 	~User(void);
 };
