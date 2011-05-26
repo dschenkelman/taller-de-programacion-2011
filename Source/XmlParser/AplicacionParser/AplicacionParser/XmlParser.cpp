@@ -194,6 +194,8 @@ long XmlParser::getOrigLineNumber(string search){
 //Si el archivo no esta abierto o se acabaron las lineas, devuelve false.
 
 bool  XmlParser::getXmlLine(void){
+    clock_t t1=clock();
+	clock_t t2;
 	
 	string strMine;
 	string logMessage;
@@ -262,6 +264,8 @@ bool  XmlParser::getXmlLine(void){
 	}
 	else
 		return false;
+	t2=clock();
+	printf("%.4lf seconds en getline\n", (t2-t1)/(double)CLOCKS_PER_SEC);
 	out.flush();
 	return true;
 }
@@ -509,10 +513,15 @@ XmlElement XmlParser::parse()
 				}
 			}
 		}
-		contador++;
-	}
+		contador++;		
 		clock_t t2=clock();
         printf("%.4lf seconds of processing\n", (t2-t1)/(double)CLOCKS_PER_SEC);
+		//cout<<"Contador: "<<contador<<endl;
+
+	}
+		
+		clock_t t2=clock();
+        printf("%.4lf seconds fuera del while\n", (t2-t1)/(double)CLOCKS_PER_SEC);
 		cout<<"Contador: "<<contador<<endl;
 	return currentParent;
 	
@@ -606,7 +615,9 @@ string& XmlParser::replaceAll(string& context, const string& from,const string& 
 bool  XmlParser::getXmlLineFromString(string &linea){
 	while(this->miToken->NextToken()){
 		linea=this->miToken->GetToken();
-		if (linea.length() == 0)
+		//linea.erase(std::remove(linea.begin(), linea.end(), '\t'), linea.end());
+		//trim(lineToRead,' ');
+		if (linea.length() <= 1)
 			continue;
 		return true;
 	}
