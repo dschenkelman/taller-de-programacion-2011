@@ -5,6 +5,7 @@
 #include "List.h"
 #include "Logger.h"
 #include "XmlElement.h"
+#include "Tokenizer.h"
 #define AUX "auxiliar.xml"
 #define PARSING "texto.xml"
 
@@ -40,6 +41,8 @@ private:
 	std::string validTags[11];
 	bool preParseFile(std::string filename);
 	bool removeBlankLines(void);
+	Tokenizer *miToken;
+	bool getXmlLineFromString(string &linea);
 
 public:
 
