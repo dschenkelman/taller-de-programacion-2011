@@ -6,12 +6,13 @@ std::string RichText::NORMAL		= "normal";
 std::string RichText::MENU_ITEM		= "menu_item";
 
 
-RichText::RichText(std::string txt, std::string type){
+RichText::RichText(std::string txt, std::string type): Image(1,1){
 	
 	int letterWidth		= 17;
 	int letterHeight	= 17;
+	
 	// nueva imagen
-	this->txtImg = new Image((letterWidth*txt.length()), letterHeight);
+	Image* aux = new Image((letterWidth*txt.length()), letterHeight);
 
 	// recorro el texto a renderizar
 	for(size_t i=0; i < txt.length(); i++){
@@ -24,11 +25,8 @@ RichText::RichText(std::string txt, std::string type){
 		dst->x=(letterWidth*i);
 		dst->y=0;
 		
-		SDL_BlitSurface(letter->getSDLSurface(), NULL, this->txtImg->getSDLSurface(), dst);
+		SDL_BlitSurface(letter->getSDLSurface(), NULL, aux->getSDLSurface(), dst);
 
 	}
-}
-
-Image* RichText::getImage(){
-	return this->txtImg;
+	this->copy(*aux);
 }
