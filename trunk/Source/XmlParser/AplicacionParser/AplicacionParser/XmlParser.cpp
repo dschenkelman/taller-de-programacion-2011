@@ -604,8 +604,6 @@ string& XmlParser::replaceAll(string& context, const string& from,const string& 
 bool  XmlParser::getXmlLineFromString(string &linea){
 	while(this->miToken->NextToken()){
 		linea=this->miToken->GetToken();
-		//linea.erase(std::remove(linea.begin(), linea.end(), '\t'), linea.end());
-		//trim(lineToRead,' ');
 		if (linea.length() <= 1)
 			continue;
 		return true;
