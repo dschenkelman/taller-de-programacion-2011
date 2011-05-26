@@ -415,7 +415,7 @@ XmlElement XmlParser::parse()
 
 		if (this->isOpeningLine)
 		{
-			XmlElement currentElement = XmlElement(name, this->lineNumber, 0);
+			XmlElement currentElement(name, this->lineNumber, 0);
 			if (!this->hasAttributeErrors)
 			{
 				List<string> attributes = this->getLineTagAttributes();
