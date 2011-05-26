@@ -44,6 +44,7 @@
 	<CAMINO fila="4" columna="13"/>
 	<CAMINO fila="4" columna="19"/>
 	<CAMINO fila="4" columna="24"/>
+	
 	<CAMINO fila="5" columna="0"/>
 	<CAMINO fila="5" columna="1"/>
 	<CAMINO fila="5" columna="2"/>
@@ -69,18 +70,21 @@
 	<CAMINO fila="5" columna="22"/>
 	<CAMINO fila="5" columna="23"/>
 	<CAMINO fila="5" columna="24"/>	
+	
 	<CAMINO fila="6" columna="0"/>
 	<CAMINO fila="6" columna="5"/>
 	<CAMINO fila="6" columna="8"/>
 	<CAMINO fila="6" columna="16"/>
 	<CAMINO fila="6" columna="19"/>
 	<CAMINO fila="6" columna="24"/>
+	
 	<CAMINO fila="7" columna="0"/>
 	<CAMINO fila="7" columna="5"/>
 	<CAMINO fila="7" columna="8"/>
 	<CAMINO fila="7" columna="16"/>
 	<CAMINO fila="7" columna="19"/>
 	<CAMINO fila="7" columna="24"/>
+	
 	<CAMINO fila="8" columna="0"/>
 	<CAMINO fila="8" columna="1"/>
 	<CAMINO fila="8" columna="2"/>
@@ -101,10 +105,12 @@
 	<CAMINO fila="8" columna="22"/>
 	<CAMINO fila="8" columna="23"/>
 	<CAMINO fila="8" columna="24"/>	
+	
 	<CAMINO fila="9" columna="5"/>
 	<CAMINO fila="9" columna="11"/>
 	<CAMINO fila="9" columna="13"/>
 	<CAMINO fila="9" columna="19"/>
+	
 	<CAMINO fila="10" columna="5"/>
 	<CAMINO fila="10" columna="11"/>
 	<CAMINO fila="10" columna="13"/>
@@ -117,6 +123,192 @@
 	<CAMINO fila="12" columna="19"/>
 	<CAMINO fila="13" columna="5"/>
 	<CAMINO fila="13" columna="19"/>
+	
+	
+	<CAMINO fila="10" columna="5"/>
+	<CAMINO fila="10" columna="11"/>
+	<CAMINO fila="10" columna="13"/>
+	<CAMINO fila="10" columna="19"/>
+	<CAMINO fila="11" columna="5"/>
+	<CAMINO fila="11" columna="11"/>
+	<CAMINO fila="11" columna="13"/>
+	<CAMINO fila="11" columna="19"/>
+	<CAMINO fila="12" columna="5"/>
+	<CAMINO fila="12" columna="8"/>
+	<CAMINO fila="12" columna="9"/>
+	<CAMINO fila="12" columna="10"/>
+	<CAMINO fila="12" columna="11"/>
+	<CAMINO fila="12" columna="12"/>
+	<CAMINO fila="12" columna="13"/>
+	<CAMINO fila="12" columna="14"/>
+	<CAMINO fila="12" columna="15"/>
+	<CAMINO fila="12" columna="16"/>
+	<CAMINO fila="12" columna="19"/>
+
+	<CAMINO fila="13" columna="8"/>
+	<CAMINO fila="13" columna="5"/>
+	<CAMINO fila="13" columna="12"/>
+	<CAMINO fila="13" columna="16"/>
+	<CAMINO fila="13" columna="19"/>
+	
+	<CAMINO fila="14" columna="5"/>
+	<CAMINO fila="14" columna="8"/>
+	<CAMINO fila="14" columna="10"/>
+	<CAMINO fila="14" columna="11"/>
+	<CAMINO fila="14" columna="12"/>
+	<CAMINO fila="14" columna="13"/>
+	<CAMINO fila="14" columna="14"/>
+	<CAMINO fila="14" columna="16"/>
+	<CAMINO fila="14" columna="19"/>
+	
+	<CAMINO fila="15" columna="5"/>
+	<CAMINO fila="15" columna="8"/>
+	<CAMINO fila="15" columna="10"/>
+	<CAMINO fila="15" columna="11"/>
+	<CAMINO fila="15" columna="12"/>
+	<CAMINO fila="15" columna="13"/>
+	<CAMINO fila="15" columna="14"/>
+	<CAMINO fila="15" columna="16"/>
+	<CAMINO fila="15" columna="19"/>
+	
+	<CAMINO fila="16" columna="5"/>
+	<CAMINO fila="16" columna="8"/>
+	<CAMINO fila="16" columna="10"/>
+	<CAMINO fila="16" columna="11"/>
+	<CAMINO fila="16" columna="12"/>
+	<CAMINO fila="16" columna="13"/>
+	<CAMINO fila="16" columna="14"/>
+	<CAMINO fila="16" columna="16"/>
+	<CAMINO fila="16" columna="19"/>
+	
+	
+	<CAMINO fila="17" columna="8"/>
+	<CAMINO fila="17" columna="5"/>
+	<CAMINO fila="17" columna="16"/>
+	<CAMINO fila="17" columna="19"/>
+	
+	<CAMINO fila="18" columna="0"/>
+	<CAMINO fila="18" columna="1"/>
+	<CAMINO fila="18" columna="2"/>
+	<CAMINO fila="18" columna="3"/>
+	<CAMINO fila="18" columna="4"/>
+	<CAMINO fila="18" columna="5"/>
+	<CAMINO fila="18" columna="6"/>
+	<CAMINO fila="18" columna="7"/>
+	<CAMINO fila="18" columna="8"/>
+	<CAMINO fila="18" columna="9"/>
+	<CAMINO fila="18" columna="10"/>
+	<CAMINO fila="18" columna="11"/>
+	<CAMINO fila="18" columna="12"/>
+	<CAMINO fila="18" columna="13"/>
+	<CAMINO fila="18" columna="14"/>
+	<CAMINO fila="18" columna="15"/>
+	<CAMINO fila="18" columna="16"/>
+	<CAMINO fila="18" columna="17"/>
+	<CAMINO fila="18" columna="18"/>
+	<CAMINO fila="18" columna="19"/>
+	<CAMINO fila="18" columna="20"/>
+	<CAMINO fila="18" columna="21"/>
+	<CAMINO fila="18" columna="22"/>
+	<CAMINO fila="18" columna="23"/>
+	<CAMINO fila="18" columna="24"/>
+	
+	<CAMINO fila="19" columna="0"/>
+	<CAMINO fila="19" columna="5"/>
+	<CAMINO fila="19" columna="8"/>
+	<CAMINO fila="19" columna="16"/>
+	<CAMINO fila="19" columna="19"/>
+	<CAMINO fila="19" columna="24"/>
+	
+	<CAMINO fila="20" columna="0"/>
+	<CAMINO fila="20" columna="5"/>
+	<CAMINO fila="20" columna="8"/>
+	<CAMINO fila="20" columna="16"/>
+	<CAMINO fila="20" columna="19"/>
+	<CAMINO fila="20" columna="24"/>
+	
+	<CAMINO fila="21" columna="0"/>
+	<CAMINO fila="21" columna="5"/>
+	<CAMINO fila="21" columna="8"/>
+	<CAMINO fila="21" columna="16"/>
+	<CAMINO fila="21" columna="19"/>
+	<CAMINO fila="21" columna="24"/>	
+	
+	<CAMINO fila="22" columna="0"/>
+	<CAMINO fila="22" columna="1"/>
+	<CAMINO fila="22" columna="2"/>
+	<CAMINO fila="22" columna="3"/>
+	<CAMINO fila="22" columna="4"/>
+	<CAMINO fila="22" columna="5"/>
+	<CAMINO fila="22" columna="6"/>
+	<CAMINO fila="22" columna="7"/>
+	<CAMINO fila="22" columna="8"/>
+	<CAMINO fila="22" columna="9"/>
+	<CAMINO fila="22" columna="10"/>
+	<CAMINO fila="22" columna="11"/>
+	<CAMINO fila="22" columna="12"/>
+	<CAMINO fila="22" columna="13"/>
+	<CAMINO fila="22" columna="14"/>
+	<CAMINO fila="22" columna="15"/>
+	<CAMINO fila="22" columna="16"/>
+	<CAMINO fila="22" columna="17"/>
+	<CAMINO fila="22" columna="18"/>
+	<CAMINO fila="22" columna="19"/>
+	<CAMINO fila="22" columna="20"/>
+	<CAMINO fila="22" columna="21"/>
+	<CAMINO fila="22" columna="22"/>
+	<CAMINO fila="22" columna="23"/>
+	<CAMINO fila="22" columna="24"/>	
+		
+	<CAMINO fila="23" columna="0"/>
+	<CAMINO fila="23" columna="5"/>
+	<CAMINO fila="23" columna="11"/>
+	<CAMINO fila="23" columna="13"/>
+	<CAMINO fila="23" columna="19"/>
+	<CAMINO fila="23" columna="24"/>
+	
+	<CAMINO fila="24" columna="0"/>
+	<CAMINO fila="24" columna="5"/>
+	<CAMINO fila="24" columna="11"/>
+	<CAMINO fila="24" columna="13"/>
+	<CAMINO fila="24" columna="19"/>
+	<CAMINO fila="24" columna="24"/>
+
+	<CAMINO fila="25" columna="0"/>
+	<CAMINO fila="25" columna="5"/>
+	<CAMINO fila="25" columna="11"/>
+	<CAMINO fila="25" columna="13"/>
+	<CAMINO fila="25" columna="19"/>
+	<CAMINO fila="25" columna="24"/>
+
+	
+	<CAMINO fila="26" columna="0"/>
+	<CAMINO fila="26" columna="1"/>
+	<CAMINO fila="26" columna="2"/>
+	<CAMINO fila="26" columna="3"/>
+	<CAMINO fila="26" columna="4"/>
+	<CAMINO fila="26" columna="5"/>
+	<CAMINO fila="26" columna="6"/>
+	<CAMINO fila="26" columna="7"/>
+	<CAMINO fila="26" columna="8"/>
+	<CAMINO fila="26" columna="9"/>
+	<CAMINO fila="26" columna="10"/>
+	<CAMINO fila="26" columna="11"/>
+	<CAMINO fila="26" columna="13"/>
+	<CAMINO fila="26" columna="14"/>
+	<CAMINO fila="26" columna="15"/>
+	<CAMINO fila="26" columna="16"/>
+	<CAMINO fila="26" columna="17"/>
+	<CAMINO fila="26" columna="18"/>
+	<CAMINO fila="26" columna="19"/>
+	<CAMINO fila="26" columna="20"/>
+	<CAMINO fila="26" columna="21"/>
+	<CAMINO fila="26" columna="22"/>
+	<CAMINO fila="26" columna="23"/>
+	<CAMINO fila="26" columna="24"/>	
+
+	
+	
    </GRILLA>
   <TIPOSOBSTACULOS>
     <TIPOOBSTACULO nombre="OBS1" textura="yunque"/>
