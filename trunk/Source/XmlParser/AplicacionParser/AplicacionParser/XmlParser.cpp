@@ -110,9 +110,9 @@ bool XmlParser::preParseFile(std::string filename){
 	//file.close();
 	this->aParsearWorkLine=workLine;
 	
-	time (&end);
+	/*time (&end);
 	diff = difftime (end,start);
-	cout<<"Fin preParseFile: "<<"tardando: "<<diff<<" segundos"<<endl;
+	cout<<"Fin preParseFile: "<<"tardando: "<<diff<<" segundos"<<endl;*/
 	return removeBlankLines();
 
 }
@@ -194,8 +194,6 @@ long XmlParser::getOrigLineNumber(string search){
 //Si el archivo no esta abierto o se acabaron las lineas, devuelve false.
 
 bool  XmlParser::getXmlLine(void){
-    clock_t t1=clock();
-	clock_t t2;
 	
 	string strMine;
 	string logMessage;
@@ -264,8 +262,6 @@ bool  XmlParser::getXmlLine(void){
 	}
 	else
 		return false;
-	t2=clock();
-	printf("%.4lf seconds en getline\n", (t2-t1)/(double)CLOCKS_PER_SEC);
 	out.flush();
 	return true;
 }
@@ -402,10 +398,8 @@ XmlElement XmlParser::parse()
 	XmlElement currentElement;
 	bool parentSet = false;
 
-    clock_t t1=clock();
 	int contador=0;
 	
-
 	while (this->getXmlLine())
 	{
 		string name = this->getLineTagName();
@@ -514,15 +508,10 @@ XmlElement XmlParser::parse()
 			}
 		}
 		contador++;		
-		clock_t t2=clock();
-        printf("%.4lf seconds of processing\n", (t2-t1)/(double)CLOCKS_PER_SEC);
 		//cout<<"Contador: "<<contador<<endl;
 
 	}
-		
-		clock_t t2=clock();
-        printf("%.4lf seconds fuera del while\n", (t2-t1)/(double)CLOCKS_PER_SEC);
-		cout<<"Contador: "<<contador<<endl;
+	cout<<"Contador: "<<contador<<endl;
 	return currentParent;
 	
 }
