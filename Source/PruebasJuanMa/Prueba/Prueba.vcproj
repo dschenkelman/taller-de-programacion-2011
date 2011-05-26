@@ -188,6 +188,10 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath=".\Activity.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\AssemblyInfo.cpp"
 				>
 			</File>
@@ -200,11 +204,19 @@
 				>
 			</File>
 			<File
+				RelativePath=".\GameActivity.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Image.cpp"
 				>
 			</File>
 			<File
 				RelativePath=".\Mapa.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\MenuActivity.cpp"
 				>
 			</File>
 			<File
@@ -256,6 +268,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\UIOptionArrowMenu.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\UIOptionArrowMenu.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Window.cpp"
 				>
 			</File>
@@ -270,11 +290,19 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
+				RelativePath=".\Activity.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Camino.h"
 				>
 			</File>
 			<File
 				RelativePath=".\Celda.h"
+				>
+			</File>
+			<File
+				RelativePath=".\GameActivity.h"
 				>
 			</File>
 			<File
@@ -287,6 +315,10 @@
 			</File>
 			<File
 				RelativePath=".\Mapa.h"
+				>
+			</File>
+			<File
+				RelativePath=".\MenuActivity.h"
 				>
 			</File>
 			<File
