@@ -212,6 +212,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Game.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\gamelog.cpp"
 				>
 			</File>
@@ -238,7 +242,15 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Game.h"
+				>
+			</File>
+			<File
 				RelativePath=".\gamelog.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\SQLite\SQL\SQL\List.h"
 				>
 			</File>
 			<File

@@ -3,10 +3,20 @@
 using namespace std;
 #include "User.h"
 
-User::User(string name, int points)
+User::User(std::string name, std::string password)
 {
 	this->name = name;
-	this->points = points;
+	this->password = password;
+}
+
+std::string User::getPassword()
+{
+	return this->password;
+}
+
+std::string User::getName()
+{
+	return this->name;
 }
 
 User::~User(void)
