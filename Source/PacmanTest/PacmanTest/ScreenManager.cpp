@@ -123,6 +123,33 @@ void ScreenManager::updatePacman(Pacman* pac)
 	this->window->display(i, x, y, 255, 255, 255, 10);
 }
 
+
+void ScreenManager::startGame()
+{
+	//esperar para cerrar
+	SDL_Event e;
+	bool running = true;
+	Uint32 period = 1000.0 / 60;
+ 
+	while(!this->gameOver()) 
+	{
+		SDL_Delay(period);
+		this->updateScreen();
+		while(SDL_PollEvent(&e)) 
+		{
+			switch(e.type)
+			{
+				case SDL_QUIT:
+					running = false;
+					this->window->close();
+					return;
+				default:
+					this->handleKeyStroke();
+			}
+		}
+	}
+}
+
 bool ScreenManager::gameOver(void)
 {
 	// eventually this will also include whether all bonuses have been eaten
