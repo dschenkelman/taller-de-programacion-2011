@@ -5,7 +5,9 @@
     <CAMINO fila="1" columna="0"/>
 	<CAMINO fila="1" columna="1"/>
 	<CAMINO fila="1" columna="2"/>
-	<CAMINO fila="1" columna="3"/>
+	<CAMINO fila="1" columna="3">
+		<BONUS tipo="alimento"/>
+	</CAMINO>
 	<CAMINO fila="1" columna="4"/>
 	<CAMINO fila="1" columna="5"/>
 	<CAMINO fila="1" columna="6"/>
@@ -316,6 +318,7 @@
   </TIPOSOBSTACULOS>
   <TIPOSBONUS>
     <TIPOBONUS nombre="uva" textura="uva"/>
+	<TIPOBONUS nombre="alimento" textura="alimento"/>
   </TIPOSBONUS>
   <TEXTURAS>
 	<TEXTURA nombre="Fondo" path="Images\texturaFondo.bmp"/>
@@ -323,5 +326,7 @@
 	<TEXTURA nombre="ladrillo" path="Images/ladrillo.bmp"/>
 	<TEXTURA nombre="uva" path="Images/uva.bmp" rot="45" alpha="#FFFFFF"/>
 	<TEXTURA nombre="anana" path="Images\anana.bmp"/>
+	<TEXTURA nombre="alimento" path="Images\alimentoBalanceado.bmp" alpha="#FFFFFF"/>
+	
   </TEXTURAS>
   </ESCENARIO>
