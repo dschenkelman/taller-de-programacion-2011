@@ -5,8 +5,11 @@
 
 void MenuActivity::onLoad(){
 	
-	// titulo y cabecera
-	//this->banner = new Image("images/title-pacman.bmp");
+	// cabecera
+	this->banner = new ImageView("Images/dual.bmp");
+	this->banner->setX(5); this->banner->setY(5);
+
+	// titulo
 	this->title = new RichTextView("pacman", RichTextView::NORMAL);
 	this->title->setX(100); this->title->setY(50);
 	
@@ -17,7 +20,7 @@ void MenuActivity::onLoad(){
 	this->arrowMenu->addOption("quit");
 
 	// los agrego a la pantalla
-	//this->add(this->banner, 0, 0);
+	this->add(this->banner);
 	this->add(this->title);
 	this->add(this->arrowMenu);
 

@@ -29,6 +29,8 @@ void Activity::add(View* w){
 	this->widgets->add(w);
 }
 
+void Activity::update(){
+}
 
 // dibuja todos los widgets que fueron agregados
 void Activity::drawViews(){
