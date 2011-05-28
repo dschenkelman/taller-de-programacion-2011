@@ -32,5 +32,8 @@ public:
 	Textura getTextura(void);
 	void setLinea(int);
 	int getLinea(void);
+	int getProbabilidad(void);
+	int getApariciones();
+	void decreaseApariciones();
 	~TipoBonus(void);
 };

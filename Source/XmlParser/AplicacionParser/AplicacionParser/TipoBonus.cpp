@@ -154,3 +154,18 @@ Textura TipoBonus::getTextura(void)
 {
 	return this->textura;
 }
+
+int TipoBonus::getProbabilidad()
+{
+	return this->probabilidad;
+}
+
+int TipoBonus::getApariciones()
+{
+	return this->apariciones;
+}
+
+void TipoBonus::decreaseApariciones()
+{
+	this->apariciones--;
+}
