@@ -326,7 +326,7 @@
 	<TEXTURA nombre="ladrillo" path="Images/ladrillo.bmp"/>
 	<TEXTURA nombre="uva" path="Images/uva.bmp" rot="45" alpha="#FFFFFF"/>
 	<TEXTURA nombre="anana" path="Images\anana.bmp"/>
-	<TEXTURA nombre="alimento" path="Images\alimentoBalanceado.bmp" alpha="#FFFFFF"/>
+	<TEXTURA nombre="alimento" path="Images\bonus.bmp" alpha="#FFFFFF"/>
 	
   </TEXTURAS>
   </ESCENARIO>
