@@ -1,25 +1,22 @@
 #include "StdAfx.h"
+#include "StatsActivity.h"
 #include "MenuActivity.h"
 #include "Activity.h"
-#include "GameActivity.h"
-#include "StatsActivity.h"
 
-void MenuActivity::onLoad(){
+void StatsActivity::onLoad(){
 	
 	// cabecera
 	this->banner = new ImageView("Images/dual.bmp");
 	this->banner->setX(5); this->banner->setY(5);
 
 	// titulo
-	this->title = new RichTextView("pacman", RichTextView::NORMAL);
+	this->title = new RichTextView("Stats", RichTextView::NORMAL);
 	this->title->setX(100); this->title->setY(50);
 	
 	// menu con flecha
 	this->arrowMenu = new OptionArrowMenuView();
 	this->arrowMenu->setX(50); this->arrowMenu->setY(200); 
-	this->arrowMenu->addOption("new game");
-	this->arrowMenu->addOption("stats");
-	this->arrowMenu->addOption("quit");
+	this->arrowMenu->addOption("return to menu");
 
 	// los agrego a la pantalla
 	this->add(this->banner);
@@ -28,7 +25,7 @@ void MenuActivity::onLoad(){
 
 }
 
-Activity* MenuActivity::notify(SDL_Event e){
+Activity* StatsActivity::notify(SDL_Event e){
 
 	Activity* nextActivity = NULL;
 
@@ -36,18 +33,9 @@ Activity* MenuActivity::notify(SDL_Event e){
 		case SDL_KEYDOWN:
 			switch(e.key.keysym.sym){
 				case SDLK_RETURN:
-					if(this->arrowMenu->getSelectedOption() == "new game")
-						nextActivity = new GameActivity();
+					if(this->arrowMenu->getSelectedOption() == "return to menu")
+						nextActivity = new MenuActivity();
 
-					if(this->arrowMenu->getSelectedOption() == "stats")
-						nextActivity = new StatsActivity();
-
-					if(this->arrowMenu->getSelectedOption() == "quit")
-						SDL_Quit();
-
-					break;
-				default:
-					this->arrowMenu->notify(e);
 					break;
 			}
 			break;

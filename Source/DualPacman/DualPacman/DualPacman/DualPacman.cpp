@@ -4,7 +4,7 @@
 #include "Window.h"
 #include "sdl/SDL.h"
 #include "ScreenManager.h"
-#include "MenuActivity.h"
+#include "PresentationActivity.h"
 //useful to detect memory leaks
 #define _CRTDBG_MAP_ALLOC
 #include <stdlib.h>
@@ -21,13 +21,13 @@ int main(int argc, char* argv[])
 	Window* w = new Window("::Dual Pacman::", 480, 640);
 	
 	// Actividad de Inicio
-	MenuActivity* menuActivity = new MenuActivity();
-	menuActivity->init();
+	PresentationActivity* pActivity = new PresentationActivity();
+	pActivity->init();
 	
 	// Seteo la actividad
-	w->setCurrentActivity(menuActivity);
+	w->setCurrentActivity(pActivity);
 	
-	menuActivity->drawViews();
+	pActivity->drawViews();
 
 	// Actualizo la ventana
 	w->refresh();

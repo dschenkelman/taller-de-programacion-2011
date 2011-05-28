@@ -299,6 +299,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\PresentationActivity.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\RichTextView.cpp"
 				>
 			</File>
@@ -308,6 +312,10 @@
 			</File>
 			<File
 				RelativePath=".\StackTests.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\StatsActivity.cpp"
 				>
 			</File>
 			<File
@@ -509,6 +517,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\PresentationActivity.h"
+				>
+			</File>
+			<File
 				RelativePath=".\resource.h"
 				>
 			</File>
@@ -526,6 +538,10 @@
 			</File>
 			<File
 				RelativePath=".\StackTests.h"
+				>
+			</File>
+			<File
+				RelativePath=".\StatsActivity.h"
 				>
 			</File>
 			<File
