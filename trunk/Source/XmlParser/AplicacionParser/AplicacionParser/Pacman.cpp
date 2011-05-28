@@ -5,8 +5,9 @@
 
 using namespace std;
 
-Pacman::Pacman(string pathTexturaAbierta, string pathTexturaCerrada, int h, int w, int x, int y, int speed) : 
-Character(pathTexturaAbierta, h, w, x, y, 0, 0, speed), dir(Direction::RIGHT),
+Pacman::Pacman(string pathTexturaAbierta, string pathTexturaCerrada, Grilla& grilla, int h,
+			   int w, int x, int y, int speed, int imageHeight, int imageWidth) : 
+Character(pathTexturaAbierta, grilla, h, w, x, y, 0, 0, speed, imageHeight, imageWidth), dir(Direction::RIGHT),
 rightKey(SDLK_RIGHT),leftKey(SDLK_LEFT), upKey(SDLK_UP), downKey(SDLK_DOWN), isDead(false)
 {
 	this->texturaOpuesta = new Image(pathTexturaCerrada);
