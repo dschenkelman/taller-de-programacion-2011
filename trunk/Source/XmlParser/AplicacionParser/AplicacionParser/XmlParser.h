@@ -60,6 +60,6 @@ public:
 	bool tagHasNoChildren(void);
 	bool lineHasErrors(void);
 	bool getIsOpeningLine(void) const;
-	XmlElement parse(void);
+	XmlElement* parse(void);
 	long getOrigLineNumber(std::string search);
 };

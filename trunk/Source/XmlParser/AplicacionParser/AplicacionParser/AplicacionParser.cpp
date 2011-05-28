@@ -72,9 +72,10 @@ int execute(int argc, char* argv[])
 		XmlParser parser;
 		string name = fileName;
 		parser.openFile(name);
-		XmlElement root = parser.parse();
+		XmlElement* root = parser.parse();
 		parser.closeFile();
-		Escenario escenario(root);
+		Escenario escenario(*root);
+		delete root;
 		if (!escenario.hasError())
 		{
 			Grapher grapher;

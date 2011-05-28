@@ -381,11 +381,11 @@ bool XmlParser::lineHasErrors(void){
 	return this->hasErrors;
 }
 
-XmlElement XmlParser::parse()
+XmlElement* XmlParser::parse()
 {
-	Stack<XmlElement> previousParents;
-	XmlElement currentParent;
-	XmlElement currentElement;
+	Stack<XmlElement*> previousParents;
+	XmlElement* currentParent;
+	XmlElement* currentElement;
 	bool parentSet = false;
 
 	while (this->getXmlLine())
@@ -397,7 +397,7 @@ XmlElement XmlParser::parse()
 
 		if (this->isOpeningLine)
 		{
-			XmlElement currentElement(name, this->lineNumber, 0);
+			XmlElement* currentElement = new XmlElement(name, this->lineNumber, 0);
 			if (!this->hasAttributeErrors)
 			{
 				List<string> attributes = this->getLineTagAttributes();
@@ -415,23 +415,24 @@ XmlElement XmlParser::parse()
 					trim(value, '"');
 				
 					XmlAttribute att(key, value);
-					currentElement.addAttribute(att);
+					currentElement->addAttribute(att);
 				}
 			}
 			// si el tag no cierra en la misma linea apilo al padre anterior y currentParent = currentElement
 			if (this->tagHasNoChildren())
 			{
-				currentElement.setEndLine(this->lineNumber);				
+				currentElement->setEndLine(this->lineNumber);				
 				if (parentSet)
 				{
 					if (this->isValidTagName(name))
 					{
-						currentParent.addChild(currentElement);
+						currentParent->addChild(*currentElement);
+						delete currentElement;
 					}
 					else
 					{
 						stringstream msg;
-						msg << "Nombre de tag: " << name << " no reconocido. Linea: " << currentElement.getStartLine();
+						msg << "Nombre de tag: " << name << " no reconocido. Linea: " << currentElement->getStartLine();
 						this->log->logWarning(msg.str());
 					}
 				}
@@ -441,7 +442,7 @@ XmlElement XmlParser::parse()
 				if (!this->isValidTagName(name))
 				{
 					stringstream msg;
-					msg << "Nombre de tag: " << name << " no reconocido. Linea: " << currentElement.getStartLine();
+					msg << "Nombre de tag: " << name << " no reconocido. Linea: " << currentElement->getStartLine();
 					this->log->logWarning(msg.str());
 				}
 				
@@ -456,42 +457,44 @@ XmlElement XmlParser::parse()
 		else
 		{
 			//in case there are incorrect elements closing
-			if (name != currentParent.getName())
+			if (name != currentParent->getName())
 			{
 				//TODO: loggear que no se cerro bien el tag
 				stringstream msg;
-				msg << "El tag: " << currentParent.getName() << " no se cerro correctamente. Linea apertura: " << currentParent.getStartLine() << ". Linea error: " << this->lineNumber;
+				msg << "El tag: " << currentParent->getName() << " no se cerro correctamente. Linea apertura: " << currentParent->getStartLine() << ". Linea error: " << this->lineNumber;
 				this->log->logWarning(msg.str());
 				
 				if (previousParents.count() != 0)
 				{
-					XmlElement previousParent = previousParents.pop();
-					previousParent.addChild(currentParent);
+					XmlElement* previousParent = previousParents.pop();
+					previousParent->addChild(*currentParent);
+					delete currentParent;
 					currentParent = previousParent;
 				}
 			}
 
-			if (name == currentParent.getName())
+			if (name == currentParent->getName())
 			{
 				if (previousParents.count() != 0)
 				{
-					XmlElement previousParent = previousParents.pop();
-					currentParent.setEndLine(this->lineNumber);
+					XmlElement* previousParent = previousParents.pop();
+					currentParent->setEndLine(this->lineNumber);
 					if (this->isValidTagName(name))
 					{
-						previousParent.addChild(currentParent);
+						previousParent->addChild(*currentParent);
+						delete currentParent;
 					}
 					else
 					{
 						stringstream msg;
-						msg << "Nombre de tag: " << name << " no reconocido. Linea: " << currentParent.getStartLine();
+						msg << "Nombre de tag: " << name << " no reconocido. Linea: " << currentParent->getStartLine();
 						this->log->logWarning(msg.str());
 					}
 					currentParent = previousParent;
 				}
 				else
 				{
-					currentParent.setEndLine(lineNumber);
+					currentParent->setEndLine(lineNumber);
 				}
 			}
 		}
