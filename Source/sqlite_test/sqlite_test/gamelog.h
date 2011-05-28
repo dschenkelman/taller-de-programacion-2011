@@ -7,6 +7,7 @@ class gamelog
 {
 private:
 	database* db;
+	bool gamelog::newUserGameEntry(char* player, int points);
 public:
 	gamelog(char* uri);
 	bool login(char* name, char* password);

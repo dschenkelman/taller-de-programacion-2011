@@ -19,6 +19,10 @@ std::string User::getName()
 	return this->name;
 }
 
+User::User(void)
+{
+}
+
 User::~User(void)
 {
 }

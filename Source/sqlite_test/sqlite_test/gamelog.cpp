@@ -52,17 +52,36 @@ bool gamelog::createPlayer(char* name, char* password) {
 	return !(bool)res;
 }
 
+bool gamelog::newUserGameEntry(char* player, int points) {
+	string sql("INSERT INTO UserGame(GameId,Points) SELECT Id,");
+	char buffer[50];
+	sql += string(itoa(points,buffer,10));
+	sql += string(" FROM Games ORDER BY Id DESC LIMIT 0,1;");
+	char* res = db->execute((char*)sql.c_str());
+	if (res) cout << res << endl;
+	sql = string("UPDATE UserGame SET PlayerId=(SELECT Id FROM Players WHERE Name='");
+	sql += string(player);
+	sql += string("') WHERE GameId=(select id from games order by id desc limit 1) AND playerid is NULL;");
+	res = db->execute((char*)sql.c_str());
+	if (res) cout << res << endl;
+	return false; // TODO
+}
+
 bool gamelog::insertGame(char* player0, char* player1, int winner, int points0, int points1, int duration) {
-	string sql("INSERT INTO Games(WinnerId,Duration) SELECT Id,'");
+	string sql("BEGIN IMMEDIATE; INSERT INTO Games(WinnerId,Duration) SELECT Id,'");
 	char buffer[50];
 	sql += string(itoa(duration,buffer,10));
 	sql += string("' FROM Players WHERE Name='");
 	if (winner==0) sql += string(player0);
-	if (winner==1) { sql += string(player1); } else return false;
+	else if (winner==1) { sql += string(player1); } else return false;
 	sql += string("'");
 	char* res = db->execute((char*)sql.c_str());
 	if (res) cout << res << endl;
-	return !(bool)res;
+
+	this->newUserGameEntry(player0,points0);
+	this->newUserGameEntry(player1,points1);
+	db->execute("COMMIT;");
+	return false; // TODO
 }
 
 gamelog::~gamelog(void)

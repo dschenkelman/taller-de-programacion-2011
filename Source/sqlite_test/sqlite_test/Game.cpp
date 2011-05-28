@@ -1,9 +1,5 @@
 #include "Game.h"
 
-Game::Game(void)
-{
-}
-
 Game::Game(User u1, User u2, int pts)
 {
 	this->userOne = u1;
