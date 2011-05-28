@@ -26,7 +26,8 @@ class Pacman : public Character
 	virtual void moveUp(void);
 	double* getDistancesForEachPosition(void);
 public:
-	Pacman(std::string pathTexturaAbierta, std::string pathTexturaCerrada,int h, int w, int x, int y, int speed);
+	Pacman(std::string pathTexturaAbierta, std::string pathTexturaCerrada, Grilla& grilla, 
+		int h, int w, int x, int y, int speed, int imageHeight, int imageWidth);
 	void handleKeyStroke(void);
 	void changeKeyboardMappings(SDLKey up, SDLKey down, SDLKey left, SDLKey right);
 	virtual void updatePosition(void);
