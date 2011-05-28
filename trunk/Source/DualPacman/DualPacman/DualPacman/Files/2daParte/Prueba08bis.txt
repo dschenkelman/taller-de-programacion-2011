@@ -1,0 +1,22 @@
+09/05/11 00:10:26  Warning: El tipo bonus uva no está siendo utilizado. Linea: 33
+09/05/11 00:10:26  Warning: La textura ananaGrande no está siendo utilizada. Linea: 42
+09/05/11 00:10:26  Error: Error al abrir la imagen: Couldn't open Images\texturaFondo.bmp
+09/05/11 00:11:06  Warning: El tipo bonus uva no está siendo utilizado. Linea: 33
+09/05/11 00:11:06  Warning: La textura ananaGrande no está siendo utilizada. Linea: 42
+09/05/11 00:11:07  Error: Error al abrir la imagen: Couldn't open Images\texturaFondo.bmp
+09/05/11 00:11:42  Warning: El tipo bonus uva no está siendo utilizado. Linea: 32
+09/05/11 00:11:42  Warning: El tipo obstaculo OBS1 no está siendo utilizado. Linea: 28
+09/05/11 00:11:42  Warning: La textura anana no está siendo utilizada. Linea: 40
+09/05/11 00:11:43  Error: Error al abrir la imagen: Couldn't open Images\texturaFondo.bmp
+09/05/11 00:15:17  Warning: El tag: texturas no se cerro correctamente. Linea apertura: 60. Linea error: 63
+09/05/11 00:15:17  Warning: La textura en la linea 62 es inválida. No tiene asignado correctamente los atributos. Linea: 62
+09/05/11 00:15:17  Warning: La textura anana no está siendo utilizada. Linea: 58
+09/05/11 00:15:17  Warning: La textura anana no está siendo utilizada. Linea: 61
+09/05/11 00:15:18  Error: Error al abrir la imagen: Couldn't open Images\texturaFondo.bmp
+10/05/11 20:31:44  Warning: El tipo bonus uva no está siendo utilizado. Linea: 16
+10/05/11 20:31:44  Warning: El tipo obstaculo OBS1 no está siendo utilizado. Linea: 12
+10/05/11 20:31:44  Warning: La textura anana no está siendo utilizada. Linea: 23
+10/05/11 20:35:25  Warning: El tipo bonus uva no está siendo utilizado. Linea: 16
+10/05/11 20:35:25  Warning: El tipo obstaculo OBS1 no está siendo utilizado. Linea: 12
+10/05/11 20:35:25  Warning: La textura anana no está siendo utilizada. Linea: 23
+10/05/11 20:35:26  Error: Error al abrir la imagen: Couldn't open Images\nohayimagen.bmp

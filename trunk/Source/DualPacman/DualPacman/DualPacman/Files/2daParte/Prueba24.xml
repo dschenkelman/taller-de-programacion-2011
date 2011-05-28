@@ -1,0 +1,45 @@
+<ESCENARIO nombre="Prueba24" texturaFondo="Fondo">
+  <GRILLA ancho="10" 
+		  alto="20" 
+		  tipoObstaculoPorDefecto="ladrillo">
+	
+    <CAMINO fila="2" columna="2"></CAMINO>
+	<CAMINO fila="2" columna="3"></CAMINO>
+	<CAMINO fila="2" columna="4"></CAMINO>
+	<CAMINO fila="2" columna="5"></CAMINO>
+	<CAMINO fila="2" columna="6"></CAMINO>
+	<CAMINO fila="3" columna="2"></CAMINO>
+	<CAMINO fila="4" columna="2"></CAMINO>
+	<CAMINO fila="5" columna="2"></CAMINO>
+	<CAMINO fila="6" columna="2"></CAMINO>
+	<CAMINO fila="3" columna="6"></CAMINO>
+	<CAMINO fila="4" columna="6"></CAMINO>
+	<CAMINO fila="5" columna="6"></CAMINO>
+	<OBSTACULO fila="6" columna="6" tipo="barra"/>
+	<CAMINO fila="6" columna="3"></CAMINO>
+	<CAMINO fila="6" columna="4"></CAMINO>
+	<CAMINO fila="6" columna="5"></CAMINO>
+	<CAMINO fila="3" columna="4"></CAMINO>
+	<CAMINO fila="4" columna="4">
+		<BONUS tipo="anana"/>
+	</CAMINO>
+	<CAMINO fila="5" columna="4"></CAMINO>
+  </GRILLA>
+  <TIPOSOBSTACULOS>
+    <TIPOOBSTACULO nombre="OBS1" textura="yunque"/>
+	<TIPOOBSTACULO nombre="ladrillo" textura="ladrillo"/>
+	<TIPOOBSTACULO nombre="barra" textura="menu"/>
+  </TIPOSOBSTACULOS>
+  <TIPOSBONUS>
+    <TIPOBONUS nombre="uva" textura="uva"/>
+	<TIPOBONUS nombre="anana" textura="anana"/>
+  </TIPOSBONUS>
+  <TEXTURAS>
+	<TEXTURA nombre="Fondo" path="Images\texturaFondo.bmp"/>
+	<TEXTURA nombre="yunque" path="Images\yunque.bmp"/>
+	<TEXTURA nombre="ladrillo" path="Images/ladrillo.bmp"/>
+	<TEXTURA nombre="uva" path="Images/uva.bmp" rot="90" alpha="#FFFFFF"/>
+	<TEXTURA nombre="anana" path="Images\anana.bmp" alpha="#FFFFFF" />
+	<TEXTURA nombre="menu" path="Images\menuNar.bmp" rot="113" alpha="#FFFFFF"/>
+  </TEXTURAS>
+  </ESCENARIO>

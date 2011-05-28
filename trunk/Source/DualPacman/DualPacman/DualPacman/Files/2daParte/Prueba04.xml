@@ -1,0 +1,60 @@
+<ESCENARIO nombre="Escenario numero 1" texturaFondo="Fondo">
+  <GRILLA ancho="40" 
+		  alto="20" 
+		  tipoObstaculoPorDefecto="ladrillo">
+    <OBSTACULO  fila="1" columna="5" tipo="OBS1"/>
+    <CAMINO fila="1" columna="0"></CAMINO>
+	<CAMINO fila="1" columna="1"></CAMINO>
+	<CAMINO fila="1" columna="2"></CAMINO>
+	<CAMINO fila="1" columna="3"></CAMINO>
+	<CAMINO fila="1" columna="4"></CAMINO>
+	<CAMINO fila="1" columna="6"></CAMINO>
+	<CAMINO fila="1" columna="7"></CAMINO>
+	<CAMINO fila="1" columna="8"></CAMINO>
+	<CAMINO fila="1" columna="9"></CAMINO>
+	<CAMINO fila="1" columna="10"></CAMINO>
+	<CAMINO fila="1" columna="11"></CAMINO>
+	<CAMINO fila="1" columna="12"></CAMINO>
+	<CAMINO fila="1" columna="13"></CAMINO>
+	<CAMINO fila="1" columna="14"></CAMINO>
+	<CAMINO fila="1" columna="15"></CAMINO>
+	<CAMINO fila="1" columna="16"></CAMINO>
+	<CAMINO fila="2" columna="16"></CAMINO>
+	<CAMINO fila="3" columna="16"></CAMINO>
+	<CAMINO fila="4" columna="16"></CAMINO>
+	<CAMINO fila="5" columna="16"></CAMINO>
+	<CAMINO fila="6" columna="16"></CAMINO>
+	<CAMINO fila="6" columna="15"></CAMINO>
+	<CAMINO fila="6" columna="14"></CAMINO>
+	<CAMINO fila="6" columna="13"></CAMINO>
+	<CAMINO fila="6" columna="12"></CAMINO>
+	<CAMINO fila="6" columna="11"></CAMINO>
+	<CAMINO fila="6" columna="10"></CAMINO>
+	<CAMINO fila="6" columna="9"></CAMINO>
+	<CAMINO fila="6" columna="8">
+		<BONUS tipo="uva"/>
+    </CAMINO>
+	<CAMINO fila="6" columna="7"></CAMINO>
+	<CAMINO fila="6" columna="6"></CAMINO>
+	<CAMINO fila="7" columna="6"></CAMINO>
+	<CAMINO fila="8" columna="6"></CAMINO>
+	<CAMINO fila="9" columna="6"></CAMINO>
+	<CAMINO fila="10" columna="6"></CAMINO>
+	<CAMINO fila="11" columna="6"></CAMINO>
+	
+   </GRILLA>
+  <TIPOSOBSTACULOS>
+    <TIPOOBSTACULO nombre="OBS1" textura="yunque"/>
+	<TIPOOBSTACULO nombre="ladrillo" textura="ladrillo"/>
+  </TIPOSOBSTACULOS>
+  <TIPOSBONUS>
+    <TIPOBONUS nombre="uva" textura="uva"/>
+  </TIPOSBONUS>
+  <TEXTURAS>
+	<TEXTURA nombre="Fondo" path="Images\texturaFondo.bmp"/>
+	<TEXTURA nombre="yunque" path="Images\yunque.bmp"/>
+	<TEXTURA nombre="ladrillo" path="Images/ladrillos.bmp"/>
+	<TEXTURA nombre="uva" path="Images/uva.bmp" rot="45" alpha="#FFFFFF"/>
+	<TEXTURA nombre="anana" path="Images\anana.bmp"/>
+  </TEXTURAS>
+  </ESCENARIO>

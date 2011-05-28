@@ -1,0 +1,2 @@
+12/04/11 19:05:45  Warning: Nombre de tag: bones no reconocido. Linea: 4
+12/04/11 19:05:45  Warning: El tipo bonus Frutillita no está siendo utilizado. Linea: 9

@@ -1,0 +1,3 @@
+12/04/11 01:42:52  Warning: En Grilla, no se pudo colocar el obstaculo; posicion ya ocupada. Linea:4
+12/04/11 01:42:52  Warning: En Grilla, no se pudo colocar el obstaculo; posicion ya ocupada. Linea:5
+12/04/11 01:42:52  Warning: En Grilla, no se pudo colocar el obstaculo; posicion ya ocupada. Linea:6

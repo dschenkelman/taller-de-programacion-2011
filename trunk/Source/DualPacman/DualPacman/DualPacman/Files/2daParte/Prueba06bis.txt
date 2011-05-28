@@ -1,0 +1,3 @@
+11/05/11 00:07:28  Warning: El tipo bonus uva no está siendo utilizado. Linea: 16
+11/05/11 00:07:28  Warning: La textura anana no está siendo utilizada. Linea: 23
+11/05/11 00:07:30  Error: Error al abrir la imagen: Couldn't open Images\yunquenoexiste.bmp
