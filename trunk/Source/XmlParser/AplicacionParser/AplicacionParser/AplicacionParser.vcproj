@@ -284,6 +284,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\SpecialBonusManager.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\StackTests.cpp"
 				>
 			</File>
@@ -479,6 +483,10 @@
 			</File>
 			<File
 				RelativePath=".\ScreenManager.h"
+				>
+			</File>
+			<File
+				RelativePath=".\SpecialBonusManager.h"
 				>
 			</File>
 			<File
