@@ -22,6 +22,7 @@ class ScreenManager
 	int imageHeight;
 	int imageWidth;
 	Grilla& grilla;
+	Image *fondoNegro;
 public:
 	ScreenManager(Window* w, Image* imageFondo, Grilla& grilla, int imageHeight, int imageWidth);
 	void startGame(void);
@@ -34,5 +35,6 @@ public:
 	void handleKeyStroke(void);
 	void updateScreen(void);
 	bool gameOver(void);
+	void deleteBonus(Pacman *pac);
 	~ScreenManager(void);
 };

@@ -2,6 +2,7 @@
 #include "ScreenManager.h"
 #include "Pacman.h"
 #include "Window.h"
+#include "ImageArea.h"
 #include <string>
 
 using namespace std;
@@ -31,6 +32,7 @@ ScreenManager::ScreenManager(Window* w, Image* imageFondo, Grilla& grilla, int i
 	this->createGhostsForPacman2();
 
 	this->pacman2->changeKeyboardMappings(SDLK_w, SDLK_s, SDLK_a, SDLK_d);
+	this->fondoNegro=new Image(this->window->getWidth(),this->window->getHeight());
 }
 
 void ScreenManager::createGhostsForPacman1(void)
@@ -86,6 +88,7 @@ void ScreenManager::handleKeyStroke(void)
 
 void ScreenManager::updateScreen(void)
 {
+	this->deleteBonus(this->pacman1);
 	this->deletePacman(this->pacman1);
 	this->deletePacman(this->pacman2);
 	this->deleteGhosts(this->pacman1Ghosts);
@@ -221,4 +224,11 @@ ScreenManager::~ScreenManager(void)
 	{
 		delete this->pacman2Ghosts.getValueAt(i);
 	}
+	delete this->fondoNegro;
+}
+
+void ScreenManager::deleteBonus(Pacman *pac){
+	
+	ImageArea ia=pac->eatBonus();
+	this->window->display(this->fondoNegro, ia.getX(), ia.getY(), ia.getImageWidth(), ia.getImageHeight());
 }

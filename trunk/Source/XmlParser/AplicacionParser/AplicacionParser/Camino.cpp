@@ -113,6 +113,22 @@ Image* Camino::obtenerRepresentacion()
 	return this->imagen;
 }
 
+
+Image* Camino::borrarBonus()
+{
+	if (this->hasBonus() && !(this->imagen->hasError()))
+	{
+		Image imagen("Images/texturas/camino.bmp");
+		TipoBonus tb = this->getBonus().getTipoBonus();
+		int red = tb.getTextura().getRed();
+		int green = tb.getTextura().getGreen();
+		int blue = tb.getTextura().getBlue();
+		this->imagen->superImpose(imagen, red, green, blue, tb.getTextura().getDelta());
+		/*ss >> repres;*/
+	}
+	return this->imagen;
+}
+
 Camino::Camino(const Camino& other)
 {
 
@@ -176,4 +192,7 @@ Textura Camino::obtenerTextura()
 	}
 
 	return textura;
+}
+void Camino::removeBonus(void){
+	this->tieneBonus=false;
 }
