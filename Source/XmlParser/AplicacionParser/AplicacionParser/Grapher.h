@@ -11,11 +11,13 @@ private:
 	int windowWidth;
 	std::map<std::string, Image *> imageCache;  
 	std::map<std::string, Image *>::iterator iter;
-
+	bool error;
+	Image* fondo;
 public:
-	void draw(Escenario& escenario);
+	Image* draw(Escenario& escenario);
 	void setVideoMode(int mode);
 	int getVideoMode(void);
+	bool hasError();
 	Grapher();
 	~Grapher();
 };

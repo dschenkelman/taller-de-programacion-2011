@@ -39,4 +39,5 @@ public:
 	const SDL_PixelFormat* getFormat() const;
 	void rotate(int degrees, Uint32 alpha);
 	void superImpose(Image& imageToImpose, int red, int green, int blue, int delta);
+	void display(Image& image, int x, int y, int red, int blue, int green, int delta);
 };
