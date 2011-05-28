@@ -24,8 +24,10 @@ int main() {
 	
 	remove("gamelog.sql");
 	gamelog glog = gamelog("gamelog.sql");
-	glog.createPlayer("ale","ale");
-	glog.insertGame("ale","ale",0,0,0,0);
+	glog.createPlayer("ale","alepass");
+	glog.createPlayer("ela","elapass");
+	glog.insertGame("ale","ela",0,10,20,60);
+	glog.insertGame("ela","ale",0,30,40,50);
 
 	getchar();
 	return 0;
