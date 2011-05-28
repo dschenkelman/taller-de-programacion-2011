@@ -3,8 +3,12 @@
 
 
 ImageView::ImageView(std::string uri):View(){
-	Image::Image(uri);
+	//Image::Image(uri);
 }
 
-ImageView::~ImageView():~View(){
+ImageView::~ImageView(){
+
+}
+
+void ImageView::draw(){
 }
