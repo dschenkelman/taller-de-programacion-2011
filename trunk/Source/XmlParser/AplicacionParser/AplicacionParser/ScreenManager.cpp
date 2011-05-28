@@ -230,5 +230,6 @@ ScreenManager::~ScreenManager(void)
 void ScreenManager::deleteBonus(Pacman *pac){
 	
 	ImageArea ia=pac->eatBonus();
-	this->window->display(this->fondoNegro, ia.getX(), ia.getY(), ia.getImageWidth(), ia.getImageHeight());
+	//this->window->display(this->fondoNegro, ia.getX(), ia.getY(), ia.getImageWidth(), ia.getImageHeight());
+	this->fondo->display(this->fondoNegro, ia.getX(), ia.getY(), ia.getImageWidth(), ia.getImageHeight());
 }

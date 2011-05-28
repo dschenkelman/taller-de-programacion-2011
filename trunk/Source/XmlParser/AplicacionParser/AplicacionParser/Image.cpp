@@ -704,3 +704,18 @@ void Image::display(Image* image, int x, int y, int red, int green, int blue, in
 		}
 	}
 }
+
+void Image::display(Image* image, int x, int y, int width, int height)
+{
+	for (int i = x; i < x + width; i++)
+	{
+		for (int j = y; j < y + height; j++)
+		{
+			if (i < this->width && j < this->height)
+			{
+				Uint32 pixel = image->getPixel(i, j);
+				this->putPixel(pixel, i, j);
+			}
+		}	
+	}
+}
