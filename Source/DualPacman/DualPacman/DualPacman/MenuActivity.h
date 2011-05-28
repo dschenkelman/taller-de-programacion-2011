@@ -2,10 +2,11 @@
 #include "Activity.h"
 #include "RichTextView.h"
 #include "OptionArrowMenuView.h"
+#include "ImageView.h"
 
 class MenuActivity : public Activity {
 private:
-	Image* banner;
+	ImageView* banner;
 	RichTextView* title;
 	OptionArrowMenuView* arrowMenu;
 

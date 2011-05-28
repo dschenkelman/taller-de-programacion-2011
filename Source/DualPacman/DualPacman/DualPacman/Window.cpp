@@ -145,7 +145,7 @@ void Window::init(){
 		
 	SDL_Event e;
 	bool running = true;
-	Uint32 period = 1000.0 / 60;
+	Uint32 period = 5000.0 / 60;
 	while(running) 
 	{
 		

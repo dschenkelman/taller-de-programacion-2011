@@ -15,5 +15,6 @@ public:
 	void init();
 	virtual void onLoad();
 	virtual Activity* notify(SDL_Event e);
+	virtual void update();
 	void drawViews();
 };
