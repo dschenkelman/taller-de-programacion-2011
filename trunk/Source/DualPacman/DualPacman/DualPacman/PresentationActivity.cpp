@@ -7,15 +7,20 @@ void PresentationActivity::onLoad(){
 	
 	// cabecera
 	this->banner = new ImageView("Images/title-pacman.bmp");
-	this->banner->setX(5); this->banner->setY(5);
+	this->banner->setX(0); this->banner->setY(0);
+
+	// insertcoin
+	this->insertCoin = new RichTextView("Insert coin", RichTextView::NORMAL);
+	this->insertCoin->setX(40); this->insertCoin->setY(200);
 
 	// menu con flecha
 	this->arrowMenu = new OptionArrowMenuView();
-	this->arrowMenu->setX(50); this->arrowMenu->setY(200); 
+	this->arrowMenu->setX(50); this->arrowMenu->setY(250); 
 	this->arrowMenu->addOption("hit enter");
 
 	// los agrego a la pantalla
 	this->add(this->banner);
+	this->add(this->insertCoin);
 	this->add(this->arrowMenu);
 
 }
