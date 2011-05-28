@@ -145,10 +145,12 @@ void Window::init(){
 		
 	SDL_Event e;
 	bool running = true;
+	Uint32 period = 1000.0 / 60;
 	while(running) 
 	{
-		while(SDL_PollEvent(&e)) 
-		{
+		
+		SDL_Delay(period);
+		if(SDL_PollEvent(&e)){
 			switch(e.type)
 			{
 				case SDL_QUIT:
@@ -162,11 +164,14 @@ void Window::init(){
 						nextActivity->init();
 						this->setCurrentActivity(nextActivity);
 					}
-					this->getCurrentActivity()->drawViews();
-					this->refresh();
+
 					break;
 			}
 		}
+		this->getCurrentActivity()->update();
+		this->getCurrentActivity()->drawViews();
+		this->refresh();
+
 	}
 }
 
