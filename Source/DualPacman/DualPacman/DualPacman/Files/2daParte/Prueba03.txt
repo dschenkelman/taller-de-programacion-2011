@@ -1,0 +1,4 @@
+08/05/11 17:05:34  Warning: La textura en la linea 57 es inválida. No tiene asignado correctamente los atributos. Linea: 57
+08/05/11 17:05:34  Warning: La textura asignada al tipo de bonus no existe. El tipo de bonus no será considerado. Linea: 51
+08/05/11 17:05:34  Error: En Grilla, camino con bonus inexistente; no se puede imprimir. Linea: 34
+08/05/11 17:05:34  Warning: La textura anana no está siendo utilizada. Linea: 58

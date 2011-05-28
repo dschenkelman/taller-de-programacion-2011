@@ -1,0 +1,3 @@
+12/04/11 19:35:40  Warning: El tag: tipobonus no se cerro correctamente. Linea apertura: 8. Linea error: 10
+12/04/11 19:35:40  Warning: No existe lista de tipo bonus 
+12/04/11 19:35:40  Error: En Grilla, camino con bonus inexistente; no se puede imprimir. Linea: 4

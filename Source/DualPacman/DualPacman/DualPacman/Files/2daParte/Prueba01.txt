@@ -1,0 +1,4 @@
+08/05/11 16:55:25  Warning: El tag: texturas no se cerro correctamente. Linea apertura: 60. Linea error: 63
+08/05/11 16:55:26  Warning: La textura en la linea 62 es inválida. No tiene asignado correctamente los atributos. Linea: 62
+08/05/11 16:55:26  Warning: La textura anana no está siendo utilizada. Linea: 58
+08/05/11 16:55:26  Warning: La textura anana no está siendo utilizada. Linea: 61
