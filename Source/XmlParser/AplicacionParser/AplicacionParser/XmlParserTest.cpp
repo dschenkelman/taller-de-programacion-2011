@@ -133,7 +133,7 @@ bool XmlParserTest::testParseReturnsXmlRootElement(void)
 {
 	XmlParser xmlParser;
 	xmlParser.openFile("Files/escenario.xml");
-	XmlElement root = xmlParser.parse();
+	XmlElement root = *(xmlParser.parse());
 
 	//testing root
 	bool successCondition = root.getName() == "escenario";
@@ -179,7 +179,7 @@ bool XmlParserTest::testElementWithUnknownNameIsIgnored(void)
 {
 	XmlParser xmlParser;
 	xmlParser.openFile("Files/escenarioInvalidElement.xml");
-	XmlElement root = xmlParser.parse();
+	XmlElement root = *(xmlParser.parse());
 
 	bool successCondition = !root.hasChildren();
 
@@ -191,7 +191,7 @@ bool XmlParserTest::testElementThatIsNotClosedIsAutomaticallyClosed(void)
 {
 	XmlParser xmlParser;
 	xmlParser.openFile("Files/escenarioMissingClosingElements.xml");
-	XmlElement root = xmlParser.parse();
+	XmlElement root = *(xmlParser.parse());
 
 	//testing root
 	bool successCondition = root.getName() == "escenario";
@@ -237,7 +237,7 @@ bool XmlParserTest::testNotOpeninigOrClosingQuotesDoesNotAddAnyAttributesToEleme
 {
 	XmlParser xmlParser;
 	xmlParser.openFile("Files/escenarioMissingQuotes2.xml");
-	XmlElement root = xmlParser.parse();
+	XmlElement root = *(xmlParser.parse());
 
 	//testing root
 	bool successCondition = root.getName() == "escenario";
