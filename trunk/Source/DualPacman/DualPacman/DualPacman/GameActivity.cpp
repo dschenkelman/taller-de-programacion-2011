@@ -6,16 +6,21 @@
 
 void GameActivity::onLoad(){
 	
-	// titulo y cabecera
-	this->title = new RichTextView("puntaje", RichTextView::NORMAL);
-	this->title->setX(100); this->title->setY(0);
+	// texto del tiempo
+	this->timeTitle = new RichTextView("Time", RichTextView::NORMAL);
+	this->timeTitle->setX(50); this->timeTitle->setY(0);
 
+	// texto de los puntos
+	this->pointsTitle = new RichTextView("Points", RichTextView::NORMAL);
+	this->pointsTitle->setX(300); this->pointsTitle->setY(0);
 
 	this->period = 2000.0 / 60;
 	this->screenManager = new ScreenManager(this, "Images/fondo.bmp");
 	
 	// los agrego a la pantalla
-	this->add(this->title);
+	this->add(this->timeTitle);
+	this->add(this->pointsTitle);
+	
 	
 }
 

@@ -6,8 +6,8 @@
 
 class GameActivity : public Activity {
 private:
-	Image* banner;
-	RichTextView* title;
+	RichTextView* pointsTitle;
+	RichTextView* timeTitle;
 	Uint32 period;
 	ScreenManager* screenManager;
 
