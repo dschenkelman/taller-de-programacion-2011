@@ -12,13 +12,20 @@ ScreenManager::ScreenManager(Window* w, Image* imageFondo, Grilla& grilla, int i
 	this->window = w;
 	this->fondo = imageFondo;
 	this->gameOverImage = new Image("Images/gameOver.bmp");
+
+	int pacman1InitialX = 0;
+	int pacman1InitialY = this->imageHeight;
+
+	int pacman2InitialX = this->imageWidth * (this->grilla.getAncho() - 1);
+	int pacman2InitialY = this->imageHeight;
+
 	this->pacman1 = new Pacman("Images/pacman.bmp","Images/pacmanClosed.bmp", this->grilla,
 		this->window->getHeight(), this->window->getWidth(),
-		0, 0, 5, this->imageHeight, this->imageWidth);
+		pacman1InitialX, pacman1InitialY, 3, this->imageHeight, this->imageWidth);
 
 	this->pacman2 = new Pacman("Images/pacman2.bmp", "Images/pacman2Closed.bmp", this->grilla,
 		this->window->getHeight(), this->window->getWidth(),
-		this->window->getWidth() - (this->pacman1->getImage()->getWidth() + 1), 0, 5, this->imageHeight, this->imageWidth);
+		pacman2InitialX, pacman2InitialY, 3, this->imageHeight, this->imageWidth);
 
 	this->createGhostsForPacman1();
 	this->createGhostsForPacman2();
@@ -28,14 +35,24 @@ ScreenManager::ScreenManager(Window* w, Image* imageFondo, Grilla& grilla, int i
 
 void ScreenManager::createGhostsForPacman1(void)
 {
-	this->pacman1Ghosts.add(new Ghost("Images/redGhost.bmp", "Images/brownVGhost.bmp", this->grilla, this->window->getHeight(), this->window->getWidth(),
-		0, this->window->getHeight() - (30 + 1), 4, this->pacman1, this->imageHeight, this->imageWidth));
+	int ghostInitialX = (this->imageWidth * (this->grilla.getAncho() - 1)) / 2;
+	int ghostInitialY = (this->imageHeight * (this->grilla.getAlto() - 1)) / 2;
+	
+	this->pacman1Ghosts.add(new Ghost("Images/redGhost.bmp", "Images/brownVGhost.bmp", 
+		this->grilla, this->window->getHeight(), this->window->getWidth(),
+		ghostInitialX + 30, ghostInitialY + 20, 2, this->pacman1, 
+		this->imageHeight, this->imageWidth));
 
-	this->pacman1Ghosts.add(new Ghost("Images/redGhost.bmp", "Images/brownVGhost.bmp" , this->grilla, this->window->getHeight(), this->window->getWidth(),
-		this->window->getWidth() - (30 + 1), this->window->getHeight() - (30 + 1), 4, this->pacman1, this->imageHeight, this->imageWidth));
+	this->pacman1Ghosts.add(new Ghost("Images/redGhost.bmp", "Images/brownVGhost.bmp" , 
+		this->grilla, this->window->getHeight(), this->window->getWidth(),
+		ghostInitialX - 30, ghostInitialY + 20, 2, 
+		this->pacman1, this->imageHeight, this->imageWidth));
 
-	Ghost* g = new Ghost("Images/redGhost.bmp", "Images/brownVGhost.bmp" , this->grilla, this->window->getHeight(), this->window->getWidth(),
-		(this->window->getWidth() - (30 + 1)) / 2, (this->window->getHeight() - (30 + 1)) / 2, 4, this->pacman1, this->imageHeight, this->imageWidth);
+	Ghost* g = new Ghost("Images/redGhost.bmp", "Images/brownVGhost.bmp" , 
+		this->grilla, this->window->getHeight(), this->window->getWidth(),
+		ghostInitialX, 
+		ghostInitialY + 20, 2, this->pacman1, 
+		this->imageHeight, this->imageWidth);
 	
 	g->setIsVulnerable(true);
 
@@ -44,11 +61,18 @@ void ScreenManager::createGhostsForPacman1(void)
 
 void ScreenManager::createGhostsForPacman2(void)
 {
-	this->pacman2Ghosts.add(new Ghost("Images/blueGhost.bmp","Images/greenVGhost.bmp", this->grilla, this->window->getHeight(), this->window->getWidth(),
-		0, this->window->getHeight() - (30 + 1), 4, this->pacman2, this->imageHeight, this->imageWidth));
+	int ghostInitialX = (this->imageWidth * (this->grilla.getAncho() - 1)) / 2;
+	int ghostInitialY = (this->imageHeight * (this->grilla.getAlto() - 1)) / 2;
 
-	this->pacman2Ghosts.add(new Ghost("Images/blueGhost.bmp", "Images/greenVGhost.bmp", this->grilla, this->window->getHeight(), this->window->getWidth(),
-		this->window->getWidth() - (30 + 1), this->window->getHeight() - (30 + 1), 4, this->pacman2, this->imageHeight, this->imageWidth));
+	this->pacman2Ghosts.add(new Ghost("Images/blueGhost.bmp","Images/greenVGhost.bmp", 
+		this->grilla, this->window->getHeight(), this->window->getWidth(),
+		ghostInitialX - 30, ghostInitialY + 20, 2, this->pacman2, 
+		this->imageHeight, this->imageWidth));
+
+	this->pacman2Ghosts.add(new Ghost("Images/blueGhost.bmp", "Images/greenVGhost.bmp", 
+		this->grilla, this->window->getHeight(), this->window->getWidth(),
+		ghostInitialX + 30, ghostInitialY + 20, 2, 
+		this->pacman2, this->imageHeight, this->imageWidth));
 }
 
 void ScreenManager::handleKeyStroke(void)
@@ -155,7 +179,7 @@ void ScreenManager::startGame(void)
 	//esperar para cerrar
 	SDL_Event e;
 	bool running = true;
-	Uint32 period = 1000.0 / 60;
+	Uint32 period = 1000.0 / 120;
  
 	this->window->display(this->fondo, 0, 0, 0, 0, 0, -1);
 	while(!this->gameOver()) 

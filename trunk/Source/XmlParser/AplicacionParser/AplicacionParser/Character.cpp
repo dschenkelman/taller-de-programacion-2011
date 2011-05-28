@@ -3,6 +3,7 @@
 #include "Image.h"
 #include <string>
 #include "Celda.h"
+#include "Obstaculo.h"
 
 using namespace std;
 
@@ -60,6 +61,17 @@ bool Character::isNextPositionValid(void)
 	Celda* c2 = this->grilla.getCelda(y2, x1);
 	Celda* c3 = this->grilla.getCelda(y1, x2);
 	Celda* c4 = this->grilla.getCelda(y2, x2);
+
+	Obstaculo* o1 = dynamic_cast<Obstaculo*>(c1);
+	Obstaculo* o2 = dynamic_cast<Obstaculo*>(c2);
+	Obstaculo* o3 = dynamic_cast<Obstaculo*>(c3);
+	Obstaculo* o4 = dynamic_cast<Obstaculo*>(c4);
+
+	if (o1 != NULL || o2 != NULL || o3 != NULL || o4 != NULL)
+	{
+		return false;
+	}
+	
 	// TODO: Implementar logica para ver si a donde me quiero mover no hay un obstaculo
 	return true;
 }
