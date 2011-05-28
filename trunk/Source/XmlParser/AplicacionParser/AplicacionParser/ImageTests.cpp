@@ -203,13 +203,13 @@ bool ImageTests::testSuperImposeSmallInsideBig(void)
 	Image im("Images/smile.bmp");
 	//Bigger
 	Image im2("Images/ananaGrande.bmp");
-	w.display(im, 100, 100, 0, 0, 0, -1);
-	w.display(im2, 100, 300, 0, 0, 0, -1);
+	w.display(&im, 100, 100, 0, 0, 0, -1);
+	w.display(&im2, 100, 300, 0, 0, 0, -1);
 	w.refresh();
 	//superponer la imagen 1 dentro de la 2.
 	im2.superImpose(im, 255, 255, 255, 50);
 	
-	w.display(im2, 200,50,  0, 0, 0, -1);
+	w.display(&im2, 200,50,  0, 0, 0, -1);
 	w.refresh();
 	
 	SDL_Event e;
@@ -238,13 +238,13 @@ bool ImageTests::testSuperImposeBigInsideSmall(void)
 	Image im("Images/smile.bmp");
 	//Bigger
 	Image im2("Images/ananaGrande.bmp");
-	w.display(im, 100, 100, 0, 0, 0, -1);
-	w.display(im2, 100, 300,  0, 0, 0, -1);
+	w.display(&im, 100, 100, 0, 0, 0, -1);
+	w.display(&im2, 100, 300,  0, 0, 0, -1);
 	w.refresh();
 	//Superponer la imagen 2 dentro de la 1.
 	im.superImpose(im2, 255, 255, 255, 25);
 	
-	w.display(im, 200,50, 0, 0, 0, -1);
+	w.display(&im, 200,50, 0, 0, 0, -1);
 	w.refresh();
 	
 	SDL_Event e;

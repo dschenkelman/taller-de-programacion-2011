@@ -4,6 +4,7 @@
 #include "stdafx.h"
 //#include "vld.h"
 #include "ListTests.h"
+#include "ScreenManager.h"
 #include "LoggerTests.h"
 #include "XmlParser.h"
 #include "StackTests.h"
@@ -81,26 +82,10 @@ int execute(int argc, char* argv[])
 			Image* fondo = grapher.draw(escenario);
 			if (!grapher.hasError())
 			{
-				Window w(escenario.getNombre(), (videoMode * 3) / 4, videoMode);
-				w.display(*fondo, 0, 0, 0, 0, 0, -1);
-				w.refresh();
-				//esperar para cerrar
-				SDL_Event e;
-				bool running = true;
-			 
-				while(running) 
-				{
-					while(SDL_PollEvent(&e)) 
-					{
-						switch(e.type)
-						{
-							case SDL_QUIT:
-								running = false;
-								w.close();
-								break;
-						}
-					}
-				}
+				Window* w = new Window(escenario.getNombre(), (videoMode * 3) / 4, videoMode);
+				ScreenManager s(w, fondo);
+				s.startGame();
+				delete w;
 			}
 			else
 			{
