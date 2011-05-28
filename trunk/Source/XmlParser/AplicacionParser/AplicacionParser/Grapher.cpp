@@ -10,7 +10,7 @@
 
 using namespace std;
 
-Grapher::Grapher() : windowHeight(480), windowWidth(640), imageCache()
+Grapher::Grapher() : windowHeight(480), windowWidth(640), imageCache(), error(false)
 {
 	//default 640x480
 }
@@ -20,12 +20,14 @@ Grapher::~Grapher()
 	for (this->iter = this->imageCache.begin(); this->iter != this->imageCache.end(); this->iter++) {
 		delete(iter->second);
 	}
+
+	delete this->fondo;
 }
 
-void Grapher::draw(Escenario& escenario)
+Image* Grapher::draw(Escenario& escenario)
 {
 	Image *imagePtr;
-	bool error = false;
+	this->error = false;
 	Grilla& grilla = escenario.getGrilla();
 
 	// Se muestra el nombre del Escenario
@@ -33,6 +35,7 @@ void Grapher::draw(Escenario& escenario)
 
 	Window w(escenario.getNombre(), windowHeight, windowWidth);
 	Image texturaFondo(escenario.getTextura().getPath());
+	this->fondo = new Image(windowWidth, windowHeight);
 		
 	if (!texturaFondo.hasError())
 	{
@@ -42,7 +45,7 @@ void Grapher::draw(Escenario& escenario)
 		Uint32 alphaPixel = t.getRed() | t.getGreen() << 8 | t.getBlue() << 16;
 		texturaFondo.rotate(t.getRotation(), alphaPixel);
 		texturaFondo.resize(windowWidth, windowHeight);
-		w.display(texturaFondo, 0, 0, 0, 0, 0, -1);
+		this->fondo->display(texturaFondo, 0, 0, 0, 0, 0, -1);
 	}
 	else
 	{
@@ -82,7 +85,7 @@ void Grapher::draw(Escenario& escenario)
 			//imagen=*imagePtr;
 			if (!(imagePtr->hasError()))
 			{
-				w.display((*imagePtr), imageWidth * j, imageHeight * i, t.getRed(), t.getGreen(), t.getBlue(), t.getDelta());
+				this->fondo->display((*imagePtr), imageWidth * j, imageHeight * i, t.getRed(), t.getGreen(), t.getBlue(), t.getDelta());
 			}
 			else
 			{
@@ -93,32 +96,7 @@ void Grapher::draw(Escenario& escenario)
 		}
 	}
 
-	if (!error)
-	{
-		w.refresh();
-		//esperar para cerrar
-		SDL_Event e;
-		bool running = true;
-	 
-		while(running) 
-		{
-			while(SDL_PollEvent(&e)) 
-			{
-				switch(e.type)
-				{
-					case SDL_QUIT:
-						running = false;
-						w.close();
-						break;
-				}
-			}
-		}
-	}
-	else
-	{
-		cout << "Error al graficar. Ver el archivo parser.log.txt";
-		w.close();
-	}
+	return this->fondo;
 }
 
 void  Grapher::setVideoMode(int mode){
@@ -149,4 +127,9 @@ void  Grapher::setVideoMode(int mode){
 }
 int  Grapher::getVideoMode(void){
 	return this->windowWidth;
+}
+
+bool Grapher::hasError(void)
+{
+	return this->error;
 }

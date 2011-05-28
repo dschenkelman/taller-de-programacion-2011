@@ -53,9 +53,6 @@ void printLeaks(int leaks)
 
 int execute(int argc, char* argv[])
 {
-	time_t start,end;
-	double diff;
-
 	if (argc != 3)
 	{
 		cout<<"Sintaxis: ApplicationParser nombreArch.xml modoVideo (640 | 800 | 1024)"<<endl;
@@ -72,26 +69,43 @@ int execute(int argc, char* argv[])
 		// The file exists, and is open for input
 		ifile.close();
 		XmlParser parser;
-		cout<<"Inicio Parser\n";
-		time (&start);
 		string name = fileName;
 		parser.openFile(name);
 		XmlElement root = parser.parse();
 		parser.closeFile();
-		time (&end);
-		diff = difftime (end,start);
-		cout<<"Fin parser: "<<"tardando: "<<diff<<" segundos"<<endl;
 		Escenario escenario(root);
 		if (!escenario.hasError())
 		{
-			cout<<"Inicio grapher\n";
-			time (&start);
 			Grapher grapher;
 			grapher.setVideoMode(videoMode);
-			grapher.draw(escenario);
-			time (&end);
-			diff = difftime (end,start);
-			cout<<"Fin grapher: "<<"tardando: "<<diff<<" segundos"<<endl;
+			Image* fondo = grapher.draw(escenario);
+			if (!grapher.hasError())
+			{
+				Window w(escenario.getNombre(), (videoMode * 3) / 4, videoMode);
+				w.display(*fondo, 0, 0, 0, 0, 0, -1);
+				w.refresh();
+				//esperar para cerrar
+				SDL_Event e;
+				bool running = true;
+			 
+				while(running) 
+				{
+					while(SDL_PollEvent(&e)) 
+					{
+						switch(e.type)
+						{
+							case SDL_QUIT:
+								running = false;
+								w.close();
+								break;
+						}
+					}
+				}
+			}
+			else
+			{
+				cout << "Error al graficar. Ver el archivo parser.log.txt";
+			}
 		}
 		else
 		{

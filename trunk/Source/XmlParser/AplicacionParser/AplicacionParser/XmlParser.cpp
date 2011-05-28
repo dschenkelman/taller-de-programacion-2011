@@ -119,9 +119,6 @@ bool XmlParser::preParseFile(std::string filename){
 
 bool XmlParser::removeBlankLines(void){
 	//ifstream initialFile(AUX, ios::in|ios::binary);	
-	time_t start,end;
-	double diff;
-	time(&start);
 	ofstream outputFile(PARSING, ios::out|ios::binary);	
 	string work;
 	string lineToRead;
@@ -137,25 +134,18 @@ bool XmlParser::removeBlankLines(void){
 	this->aParsearWorkLine.clear();
 
 	while (miTok.NextToken() ){
-		
 		lineToRead=miTok.GetToken();
 		trim(lineToRead,' ');
 		if (lineToRead.length() > 0){
 			outputFile<<lineToRead<<"\n";
 			this->aParsearWorkLine+=lineToRead;
 			this->aParsearWorkLine+="\n";
-
 		}
-		
 	}
 
 	//initialFile.close();	
 	outputFile.close();	
-	time (&end);
-	diff = difftime (end,start);
-	cout<<"Fin removeBlankLines: "<<"tardando: "<<diff<<" segundos"<<endl;
 	return true;
-
 }
 
 void XmlParser::closeFile(void){
@@ -398,8 +388,6 @@ XmlElement XmlParser::parse()
 	XmlElement currentElement;
 	bool parentSet = false;
 
-	int contador=0;
-	
 	while (this->getXmlLine())
 	{
 		string name = this->getLineTagName();
@@ -507,13 +495,9 @@ XmlElement XmlParser::parse()
 				}
 			}
 		}
-		contador++;		
-		//cout<<"Contador: "<<contador<<endl;
-
 	}
-	cout<<"Contador: "<<contador<<endl;
 	return currentParent;
-	
+
 }
 
 void XmlParser::parseOpeningLine(string line)
