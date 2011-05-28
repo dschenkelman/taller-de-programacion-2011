@@ -22,6 +22,10 @@ void GameActivity::onLoad(){
 }
 
 
+void GameActivity::update(){
+	screenManager->updateScreen();
+}
+
 Activity* GameActivity::notify(SDL_Event e){
 	
 	Activity* nextActivity = NULL;
