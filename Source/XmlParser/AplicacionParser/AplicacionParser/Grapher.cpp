@@ -10,7 +10,8 @@
 
 using namespace std;
 
-Grapher::Grapher() : windowHeight(480), windowWidth(640), imageCache(), error(false)
+Grapher::Grapher() : windowHeight(480), windowWidth(640), imageCache(),
+error(false), imageHeight(0), imageWidth(0)
 {
 	//default 640x480
 }
@@ -54,8 +55,8 @@ Image* Grapher::draw(Escenario& escenario)
 
 	// va a truncar y es la idea. tiene que quedar mas chico porque sino,
 	// no entran todas las celdas
-	int imageHeight = windowHeight / grilla.getAlto();
-	int imageWidth = windowWidth / grilla.getAncho();
+	this->imageHeight = windowHeight / grilla.getAlto();
+	this->imageWidth = windowWidth / grilla.getAncho();
 
 	// Se dibuja fila por fila de la matriz
 	for(unsigned int i=0; i<grilla.getAlto(); i++)
@@ -119,6 +120,7 @@ void  Grapher::setVideoMode(int mode){
 		default:{
 			this->windowHeight=480;
 			this->windowWidth=640;
+			break;
 		}
 	}		
 
@@ -131,4 +133,14 @@ int  Grapher::getVideoMode(void){
 bool Grapher::hasError(void)
 {
 	return this->error;
+}
+
+int Grapher::getImageHeight()
+{
+	return this->imageHeight;
+}
+
+int Grapher::getImageWidth()
+{
+	return this->imageWidth;
 }

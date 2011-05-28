@@ -6,6 +6,7 @@
 #include <string>
 #include "Ghost.h"
 #include "List.h"
+#include "Grilla.h"
 
 class ScreenManager
 {
@@ -18,8 +19,11 @@ class ScreenManager
 	Pacman* pacman2;
 	Uint32 initialTime;
 	int deadCycles;
+	int imageHeight;
+	int imageWidth;
+	Grilla& grilla;
 public:
-	ScreenManager(Window* w, Image* imageFondo);
+	ScreenManager(Window* w, Image* imageFondo, Grilla& grilla, int imageHeight, int imageWidth);
 	void startGame(void);
 	void updatePacman(Pacman* pac);
 	void deletePacman(Pacman* pac);
