@@ -83,7 +83,7 @@ int execute(int argc, char* argv[])
 			if (!grapher.hasError())
 			{
 				Window* w = new Window(escenario.getNombre(), (videoMode * 3) / 4, videoMode);
-				ScreenManager s(w, fondo);
+				ScreenManager s(w, fondo, escenario.getGrilla(), grapher.getImageHeight(), grapher.getImageWidth());
 				s.startGame();
 				delete w;
 			}

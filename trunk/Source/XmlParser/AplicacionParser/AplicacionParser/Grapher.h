@@ -9,6 +9,8 @@ class Grapher
 private:
 	int windowHeight;
 	int windowWidth;
+	int imageHeight;
+	int imageWidth;
 	std::map<std::string, Image *> imageCache;  
 	std::map<std::string, Image *>::iterator iter;
 	bool error;
@@ -18,6 +20,8 @@ public:
 	void setVideoMode(int mode);
 	int getVideoMode(void);
 	bool hasError();
+	int getImageHeight();
+	int getImageWidth();
 	Grapher();
 	~Grapher();
 };

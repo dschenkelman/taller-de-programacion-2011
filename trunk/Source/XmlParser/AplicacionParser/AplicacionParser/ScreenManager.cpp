@@ -6,7 +6,8 @@
 
 using namespace std;
 
-ScreenManager::ScreenManager(Window* w, Image* imageFondo) : deadCycles(0)
+ScreenManager::ScreenManager(Window* w, Image* imageFondo, Grilla& grilla, int imageHeight, int imageWidth) 
+: deadCycles(0), imageHeight(imageHeight), imageWidth(imageWidth), grilla(grilla)
 {
 	this->window = w;
 	this->fondo = imageFondo;
