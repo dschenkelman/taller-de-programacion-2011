@@ -33,7 +33,6 @@ Image* Grapher::draw(Escenario& escenario)
 	// Se muestra el nombre del Escenario
 	std::cout << "Escenario: "+escenario.getNombre()+" \n";
 
-	Window w(escenario.getNombre(), windowHeight, windowWidth);
 	Image texturaFondo(escenario.getTextura().getPath());
 	this->fondo = new Image(windowWidth, windowHeight);
 		
@@ -45,7 +44,7 @@ Image* Grapher::draw(Escenario& escenario)
 		Uint32 alphaPixel = t.getRed() | t.getGreen() << 8 | t.getBlue() << 16;
 		texturaFondo.rotate(t.getRotation(), alphaPixel);
 		texturaFondo.resize(windowWidth, windowHeight);
-		this->fondo->display(texturaFondo, 0, 0, 0, 0, 0, -1);
+		this->fondo->display(&texturaFondo, 0, 0, 0, 0, 0, -1);
 	}
 	else
 	{
@@ -85,7 +84,7 @@ Image* Grapher::draw(Escenario& escenario)
 			//imagen=*imagePtr;
 			if (!(imagePtr->hasError()))
 			{
-				this->fondo->display((*imagePtr), imageWidth * j, imageHeight * i, t.getRed(), t.getGreen(), t.getBlue(), t.getDelta());
+				this->fondo->display(imagePtr, imageWidth * j, imageHeight * i, t.getRed(), t.getGreen(), t.getBlue(), t.getDelta());
 			}
 			else
 			{

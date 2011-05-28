@@ -36,17 +36,20 @@ void Window::close(void)
 	SDL_Quit();
 }
 
-void Window::display(Image& image, int x, int y, int red, int green, int blue, int delta)
+void Window::display(Image* image, int x, int y, int red, int green, int blue, int delta)
 {
-	for (int i = 0; i < image.getWidth(); i++)
+	for (int i = 0; i < image->getWidth(); i++)
 	{
-		for (int j = 0; j < image.getHeight(); j++)
+		for (int j = 0; j < image->getHeight(); j++)
 		{
-			Uint32 overPixel = image.getPixel(i, j);
+			Uint32 overPixel = image->getPixel(i, j);
 			int deltaPixel = PixelHelpers::getDeltaBetweenPixels(red, green, blue, overPixel);
 			if (deltaPixel > delta)
 			{
-				this->putPixel(overPixel, (x + i), (y + j));
+				if (x + i < this->width && y + j < this->height)
+				{
+					this->putPixel(overPixel, (x + i), (y + j));
+				}
 			}
 		}
 	}
@@ -130,6 +133,22 @@ void Window::refresh(void)
 {
 	SDL_Flip(this->window);
 }
+
+void Window::display(Image* image, int x, int y, int width, int height)
+{
+	for (int i = x; i < x + width; i++)
+	{
+		for (int j = y; j < y + height; j++)
+		{
+			if (i < this->width && j < this->height)
+			{
+				Uint32 pixel = image->getPixel(i, j);
+				this->putPixel(pixel, i, j);
+			}
+		}	
+	}
+}
+
 Window::~Window(void)
 {
 	//no hay que hacer free lo hace el SDL_Quit

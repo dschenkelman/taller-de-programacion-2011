@@ -689,13 +689,13 @@ void Image::resizeOnePixelImage()
 	}
 }
 
-void Image::display(Image& image, int x, int y, int red, int green, int blue, int delta)
+void Image::display(Image* image, int x, int y, int red, int green, int blue, int delta)
 {
-	for (int i = 0; i < image.getWidth(); i++)
+	for (int i = 0; i < image->getWidth(); i++)
 	{
-		for (int j = 0; j < image.getHeight(); j++)
+		for (int j = 0; j < image->getHeight(); j++)
 		{
-			Uint32 overPixel = image.getPixel(i, j);
+			Uint32 overPixel = image->getPixel(i, j);
 			int deltaPixel = PixelHelpers::getDeltaBetweenPixels(red, green, blue, overPixel);
 			if (deltaPixel > delta)
 			{

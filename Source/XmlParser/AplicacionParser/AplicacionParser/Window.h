@@ -17,6 +17,15 @@ public:
 	Window(std::string, int h, int w);
 	void close(void);
 	void refresh(void);
-	void display(Image& image, int x, int y, int red, int blue, int green, int delta);
+	void display(Image* image, int x, int y, int red, int blue, int green, int delta);
+	void display(Image* image, int x, int y, int width, int height);
+	int getHeight(void)
+	{
+		return this->height;
+	}
+	int getWidth(void)
+	{
+		return this->width;
+	}
 	~Window(void);
 };

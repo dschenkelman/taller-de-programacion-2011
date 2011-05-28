@@ -208,11 +208,23 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Character.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\CollisionHelper.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Escenario.cpp"
 				>
 			</File>
 			<File
 				RelativePath=".\EscenarioTests.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Ghost.cpp"
 				>
 			</File>
 			<File
@@ -260,7 +272,15 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Pacman.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\PixelHelpers.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\ScreenManager.cpp"
 				>
 			</File>
 			<File
@@ -382,11 +402,23 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Character.h"
+				>
+			</File>
+			<File
+				RelativePath=".\CollisionHelper.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Escenario.h"
 				>
 			</File>
 			<File
 				RelativePath=".\EscenarioTests.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Ghost.h"
 				>
 			</File>
 			<File
@@ -438,7 +470,15 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Pacman.h"
+				>
+			</File>
+			<File
 				RelativePath=".\PixelHelpers.h"
+				>
+			</File>
+			<File
+				RelativePath=".\ScreenManager.h"
 				>
 			</File>
 			<File
