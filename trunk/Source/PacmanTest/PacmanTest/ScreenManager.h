@@ -20,6 +20,7 @@ class ScreenManager
 	int deadCycles;
 public:
 	ScreenManager(Window* w, std::string pathFondo);
+	void startGame(void);
 	void updatePacman(Pacman* pac);
 	void updateGhosts(List<Ghost*> ghosts);
 	void createGhostsForPacman1(void);

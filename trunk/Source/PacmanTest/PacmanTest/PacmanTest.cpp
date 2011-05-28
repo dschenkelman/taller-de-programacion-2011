@@ -14,28 +14,8 @@ void Execute(void)
 {
 	Window* w = new Window("Pacman", 480, 640);
 	//esperar para cerrar
-	SDL_Event e;
-	bool running = true;
-	Uint32 period = 1000.0 / 60;
 	ScreenManager screenManager(w, "Images/fondo.bmp");
- 
-	while(!screenManager.gameOver()) 
-	{
-		SDL_Delay(period);
-		screenManager.updateScreen();
-		while(SDL_PollEvent(&e)) 
-		{
-			switch(e.type)
-			{
-				case SDL_QUIT:
-					running = false;
-					w->close();
-					break;
-				default:
-					screenManager.handleKeyStroke();
-			}
-		}
-	}
+	screenManager.startGame();
 	delete w;
 }
 
