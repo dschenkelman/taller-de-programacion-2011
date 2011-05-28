@@ -22,9 +22,11 @@ public:
 	Camino& operator=(const Camino& other);
 	Bonus& getBonus();
 	bool hasBonus();
+	void removeBonus(void);
 	Celda* copiar(void);
 	bool hasError(void);
 	~Camino(void);
 	Textura obtenerTextura();
 	Image* obtenerRepresentacion();
+	Image* borrarBonus();
 };

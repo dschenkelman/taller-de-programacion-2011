@@ -27,3 +27,24 @@ bool CollisionHelper::IsPointInRectangle(int x, int y, int left, int top, int ri
 {
 	return left <= x && x < right && top <= y && y < bottom;
 }
+
+bool CollisionHelper::BonusCollision(Image *i1, Image *i2, int left1, int top1, int left2, int top2 ){
+
+	int right1 = left1 + i1->getWidth();
+	int bottom1 =  top1 + i1->getHeight();
+
+	int right2 = left2 + i2->getWidth();
+	int bottom2 =  top2 + i2->getHeight();
+
+	bool oneCollidedWithTwo = IsPointInRectangle(left1, top1, left2, top2, right2, bottom2) ||
+		IsPointInRectangle(right1, top1, left2, top2, right2, bottom2) ||
+		IsPointInRectangle(left1, bottom1, left2, top2, right2, bottom2) ||
+		IsPointInRectangle(right1, bottom1, left2, top2, right2, bottom2);
+
+	bool twoCollidedWithOne = IsPointInRectangle(left2, top2, left1, top1, right1, bottom1) ||
+		IsPointInRectangle(right2, top2, left1, top1, right1, bottom1) ||
+		IsPointInRectangle(left2, bottom2, left1, top1, right1, bottom1) ||
+		IsPointInRectangle(right2, bottom2, left1, top1, right1, bottom1);
+
+	return oneCollidedWithTwo || twoCollidedWithOne;
+}

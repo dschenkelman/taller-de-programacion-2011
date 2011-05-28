@@ -1,6 +1,9 @@
 #include "StdAfx.h"
 #include "Pacman.h"
 #include "Image.h"
+#include "Camino.h"
+#include "ImageArea.h"
+#include "CollisionHelper.h"
 #include <string>
 
 using namespace std;
@@ -169,4 +172,39 @@ void Pacman::rotateWhenDead(void)
 bool Pacman::isAlive(void)
 {
 	return !this->isDead;
+}
+
+ImageArea Pacman::eatBonus(void)
+{
+	int posX = this->x;
+	int posY = this->y;
+	int width = this->textura->getWidth();
+	int height = this->textura->getHeight();
+
+	int x1 = posX / this->imageWidth;
+	int y1 = posY / this->imageHeight;
+	
+	int x2 = (posX + width) / this->imageWidth;
+	int y2 = (posY + height) / this->imageHeight;
+
+	if (x1 < 0 || x2 >= this->grilla.getAncho() || y1 < 0 || y2 >= this->grilla.getAlto())	{
+		return ImageArea(0,0,0,0);
+	}
+
+	Celda* c1 = this->grilla.getCelda(y1, x1);
+	Camino* cam1 = dynamic_cast<Camino*>(c1);
+	
+
+	if (cam1 != NULL && cam1->hasBonus()){
+		Image *bono=cam1->getBonus().obtenerRepresentacion();
+		int posX= (x1*this->imageWidth)+(this->imageWidth-bono->getWidth())/2;
+		int posY= (y1*this->imageHeight)+(this->imageHeight-bono->getHeight())/2;
+		if (CollisionHelper::BonusCollision(this->textura, bono, this->x, this->y, posX, posY) ){
+			ImageArea ia(posX,posY,bono->getWidth(),bono->getHeight());
+			cam1->removeBonus();
+			return ia;
+		}
+	}
+	
+	return ImageArea(0,0,0,0);
 }

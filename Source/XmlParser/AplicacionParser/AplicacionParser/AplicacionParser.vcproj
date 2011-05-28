@@ -248,6 +248,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\ImageArea.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\ImageTests.cpp"
 				>
 			</File>
@@ -443,6 +447,10 @@
 			</File>
 			<File
 				RelativePath=".\Image.h"
+				>
+			</File>
+			<File
+				RelativePath=".\ImageArea.h"
 				>
 			</File>
 			<File

@@ -83,20 +83,22 @@ bool Bonus::hasError(void)
 
 Image* Bonus::obtenerRepresentacion(void)
 {
-	Textura textura = this->getTipoBonus().getTextura();
-	Image * imagen=new Image(textura.getPath());
-	if (!(imagen->hasError()))
-	{
-		imagen->crop(textura.getTop(), textura.getLeft(), textura.getRight(), textura.getBottom());
-		Uint32 alphaPixel = textura.getRed() | textura.getGreen() << 8 | textura.getBlue() << 16;
-		imagen->rotate(textura.getRotation(), alphaPixel);
+	if (this->imagen == NULL){
+		Textura textura = this->getTipoBonus().getTextura();
+		this->imagen=new Image(textura.getPath());
+		if (!(this->imagen->hasError()))
+		{
+			this->imagen->crop(textura.getTop(), textura.getLeft(), textura.getRight(), textura.getBottom());
+			Uint32 alphaPixel = textura.getRed() | textura.getGreen() << 8 | textura.getBlue() << 16;
+			this->imagen->rotate(textura.getRotation(), alphaPixel);
+		}
+		
 	}
-	this->imagen=imagen;
-	return imagen;	
+	return this->imagen;	
 }
 
 Bonus::~Bonus(void)
 {
-	if (this->imagen == NULL)
+	if (this->imagen != NULL)
 		delete (this->imagen);
 }

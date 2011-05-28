@@ -3,6 +3,7 @@
 #include "Image.h"
 #include <string>
 #include "Character.h"
+#include "ImageArea.h"
 
 class Pacman : public Character
 {
@@ -34,5 +35,6 @@ public:
 	void rotateWhenDead(void);
 	void kill(void);
 	bool isAlive(void);
+	ImageArea eatBonus(void);
 	~Pacman(void);
 };
