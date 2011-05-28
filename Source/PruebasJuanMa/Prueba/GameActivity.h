@@ -1,14 +1,14 @@
 #pragma once
 #include "Activity.h"
-#include "RichText.h"
-#include "UIOptionArrowMenu.h"
+#include "RichTextView.h"
+#include "OptionArrowMenuView.h"
 
 class GameActivity : public Activity {
 private:
 	Image* banner;
-	RichText* title;
+	RichTextView* title;
 
 public:
 	void onLoad();
-	void notify(SDL_Event e);
+	Activity* notify(SDL_Event e);
 };

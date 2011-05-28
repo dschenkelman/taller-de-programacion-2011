@@ -17,62 +17,31 @@
 #include "Window.h"
 #include "Image.h"
 #include "Rotador.h"
-#include "RichText.h"
+#include "RichTextView.h"
 #include "MenuActivity.h"
 
 #define SDL_main main 
 
 
+
 int main(int argc, char* argv[])
 {
-	//Window ventana = Window();
+	Window* w = new Window("::Dual Pacman::", 480, 640);
 	
-	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
-		printf("Unable to initialize SDL: %s\n", SDL_GetError());
-		return 1;
-	}
-	atexit(SDL_Quit);
-
-	SDL_Surface *screen;
-	 
-	screen = SDL_SetVideoMode(640, 480, 24, SDL_DOUBLEBUF);
-	if (screen == NULL) {
-		printf("Unable to set video mode: %s\n", SDL_GetError());
-		return 1;
-	}
-
-	// banner: dual
-	Image* dualBanner = new Image("images/dual.bmp");
-	
+	// Actividad de Inicio
 	MenuActivity* menuActivity = new MenuActivity();
 	menuActivity->init();
 	
-	SDL_BlitSurface(menuActivity->getSDLSurface(), NULL, screen, NULL);
-	SDL_Flip(screen);
+	// Seteo la actividad
+	w->setCurrentActivity(menuActivity);
+	
+	menuActivity->drawViews();
 
-	SDL_Event e;
-	bool running = true;
-	while(running) 
-	{
-		while(SDL_PollEvent(&e)) 
-		{
-			switch(e.type)
-			{
-				case SDL_QUIT:
-					running = false;
-					break;
-				default:
-					menuActivity->notify(e);
-					SDL_BlitSurface(menuActivity->getSDLSurface(), NULL, screen, NULL);
-					SDL_Flip(screen);
-					break;
-			}
-		}
-	}
-
-
-	// libero memoria
-	//free(text1);
-	 
+	// Actualizo la ventana
+	w->refresh();
+	
+	// Inicio manejo de eventos
+	w->init();
+	
 	return 0;
 }

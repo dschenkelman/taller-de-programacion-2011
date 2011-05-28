@@ -1,12 +1,12 @@
 #include "StdAfx.h"
-#include "RichText.h"
+#include "RichTextView.h"
 
-std::string RichText::MENU_HEADER1	= "menu_header1";
-std::string RichText::NORMAL		= "normal";
-std::string RichText::MENU_ITEM		= "menu_item";
+std::string RichTextView::MENU_HEADER1	= "menu_header1";
+std::string RichTextView::NORMAL			= "normal";
+std::string RichTextView::MENU_ITEM		= "menu_item";
 
 
-RichText::RichText(std::string txt, std::string type): Image(1,1){
+RichTextView::RichTextView(std::string txt, std::string type): View(){
 	
 	int letterWidth		= 17;
 	int letterHeight	= 17;

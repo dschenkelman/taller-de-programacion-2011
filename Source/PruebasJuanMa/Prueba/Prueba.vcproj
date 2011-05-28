@@ -212,6 +212,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\ImageView.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Mapa.cpp"
 				>
 			</File>
@@ -224,6 +228,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\OptionArrowMenuView.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\PixelHelpers.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Prueba.cpp"
 				>
 			</File>
@@ -232,7 +244,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\RichText.cpp"
+				RelativePath=".\RichTextView.cpp"
 				>
 			</File>
 			<File
@@ -268,11 +280,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\UIOptionArrowMenu.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\UIOptionArrowMenu.h"
+				RelativePath=".\View.cpp"
 				>
 			</File>
 			<File
@@ -302,11 +310,19 @@
 				>
 			</File>
 			<File
+				RelativePath=".\EventDispatcher.h"
+				>
+			</File>
+			<File
 				RelativePath=".\GameActivity.h"
 				>
 			</File>
 			<File
 				RelativePath=".\Image.h"
+				>
+			</File>
+			<File
+				RelativePath=".\ImageView.h"
 				>
 			</File>
 			<File
@@ -326,6 +342,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\OptionArrowMenuView.h"
+				>
+			</File>
+			<File
+				RelativePath=".\PixelHelpers.h"
+				>
+			</File>
+			<File
 				RelativePath=".\resampler.h"
 				>
 			</File>
@@ -334,7 +358,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\RichText.h"
+				RelativePath=".\RichTextView.h"
 				>
 			</File>
 			<File
@@ -351,6 +375,14 @@
 			</File>
 			<File
 				RelativePath=".\String.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Ventana.h"
+				>
+			</File>
+			<File
+				RelativePath=".\View.h"
 				>
 			</File>
 			<File
