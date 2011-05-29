@@ -176,6 +176,10 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath=".\Activity.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\AplicacionParser.cpp"
 				>
 			</File>
@@ -216,11 +220,19 @@
 				>
 			</File>
 			<File
+				RelativePath=".\DAO.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Escenario.cpp"
 				>
 			</File>
 			<File
 				RelativePath=".\EscenarioTests.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\GameActivity.cpp"
 				>
 			</File>
 			<File
@@ -256,6 +268,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\ImageView.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\ListTests.cpp"
 				>
 			</File>
@@ -268,6 +284,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\MenuActivity.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Obstaculo.cpp"
 				>
 			</File>
@@ -276,11 +296,39 @@
 				>
 			</File>
 			<File
+				RelativePath=".\OptionArrowMenuView.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Pacman.cpp"
 				>
 			</File>
 			<File
 				RelativePath=".\PixelHelpers.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\PresentationActivity.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\RankingByGamesPlayedActivity.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\RankingByPointsActivity.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\RankingByTimeActivity.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\RankingByWinsActivity.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\RichTextView.cpp"
 				>
 			</File>
 			<File
@@ -293,6 +341,10 @@
 			</File>
 			<File
 				RelativePath=".\StackTests.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\StatsActivity.cpp"
 				>
 			</File>
 			<File
@@ -352,6 +404,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\View.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Window.cpp"
 				>
 			</File>
@@ -381,6 +437,10 @@
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
+			<File
+				RelativePath=".\Activity.h"
+				>
+			</File>
 			<File
 				RelativePath=".\Bonus.h"
 				>
@@ -418,11 +478,19 @@
 				>
 			</File>
 			<File
+				RelativePath=".\DAO.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Escenario.h"
 				>
 			</File>
 			<File
 				RelativePath=".\EscenarioTests.h"
+				>
+			</File>
+			<File
+				RelativePath=".\GameActivity.h"
 				>
 			</File>
 			<File
@@ -458,6 +526,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\ImageView.h"
+				>
+			</File>
+			<File
 				RelativePath=".\List.h"
 				>
 			</File>
@@ -474,6 +546,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\MenuActivity.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Obstaculo.h"
 				>
 			</File>
@@ -482,11 +558,39 @@
 				>
 			</File>
 			<File
+				RelativePath=".\OptionArrowMenuView.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Pacman.h"
 				>
 			</File>
 			<File
 				RelativePath=".\PixelHelpers.h"
+				>
+			</File>
+			<File
+				RelativePath=".\PresentationActivity.h"
+				>
+			</File>
+			<File
+				RelativePath=".\RankingByGamesPlayedActivity.h"
+				>
+			</File>
+			<File
+				RelativePath=".\RankingByPointsActivity.h"
+				>
+			</File>
+			<File
+				RelativePath=".\RankingByTimeActivity.h"
+				>
+			</File>
+			<File
+				RelativePath=".\RankingByWinsActivity.h"
+				>
+			</File>
+			<File
+				RelativePath=".\RichTextView.h"
 				>
 			</File>
 			<File
@@ -503,6 +607,10 @@
 			</File>
 			<File
 				RelativePath=".\StackTests.h"
+				>
+			</File>
+			<File
+				RelativePath=".\StatsActivity.h"
 				>
 			</File>
 			<File
@@ -543,6 +651,10 @@
 			</File>
 			<File
 				RelativePath=".\Tokenizer.h"
+				>
+			</File>
+			<File
+				RelativePath=".\View.h"
 				>
 			</File>
 			<File
