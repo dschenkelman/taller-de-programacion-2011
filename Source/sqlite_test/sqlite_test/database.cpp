@@ -29,6 +29,13 @@ query database::getQuery(char* sql)
 	return query(this->db,sql);
 }
 
+query* database::getQuery_v2(char* sql)
+{
+	query* q = new query(this->db,sql);
+	return q;
+	//return query(this->db,sql);
+}
+
 database::~database(void)
 {
 	sqlite3_close(this->db);

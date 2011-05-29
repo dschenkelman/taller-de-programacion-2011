@@ -84,18 +84,35 @@ bool gamelog::insertGame(char* player0, char* player1, int winner, int points0, 
 	return false; // TODO
 }
 
-query gamelog::playersByPlayedTime()
+query* gamelog::playersByPlayedTime()
 {
-	string sql("SELECT PlayerId,sum(distinct Duration) AS TotalPlayed FROM Games g INNER JOIN UserGame ug ON g.Id=ug.GameId GROUP BY PlayerId;");
-	query q = this->db->getQuery((char*)sql.c_str());
-	return q;
+	return this->db->getQuery_v2("SELECT p.Name,sum(distinct Duration) AS TotalPlayed FROM Games g INNER JOIN UserGame ug ON g.Id=ug.GameId INNER JOIN Players p ON p.Id=ug.PlayerId GROUP BY PlayerId;");
 }
 
-query gamelog::playersByGamesPlayed()
+query* gamelog::playersByGamesPlayed()
 {
-	string sql("select count(distinct ug.gameid) as GamesPlayed,p.name from usergame ug inner join players p on p.id=ug.playerid group by ug.playerid;");
-	query q = this->db->getQuery((char*)sql.c_str());
-	return q;
+	return this->db->getQuery_v2("select count(distinct ug.gameid) as GamesPlayed,p.name from usergame ug inner join players p on p.id=ug.playerid group by ug.playerid;");
+}
+
+query* gamelog::playersByTotalPoints()
+{
+	return this->db->getQuery_v2("select sum(distinct ug.points) as TotalPoints,p.name from usergame ug inner join players p on p.id=ug.playerid group by ug.playerid;");
+}
+
+query* gamelog::playersByWinnedCount()
+{
+	return this->db->getQuery_v2("select count(distinct g.winnerid)as WinnedCount,p.name from games g inner join players p on p.id=g.winnerid group by g.winnerid;");
+}
+
+query* gamelog::playersComparison(char* player0, char* player1)
+//select GameId,p.Name,w.Name as Winner,Duration,Points from games g inner join usergame ug on g.id=ug.gameid inner join players p on p.id=ug.playerid inner join players w on w.id=g.winnerid where g.id in (select g.id from games g inner join usergame ug on g.id=ug.gameid inner join players p on p.id=ug.playerid where p.name in ('ale') group by g.id) order by gameid;
+{
+	string sql("select GameId,p.Name,w.Name as Winner,Duration,Points from games g inner join usergame ug on g.id=ug.gameid inner join players p on p.id=ug.playerid inner join players w on w.id=g.winnerid where g.id in (select g.id from games g inner join usergame ug on g.id=ug.gameid inner join players p on p.id=ug.playerid where p.name in ('");
+	sql += string(player0);
+	sql += string("','");
+	sql += string(player1);
+	sql += string("') group by g.id) order by gameid;");
+	return this->db->getQuery_v2((char*)sql.c_str());
 }
 
 gamelog::~gamelog(void)
