@@ -3,6 +3,14 @@
 #include "MenuActivity.h"
 #include "Activity.h"
 
+
+PresentationActivity::PresentationActivity(int width, int height):Activity(width, height){
+}
+
+PresentationActivity::~PresentationActivity(){
+}
+
+
 void PresentationActivity::onLoad(){
 	
 	// cabecera
@@ -33,7 +41,7 @@ Activity* PresentationActivity::notify(SDL_Event e){
 		case SDL_KEYDOWN:
 			switch(e.key.keysym.sym){
 				case SDLK_RETURN:
-					nextActivity = new MenuActivity();
+					nextActivity = new MenuActivity(this->getWidth(), this->getHeight());
 					break;
 			}
 			break;

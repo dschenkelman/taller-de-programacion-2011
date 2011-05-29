@@ -18,10 +18,12 @@ using namespace System;
 
 int main(int argc, char* argv[])
 {
-	Window* w = new Window("::Dual Pacman::", 480, 640);
+	int width = 1024;
+	int height = 780;
+	Window* w = new Window("::Dual Pacman::", height, width);
 	
 	// Actividad de Inicio
-	PresentationActivity* pActivity = new PresentationActivity();
+	PresentationActivity* pActivity = new PresentationActivity(width, height);
 	pActivity->init();
 	
 	// Seteo la actividad

@@ -12,6 +12,8 @@ private:
 	ScreenManager* screenManager;
 
 public:
+	GameActivity(int width, int height);
+	~GameActivity();
 	void onLoad();
 	Activity* notify(SDL_Event e);
 	void update();

@@ -2,7 +2,7 @@
 #include "Activity.h"
 
 
-Activity::Activity() : Image(640,480){
+Activity::Activity(int width, int height) : Image(width,height){
 	this->widgets = new List<View*>();
 }
 

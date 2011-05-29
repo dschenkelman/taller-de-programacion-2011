@@ -4,6 +4,11 @@
 #include "GameActivity.h"
 #include "StatsActivity.h"
 
+
+MenuActivity::MenuActivity(int width, int height):Activity(width, height){
+}
+
+
 void MenuActivity::onLoad(){
 	
 	// cabecera
@@ -37,10 +42,10 @@ Activity* MenuActivity::notify(SDL_Event e){
 			switch(e.key.keysym.sym){
 				case SDLK_RETURN:
 					if(this->arrowMenu->getSelectedOption() == "new game")
-						nextActivity = new GameActivity();
+						nextActivity = new GameActivity(this->getWidth(), this->getHeight());
 
 					if(this->arrowMenu->getSelectedOption() == "stats")
-						nextActivity = new StatsActivity();
+						nextActivity = new StatsActivity(this->getWidth(), this->getHeight());
 
 					if(this->arrowMenu->getSelectedOption() == "quit")
 						SDL_Quit();
