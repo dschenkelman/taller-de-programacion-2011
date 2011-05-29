@@ -9,7 +9,7 @@ private:
 	List<View*>* widgets;
 
 public:
-	Activity();
+	Activity(int width, int height);
 	~Activity();
 	void add(View* w);
 	void init();

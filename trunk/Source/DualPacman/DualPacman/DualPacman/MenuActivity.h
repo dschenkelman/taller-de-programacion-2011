@@ -13,4 +13,5 @@ private:
 public:
 	void onLoad();
 	Activity* notify(SDL_Event e);
+	MenuActivity(int width, int height);
 };

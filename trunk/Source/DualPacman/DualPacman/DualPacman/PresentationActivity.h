@@ -11,6 +11,8 @@ private:
 	OptionArrowMenuView* arrowMenu;
 
 public:
+	PresentationActivity(int width, int height);
+	~PresentationActivity();
 	void onLoad();
 	Activity* notify(SDL_Event e);
 };

@@ -4,6 +4,14 @@
 #include "MenuActivity.h"
 #include "ScreenManager.h"
 
+
+GameActivity::GameActivity(int width, int height):Activity(width, height){
+}
+
+GameActivity::~GameActivity(){
+}
+
+
 void GameActivity::onLoad(){
 	
 	// texto del tiempo
@@ -37,7 +45,7 @@ Activity* GameActivity::notify(SDL_Event e){
 		case SDL_KEYDOWN:
 			switch(e.key.keysym.sym){
 				case SDLK_RETURN:
-					nextActivity = new MenuActivity();
+					nextActivity = new MenuActivity(this->getWidth(), this->getHeight());
 					break;
 				default:
 					screenManager->handleKeyStroke();

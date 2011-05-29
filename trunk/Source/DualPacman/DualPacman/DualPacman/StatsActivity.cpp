@@ -3,6 +3,11 @@
 #include "MenuActivity.h"
 #include "Activity.h"
 
+
+StatsActivity::StatsActivity(int width, int height):Activity(width, height){
+}
+
+
 void StatsActivity::onLoad(){
 	
 	// cabecera
@@ -34,7 +39,7 @@ Activity* StatsActivity::notify(SDL_Event e){
 			switch(e.key.keysym.sym){
 				case SDLK_RETURN:
 					if(this->arrowMenu->getSelectedOption() == "return to menu")
-						nextActivity = new MenuActivity();
+						nextActivity = new MenuActivity(this->getWidth(), this->getHeight());
 
 					break;
 			}
