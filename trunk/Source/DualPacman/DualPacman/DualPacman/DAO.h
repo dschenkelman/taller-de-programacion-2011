@@ -9,7 +9,7 @@ public:
 	List<std::string> getRankingByPoints();
 	List<std::string> getRankingByTime();
 	List<std::string> getRankingByGamesPlayed();
-	List<std::string> getRankingByGamesWon();
+	List<std::string> getRankingByWins();
 public:
 	~DAO(void);
 };

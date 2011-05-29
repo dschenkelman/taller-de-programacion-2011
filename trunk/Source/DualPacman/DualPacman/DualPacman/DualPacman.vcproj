@@ -307,7 +307,15 @@
 				>
 			</File>
 			<File
+				RelativePath=".\RankingByGamesPlayedActivity.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\RankingByPointsActivity.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\RankingByWinsActivity.cpp"
 				>
 			</File>
 			<File
@@ -533,7 +541,15 @@
 				>
 			</File>
 			<File
+				RelativePath=".\RankingByGamesPlayedActivity.h"
+				>
+			</File>
+			<File
 				RelativePath=".\RankingByPointsActivity.h"
+				>
+			</File>
+			<File
+				RelativePath=".\RankingByWinsActivity.h"
 				>
 			</File>
 			<File

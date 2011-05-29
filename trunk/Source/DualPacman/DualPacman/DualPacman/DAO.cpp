@@ -28,7 +28,7 @@ List<std::string> DAO::getRankingByGamesPlayed()
 	return usersList;
 }
 
-List<std::string> DAO::getRankingByGamesWon()
+List<std::string> DAO::getRankingByWins()
 {
 	List<std::string> usersList;
 	usersList.add("Gonzo 9");
