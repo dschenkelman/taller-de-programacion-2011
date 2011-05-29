@@ -23,7 +23,7 @@ void OptionArrowMenuView::addOption(std::string optionTxt){
 void OptionArrowMenuView::draw(){
 
 	int newH = ( (this->optionHeight+12)*this->options->length() );
-	Image* aux = new Image(300, newH);
+	Image* aux = new Image(350, newH);
 	this->copy(*aux);
 
 	// dibujo opciones
