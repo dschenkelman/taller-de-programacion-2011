@@ -12,10 +12,12 @@ void RankingByPointsActivity::onLoad()
 	// cabecera
 	this->banner = new ImageView("Images/dual.bmp");
 	this->banner->setX(5); this->banner->setY(5);
+	this->banner->setVerticalAlign(View::VERTICAL_ALIGN_CENTER);
 
 	// titulo
 	this->title = new RichTextView("Ranking by points", RichTextView::NORMAL);
 	this->title->setX(100); this->title->setY(50);
+	this->title->setVerticalAlign(View::VERTICAL_ALIGN_CENTER);
 
 	// datos
 	List<std::string> ranking = DAO().getRankingByPoints();
