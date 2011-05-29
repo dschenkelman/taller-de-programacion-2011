@@ -173,7 +173,7 @@ void ScreenManager::deleteGhosts(List<Ghost*>& ghosts)
 		Image* ig = g->getImage();
 		int height = ig->getHeight();
 		int width = ig->getWidth();
-		this->window->display(this->fondo, xg, yg, width, height);
+		this->window->display(this->fondoNegro, xg, yg, width, height);
 	}
 }
 
@@ -230,6 +230,5 @@ ScreenManager::~ScreenManager(void)
 void ScreenManager::deleteBonus(Pacman *pac){
 	
 	ImageArea ia=pac->eatBonus();
-	//this->window->display(this->fondoNegro, ia.getX(), ia.getY(), ia.getImageWidth(), ia.getImageHeight());
 	this->fondo->display(this->fondoNegro, ia.getX(), ia.getY(), ia.getImageWidth(), ia.getImageHeight());
 }
