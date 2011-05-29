@@ -18,8 +18,8 @@ using namespace System;
 
 int main(int argc, char* argv[])
 {
-	int width = 1024;
-	int height = 780;
+	int width = 640;
+	int height = 480;
 	Window* w = new Window("::Dual Pacman::", height, width);
 	
 	// Actividad de Inicio
