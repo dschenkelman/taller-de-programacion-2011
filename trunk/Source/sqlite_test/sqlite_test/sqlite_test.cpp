@@ -5,6 +5,11 @@
 #include <iostream>
 using namespace std;
 
+//useful to detect memory leaks
+#define _CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+#include <crtdbg.h>
+
 int main() {
 	cout << "hello world!" << endl;
 	remove("test.sql");
@@ -15,6 +20,7 @@ int main() {
 	res = db.execute("INSERT INTO table0 VALUES (123, 'texto!')");
 	if (res) cout << res << endl;
 	query q = db.getQuery("SELECT * FROM table0");
+	q.next();
 	int n;
 	n = q.getInt(0);
 	cout << n << endl;
@@ -26,8 +32,19 @@ int main() {
 	gamelog glog = gamelog("gamelog.sql");
 	glog.createPlayer("ale","alepass");
 	glog.createPlayer("ela","elapass");
+	glog.createPlayer("juan","juanpass");
 	glog.insertGame("ale","ela",0,10,20,60);
 	glog.insertGame("ela","ale",0,30,40,50);
+	glog.insertGame("ale","juan",1,15,25,70);
+
+	query* stats = glog.playersByPlayedTime();
+	while(!stats->next()) {
+		cout << "Jugador: " << stats->getChars(0) << " Puntos: " << stats->getInt(1) << endl;
+	}
+
+	//dump memory leaks to VS Output Window
+	int leaks = _CrtDumpMemoryLeaks();
+	cout << "Memory leaks: " << leaks << endl;
 
 	getchar();
 	return 0;
