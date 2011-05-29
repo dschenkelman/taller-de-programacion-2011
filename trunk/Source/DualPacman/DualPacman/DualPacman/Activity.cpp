@@ -43,12 +43,17 @@ void Activity::drawViews(){
 		SDL_Rect* rec = new SDL_Rect();
 		rec->h = w->getHeight();
 		rec->w = w->getWidth();
-		rec->x = w->getX();
+
+		if(w->getVerticalAlign() == View::VERTICAL_ALIGN_CENTER){
+			rec->x = ((this->getWidth()/2)-(w->getWidth()/2));
+		}else{
+			rec->x = w->getX();
+		}
 		rec->y = w->getY();
+		
 		SDL_BlitSurface(w->getSDLSurface(), NULL, this->getSDLSurface(), rec);
 	}
 	SDL_Flip(this->getSDLSurface());
 }
-
 
 

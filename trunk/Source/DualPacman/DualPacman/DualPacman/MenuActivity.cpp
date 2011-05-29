@@ -14,10 +14,12 @@ void MenuActivity::onLoad(){
 	// cabecera
 	this->banner = new ImageView("Images/dual.bmp");
 	this->banner->setX(5); this->banner->setY(5);
+	this->banner->setVerticalAlign(View::VERTICAL_ALIGN_CENTER);
 
 	// titulo
 	this->title = new RichTextView("pacman", RichTextView::NORMAL);
-	this->title->setX(100); this->title->setY(50);
+	this->title->setY(50);
+	this->title->setVerticalAlign(View::VERTICAL_ALIGN_CENTER);
 	
 	// menu con flecha
 	this->arrowMenu = new OptionArrowMenuView();
