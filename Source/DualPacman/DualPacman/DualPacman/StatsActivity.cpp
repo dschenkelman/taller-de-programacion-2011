@@ -5,6 +5,7 @@
 #include "RankingByPointsActivity.h"
 #include "RankingByGamesPlayedActivity.h"
 #include "RankingByWinsActivity.h"
+#include "RankingByTimeActivity.h"
 
 
 StatsActivity::StatsActivity(int width, int height):Activity(width, height){
@@ -60,10 +61,10 @@ Activity* StatsActivity::notify(SDL_Event e){
 					if(this->arrowMenu->getSelectedOption() == "ranking by wins")
 						nextActivity = new RankingByWinsActivity(this->getWidth(), this->getHeight());
 
-					/*if(this->arrowMenu->getSelectedOption() == "ranking by time")
-						nextActivity = new RankingByTime(this->getWidth(), this->getHeight());
+					if(this->arrowMenu->getSelectedOption() == "ranking by time")
+						nextActivity = new RankingByTimeActivity(this->getWidth(), this->getHeight());
 
-					if(this->arrowMenu->getSelectedOption() == "comparison between players")
+					/*if(this->arrowMenu->getSelectedOption() == "comparison between players")
 						nextActivity = new RankingByPointsActivity(this->getWidth(), this->getHeight());*/
 
 					break;

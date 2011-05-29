@@ -315,6 +315,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\RankingByTimeActivity.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\RankingByWinsActivity.cpp"
 				>
 			</File>
@@ -546,6 +550,10 @@
 			</File>
 			<File
 				RelativePath=".\RankingByPointsActivity.h"
+				>
+			</File>
+			<File
+				RelativePath=".\RankingByTimeActivity.h"
 				>
 			</File>
 			<File
