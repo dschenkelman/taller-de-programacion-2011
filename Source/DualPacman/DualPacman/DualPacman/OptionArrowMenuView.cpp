@@ -50,36 +50,39 @@ void OptionArrowMenuView::draw(){
 
 
 void OptionArrowMenuView::arrowUp(){
-	if( this->arrowIndex > 1){
-		SDL_Rect* rec = new SDL_Rect();
-		rec->h = this->arrow->getHeight();
-		rec->w = this->arrow->getWidth();
+	SDL_Rect* rec = new SDL_Rect();
+	rec->h = this->arrow->getHeight();
+	rec->w = this->arrow->getWidth();
 
-		
-		// borro la flecha anterior
-		rec->x = this->arrowX;
-		rec->y = this->arrowY;
-		SDL_FillRect( this->getSDLSurface(), rec, 0);
+	
+	// borro la flecha anterior
+	rec->x = this->arrowX;
+	rec->y = this->arrowY;
+	SDL_FillRect( this->getSDLSurface(), rec, 0);
 
-		// pongo la flecha en la nueva posicion
-		rec->x = this->arrowX;
+	// pongo la flecha en la nueva posicion
+	rec->x = this->arrowX;
+	if( this->arrowIndex > 1) {
 		rec->y = (this->arrowY-this->optionHeight);
-		
-		this->arrowY = (this->arrowY-this->optionHeight);
-		
-		// actualizo la imagen
-		SDL_BlitSurface(this->arrow->getSDLSurface(), NULL, this->getSDLSurface(), rec);
-		SDL_Flip(this->getSDLSurface());
-		
+		this->arrowY = rec->y;
 		this->arrowIndex--;
-	};
+	} else {
+		rec->y = (this->arrowY+this->optionHeight*(this->options->length()-1));
+		this->arrowY = rec->y;
+		this->arrowIndex+=(this->options->length()-1);
+	}
+		
+		
+	// actualizo la imagen
+	SDL_BlitSurface(this->arrow->getSDLSurface(), NULL, this->getSDLSurface(), rec);
+	SDL_Flip(this->getSDLSurface());
+		
 	
 }
 
 
 void OptionArrowMenuView::arrowDown(){
 	
-	if( this->arrowIndex < this->options->length() ){
 		SDL_Rect* rec = new SDL_Rect();
 		rec->h = this->arrow->getHeight();
 		rec->w = this->arrow->getWidth();
@@ -92,17 +95,20 @@ void OptionArrowMenuView::arrowDown(){
 
 		// pongo la flecha en la nueva posicion
 		rec->x = this->arrowX;
+	if( this->arrowIndex < this->options->length() ){
 		rec->y = (this->arrowY+this->optionHeight);
-
-		this->arrowY = (this->arrowY+this->optionHeight);
+		this->arrowY = rec->y;
+		this->arrowIndex++;
+	} else {
+		rec->y = (this->arrowY-this->optionHeight*(this->options->length()-1));
+		this->arrowY = rec->y;
+		this->arrowIndex-=this->options->length()-1;
+	}
 
 		// actualizo la imagen
 		SDL_BlitSurface(this->arrow->getSDLSurface(), NULL, this->getSDLSurface(), rec);
 		SDL_Flip(this->getSDLSurface());
-		
-		this->arrowIndex++;
-	};
-	
+			
 }
 
 
