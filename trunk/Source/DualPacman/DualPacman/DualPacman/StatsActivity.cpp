@@ -2,6 +2,7 @@
 #include "StatsActivity.h"
 #include "MenuActivity.h"
 #include "Activity.h"
+#include "RankingByPointsActivity.h"
 
 
 StatsActivity::StatsActivity(int width, int height):Activity(width, height){
@@ -22,6 +23,7 @@ void StatsActivity::onLoad(){
 	this->arrowMenu = new OptionArrowMenuView();
 	this->arrowMenu->setX(50); this->arrowMenu->setY(200); 
 	this->arrowMenu->addOption("return to menu");
+	this->arrowMenu->addOption("ranking by points");
 
 	// los agrego a la pantalla
 	this->add(this->banner);
@@ -41,6 +43,12 @@ Activity* StatsActivity::notify(SDL_Event e){
 					if(this->arrowMenu->getSelectedOption() == "return to menu")
 						nextActivity = new MenuActivity(this->getWidth(), this->getHeight());
 
+					if(this->arrowMenu->getSelectedOption() == "ranking by points")
+						nextActivity = new RankingByPointsActivity(this->getWidth(), this->getHeight());
+
+					break;
+				default:
+					this->arrowMenu->notify(e);
 					break;
 			}
 			break;

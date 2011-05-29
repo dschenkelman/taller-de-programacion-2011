@@ -211,6 +211,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\DAO.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\DualPacman.cpp"
 				>
 			</File>
@@ -300,6 +304,10 @@
 			</File>
 			<File
 				RelativePath=".\PresentationActivity.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\RankingByPointsActivity.cpp"
 				>
 			</File>
 			<File
@@ -433,6 +441,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\DAO.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Escenario.h"
 				>
 			</File>
@@ -518,6 +530,10 @@
 			</File>
 			<File
 				RelativePath=".\PresentationActivity.h"
+				>
+			</File>
+			<File
+				RelativePath=".\RankingByPointsActivity.h"
 				>
 			</File>
 			<File
