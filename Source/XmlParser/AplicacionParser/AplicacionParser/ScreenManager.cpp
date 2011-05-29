@@ -160,7 +160,7 @@ void ScreenManager::deletePacman(Pacman* pac)
 	Image* i = pac->getImage();
 	int height = i->getHeight();
 	int width = i->getWidth();
-	this->window->display(this->fondo, x, y, width, height);
+	this->window->display(this->fondoNegro, x, y, width, height);
 }
 
 void ScreenManager::deleteGhosts(List<Ghost*>& ghosts)
