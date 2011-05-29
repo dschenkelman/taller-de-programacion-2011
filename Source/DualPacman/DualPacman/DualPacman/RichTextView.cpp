@@ -2,7 +2,7 @@
 #include "RichTextView.h"
 
 std::string RichTextView::MENU_HEADER1	= "menu_header1";
-std::string RichTextView::NORMAL			= "normal";
+std::string RichTextView::NORMAL			= "verdana_white_black";
 std::string RichTextView::MENU_ITEM		= "menu_item";
 
 
