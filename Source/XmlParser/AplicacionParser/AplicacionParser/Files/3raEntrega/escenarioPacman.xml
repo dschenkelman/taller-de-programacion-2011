@@ -3,7 +3,7 @@
   		  alto="28" 
 		  tipoObstaculoPorDefecto="ladrillo">
     <CAMINO fila="1" columna="0">
-		<BONUS tipo="alimento"/>
+		<BONUS tipo="alimentoEspecial"/>
 	</CAMINO>
 	<CAMINO fila="1" columna="1">
 		<BONUS tipo="alimento"/>
@@ -72,7 +72,7 @@
 		<BONUS tipo="alimento"/>
 	</CAMINO>
 	<CAMINO fila="1" columna="24">
-		<BONUS tipo="alimento"/>
+		<BONUS tipo="alimentoEspecial"/>
 	</CAMINO>
 	<CAMINO fila="2" columna="0">
 		<BONUS tipo="alimento"/>
@@ -736,7 +736,7 @@
 		<BONUS tipo="alimento"/>
 	</CAMINO>
 	<CAMINO fila="26" columna="0">
-		<BONUS tipo="alimento"/>
+		<BONUS tipo="alimentoEspecial"/>
 	</CAMINO>
 	<CAMINO fila="26" columna="1">
 		<BONUS tipo="alimento"/>
@@ -805,24 +805,20 @@
 		<BONUS tipo="alimento"/>
 	</CAMINO>
 	<CAMINO fila="26" columna="24">
-		<BONUS tipo="alimento"/>
+		<BONUS tipo="alimentoEspecial"/>
 	</CAMINO>
    </GRILLA>
   <TIPOSOBSTACULOS>
-    <TIPOOBSTACULO nombre="OBS1" textura="yunque"/>
 	<TIPOOBSTACULO nombre="ladrillo" textura="ladrillo"/>
   </TIPOSOBSTACULOS>
   <TIPOSBONUS>
-    <TIPOBONUS nombre="uva" textura="uva"/>
 	<TIPOBONUS nombre="alimento" textura="alimento"/>
+	<TIPOBONUS nombre="alimentoEspecial" textura="alimentoEspecial"/>
   </TIPOSBONUS>
   <TEXTURAS>
 	<TEXTURA nombre="Fondo" path="Images\texturaFondo.bmp"/>
-	<TEXTURA nombre="yunque" path="Images\yunque.bmp"/>
 	<TEXTURA nombre="ladrillo" path="Images/ladrillo.bmp"/>
-	<TEXTURA nombre="uva" path="Images/uva.bmp" rot="45" alpha="#FFFFFF"/>
-	<TEXTURA nombre="anana" path="Images\anana.bmp"/>
-	<TEXTURA nombre="alimento" path="Images\bonus.bmp" alpha="#FFFFFF"/>
-	
+	<TEXTURA nombre="alimento" path="Images\bonus.bmp" alpha="#FFFFFF"/>	
+	<TEXTURA nombre="alimentoEspecial" path="Images\alimentoEspecial.bmp" alpha="#FFFFFF"/>
   </TEXTURAS>
   </ESCENARIO>

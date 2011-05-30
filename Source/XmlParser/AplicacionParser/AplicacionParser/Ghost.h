@@ -7,11 +7,13 @@
 
 class Ghost : public Character
 {
+	Image* texturaVulnerable;
+	Image* texturaNoVulnerable;
 	Pacman* pacman;
 	static const int pacmanKillDelta = 5;
 	bool isVulnerable;
 	std::string pathTextura;
-	std::string texturaVulnerable;
+	std::string pathTexturaVulnerable;
 	int originalSpeed;
 	int originalX;
 	int originalY;

@@ -83,7 +83,8 @@ bool Bonus::hasError(void)
 
 Image* Bonus::obtenerRepresentacion(void)
 {
-	if (this->imagen == NULL){
+	if (this->imagen == NULL)
+	{
 		Textura textura = this->getTipoBonus().getTextura();
 		this->imagen=new Image(textura.getPath());
 		if (!(this->imagen->hasError()))
@@ -92,7 +93,6 @@ Image* Bonus::obtenerRepresentacion(void)
 			Uint32 alphaPixel = textura.getRed() | textura.getGreen() << 8 | textura.getBlue() << 16;
 			this->imagen->rotate(textura.getRotation(), alphaPixel);
 		}
-		
 	}
 	return this->imagen;	
 }

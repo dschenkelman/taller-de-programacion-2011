@@ -14,6 +14,7 @@ xDirection(xDir), yDirection(yDir), speed(speed),
 grilla(grilla), imageHeight(imageHeight), imageWidth(imageWidth)
 {
 	this->textura = new Image(pathTextura);
+	this->textura->resize(this->imageWidth - this->speed, this->imageHeight - this->speed);
 }
 
 void Character::moveDown(void)
@@ -78,8 +79,8 @@ bool Character::isNextPositionValid(void)
 
 void Character::updatePosition(void)
 {
-	Character::x = this->getNextX();
-	Character::y = this->getNextY();
+	this->x = this->getNextX();
+	this->y = this->getNextY();
 }
 
 int Character::getNextX(void)
