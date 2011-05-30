@@ -8,17 +8,19 @@
 using namespace std;
 
 ScreenManager::ScreenManager(Window* w, Image* imageFondo, Grilla& grilla, int imageHeight, int imageWidth) 
-: deadCycles(0), imageHeight(imageHeight), imageWidth(imageWidth), grilla(grilla)
+: deadCycles(0), imageHeight(imageHeight), imageWidth(imageWidth), grilla(grilla), period(0),
+vulnerablePacman1Cycles(0), vulnerablePacman2Cycles(0), 
+pacman1GhostsVulnerable(false), pacman2GhostsVulnerable(false)
 {
 	this->window = w;
 	this->fondo = imageFondo;
 	this->gameOverImage = new Image("Images/gameOver.bmp");
 
-	int pacman1InitialX = 0;
-	int pacman1InitialY = this->imageHeight;
+	int pacman1InitialX = this->imageWidth * 11;
+	int pacman1InitialY = this->imageHeight * 18;
 
-	int pacman2InitialX = this->imageWidth * (this->grilla.getAncho() - 1);
-	int pacman2InitialY = this->imageHeight;
+	int pacman2InitialX = this->imageWidth * 13;
+	int pacman2InitialY = this->imageHeight * 18;
 
 	this->pacman1 = new Pacman("Images/pacman.bmp","Images/pacmanClosed.bmp", this->grilla,
 		this->window->getHeight(), this->window->getWidth(),
@@ -42,23 +44,25 @@ void ScreenManager::createGhostsForPacman1(void)
 	
 	this->pacman1Ghosts.add(new Ghost("Images/redGhost.bmp", "Images/brownVGhost.bmp", 
 		this->grilla, this->window->getHeight(), this->window->getWidth(),
-		ghostInitialX + 30, ghostInitialY + 20, 2, this->pacman1, 
+		ghostInitialX + 30, ghostInitialY + 20, 3, this->pacman1, 
 		this->imageHeight, this->imageWidth));
 
 	this->pacman1Ghosts.add(new Ghost("Images/redGhost.bmp", "Images/brownVGhost.bmp" , 
 		this->grilla, this->window->getHeight(), this->window->getWidth(),
-		ghostInitialX - 30, ghostInitialY + 20, 2, 
+		ghostInitialX - 30, ghostInitialY + 20, 3, 
 		this->pacman1, this->imageHeight, this->imageWidth));
 
-	Ghost* g = new Ghost("Images/redGhost.bmp", "Images/brownVGhost.bmp" , 
+	this->pacman1Ghosts.add(new Ghost("Images/redGhost.bmp", "Images/brownVGhost.bmp" , 
 		this->grilla, this->window->getHeight(), this->window->getWidth(),
 		ghostInitialX, 
-		ghostInitialY + 20, 2, this->pacman1, 
-		this->imageHeight, this->imageWidth);
-	
-	g->setIsVulnerable(true);
+		ghostInitialY - 20, 3, this->pacman1, 
+		this->imageHeight, this->imageWidth));
 
-	this->pacman1Ghosts.add(g);
+	this->pacman1Ghosts.add(new Ghost("Images/redGhost.bmp", "Images/brownVGhost.bmp" , 
+		this->grilla, this->window->getHeight(), this->window->getWidth(),
+		ghostInitialX, 
+		ghostInitialY - 20, 3, this->pacman1, 
+		this->imageHeight, this->imageWidth));
 }
 
 void ScreenManager::createGhostsForPacman2(void)
@@ -68,13 +72,23 @@ void ScreenManager::createGhostsForPacman2(void)
 
 	this->pacman2Ghosts.add(new Ghost("Images/blueGhost.bmp","Images/greenVGhost.bmp", 
 		this->grilla, this->window->getHeight(), this->window->getWidth(),
-		ghostInitialX - 30, ghostInitialY + 20, 2, this->pacman2, 
+		ghostInitialX - 30, ghostInitialY + 20, 3, this->pacman2, 
 		this->imageHeight, this->imageWidth));
 
 	this->pacman2Ghosts.add(new Ghost("Images/blueGhost.bmp", "Images/greenVGhost.bmp", 
 		this->grilla, this->window->getHeight(), this->window->getWidth(),
-		ghostInitialX + 30, ghostInitialY + 20, 2, 
+		ghostInitialX + 30, ghostInitialY + 20, 3, 
 		this->pacman2, this->imageHeight, this->imageWidth));
+
+	this->pacman2Ghosts.add(new Ghost("Images/blueGhost.bmp", "Images/greenVGhost.bmp" , 
+		this->grilla, this->window->getHeight(), this->window->getWidth(),
+		ghostInitialX, ghostInitialY - 20, 3, this->pacman2, 
+		this->imageHeight, this->imageWidth));
+
+	this->pacman2Ghosts.add(new Ghost("Images/blueGhost.bmp", "Images/greenVGhost.bmp" , 
+		this->grilla, this->window->getHeight(), this->window->getWidth(),
+		ghostInitialX, ghostInitialY - 20, 3, this->pacman2, 
+		this->imageHeight, this->imageWidth));
 }
 
 void ScreenManager::handleKeyStroke(void)
@@ -88,7 +102,7 @@ void ScreenManager::handleKeyStroke(void)
 
 void ScreenManager::updateScreen(void)
 {
-	this->deleteBonus(this->pacman1);
+	this->updateGhostsVulnerability();
 	this->deletePacman(this->pacman1);
 	this->deletePacman(this->pacman2);
 	this->deleteGhosts(this->pacman1Ghosts);
@@ -99,6 +113,8 @@ void ScreenManager::updateScreen(void)
 		this->updatePacman(this->pacman2);
 		this->updateGhosts(this->pacman1Ghosts);
 		this->updateGhosts(this->pacman2Ghosts);
+		this->deleteBonus(this->pacman1, this->pacman1Ghosts, true);
+		this->deleteBonus(this->pacman2, this->pacman2Ghosts, false);
 	}
 	else
 	{
@@ -153,6 +169,34 @@ void ScreenManager::updatePacman(Pacman* pac)
 	this->window->display(i, x, y, 255, 255, 255, 50);
 }
 
+void ScreenManager::updateGhostsVulnerability(void)
+{
+	if (this->pacman1GhostsVulnerable)
+	{
+		this->vulnerablePacman1Cycles++;
+
+		if (this->vulnerablePacman1Cycles * this->period >= vulnerableTime)
+		{
+			for (int i = 0; i < this->pacman1Ghosts.length(); i++)
+			{
+				this->pacman1Ghosts[i]->setIsVulnerable(false);
+			}
+		}
+	}
+
+	if (this->pacman2GhostsVulnerable)
+	{
+		this->vulnerablePacman2Cycles++;
+
+		if (this->vulnerablePacman2Cycles * this->period >= vulnerableTime)
+		{
+			for (int i = 0; i < this->pacman2Ghosts.length(); i++)
+			{
+				this->pacman2Ghosts[i]->setIsVulnerable(false);
+			}
+		}
+	}
+}
 void ScreenManager::deletePacman(Pacman* pac)
 {
 	int x = pac->getX();
@@ -177,17 +221,30 @@ void ScreenManager::deleteGhosts(List<Ghost*>& ghosts)
 	}
 }
 
+void ScreenManager::deleteBonus(Pacman *pac, List<Ghost*>& ghosts, bool isPacman1)
+{
+	
+	ImageArea ia=pac->eatBonus();
+	string bonus = pac->getLastEatenBonus();
+	if (bonus != "")
+	{
+		this->handleBonusEating(pac, ghosts, bonus, isPacman1);
+	}
+
+	//this->window->display(this->fondoNegro, ia.getX(), ia.getY(), ia.getImageWidth(), ia.getImageHeight());
+	this->fondo->display(this->fondoNegro, ia.getX(), ia.getY(), ia.getImageWidth(), ia.getImageHeight());
+}
 void ScreenManager::startGame(void)
 {
 	//esperar para cerrar
 	SDL_Event e;
 	bool running = true;
-	Uint32 period = 1000.0 / 120;
+	this->period = 1000.0 / 120;
  
 	this->window->display(this->fondo, 0, 0, 0, 0, 0, -1);
 	while(!this->gameOver()) 
 	{
-		SDL_Delay(period);
+		SDL_Delay(this->period);
 		this->updateScreen();
 		while(SDL_PollEvent(&e)) 
 		{
@@ -209,11 +266,42 @@ bool ScreenManager::gameOver(void)
 	// eventually this will also include whether all bonuses have been eaten
 	return this->deadCycles >= 40;
 }
+void ScreenManager::handleBonusEating(Pacman* pac, List<Ghost*>& ghosts, string bonus, bool isPacman1)
+{
+	if (bonus == "alimento")
+	{
+		// alimento comun
+		pac->increaseScore(10);
+		return;
+	}
+
+	if (bonus == "alimentoEspecial")
+	{
+		// alimento bonus, fanstamas vulnerablesppp
+		pac->increaseScore(50);
+		for (int i = 0; i < ghosts.length(); i++)
+		{
+			ghosts[i]->setIsVulnerable(true);
+		}
+
+		if (isPacman1)
+		{
+			this->pacman1GhostsVulnerable = true;
+		}
+		else
+		{
+			this->pacman2GhostsVulnerable = true;
+		}
+
+		return;
+	}
+}
 ScreenManager::~ScreenManager(void)
 {
 	delete this->pacman1;
 	delete this->pacman2;
 	delete this->gameOverImage;
+	delete this->fondoNegro;
 
 	for (int i = 0; i < this->pacman1Ghosts.length(); i++)
 	{
@@ -224,11 +312,6 @@ ScreenManager::~ScreenManager(void)
 	{
 		delete this->pacman2Ghosts.getValueAt(i);
 	}
-	delete this->fondoNegro;
 }
 
-void ScreenManager::deleteBonus(Pacman *pac){
-	
-	ImageArea ia=pac->eatBonus();
-	this->fondo->display(this->fondoNegro, ia.getX(), ia.getY(), ia.getImageWidth(), ia.getImageHeight());
 }

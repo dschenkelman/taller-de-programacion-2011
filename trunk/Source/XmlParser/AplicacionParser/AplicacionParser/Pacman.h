@@ -26,6 +26,9 @@ class Pacman : public Character
 	virtual void moveDown(void);
 	virtual void moveUp(void);
 	double* getDistancesForEachPosition(void);
+	std::string lastEatenBonus;
+	int score;
+	int normalBonusEaten;
 public:
 	Pacman(std::string pathTexturaAbierta, std::string pathTexturaCerrada, Grilla& grilla, 
 		int h, int w, int x, int y, int speed, int imageHeight, int imageWidth);
@@ -35,6 +38,9 @@ public:
 	void rotateWhenDead(void);
 	void kill(void);
 	bool isAlive(void);
+	void increaseScore(int increase);
+	void increaseEatenBonus(void);
+	std::string getLastEatenBonus(void);
 	ImageArea eatBonus(void);
 	~Pacman(void);
 };

@@ -410,7 +410,7 @@ int reMappedPos(int posSrc, int maxSrc, int maxDst){
 
 void Image::resize(int newWidth, int newHeight)
 {
-	if (this->hasError())
+	if (this->hasError() || (newWidth == this->getWidth() && newHeight == this->getHeight()))
 		return;
 
 	int widthSrc	= this->getWidth();

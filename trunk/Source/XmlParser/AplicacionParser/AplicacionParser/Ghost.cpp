@@ -9,12 +9,15 @@
 
 using namespace std;
 
-Ghost::Ghost(string pathTextura, string texturaVulnerable, Grilla& grilla, int h, int w, 
+Ghost::Ghost(string pathTextura, string pathTexturaVulnerable, Grilla& grilla, int h, int w, 
 			 int x, int y, int speed, Pacman* pacman, int imageHeight, int imageWidth):
 Character(pathTextura, grilla, h, w, x, y, 0, 0, speed, imageHeight, imageWidth), pacman(pacman), 
-pathTextura(pathTextura), texturaVulnerable(texturaVulnerable),
+pathTextura(pathTextura), pathTexturaVulnerable(pathTexturaVulnerable),
 isVulnerable(false), originalSpeed(speed), originalX(x), originalY(y)
 {
+	this->texturaNoVulnerable = this->textura;
+	this->texturaVulnerable = new Image(this->pathTexturaVulnerable);
+	this->texturaVulnerable->resize(this->imageWidth - this->speed, this->imageHeight - this->speed);
 }
 
 void Ghost::updatePosition(void)
@@ -48,15 +51,14 @@ void Ghost::setIsVulnerable(bool value)
 	if (value != this->isVulnerable)
 	{
 		this->isVulnerable = value;
-		delete Character::textura;
 		if (this->isVulnerable)
 		{
-			Character::textura = new Image(this->texturaVulnerable);
+			Character::textura = this->texturaVulnerable;
 			Character::speed = this->originalSpeed * 2 / 3;
 		}
 		else
 		{
-			Character::textura = new Image(this->pathTextura);
+			Character::textura = this->texturaNoVulnerable;
 			Character::speed = this->originalSpeed;
 		}
 	}
@@ -153,4 +155,12 @@ void Ghost::comeBackToLife(void)
 
 Ghost::~Ghost(void)
 {
+	if (this->isVulnerable)
+	{
+		delete this->texturaNoVulnerable;
+	}
+	else
+	{
+		delete this->texturaVulnerable;
+	}
 }
