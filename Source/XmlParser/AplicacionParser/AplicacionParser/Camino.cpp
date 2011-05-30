@@ -97,19 +97,23 @@ Camino::~Camino(void)
 
 Image* Camino::obtenerRepresentacion()
 {
-	this->imagen = new Image("Images/texturas/camino.bmp");
-
-	if (this->hasBonus() && !(this->imagen->hasError()))
+	if (this->imagen == NULL)
 	{
-		/*std::stringstream ss;
-		std::string repres;*/
-		TipoBonus tb = this->getBonus().getTipoBonus();
-		int red = tb.getTextura().getRed();
-		int green = tb.getTextura().getGreen();
-		int blue = tb.getTextura().getBlue();
-		this->imagen->superImpose(*(this->getBonus().obtenerRepresentacion()), red, green, blue, tb.getTextura().getDelta());
-		/*ss >> repres;*/
+		this->imagen = new Image("Images/texturas/camino.bmp");
+
+		if (this->hasBonus() && !(this->imagen->hasError()))
+		{
+			/*std::stringstream ss;
+			std::string repres;*/
+			TipoBonus tb = this->getBonus().getTipoBonus();
+			int red = tb.getTextura().getRed();
+			int green = tb.getTextura().getGreen();
+			int blue = tb.getTextura().getBlue();
+			this->imagen->superImpose(*(this->getBonus().obtenerRepresentacion()), red, green, blue, tb.getTextura().getDelta());
+			/*ss >> repres;*/
+		}
 	}
+
 	return this->imagen;
 }
 

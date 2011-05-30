@@ -20,6 +20,7 @@ class Grilla
 	bool matrizGenerada;
 	int ancho;
 	int alto;
+	int cantidadBonus;
 	std::string tipoObstaculoPorDefecto;
 	List<List<Celda*>> matriz;
 	void populateValidAttributes(void);
@@ -46,5 +47,6 @@ public:
 	std::string getTipoObstaculoPorDefecto();
 	Celda* getCelda(int fila, int columna);
 	bool hasError(void);
+	int getCantidadBonus(void);
 	~Grilla(void);
 };
