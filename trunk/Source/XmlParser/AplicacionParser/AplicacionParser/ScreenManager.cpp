@@ -44,24 +44,24 @@ void ScreenManager::createGhostsForPacman1(void)
 	
 	this->pacman1Ghosts.add(new Ghost("Images/redGhost.bmp", "Images/brownVGhost.bmp", 
 		this->grilla, this->window->getHeight(), this->window->getWidth(),
-		ghostInitialX + 30, ghostInitialY + 20, 3, this->pacman1, 
+		ghostInitialX + 30, ghostInitialY + 20, 2, this->pacman1, 
 		this->imageHeight, this->imageWidth));
 
 	this->pacman1Ghosts.add(new Ghost("Images/redGhost.bmp", "Images/brownVGhost.bmp" , 
 		this->grilla, this->window->getHeight(), this->window->getWidth(),
-		ghostInitialX - 30, ghostInitialY + 20, 3, 
+		ghostInitialX - 30, ghostInitialY + 20, 2, 
 		this->pacman1, this->imageHeight, this->imageWidth));
 
 	this->pacman1Ghosts.add(new Ghost("Images/redGhost.bmp", "Images/brownVGhost.bmp" , 
 		this->grilla, this->window->getHeight(), this->window->getWidth(),
 		ghostInitialX, 
-		ghostInitialY - 20, 3, this->pacman1, 
+		ghostInitialY - 20, 2, this->pacman1, 
 		this->imageHeight, this->imageWidth));
 
 	this->pacman1Ghosts.add(new Ghost("Images/redGhost.bmp", "Images/brownVGhost.bmp" , 
 		this->grilla, this->window->getHeight(), this->window->getWidth(),
 		ghostInitialX, 
-		ghostInitialY - 20, 3, this->pacman1, 
+		ghostInitialY - 20, 2, this->pacman1, 
 		this->imageHeight, this->imageWidth));
 }
 
@@ -72,22 +72,22 @@ void ScreenManager::createGhostsForPacman2(void)
 
 	this->pacman2Ghosts.add(new Ghost("Images/blueGhost.bmp","Images/greenVGhost.bmp", 
 		this->grilla, this->window->getHeight(), this->window->getWidth(),
-		ghostInitialX - 30, ghostInitialY + 20, 3, this->pacman2, 
+		ghostInitialX - 30, ghostInitialY + 20, 2, this->pacman2, 
 		this->imageHeight, this->imageWidth));
 
 	this->pacman2Ghosts.add(new Ghost("Images/blueGhost.bmp", "Images/greenVGhost.bmp", 
 		this->grilla, this->window->getHeight(), this->window->getWidth(),
-		ghostInitialX + 30, ghostInitialY + 20, 3, 
+		ghostInitialX + 30, ghostInitialY + 20, 2, 
 		this->pacman2, this->imageHeight, this->imageWidth));
 
 	this->pacman2Ghosts.add(new Ghost("Images/blueGhost.bmp", "Images/greenVGhost.bmp" , 
 		this->grilla, this->window->getHeight(), this->window->getWidth(),
-		ghostInitialX, ghostInitialY - 20, 3, this->pacman2, 
+		ghostInitialX, ghostInitialY - 20, 2, this->pacman2, 
 		this->imageHeight, this->imageWidth));
 
 	this->pacman2Ghosts.add(new Ghost("Images/blueGhost.bmp", "Images/greenVGhost.bmp" , 
 		this->grilla, this->window->getHeight(), this->window->getWidth(),
-		ghostInitialX, ghostInitialY - 20, 3, this->pacman2, 
+		ghostInitialX, ghostInitialY - 20, 2, this->pacman2, 
 		this->imageHeight, this->imageWidth));
 }
 
@@ -223,7 +223,6 @@ void ScreenManager::deleteGhosts(List<Ghost*>& ghosts)
 
 void ScreenManager::deleteBonus(Pacman *pac, List<Ghost*>& ghosts, bool isPacman1)
 {
-	
 	ImageArea ia=pac->eatBonus();
 	string bonus = pac->getLastEatenBonus();
 	if (bonus != "")
@@ -231,7 +230,6 @@ void ScreenManager::deleteBonus(Pacman *pac, List<Ghost*>& ghosts, bool isPacman
 		this->handleBonusEating(pac, ghosts, bonus, isPacman1);
 	}
 
-	//this->window->display(this->fondoNegro, ia.getX(), ia.getY(), ia.getImageWidth(), ia.getImageHeight());
 	this->fondo->display(this->fondoNegro, ia.getX(), ia.getY(), ia.getImageWidth(), ia.getImageHeight());
 }
 void ScreenManager::startGame(void)
@@ -264,7 +262,7 @@ void ScreenManager::startGame(void)
 bool ScreenManager::gameOver(void)
 {
 	// eventually this will also include whether all bonuses have been eaten
-	return this->deadCycles >= 40;
+	return (this->deadCycles >= 40 || (this->pacman1->getEatenBonus() + this->pacman2->getEatenBonus() == this->grilla.getCantidadBonus())) ;
 }
 void ScreenManager::handleBonusEating(Pacman* pac, List<Ghost*>& ghosts, string bonus, bool isPacman1)
 {
@@ -272,6 +270,7 @@ void ScreenManager::handleBonusEating(Pacman* pac, List<Ghost*>& ghosts, string 
 	{
 		// alimento comun
 		pac->increaseScore(10);
+		pac->increaseEatenBonus();
 		return;
 	}
 
@@ -279,6 +278,7 @@ void ScreenManager::handleBonusEating(Pacman* pac, List<Ghost*>& ghosts, string 
 	{
 		// alimento bonus, fanstamas vulnerablesppp
 		pac->increaseScore(50);
+		pac->increaseEatenBonus();
 		for (int i = 0; i < ghosts.length(); i++)
 		{
 			ghosts[i]->setIsVulnerable(true);
@@ -312,6 +312,4 @@ ScreenManager::~ScreenManager(void)
 	{
 		delete this->pacman2Ghosts.getValueAt(i);
 	}
-}
-
 }

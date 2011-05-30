@@ -6,7 +6,7 @@
 #include <sstream>
 using namespace std;
 
-Grilla::Grilla(int an, int al, std::string& topd) : matrizGenerada(false), tieneError(false)
+Grilla::Grilla(int an, int al, std::string& topd) : matrizGenerada(false), tieneError(false), cantidadBonus(0)
 {
 	if (an < 0 || al < 0)
 	{
@@ -186,6 +186,7 @@ void Grilla::generarMatriz(List<XmlElement>& listaElementos)
 				}
 
 				cam->getBonus().setTipoBonus(obtenerTipoBonus(tipoBonus));
+				this->cantidadBonus++;
 			}
 			bool result = colocarCeldaEnMatriz(cam, listaElementos.at(i).getStartLine());
 		}
@@ -488,4 +489,9 @@ void Grilla::llenarMatrizDeObstaculosDefecto(void)
 	}
 
 	this->matrizGenerada = true;
+}
+
+int Grilla::getCantidadBonus(void)
+{
+	return this->cantidadBonus;
 }

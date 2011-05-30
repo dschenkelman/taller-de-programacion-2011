@@ -186,6 +186,11 @@ void Pacman::increaseEatenBonus(void)
 	this->normalBonusEaten++;
 }
 
+int Pacman::getEatenBonus(void)
+{
+	return this->normalBonusEaten;
+}
+
 std::string Pacman::getLastEatenBonus(void)
 {
 	return this->lastEatenBonus;
@@ -214,7 +219,7 @@ ImageArea Pacman::eatBonus(void)
 
 	if (cam1 != NULL && cam1->hasBonus())
 	{
-		Image *bono=cam1->obtenerRepresentacion();
+		Image *bono=cam1->getBonus().obtenerRepresentacion();
 		int posX= (x1*this->imageWidth)+(this->imageWidth-bono->getWidth())/2;
 		int posY= (y1*this->imageHeight)+(this->imageHeight-bono->getHeight())/2;
 		if (CollisionHelper::BonusCollision(this->textura, bono, this->x, this->y, posX, posY))

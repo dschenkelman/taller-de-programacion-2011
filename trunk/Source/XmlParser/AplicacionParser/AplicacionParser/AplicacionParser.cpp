@@ -116,7 +116,7 @@ int main(int argc, char* argv[])
 
 	char aux;
 	cin >> aux;
-	return 0;
+	return res;
 }
 
 //int _tmain(int argc, _TCHAR* argv[])

@@ -40,6 +40,7 @@ public:
 	bool isAlive(void);
 	void increaseScore(int increase);
 	void increaseEatenBonus(void);
+	int getEatenBonus(void);
 	std::string getLastEatenBonus(void);
 	ImageArea eatBonus(void);
 	~Pacman(void);
