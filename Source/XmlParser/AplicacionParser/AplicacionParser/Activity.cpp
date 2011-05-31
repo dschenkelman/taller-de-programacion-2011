@@ -1,6 +1,6 @@
 #include "StdAfx.h"
 #include "Activity.h"
-
+#include "PixelHelpers.h"
 
 Activity::Activity(int width, int height) : Image(width,height){
 	this->widgets = new List<View*>();
@@ -57,3 +57,38 @@ void Activity::drawViews(){
 }
 
 
+void Activity::display(Image* image, int x, int y, int red, int green, int blue, int delta)
+{
+	for (int i = 0; i < image->getWidth(); i++)
+	{
+		for (int j = 0; j < image->getHeight(); j++)
+		{
+			Uint32 overPixel = image->getPixel(i, j);
+			int deltaPixel = PixelHelpers::getDeltaBetweenPixels(red, green, blue, overPixel);
+			if (deltaPixel > delta)
+			{
+				if (x + i < this->getWidth() && y + j < this->getHeight())
+				{
+					this->putPixel(overPixel, (x + i), (y + j));
+				}
+			}
+		}
+	}
+}
+
+
+
+void Activity::display(Image* image, int x, int y, int width, int height)
+{
+	for (int i = x; i < x + width; i++)
+	{
+		for (int j = y; j < y + height; j++)
+		{
+			if (i < this->getWidth() && j < this->getHeight())
+			{
+				Uint32 pixel = image->getPixel(i, j);
+				this->putPixel(pixel, i, j);
+			}
+		}	
+	}
+}
