@@ -215,6 +215,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\database.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\DualPacman.cpp"
 				>
 			</File>
@@ -228,6 +232,10 @@
 			</File>
 			<File
 				RelativePath=".\GameActivity.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\gamelog.cpp"
 				>
 			</File>
 			<File
@@ -304,6 +312,10 @@
 			</File>
 			<File
 				RelativePath=".\PresentationActivity.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\query.cpp"
 				>
 			</File>
 			<File
@@ -457,6 +469,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\database.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Escenario.h"
 				>
 			</File>
@@ -466,6 +482,10 @@
 			</File>
 			<File
 				RelativePath=".\GameActivity.h"
+				>
+			</File>
+			<File
+				RelativePath=".\gamelog.h"
 				>
 			</File>
 			<File
@@ -542,6 +562,10 @@
 			</File>
 			<File
 				RelativePath=".\PresentationActivity.h"
+				>
+			</File>
+			<File
+				RelativePath=".\query.h"
 				>
 			</File>
 			<File
@@ -658,6 +682,26 @@
 			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav"
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
+			<File
+				RelativePath=".\sqlite\sqlite3.c"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						CompileAsManaged="0"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\sqlite\sqlite3.h"
+				>
+			</File>
+			<File
+				RelativePath=".\sqlite\sqlite3ext.h"
+				>
+			</File>
 		</Filter>
 	</Files>
 	<Globals>

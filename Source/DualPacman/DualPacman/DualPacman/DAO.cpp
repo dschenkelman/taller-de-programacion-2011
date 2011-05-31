@@ -1,41 +1,51 @@
 #include "DAO.h"
 
-DAO::DAO(void)
+DAO::DAO(char* uri)
 {
+	this->glog = new gamelog(uri);
 }
 
-List<std::string> DAO::getRankingByPoints()
+query* DAO::getRankingByPoints()
 {
-	List<std::string> usersList;
+	/*List<std::string> usersList;
 	usersList.add("Juanma 1000");
 	usersList.add("Gonzo 8000");
-	return usersList;
+	return usersList;*/
+	
+	return glog->playersByTotalPoints();
 }
 
-List<std::string> DAO::getRankingByTime()
+query* DAO::getRankingByTime()
 {
-	List<std::string> usersList;
+	/*List<std::string> usersList;
 	usersList.add("Juanma 13 hs");
 	usersList.add("Gonzo 10 hs");
-	return usersList;
+	return usersList;*/
+
+	return glog->playersByPlayedTime();
 }
 
-List<std::string> DAO::getRankingByGamesPlayed()
+query* DAO::getRankingByGamesPlayed()
 {
-	List<std::string> usersList;
+	/*List<std::string> usersList;
 	usersList.add("Gonzo 15");
 	usersList.add("Juanma 13");
-	return usersList;
+	return usersList;*/
+
+	return glog->playersByGamesPlayed();
 }
 
-List<std::string> DAO::getRankingByWins()
+query* DAO::getRankingByWins()
 {
-	List<std::string> usersList;
+	/*List<std::string> usersList;
 	usersList.add("Gonzo 9");
 	usersList.add("Juanma 8");
-	return usersList;
+	return usersList;*/
+
+	return glog->playersByWinnedCount();
 }
 
 DAO::~DAO(void)
 {
+	delete this->glog;
 }
