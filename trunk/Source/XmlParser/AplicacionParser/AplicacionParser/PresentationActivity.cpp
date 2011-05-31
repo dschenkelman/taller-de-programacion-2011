@@ -7,6 +7,9 @@
 PresentationActivity::PresentationActivity(int width, int height):Activity(width, height){
 }
 
+PresentationActivity::PresentationActivity(Escenario escenario, int width, int height):Activity(escenario, width, height){
+}
+
 PresentationActivity::~PresentationActivity(){
 }
 

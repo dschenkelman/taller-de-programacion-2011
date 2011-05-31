@@ -4,7 +4,7 @@
 #include <string>
 #include <exception>
 #include <sstream>
-#include "sdl/sdl.h"
+#include "sdl.h"
 #include "PixelHelpers.h"
 
 using namespace std;
@@ -131,6 +131,7 @@ void Window::putPixel(SDL_Surface *surface, Uint32 pixel, int x, int y)
 
 void Window::refresh(void)
 {
+	//SDL_BlitSurface(this->getCurrentActivity()->getSDLSurface(), NULL, this->window, NULL);
 	SDL_Flip(this->window);
 }
 

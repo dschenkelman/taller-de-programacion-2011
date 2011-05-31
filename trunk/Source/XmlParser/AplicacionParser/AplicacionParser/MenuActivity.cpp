@@ -8,6 +8,9 @@
 MenuActivity::MenuActivity(int width, int height):Activity(width, height){
 }
 
+MenuActivity::MenuActivity(Escenario escenario, int width, int height):Activity(escenario, width, height){
+}
+
 
 void MenuActivity::onLoad(){
 	
@@ -44,7 +47,7 @@ Activity* MenuActivity::notify(SDL_Event e){
 			switch(e.key.keysym.sym){
 				case SDLK_RETURN:
 					if(this->arrowMenu->getSelectedOption() == "new game")
-						nextActivity = new GameActivity(this->getWidth(), this->getHeight());
+						nextActivity = new GameActivity(this->getEscenario(), this->getWidth(), this->getHeight());
 
 					if(this->arrowMenu->getSelectedOption() == "stats")
 						nextActivity = new StatsActivity(this->getWidth(), this->getHeight());

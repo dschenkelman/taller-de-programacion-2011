@@ -2,6 +2,7 @@
 #include "Activity.h"
 #include "RichTextView.h"
 #include "OptionArrowMenuView.h"
+#include "Escenario.h"
 #include "ScreenManager.h"
 
 class GameActivity : public Activity {
@@ -13,6 +14,7 @@ private:
 
 public:
 	GameActivity(int width, int height);
+	GameActivity(Escenario escenario, int width, int height);
 	~GameActivity();
 	void onLoad();
 	Activity* notify(SDL_Event e);
