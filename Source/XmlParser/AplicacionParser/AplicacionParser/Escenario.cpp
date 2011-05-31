@@ -96,8 +96,8 @@ List<TipoBonus> Escenario::obtenerTiposBonus(List<XmlElement>& listaElementos)
 	List<TipoBonus> listaBonus;
 	List<string> listaTexturas;
 	bool found = false;
-
-	for(size_t i = 0; i < listaElementos.length(); i++)
+	size_t elementsLength = listaElementos.length();
+	for(size_t i = 0; i < elementsLength; i++)
 	{
 		if(listaElementos.at(i).getName() == "tiposbonus")
 		{

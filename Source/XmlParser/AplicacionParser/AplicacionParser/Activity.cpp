@@ -6,6 +6,11 @@ Activity::Activity(int width, int height) : Image(width,height){
 	this->widgets = new List<View*>();
 }
 
+Activity::Activity(Escenario escenario, int width, int height) : Image(width,height){
+	this->widgets = new List<View*>();
+	this->escenario = escenario;
+}
+
 Activity::~Activity(){
 }
 
@@ -21,6 +26,10 @@ void Activity::onLoad(){
 
 Activity* Activity::notify(SDL_Event e){
 	return NULL;
+}
+
+Escenario Activity::getEscenario(){
+	return this->escenario;
 }
 
 

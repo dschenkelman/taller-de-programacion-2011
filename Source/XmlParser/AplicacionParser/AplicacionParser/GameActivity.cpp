@@ -3,9 +3,13 @@
 #include "Activity.h"
 #include "MenuActivity.h"
 #include "ScreenManager.h"
+#include "Grapher.h"
 
 
 GameActivity::GameActivity(int width, int height):Activity(width, height){
+}
+
+GameActivity::GameActivity(Escenario escenario, int width, int height):Activity(escenario, width, height){
 }
 
 GameActivity::~GameActivity(){
@@ -24,6 +28,22 @@ void GameActivity::onLoad(){
 
 	this->period = 2000.0 / 60;
 	//this->screenManager = new ScreenManager(this, "Images/fondo.bmp");
+	Image* imgBackgroung = new Image("Images/fondo.bmp");
+
+	int imageHeight = (480 / 28);
+	
+	// this->imageWidth = windowWidth / grilla.getAncho();
+	int imageWidth = imageHeight;
+
+	Grapher grapher;
+	grapher.setVideoMode(640);
+	Image* fondo = grapher.draw(this->getEscenario());
+
+	//this->screenManager = new ScreenManager(this, fondo, this->getEscenario().getGrilla(), imageHeight, imageWidth);
+	//this->screenManager->startGame();
+
+	/*ScreenManager s(w, fondo, escenario.getGrilla(), grapher.getImageHeight(), grapher.getImageWidth());
+				s.startGame();*/
 	
 	// los agrego a la pantalla
 	this->add(this->timeTitle);

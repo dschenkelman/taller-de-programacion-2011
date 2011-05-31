@@ -12,6 +12,7 @@ private:
 
 public:
 	PresentationActivity(int width, int height);
+	PresentationActivity(Escenario escenario, int width, int height);
 	~PresentationActivity();
 	void onLoad();
 	Activity* notify(SDL_Event e);
