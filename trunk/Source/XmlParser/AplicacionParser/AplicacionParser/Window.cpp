@@ -4,7 +4,7 @@
 #include <string>
 #include <exception>
 #include <sstream>
-#include "sdl.h"
+#include "sdl/sdl.h"
 #include "PixelHelpers.h"
 
 using namespace std;
@@ -156,5 +156,49 @@ Window::~Window(void)
 	if (!this->closed)
 	{ 
 		this->close();
+	}
+}
+
+Activity* Window::getCurrentActivity(){
+	return this->currentActivity;
+}
+
+void Window::setCurrentActivity(Activity* activity){
+	this->currentActivity = activity;
+};
+
+
+/// Pone a correr el loop de atencion de eventos
+void Window::init(){
+		
+	SDL_Event e;
+	bool running = true;
+	Uint32 period = 5000.0 / 60;
+	while(running) 
+	{
+		
+		SDL_Delay(period);
+		if(SDL_PollEvent(&e)){
+			switch(e.type)
+			{
+				case SDL_QUIT:
+					running = false;
+					break;
+				default:
+					Activity* nextActivity = this->getCurrentActivity()->notify(e);
+					// si la actividad en curso devuelve la siguiente actividad
+					// la seteo como corriente y destruyo la anterior
+					if( nextActivity != NULL){
+						nextActivity->init();
+						this->setCurrentActivity(nextActivity);
+					}
+
+					break;
+			}
+		}
+		this->getCurrentActivity()->update();
+		this->getCurrentActivity()->drawViews();
+		this->refresh();
+
 	}
 }
