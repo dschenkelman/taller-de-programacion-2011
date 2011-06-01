@@ -10,7 +10,7 @@
 #include <stdlib.h>
 #include <crtdbg.h>
 
-using namespace System;
+//using namespace std;
 
 #define SDL_main main 
 

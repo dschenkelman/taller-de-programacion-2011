@@ -11,11 +11,11 @@ gamelog::gamelog(char* uri)
 	db = new database(uri);
 	char* debugmsg;
 	debugmsg = db->execute("CREATE TABLE IF NOT EXISTS Players (Id INTEGER PRIMARY KEY, Name TEXT, Password TEXT)");
-	//if (debugmsg) cout << debugmsg << endl;
+	if (debugmsg) cout << debugmsg << endl;
 	debugmsg = db->execute("CREATE TABLE IF NOT EXISTS Games (Id INTEGER PRIMARY KEY, WinnerId INTEGER, Duration INTEGER, FOREIGN KEY(WinnerId) REFERENCES Players(PlayerId))");
-	//if (debugmsg) cout << debugmsg << endl;
+	if (debugmsg) cout << debugmsg << endl;
 	debugmsg = db->execute("CREATE TABLE IF NOT EXISTS UserGame (GameId INTEGER, PlayerId INTEGER, Points INTEGER, FOREIGN KEY(GameId) REFERENCES Games(Id), FOREIGN KEY(PlayerId) REFERENCES Players(PlayerId))");
-	//if (debugmsg) cout << debugmsg << endl;
+	if (debugmsg) cout << debugmsg << endl;
 }
 
 bool gamelog::login(char* name, char* password) {
@@ -48,7 +48,7 @@ bool gamelog::createPlayer(char* name, char* password) {
 	sql += string(password);
 	sql += string("\")");
 	char* res = db->execute((char*)sql.c_str());
-	//if (res) cout << res << endl;
+	if (res) cout << res << endl;
 	return !(bool)res;
 }
 
@@ -63,7 +63,7 @@ bool gamelog::newUserGameEntry(char* player, int points) {
 	sql += string(player);
 	sql += string("') WHERE GameId=(select id from games order by id desc limit 1) AND playerid is NULL;");
 	res = db->execute((char*)sql.c_str());
-	//if (res) cout << res << endl;
+	if (res) cout << res << endl;
 	return false; // TODO
 }
 
@@ -76,7 +76,7 @@ bool gamelog::insertGame(char* player0, char* player1, int winner, int points0, 
 	else if (winner==1) { sql += string(player1); } else return false;
 	sql += string("'");
 	char* res = db->execute((char*)sql.c_str());
-	//if (res) cout << res << endl;
+	if (res) cout << res << endl;
 
 	this->newUserGameEntry(player0,points0);
 	this->newUserGameEntry(player1,points1);
