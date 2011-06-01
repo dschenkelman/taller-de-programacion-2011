@@ -11,7 +11,7 @@ database::database(char* uri)
 	if(res)
 	{
 		cout << "Database connection failed" << endl;
-		//return -1;
+//		return -1;
 	}
 	cout << "Connection successful" << endl;
 }

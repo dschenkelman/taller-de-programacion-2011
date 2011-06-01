@@ -14,5 +14,6 @@ public:
 	query* getRankingByTime();
 	query* getRankingByGamesPlayed();
 	query* getRankingByWins();
+	query* getPlayers();
 	~DAO(void);
 };
