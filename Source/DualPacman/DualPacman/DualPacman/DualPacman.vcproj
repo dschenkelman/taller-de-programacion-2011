@@ -21,7 +21,7 @@
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
 			CharacterSet="1"
-			ManagedExtensions="1"
+			ManagedExtensions="0"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -231,6 +231,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Game.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\GameActivity.cpp"
 				>
 			</File>
@@ -391,6 +395,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\User.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\View.cpp"
 				>
 			</File>
@@ -478,6 +486,10 @@
 			</File>
 			<File
 				RelativePath=".\EscenarioTests.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Game.h"
 				>
 			</File>
 			<File
@@ -649,6 +661,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\User.h"
+				>
+			</File>
+			<File
 				RelativePath=".\View.h"
 				>
 			</File>
@@ -685,14 +701,6 @@
 			<File
 				RelativePath=".\sqlite\sqlite3.c"
 				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						CompileAsManaged="0"
-					/>
-				</FileConfiguration>
 			</File>
 			<File
 				RelativePath=".\sqlite\sqlite3.h"

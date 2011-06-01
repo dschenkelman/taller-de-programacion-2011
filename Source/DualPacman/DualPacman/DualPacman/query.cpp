@@ -10,10 +10,10 @@ query::query(sqlite3* db, char* sql)
 	this->db = db;
 	this->sql = sql;
 	int retval = sqlite3_prepare_v2(db,sql,-1,&this->stmt,0);
-//	cout << sql << endl;
+	cout << sql << endl;
 	if(retval)
 	{
-		//cout << "Selecting data from DB Failed" << endl;
+		cout << "Selecting data from DB Failed" << endl;
 		//return -1;
 	}
 	//this->next();
