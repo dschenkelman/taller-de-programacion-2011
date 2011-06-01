@@ -84,6 +84,11 @@ bool gamelog::insertGame(char* player0, char* player1, int winner, int points0, 
 	return false; // TODO
 }
 
+query* gamelog::getPlayers()
+{
+	return this->db->getQuery_v2("SELECT * FROM Players");
+}
+
 query* gamelog::playersByPlayedTime()
 {
 	return this->db->getQuery_v2("SELECT p.Name,sum(distinct Duration) AS TotalPlayed FROM Games g INNER JOIN UserGame ug ON g.Id=ug.GameId INNER JOIN Players p ON p.Id=ug.PlayerId GROUP BY PlayerId;");

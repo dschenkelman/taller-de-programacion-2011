@@ -65,7 +65,7 @@ Activity* StatsActivity::notify(SDL_Event e){
 						nextActivity = new RankingByTimeActivity(this->getWidth(), this->getHeight());
 
 					/*if(this->arrowMenu->getSelectedOption() == "comparison between players")
-						nextActivity = new RankingByPointsActivity(this->getWidth(), this->getHeight());*/
+						nextActivity = new ComparisonBetweenPlayersActivity(this->getWidth(), this->getHeight());*/
 
 					break;
 				default:

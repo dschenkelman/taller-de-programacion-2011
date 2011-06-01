@@ -19,5 +19,6 @@ public:
 	query* gamelog::playersByTotalPoints();
 	query* gamelog::playersByWinnedCount();
 	query* gamelog::playersComparison(char* player0, char* player1);
+	query* getPlayers();
 	~gamelog(void);
 };
