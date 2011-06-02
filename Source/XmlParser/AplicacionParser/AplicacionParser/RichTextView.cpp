@@ -19,13 +19,13 @@ RichTextView::RichTextView(std::string txt, std::string type): View(){
 		
 		Image* letter = new Image("images/text/" + type + "/" + txt.at(i) + ".bmp");
 		
-		SDL_Rect* dst = new SDL_Rect();
-		dst->h=17;
-		dst->w=17;
-		dst->x=(letterWidth*i);
-		dst->y=0;
+		SDL_Rect dst;
+		dst.h=17;
+		dst.w=17;
+		dst.x=(letterWidth*i);
+		dst.y=0;
 		
-		SDL_BlitSurface(letter->getSDLSurface(), NULL, aux->getSDLSurface(), dst);
+		SDL_BlitSurface(letter->getSDLSurface(), NULL, aux->getSDLSurface(), &dst);
 		delete letter;
 	}
 	this->copy(*aux);
