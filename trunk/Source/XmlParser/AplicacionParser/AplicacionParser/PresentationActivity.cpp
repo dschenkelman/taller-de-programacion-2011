@@ -7,7 +7,10 @@
 PresentationActivity::PresentationActivity(int width, int height):Activity(width, height){
 }
 
-PresentationActivity::PresentationActivity(Escenario escenario, int width, int height):Activity(escenario, width, height){
+PresentationActivity::PresentationActivity(Escenario* escenario, int width, int height):Activity(escenario, width, height){
+}
+
+PresentationActivity::PresentationActivity(ParameterHolder* parameters, int width, int height):Activity(parameters, width, height){
 }
 
 PresentationActivity::~PresentationActivity(){
@@ -15,23 +18,20 @@ PresentationActivity::~PresentationActivity(){
 
 
 void PresentationActivity::onLoad(){
-	
+
 	// cabecera
 	this->banner = new ImageView("Images/title-pacman.bmp");
 	this->banner->setX(0); this->banner->setY(0);
-
-	// insertcoin
-	this->insertCoin = new RichTextView("Insert coin", RichTextView::NORMAL);
-	this->insertCoin->setX(40); this->insertCoin->setY(200);
+	this->banner->setVerticalAlign(View::VERTICAL_ALIGN_CENTER);
 
 	// menu con flecha
 	this->arrowMenu = new OptionArrowMenuView();
 	this->arrowMenu->setX(50); this->arrowMenu->setY(250); 
 	this->arrowMenu->addOption("hit enter");
+	this->arrowMenu->setVerticalAlign(View::VERTICAL_ALIGN_CENTER);
 
 	// los agrego a la pantalla
 	this->add(this->banner);
-	this->add(this->insertCoin);
 	this->add(this->arrowMenu);
 
 }

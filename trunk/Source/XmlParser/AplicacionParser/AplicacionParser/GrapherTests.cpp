@@ -23,8 +23,8 @@ void GrapherTests::printLeaks(int leaks)
 
 void GrapherTests::run(void)
 {
-	printResult("testGraficarEscenario", testGraficarEscenario());
-	printResult("testGraficarEscenario800x600", testGraficarEscenario800x600());
+	/*printResult("testGraficarEscenario", testGraficarEscenario());
+	printResult("testGraficarEscenario800x600", testGraficarEscenario800x600());*/
 	printResult("testGraficarEscenario1024x768", testGraficarEscenario1024x768());
 	
 }
@@ -576,7 +576,7 @@ bool GrapherTests::testGraficarEscenario1024x768(void)
 	
 	XmlElement elementoTextura("textura", 3, 3);
 	XmlAttribute atributoNombreTextura("nombre", "Fondo");
-	XmlAttribute atributoPathTextura("path", "Images/texturaFondo.bmp");
+	XmlAttribute atributoPathTextura("path", "Images/fondo_rgb.bmp");
 	
 	XmlElement elementoTextura1("textura", 20, 20);
 	XmlAttribute atributo1("nombre", "yunque");

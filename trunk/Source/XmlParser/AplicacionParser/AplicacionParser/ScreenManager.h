@@ -7,14 +7,14 @@
 #include "Ghost.h"
 #include "List.h"
 #include "Grilla.h"
-//#include "Activity.h"
+#include "Activity.h"
 
 class ScreenManager
 {
 	List<Ghost*> pacman1Ghosts;
 	List<Ghost*> pacman2Ghosts;
-	//Activity* window;
-	Window* window;
+	Activity* window;
+	//Window* window;
 	Image* fondo;
 	Image* gameOverImage;
 	Pacman* pacman1;
@@ -42,10 +42,14 @@ class ScreenManager
 	bool gameOver(void);
 	void deleteBonus(Pacman *pac, List<Ghost*>& ghosts, bool isPacman1);
 public:
-	//ScreenManager(Activity* w, Image* imageFondo, Grilla& grilla, int imageHeight, int imageWidth);
-	ScreenManager(Window* w, Image* imageFondo, Grilla& grilla, int imageHeight, int imageWidth);
+	ScreenManager(Activity* w, Image* imageFondo, Grilla& grilla, int imageHeight, int imageWidth);
+	//ScreenManager(Window* w, Image* imageFondo, Grilla& grilla, int imageHeight, int imageWidth);
 	void startGame(void);
 	void handleKeyStroke(void);
 	void updateScreen(void);
 	~ScreenManager(void);
+	List<Ghost*> getPacman1Ghosts();
+	List<Ghost*> getPacman2Ghosts();
+	Pacman* getPacman1();
+	Pacman* getPacman2();
 };

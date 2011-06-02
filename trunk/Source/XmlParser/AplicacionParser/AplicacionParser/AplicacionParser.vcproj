@@ -304,6 +304,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Parameter.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\ParameterHolder.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\PixelHelpers.cpp"
 				>
 			</File>
@@ -563,6 +571,14 @@
 			</File>
 			<File
 				RelativePath=".\Pacman.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Parameter.h"
+				>
+			</File>
+			<File
+				RelativePath=".\ParameterHolder.h"
 				>
 			</File>
 			<File

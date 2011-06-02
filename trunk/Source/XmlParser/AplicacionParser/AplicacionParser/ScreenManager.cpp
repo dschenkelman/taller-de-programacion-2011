@@ -7,7 +7,7 @@
 
 using namespace std;
 
-ScreenManager::ScreenManager(Window* w, Image* imageFondo, Grilla& grilla, int imageHeight, int imageWidth) 
+ScreenManager::ScreenManager(Activity* w, Image* imageFondo, Grilla& grilla, int imageHeight, int imageWidth) 
 : deadCycles(0), imageHeight(imageHeight), imageWidth(imageWidth), grilla(grilla), period(0),
 vulnerablePacman1Cycles(0), vulnerablePacman2Cycles(0), 
 pacman1GhostsVulnerable(false), pacman2GhostsVulnerable(false)
@@ -37,9 +37,9 @@ pacman1GhostsVulnerable(false), pacman2GhostsVulnerable(false)
 	this->fondoNegro=new Image(this->window->getWidth(),this->window->getHeight());
 	
 	/**/
-	//this->window->display(this->fondo, 0, 0, 0, 0, 0, -1);
-	/*SDL_BlitSurface(this->fondo->getSDLSurface(), NULL, this->window->getSDLSurface(), NULL);
-	SDL_Flip(this->window->getSDLSurface());*/
+	this->window->display(this->fondo, 0, 0, 0, 0, 0, -1);
+	SDL_BlitSurface(this->fondo->getSDLSurface(), NULL, this->window->getSDLSurface(), NULL);
+	SDL_Flip(this->window->getSDLSurface());
 }
 
 void ScreenManager::createGhostsForPacman1(void)
@@ -118,8 +118,8 @@ void ScreenManager::updateScreen(void)
 		this->updatePacman(this->pacman2);
 		this->updateGhosts(this->pacman1Ghosts);
 		this->updateGhosts(this->pacman2Ghosts);
-		this->deleteBonus(this->pacman1, this->pacman1Ghosts, true);
-		this->deleteBonus(this->pacman2, this->pacman2Ghosts, false);
+		/*this->deleteBonus(this->pacman1, this->pacman1Ghosts, true);
+		this->deleteBonus(this->pacman2, this->pacman2Ghosts, false);*/
 	}
 	else
 	{
@@ -144,19 +144,12 @@ void ScreenManager::updateScreen(void)
 			int y = (this->window->getHeight() - this->gameOverImage->getHeight()) / 2;
 
 			this->window->display(this->gameOverImage, x, y, 0, 0, 0, 20);
-			//SDL_Rect* recGO = new SDL_Rect();
-			//recGO->h = this->gameOverImage->getHeight();
-			//recGO->w = this->gameOverImage->getWidth();
-			//recGO->x = x;
-			//recGO->y = y;
-			//SDL_BlitSurface(this->gameOverImage->getSDLSurface(), NULL, this->window->getSDLSurface(), recGO);
 		}
-
 
 		this->deadCycles++;
 	}
-	//SDL_Flip(this->window->getSDLSurface());
-	this->window->refresh();
+	SDL_Flip(this->window->getSDLSurface());
+	//this->window->refresh();
 }
 
 void ScreenManager::updateGhosts(List<Ghost*>& ghosts)
@@ -218,12 +211,12 @@ void ScreenManager::deletePacman(Pacman* pac)
 	int width = i->getWidth();
 	
 	this->window->display(this->fondoNegro, x, y, width, height);
-	//SDL_Rect* recGO = new SDL_Rect();
-	//	recGO->h = i->getHeight();
-	//	recGO->w = i->getWidth();
-	//	recGO->x = x;
-	//	recGO->y = y;
-	//SDL_BlitSurface(this->fondoNegro->getSDLSurface(), NULL, this->window->getSDLSurface(), recGO);
+	/*SDL_Rect* recGO = new SDL_Rect();
+		recGO->h = i->getHeight();
+		recGO->w = i->getWidth();
+		recGO->x = x;
+		recGO->y = y;
+	SDL_BlitSurface(this->fondoNegro->getSDLSurface(), NULL, this->window->getSDLSurface(), recGO);*/
 }
 
 void ScreenManager::deleteGhosts(List<Ghost*>& ghosts)
@@ -238,12 +231,12 @@ void ScreenManager::deleteGhosts(List<Ghost*>& ghosts)
 		int width = ig->getWidth();
 		
 		this->window->display(this->fondoNegro, xg, yg, width, height);
-		//SDL_Rect* recGO = new SDL_Rect();
-		//recGO->h = ig->getHeight();
-		//recGO->w = ig->getWidth();
-		//recGO->x = xg;
-		//recGO->y = yg;
-		//SDL_BlitSurface(this->fondoNegro->getSDLSurface(), NULL, this->window->getSDLSurface(), recGO);
+		/*SDL_Rect* recGO = new SDL_Rect();
+		recGO->h = ig->getHeight();
+		recGO->w = ig->getWidth();
+		recGO->x = xg;
+		recGO->y = yg;
+		SDL_BlitSurface(this->fondoNegro->getSDLSurface(), NULL, this->window->getSDLSurface(), recGO);*/
 	}
 }
 
@@ -257,12 +250,6 @@ void ScreenManager::deleteBonus(Pacman *pac, List<Ghost*>& ghosts, bool isPacman
 	}
 
 	this->fondo->display(this->fondoNegro, ia.getX(), ia.getY(), ia.getImageWidth(), ia.getImageHeight());
-	//SDL_Rect* recGO = new SDL_Rect();
-	//recGO->h = ia.getImageHeight();
-	//recGO->w = ia.getImageWidth();
-	//recGO->x = ia.getX();
-	//recGO->y = ia.getY();
-	//SDL_BlitSurface(this->fondoNegro->getSDLSurface(), NULL, this->window->getSDLSurface(), recGO);
 }
 void ScreenManager::startGame(void)
 {
@@ -282,7 +269,7 @@ void ScreenManager::startGame(void)
 			{
 				case SDL_QUIT:
 					running = false;
-					this->window->close();
+					//this->window->close();
 					return;
 				default:
 					this->handleKeyStroke();

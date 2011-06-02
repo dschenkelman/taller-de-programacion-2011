@@ -66,66 +66,69 @@ int execute(int argc, char* argv[])
 	char* fileName = argv[1];
 	videoMode = atoi(argv[2]);
 
-	ifstream ifile(fileName);
-	if (ifile) 
-	{
+	//ifstream ifile(fileName);
+	//if (ifile) 
+	//{
 		// The file exists, and is open for input
-		ifile.close();
-		XmlParser parser;
-		string name = fileName;
-		parser.openFile(name);
-		XmlElement* root = parser.parse();
-		parser.closeFile();
-		Escenario escenario(*root);
-		delete root;
-		if (!escenario.hasError())
-		{
-			Grapher grapher;
-			grapher.setVideoMode(videoMode);
-			Image* fondo = grapher.draw(escenario);
-			if (!grapher.hasError())
-			{
+		//ifile.close();
+		//XmlParser parser;
+		//string name = fileName;
+		//parser.openFile(name);
+		//XmlElement* root = parser.parse();
+		//parser.closeFile();
+		//Escenario escenario(*root);
+		//delete root;
+		//if (!escenario.hasError())
+		//{
+		//	Grapher grapher;
+		//	grapher.setVideoMode(videoMode);
+		//	Image* fondo = grapher.draw(escenario);
+		//	if (!grapher.hasError())
+		//	{
+		//		int width = videoMode;
+		//		int height = ((videoMode * 3) / 4);
+		//		Window* w = new Window(escenario.getNombre(), height, width);
+		//		ScreenManager s(w, fondo, escenario.getGrilla(), grapher.getImageHeight(), grapher.getImageWidth());
+		//		s.startGame();
+				
 				int width = videoMode;
 				int height = ((videoMode * 3) / 4);
-				Window* w = new Window(escenario.getNombre(), height, width);
-				ScreenManager s(w, fondo, escenario.getGrilla(), grapher.getImageHeight(), grapher.getImageWidth());
-				s.startGame();
+				Window* w = new Window("DualPacman", height, width);
 
+				// Actividad de Inicio
+				PresentationActivity* pActivity = new PresentationActivity(width, height);
+				pActivity->init();
+				
+				// Seteo la actividad
+				w->setCurrentActivity(pActivity);
+				
+				pActivity->drawViews();
 
-				//// Actividad de Inicio
-				//PresentationActivity* pActivity = new PresentationActivity(escenario, width, height);
-				//pActivity->init();
-				//
-				//// Seteo la actividad
-				//w->setCurrentActivity(pActivity);
-				//
-				//pActivity->drawViews();
-
-				//// Actualizo la ventana
-				//w->refresh();
-				//
-				//// Inicio manejo de eventos
-				//w->init();				
+				// Actualizo la ventana
+				w->refresh();
+				
+				// Inicio manejo de eventos
+				w->init();				
 
 
 				delete w;
-			}
-			else
-			{
-				cout << "Error al graficar. Ver el archivo parser.log.txt";
-			}
-		}
-		else
-		{
-			cout << "Error al imprimir el Escenario. Referirse a parser.log.txt para mas detalles." << endl;
-			return -1;
-		}
-	}
-	else
-	{
-		cout << "El archivo: " << fileName << " no existe." << endl;
-		return -1;
-	}
+	//		}
+	//		else
+	//		{
+	//			cout << "Error al graficar. Ver el archivo parser.log.txt";
+	//		}
+	//	}
+	//	else
+	//	{
+	//		cout << "Error al imprimir el Escenario. Referirse a parser.log.txt para mas detalles." << endl;
+	//		return -1;
+	//	}
+	//}
+	//else
+	//{
+	//	cout << "El archivo: " << fileName << " no existe." << endl;
+	//	return -1;
+	//}
 	
 	return 0;
 }
@@ -239,40 +242,36 @@ int main(int argc, char* argv[])
 //int _tmain(int argc, _TCHAR* argv[]){
 //	
 //	int videoMode =640;
-//	/*char* fileName = argv[1];
-//	videoMode = atoi(argv[2]);*/
 //
-//	char* fileName = "escenarioPacman.xml";
-//	//videoMode = atoi(argv[2]);
+//	//char* fileName = "escenarioPacman.xml";
 //
-//	ifstream ifile(fileName);
-//	if (ifile) 
-//	{
-//		// The file exists, and is open for input
-//		ifile.close();
-//		XmlParser parser;
-//		string name = fileName;
-//		parser.openFile(name);
-//		XmlElement* root = parser.parse();
-//		parser.closeFile();
-//		Escenario escenario(*root);
-//		delete root;
-//		if (!escenario.hasError())
-//		{
-//			Grapher grapher;
-//			grapher.setVideoMode(videoMode);
-//			Image* fondo = grapher.draw(escenario);
-//			if (!grapher.hasError())
-//			{
+//	//ifstream ifile(fileName);
+//	//if (ifile) 
+//	//{
+//	//	// The file exists, and is open for input
+//	//	ifile.close();
+//	//	XmlParser parser;
+//	//	string name = fileName;
+//	//	parser.openFile(name);
+//	//	XmlElement* root = parser.parse();
+//	//	parser.closeFile();
+//	//	
+//	//	Escenario* escenario = new Escenario(*root);
+//
+//	//	delete root;
+//	//	if (!escenario->hasError())
+//	//	{
+//	//		Grapher grapher;
+//	//		grapher.setVideoMode(videoMode);
+//	//		Image* fondo = grapher.draw(*escenario);
+//	//		if (!grapher.hasError())
+//	//		{
 //				int width = videoMode;
 //				int height = ((videoMode * 3) / 4);
-//				Window* w = new Window(escenario.getNombre(), height, width);
-//				/*ScreenManager s(w, fondo, escenario.getGrilla(), grapher.getImageHeight(), grapher.getImageWidth());
-//				s.startGame();*/
-//
+//				Window* w = new Window("DualPacman", height, width);
 //
 //				// Actividad de Inicio
-//				PresentationActivity* pActivity = new PresentationActivity(escenario, width, height);
+//				PresentationActivity* pActivity = new PresentationActivity(width, height);
 //				pActivity->init();
 //				
 //				// Seteo la actividad
@@ -288,7 +287,7 @@ int main(int argc, char* argv[])
 //
 //
 //				delete w;
-//			}
+//			/*}
 //			else
 //			{
 //				cout << "Error al graficar. Ver el archivo parser.log.txt";
@@ -304,7 +303,7 @@ int main(int argc, char* argv[])
 //	{
 //		cout << "El archivo: " << fileName << " no existe." << endl;
 //		return -1;
-//	}
+//	}*/
 //	
 //	return 0;
 //}
