@@ -8,4 +8,5 @@ private:
 public:
 	void* getParameter(std::string key);
 	void addParameter(std::string key, void* value);
+	~ParameterHolder();
 };

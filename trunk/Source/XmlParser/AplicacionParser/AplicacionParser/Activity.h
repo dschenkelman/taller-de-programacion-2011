@@ -15,7 +15,7 @@ public:
 	Activity(int width, int height);
 	Activity(Escenario* escenario, int width, int height);
 	Activity(ParameterHolder* parameterHolder, int width, int height);
-	~Activity();
+	virtual ~Activity();
 	void add(View* w);
 	void init();
 	virtual void onLoad();

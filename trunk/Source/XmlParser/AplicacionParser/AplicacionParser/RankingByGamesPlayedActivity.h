@@ -12,6 +12,7 @@ private:
 	OptionArrowMenuView* arrowMenu;
 public:
 	RankingByGamesPlayedActivity(int width, int height);
+	~RankingByGamesPlayedActivity();
 	void onLoad();
 	Activity* notify(SDL_Event e);
 };

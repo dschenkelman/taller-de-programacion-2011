@@ -14,7 +14,7 @@ public:
 	PresentationActivity(int width, int height);
 	PresentationActivity(Escenario* escenario, int width, int height);
 	PresentationActivity(ParameterHolder* parameters, int width, int height);
-	~PresentationActivity();
+	virtual ~PresentationActivity();
 	void onLoad();
 	Activity* notify(SDL_Event e);
 };

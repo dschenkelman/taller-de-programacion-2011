@@ -11,6 +11,12 @@ MenuActivity::MenuActivity(int width, int height):Activity(width, height){
 MenuActivity::MenuActivity(Escenario* escenario, int width, int height):Activity(escenario, width, height){
 }
 
+MenuActivity::~MenuActivity()
+{
+	delete this->banner;
+	delete this->title;
+	delete this->arrowMenu;
+}
 
 void MenuActivity::onLoad(){
 	

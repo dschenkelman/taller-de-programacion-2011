@@ -18,6 +18,15 @@ void OptionArrowMenuView::addOption(std::string optionTxt){
 	this->options->add(optionTxt);
 }
 
+OptionArrowMenuView::~OptionArrowMenuView()
+{
+	delete this->arrow;
+	/*for (int i = 0; i < this->options->length(); i++)
+	{
+		delete this->options.at(i);
+	}*/
+	delete this->options;
+}
 
 // dibujo las opciones del menu
 void OptionArrowMenuView::draw(){
@@ -35,6 +44,8 @@ void OptionArrowMenuView::draw(){
 		rec->x = 50;
 		rec->y = (this->optionHeight*i);
 		SDL_BlitSurface(newOption->getSDLSurface(), NULL, this->getSDLSurface(), rec);
+		delete newOption;
+		delete rec;
 	}
 	
 	// dibujo flecha
@@ -44,6 +55,7 @@ void OptionArrowMenuView::draw(){
 	rec->x = this->arrowX;
 	rec->y = this->arrowY;
 	SDL_BlitSurface(this->arrow->getSDLSurface(), NULL, this->getSDLSurface(), rec);
+	delete rec;
 
 	SDL_Flip(this->getSDLSurface());
 }
@@ -72,6 +84,8 @@ void OptionArrowMenuView::arrowUp(){
 		SDL_Flip(this->getSDLSurface());
 		
 		this->arrowIndex--;
+
+		delete rec;
 	};
 	
 }
@@ -101,6 +115,7 @@ void OptionArrowMenuView::arrowDown(){
 		SDL_Flip(this->getSDLSurface());
 		
 		this->arrowIndex++;
+		delete rec;
 	};
 	
 }

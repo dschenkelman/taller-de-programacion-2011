@@ -14,4 +14,5 @@ public:
 	RankingByWinsActivity(int width, int height);
 	void onLoad();
 	Activity* notify(SDL_Event e);
+	~RankingByWinsActivity();
 };

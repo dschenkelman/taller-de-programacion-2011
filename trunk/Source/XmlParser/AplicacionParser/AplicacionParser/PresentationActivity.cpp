@@ -13,7 +13,10 @@ PresentationActivity::PresentationActivity(Escenario* escenario, int width, int 
 PresentationActivity::PresentationActivity(ParameterHolder* parameters, int width, int height):Activity(parameters, width, height){
 }
 
-PresentationActivity::~PresentationActivity(){
+PresentationActivity::~PresentationActivity(void)
+{
+	delete this->banner;
+	delete this->arrowMenu;
 }
 
 
@@ -51,5 +54,4 @@ Activity* PresentationActivity::notify(SDL_Event e){
 	}
 
 	return nextActivity;
-
 }

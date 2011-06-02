@@ -61,3 +61,10 @@ Activity* RankingByTimeActivity::notify(SDL_Event e){
 
 	return nextActivity;
 }
+
+RankingByTimeActivity::~RankingByTimeActivity()
+{
+	delete this->banner;
+	delete this->title;
+	delete this->arrowMenu;
+}

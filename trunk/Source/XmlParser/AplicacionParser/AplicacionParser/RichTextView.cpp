@@ -26,7 +26,11 @@ RichTextView::RichTextView(std::string txt, std::string type): View(){
 		dst->y=0;
 		
 		SDL_BlitSurface(letter->getSDLSurface(), NULL, aux->getSDLSurface(), dst);
-
+		delete letter;
 	}
 	this->copy(*aux);
+
+	delete aux;
 }
+
+RichTextView::~RichTextView(){}
