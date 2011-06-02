@@ -110,8 +110,6 @@ int execute(int argc, char* argv[])
 				// Inicio manejo de eventos
 				w->init();				
 
-				delete pActivity;
-
 				delete w;
 	//		}
 	//		else

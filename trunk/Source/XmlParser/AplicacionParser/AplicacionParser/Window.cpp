@@ -184,22 +184,28 @@ void Window::init(){
 			{
 				case SDL_QUIT:
 					running = false;
+					delete this->currentActivity;
 					break;
 				default:
 					Activity* nextActivity = this->getCurrentActivity()->notify(e);
 					// si la actividad en curso devuelve la siguiente actividad
 					// la seteo como corriente y destruyo la anterior
-					if( nextActivity != NULL){
+					if( nextActivity != NULL)
+					{
 						nextActivity->init();
+						delete this->currentActivity;
 						this->setCurrentActivity(nextActivity);
 					}
 
 					break;
 			}
 		}
-		this->getCurrentActivity()->update();
-		this->getCurrentActivity()->drawViews();
-		this->refresh();
 
+		if (running)
+		{
+			this->getCurrentActivity()->update();
+			this->getCurrentActivity()->drawViews();
+			this->refresh();
+		}
 	}
 }
