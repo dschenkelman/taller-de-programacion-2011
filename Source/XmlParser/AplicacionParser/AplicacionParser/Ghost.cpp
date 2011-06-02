@@ -77,6 +77,10 @@ void Ghost::checkPacmanCollision(void)
 		if (this->isVulnerable)
 		{
 			this->comeBackToLife();
+			int ghostKills = this->pacman->getGhostKills();
+			ghostKills++;
+			this->pacman->setGhostKills(ghostKills);
+			this->pacman->increaseScore(200 * ghostKills);
 		}
 		else
 		{

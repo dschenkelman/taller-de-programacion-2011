@@ -12,7 +12,7 @@ Pacman::Pacman(string pathTexturaAbierta, string pathTexturaCerrada, Grilla& gri
 			   int w, int x, int y, int speed, int imageHeight, int imageWidth) : 
 Character(pathTexturaAbierta, grilla, h, w, x, y, 0, 0, speed, imageHeight, imageWidth), dir(Direction::RIGHT),
 rightKey(SDLK_RIGHT),leftKey(SDLK_LEFT), upKey(SDLK_UP), downKey(SDLK_DOWN), isDead(false),
-score(0), normalBonusEaten(0), lastEatenBonus("")
+score(0), normalBonusEaten(0), lastEatenBonus(""), ghostKills(0)
 {
 	this->texturaOpuesta = new Image(pathTexturaCerrada);
 	this->texturaOpuesta->resize(this->imageWidth - this->speed, this->imageHeight - this->speed);
@@ -163,6 +163,7 @@ void Pacman::kill(void)
 	this->isDead = true;
 	this->xDirection = 0;
 	this->yDirection = 0;
+	this->score = -10;
 	Character::speed;
 }
 
@@ -233,4 +234,14 @@ ImageArea Pacman::eatBonus(void)
 	
 	this->lastEatenBonus = "";
 	return ImageArea(0,0,0,0);
+}
+
+void Pacman::setGhostKills(int kills)
+{
+	this->ghostKills = kills;
+}
+
+int Pacman::getGhostKills(void)
+{
+	return this->ghostKills;
 }

@@ -296,6 +296,7 @@ void ScreenManager::handleBonusEating(Pacman* pac, List<Ghost*>& ghosts, string 
 	if (bonus == "alimentoEspecial")
 	{
 		// alimento bonus, fanstamas vulnerablesppp
+		pac->setGhostKills(0);
 		pac->increaseScore(50);
 		pac->increaseEatenBonus();
 		for (int i = 0; i < ghosts.length(); i++)

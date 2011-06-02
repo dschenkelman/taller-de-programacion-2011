@@ -29,6 +29,7 @@ class Pacman : public Character
 	std::string lastEatenBonus;
 	int score;
 	int normalBonusEaten;
+	int ghostKills;
 public:
 	Pacman(std::string pathTexturaAbierta, std::string pathTexturaCerrada, Grilla& grilla, 
 		int h, int w, int x, int y, int speed, int imageHeight, int imageWidth);
@@ -41,6 +42,8 @@ public:
 	void increaseScore(int increase);
 	void increaseEatenBonus(void);
 	int getEatenBonus(void);
+	int getGhostKills(void);
+	void setGhostKills(int kills);
 	std::string getLastEatenBonus(void);
 	ImageArea eatBonus(void);
 	~Pacman(void);
