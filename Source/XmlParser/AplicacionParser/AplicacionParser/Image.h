@@ -23,7 +23,7 @@ public:
 	Image(int width, int height); // Empty image constructor
 	Image(const Image& other);
 	Image& operator=(const Image& other);
-	~Image(void);
+	virtual ~Image(void);
 	SDL_Surface* getSDLSurface(void) const;
 	int getWidth(void) const;
 	int getHeight(void) const;

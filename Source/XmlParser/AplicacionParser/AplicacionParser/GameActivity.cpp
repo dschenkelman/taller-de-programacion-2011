@@ -13,7 +13,13 @@ GameActivity::GameActivity(int width, int height):Activity(width, height){
 GameActivity::GameActivity(Escenario* escenario, int width, int height):Activity(escenario, width, height){
 }
 
-GameActivity::~GameActivity(){
+GameActivity::~GameActivity()
+{
+	delete this->fondo;
+	delete this->escenario;
+	delete this->timeTitle;
+	delete this->pointsTitle;
+	delete this->screenManager;
 }
 
 
@@ -31,12 +37,12 @@ void GameActivity::onLoad(){
 	XmlElement* root = parser.parse();
 	parser.closeFile();
 	
-	Escenario* myEscenario = new Escenario(*root);
+	this->escenario = new Escenario(*root);
 	Grapher grapher;
 	grapher.setVideoMode(this->getWidth());
-	Image* fondo = grapher.draw(*myEscenario);
+	this->fondo = grapher.draw(*this->escenario);
 
-	int posX = (grapher.getImageWidth() * myEscenario->getGrilla().getAncho())+10;
+	int posX = (grapher.getImageWidth() * this->escenario->getGrilla().getAncho())+10;
 
 	// texto del tiempo
 	this->timeTitle = new RichTextView("Time", RichTextView::NORMAL);
@@ -46,14 +52,12 @@ void GameActivity::onLoad(){
 	this->pointsTitle = new RichTextView("Points", RichTextView::NORMAL);
 	this->pointsTitle->setX(posX); this->pointsTitle->setY(50);
 
-
 	// Creo un screenmanager para la logica del juego
-	this->screenManager = new ScreenManager(this, fondo, myEscenario->getGrilla(), grapher.getImageHeight(), grapher.getImageWidth());
+	this->screenManager = new ScreenManager(this, fondo, this->escenario->getGrilla(), grapher.getImageHeight(), grapher.getImageWidth());
 
 	// los agrego a la pantalla
 	this->add(this->timeTitle);
 	this->add(this->pointsTitle);
-	
 }
 
 

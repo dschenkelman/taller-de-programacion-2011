@@ -16,7 +16,13 @@ Activity::Activity(ParameterHolder* ph, int width, int height) : Image(width,hei
 	this->parameters = ph;
 }
 
-Activity::~Activity(){
+Activity::~Activity()
+{
+	/*for (int i = 0; i < this->widgets->length(); i++)
+	{
+		delete this->widgets->at(i);
+	}*/
+	delete this->widgets;
 }
 
 
@@ -89,8 +95,6 @@ void Activity::display(Image* image, int x, int y, int red, int green, int blue,
 		}
 	}
 }
-
-
 
 void Activity::display(Image* image, int x, int y, int width, int height)
 {

@@ -7,6 +7,8 @@
 
 class GameActivity : public Activity {
 private:
+	Escenario* escenario;
+	Image* fondo;
 	RichTextView* pointsTitle;
 	RichTextView* timeTitle;
 	Uint32 period;

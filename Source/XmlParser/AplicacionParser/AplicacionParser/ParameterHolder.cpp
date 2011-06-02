@@ -4,7 +4,6 @@
 void ParameterHolder::addParameter(std::string key, void *value){
 	Parameter* newParameter = new Parameter();
 	this->parameters->add(newParameter);
-	
 }
 
 void* ParameterHolder::getParameter(std::string key){
@@ -18,4 +17,12 @@ void* ParameterHolder::getParameter(std::string key){
 		}
 	}
 	return toReturn;
+}
+
+ParameterHolder::~ParameterHolder()
+{
+	for (int i = 0; i < this->parameters->length(); i++)
+	{
+		delete this->parameters->at(i);
+	}
 }

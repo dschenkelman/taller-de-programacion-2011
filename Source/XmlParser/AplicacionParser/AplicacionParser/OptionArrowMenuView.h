@@ -14,7 +14,7 @@ private:
 
 public:
 	OptionArrowMenuView();
-	~OptionArrowMenuView();
+	virtual ~OptionArrowMenuView();
 	void addOption(std::string optionTxt);
 	void addListener();
 	void notify(SDL_Event e);
