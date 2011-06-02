@@ -3,15 +3,18 @@
 #include "List.h"
 #include "View.h"
 #include "Escenario.h"
+#include "ParameterHolder.h"
 
 class Activity: public Image{
 private:
-	//EventDispatcher* dispatcher;
 	List<View*>* widgets;
-	Escenario escenario;
+	Escenario* escenario;
+protected:
+	ParameterHolder* parameters;
 public:
 	Activity(int width, int height);
-	Activity(Escenario escenario, int width, int height);
+	Activity(Escenario* escenario, int width, int height);
+	Activity(ParameterHolder* parameterHolder, int width, int height);
 	~Activity();
 	void add(View* w);
 	void init();
@@ -21,5 +24,5 @@ public:
 	void drawViews();
 	void display(Image* image, int x, int y, int red, int blue, int green, int delta);
 	void display(Image* image, int x, int y, int width, int height);
-	Escenario getEscenario();
+	Escenario* getEscenario();
 };

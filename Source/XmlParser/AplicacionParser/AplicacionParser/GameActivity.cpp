@@ -4,12 +4,13 @@
 #include "MenuActivity.h"
 #include "ScreenManager.h"
 #include "Grapher.h"
-
+#include <iostream>
+#include "XmlParser.h"
 
 GameActivity::GameActivity(int width, int height):Activity(width, height){
 }
 
-GameActivity::GameActivity(Escenario escenario, int width, int height):Activity(escenario, width, height){
+GameActivity::GameActivity(Escenario* escenario, int width, int height):Activity(escenario, width, height){
 }
 
 GameActivity::~GameActivity(){
@@ -18,44 +19,50 @@ GameActivity::~GameActivity(){
 
 void GameActivity::onLoad(){
 	
+	this->period = 1000.0 / 60;
+
+	char* fileName = "escenarioPacman.xml";
+
+	ifstream ifile(fileName);
+	ifile.close();
+	XmlParser parser;
+	string name = fileName;
+	parser.openFile(name);
+	XmlElement* root = parser.parse();
+	parser.closeFile();
+	
+	Escenario* myEscenario = new Escenario(*root);
+	Grapher grapher;
+	grapher.setVideoMode(this->getWidth());
+	Image* fondo = grapher.draw(*myEscenario);
+
+	int posX = (grapher.getImageWidth() * myEscenario->getGrilla().getAncho())+10;
+
 	// texto del tiempo
 	this->timeTitle = new RichTextView("Time", RichTextView::NORMAL);
-	this->timeTitle->setX(50); this->timeTitle->setY(0);
+	this->timeTitle->setX(posX); this->timeTitle->setY(0);
 
 	// texto de los puntos
 	this->pointsTitle = new RichTextView("Points", RichTextView::NORMAL);
-	this->pointsTitle->setX(300); this->pointsTitle->setY(0);
+	this->pointsTitle->setX(posX); this->pointsTitle->setY(50);
 
-	this->period = 2000.0 / 60;
-	//this->screenManager = new ScreenManager(this, "Images/fondo.bmp");
-	Image* imgBackgroung = new Image("Images/fondo.bmp");
 
-	int imageHeight = (480 / 28);
-	
-	// this->imageWidth = windowWidth / grilla.getAncho();
-	int imageWidth = imageHeight;
+	// Creo un screenmanager para la logica del juego
+	this->screenManager = new ScreenManager(this, fondo, myEscenario->getGrilla(), grapher.getImageHeight(), grapher.getImageWidth());
 
-	Grapher grapher;
-	grapher.setVideoMode(640);
-	Image* fondo = grapher.draw(this->getEscenario());
-
-	//this->screenManager = new ScreenManager(this, fondo, this->getEscenario().getGrilla(), imageHeight, imageWidth);
-	//this->screenManager->startGame();
-
-	/*ScreenManager s(w, fondo, escenario.getGrilla(), grapher.getImageHeight(), grapher.getImageWidth());
-				s.startGame();*/
-	
 	// los agrego a la pantalla
 	this->add(this->timeTitle);
 	this->add(this->pointsTitle);
 	
-	
 }
 
 
+// En el update de esta actividad hago el update del juego
 void GameActivity::update(){
 	screenManager->updateScreen();
 }
+
+
 
 Activity* GameActivity::notify(SDL_Event e){
 	

@@ -143,7 +143,7 @@ bool ImageTests::testResizeToBigger(void)
 	}
 	
 	// nueva imagen
-	Image* imgSmile = new Image("Images/texturas/l3.bmp");
+	Image* imgSmile = new Image("Images/fondo_rgb.bmp");
 
 	SDL_Rect src, dest;
 	src.x = 0;
@@ -157,7 +157,7 @@ bool ImageTests::testResizeToBigger(void)
 	SDL_BlitSurface(imgSmile->getSDLSurface(), &src, screen, &dest);
 	SDL_Flip(screen);
 	
-	imgSmile->resize(600, 480);
+	imgSmile->resize(1024, 768);
 	
 	// Pego la imagen en la pantalla
 	src.x = 0;
@@ -168,7 +168,7 @@ bool ImageTests::testResizeToBigger(void)
 	dest.y = 20;
 	dest.w = imgSmile->getWidth();
 	dest.h = imgSmile->getHeight();
-	SDL_BlitSurface(imgSmile->getSDLSurface(), &src, screen, &dest);
+	SDL_BlitSurface(imgSmile->getSDLSurface(), NULL, screen, NULL);
 	SDL_Flip(screen);
 
 	//esperar para cerrar
