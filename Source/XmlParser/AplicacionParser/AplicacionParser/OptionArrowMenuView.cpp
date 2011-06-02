@@ -21,10 +21,6 @@ void OptionArrowMenuView::addOption(std::string optionTxt){
 OptionArrowMenuView::~OptionArrowMenuView()
 {
 	delete this->arrow;
-	/*for (int i = 0; i < this->options->length(); i++)
-	{
-		delete this->options.at(i);
-	}*/
 	delete this->options;
 }
 

@@ -18,10 +18,6 @@ Activity::Activity(ParameterHolder* ph, int width, int height) : Image(width,hei
 
 Activity::~Activity()
 {
-	/*for (int i = 0; i < this->widgets->length(); i++)
-	{
-		delete this->widgets->at(i);
-	}*/
 	delete this->widgets;
 }
 
@@ -60,18 +56,19 @@ void Activity::drawViews(){
 		
 		w->draw();
 
-		SDL_Rect* rec = new SDL_Rect();
-		rec->h = w->getHeight();
-		rec->w = w->getWidth();
+		/*SDL_Rect* rec = new SDL_Rect();*/
+		SDL_Rect rec;
+		rec.h = w->getHeight();
+		rec.w = w->getWidth();
 
 		if(w->getVerticalAlign() == View::VERTICAL_ALIGN_CENTER){
-			rec->x = ((this->getWidth()/2)-(w->getWidth()/2));
+			rec.x = ((this->getWidth()/2)-(w->getWidth()/2));
 		}else{
-			rec->x = w->getX();
+			rec.x = w->getX();
 		}
-		rec->y = w->getY();
+		rec.y = w->getY();
 		
-		SDL_BlitSurface(w->getSDLSurface(), NULL, this->getSDLSurface(), rec);
+		SDL_BlitSurface(w->getSDLSurface(), NULL, this->getSDLSurface(), &rec);
 	}
 	SDL_Flip(this->getSDLSurface());
 }

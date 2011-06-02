@@ -3,14 +3,12 @@
 
 
 ImageView::ImageView(std::string uri):View(){
-	Image::Image(uri);
 	this->myImg = new Image(uri);
 	this->copy(*myImg);
 }
 
 ImageView::~ImageView(){
-	//delete(this->img);
-
+	delete(this->myImg);
 }
 
 void ImageView::draw(){
