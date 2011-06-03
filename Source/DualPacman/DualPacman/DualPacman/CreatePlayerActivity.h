@@ -10,6 +10,8 @@ private:
 	std::string name;
 	std::string pass;
 	std::string passView;
+	RichTextView* rtvPassBox;
+	RichTextView* rtvUsernameBox;
 	bool usernameBoxActive;
 	ImageView* banner;
 	RichTextView* title;

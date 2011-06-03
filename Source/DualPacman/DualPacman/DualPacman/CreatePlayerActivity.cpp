@@ -11,6 +11,7 @@ CreatePlayerActivity::CreatePlayerActivity(int width, int height):Activity(width
 }
 
 CreatePlayerActivity::~CreatePlayerActivity(){
+
 }
 
 
@@ -33,11 +34,11 @@ void CreatePlayerActivity::onLoad()
 	RichTextView* rtvPass = new RichTextView("Password", RichTextView::NORMAL);
 	rtvPass->setX((this->getWidth()/2) - 116); rtvPass->setY(260);
 
-	RichTextView* rtvUsernameBox = new RichTextView(this->name, RichTextView::NORMAL);
-	rtvUsernameBox->setX((this->getWidth()/2) - 20); rtvUsernameBox->setY(220);
+	this->rtvUsernameBox = new RichTextView(this->name, RichTextView::NORMAL);
+	this->rtvUsernameBox->setX((this->getWidth()/2) - 20); this->rtvUsernameBox->setY(220);
 
-	RichTextView* rtvPassBox = new RichTextView(this->passView, RichTextView::NORMAL);
-	rtvPassBox->setX((this->getWidth()/2) - 20); rtvPassBox->setY(280);
+	this->rtvPassBox = new RichTextView(this->passView, RichTextView::NORMAL);
+	this->rtvPassBox->setX((this->getWidth()/2) - 20); this->rtvPassBox->setY(280);
 
 	this->arrowMenu = new OptionArrowMenuView();
 	this->arrowMenu->setVerticalAlign(View::VERTICAL_ALIGN_CENTER); this->arrowMenu->setY(this->getHeight() - 50);
@@ -74,12 +75,21 @@ Activity* CreatePlayerActivity::notify(SDL_Event e)
 				if(this->usernameBoxActive)
 				{
 					this->name.erase(this->name.size()-1, 1);
+					RichTextView* newRtvUsernameBox = new RichTextView(this->name, RichTextView::NORMAL);
+					newRtvUsernameBox->setX(this->rtvUsernameBox->getX());
+					newRtvUsernameBox->setY(this->rtvUsernameBox->getY());
+					this->updateViewFromView(this->rtvUsernameBox, newRtvUsernameBox);
+					this->rtvUsernameBox = newRtvUsernameBox;
 				}
 
 				else
 				{
 					this->pass.erase(this->pass.size()-1, 1);
 					this->passView.erase(this->passView.size()-1, 1);
+					RichTextView* newRtvPassBox = new RichTextView(this->passView, RichTextView::NORMAL);
+					newRtvPassBox->setX(this->rtvPassBox->getX());
+					newRtvPassBox->setY(this->rtvPassBox->getY());
+					this->updateViewFromView(this->rtvPassBox, newRtvPassBox);
 				}
 			}
 
@@ -117,13 +127,22 @@ Activity* CreatePlayerActivity::notify(SDL_Event e)
 					if(this->name.size() < 5)
 					{
 						this->name += letra;
+						RichTextView* newRtvUsernameBox = new RichTextView(this->name, RichTextView::NORMAL);
+						newRtvUsernameBox->setX(this->rtvUsernameBox->getX());
+						newRtvUsernameBox->setY(this->rtvUsernameBox->getY());
+						this->updateViewFromView(this->rtvUsernameBox, newRtvUsernameBox);
+						this->rtvUsernameBox = newRtvUsernameBox;
 					}
 				}
 
 				else
 				{
 					this->pass += letra;
-					this->passView += '*';
+					this->passView += 'z';
+					RichTextView* newRtvPassBox = new RichTextView(this->passView, RichTextView::NORMAL);
+					newRtvPassBox->setX(this->rtvPassBox->getX());
+					newRtvPassBox->setY(this->rtvPassBox->getY());
+					this->updateViewFromView(this->rtvPassBox, newRtvPassBox);
 				}
 			}
 
