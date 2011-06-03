@@ -44,6 +44,8 @@ void RankingByGamesPlayedActivity::onLoad()
 		userY += 20;
 	}
 
+	delete query;
+
 	// menu con flecha
 	this->arrowMenu = new OptionArrowMenuView();
 	this->arrowMenu->setX(50); this->arrowMenu->setY(this->getHeight() - 50); 
