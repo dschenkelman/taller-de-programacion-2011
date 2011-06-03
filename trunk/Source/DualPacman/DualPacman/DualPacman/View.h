@@ -7,6 +7,7 @@ private:
 	int y;
 	Image* img;
 	int verticalAlign;
+	int id;
 public:
 	View();
 	~View();
@@ -17,6 +18,9 @@ public:
 	virtual void draw();
 	int getVerticalAlign(void);
 	void setVerticalAlign(int value);
+	void setId(int id);
+	int getId(void);
+	void updateFrom(View* v);
 	
 	// valores de la alineacion
 	static int VERTICAL_ALIGN_CENTER;

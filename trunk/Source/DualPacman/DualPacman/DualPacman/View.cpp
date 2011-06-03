@@ -34,3 +34,17 @@ int View::getVerticalAlign(){
 
 void View::draw(){
 }
+
+void View::updateFrom(View *v){
+	this->setX(v->getX());
+	this->setY(v->getY());
+	SDL_BlitSurface(v->getSDLSurface(), NULL, this->getSDLSurface(), NULL);
+}
+
+int View::getId(void){
+	return this->id;
+}
+
+void View::setId(int id){
+	this->id = id;
+}
