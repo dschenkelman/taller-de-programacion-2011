@@ -14,8 +14,6 @@
 
 #define SDL_main main 
 
-
-
 int main(int argc, char* argv[])
 {
 	int width = 640;

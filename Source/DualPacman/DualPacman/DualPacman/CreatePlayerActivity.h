@@ -9,6 +9,7 @@ class CreatePlayerActivity : public Activity
 private:
 	std::string name;
 	std::string pass;
+	std::string passView;
 	bool usernameBoxActive;
 	ImageView* banner;
 	RichTextView* title;
