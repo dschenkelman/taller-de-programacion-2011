@@ -150,7 +150,6 @@ void ScreenManager::updateScreen(void)
 		this->deadCycles++;
 	}
 	SDL_Flip(this->window->getSDLSurface());
-	//this->window->refresh();
 }
 
 void ScreenManager::updateGhosts(List<Ghost*>& ghosts)
@@ -212,12 +211,6 @@ void ScreenManager::deletePacman(Pacman* pac)
 	int width = i->getWidth();
 	
 	this->window->display(this->fondoNegro, x, y, width, height);
-	/*SDL_Rect* recGO = new SDL_Rect();
-		recGO->h = i->getHeight();
-		recGO->w = i->getWidth();
-		recGO->x = x;
-		recGO->y = y;
-	SDL_BlitSurface(this->fondoNegro->getSDLSurface(), NULL, this->window->getSDLSurface(), recGO);*/
 }
 
 void ScreenManager::deleteGhosts(List<Ghost*>& ghosts)
@@ -232,12 +225,6 @@ void ScreenManager::deleteGhosts(List<Ghost*>& ghosts)
 		int width = ig->getWidth();
 		
 		this->window->display(this->fondoNegro, xg, yg, width, height);
-		/*SDL_Rect* recGO = new SDL_Rect();
-		recGO->h = ig->getHeight();
-		recGO->w = ig->getWidth();
-		recGO->x = xg;
-		recGO->y = yg;
-		SDL_BlitSurface(this->fondoNegro->getSDLSurface(), NULL, this->window->getSDLSurface(), recGO);*/
 	}
 }
 
@@ -254,29 +241,29 @@ void ScreenManager::deleteBonus(Pacman *pac, List<Ghost*>& ghosts, bool isPacman
 }
 void ScreenManager::startGame(void)
 {
-	//esperar para cerrar
-	SDL_Event e;
-	bool running = true;
-	this->period = 1000.0 / 120;
- 
-	this->window->display(this->fondo, 0, 0, 0, 0, 0, -1);
-	while(!this->gameOver()) 
-	{
-		SDL_Delay(this->period);
-		this->updateScreen();
-		while(SDL_PollEvent(&e)) 
-		{
-			switch(e.type)
-			{
-				case SDL_QUIT:
-					running = false;
-					//this->window->close();
-					return;
-				default:
-					this->handleKeyStroke();
-			}
-		}
-	}
+	////esperar para cerrar
+	//SDL_Event e;
+	//bool running = true;
+	//this->period = 1000.0 / 120;
+ //
+	//this->window->display(this->fondo, 0, 0, 0, 0, 0, -1);
+	//while(!this->gameOver()) 
+	//{
+	//	SDL_Delay(this->period);
+	//	this->updateScreen();
+	//	while(SDL_PollEvent(&e)) 
+	//	{
+	//		switch(e.type)
+	//		{
+	//			case SDL_QUIT:
+	//				running = false;
+	//				//this->window->close();
+	//				return;
+	//			default:
+	//				this->handleKeyStroke();
+	//		}
+	//	}
+	//}
 }
 
 bool ScreenManager::gameOver(void)
