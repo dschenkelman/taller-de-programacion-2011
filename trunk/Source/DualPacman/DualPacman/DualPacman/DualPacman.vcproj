@@ -235,6 +235,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\ExistingUsernameActivity.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Game.cpp"
 				>
 			</File>
@@ -494,6 +498,10 @@
 			</File>
 			<File
 				RelativePath=".\EscenarioTests.h"
+				>
+			</File>
+			<File
+				RelativePath=".\ExistingUsernameActivity.h"
 				>
 			</File>
 			<File

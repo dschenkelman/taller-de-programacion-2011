@@ -2,6 +2,7 @@
 #include "List.h"
 #include "DAO.h"
 #include "MenuActivity.h"
+#include "ExistingUsernameActivity.h"
 #include <sstream>
 
 CreatePlayerActivity::CreatePlayerActivity(int width, int height):Activity(width, height)
@@ -31,7 +32,7 @@ void CreatePlayerActivity::onLoad()
 	RichTextView* rtvUsernameBox = new RichTextView(this->name, RichTextView::NORMAL);
 	rtvUsernameBox->setX((this->getWidth()/2) - 20); rtvUsernameBox->setY(220);
 
-	RichTextView* rtvPassBox = new RichTextView(this->pass, RichTextView::NORMAL);
+	RichTextView* rtvPassBox = new RichTextView(this->passView, RichTextView::NORMAL);
 	rtvPassBox->setX((this->getWidth()/2) - 20); rtvPassBox->setY(280);
 
 	this->arrowMenu = new OptionArrowMenuView();
@@ -53,9 +54,14 @@ Activity* CreatePlayerActivity::notify(SDL_Event e)
 {
 	Activity* nextActivity = NULL;
 	switch(e.type){
-			char letra;
-			int y;
+		char letra;
+		int y;
 		case SDL_KEYDOWN:
+			if(e.key.keysym.sym == SDLK_TAB)
+			{
+				this->usernameBoxActive = !(this->usernameBoxActive);
+			}
+
 			letra = this->getKey(e.key);
 			
 			//backspace
@@ -68,9 +74,12 @@ Activity* CreatePlayerActivity::notify(SDL_Event e)
 
 				else
 				{
-					this->pass.erase(this->pass.size()-1, -1);
+					this->pass.erase(this->pass.size()-1, 1);
+					this->passView.erase(this->passView.size()-1, 1);
 				}
 			}
+
+			else if(letra == '1'){}
 
 			//enter
 			else if(letra == '2')
@@ -82,23 +91,35 @@ Activity* CreatePlayerActivity::notify(SDL_Event e)
 				
 				if(this->arrowMenu->getSelectedOption() == "create player")
 				{
-					int a = 5;
-
 					if(this->verifyUsername(this->name))
 					{
-						//nextActivity = new ExistingUsernameActivity(this->getWidth(), this->getHeight())
+						nextActivity = new ExistingUsernameActivity(this->getWidth(), this->getHeight());
 					}
-
-					//nextActivity;
+					
+					else
+					{
+						DAO d("gamelog.sql");
+						d.createPlayer(name, pass);
+						nextActivity = new MenuActivity(this->getWidth(), this->getHeight());
+					}
 				}
 			}
 
 			//letra
-			else if(this->usernameBoxActive)
+			else
 			{
-				if(this->name.size() < 5)
+				if(this->usernameBoxActive)
 				{
-					this->name += letra;
+					if(this->name.size() < 5)
+					{
+						this->name += letra;
+					}
+				}
+
+				else
+				{
+					this->pass += letra;
+					this->passView += '*';
 				}
 			}
 
