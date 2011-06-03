@@ -18,6 +18,10 @@ Activity::Activity(ParameterHolder* ph, int width, int height) : Image(width,hei
 
 Activity::~Activity()
 {
+	for (int i = 0; i < this->widgets->length(); i++)
+	{
+		delete this->widgets->at(i);
+	}
 	delete this->widgets;
 }
 

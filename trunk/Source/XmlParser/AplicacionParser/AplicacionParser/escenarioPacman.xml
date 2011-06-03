@@ -404,19 +404,59 @@
 	<CAMINO fila="12" columna="19">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="13" columna="8">
+	
+	<CAMINO fila="13" columna="0">
+		<BONUS tipo="alimento"/>
+	</CAMINO>
+	<CAMINO fila="13" columna="1">
+		<BONUS tipo="alimento"/>
+	</CAMINO>
+	<CAMINO fila="13" columna="2">
+		<BONUS tipo="alimento"/>
+	</CAMINO>
+	<CAMINO fila="13" columna="3">
+		<BONUS tipo="alimento"/>
+	</CAMINO>
+	<CAMINO fila="13" columna="4">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
 	<CAMINO fila="13" columna="5">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="13" columna="12"/>
+	<CAMINO fila="13" columna="8">
+		<BONUS tipo="alimento"/>
+	</CAMINO>
+	<CAMINO fila="13" columna="12">
+		<BONUS tipo="alimento"/>
+	</CAMINO>
 	<CAMINO fila="13" columna="16">
+		<BONUS tipo="alimento"/>
+	</CAMINO>
+	<CAMINO fila="13" columna="17">
+		<BONUS tipo="alimento"/>
+	</CAMINO>
+	<CAMINO fila="13" columna="18">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
 	<CAMINO fila="13" columna="19">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
+	<CAMINO fila="13" columna="20">
+		<BONUS tipo="alimento"/>
+	</CAMINO>
+	<CAMINO fila="13" columna="21">
+		<BONUS tipo="alimento"/>
+	</CAMINO>
+	<CAMINO fila="13" columna="22">
+		<BONUS tipo="alimento"/>
+	</CAMINO>
+	<CAMINO fila="13" columna="23">
+		<BONUS tipo="alimento"/>
+	</CAMINO>
+	<CAMINO fila="13" columna="24">
+		<BONUS tipo="alimento"/>
+	</CAMINO>
+	
 	<CAMINO fila="14" columna="5">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
@@ -428,7 +468,9 @@
 	<CAMINO fila="14" columna="12"/>
 	<CAMINO fila="14" columna="13"/>
 	<CAMINO fila="14" columna="14"/>
-	<CAMINO fila="14" columna="16"/>
+	<CAMINO fila="14" columna="16">
+		<BONUS tipo="alimento"/>
+	</CAMINO>
 	<CAMINO fila="14" columna="19">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
@@ -443,7 +485,9 @@
 	<CAMINO fila="15" columna="12"/>
 	<CAMINO fila="15" columna="13"/>
 	<CAMINO fila="15" columna="14"/>
-	<CAMINO fila="15" columna="16"/>
+	<CAMINO fila="15" columna="16">
+		<BONUS tipo="alimento"/>
+	</CAMINO>
 	<CAMINO fila="15" columna="19">
 		<BONUS tipo="alimento"/>
 	</CAMINO>

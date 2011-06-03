@@ -63,7 +63,7 @@ Activity* RankingByPointsActivity::notify(SDL_Event e){
 
 RankingByPointsActivity::~RankingByPointsActivity()
 {
-	delete this->banner;
+	/*delete this->banner;
 	delete this->title;
-	delete this->arrowMenu;
+	delete this->arrowMenu;*/
 }
