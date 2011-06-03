@@ -10,6 +10,10 @@ CreatePlayerActivity::CreatePlayerActivity(int width, int height):Activity(width
 	this->usernameBoxActive = true;
 }
 
+CreatePlayerActivity::~CreatePlayerActivity(){
+}
+
+
 void CreatePlayerActivity::onLoad()
 {
 	// cabecera
