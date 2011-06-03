@@ -3,6 +3,7 @@
 #include "Activity.h"
 #include "GameActivity.h"
 #include "StatsActivity.h"
+#include "CreatePlayerActivity.h"
 
 
 MenuActivity::MenuActivity(int width, int height):Activity(width, height){
@@ -25,6 +26,7 @@ void MenuActivity::onLoad(){
 	this->arrowMenu = new OptionArrowMenuView();
 	this->arrowMenu->setX(50); this->arrowMenu->setY(200); 
 	this->arrowMenu->addOption("new game");
+	this->arrowMenu->addOption("create player");
 	this->arrowMenu->addOption("stats");
 	this->arrowMenu->addOption("quit");
 
@@ -45,6 +47,9 @@ Activity* MenuActivity::notify(SDL_Event e){
 				case SDLK_RETURN:
 					if(this->arrowMenu->getSelectedOption() == "new game")
 						nextActivity = new GameActivity(this->getWidth(), this->getHeight());
+
+					if(this->arrowMenu->getSelectedOption() == "create player")
+						nextActivity = new CreatePlayerActivity(this->getWidth(), this->getHeight());
 
 					if(this->arrowMenu->getSelectedOption() == "stats")
 						nextActivity = new StatsActivity(this->getWidth(), this->getHeight());
