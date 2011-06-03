@@ -27,4 +27,5 @@ public:
 	Textura obtenerTextura();
 	~Obstaculo(void);
 	Image* obtenerRepresentacion();
+	void setearRepresentacion(Image*);
 };

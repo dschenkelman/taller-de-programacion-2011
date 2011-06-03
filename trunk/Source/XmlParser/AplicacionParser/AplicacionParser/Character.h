@@ -9,7 +9,7 @@ class Character
 	int getNextY(void);
 protected:
 	Image* textura;
-	Grilla& grilla;
+	Grilla* grilla;
 	int x;
 	int y;
 	int xDirection;
@@ -24,7 +24,7 @@ protected:
 	virtual void moveDown(void);
 	virtual void moveUp(void);
 	bool isNextPositionValid(void);
-	Character(std::string pathTextura, Grilla& grilla, int h, int w, int x, int y, int xDir, int yDir, int speed, int imageHeight, int imageWidth);
+	Character(std::string pathTextura, Grilla* grilla, int h, int w, int x, int y, int xDir, int yDir, int speed, int imageHeight, int imageWidth);
 public:
 	virtual void updatePosition(void);
 	Image* getImage(void)

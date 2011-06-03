@@ -188,15 +188,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\BonusTests.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\Camino.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\CaminoTests.cpp"
 				>
 			</File>
 			<File
@@ -205,10 +197,6 @@
 			</File>
 			<File
 				RelativePath=".\CellMatrix.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\CellMatrixTests.cpp"
 				>
 			</File>
 			<File
@@ -232,10 +220,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\EscenarioTests.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\GameActivity.cpp"
 				>
 			</File>
@@ -252,15 +236,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\GrapherTests.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\Grilla.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\GrillaTests.cpp"
 				>
 			</File>
 			<File
@@ -269,10 +245,6 @@
 			</File>
 			<File
 				RelativePath=".\ImageArea.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\ImageTests.cpp"
 				>
 			</File>
 			<File
@@ -288,19 +260,11 @@
 				>
 			</File>
 			<File
-				RelativePath=".\LoggerTests.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\MenuActivity.cpp"
 				>
 			</File>
 			<File
 				RelativePath=".\Obstaculo.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\ObstaculoTests.cpp"
 				>
 			</File>
 			<File
@@ -400,10 +364,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\TexturaTests.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\TipoBonus.cpp"
 				>
 			</File>
@@ -413,10 +373,6 @@
 			</File>
 			<File
 				RelativePath=".\TipoObstaculo.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\TipoObstaculoTests.cpp"
 				>
 			</File>
 			<File
@@ -444,15 +400,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\XmlElementTests.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\XmlParser.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\XmlParserTest.cpp"
 				>
 			</File>
 		</Filter>
@@ -470,15 +418,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\BonusTests.h"
-				>
-			</File>
-			<File
 				RelativePath=".\Camino.h"
-				>
-			</File>
-			<File
-				RelativePath=".\CaminoTests.h"
 				>
 			</File>
 			<File
@@ -487,10 +427,6 @@
 			</File>
 			<File
 				RelativePath=".\CellMatrix.h"
-				>
-			</File>
-			<File
-				RelativePath=".\CellMatrixTests.h"
 				>
 			</File>
 			<File
@@ -514,10 +450,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\EscenarioTests.h"
-				>
-			</File>
-			<File
 				RelativePath=".\GameActivity.h"
 				>
 			</File>
@@ -534,15 +466,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\GrapherTests.h"
-				>
-			</File>
-			<File
 				RelativePath=".\Grilla.h"
-				>
-			</File>
-			<File
-				RelativePath=".\GrillaTests.h"
 				>
 			</File>
 			<File
@@ -551,10 +475,6 @@
 			</File>
 			<File
 				RelativePath=".\ImageArea.h"
-				>
-			</File>
-			<File
-				RelativePath=".\ImageTests.h"
 				>
 			</File>
 			<File
@@ -574,19 +494,11 @@
 				>
 			</File>
 			<File
-				RelativePath=".\LoggerTests.h"
-				>
-			</File>
-			<File
 				RelativePath=".\MenuActivity.h"
 				>
 			</File>
 			<File
 				RelativePath=".\Obstaculo.h"
-				>
-			</File>
-			<File
-				RelativePath=".\ObstaculoTests.h"
 				>
 			</File>
 			<File
@@ -638,6 +550,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\resource2.h"
+				>
+			</File>
+			<File
 				RelativePath=".\RichTextView.h"
 				>
 			</File>
@@ -654,10 +570,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\StackTests.h"
-				>
-			</File>
-			<File
 				RelativePath=".\StatsActivity.h"
 				>
 			</File>
@@ -670,15 +582,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\StringTests.h"
-				>
-			</File>
-			<File
 				RelativePath=".\Textura.h"
-				>
-			</File>
-			<File
-				RelativePath=".\TexturaTests.h"
 				>
 			</File>
 			<File
@@ -686,15 +590,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\TipoBonusTests.h"
-				>
-			</File>
-			<File
 				RelativePath=".\TipoObstaculo.h"
-				>
-			</File>
-			<File
-				RelativePath=".\TipoObstaculoTests.h"
 				>
 			</File>
 			<File
@@ -722,27 +618,13 @@
 				>
 			</File>
 			<File
-				RelativePath=".\XmlElementTests.h"
-				>
-			</File>
-			<File
 				RelativePath=".\XmlParser.h"
-				>
-			</File>
-			<File
-				RelativePath=".\XmlParserTest.h"
 				>
 			</File>
 		</Filter>
 		<Filter
 			Name="Resource Files"
-			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav"
-			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
-			<File
-				RelativePath=".\AplicacionParser.rc"
-				>
-			</File>
 			<File
 				RelativePath=".\sqlite\sqlite3.c"
 				>
@@ -752,7 +634,6 @@
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="0"
-						Detect64BitPortabilityProblems="false"
 					/>
 				</FileConfiguration>
 			</File>
@@ -765,6 +646,10 @@
 				>
 			</File>
 		</Filter>
+		<File
+			RelativePath=".\AplicacionParser.rc"
+			>
+		</File>
 		<File
 			RelativePath=".\ReadMe.txt"
 			>

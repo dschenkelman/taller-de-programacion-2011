@@ -21,7 +21,7 @@ class Ghost : public Character
 	std::vector<double> getDistanceForEachPosition(void);
 public:
 	Ghost(std::string pathTextura, std::string texturaVulnerable,
-		Grilla& grilla, int h, int w, int x, int y, int speed, Pacman* pacman, int imageHeight, int imageWidth);
+		Grilla* grilla, int h, int w, int x, int y, int speed, Pacman* pacman, int imageHeight, int imageWidth);
 	double getDistanceToPacman(int x, int y);
 	void checkPacmanCollision(void);
 	void comeBackToLife(void);

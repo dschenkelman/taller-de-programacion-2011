@@ -27,7 +27,8 @@ Grilla::Grilla(int an, int al, std::string& topd) : matrizGenerada(false), tiene
 	populateValidAttributes();
 }
 
-Grilla::Grilla(XmlElement& e, List<TipoObstaculo>& lo, List<TipoBonus>& lb) : matrizGenerada(false), tieneError(false), tipoObstaculoPorDefecto("")
+Grilla::Grilla(XmlElement& e, List<TipoObstaculo>& lo, List<TipoBonus>& lb) : matrizGenerada(false), tieneError(false)
+, tipoObstaculoPorDefecto(""), cantidadBonus(0)
 {
 	this->populateValidAttributes();
 	this->tieneError = !this->validateAttributes(e);
@@ -170,7 +171,7 @@ void Grilla::generarMatriz(List<XmlElement>& listaElementos)
 			
 			if(cam->hasBonus())
 			{
-				std::string tipoBonus = cam->getBonus().getTipo();
+				std::string tipoBonus = cam->getBonus()->getTipo();
 
 				bool bonusValido = verificarTipoBonusExistente(tipoBonus);
 
@@ -185,7 +186,7 @@ void Grilla::generarMatriz(List<XmlElement>& listaElementos)
 					continue;
 				}
 
-				cam->getBonus().setTipoBonus(obtenerTipoBonus(tipoBonus));
+				cam->getBonus()->setTipoBonus(obtenerTipoBonus(tipoBonus));
 				this->cantidadBonus++;
 			}
 			bool result = colocarCeldaEnMatriz(cam, listaElementos.at(i).getStartLine());

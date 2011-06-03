@@ -29,7 +29,7 @@ class ScreenManager
 	int deadCycles;
 	int imageHeight;
 	int imageWidth;
-	Grilla& grilla;
+	Grilla* grilla;
 	Image *fondoNegro;
 	void updatePacman(Pacman* pac);
 	void updateGhostsVulnerability(void);
@@ -39,11 +39,11 @@ class ScreenManager
 	void createGhostsForPacman1(void);
 	void createGhostsForPacman2(void);
 	void handleBonusEating(Pacman* pac, List<Ghost*>& ghosts, std::string bonus, bool isPacman1);
-	bool gameOver(void);
 	void deleteBonus(Pacman *pac, List<Ghost*>& ghosts, bool isPacman1);
 public:
-	ScreenManager(Activity* w, Image* imageFondo, Grilla& grilla, int imageHeight, int imageWidth);
+	ScreenManager(Activity* w, Image* imageFondo, Grilla* grilla, int imageHeight, int imageWidth, Uint32 period);
 	//ScreenManager(Window* w, Image* imageFondo, Grilla& grilla, int imageHeight, int imageWidth);
+	bool gameOver(void);
 	void startGame(void);
 	void handleKeyStroke(void);
 	void updateScreen(void);

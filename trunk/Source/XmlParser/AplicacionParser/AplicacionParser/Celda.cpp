@@ -66,3 +66,7 @@ Textura Celda::obtenerTextura()
 {
 	return Textura();
 }
+
+void Celda::setearRepresentacion(Image* rep)
+{
+}

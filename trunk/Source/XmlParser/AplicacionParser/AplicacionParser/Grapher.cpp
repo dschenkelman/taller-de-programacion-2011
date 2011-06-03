@@ -29,7 +29,7 @@ Image* Grapher::draw(Escenario& escenario)
 {
 	Image *imagePtr;
 	this->error = false;
-	Grilla& grilla = escenario.getGrilla();
+	Grilla* grilla = escenario.getGrilla();
 
 	// Se muestra el nombre del Escenario
 	std::cout << "Escenario: "+escenario.getNombre()+" \n";
@@ -55,18 +55,18 @@ Image* Grapher::draw(Escenario& escenario)
 
 	// va a truncar y es la idea. tiene que quedar mas chico porque sino,
 	// no entran todas las celdas
-	this->imageHeight = windowHeight / grilla.getAlto();
+	this->imageHeight = windowHeight / grilla->getAlto();
 	
 	// this->imageWidth = windowWidth / grilla.getAncho();
 	this->imageWidth = this->imageHeight;
 
 	// Se dibuja fila por fila de la matriz
-	for(unsigned int i=0; i<grilla.getAlto(); i++)
+	for(unsigned int i=0; i<grilla->getAlto(); i++)
 	{
-		for(unsigned int j=0; j<grilla.getAncho(); j++)
+		for(unsigned int j=0; j<grilla->getAncho(); j++)
 		{
 			// A cada celda le pido su representacion y la muestro por consola
-			Celda* celda = grilla.getCelda(i, j);
+			Celda* celda = grilla->getCelda(i, j);
 			
 			Textura t = celda->obtenerTextura();
 			string nombreTextura = t.getNombre();
@@ -83,6 +83,7 @@ Image* Grapher::draw(Escenario& escenario)
 			else
 			{
 				imagePtr = (this->imageCache[nombreTextura]);
+				celda->setearRepresentacion(imagePtr);
 			}
 			//imagen=*imagePtr;
 			if (!(imagePtr->hasError()))

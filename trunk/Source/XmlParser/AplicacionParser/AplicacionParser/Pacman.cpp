@@ -8,7 +8,7 @@
 
 using namespace std;
 
-Pacman::Pacman(string pathTexturaAbierta, string pathTexturaCerrada, Grilla& grilla, int h,
+Pacman::Pacman(string pathTexturaAbierta, string pathTexturaCerrada, Grilla* grilla, int h,
 			   int w, int x, int y, int speed, int imageHeight, int imageWidth) : 
 Character(pathTexturaAbierta, grilla, h, w, x, y, 0, 0, speed, imageHeight, imageWidth), dir(Direction::RIGHT),
 rightKey(SDLK_RIGHT),leftKey(SDLK_LEFT), upKey(SDLK_UP), downKey(SDLK_DOWN), isDead(false),
@@ -210,23 +210,24 @@ ImageArea Pacman::eatBonus(void)
 	int x2 = (posX + width) / this->imageWidth;
 	int y2 = (posY + height) / this->imageHeight;
 
-	if (x1 < 0 || x2 >= this->grilla.getAncho() || y1 < 0 || y2 >= this->grilla.getAlto())	{
+	if (x1 < 0 || x2 >= this->grilla->getAncho() || y1 < 0 || y2 >= this->grilla->getAlto())
+	{
 		this->lastEatenBonus = "";
 		return ImageArea(0,0,0,0);
 	}
 
-	Celda* c1 = this->grilla.getCelda(y1, x1);
+	Celda* c1 = Character::grilla->getCelda(y1, x1);
 	Camino* cam1 = dynamic_cast<Camino*>(c1);
 
 	if (cam1 != NULL && cam1->hasBonus())
 	{
-		Image *bono=cam1->getBonus().obtenerRepresentacion();
+		Image *bono=cam1->getBonus()->obtenerRepresentacion();
 		int posX= (x1*this->imageWidth)+(this->imageWidth-bono->getWidth())/2;
 		int posY= (y1*this->imageHeight)+(this->imageHeight-bono->getHeight())/2;
 		if (CollisionHelper::BonusCollision(this->textura, bono, this->x, this->y, posX, posY))
 		{
 			ImageArea ia(posX,posY,bono->getWidth(),bono->getHeight());
-			this->lastEatenBonus = cam1->getBonus().getTipoBonus().getNombre();
+			this->lastEatenBonus = cam1->getBonus()->getTipoBonus().getNombre();
 			cam1->removeBonus();
 			return ia;
 		}

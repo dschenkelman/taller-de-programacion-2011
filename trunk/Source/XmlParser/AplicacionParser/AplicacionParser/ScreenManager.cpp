@@ -7,11 +7,12 @@
 
 using namespace std;
 
-ScreenManager::ScreenManager(Activity* w, Image* imageFondo, Grilla& grilla, int imageHeight, int imageWidth) 
-: deadCycles(0), imageHeight(imageHeight), imageWidth(imageWidth), grilla(grilla), period(0),
+ScreenManager::ScreenManager(Activity* w, Image* imageFondo, Grilla* g, int imageHeight, int imageWidth, Uint32 period) 
+: deadCycles(0), imageHeight(imageHeight), imageWidth(imageWidth), period(period),
 vulnerablePacman1Cycles(0), vulnerablePacman2Cycles(0), 
 pacman1GhostsVulnerable(false), pacman2GhostsVulnerable(false)
 {
+	this->grilla = g;
 	this->window = w;
 	this->fondo = imageFondo;
 	this->gameOverImage = new Image("Images/gameOver.bmp");
@@ -44,8 +45,8 @@ pacman1GhostsVulnerable(false), pacman2GhostsVulnerable(false)
 
 void ScreenManager::createGhostsForPacman1(void)
 {
-	int ghostInitialX = (this->imageWidth * (this->grilla.getAncho() - 1)) / 2;
-	int ghostInitialY = (this->imageHeight * (this->grilla.getAlto() - 1)) / 2;
+	int ghostInitialX = (this->imageWidth * (this->grilla->getAncho() - 1)) / 2;
+	int ghostInitialY = (this->imageHeight * (this->grilla->getAlto() - 1)) / 2;
 	
 	this->pacman1Ghosts.add(new Ghost("Images/redGhost.bmp", "Images/brownVGhost.bmp", 
 		this->grilla, this->window->getHeight(), this->window->getWidth(),
@@ -72,8 +73,8 @@ void ScreenManager::createGhostsForPacman1(void)
 
 void ScreenManager::createGhostsForPacman2(void)
 {
-	int ghostInitialX = (this->imageWidth * (this->grilla.getAncho() - 1)) / 2;
-	int ghostInitialY = (this->imageHeight * (this->grilla.getAlto() - 1)) / 2;
+	int ghostInitialX = (this->imageWidth * (this->grilla->getAncho() - 1)) / 2;
+	int ghostInitialY = (this->imageHeight * (this->grilla->getAlto() - 1)) / 2;
 
 	this->pacman2Ghosts.add(new Ghost("Images/blueGhost.bmp","Images/greenVGhost.bmp", 
 		this->grilla, this->window->getHeight(), this->window->getWidth(),
@@ -281,7 +282,7 @@ void ScreenManager::startGame(void)
 bool ScreenManager::gameOver(void)
 {
 	// eventually this will also include whether all bonuses have been eaten
-	return (this->deadCycles >= 40 || (this->pacman1->getEatenBonus() + this->pacman2->getEatenBonus() == this->grilla.getCantidadBonus())) ;
+	return (this->deadCycles >= 40 || (this->pacman1->getEatenBonus() + this->pacman2->getEatenBonus() == this->grilla->getCantidadBonus())) ;
 }
 void ScreenManager::handleBonusEating(Pacman* pac, List<Ghost*>& ghosts, string bonus, bool isPacman1)
 {

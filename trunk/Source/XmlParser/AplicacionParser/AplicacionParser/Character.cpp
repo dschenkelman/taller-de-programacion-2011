@@ -7,12 +7,13 @@
 
 using namespace std;
 
-Character::Character(string pathTextura, Grilla& grilla, int h, int w, int x, int y,
+Character::Character(string pathTextura, Grilla* g, int h, int w, int x, int y,
 					 int xDir, int yDir, int speed, int imageHeight, int imageWidth):
 screenHeight(h), screenWidth(w), x(x), y(y), 
 xDirection(xDir), yDirection(yDir), speed(speed),
-grilla(grilla), imageHeight(imageHeight), imageWidth(imageWidth)
+grilla(g), imageHeight(imageHeight), imageWidth(imageWidth)
 {
+	this->grilla = g;
 	this->textura = new Image(pathTextura);
 	this->textura->resize(this->imageWidth - this->speed, this->imageHeight - this->speed);
 }
@@ -54,14 +55,14 @@ bool Character::isNextPositionValid(void)
 	int x2 = (nextX + width) / this->imageWidth;
 	int y2 = (nextY + height) / this->imageHeight;
 
-	if (x1 < 0 || x2 >= this->grilla.getAncho() || y1 < 0 || y2 >= this->grilla.getAlto())
+	if (x1 < 0 || x2 >= this->grilla->getAncho() || y1 < 0 || y2 >= this->grilla->getAlto())
 	{
 		return false;
 	}
-	Celda* c1 = this->grilla.getCelda(y1, x1);
-	Celda* c2 = this->grilla.getCelda(y2, x1);
-	Celda* c3 = this->grilla.getCelda(y1, x2);
-	Celda* c4 = this->grilla.getCelda(y2, x2);
+	Celda* c1 = this->grilla->getCelda(y1, x1);
+	Celda* c2 = this->grilla->getCelda(y2, x1);
+	Celda* c3 = this->grilla->getCelda(y1, x2);
+	Celda* c4 = this->grilla->getCelda(y2, x2);
 
 	Obstaculo* o1 = dynamic_cast<Obstaculo*>(c1);
 	Obstaculo* o2 = dynamic_cast<Obstaculo*>(c2);

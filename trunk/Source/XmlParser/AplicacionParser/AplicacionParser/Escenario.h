@@ -12,7 +12,7 @@ class Escenario
 	Textura textura;
 	std::string texturaFondo;
 	std::string nombre;
-	Grilla grilla;
+	Grilla* grilla;
 	bool tieneError;
 	List<std::string> validAttributes;
 	List<TipoBonus> tiposBonus;
@@ -34,7 +34,7 @@ public:
 	List<TipoBonus> getTiposBonus(void);
 	List<TipoObstaculo> getTiposObstaculos(void);
 	List<Textura> getTexturas(void);
-	Grilla& getGrilla(void);
+	Grilla* getGrilla(void);
 	std::string getNombre(void);
 	std::string getTexturaFondo(void);
 	bool hasError(void);

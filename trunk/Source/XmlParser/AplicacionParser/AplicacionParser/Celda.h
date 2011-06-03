@@ -20,6 +20,7 @@ public:
 	virtual Celda* copiar(void);
 	virtual ~Celda(void);
 	virtual Image* obtenerRepresentacion();
+	virtual void setearRepresentacion(Image*);
 	virtual Textura obtenerTextura();
 	virtual bool hasError(void);
 };

@@ -11,16 +11,16 @@ class Camino : public Celda
 	bool tieneError;
 	void populateValidAttributes(void);
 	bool validateAttributes(XmlElement& e);
-	Bonus bonus;
+	Bonus* bonus;
 	bool tieneBonus;
 	Image* imagen;
+	Camino(const Camino& other);
+	Camino& operator=(const Camino& other);
 public:
 	Camino(XmlElement& e);
 	Camino(int f, int c);
 	Camino(void);
-	Camino(const Camino& other);
-	Camino& operator=(const Camino& other);
-	Bonus& getBonus();
+	Bonus* getBonus();
 	bool hasBonus();
 	void removeBonus(void);
 	Celda* copiar(void);
@@ -28,5 +28,6 @@ public:
 	~Camino(void);
 	Textura obtenerTextura();
 	Image* obtenerRepresentacion();
+	void setearRepresentacion(Image*);
 	Image* borrarBonus();
 };
