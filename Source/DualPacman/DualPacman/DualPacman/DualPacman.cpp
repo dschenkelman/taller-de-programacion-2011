@@ -20,8 +20,11 @@ int main(int argc, char* argv[])
 	int height = 480;
 	Window* w = new Window("::Dual Pacman::", height, width);
 	
+	ParameterHolder* paramHolder = new ParameterHolder();
+	paramHolder->addParameter("width", "640");
+
 	// Actividad de Inicio
-	PresentationActivity* pActivity = new PresentationActivity(width, height);
+	PresentationActivity* pActivity = new PresentationActivity(paramHolder, width, height);
 	pActivity->init();
 	
 	// Seteo la actividad

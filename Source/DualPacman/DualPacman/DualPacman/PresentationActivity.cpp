@@ -7,18 +7,23 @@
 PresentationActivity::PresentationActivity(int width, int height):Activity(width, height){
 }
 
+PresentationActivity::PresentationActivity(ParameterHolder* params, int width, int height):Activity(params, width, height){
+}
+
 PresentationActivity::~PresentationActivity(){
 }
 
 
 void PresentationActivity::onLoad(){
-	
+
 	// cabecera
 	this->banner = new ImageView("Images/title-pacman.bmp");
 	this->banner->setX(0); this->banner->setY(0);
 
+	this->prueba = "hola";
+
 	// insertcoin
-	this->insertCoin = new RichTextView("Insert coin", RichTextView::NORMAL);
+	this->insertCoin = new RichTextView(this->prueba, RichTextView::NORMAL);
 	this->insertCoin->setX(40); this->insertCoin->setY(200);
 
 	// menu con flecha
@@ -43,6 +48,11 @@ Activity* PresentationActivity::notify(SDL_Event e){
 				case SDLK_RETURN:
 					nextActivity = new MenuActivity(this->getWidth(), this->getHeight());
 					break;
+				default:
+					this->prueba = this->prueba + "s";
+					RichTextView* f = new RichTextView(this->prueba, RichTextView::NORMAL);
+					f->setX(40); f->setY(200);
+					this->updateViewFromView(this->insertCoin, f);
 			}
 			break;
 	}
