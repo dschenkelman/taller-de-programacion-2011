@@ -23,7 +23,6 @@ Escenario::Escenario(XmlElement& e) : tieneError(false), texturaFondo(""), textu
 
 	this->populateValidAttributes();
 	this->tieneError = !this->validateAttributes(e);
-	Grilla miGrilla;
 
 	this->getTexturaFondoFromElement(e);
 
@@ -37,20 +36,20 @@ Escenario::Escenario(XmlElement& e) : tieneError(false), texturaFondo(""), textu
 		{
 			if (e.getChildren().at(i).getName() == "grilla")
 			{
-				this->grilla = Grilla(e.getChildren().at(i), tiposObstaculos, tiposBonus);
+				this->grilla = new Grilla(e.getChildren().at(i), tiposObstaculos, tiposBonus);
 			}
 		}
 	}
 	else
 	{
-		this->grilla = miGrilla;
+		// this->grilla = miGrilla;
 	}
 
 	this->validarTexturaFondoExiste(e.getStartLine());
 	this->verificarTexturasUtilizadas();
 }
 
-Grilla& Escenario::getGrilla()
+Grilla* Escenario::getGrilla()
 {
 	return grilla;
 }
@@ -83,10 +82,6 @@ List<TipoBonus> Escenario::getTiposBonus()
 List<TipoObstaculo> Escenario::getTiposObstaculos()
 {
 	return tiposObstaculos;
-}
-
-Escenario::~Escenario(void)
-{
 }
 
 //metodos privados
@@ -273,7 +268,7 @@ List<Textura> Escenario::obtenerTexturas(List<XmlElement>& listaElementos)
 
 bool Escenario::hasError(void)
 {
-	return tieneError || this->grilla.hasError();
+	return tieneError || this->grilla->hasError();
 }
 
 void Escenario::populateValidAttributes(void)
@@ -401,4 +396,9 @@ void Escenario::verificarTexturasUtilizadas()
 			Logger::getInstance()->logWarning(msg.str());
 		}
 	}
+}
+
+Escenario::~Escenario()
+{
+	delete this->grilla;
 }

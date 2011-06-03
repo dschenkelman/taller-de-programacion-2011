@@ -31,7 +31,7 @@ class Pacman : public Character
 	int normalBonusEaten;
 	int ghostKills;
 public:
-	Pacman(std::string pathTexturaAbierta, std::string pathTexturaCerrada, Grilla& grilla, 
+	Pacman(std::string pathTexturaAbierta, std::string pathTexturaCerrada, Grilla* grilla, 
 		int h, int w, int x, int y, int speed, int imageHeight, int imageWidth);
 	void handleKeyStroke(void);
 	void changeKeyboardMappings(SDLKey up, SDLKey down, SDLKey left, SDLKey right);

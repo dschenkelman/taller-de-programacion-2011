@@ -5,24 +5,8 @@
 //#include "vld.h"
 #include "ListTests.h"
 #include "ScreenManager.h"
-#include "LoggerTests.h"
 #include "XmlParser.h"
-#include "StackTests.h"
-#include "StringTests.h"
-#include "BonusTests.h"
-#include "XmlParserTest.h"
-#include "XmlElementTests.h"
-#include "TipoObstaculoTests.h"
-#include "TipoBonusTests.h"
-#include "ObstaculoTests.h"
-#include "TexturaTests.h"
-#include "CaminoTests.h"
-#include "CellMatrixTests.h"
-#include "GrillaTests.h"
-#include "EscenarioTests.h"
-#include "GrapherTests.h"
 #include "Image.h"
-#include "ImageTests.h"
 #include "Window.h"
 #include <iostream>
 #include "time.h"
@@ -33,20 +17,6 @@ using namespace std;
 #define _CRTDBG_MAP_ALLOC
 #include <stdlib.h>
 #include <crtdbg.h>
-
-
-void testLeaks(void){
-
-	cout<<"Test de Grapher"<<endl;
-	GrapherTests grapherTest;
-	grapherTest.run();
-	
-	SDL_Delay(1000);
-
-	printf( "Press ENTER to continue... " );
-
-	char c = getchar();
-}
 
 
 void printLeaks(int leaks)

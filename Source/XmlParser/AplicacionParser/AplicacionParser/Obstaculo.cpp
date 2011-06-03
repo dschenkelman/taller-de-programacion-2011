@@ -152,6 +152,11 @@ void Obstaculo::setError(void)
 	this->tieneError = true;
 }
 
+void Obstaculo::setearRepresentacion(Image* rep)
+{
+	this->imagen = rep;
+}
+
 Textura Obstaculo::obtenerTextura()
 {
 	//parameters not required

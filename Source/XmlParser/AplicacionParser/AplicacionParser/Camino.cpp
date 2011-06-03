@@ -56,8 +56,7 @@ Camino::Camino(XmlElement& e) : tieneBonus(false), tieneError(false)
 		
 		if(listaHijos.length() == 1)
 		{
-			Bonus b = Bonus(listaHijos.at(0));
-			bonus = b;
+			this->bonus =  new Bonus(listaHijos.at(0));
 			tieneBonus = true;
 		}
 
@@ -81,9 +80,9 @@ bool Camino::hasBonus()
 	return tieneBonus;
 }
 
-Bonus& Camino::getBonus()
+Bonus* Camino::getBonus()
 {
-	return bonus;
+	return this->bonus;
 }
 
 Camino::~Camino(void)
@@ -93,6 +92,7 @@ Camino::~Camino(void)
 		EL CAMINO NO BORRA SUS IMAGENES PORQUE EL CACHE LO HACE POR EL
 		delete(this->imagen);
 	}*/
+	delete this->bonus;
 }
 
 Image* Camino::obtenerRepresentacion()
@@ -105,11 +105,11 @@ Image* Camino::obtenerRepresentacion()
 		{
 			/*std::stringstream ss;
 			std::string repres;*/
-			TipoBonus tb = this->getBonus().getTipoBonus();
+			TipoBonus tb = this->bonus->getTipoBonus();
 			int red = tb.getTextura().getRed();
 			int green = tb.getTextura().getGreen();
 			int blue = tb.getTextura().getBlue();
-			this->imagen->superImpose(*(this->getBonus().obtenerRepresentacion()), red, green, blue, tb.getTextura().getDelta());
+			this->imagen->superImpose(*(this->bonus->obtenerRepresentacion()), red, green, blue, tb.getTextura().getDelta());
 			/*ss >> repres;*/
 		}
 	}
@@ -123,7 +123,7 @@ Image* Camino::borrarBonus()
 	if (this->hasBonus() && !(this->imagen->hasError()))
 	{
 		Image imagen("Images/texturas/camino.bmp");
-		TipoBonus tb = this->getBonus().getTipoBonus();
+		TipoBonus tb = this->getBonus()->getTipoBonus();
 		int red = tb.getTextura().getRed();
 		int green = tb.getTextura().getGreen();
 		int blue = tb.getTextura().getBlue();
@@ -131,11 +131,6 @@ Image* Camino::borrarBonus()
 		/*ss >> repres;*/
 	}
 	return this->imagen;
-}
-
-Camino::Camino(const Camino& other)
-{
-
 }
 
 Celda* Camino::copiar(void)
@@ -153,7 +148,7 @@ bool Camino::hasError(void)
 	bool bonusError = false;
 	if (this->tieneBonus)
 	{
-		bonusError = this->bonus.hasError();
+		bonusError = this->bonus->hasError();
 	}
 	return this->tieneError || bonusError;
 }
@@ -191,7 +186,7 @@ Textura Camino::obtenerTextura()
 	
 	if (this->hasBonus())
 	{
-		string nombreTexturaBonus = this->getBonus().getTipoBonus().getTextura().getNombre();
+		string nombreTexturaBonus = this->bonus->getTipoBonus().getTextura().getNombre();
 		textura.setNombre(textura.getNombre() + nombreTexturaBonus);
 	}
 
@@ -199,4 +194,9 @@ Textura Camino::obtenerTextura()
 }
 void Camino::removeBonus(void){
 	this->tieneBonus=false;
+}
+
+void Camino::setearRepresentacion(Image* rep)
+{
+	this->imagen = rep;
 }

@@ -9,7 +9,7 @@
 
 using namespace std;
 
-Ghost::Ghost(string pathTextura, string pathTexturaVulnerable, Grilla& grilla, int h, int w, 
+Ghost::Ghost(string pathTextura, string pathTexturaVulnerable, Grilla* grilla, int h, int w, 
 			 int x, int y, int speed, Pacman* pacman, int imageHeight, int imageWidth):
 Character(pathTextura, grilla, h, w, x, y, 0, 0, speed, imageHeight, imageWidth), pacman(pacman), 
 pathTextura(pathTextura), pathTexturaVulnerable(pathTexturaVulnerable),

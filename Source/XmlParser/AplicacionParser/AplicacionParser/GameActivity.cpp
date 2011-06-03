@@ -15,11 +15,11 @@ GameActivity::GameActivity(Escenario* escenario, int width, int height):Activity
 
 GameActivity::~GameActivity()
 {
-	delete this->fondo;
+	delete this->screenManager;
 	delete this->escenario;
+	delete this->fondo;
 	/*delete this->timeTitle;
 	delete this->pointsTitle;*/
-	delete this->screenManager;
 }
 
 
@@ -42,7 +42,7 @@ void GameActivity::onLoad(){
 	grapher.setVideoMode(this->getWidth());
 	this->fondo = grapher.draw(*this->escenario);
 
-	int posX = (grapher.getImageWidth() * this->escenario->getGrilla().getAncho())+10;
+	int posX = (grapher.getImageWidth() * this->escenario->getGrilla()->getAncho())+10;
 
 	// texto del tiempo
 	this->timeTitle = new RichTextView("Time", RichTextView::NORMAL);
@@ -53,7 +53,7 @@ void GameActivity::onLoad(){
 	this->pointsTitle->setX(posX); this->pointsTitle->setY(50);
 
 	// Creo un screenmanager para la logica del juego
-	this->screenManager = new ScreenManager(this, fondo, this->escenario->getGrilla(), grapher.getImageHeight(), grapher.getImageWidth());
+	this->screenManager = new ScreenManager(this, fondo, this->escenario->getGrilla(), grapher.getImageHeight(), grapher.getImageWidth(), this->period);
 
 	// los agrego a la pantalla
 	this->add(this->timeTitle);
@@ -83,6 +83,11 @@ Activity* GameActivity::notify(SDL_Event e){
 					
 			}
 			break;
+	}
+
+	if (this->screenManager->gameOver())
+	{
+		nextActivity = new MenuActivity(this->getWidth(), this->getHeight());
 	}
 
 	screenManager->updateScreen();
