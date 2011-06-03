@@ -29,7 +29,7 @@ GameActivity::~GameActivity()
 void GameActivity::onLoad(){
 
 	this->period = 1000.0 / 60;
-	
+	this->errorFound = false;	
 	char* fileName = "escenarioPacman.xml";
 	ifstream ifile(fileName);
 	if (ifile) 
@@ -114,8 +114,9 @@ void GameActivity::onLoad(){
 
 // En el update de esta actividad hago el update del juego
 void GameActivity::update(){
-	if(!this->errorFound)
+	if(!this->errorFound){
 		screenManager->updateScreen();
+	}
 }
 
 
@@ -137,9 +138,9 @@ Activity* GameActivity::notify(SDL_Event e){
 						{
 							nextActivity = new MenuActivity(this->getWidth(), this->getHeight());
 						}
-						//screenManager->updateScreen();
+						screenManager->updateScreen();
 					}
-					
+				
 			}
 			break;
 	}
