@@ -17,8 +17,8 @@ GameActivity::~GameActivity()
 {
 	delete this->fondo;
 	delete this->escenario;
-	delete this->timeTitle;
-	delete this->pointsTitle;
+	/*delete this->timeTitle;
+	delete this->pointsTitle;*/
 	delete this->screenManager;
 }
 

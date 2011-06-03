@@ -81,7 +81,7 @@ Activity* StatsActivity::notify(SDL_Event e){
 
 StatsActivity::~StatsActivity()
 {
-	delete this->arrowMenu;
+	/*delete this->arrowMenu;
 	delete this->title;
-	delete this->banner;
+	delete this->banner;*/
 }

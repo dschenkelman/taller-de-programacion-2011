@@ -15,8 +15,8 @@ PresentationActivity::PresentationActivity(ParameterHolder* parameters, int widt
 
 PresentationActivity::~PresentationActivity(void)
 {
-	delete this->banner;
-	delete this->arrowMenu;
+	/*delete this->banner;
+	delete this->arrowMenu;*/
 }
 
 

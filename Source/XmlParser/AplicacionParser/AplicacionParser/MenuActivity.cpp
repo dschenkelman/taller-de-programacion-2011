@@ -13,9 +13,9 @@ MenuActivity::MenuActivity(Escenario* escenario, int width, int height):Activity
 
 MenuActivity::~MenuActivity()
 {
-	delete this->banner;
+	/*delete this->banner;
 	delete this->title;
-	delete this->arrowMenu;
+	delete this->arrowMenu;*/
 }
 
 void MenuActivity::onLoad(){
