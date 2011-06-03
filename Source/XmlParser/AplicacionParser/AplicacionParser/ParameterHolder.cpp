@@ -1,13 +1,13 @@
 #include "stdafx.h"
 #include "ParameterHolder.h"
 
-void ParameterHolder::addParameter(std::string key, void *value){
+void ParameterHolder::addParameter(std::string key, std::string value){
 	Parameter* newParameter = new Parameter();
 	this->parameters->add(newParameter);
 }
 
-void* ParameterHolder::getParameter(std::string key){
-	void* toReturn = NULL;
+std::string ParameterHolder::getParameter(std::string key){
+	std::string toReturn = NULL;
 	bool found = false;
 	size_t pos = 0;
 	while(!found && pos < this->parameters->length()){

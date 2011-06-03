@@ -1,7 +1,7 @@
 #include "StdAfx.h"
 #include "View.h"
 
-int View::VERTICAL_ALIGN_CENTER = 1;
+//int View::VERTICAL_ALIGN_CENTER = 1;
 
 View::View():Image(0,0){
 }

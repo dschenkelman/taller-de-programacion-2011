@@ -6,7 +6,7 @@ class ParameterHolder{
 private:
 	List<Parameter*>* parameters;
 public:
-	void* getParameter(std::string key);
-	void addParameter(std::string key, void* value);
+	std::string getParameter(std::string key);
+	void addParameter(std::string key, std::string value);
 	~ParameterHolder();
 };

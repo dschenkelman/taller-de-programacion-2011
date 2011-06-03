@@ -5,6 +5,6 @@ std::string Parameter::getKey(){
 	return this->key;
 }
 
-void* Parameter::getValue(){
+std::string Parameter::getValue(){
 	return this->value;
 }

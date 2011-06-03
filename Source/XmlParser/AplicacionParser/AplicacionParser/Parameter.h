@@ -4,10 +4,10 @@
 class Parameter{
 private:
 	std::string key;
-	void* value;
+	std::string value;
 public:
 	std::string getKey();
-	void* getValue();
+	std::string getValue();
 	void setKey(std::string k);
-	void setValue(void* v);
+	void setValue(std::string v);
 };

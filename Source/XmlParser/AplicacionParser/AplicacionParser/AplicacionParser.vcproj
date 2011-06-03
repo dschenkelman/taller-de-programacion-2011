@@ -224,6 +224,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\database.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Escenario.cpp"
 				>
 			</File>
@@ -233,6 +237,10 @@
 			</File>
 			<File
 				RelativePath=".\GameActivity.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\gamelog.cpp"
 				>
 			</File>
 			<File
@@ -317,6 +325,10 @@
 			</File>
 			<File
 				RelativePath=".\PresentationActivity.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\query.cpp"
 				>
 			</File>
 			<File
@@ -412,6 +424,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\User.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\View.cpp"
 				>
 			</File>
@@ -490,6 +506,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\database.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Escenario.h"
 				>
 			</File>
@@ -499,6 +519,10 @@
 			</File>
 			<File
 				RelativePath=".\GameActivity.h"
+				>
+			</File>
+			<File
+				RelativePath=".\gamelog.h"
 				>
 			</File>
 			<File
@@ -590,6 +614,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\query.h"
+				>
+			</File>
+			<File
 				RelativePath=".\RankingByGamesPlayedActivity.h"
 				>
 			</File>
@@ -603,6 +631,10 @@
 			</File>
 			<File
 				RelativePath=".\RankingByWinsActivity.h"
+				>
+			</File>
+			<File
+				RelativePath=".\resource1.h"
 				>
 			</File>
 			<File
@@ -670,6 +702,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\User.h"
+				>
+			</File>
+			<File
 				RelativePath=".\View.h"
 				>
 			</File>
@@ -703,6 +739,31 @@
 			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav"
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
+			<File
+				RelativePath=".\AplicacionParser.rc"
+				>
+			</File>
+			<File
+				RelativePath=".\sqlite\sqlite3.c"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="0"
+						Detect64BitPortabilityProblems="false"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\sqlite\sqlite3.h"
+				>
+			</File>
+			<File
+				RelativePath=".\sqlite\sqlite3ext.h"
+				>
+			</File>
 		</Filter>
 		<File
 			RelativePath=".\ReadMe.txt"
