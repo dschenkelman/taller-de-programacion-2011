@@ -1,6 +1,5 @@
 #include "StdAfx.h"
 #include "PixelHelpers.h"
-#include "sdl.h"
 
 PixelHelpers::PixelHelpers(void)
 {

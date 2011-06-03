@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include "SDL.h"
+#include "sdl/SDL.h"
 #include "View.h"
 
 class RichTextView: public View{

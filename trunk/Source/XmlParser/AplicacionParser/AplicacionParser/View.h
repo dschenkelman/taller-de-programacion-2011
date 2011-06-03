@@ -19,6 +19,6 @@ public:
 	void setVerticalAlign(int value);
 	
 	// valores de la alineacion
-	static int VERTICAL_ALIGN_CENTER;
+	static const int VERTICAL_ALIGN_CENTER = 1;
 
 };

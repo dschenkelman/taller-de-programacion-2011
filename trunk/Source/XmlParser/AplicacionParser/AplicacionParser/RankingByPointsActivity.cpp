@@ -3,6 +3,7 @@
 #include "StatsActivity.h"
 #include "Activity.h"
 #include "DAO.h"
+#include <sstream>
 
 RankingByPointsActivity::RankingByPointsActivity(int width, int height):Activity(width, height){
 }
@@ -20,20 +21,31 @@ void RankingByPointsActivity::onLoad()
 	this->title->setVerticalAlign(View::VERTICAL_ALIGN_CENTER);
 
 	// datos
-	List<std::string> ranking = DAO().getRankingByPoints();
+	DAO dao("gamelog.sql");
+	query* query = dao.getRankingByPoints();
 	int userY = 200;
-	for(int i = 0; i < ranking.length(); i++)
+	
+	while(!query->next())
 	{
-		std::string str = ranking.at(i);
-		RichTextView* rtv = new RichTextView(str, RichTextView::NORMAL);
-		rtv->setX(100); rtv->setY(userY);
-		this->add(rtv);
-		userY += 50;
+		std::string name = query->getChars(1);
+		std::stringstream out;
+		out << query->getInt(0);
+		std::string points = out.str();
+		
+		RichTextView* rtvName = new RichTextView(name, RichTextView::NORMAL);
+		rtvName->setX(100); rtvName->setY(userY);
+		
+		RichTextView* rtvPoints = new RichTextView(points, RichTextView::NORMAL);
+		rtvPoints->setX(this->getWidth() - 120); rtvPoints->setY(userY + 100);
+
+		this->add(rtvName); this->add(rtvPoints);
+
+		userY += 20;
 	}
 
 	// menu con flecha
 	this->arrowMenu = new OptionArrowMenuView();
-	this->arrowMenu->setX(50); this->arrowMenu->setY(this->getHeight() - 200); 
+	this->arrowMenu->setX(50); this->arrowMenu->setY(this->getHeight() - 50); 
 	this->arrowMenu->addOption("return to menu");
 
 	// los agrego a la pantalla
@@ -59,11 +71,4 @@ Activity* RankingByPointsActivity::notify(SDL_Event e){
 	}
 
 	return nextActivity;
-}
-
-RankingByPointsActivity::~RankingByPointsActivity()
-{
-	/*delete this->banner;
-	delete this->title;
-	delete this->arrowMenu;*/
 }

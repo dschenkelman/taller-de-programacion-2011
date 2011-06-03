@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include "sdl.h"
+#include "sdl/sdl.h"
 #include <limits>
 
 class Image

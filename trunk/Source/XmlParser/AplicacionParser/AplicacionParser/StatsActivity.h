@@ -14,5 +14,4 @@ public:
 	void onLoad();
 	Activity* notify(SDL_Event e);
 	StatsActivity(int width, int height);
-	virtual ~StatsActivity();
 };
