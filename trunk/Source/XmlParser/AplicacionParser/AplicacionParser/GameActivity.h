@@ -13,6 +13,7 @@ private:
 	RichTextView* timeTitle;
 	Uint32 period;
 	ScreenManager* screenManager;
+	bool errorFound;
 
 public:
 	GameActivity(int width, int height);
