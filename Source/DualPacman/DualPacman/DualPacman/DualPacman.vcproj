@@ -211,6 +211,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\CreatePlayerActivity.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\DAO.cpp"
 				>
 			</File>
@@ -470,6 +474,10 @@
 			</File>
 			<File
 				RelativePath=".\CollisionHelper.h"
+				>
+			</File>
+			<File
+				RelativePath=".\CreatePlayerActivity.h"
 				>
 			</File>
 			<File
