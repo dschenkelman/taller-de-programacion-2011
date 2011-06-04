@@ -8,6 +8,7 @@
 #include "List.h"
 #include "Grilla.h"
 #include "Activity.h"
+#include "SoundManager.h"
 
 class ScreenManager
 {
@@ -24,6 +25,7 @@ class ScreenManager
 	Image* gameOverImage;
 	Pacman* pacman1;
 	Pacman* pacman2;
+	SoundManager* soundManager;
 	Uint32 period;
 	int vulnerablePacman1Cycles;
 	int vulnerablePacman2Cycles;

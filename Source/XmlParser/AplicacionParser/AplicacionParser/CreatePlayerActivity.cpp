@@ -85,6 +85,7 @@ Activity* CreatePlayerActivity::notify(SDL_Event e)
 						newRtvUsernameBox->setX(this->rtvUsernameBox->getX());
 						newRtvUsernameBox->setY(this->rtvUsernameBox->getY());
 						this->updateViewFromView(this->rtvUsernameBox, newRtvUsernameBox);
+						delete this->rtvUsernameBox;
 						this->rtvUsernameBox = newRtvUsernameBox;
 					}
 					
@@ -144,6 +145,7 @@ Activity* CreatePlayerActivity::notify(SDL_Event e)
 						newRtvUsernameBox->setX(this->rtvUsernameBox->getX());
 						newRtvUsernameBox->setY(this->rtvUsernameBox->getY());
 						this->updateViewFromView(this->rtvUsernameBox, newRtvUsernameBox);
+						delete this->rtvUsernameBox;
 						this->rtvUsernameBox = newRtvUsernameBox;
 					}
 				}
