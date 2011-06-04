@@ -260,10 +260,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\ListTests.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\Logger.cpp"
 				>
 			</File>
@@ -336,10 +332,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\StackTests.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\StatsActivity.cpp"
 				>
 			</File>
@@ -368,19 +360,11 @@
 				>
 			</File>
 			<File
-				RelativePath=".\StringTests.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\Textura.cpp"
 				>
 			</File>
 			<File
 				RelativePath=".\TipoBonus.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\TipoBonusTests.cpp"
 				>
 			</File>
 			<File

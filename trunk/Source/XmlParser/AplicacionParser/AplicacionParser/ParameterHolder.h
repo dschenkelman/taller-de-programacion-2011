@@ -4,7 +4,7 @@
 
 class ParameterHolder{
 private:
-	List<Parameter*>* parameters;
+	List<Parameter*> parameters;
 public:
 	// string parameters
 	std::string getParameter(std::string key);

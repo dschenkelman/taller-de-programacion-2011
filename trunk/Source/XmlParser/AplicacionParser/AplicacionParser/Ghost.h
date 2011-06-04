@@ -5,9 +5,11 @@
 #include "Pacman.h"
 #include <vector>
 #include <stack>
+#include "SoundManager.h"
 
 class Ghost : public Character
 {
+	SoundManager* soundManager;
 	Image* texturaVulnerable;
 	Image* texturaNoVulnerable;
 	Pacman* pacman;
@@ -33,7 +35,7 @@ class Ghost : public Character
 	bool isGoingThroughDoor(void);
 	bool isActive;
 public:
-	Ghost(std::string pathTextura, std::string texturaVulnerable,
+	Ghost(SoundManager* soundManager, std::string pathTextura, std::string texturaVulnerable,
 		Grilla* grilla, int h, int w, int x, int y, int speed, 
 		Pacman* pacman, int imageHeight, int imageWidth, bool inHq, int idiotCorner);
 	double getDistanceToPacman(int x, int y);
