@@ -76,10 +76,12 @@ void PresentationActivity::update(){
 		int newx = this->pc3d->getX()+5;
 		pc1->setX(newx); pc1->setY(this->getHeight()/4+10);
 		this->updateViewFromView(this->pc3d, pc1);
+		delete this->pc3d;
 		this->pc3d = pc1;
 	}else{
 		pc1->setX(-20); pc1->setY(this->getHeight()/4+10);
 		this->updateViewFromView(this->pc3d, pc1);
+		delete this->pc3d;
 		this->pc3d = pc1;
 	}
 
