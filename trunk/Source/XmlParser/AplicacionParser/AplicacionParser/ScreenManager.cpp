@@ -14,6 +14,7 @@ pacman1GhostsVulnerable(false), pacman2GhostsVulnerable(false),
 activatedGhosts(0), activationCycles(ghostActivationTime)
 {
 	this->soundManager = new SoundManager();
+	
 	this->grilla = g;
 	this->window = w;
 	this->fondo = imageFondo;
@@ -43,6 +44,9 @@ activatedGhosts(0), activationCycles(ghostActivationTime)
 	this->window->display(this->fondo, 0, 0, 0, 0, 0, -1);
 	SDL_BlitSurface(this->fondo->getSDLSurface(), NULL, this->window->getSDLSurface(), NULL);
 	SDL_Flip(this->window->getSDLSurface());
+
+	// 0 means infiinte loop
+	this->soundManager->playSound(this->soundManager->getBackgroundPath(), 0);
 }
 
 void ScreenManager::createGhostsForPacman1(void)
