@@ -7,8 +7,14 @@ private:
 	int y;
 	Image* img;
 	int verticalAlign;
+	int r;
+	int g;
+	int b;
+	int delta;
+	bool withAlpha;
 public:
 	View();
+	View(int r, int g, int b, int delta);
 	~View();
 	void setX(int x);
 	int getX(void);
@@ -17,6 +23,21 @@ public:
 	virtual void draw();
 	int getVerticalAlign(void);
 	void setVerticalAlign(int value);
+	int getRed(){
+		return this->r;
+	}
+	int getBlue(){
+		return this->b;
+	}
+	int getGreen(){
+		return this->r;
+	}
+	int getDelta(){
+		return this->delta;
+	}
+	bool hasAlpha(){
+		return this->withAlpha;
+	}
 	
 	// valores de la alineacion
 	static const int VERTICAL_ALIGN_CENTER = 1;

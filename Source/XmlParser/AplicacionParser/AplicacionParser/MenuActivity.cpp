@@ -26,6 +26,7 @@ void MenuActivity::onLoad(){
 	this->banner->setVerticalAlign(View::VERTICAL_ALIGN_CENTER);
 
 	// titulo
+	//this->title = new RichTextView("pacman", RichTextView::NORMAL, 0, 0, 0, 1);
 	this->title = new RichTextView("pacman", RichTextView::NORMAL);
 	this->title->setY(50);
 	this->title->setVerticalAlign(View::VERTICAL_ALIGN_CENTER);
