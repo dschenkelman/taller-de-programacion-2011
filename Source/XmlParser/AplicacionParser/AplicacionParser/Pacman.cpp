@@ -11,7 +11,7 @@ using namespace std;
 Pacman::Pacman(string pathTexturaAbierta, string pathTexturaCerrada, Grilla* grilla, int h,
 			   int w, int x, int y, int speed, int imageHeight, int imageWidth) : 
 Character(pathTexturaAbierta, grilla, h, w, x, y, 0, 0, speed, imageHeight, imageWidth), dir(Direction::RIGHT),
-rightKey(SDLK_RIGHT),leftKey(SDLK_LEFT), upKey(SDLK_UP), downKey(SDLK_DOWN), isDead(false),
+rightKey(SDLK_RIGHT),leftKey(SDLK_LEFT), upKey(SDLK_UP), downKey(SDLK_DOWN), isDead(false), keyPressed(Direction::CENTER), 
 score(0), normalBonusEaten(0), lastEatenBonus(""), ghostKills(0)
 {
 	this->texturaOpuesta = new Image(pathTexturaCerrada);
@@ -32,29 +32,87 @@ void Pacman::handleKeyStroke(void)
 	
 	if(Keys[this->leftKey]) 	
 	{
-		this->moveLeft();	
+		//if (this->keyPressed == Direction::BEGIN){
+		//	cout<<"KeyPressed LEFT"<<endl;
+			this->keyPressed = Direction::LEFT;
+		//}
+		//this->moveLeft();	
 	} 
 	else if(Keys[this->upKey]) 		
 	{ 
-		this->moveUp();
+	/*	if (this->keyPressed == Direction::BEGIN){
+			cout<<"KeyPressed UP"<<endl;
+	*/		this->keyPressed = Direction::UP;
+	//	}
+		//this->moveUp();
 	} 
 	else if(Keys[this->rightKey]) 	
 	{
-		this->moveRight();
+	/*	if (this->keyPressed == Direction::BEGIN){
+			cout<<"KeyPressed RIGHT"<<endl;
+	*/		this->keyPressed = Direction::RIGHT;
+	//	}
+		//this->moveRight();
 	} 
 	else if(Keys[this->downKey]) 	
 	{ 
-		this->moveDown();
+	/*	if (this->keyPressed == Direction::BEGIN){
+			cout<<"KeyPressed DOWN"<<endl;
+	*/		this->keyPressed = Direction::DOWN;
+	//	}
+		//this->moveDown();
 	}
 }
 
 void Pacman::updatePosition(void)
 {
+	
+	int x=Character::xDirection;
+	int y=Character::yDirection;
+
+	
+	cout<<"Key Pressed: "<<keyPressed<<endl;
+
+	switch(this->keyPressed){
+			case Direction::UP:
+				Character::moveUp();
+				cout<<"moveUP"<<endl;
+				break;
+			case Direction::DOWN:
+				cout<<"moveDown"<<endl;
+				Character::moveDown();
+				break;
+			case Direction::LEFT:
+				cout<<"moveLeft"<<endl;
+				Character::moveLeft();
+				break;
+			case Direction::RIGHT:
+				cout<<"moveRight"<<endl;
+				Character::moveRight();
+				break;
+		}
+	
 	if (!Character::isNextPositionValid())
 	{
-		Character::xDirection = 0;
-		Character::yDirection = 0;
+		cout<<"La posicion siguiente no es valida"<<endl;
+		Character::xDirection = x;
+		Character::yDirection = y;
+		
+		if (!Character::isNextPositionValid())
+		{
+			cout<<"La posicion original no es valida"<<endl;
+			Character::xDirection = 0;
+			Character::yDirection = 0;
+		}
+		
 	}
+	else
+	{
+		if (this->keyPressed != Direction::CENTER)
+			this->rotate(this->dir,this->keyPressed);
+		this->keyPressed=Direction::CENTER;
+	}
+
 	Image* aux = Character::textura;
 	Character::textura = this->texturaOpuesta;
 	this->texturaOpuesta = aux;
@@ -69,93 +127,25 @@ Pacman::~Pacman(void)
 void Pacman::moveLeft(void)
 {
 	Character::moveLeft();
-	switch(this->dir)
-	{
-		case Direction::DOWN:
-			Character::textura->rotate(-90 ,0);
-			this->texturaOpuesta->rotate(-90, 0);
-			break;
-		case Direction::UP:
-			Character::textura->rotate(90 ,0);
-			this->texturaOpuesta->rotate(90, 0);
-			break;
-		case Direction::RIGHT:
-			Character::textura->rotate(180 ,0);
-			this->texturaOpuesta->rotate(180, 0);
-			break;
-		default:
-			break;
-	}
-	this->dir = Direction::LEFT;
+	this->rotate(this->dir,Direction::LEFT);
 }
 
 void Pacman::moveRight(void)
 {
 	Character::moveRight();
-	switch(this->dir)
-	{
-		case Direction::DOWN:
-			Character::textura->rotate(90 ,0);
-			this->texturaOpuesta->rotate(90, 0);
-			break;
-		case Direction::LEFT:
-			Character::textura->rotate(180 ,0);
-			this->texturaOpuesta->rotate(180, 0);
-			break;
-		case Direction::UP:
-			Character::textura->rotate(-90 ,0);
-			this->texturaOpuesta->rotate(-90, 0);
-			break;
-		default:
-			break;
-	}
-	this->dir = Direction::RIGHT;
+	this->rotate(this->dir,Direction::RIGHT);
 }
 
 void Pacman::moveDown(void)
 {
 	Character::moveDown();
-	switch(this->dir)
-	{
-		case Direction::RIGHT:
-			Character::textura->rotate(-90 ,0);
-			this->texturaOpuesta->rotate(-90, 0);
-			break;
-		case Direction::LEFT:
-			Character::textura->rotate(90 ,0);
-			this->texturaOpuesta->rotate(90, 0);
-			break;
-		case Direction::UP:
-			Character::textura->rotate(180 ,0);
-			this->texturaOpuesta->rotate(180, 0);
-			break;
-		default:
-			break;
-	}
-	this->dir = Direction::DOWN;
+	this->rotate(this->dir,Direction::DOWN);
 }
 
 void Pacman::moveUp(void)
 {	
 	Character::moveUp();
-	switch(this->dir)
-	{
-		case Direction::DOWN:
-			Character::textura->rotate(180 ,0);
-			this->texturaOpuesta->rotate(180, 0);
-			break;
-		case Direction::LEFT:
-			Character::textura->rotate(-90 ,0);
-			this->texturaOpuesta->rotate(-90, 0);
-			break;
-		case Direction::RIGHT:
-			Character::textura->rotate(90 ,0);
-			this->texturaOpuesta->rotate(90, 0);
-			break;
-		default:
-			break;
-	}
-	this->dir = Direction::UP;
+	this->rotate(this->dir,Direction::UP);
 }
 
 void Pacman::kill(void)
@@ -280,3 +270,120 @@ int Pacman::getGhostKills(void)
 {
 	return this->ghostKills;
 }
+
+void Pacman::rotate(Direction current, Direction next){
+	
+	if (current == next || next == Direction::CENTER)
+		return;
+	cout<<"A rotar de "<<current<<" a "<<next<<endl;
+
+	switch (current){
+		case Direction::UP:
+			this->rotateFromUp(next);
+			break;
+		case Direction::DOWN:
+			this->rotateFromDown(next);
+			break;
+		case Direction::LEFT:
+			this->rotateFromLeft(next);
+			break;
+		case Direction::RIGHT:
+			this->rotateFromRight(next);
+			break;
+	}
+}
+
+
+void Pacman::rotateFromUp( Direction next){
+
+	cout<<"Rotate from UP: "<<next<<endl;
+	switch(next)
+	{
+		case Direction::DOWN:
+			Character::textura->rotate(180 ,0);
+			this->texturaOpuesta->rotate(180, 0);
+			break;
+		case Direction::LEFT:
+			Character::textura->rotate(90 ,0);
+			this->texturaOpuesta->rotate(90, 0);
+			break;
+		case Direction::RIGHT:
+			Character::textura->rotate(-90 ,0);
+			this->texturaOpuesta->rotate(-90, 0);
+			break;
+		default:
+			break;
+	}
+	this->dir =next;
+}
+
+void Pacman::rotateFromDown( Direction next){
+
+	cout<<"Rotate from Down: "<<next<<endl;
+	switch(next)
+	{
+		case Direction::RIGHT:
+			Character::textura->rotate(90 ,0);
+			this->texturaOpuesta->rotate(90, 0);
+			break;
+		case Direction::LEFT:
+			Character::textura->rotate(-90 ,0);
+			this->texturaOpuesta->rotate(-90, 0);
+			break;
+		case Direction::UP:
+			Character::textura->rotate(180 ,0);
+			this->texturaOpuesta->rotate(180, 0);
+			break;
+		default:
+			break;
+	}
+	this->dir =next;
+}
+
+void Pacman::rotateFromLeft( Direction next){
+
+	cout<<"Rotate from Left: "<<next<<endl;
+	switch(next)
+	{
+		case Direction::DOWN:
+			Character::textura->rotate(90 ,0);
+			this->texturaOpuesta->rotate(90, 0);
+			break;
+		case Direction::UP:
+			Character::textura->rotate(-90 ,0);
+			this->texturaOpuesta->rotate(-90, 0);
+			break;
+		case Direction::RIGHT:
+			Character::textura->rotate(180 ,0);
+			this->texturaOpuesta->rotate(180, 0);
+			break;
+		default:
+			break;
+	}
+	this->dir =  next;
+}
+
+void Pacman::rotateFromRight( Direction next){
+
+	cout<<"Rotate from Right: "<<next<<endl;
+
+	switch(next)
+	{
+		case Direction::DOWN:
+			Character::textura->rotate(-90 ,0);
+			this->texturaOpuesta->rotate(-90, 0);
+			break;
+		case Direction::LEFT:
+			Character::textura->rotate(180 ,0);
+			this->texturaOpuesta->rotate(180, 0);
+			break;
+		case Direction::UP:
+			Character::textura->rotate(90 ,0);
+			this->texturaOpuesta->rotate(90, 0);
+			break;
+		default:
+			break;
+	}
+	this->dir =next;
+}
+

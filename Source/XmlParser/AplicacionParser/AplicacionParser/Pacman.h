@@ -12,7 +12,8 @@ class Pacman : public Character
 		RIGHT,
 		LEFT,
 		UP,
-		DOWN
+		DOWN,
+		CENTER
 	};
 	Image* texturaOpuesta;
 	Direction dir;
@@ -20,6 +21,9 @@ class Pacman : public Character
 	SDLKey downKey;
 	SDLKey leftKey;
 	SDLKey rightKey;
+
+	Direction keyPressed;
+
 	bool isDead;
 	virtual void moveLeft(void);
 	virtual void moveRight(void);
@@ -30,6 +34,11 @@ class Pacman : public Character
 	int score;
 	int normalBonusEaten;
 	int ghostKills;
+	void rotate(Direction current, Direction next);
+	void rotateFromUp( Direction next);
+	void rotateFromDown( Direction next);
+	void rotateFromLeft( Direction next);
+	void rotateFromRight( Direction next);
 public:
 	Pacman(std::string pathTexturaAbierta, std::string pathTexturaCerrada, Grilla* grilla, 
 		int h, int w, int x, int y, int speed, int imageHeight, int imageWidth);
