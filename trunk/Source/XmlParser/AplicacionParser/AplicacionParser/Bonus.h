@@ -12,6 +12,8 @@ class Bonus
 	List<std::string> validAttributes;
 	std::string tipo;
 	TipoBonus tipoBonus;
+	double frecuencia;
+	int duracion;
 public:
 	Bonus(void);
 	Bonus(XmlElement& e);
