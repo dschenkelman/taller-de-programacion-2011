@@ -11,6 +11,7 @@
 #include <iostream>
 #include "time.h"
 #include "PresentationActivity.h"
+#include "ParameterHolder.h"
 using namespace std;
 
 //useful to detect memory leaks
@@ -40,6 +41,11 @@ int execute(int argc, char* argv[])
 	int height = ((videoMode * 3) / 4);
 	Window* w = new Window("DualPacman", height, width);
 
+	ParameterHolder* parameters = new ParameterHolder();
+	parameters->addParameter("fileName",fileName);
+	parameters->addIntParameter("winWidth", width);
+	parameters->addIntParameter("winHeight", height);
+
 	// Actividad de Inicio
 	PresentationActivity* pActivity = new PresentationActivity(width, height);
 	pActivity->init();
@@ -55,6 +61,7 @@ int execute(int argc, char* argv[])
 	// Inicio manejo de eventos
 	w->init();				
 
+	delete parameters;
 	delete w;
 	
 	return 0;
