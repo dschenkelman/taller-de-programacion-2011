@@ -23,4 +23,5 @@ public:
 	void onLoad();
 	Activity* notify(SDL_Event e);
 	~CreatePlayerActivity(void);
+	static const int MAX_LENGHT = 5;
 };

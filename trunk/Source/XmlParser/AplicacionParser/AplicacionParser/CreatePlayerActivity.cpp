@@ -37,11 +37,11 @@ void CreatePlayerActivity::onLoad()
 	rtvPass->setX((this->getWidth()/2) - 200); rtvPass->setY(260);
 
 	//this->rtvUsernameBox = new RichTextView(this->name, RichTextView::NORMAL);
-	this->rtvUsernameBox = new InputTextView(4);
+	this->rtvUsernameBox = new InputTextView("", this->MAX_LENGHT);
 	this->rtvUsernameBox->setX((this->getWidth()/2) - 20); this->rtvUsernameBox->setY(200);
 
 	//this->rtvPassBox = new RichTextView(this->passView, RichTextView::NORMAL);
-	this->rtvPassBox = new InputTextView(4);
+	this->rtvPassBox = new InputTextView("", this->MAX_LENGHT);
 	this->rtvPassBox->setX((this->getWidth()/2) - 20); this->rtvPassBox->setY(260);
 
 	this->arrowMenu = new OptionArrowMenuView();
@@ -81,7 +81,7 @@ Activity* CreatePlayerActivity::notify(SDL_Event e)
 					if(this->name.size() > 0)
 					{
 						this->name.erase(this->name.size()-1, 1);
-						RichTextView* newRtvUsernameBox = new RichTextView(this->name, RichTextView::NORMAL);
+						RichTextView* newRtvUsernameBox = new InputTextView(this->name, this->MAX_LENGHT);
 						newRtvUsernameBox->setX(this->rtvUsernameBox->getX());
 						newRtvUsernameBox->setY(this->rtvUsernameBox->getY());
 						this->updateViewFromView(this->rtvUsernameBox, newRtvUsernameBox);
@@ -96,7 +96,7 @@ Activity* CreatePlayerActivity::notify(SDL_Event e)
 					{
 						this->pass.erase(this->pass.size()-1, 1);
 						this->passView.erase(this->passView.size()-1, 1);	
-						RichTextView* newRtvPassBox = new RichTextView(this->passView, RichTextView::NORMAL);
+						RichTextView* newRtvPassBox = new InputTextView(this->passView, this->MAX_LENGHT);
 						newRtvPassBox->setX(this->rtvPassBox->getX());
 						newRtvPassBox->setY(this->rtvPassBox->getY());
 						this->updateViewFromView(this->rtvPassBox, newRtvPassBox);
@@ -136,10 +136,10 @@ Activity* CreatePlayerActivity::notify(SDL_Event e)
 			{
 				if(this->usernameBoxActive)
 				{
-					if(this->name.size() < 5)
+					if(this->name.size() < this->MAX_LENGHT)
 					{
 						this->name += letra;
-						RichTextView* newRtvUsernameBox = new RichTextView(this->name, RichTextView::NORMAL);
+						RichTextView* newRtvUsernameBox = new InputTextView(this->name, this->MAX_LENGHT);
 						newRtvUsernameBox->setX(this->rtvUsernameBox->getX());
 						newRtvUsernameBox->setY(this->rtvUsernameBox->getY());
 						this->updateViewFromView(this->rtvUsernameBox, newRtvUsernameBox);
@@ -151,7 +151,7 @@ Activity* CreatePlayerActivity::notify(SDL_Event e)
 				{
 					this->pass += letra;
 					this->passView += "&atrsk;";
-					RichTextView* newRtvPassBox = new RichTextView(this->passView, RichTextView::NORMAL);
+					RichTextView* newRtvPassBox = new InputTextView(this->passView, this->MAX_LENGHT);
 					newRtvPassBox->setX(this->rtvPassBox->getX());
 					newRtvPassBox->setY(this->rtvPassBox->getY());
 					this->updateViewFromView(this->rtvPassBox, newRtvPassBox);
