@@ -7,6 +7,7 @@
 #include <iostream>
 #include "XmlParser.h"
 #include <sstream>
+#include <algorithm>
 
 GameActivity::GameActivity(int width, int height):Activity(width, height), points1(0), points2(0), xCarteles(0)
 {
@@ -190,7 +191,14 @@ void GameActivity::updateScoreBoard(void)
 		this->points1 = pacman1Score;
 		stringstream ss;//create a stringstream
 		ss << pacman1Score;//add number to the stream
-		RichTextView* updatedPoints1View = new RichTextView(ss.str(), RichTextView::NORMAL);
+		string score  = ss.str();
+		
+		if (score.at(0) == '-')
+		{
+			score = "&mdash;" + score.substr(1);
+		}
+
+		RichTextView* updatedPoints1View = new RichTextView(score, RichTextView::NORMAL);
 		updatedPoints1View->setX(this->xCarteles); updatedPoints1View->setY(75);
 
 		this->updateViewFromView(this->points1View, updatedPoints1View);
@@ -204,7 +212,15 @@ void GameActivity::updateScoreBoard(void)
 		this->points2 = pacman2Score;
 		stringstream ss;//create a stringstream
 		ss << pacman2Score;//add number to the stream
-		RichTextView* updatedPoints2View = new RichTextView(ss.str(), RichTextView::NORMAL);
+
+		string score  = ss.str();
+
+		if (score.at(0) == '-')
+		{
+			score = "&mdash;" + score.substr(1);
+		}
+
+		RichTextView* updatedPoints2View = new RichTextView(score, RichTextView::NORMAL);
 		updatedPoints2View->setX(this->xCarteles); updatedPoints2View->setY(125);
 
 		this->updateViewFromView(this->points2View, updatedPoints2View);
