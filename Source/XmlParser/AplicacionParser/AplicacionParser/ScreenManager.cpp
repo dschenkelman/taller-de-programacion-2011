@@ -211,7 +211,7 @@ void ScreenManager::updateGhostsActivation(void)
 	this->activationCycles++;
 	int milliseconds = this->activationCycles * period;
 
-	if (milliseconds >= this->ghostActivationTime && this->activatedGhosts < 4)
+	if (milliseconds >= this->ghostActivationTime && this->activatedGhosts < this->pacman1Ghosts.length())
 	{
 		this->activationCycles = 0;
 		this->pacman1Ghosts.at(this->activatedGhosts)->setIsActive(true);

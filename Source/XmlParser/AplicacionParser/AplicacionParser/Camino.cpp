@@ -14,7 +14,7 @@ Camino::Camino(int f, int c) : Celda(f, c), tieneBonus(false), tieneError(false)
 
 Camino::Camino(XmlElement& e) : tieneBonus(false), tieneError(false)
 {
-	this->bonus == NULL;
+	this->bonus = NULL;
 	this->imagen=NULL;
 	this->populateValidAttributes();
 	this->tieneError = !this->validateAttributes(e);
