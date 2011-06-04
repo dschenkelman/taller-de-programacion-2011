@@ -4,6 +4,7 @@
 #include "Character.h"
 #include "Pacman.h"
 #include <vector>
+#include <stack>
 
 class Ghost : public Character
 {
@@ -12,6 +13,10 @@ class Ghost : public Character
 	Pacman* pacman;
 	static const int pacmanKillDelta = 5;
 	bool isVulnerable;
+	bool idiotMode;
+	int moveHistory[4];
+	int moveHistoryPos;
+	int idiotModeTimeout;
 	std::string pathTextura;
 	std::string pathTexturaVulnerable;
 	int originalSpeed;
@@ -32,10 +37,12 @@ public:
 		Pacman* pacman, int imageHeight, int imageWidth, bool inHq);
 	double getDistanceToPacman(int x, int y);
 	double getDistanceToLeaveHeadquarters(int x, int y);
+	double getDistanceToCorner(int x, int y);
 	void checkPacmanCollision(void);
 	void comeBackToLife(void);
 	void setIsVulnerable(bool vulnerable);
 	void setIsActive(bool value);
 	virtual void updatePosition();
+	void rotateLeft(void);
 	~Ghost(void);
 };
