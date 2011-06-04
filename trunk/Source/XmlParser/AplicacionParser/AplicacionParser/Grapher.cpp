@@ -21,13 +21,12 @@ Grapher::~Grapher()
 	for (this->iter = this->imageCache.begin(); this->iter != this->imageCache.end(); this->iter++) {
 		delete(this->iter->second);
 	}
-
-	delete this->fondo;
 }
 
 Image* Grapher::draw(Escenario& escenario)
 {
-	Image *imagePtr;
+	Image* fondo;
+	Image* imagePtr;
 	this->error = false;
 	Grilla* grilla = escenario.getGrilla();
 
@@ -35,7 +34,7 @@ Image* Grapher::draw(Escenario& escenario)
 	std::cout << "Escenario: "+escenario.getNombre()+" \n";
 
 	Image texturaFondo(escenario.getTextura().getPath());
-	this->fondo = new Image(windowWidth, windowHeight);
+	fondo = new Image(windowWidth, windowHeight);
 		
 	if (!texturaFondo.hasError())
 	{
@@ -45,7 +44,7 @@ Image* Grapher::draw(Escenario& escenario)
 		Uint32 alphaPixel = t.getRed() | t.getGreen() << 8 | t.getBlue() << 16;
 		texturaFondo.rotate(t.getRotation(), alphaPixel);
 		texturaFondo.resize(windowWidth, windowHeight);
-		this->fondo->display(&texturaFondo, 0, 0, 0, 0, 0, -1);
+		fondo->display(&texturaFondo, 0, 0, 0, 0, 0, -1);
 	}
 	else
 	{
@@ -88,7 +87,7 @@ Image* Grapher::draw(Escenario& escenario)
 			//imagen=*imagePtr;
 			if (!(imagePtr->hasError()))
 			{
-				this->fondo->display(imagePtr, imageWidth * j, imageHeight * i, t.getRed(), t.getGreen(), t.getBlue(), t.getDelta());
+				fondo->display(imagePtr, imageWidth * j, imageHeight * i, t.getRed(), t.getGreen(), t.getBlue(), t.getDelta());
 			}
 			else
 			{
@@ -99,7 +98,7 @@ Image* Grapher::draw(Escenario& escenario)
 		}
 	}
 
-	return this->fondo;
+	return fondo;
 }
 
 void  Grapher::setVideoMode(int mode){

@@ -14,7 +14,6 @@ private:
 	std::map<std::string, Image *> imageCache;  
 	std::map<std::string, Image *>::iterator iter;
 	bool error;
-	Image* fondo;
 public:
 	Image* draw(Escenario& escenario);
 	void setVideoMode(int mode);

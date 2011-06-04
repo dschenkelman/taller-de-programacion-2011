@@ -24,7 +24,7 @@ GameActivity::~GameActivity()
 	{
 		delete this->screenManager;
 		delete this->escenario;
-		// delete this->fondo; => esto hay que ver donde se esta borrando! ahora tira puntero erroneo
+		delete this->fondo;
 		/*delete this->timeTitle;
 		delete this->pointsTitle;*/
 	}
@@ -81,7 +81,7 @@ void GameActivity::onLoad(){
 				this->points2View->setX(this->xCarteles); this->points2View->setY(125);
 
 				// Creo un screenmanager para la logica del juego
-				this->screenManager = new ScreenManager(this, fondo, this->escenario->getGrilla(), grapher.getImageHeight(), grapher.getImageWidth(), this->period);
+				this->screenManager = new ScreenManager(this, this->fondo, this->escenario->getGrilla(), grapher.getImageHeight(), grapher.getImageWidth(), this->period);
 
 				// los agrego a la pantalla
 				this->add(this->timeTitle);
@@ -135,7 +135,8 @@ void GameActivity::onLoad(){
 
 
 // En el update de esta actividad hago el update del juego
-void GameActivity::update(){
+void GameActivity::update()
+{
 	if(!this->errorFound)
 	{
 		screenManager->updateScreen();
