@@ -27,4 +27,5 @@ public:
 	void display(Image* image, int x, int y, int red, int blue, int green, int delta);
 	void display(Image* image, int x, int y, int width, int height);
 	Escenario* getEscenario();
+	void setBackgroundImage(std::string uri);
 };

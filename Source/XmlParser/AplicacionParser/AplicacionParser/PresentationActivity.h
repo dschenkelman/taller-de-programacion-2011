@@ -8,7 +8,8 @@ class PresentationActivity : public Activity {
 private:
 	ImageView* banner;
 	RichTextView* pressEnter;
-
+	ImageView* pc3d;
+	int clock;
 public:
 	PresentationActivity(int width, int height);
 	PresentationActivity(Escenario* escenario, int width, int height);
@@ -16,4 +17,5 @@ public:
 	virtual ~PresentationActivity();
 	void onLoad();
 	Activity* notify(SDL_Event e);
+	void update();
 };

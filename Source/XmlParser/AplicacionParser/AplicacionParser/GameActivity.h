@@ -21,6 +21,9 @@ private:
 	int points1;
 	int points2;
 	void updateScoreBoard(void);
+	bool loaded;
+	void loadGame(void);
+	RichTextView* loadingTxt;
 public:
 	GameActivity(int width, int height);
 	GameActivity(Escenario* escenario, int width, int height);
