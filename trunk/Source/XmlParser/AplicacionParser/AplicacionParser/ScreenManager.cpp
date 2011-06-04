@@ -278,10 +278,12 @@ void ScreenManager::handleBonusEating(Pacman* pac, List<Ghost*>& ghosts, string 
 		if (isPacman1)
 		{
 			this->pacman1GhostsVulnerable = true;
+			vulnerablePacman1Cycles = 0;
 		}
 		else
 		{
 			this->pacman2GhostsVulnerable = true;
+			vulnerablePacman2Cycles = 0;
 		}
 
 		return;
