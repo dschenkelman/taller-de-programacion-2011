@@ -12,6 +12,7 @@ class SoundManager
 	static const int AUDIO_BUFFERS = 2048;
 	std::map<std::string, Mix_Chunk*> audioChunks; 
 	std::map<std::string, int> audioChannels; 
+	std::string backgroundSound;
 	std::string eatSound;
 	std::string eatGhostSound;
 	void loadPacmanSounds(void);
@@ -20,6 +21,7 @@ public:
 	SoundManager(void);
 	std::string getEatPath();
 	std::string getEatGhostPath();
+	std::string getBackgroundPath();
 	void loadSound(std::string path);
 	void playSound(std::string path, int timesToPlay);
 	~SoundManager(void);

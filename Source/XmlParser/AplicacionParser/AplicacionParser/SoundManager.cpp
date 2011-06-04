@@ -5,7 +5,8 @@
 
 using namespace std;
 
-SoundManager::SoundManager(void) : lastChannel(0), eatSound("sounds/eat.wav"), eatGhostSound("sounds/eatGhost.wav")
+SoundManager::SoundManager(void) : lastChannel(0), 
+eatSound("sounds/eat.wav"), eatGhostSound("sounds/eatGhost.wav"), backgroundSound("sounds/siren.wav")
 {
 	if(Mix_OpenAudio(AUDIO_RATE, AUDIO_FORMAT, AUDIO_CHANNELS, AUDIO_BUFFERS) != 0) 
 	{
@@ -19,6 +20,7 @@ SoundManager::SoundManager(void) : lastChannel(0), eatSound("sounds/eat.wav"), e
 
 void SoundManager::loadPacmanSounds()
 {
+	this->loadSound(this->backgroundSound);
 	this->loadSound(this->eatSound);
 	this->loadSound(this->eatGhostSound);
 }
@@ -31,6 +33,11 @@ std::string SoundManager::getEatPath(void)
 std::string SoundManager::getEatGhostPath(void)
 {
 	return this->eatGhostSound;
+}
+
+std::string SoundManager::getBackgroundPath(void)
+{
+	return this->backgroundSound;
 }
 
 void SoundManager::loadSound(string path)
@@ -89,3 +96,4 @@ SoundManager::~SoundManager(void)
 
 	Mix_CloseAudio();
 }
+
