@@ -824,9 +824,9 @@
 	<TIPOBONUS nombre="alimentoEspecial" textura="alimentoEspecial"/>
   </TIPOSBONUS>
   <TEXTURAS>
-	<TEXTURA nombre="Fondo" path="Images\texturaFondo.bmp"/>
+	<TEXTURA nombre="Fondo" path="Images/texturaFondo.bmp"/>
 	<TEXTURA nombre="ladrillo" path="Images/ladrillo.bmp"/>
-	<TEXTURA nombre="alimento" path="Images\bonus.bmp" alpha="#FFFFFF"/>	
-	<TEXTURA nombre="alimentoEspecial" path="Images\alimentoEspecial.bmp" alpha="#FFFFFF"/>
+	<TEXTURA nombre="alimento" path="Images/bonus.bmp" alpha="#FFFFFF"/>	
+	<TEXTURA nombre="alimentoEspecial" path="Images/alimentoEspecial.bmp" alpha="#FFFFFF"/>
   </TEXTURAS>
   </ESCENARIO>
