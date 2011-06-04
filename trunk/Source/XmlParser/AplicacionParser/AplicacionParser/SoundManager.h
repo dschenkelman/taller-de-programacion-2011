@@ -24,5 +24,6 @@ public:
 	std::string getBackgroundPath();
 	void loadSound(std::string path);
 	void playSound(std::string path, int timesToPlay);
+	void pauseSound(std::string path);
 	~SoundManager(void);
 };
