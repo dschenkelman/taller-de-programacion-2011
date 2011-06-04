@@ -5,7 +5,7 @@
 
 using namespace std;
 
-SoundManager::SoundManager(void) : eatSound("sounds/eat.wav"), eatGhostSound("sounds/eatGhost.wav")
+SoundManager::SoundManager(void) : lastChannel(0), eatSound("sounds/eat.wav"), eatGhostSound("sounds/eatGhost.wav")
 {
 	if(Mix_OpenAudio(AUDIO_RATE, AUDIO_FORMAT, AUDIO_CHANNELS, AUDIO_BUFFERS) != 0) 
 	{
@@ -46,6 +46,9 @@ void SoundManager::loadSound(string path)
 	}
 
 	this->audioChunks[path] = audioChunk;
+	this->audioChannels[path] = this->lastChannel;
+
+	this->lastChannel++;
 }
 
 void SoundManager::playSound(string path, int timesToPlay)
