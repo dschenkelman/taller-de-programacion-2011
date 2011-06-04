@@ -95,11 +95,12 @@ Activity* CreatePlayerActivity::notify(SDL_Event e)
 					if(this->pass.size() > 0)
 					{
 						this->pass.erase(this->pass.size()-1, 1);
-						this->passView.erase(this->passView.size()-1, 1);	
+						this->passView.erase(this->passView.size()-7, 7);	
 						RichTextView* newRtvPassBox = new InputTextView(this->passView, this->MAX_LENGHT);
 						newRtvPassBox->setX(this->rtvPassBox->getX());
 						newRtvPassBox->setY(this->rtvPassBox->getY());
 						this->updateViewFromView(this->rtvPassBox, newRtvPassBox);
+						this->rtvPassBox = newRtvPassBox;
 					}
 
 				}
