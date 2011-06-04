@@ -5,6 +5,7 @@
 #include "MenuActivity.h"
 #include "ExistingUsernameActivity.h"
 #include <sstream>
+#include "InputTextView.h"
 
 CreatePlayerActivity::CreatePlayerActivity(int width, int height):Activity(width, height)
 {
@@ -30,16 +31,18 @@ void CreatePlayerActivity::onLoad()
 
 	// contenido
 	RichTextView* rtvUsername = new RichTextView("Username", RichTextView::NORMAL);
-	rtvUsername->setX((this->getWidth()/2) - 116); rtvUsername->setY(200);
+	rtvUsername->setX((this->getWidth()/2) - 200); rtvUsername->setY(200);
 
 	RichTextView* rtvPass = new RichTextView("Password", RichTextView::NORMAL);
-	rtvPass->setX((this->getWidth()/2) - 116); rtvPass->setY(260);
+	rtvPass->setX((this->getWidth()/2) - 200); rtvPass->setY(260);
 
-	this->rtvUsernameBox = new RichTextView(this->name, RichTextView::NORMAL);
-	this->rtvUsernameBox->setX((this->getWidth()/2) - 20); this->rtvUsernameBox->setY(220);
+	//this->rtvUsernameBox = new RichTextView(this->name, RichTextView::NORMAL);
+	this->rtvUsernameBox = new InputTextView(4);
+	this->rtvUsernameBox->setX((this->getWidth()/2) - 20); this->rtvUsernameBox->setY(200);
 
-	this->rtvPassBox = new RichTextView(this->passView, RichTextView::NORMAL);
-	this->rtvPassBox->setX((this->getWidth()/2) - 20); this->rtvPassBox->setY(280);
+	//this->rtvPassBox = new RichTextView(this->passView, RichTextView::NORMAL);
+	this->rtvPassBox = new InputTextView(4);
+	this->rtvPassBox->setX((this->getWidth()/2) - 20); this->rtvPassBox->setY(260);
 
 	this->arrowMenu = new OptionArrowMenuView();
 	this->arrowMenu->setVerticalAlign(View::VERTICAL_ALIGN_CENTER); this->arrowMenu->setY(this->getHeight() - 50);
