@@ -14,6 +14,7 @@ class Ghost : public Character
 	static const int pacmanKillDelta = 5;
 	bool isVulnerable;
 	bool idiotMode;
+	int idiotCorner;
 	int moveHistory[4];
 	int moveHistoryPos;
 	int idiotModeTimeout;
@@ -34,7 +35,7 @@ class Ghost : public Character
 public:
 	Ghost(std::string pathTextura, std::string texturaVulnerable,
 		Grilla* grilla, int h, int w, int x, int y, int speed, 
-		Pacman* pacman, int imageHeight, int imageWidth, bool inHq);
+		Pacman* pacman, int imageHeight, int imageWidth, bool inHq, int idiotCorner);
 	double getDistanceToPacman(int x, int y);
 	double getDistanceToLeaveHeadquarters(int x, int y);
 	double getDistanceToCorner(int x, int y);
