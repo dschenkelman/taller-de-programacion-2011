@@ -3,6 +3,7 @@
 
 class View: public Image{
 private:
+	int id;
 	int x;
 	int y;
 	Image* img;
@@ -23,6 +24,9 @@ public:
 	virtual void draw();
 	int getVerticalAlign(void);
 	void setVerticalAlign(int value);
+	void setId(int id);
+	int getId(void);
+
 	int getRed(){
 		return this->r;
 	}

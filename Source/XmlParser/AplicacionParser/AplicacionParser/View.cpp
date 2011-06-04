@@ -43,3 +43,11 @@ int View::getVerticalAlign(){
 
 void View::draw(){
 }
+
+int View::getId(void){
+	return this->id;
+}
+
+void View::setId(int id){
+	this->id = id;
+}
