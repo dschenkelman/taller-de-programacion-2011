@@ -5,9 +5,9 @@
 
 class Character
 {
+protected:
 	int getNextX(void);
 	int getNextY(void);
-protected:
 	Image* textura;
 	Grilla* grilla;
 	int x;
@@ -23,7 +23,7 @@ protected:
 	virtual void moveRight(void);
 	virtual void moveDown(void);
 	virtual void moveUp(void);
-	bool isNextPositionValid(void);
+	virtual bool isNextPositionValid(void);
 	Character(std::string pathTextura, Grilla* grilla, int h, int w, int x, int y, int xDir, int yDir, int speed, int imageHeight, int imageWidth);
 public:
 	virtual void updatePosition(void);

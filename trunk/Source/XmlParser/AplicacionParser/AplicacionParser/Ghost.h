@@ -19,9 +19,13 @@ class Ghost : public Character
 	int originalY;
 	void determineNextPosition(void);
 	std::vector<double> getDistanceForEachPosition(void);
+	bool inHeadquarters;
+	virtual bool isNextPositionValid(void);
+	bool isGoingThroughDoor(void);
 public:
 	Ghost(std::string pathTextura, std::string texturaVulnerable,
-		Grilla* grilla, int h, int w, int x, int y, int speed, Pacman* pacman, int imageHeight, int imageWidth);
+		Grilla* grilla, int h, int w, int x, int y, int speed, 
+		Pacman* pacman, int imageHeight, int imageWidth, bool inHq);
 	double getDistanceToPacman(int x, int y);
 	void checkPacmanCollision(void);
 	void comeBackToLife(void);
