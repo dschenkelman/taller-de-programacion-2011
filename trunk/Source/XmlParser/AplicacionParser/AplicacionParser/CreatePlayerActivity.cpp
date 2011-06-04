@@ -139,7 +139,7 @@ Activity* CreatePlayerActivity::notify(SDL_Event e)
 				else
 				{
 					this->pass += letra;
-					this->passView += 'z';
+					this->passView += "&atrsk;";
 					RichTextView* newRtvPassBox = new RichTextView(this->passView, RichTextView::NORMAL);
 					newRtvPassBox->setX(this->rtvPassBox->getX());
 					newRtvPassBox->setY(this->rtvPassBox->getY());
