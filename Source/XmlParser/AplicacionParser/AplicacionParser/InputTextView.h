@@ -3,6 +3,6 @@
 
 class InputTextView: public RichTextView{
 public:
-	InputTextView(int size);
+	InputTextView(std::string txt, int size);
 	~InputTextView();
 };
