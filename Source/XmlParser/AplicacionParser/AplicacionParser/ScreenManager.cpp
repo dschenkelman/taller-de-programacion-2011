@@ -210,7 +210,7 @@ void ScreenManager::deletePacman(Pacman* pac)
 	int height = i->getHeight();
 	int width = i->getWidth();
 	
-	this->window->display(this->fondoNegro, x, y, width, height);
+	this->window->display(this->fondo, x, y, width, height);
 }
 
 void ScreenManager::deleteGhosts(List<Ghost*>& ghosts)
@@ -224,7 +224,7 @@ void ScreenManager::deleteGhosts(List<Ghost*>& ghosts)
 		int height = ig->getHeight();
 		int width = ig->getWidth();
 		
-		this->window->display(this->fondoNegro, xg, yg, width, height);
+		this->window->display(this->fondo, xg, yg, width, height);
 	}
 }
 
@@ -236,6 +236,8 @@ void ScreenManager::deleteBonus(Pacman *pac, List<Ghost*>& ghosts, bool isPacman
 	{
 		this->handleBonusEating(pac, ghosts, bonus, isPacman1);
 	}
+
+	this->fondo->display(this->fondoNegro, ia.getX(), ia.getY(), ia.getImageWidth(), ia.getImageHeight());
 }
 
 bool ScreenManager::gameOver(void)

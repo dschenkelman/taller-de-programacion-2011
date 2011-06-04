@@ -227,13 +227,39 @@ ImageArea Pacman::eatBonus(void)
 	if (cam1 != NULL && cam1->hasBonus())
 	{
 		Image *bono=cam1->getBonus()->obtenerRepresentacion();
-		int posX= (x1*this->imageWidth)+(this->imageWidth-bono->getWidth())/2;
-		int posY= (y1*this->imageHeight)+(this->imageHeight-bono->getHeight())/2;
-		if (CollisionHelper::BonusCollision(this->textura, bono, this->x, this->y, posX, posY))
+		int bonusWidth = bono->getWidth() > this->imageWidth ? this->imageWidth : bono->getWidth(); 
+		int bonusHeight = bono->getHeight() > this->imageHeight ? this->imageHeight : bono->getHeight();
+			
+		int posX= (x1*this->imageWidth)+(this->imageWidth-bonusWidth)/2;
+		int posY= (y1*this->imageHeight)+(this->imageHeight-bonusHeight)/2;
+		if (CollisionHelper::BonusCollision(this->textura, this->x, this->y, posX, posY, bonusHeight, bonusWidth))
 		{
-			ImageArea ia(posX,posY,bono->getWidth(),bono->getHeight());
+			ImageArea ia(posX,posY,bonusWidth,bonusHeight);
 			this->lastEatenBonus = cam1->getBonus()->getTipoBonus().getNombre();
 			cam1->removeBonus();
+			delete bono;
+			return ia;
+		}
+
+		delete bono;
+	}
+
+	Celda* c2 = Character::grilla->getCelda(y2, x2);
+	Camino* cam2 = dynamic_cast<Camino*>(c2);
+
+	if (cam2 != NULL && cam2->hasBonus())
+	{
+		Image *bono=cam2->getBonus()->obtenerRepresentacion();
+		int bonusWidth = bono->getWidth() > this->imageWidth ? this->imageWidth : bono->getWidth(); 
+		int bonusHeight = bono->getHeight() > this->imageHeight ? this->imageHeight : bono->getHeight();
+			
+		int posX= (x2*this->imageWidth)+(this->imageWidth-bonusWidth)/2;
+		int posY= (y2*this->imageHeight)+(this->imageHeight-bonusHeight)/2;
+		if (CollisionHelper::BonusCollision(this->textura, this->x, this->y, posX, posY, bonusHeight, bonusWidth))
+		{
+			ImageArea ia(posX,posY,bonusWidth,bonusHeight);
+			this->lastEatenBonus = cam2->getBonus()->getTipoBonus().getNombre();
+			cam2->removeBonus();
 			delete bono;
 			return ia;
 		}
