@@ -1,10 +1,8 @@
 #include "StdAfx.h"
 #include "RichTextView.h"
 
-std::string RichTextView::MENU_HEADER1	= "menu_header1";
-std::string RichTextView::NORMAL			= "verdana_white_black";
-std::string RichTextView::MENU_ITEM		= "menu_item";
-
+std::string RichTextView::NORMAL_GREEN = "arial_green_black";
+std::string RichTextView::NORMAL = "verdana_white_black";
 
 RichTextView::RichTextView(std::string txt, std::string type, int r, int g, int b, int delta): View(r,g,b,delta){
 	RichTextView::RichTextView(txt,type);

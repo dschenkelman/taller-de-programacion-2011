@@ -256,6 +256,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\InputTextView.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\ListTests.cpp"
 				>
 			</File>
@@ -487,6 +491,10 @@
 			</File>
 			<File
 				RelativePath=".\ImageView.h"
+				>
+			</File>
+			<File
+				RelativePath=".\InputTextView.h"
 				>
 			</File>
 			<File
