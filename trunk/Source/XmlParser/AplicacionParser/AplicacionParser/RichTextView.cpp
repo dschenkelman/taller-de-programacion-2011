@@ -6,6 +6,11 @@ std::string RichTextView::NORMAL			= "verdana_white_black";
 std::string RichTextView::MENU_ITEM		= "menu_item";
 
 
+RichTextView::RichTextView(std::string txt, std::string type, int r, int g, int b, int delta): View(r,g,b,delta){
+	RichTextView::RichTextView(txt,type);
+}
+
+
 RichTextView::RichTextView(std::string txt, std::string type): View(){
 	
 	int letterWidth		= 17;
@@ -20,8 +25,8 @@ RichTextView::RichTextView(std::string txt, std::string type): View(){
 		Image* letter = new Image("images/text/" + type + "/" + txt.at(i) + ".bmp");
 		
 		SDL_Rect dst;
-		dst.h=17;
-		dst.w=17;
+		dst.h=letterHeight;
+		dst.w=letterWidth;
 		dst.x=(letterWidth*i);
 		dst.y=0;
 		

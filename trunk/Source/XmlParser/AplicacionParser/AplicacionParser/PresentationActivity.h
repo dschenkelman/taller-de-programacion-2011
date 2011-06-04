@@ -7,8 +7,7 @@
 class PresentationActivity : public Activity {
 private:
 	ImageView* banner;
-	RichTextView* insertCoin;
-	OptionArrowMenuView* arrowMenu;
+	RichTextView* pressEnter;
 
 public:
 	PresentationActivity(int width, int height);

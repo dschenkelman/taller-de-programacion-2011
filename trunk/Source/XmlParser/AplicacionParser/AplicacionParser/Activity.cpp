@@ -60,21 +60,24 @@ void Activity::drawViews(){
 		
 		w->draw();
 
-		/*SDL_Rect* rec = new SDL_Rect();*/
-		SDL_Rect rec;
-		rec.h = w->getHeight();
-		rec.w = w->getWidth();
-
-		if(w->getVerticalAlign() == View::VERTICAL_ALIGN_CENTER){
-			rec.x = ((this->getWidth()/2)-(w->getWidth()/2));
+		if(w->hasAlpha()){
+			this->display(w, w->getX(), w->getY(), w->getRed(), w->getBlue(), w->getGreen(), w->getDelta());
 		}else{
-			rec.x = w->getX();
+			SDL_Rect rec;
+			rec.h = w->getHeight();
+			rec.w = w->getWidth();
+
+			if(w->getVerticalAlign() == View::VERTICAL_ALIGN_CENTER){
+				rec.x = ((this->getWidth()/2)-(w->getWidth()/2));
+			}else{
+				rec.x = w->getX();
+			}
+			rec.y = w->getY();
+			
+			SDL_BlitSurface(w->getSDLSurface(), NULL, this->getSDLSurface(), &rec);
+			SDL_Flip(this->getSDLSurface());
 		}
-		rec.y = w->getY();
-		
-		SDL_BlitSurface(w->getSDLSurface(), NULL, this->getSDLSurface(), &rec);
 	}
-	SDL_Flip(this->getSDLSurface());
 }
 
 

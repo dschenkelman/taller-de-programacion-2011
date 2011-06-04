@@ -4,6 +4,15 @@
 //int View::VERTICAL_ALIGN_CENTER = 1;
 
 View::View():Image(0,0){
+	this->withAlpha = false;
+}
+
+View::View(int r, int g, int b, int delta):Image(0,0){
+	this->r = r;
+	this->g = g;
+	this->b = b;
+	this->delta = delta;
+	this->withAlpha = true;
 }
 
 View::~View(){
