@@ -6,14 +6,16 @@
 #include "CollisionHelper.h"
 #include <vector>
 #include <limits>
+#include "Obstaculo.h"
+#include "Celda.h"
 
 using namespace std;
 
 Ghost::Ghost(string pathTextura, string pathTexturaVulnerable, Grilla* grilla, int h, int w, 
-			 int x, int y, int speed, Pacman* pacman, int imageHeight, int imageWidth):
+			 int x, int y, int speed, Pacman* pacman, int imageHeight, int imageWidth, bool inHq):
 Character(pathTextura, grilla, h, w, x, y, 0, 0, speed, imageHeight, imageWidth), pacman(pacman), 
 pathTextura(pathTextura), pathTexturaVulnerable(pathTexturaVulnerable),
-isVulnerable(false), originalSpeed(speed), originalX(x), originalY(y)
+isVulnerable(false), originalSpeed(speed), originalX(x), originalY(y), inHeadquarters(inHq)
 {
 	this->texturaNoVulnerable = this->textura;
 	this->texturaVulnerable = new Image(this->pathTexturaVulnerable);
@@ -131,7 +133,7 @@ void Ghost::determineNextPosition(void)
 		}
 
 		attempts++;
-	} while(!Character::isNextPositionValid() && attempts < 4);
+	} while(!this->isNextPositionValid() && attempts < 4);
 }
 
 vector<double> Ghost::getDistanceForEachPosition(void)
@@ -152,9 +154,65 @@ vector<double> Ghost::getDistanceForEachPosition(void)
 
 void Ghost::comeBackToLife(void)
 {
-	Character::x = this->originalX;
-	Character::y = this->originalY;
+	Character::x = (this->imageWidth * (this->grilla->getAncho() - 1)) / 2;
+	Character::y = (this->imageHeight * (this->grilla->getAlto() - 1)) / 2;
 	this->setIsVulnerable(false);
+	this->inHeadquarters = true;
+}
+
+bool Ghost::isNextPositionValid(void)
+{
+	bool defaultValid = Character::isNextPositionValid();
+
+	if (!defaultValid)
+	{
+		if (this->inHeadquarters)
+		{
+			bool goingOut = this->isGoingThroughDoor();
+			return goingOut;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	return true;
+}
+
+bool Ghost::isGoingThroughDoor(void)
+{
+	int nextX = this->getNextX();
+	int nextY = this->getNextY();
+	int width = this->textura->getWidth();
+	int height = this->textura->getHeight();
+
+	int x1 = nextX / this->imageWidth;
+	int y1 = nextY / this->imageHeight;
+
+	int x2 = (nextX + width) / this->imageWidth;
+	int y2 = (nextY + height) / this->imageHeight;
+
+	if (x1 < 0 || x2 >= this->grilla->getAncho() || y1 < 0 || y2 >= this->grilla->getAlto())
+	{
+		return false;
+	}
+	Celda* c1 = this->grilla->getCelda(y1, x1);
+	Celda* c2 = this->grilla->getCelda(y2, x1);
+	Celda* c3 = this->grilla->getCelda(y1, x2);
+	Celda* c4 = this->grilla->getCelda(y2, x2);
+
+	Obstaculo* o1 = dynamic_cast<Obstaculo*>(c1);
+	Obstaculo* o2 = dynamic_cast<Obstaculo*>(c2);
+	Obstaculo* o3 = dynamic_cast<Obstaculo*>(c3);
+	Obstaculo* o4 = dynamic_cast<Obstaculo*>(c4);
+
+	bool a = (o1 == NULL || (o1 != NULL && o1->getTipoObstaculo().getNombre() == "puerta"));
+	bool b = (o2 == NULL || (o2 != NULL && o2->getTipoObstaculo().getNombre() == "puerta"));
+	bool c = (o3 == NULL || (o3 != NULL && o3->getTipoObstaculo().getNombre() == "puerta"));
+	bool d = (o4 == NULL || (o4 != NULL && o4->getTipoObstaculo().getNombre() == "puerta"));
+
+	return a && b && c && d;
 }
 
 Ghost::~Ghost(void)
