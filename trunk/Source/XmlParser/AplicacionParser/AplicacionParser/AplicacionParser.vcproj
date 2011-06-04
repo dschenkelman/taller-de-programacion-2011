@@ -60,7 +60,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="&quot;SDL.lib&quot; &quot;SDLmain.lib&quot;"
+				AdditionalDependencies="&quot;lib/SDL.lib&quot; &quot;lib/SDLmain.lib&quot;"
 				LinkIncremental="2"
 				GenerateDebugInformation="true"
 				SubSystem="1"
