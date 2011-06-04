@@ -17,6 +17,9 @@ class Ghost : public Character
 	int originalSpeed;
 	int originalX;
 	int originalY;
+	// represent the cell just above the HQ
+	int outXPosition;
+	int outYPosition;
 	void determineNextPosition(void);
 	std::vector<double> getDistanceForEachPosition(void);
 	bool inHeadquarters;
@@ -28,6 +31,7 @@ public:
 		Grilla* grilla, int h, int w, int x, int y, int speed, 
 		Pacman* pacman, int imageHeight, int imageWidth, bool inHq);
 	double getDistanceToPacman(int x, int y);
+	double getDistanceToLeaveHeadquarters(int x, int y);
 	void checkPacmanCollision(void);
 	void comeBackToLife(void);
 	void setIsVulnerable(bool vulnerable);
