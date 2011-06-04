@@ -24,6 +24,9 @@ outXPosition(0), outYPosition(0)
 	this->texturaNoVulnerable = this->textura;
 	this->texturaVulnerable = new Image(this->pathTexturaVulnerable);
 	this->texturaVulnerable->resize(this->imageWidth - this->speed, this->imageHeight - this->speed);
+	this->idiotMode = false;
+	this->moveHistoryPos = 0;
+	this->moveHistory[0] = 999;
 }
 
 void Ghost::updatePosition(void)
@@ -68,6 +71,16 @@ double Ghost::getDistanceToLeaveHeadquarters(int x, int y)
 {
 	int xDif = x - this->outXPosition;
 	int yDif = y - this->outYPosition;
+	double dif = xDif * xDif + yDif * yDif;
+	double distance = sqrt(dif);
+	return distance;
+}
+
+double Ghost::getDistanceToCorner(int x, int y)
+{
+	//return Ghost::getDistanceToLeaveHeadquarters(x,y);
+	int xDif = x - 0;
+	int yDif = y - 500;
 	double dif = xDif * xDif + yDif * yDif;
 	double distance = sqrt(dif);
 	return distance;
@@ -120,6 +133,19 @@ void Ghost::checkPacmanCollision(void)
 	}
 }
 
+int getDiferentPositions(int posArray[], int size) {
+	int ret = 0;
+	for (int i=0;i<4;i++) {
+		for (int j=0;j<size;j++) {
+			if (posArray[j]==i) {
+				ret++;
+				break;
+			}
+		}
+	}
+	return ret;
+}
+
 void Ghost::determineNextPosition(void)
 {
 	// 4 possible positions, array of 4
@@ -127,9 +153,12 @@ void Ghost::determineNextPosition(void)
 	int attempts = 0;
 	do
 	{
+		cout << "x " << this->xDirection << " y " << this->yDirection << endl;
 		int position;	
 		if (this->isVulnerable)
 		{
+			this->idiotMode=false;
+			this->idiotModeTimeout=0;
 			// runaway
 			position = max_element(distances.begin(), distances.end()) - distances.begin();
 			
@@ -143,6 +172,29 @@ void Ghost::determineNextPosition(void)
 			
 			// to avoid taking this into account if the position is not valid
 			distances[position] = numeric_limits<double>::max();
+		}
+		if (!this->moveHistory[this->moveHistoryPos] == position) {
+			this->moveHistory[this->moveHistoryPos] = position;
+			this->moveHistoryPos++;
+			if (this->moveHistoryPos>3) this->moveHistoryPos=0;
+		}
+		if (getDiferentPositions(this->moveHistory,4) == 2 && this->idiotModeTimeout < 100 ) {
+			if (!this->idiotMode) {
+				//cout << "ENTERING IDIOT MODE" <<endl<<endl;
+			}
+			this->idiotMode = true;
+			this->idiotModeTimeout++;
+			cout << this->idiotModeTimeout << endl;
+		} else {
+			if (this->idiotMode) {
+				//cout << "LEAVING IDIOT MODE" <<endl<<endl;
+				this->moveHistory[0]=0;
+				this->moveHistory[1]=1;
+				this->moveHistory[2]=2;
+				this->moveHistory[3]=3;
+			}
+			this->idiotMode = false;
+			this->idiotModeTimeout = 0;
 		}
 
 		switch(position)
@@ -165,6 +217,21 @@ void Ghost::determineNextPosition(void)
 	} while(!this->isNextPositionValid() && attempts < 4);
 }
 
+void Ghost::rotateLeft(void)
+{
+	if (this->xDirection==0 && this->yDirection==0) {
+		this->xDirection=-1;
+		this->yDirection=0;
+		cout << "posx " << this->xDirection << " posy " << this->yDirection << endl;
+		return;
+	}
+	int tmp = this->xDirection;
+	this->xDirection = this->yDirection;
+	this->yDirection = tmp;
+	if (this->xDirection==0) this->yDirection = -this->yDirection;
+	cout << "posx " << this->xDirection << " posy " << this->yDirection << endl;
+}
+
 vector<double> Ghost::getDistanceForEachPosition(void)
 {
 	vector<double> distances;
@@ -175,10 +242,17 @@ vector<double> Ghost::getDistanceForEachPosition(void)
 
 	if (!this->inHeadquarters)
 	{
-		distanceUp = this->getDistanceToPacman(Character::x, Character::y - Character::speed);
-		distanceDown = this->getDistanceToPacman(Character::x, Character::y + Character::speed);
-		distanceLeft = this->getDistanceToPacman(Character::x - Character::speed, Character::y);
-		distanceRight = this->getDistanceToPacman(Character::x + Character::speed, Character::y);
+		if(!this->idiotMode) {
+			distanceUp = this->getDistanceToPacman(Character::x, Character::y - Character::speed);
+			distanceDown = this->getDistanceToPacman(Character::x, Character::y + Character::speed);
+			distanceLeft = this->getDistanceToPacman(Character::x - Character::speed, Character::y);
+			distanceRight = this->getDistanceToPacman(Character::x + Character::speed, Character::y);
+		} else {
+			distanceUp = this->getDistanceToCorner(Character::x, Character::y - Character::speed);
+			distanceDown = this->getDistanceToCorner(Character::x, Character::y + Character::speed);
+			distanceLeft = this->getDistanceToCorner(Character::x - Character::speed, Character::y);
+			distanceRight = this->getDistanceToCorner(Character::x + Character::speed, Character::y);
+		}
 	}
 	else
 	{
