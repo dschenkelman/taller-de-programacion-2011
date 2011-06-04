@@ -15,8 +15,12 @@ Ghost::Ghost(string pathTextura, string pathTexturaVulnerable, Grilla* grilla, i
 			 int x, int y, int speed, Pacman* pacman, int imageHeight, int imageWidth, bool inHq):
 Character(pathTextura, grilla, h, w, x, y, 0, 0, speed, imageHeight, imageWidth), pacman(pacman), 
 pathTextura(pathTextura), pathTexturaVulnerable(pathTexturaVulnerable),
-isVulnerable(false), originalSpeed(speed), originalX(x), originalY(y), inHeadquarters(inHq), isActive(false)
+isVulnerable(false), originalSpeed(speed), originalX(x), originalY(y), 
+inHeadquarters(inHq), isActive(false),
+outXPosition(0), outYPosition(0)
 {
+	this->outXPosition = this->imageWidth * ((grilla->getAncho() - 1) / 2);
+	this->outYPosition = ((this->imageHeight * (this->grilla->getAlto() - 1)) / 2) - 22;
 	this->texturaNoVulnerable = this->textura;
 	this->texturaVulnerable = new Image(this->pathTexturaVulnerable);
 	this->texturaVulnerable->resize(this->imageWidth - this->speed, this->imageHeight - this->speed);
@@ -26,6 +30,14 @@ void Ghost::updatePosition(void)
 {
 	if (this->isActive)
 	{
+		if (this->inHeadquarters)
+		{
+			double distance = this->getDistanceToLeaveHeadquarters(Character::x, Character::y);
+			if (distance < 2)
+			{
+				this->inHeadquarters = false;
+			}
+		}
 		this->determineNextPosition();
 		Character::updatePosition();
 	}
@@ -47,6 +59,15 @@ double Ghost::getDistanceToPacman(int x, int y)
 
 	int xDif = abs((x % Character::screenWidth) - this->pacman->getX());
 	int yDif = abs((y % Character::screenHeight) - this->pacman->getY());
+	double dif = xDif * xDif + yDif * yDif;
+	double distance = sqrt(dif);
+	return distance;
+}
+
+double Ghost::getDistanceToLeaveHeadquarters(int x, int y)
+{
+	int xDif = x - this->outXPosition;
+	int yDif = y - this->outYPosition;
 	double dif = xDif * xDif + yDif * yDif;
 	double distance = sqrt(dif);
 	return distance;
@@ -147,10 +168,25 @@ void Ghost::determineNextPosition(void)
 vector<double> Ghost::getDistanceForEachPosition(void)
 {
 	vector<double> distances;
-	double distanceUp = this->getDistanceToPacman(Character::x, Character::y - Character::speed);
-	double distanceDown = this->getDistanceToPacman(Character::x, Character::y + Character::speed);
-	double distanceLeft = this->getDistanceToPacman(Character::x - Character::speed, Character::y);
-	double distanceRight = this->getDistanceToPacman(Character::x + Character::speed, Character::y);
+	double distanceUp;
+	double distanceDown;
+	double distanceLeft;
+	double distanceRight;
+
+	if (!this->inHeadquarters)
+	{
+		distanceUp = this->getDistanceToPacman(Character::x, Character::y - Character::speed);
+		distanceDown = this->getDistanceToPacman(Character::x, Character::y + Character::speed);
+		distanceLeft = this->getDistanceToPacman(Character::x - Character::speed, Character::y);
+		distanceRight = this->getDistanceToPacman(Character::x + Character::speed, Character::y);
+	}
+	else
+	{
+		distanceUp = this->getDistanceToLeaveHeadquarters(Character::x, Character::y - Character::speed);
+		distanceDown = this->getDistanceToLeaveHeadquarters(Character::x, Character::y + Character::speed);
+		distanceLeft = this->getDistanceToLeaveHeadquarters(Character::x - Character::speed, Character::y);
+		distanceRight = this->getDistanceToLeaveHeadquarters(Character::x + Character::speed, Character::y);
+	}
 
 	distances.push_back(distanceUp);
 	distances.push_back(distanceDown);
