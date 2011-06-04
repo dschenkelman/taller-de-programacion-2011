@@ -22,6 +22,7 @@ class Ghost : public Character
 	bool inHeadquarters;
 	virtual bool isNextPositionValid(void);
 	bool isGoingThroughDoor(void);
+	bool isActive;
 public:
 	Ghost(std::string pathTextura, std::string texturaVulnerable,
 		Grilla* grilla, int h, int w, int x, int y, int speed, 
@@ -30,6 +31,7 @@ public:
 	void checkPacmanCollision(void);
 	void comeBackToLife(void);
 	void setIsVulnerable(bool vulnerable);
+	void setIsActive(bool value);
 	virtual void updatePosition();
 	~Ghost(void);
 };

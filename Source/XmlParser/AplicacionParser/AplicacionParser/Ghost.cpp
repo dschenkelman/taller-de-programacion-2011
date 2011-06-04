@@ -15,7 +15,7 @@ Ghost::Ghost(string pathTextura, string pathTexturaVulnerable, Grilla* grilla, i
 			 int x, int y, int speed, Pacman* pacman, int imageHeight, int imageWidth, bool inHq):
 Character(pathTextura, grilla, h, w, x, y, 0, 0, speed, imageHeight, imageWidth), pacman(pacman), 
 pathTextura(pathTextura), pathTexturaVulnerable(pathTexturaVulnerable),
-isVulnerable(false), originalSpeed(speed), originalX(x), originalY(y), inHeadquarters(inHq)
+isVulnerable(false), originalSpeed(speed), originalX(x), originalY(y), inHeadquarters(inHq), isActive(false)
 {
 	this->texturaNoVulnerable = this->textura;
 	this->texturaVulnerable = new Image(this->pathTexturaVulnerable);
@@ -24,8 +24,12 @@ isVulnerable(false), originalSpeed(speed), originalX(x), originalY(y), inHeadqua
 
 void Ghost::updatePosition(void)
 {
-	this->determineNextPosition();
-	Character::updatePosition();
+	if (this->isActive)
+	{
+		this->determineNextPosition();
+		Character::updatePosition();
+	}
+
 	this->checkPacmanCollision();
 }
 
@@ -66,6 +70,10 @@ void Ghost::setIsVulnerable(bool value)
 	}
 }
 
+void Ghost::setIsActive(bool value)
+{
+	this->isActive = value;
+}
 void Ghost::checkPacmanCollision(void)
 {
 	bool areInSamePosition = CollisionHelper::AreFullyCollisioned(Character::x, Character::y,
@@ -155,7 +163,7 @@ vector<double> Ghost::getDistanceForEachPosition(void)
 void Ghost::comeBackToLife(void)
 {
 	Character::x = (this->imageWidth * (this->grilla->getAncho() - 1)) / 2;
-	Character::y = (this->imageHeight * (this->grilla->getAlto() - 1)) / 2;
+	Character::y = ((this->imageHeight * (this->grilla->getAlto() - 1)) / 2) + this->imageHeight;
 	this->setIsVulnerable(false);
 	this->inHeadquarters = true;
 }

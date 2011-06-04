@@ -11,6 +11,11 @@
 
 class ScreenManager
 {
+	// in milliseconds
+	static const int vulnerableTime = 10000;
+	static const int ghostActivationTime = 4000;
+	int activatedGhosts;
+	int activationCycles;
 	List<Ghost*> pacman1Ghosts;
 	List<Ghost*> pacman2Ghosts;
 	Activity* window;
@@ -24,8 +29,6 @@ class ScreenManager
 	int vulnerablePacman2Cycles;
 	bool pacman1GhostsVulnerable;
 	bool pacman2GhostsVulnerable;
-	// in milliseconds
-	static const int vulnerableTime = 10000;
 	int deadCycles;
 	int imageHeight;
 	int imageWidth;
@@ -33,6 +36,7 @@ class ScreenManager
 	Image *fondoNegro;
 	void updatePacman(Pacman* pac);
 	void updateGhostsVulnerability(void);
+	void updateGhostsActivation(void);
 	void deletePacman(Pacman* pac);
 	void updateGhosts(List<Ghost*>& ghosts);
 	void deleteGhosts(List<Ghost*>& ghosts);
