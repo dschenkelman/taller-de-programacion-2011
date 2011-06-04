@@ -192,8 +192,8 @@ void Window::init(){
 					// la seteo como corriente y destruyo la anterior
 					if( nextActivity != NULL)
 					{
-						nextActivity->init();
 						delete this->currentActivity;
+						nextActivity->init();
 						this->setCurrentActivity(nextActivity);
 					}
 

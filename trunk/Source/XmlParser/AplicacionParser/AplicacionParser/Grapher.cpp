@@ -19,7 +19,7 @@ error(false), imageHeight(0), imageWidth(0)
 Grapher::~Grapher()
 {
 	for (this->iter = this->imageCache.begin(); this->iter != this->imageCache.end(); this->iter++) {
-		delete(iter->second);
+		delete(this->iter->second);
 	}
 
 	delete this->fondo;

@@ -6,7 +6,7 @@
 
 using namespace std;
 
-TipoBonus::TipoBonus(void) : tieneError(false), utilizado(false),
+TipoBonus::TipoBonus(void) : tieneError(false), utilizado(false),nombre(""), nombreTextura(""),
 unidad("pasos"), duracion(100), probabilidad(1), apariciones(1) 
 {
 	this->populateValidAttributes();
@@ -18,7 +18,7 @@ unidad("pasos"), duracion(100), probabilidad(1), apariciones(1)
 	this->populateValidAttributes();
 }
 
-TipoBonus::TipoBonus(XmlElement& e) : tieneError(false), utilizado(false),
+TipoBonus::TipoBonus(XmlElement& e) : tieneError(false), utilizado(false), nombre(""), nombreTextura(""),
 unidad("pasos"), duracion(100), probabilidad(1), apariciones(1)
 {
 	this->populateValidAttributes();
@@ -150,7 +150,7 @@ void TipoBonus::setTextura(Textura & t)
 	this->textura = t;
 }
 
-Textura TipoBonus::getTextura(void)
+Textura& TipoBonus::getTextura(void)
 {
 	return this->textura;
 }

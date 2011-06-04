@@ -341,39 +341,6 @@
 	<CAMINO fila="12" columna="19">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="13" columna="5">
-		<BONUS tipo="alimento"/>
-	</CAMINO>
-	<CAMINO fila="13" columna="19">
-		<BONUS tipo="alimento"/>
-	</CAMINO>
-	<CAMINO fila="10" columna="5">
-		<BONUS tipo="alimento"/>
-	</CAMINO>
-	<CAMINO fila="10" columna="11">
-		<BONUS tipo="alimento"/>
-	</CAMINO>
-	<CAMINO fila="10" columna="13">
-		<BONUS tipo="alimento"/>
-	</CAMINO>
-	<CAMINO fila="10" columna="19">
-		<BONUS tipo="alimento"/>
-	</CAMINO>
-	<CAMINO fila="11" columna="5">
-		<BONUS tipo="alimento"/>
-	</CAMINO>
-	<CAMINO fila="11" columna="11">
-		<BONUS tipo="alimento"/>
-	</CAMINO>
-	<CAMINO fila="11" columna="13">
-		<BONUS tipo="alimento"/>
-	</CAMINO>
-	<CAMINO fila="11" columna="19">
-		<BONUS tipo="alimento"/>
-	</CAMINO>
-	<CAMINO fila="12" columna="5">
-		<BONUS tipo="alimento"/>
-	</CAMINO>
 	<CAMINO fila="12" columna="8">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
@@ -399,9 +366,6 @@
 		<BONUS tipo="alimento"/>
 	</CAMINO>
 	<CAMINO fila="12" columna="16">
-		<BONUS tipo="alimento"/>
-	</CAMINO>
-	<CAMINO fila="12" columna="19">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
 	

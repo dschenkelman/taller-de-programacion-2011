@@ -10,7 +10,6 @@ using namespace std;
 Bonus::Bonus(void) : tieneError(false)
 {
 	this->populateValidAttributes();
-	this->imagen=NULL;
 }
 
 Bonus::Bonus(XmlElement& e) : tieneError(false)
@@ -28,7 +27,6 @@ Bonus::Bonus(XmlElement& e) : tieneError(false)
 	{
 		tipo = e.getValue("tipo");
 	}	
-	this->imagen=NULL;
 }
 
 bool Bonus::validateAttributes(XmlElement& e)
@@ -61,12 +59,12 @@ std::string Bonus::getTipo()
 	return tipo;
 }
 
-void Bonus::setTipoBonus(TipoBonus tb)
+void Bonus::setTipoBonus(TipoBonus& tb)
 {
 	tipoBonus = tb;
 }
 
-TipoBonus Bonus::getTipoBonus()
+TipoBonus& Bonus::getTipoBonus()
 {
 	return tipoBonus;
 }
@@ -83,22 +81,18 @@ bool Bonus::hasError(void)
 
 Image* Bonus::obtenerRepresentacion(void)
 {
-	if (this->imagen == NULL)
+	Textura textura = this->tipoBonus.getTextura();
+	Image* image = new Image(textura.getPath());
+	if (!(image->hasError()))
 	{
-		Textura textura = this->getTipoBonus().getTextura();
-		this->imagen=new Image(textura.getPath());
-		if (!(this->imagen->hasError()))
-		{
-			this->imagen->crop(textura.getTop(), textura.getLeft(), textura.getRight(), textura.getBottom());
-			Uint32 alphaPixel = textura.getRed() | textura.getGreen() << 8 | textura.getBlue() << 16;
-			this->imagen->rotate(textura.getRotation(), alphaPixel);
-		}
+		image->crop(textura.getTop(), textura.getLeft(), textura.getRight(), textura.getBottom());
+		Uint32 alphaPixel = textura.getRed() | textura.getGreen() << 8 | textura.getBlue() << 16;
+		image->rotate(textura.getRotation(), alphaPixel);
 	}
-	return this->imagen;	
+	
+	return image;	
 }
 
 Bonus::~Bonus(void)
 {
-	if (this->imagen != NULL)
-		delete (this->imagen);
 }

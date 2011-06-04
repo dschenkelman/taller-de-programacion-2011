@@ -7,6 +7,8 @@
 
 class Obstaculo : public Celda
 {
+	Obstaculo( const Obstaculo& o );
+	Obstaculo& operator=( const Obstaculo& o );
 	std::string tipo;
 	TipoObstaculo tipoObstaculo;
 	List<std::string> validAttributes;

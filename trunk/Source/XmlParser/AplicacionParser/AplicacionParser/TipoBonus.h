@@ -29,7 +29,7 @@ public:
 	bool hasError(void);
 	std::string getNombreTextura(void);
 	void setTextura(Textura&);
-	Textura getTextura(void);
+	Textura& getTextura(void);
 	void setLinea(int);
 	int getLinea(void);
 	int getProbabilidad(void);

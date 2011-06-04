@@ -7,19 +7,22 @@
 #include <iostream>
 #include "XmlParser.h"
 
-GameActivity::GameActivity(int width, int height):Activity(width, height){
+GameActivity::GameActivity(int width, int height):Activity(width, height)
+{
 	this->errorFound = false;
 }
 
-GameActivity::GameActivity(Escenario* escenario, int width, int height):Activity(escenario, width, height){
+GameActivity::GameActivity(Escenario* escenario, int width, int height):Activity(escenario, width, height)
+{
 }
 
 GameActivity::~GameActivity()
 {
-	if(!this->errorFound){
+	if(!this->errorFound)
+	{
 		delete this->screenManager;
 		delete this->escenario;
-		delete this->fondo;
+		// delete this->fondo; => esto hay que ver donde se esta borrando! ahora tira puntero erroneo
 		/*delete this->timeTitle;
 		delete this->pointsTitle;*/
 	}
@@ -108,7 +111,6 @@ void GameActivity::onLoad(){
 
 		this->errorFound = true;
 	}
-
 }
 
 
@@ -144,5 +146,15 @@ Activity* GameActivity::notify(SDL_Event e){
 			}
 			break;
 	}
+
+	if (this->screenManager->gameOver())
+	{
+		nextActivity = new MenuActivity(this->getWidth(), this->getHeight());
+	}
+	else
+	{
+		screenManager->updateScreen();
+	}
+
 	return nextActivity;
 }
