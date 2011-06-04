@@ -71,36 +71,36 @@ void Pacman::updatePosition(void)
 	int y=Character::yDirection;
 
 	
-	cout<<"Key Pressed: "<<keyPressed<<endl;
+	//cout<<"Key Pressed: "<<keyPressed<<endl;
 
 	switch(this->keyPressed){
 			case Direction::UP:
 				Character::moveUp();
-				cout<<"moveUP"<<endl;
+				//cout<<"moveUP"<<endl;
 				break;
 			case Direction::DOWN:
-				cout<<"moveDown"<<endl;
+				//cout<<"moveDown"<<endl;
 				Character::moveDown();
 				break;
 			case Direction::LEFT:
-				cout<<"moveLeft"<<endl;
+				//cout<<"moveLeft"<<endl;
 				Character::moveLeft();
 				break;
 			case Direction::RIGHT:
-				cout<<"moveRight"<<endl;
+				//cout<<"moveRight"<<endl;
 				Character::moveRight();
 				break;
 		}
 	
 	if (!Character::isNextPositionValid())
 	{
-		cout<<"La posicion siguiente no es valida"<<endl;
+		//cout<<"La posicion siguiente no es valida"<<endl;
 		Character::xDirection = x;
 		Character::yDirection = y;
 		
 		if (!Character::isNextPositionValid())
 		{
-			cout<<"La posicion original no es valida"<<endl;
+			//cout<<"La posicion original no es valida"<<endl;
 			Character::xDirection = 0;
 			Character::yDirection = 0;
 		}
@@ -275,7 +275,7 @@ void Pacman::rotate(Direction current, Direction next){
 	
 	if (current == next || next == Direction::CENTER)
 		return;
-	cout<<"A rotar de "<<current<<" a "<<next<<endl;
+	//cout<<"A rotar de "<<current<<" a "<<next<<endl;
 
 	switch (current){
 		case Direction::UP:
@@ -296,7 +296,7 @@ void Pacman::rotate(Direction current, Direction next){
 
 void Pacman::rotateFromUp( Direction next){
 
-	cout<<"Rotate from UP: "<<next<<endl;
+	//cout<<"Rotate from UP: "<<next<<endl;
 	switch(next)
 	{
 		case Direction::DOWN:
@@ -319,7 +319,7 @@ void Pacman::rotateFromUp( Direction next){
 
 void Pacman::rotateFromDown( Direction next){
 
-	cout<<"Rotate from Down: "<<next<<endl;
+	//cout<<"Rotate from Down: "<<next<<endl;
 	switch(next)
 	{
 		case Direction::RIGHT:
@@ -342,7 +342,7 @@ void Pacman::rotateFromDown( Direction next){
 
 void Pacman::rotateFromLeft( Direction next){
 
-	cout<<"Rotate from Left: "<<next<<endl;
+	//cout<<"Rotate from Left: "<<next<<endl;
 	switch(next)
 	{
 		case Direction::DOWN:
@@ -365,7 +365,7 @@ void Pacman::rotateFromLeft( Direction next){
 
 void Pacman::rotateFromRight( Direction next){
 
-	cout<<"Rotate from Right: "<<next<<endl;
+	//cout<<"Rotate from Right: "<<next<<endl;
 
 	switch(next)
 	{
