@@ -86,6 +86,11 @@ void SoundManager::playSound(string path, int timesToPlay)
 }
 
 
+void SoundManager::pauseSound(string path)
+{
+	int channel = this->audioChannels[path];
+	Mix_HaltChannel(channel);
+}
 SoundManager::~SoundManager(void)
 {
 	std::map<std::string, Mix_Chunk*>::iterator iter;

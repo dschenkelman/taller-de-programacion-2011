@@ -267,7 +267,13 @@ void ScreenManager::deleteBonus(Pacman *pac, List<Ghost*>& ghosts, bool isPacman
 bool ScreenManager::gameOver(void)
 {
 	// eventually this will also include whether all bonuses have been eaten
-	return (this->deadCycles >= 40 || (this->pacman1->getEatenBonus() + this->pacman2->getEatenBonus() == this->grilla->getCantidadBonus())) ;
+	bool gameOver = (this->deadCycles >= 40 || (this->pacman1->getEatenBonus() + this->pacman2->getEatenBonus() == this->grilla->getCantidadBonus()));
+	if (gameOver)
+	{
+		this->soundManager->pauseSound(this->soundManager->getBackgroundPath());
+	}
+	
+	return gameOver;
 }
 
 Pacman* ScreenManager::getPacman1(void)
