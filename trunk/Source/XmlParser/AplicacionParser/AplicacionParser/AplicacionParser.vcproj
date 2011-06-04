@@ -60,7 +60,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="&quot;lib/SDL.lib&quot; &quot;lib/SDLmain.lib&quot;"
+				AdditionalDependencies="&quot;lib/SDL.lib&quot; &quot;lib/SDLmain.lib&quot; &quot;lib/SDL_mixer.lib&quot;"
 				LinkIncremental="2"
 				GenerateDebugInformation="true"
 				SubSystem="1"
@@ -328,6 +328,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\SoundManager.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\SpecialBonusManager.cpp"
 				>
 			</File>
@@ -575,6 +579,10 @@
 			</File>
 			<File
 				RelativePath=".\ScreenManager.h"
+				>
+			</File>
+			<File
+				RelativePath=".\SoundManager.h"
 				>
 			</File>
 			<File

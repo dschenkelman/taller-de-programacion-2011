@@ -11,7 +11,7 @@ using namespace std;
 
 Window::Window(string t, int h, int w) : title(t), height(h), width(w), closed(false)
 {
-	if (SDL_Init(SDL_INIT_VIDEO) != 0) 
+	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0) 
 	{
 		stringstream msg;
 		msg << "Unable to initialize SDL: " << SDL_GetError();

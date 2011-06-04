@@ -13,6 +13,7 @@ vulnerablePacman1Cycles(0), vulnerablePacman2Cycles(0),
 pacman1GhostsVulnerable(false), pacman2GhostsVulnerable(false),
 activatedGhosts(0), activationCycles(ghostActivationTime)
 {
+	this->soundManager = new SoundManager();
 	this->grilla = g;
 	this->window = w;
 	this->fondo = imageFondo;
@@ -110,7 +111,7 @@ void ScreenManager::handleKeyStroke(void)
 void ScreenManager::updateScreen(void)
 {
 	this->updateGhostsVulnerability();
-	this->updateGhostsActivation();
+	// this->updateGhostsActivation();
 	this->deletePacman(this->pacman1);
 	this->deletePacman(this->pacman2);
 	this->deleteGhosts(this->pacman1Ghosts);
@@ -282,11 +283,14 @@ void ScreenManager::handleBonusEating(Pacman* pac, List<Ghost*>& ghosts, string 
 		// alimento comun
 		pac->increaseScore(10);
 		pac->increaseEatenBonus();
+		this->soundManager->playSound(this->soundManager->getEatSoundPath(), 1);
 		return;
 	}
 
 	if (bonus == "alimentoEspecial")
 	{
+		this->soundManager->playSound(this->soundManager->getEatSoundPath(), 1);
+		
 		// alimento bonus, fanstamas vulnerablesppp
 		pac->setGhostKills(0);
 		pac->increaseScore(50);
@@ -316,6 +320,7 @@ ScreenManager::~ScreenManager(void)
 	delete this->pacman2;
 	delete this->gameOverImage;
 	delete this->fondoNegro;
+	delete this->soundManager;
 
 	for (int i = 0; i < this->pacman1Ghosts.length(); i++)
 	{
