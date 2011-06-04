@@ -16,7 +16,7 @@ Ghost::Ghost(SoundManager* soundManager, string pathTextura, string pathTexturaV
 Character(pathTextura, grilla, h, w, x, y, 0, 0, speed, imageHeight, imageWidth), pacman(pacman), 
 pathTextura(pathTextura), pathTexturaVulnerable(pathTexturaVulnerable),
 isVulnerable(false), originalSpeed(speed), originalX(x), originalY(y), 
-inHeadquarters(inHq), isActive(false),
+inHeadquarters(inHq), isActive(false), idiotMode(false),
 outXPosition(0), outYPosition(0)
 {
 	this->soundManager = soundManager;
@@ -25,7 +25,6 @@ outXPosition(0), outYPosition(0)
 	this->texturaNoVulnerable = this->textura;
 	this->texturaVulnerable = new Image(this->pathTexturaVulnerable);
 	this->texturaVulnerable->resize(this->imageWidth - this->speed, this->imageHeight - this->speed);
-	this->idiotMode = false;
 	this->moveHistoryPos = 0;
 	this->moveHistory[0] = 999;
 }
@@ -37,7 +36,7 @@ void Ghost::updatePosition(void)
 		if (this->inHeadquarters)
 		{
 			double distance = this->getDistanceToLeaveHeadquarters(Character::x, Character::y);
-			if (distance < 2)
+			if (distance < 1.5)
 			{
 				this->inHeadquarters = false;
 				this->idiotMode=true;
@@ -132,6 +131,7 @@ void Ghost::checkPacmanCollision(void)
 			ghostKills++;
 			this->pacman->setGhostKills(ghostKills);
 			this->pacman->increaseScore(200 * ghostKills);
+			this->soundManager->playSound(this->soundManager->getEatGhostPath(), 1);
 		}
 		else
 		{

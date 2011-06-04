@@ -15,6 +15,7 @@ class SoundManager
 	std::string eatSound;
 	std::string eatGhostSound;
 	void loadPacmanSounds(void);
+	int lastChannel;
 public:
 	SoundManager(void);
 	std::string getEatPath();
