@@ -78,22 +78,30 @@ Activity* CreatePlayerActivity::notify(SDL_Event e)
 			{
 				if(this->usernameBoxActive)
 				{
-					this->name.erase(this->name.size()-1, 1);
-					RichTextView* newRtvUsernameBox = new RichTextView(this->name, RichTextView::NORMAL);
-					newRtvUsernameBox->setX(this->rtvUsernameBox->getX());
-					newRtvUsernameBox->setY(this->rtvUsernameBox->getY());
-					this->updateViewFromView(this->rtvUsernameBox, newRtvUsernameBox);
-					this->rtvUsernameBox = newRtvUsernameBox;
+					if(this->name.size() > 0)
+					{
+						this->name.erase(this->name.size()-1, 1);
+						RichTextView* newRtvUsernameBox = new RichTextView(this->name, RichTextView::NORMAL);
+						newRtvUsernameBox->setX(this->rtvUsernameBox->getX());
+						newRtvUsernameBox->setY(this->rtvUsernameBox->getY());
+						this->updateViewFromView(this->rtvUsernameBox, newRtvUsernameBox);
+						this->rtvUsernameBox = newRtvUsernameBox;
+					}
+					
 				}
 
 				else
 				{
-					this->pass.erase(this->pass.size()-1, 1);
-					this->passView.erase(this->passView.size()-1, 1);
-					RichTextView* newRtvPassBox = new RichTextView(this->passView, RichTextView::NORMAL);
-					newRtvPassBox->setX(this->rtvPassBox->getX());
-					newRtvPassBox->setY(this->rtvPassBox->getY());
-					this->updateViewFromView(this->rtvPassBox, newRtvPassBox);
+					if(this->pass.size() > 0)
+					{
+						this->pass.erase(this->pass.size()-1, 1);
+						this->passView.erase(this->passView.size()-1, 1);	
+						RichTextView* newRtvPassBox = new RichTextView(this->passView, RichTextView::NORMAL);
+						newRtvPassBox->setX(this->rtvPassBox->getX());
+						newRtvPassBox->setY(this->rtvPassBox->getY());
+						this->updateViewFromView(this->rtvPassBox, newRtvPassBox);
+					}
+
 				}
 			}
 
