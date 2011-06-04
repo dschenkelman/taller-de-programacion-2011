@@ -50,18 +50,21 @@ void Activity::add(View* w){
 }
 
 
-void Activity::updateViewFromView(View* to, View* from){
+void Activity::updateViewFromView(View* to, View* from)
+{
 	this->removeView(to);
 	this->add(from);
-
 }
 
 void Activity::removeView(View* w){
 	size_t pos = 0;
 	bool found = false;
 	while( !found && pos < this->widgets->length() ){
-		if(this->widgets->at(pos)->getId() == w->getId())
+		if(this->widgets->at(pos) == w)
+		{
 			found = true;
+			break;
+		}
 		pos++;
 	}
 	if(found){
