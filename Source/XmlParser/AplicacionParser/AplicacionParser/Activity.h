@@ -17,6 +17,8 @@ public:
 	Activity(ParameterHolder* parameterHolder, int width, int height);
 	virtual ~Activity();
 	void add(View* w);
+	void removeView(View* w);
+	void updateViewFromView(View* to, View* from);
 	void init();
 	virtual void onLoad();
 	virtual Activity* notify(SDL_Event e);

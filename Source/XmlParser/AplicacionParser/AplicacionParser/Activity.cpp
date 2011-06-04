@@ -49,6 +49,36 @@ void Activity::add(View* w){
 	this->widgets->add(w);
 }
 
+
+void Activity::updateViewFromView(View* to, View* from){
+	this->removeView(to);
+	this->add(from);
+
+}
+
+void Activity::removeView(View* w){
+	size_t pos = 0;
+	bool found = false;
+	while( !found && pos < this->widgets->length() ){
+		if(this->widgets->at(pos)->getId() == w->getId())
+			found = true;
+		pos++;
+	}
+	if(found){
+		this->widgets->removeAt(pos);
+		SDL_Rect* rec = new SDL_Rect();
+		rec->h = w->getHeight();
+		rec->w = w->getWidth();
+		rec->x = w->getX();
+		rec->y = w->getY();
+		SDL_FillRect(this->getSDLSurface(), rec, 0);
+		SDL_Flip(this->getSDLSurface());
+		delete rec;
+	}
+}
+
+
+
 void Activity::update(){
 }
 
