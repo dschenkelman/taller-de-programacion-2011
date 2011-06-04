@@ -115,12 +115,14 @@ void ScreenManager::updateScreen(void)
 	this->deleteGhosts(this->pacman2Ghosts);
 	if (this->pacman1->isAlive() && this->pacman2->isAlive())
 	{
+		this->deleteBonus(this->pacman1, this->pacman1Ghosts, true);
+		this->deleteBonus(this->pacman2, this->pacman2Ghosts, false);
 		this->updatePacman(this->pacman1);
 		this->updatePacman(this->pacman2);
 		this->updateGhosts(this->pacman1Ghosts);
 		this->updateGhosts(this->pacman2Ghosts);
-		this->deleteBonus(this->pacman1, this->pacman1Ghosts, true);
-		this->deleteBonus(this->pacman2, this->pacman2Ghosts, false);
+		/*this->deleteBonus(this->pacman1, this->pacman1Ghosts, true);
+		this->deleteBonus(this->pacman2, this->pacman2Ghosts, false);*/
 	}
 	else
 	{
@@ -238,6 +240,7 @@ void ScreenManager::deleteBonus(Pacman *pac, List<Ghost*>& ghosts, bool isPacman
 	}
 
 	this->fondo->display(this->fondoNegro, ia.getX(), ia.getY(), ia.getImageWidth(), ia.getImageHeight());
+	this->window->display(this->fondoNegro, ia.getX(), ia.getY(), ia.getImageWidth(), ia.getImageHeight());
 }
 
 bool ScreenManager::gameOver(void)

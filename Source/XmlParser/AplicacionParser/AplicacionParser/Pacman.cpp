@@ -234,7 +234,7 @@ ImageArea Pacman::eatBonus(void)
 		int posY= (y1*this->imageHeight)+(this->imageHeight-bonusHeight)/2;
 		if (CollisionHelper::BonusCollision(this->textura, this->x, this->y, posX, posY, bonusHeight, bonusWidth))
 		{
-			ImageArea ia(posX,posY,bonusWidth,bonusHeight);
+			ImageArea ia(x1*this->imageWidth,y1*this->imageHeight,this->imageWidth,this->imageHeight);
 			this->lastEatenBonus = cam1->getBonus()->getTipoBonus().getNombre();
 			cam1->removeBonus();
 			delete bono;
@@ -244,7 +244,7 @@ ImageArea Pacman::eatBonus(void)
 		delete bono;
 	}
 
-	Celda* c2 = Character::grilla->getCelda(y2, x2);
+	/*Celda* c2 = Character::grilla->getCelda(y2, x2);
 	Camino* cam2 = dynamic_cast<Camino*>(c2);
 
 	if (cam2 != NULL && cam2->hasBonus())
@@ -257,7 +257,7 @@ ImageArea Pacman::eatBonus(void)
 		int posY= (y2*this->imageHeight)+(this->imageHeight-bonusHeight)/2;
 		if (CollisionHelper::BonusCollision(this->textura, this->x, this->y, posX, posY, bonusHeight, bonusWidth))
 		{
-			ImageArea ia(posX,posY,bonusWidth,bonusHeight);
+			ImageArea ia(x2*this->imageWidth,y2*this->imageHeight,this->imageWidth,this->imageHeight);
 			this->lastEatenBonus = cam2->getBonus()->getTipoBonus().getNombre();
 			cam2->removeBonus();
 			delete bono;
@@ -266,7 +266,7 @@ ImageArea Pacman::eatBonus(void)
 
 		delete bono;
 	}
-	
+	*/
 	this->lastEatenBonus = "";
 	return ImageArea(0,0,0,0);
 }
