@@ -12,7 +12,7 @@
 using namespace std;
 
 Ghost::Ghost(string pathTextura, string pathTexturaVulnerable, Grilla* grilla, int h, int w, 
-			 int x, int y, int speed, Pacman* pacman, int imageHeight, int imageWidth, bool inHq):
+			 int x, int y, int speed, Pacman* pacman, int imageHeight, int imageWidth, bool inHq, int idiotCorner):
 Character(pathTextura, grilla, h, w, x, y, 0, 0, speed, imageHeight, imageWidth), pacman(pacman), 
 pathTextura(pathTextura), pathTexturaVulnerable(pathTexturaVulnerable),
 isVulnerable(false), originalSpeed(speed), originalX(x), originalY(y), 
@@ -39,6 +39,7 @@ void Ghost::updatePosition(void)
 			if (distance < 2)
 			{
 				this->inHeadquarters = false;
+				this->idiotMode=true;
 			}
 		}
 		this->determineNextPosition();
@@ -79,8 +80,13 @@ double Ghost::getDistanceToLeaveHeadquarters(int x, int y)
 double Ghost::getDistanceToCorner(int x, int y)
 {
 	//return Ghost::getDistanceToLeaveHeadquarters(x,y);
-	int xDif = x - 0;
-	int yDif = y - 500;
+	int xOffset, yOffset;
+	if (this->idiotCorner%2) xOffset = 500;
+	else xOffset = 0;
+	if (this->idiotCorner<2) yOffset = 500;
+	else yOffset = 0;
+	int xDif = x - xOffset;
+	int yDif = y - yOffset;
 	double dif = xDif * xDif + yDif * yDif;
 	double distance = sqrt(dif);
 	return distance;
@@ -88,7 +94,7 @@ double Ghost::getDistanceToCorner(int x, int y)
 
 void Ghost::setIsVulnerable(bool value)
 {
-	if (value != this->isVulnerable)
+	if (value != this->isVulnerable && !this->inHeadquarters)
 	{
 		this->isVulnerable = value;
 		if (this->isVulnerable)
@@ -153,7 +159,7 @@ void Ghost::determineNextPosition(void)
 	int attempts = 0;
 	do
 	{
-		cout << "x " << this->xDirection << " y " << this->yDirection << endl;
+		//cout << "x " << this->xDirection << " y " << this->yDirection << endl;
 		int position;	
 		if (this->isVulnerable)
 		{
@@ -180,14 +186,14 @@ void Ghost::determineNextPosition(void)
 		}
 		if (getDiferentPositions(this->moveHistory,4) == 2 && this->idiotModeTimeout < 100 ) {
 			if (!this->idiotMode) {
-				//cout << "ENTERING IDIOT MODE" <<endl<<endl;
+				cout << "ENTERING IDIOT MODE" <<endl<<endl;
 			}
 			this->idiotMode = true;
 			this->idiotModeTimeout++;
 			cout << this->idiotModeTimeout << endl;
 		} else {
 			if (this->idiotMode) {
-				//cout << "LEAVING IDIOT MODE" <<endl<<endl;
+				cout << "LEAVING IDIOT MODE" <<endl<<endl;
 				this->moveHistory[0]=0;
 				this->moveHistory[1]=1;
 				this->moveHistory[2]=2;
@@ -222,14 +228,14 @@ void Ghost::rotateLeft(void)
 	if (this->xDirection==0 && this->yDirection==0) {
 		this->xDirection=-1;
 		this->yDirection=0;
-		cout << "posx " << this->xDirection << " posy " << this->yDirection << endl;
+		//cout << "posx " << this->xDirection << " posy " << this->yDirection << endl;
 		return;
 	}
 	int tmp = this->xDirection;
 	this->xDirection = this->yDirection;
 	this->yDirection = tmp;
 	if (this->xDirection==0) this->yDirection = -this->yDirection;
-	cout << "posx " << this->xDirection << " posy " << this->yDirection << endl;
+	//cout << "posx " << this->xDirection << " posy " << this->yDirection << endl;
 }
 
 vector<double> Ghost::getDistanceForEachPosition(void)
