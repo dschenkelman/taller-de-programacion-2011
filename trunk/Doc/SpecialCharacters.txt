@@ -1,0 +1,5 @@
+simple dot	-> '.':		&sdot;
+double dot 	-> ':':		&ddot;
+under dash 	-> '_': 	&udash;
+middle dash -> '-':		&mdash;
+asterisk	-> '*':		&atrsk;
