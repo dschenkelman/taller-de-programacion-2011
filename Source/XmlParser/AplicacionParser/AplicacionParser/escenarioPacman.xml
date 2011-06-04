@@ -390,9 +390,7 @@
 	<CAMINO fila="13" columna="8">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="13" columna="12">
-		<BONUS tipo="alimento"/>
-	</CAMINO>
+	<OBSTACULO fila="13" columna="12" tipo="puerta"/>
 	<CAMINO fila="13" columna="16">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
@@ -818,6 +816,7 @@
    </GRILLA>
   <TIPOSOBSTACULOS>
 	<TIPOOBSTACULO nombre="ladrillo" textura="ladrillo"/>
+	<TIPOOBSTACULO nombre="puerta" textura="puerta"/>
   </TIPOSOBSTACULOS>
   <TIPOSBONUS>
 	<TIPOBONUS nombre="alimento" textura="alimento"/>
@@ -826,6 +825,7 @@
   <TEXTURAS>
 	<TEXTURA nombre="Fondo" path="Images/texturaFondo.bmp"/>
 	<TEXTURA nombre="ladrillo" path="Images/ladrillo.bmp"/>
+	<TEXTURA nombre="puerta" path="Images/puerta.bmp" alpha="#FFFFFF"/>
 	<TEXTURA nombre="alimento" path="Images/bonus.bmp" alpha="#FFFFFF"/>	
 	<TEXTURA nombre="alimentoEspecial" path="Images/alimentoEspecial.bmp" alpha="#FFFFFF"/>
   </TEXTURAS>
