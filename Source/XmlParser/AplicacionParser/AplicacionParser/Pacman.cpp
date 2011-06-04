@@ -229,8 +229,11 @@ ImageArea Pacman::eatBonus(void)
 			ImageArea ia(posX,posY,bono->getWidth(),bono->getHeight());
 			this->lastEatenBonus = cam1->getBonus()->getTipoBonus().getNombre();
 			cam1->removeBonus();
+			delete bono;
 			return ia;
 		}
+
+		delete bono;
 	}
 	
 	this->lastEatenBonus = "";

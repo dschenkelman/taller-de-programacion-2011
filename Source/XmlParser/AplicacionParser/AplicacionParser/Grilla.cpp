@@ -152,7 +152,7 @@ Grilla::~Grilla()
 			for (size_t j = 0; j < this->ancho; j++)
 			{
 				//borro celda
-				delete this->matriz.at(i).at(j);
+				delete this->getCelda(i, j);
 			}	
 		}
 	}
@@ -298,7 +298,7 @@ bool Grilla::verificarTipoObstaculoExistente(std::string to)
 	return false;
 }
 
-TipoBonus Grilla::obtenerTipoBonus(std::string tb)
+TipoBonus& Grilla::obtenerTipoBonus(std::string tb)
 {
 	for(size_t i = 0; i < tiposBonus.length(); i++)
 	{
@@ -314,7 +314,7 @@ TipoBonus Grilla::obtenerTipoBonus(std::string tb)
 	}
 }
 
-TipoObstaculo Grilla::obtenerTipoObstaculo(std::string to)
+TipoObstaculo& Grilla::obtenerTipoObstaculo(std::string to)
 {
 	for(size_t i = 0; i < tiposObstaculos.length(); i++)
 	{

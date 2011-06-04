@@ -236,34 +236,6 @@ void ScreenManager::deleteBonus(Pacman *pac, List<Ghost*>& ghosts, bool isPacman
 	{
 		this->handleBonusEating(pac, ghosts, bonus, isPacman1);
 	}
-
-	/*this->fondo->display(this->fondoNegro, ia.getX(), ia.getY(), ia.getImageWidth(), ia.getImageHeight());*/
-}
-void ScreenManager::startGame(void)
-{
-	////esperar para cerrar
-	//SDL_Event e;
-	//bool running = true;
-	//this->period = 1000.0 / 120;
- //
-	//this->window->display(this->fondo, 0, 0, 0, 0, 0, -1);
-	//while(!this->gameOver()) 
-	//{
-	//	SDL_Delay(this->period);
-	//	this->updateScreen();
-	//	while(SDL_PollEvent(&e)) 
-	//	{
-	//		switch(e.type)
-	//		{
-	//			case SDL_QUIT:
-	//				running = false;
-	//				//this->window->close();
-	//				return;
-	//			default:
-	//				this->handleKeyStroke();
-	//		}
-	//	}
-	//}
 }
 
 bool ScreenManager::gameOver(void)

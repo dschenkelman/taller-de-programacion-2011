@@ -6,6 +6,8 @@
 
 class Celda
 {
+	Celda( const Celda& c );
+	Celda& operator=( const Celda& c );
 protected:
 	int fila;
 	int columna;

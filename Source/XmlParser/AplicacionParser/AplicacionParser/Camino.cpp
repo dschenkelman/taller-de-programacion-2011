@@ -14,6 +14,7 @@ Camino::Camino(int f, int c) : Celda(f, c), tieneBonus(false), tieneError(false)
 
 Camino::Camino(XmlElement& e) : tieneBonus(false), tieneError(false)
 {
+	this->bonus == NULL;
 	this->imagen=NULL;
 	this->populateValidAttributes();
 	this->tieneError = !this->validateAttributes(e);
@@ -87,12 +88,10 @@ Bonus* Camino::getBonus()
 
 Camino::~Camino(void)
 {
-	/*if (this->imagen != NULL)
+	if (this->tieneBonus)
 	{
-		EL CAMINO NO BORRA SUS IMAGENES PORQUE EL CACHE LO HACE POR EL
-		delete(this->imagen);
-	}*/
-	delete this->bonus;
+		delete this->bonus;
+	}
 }
 
 Image* Camino::obtenerRepresentacion()
@@ -109,7 +108,9 @@ Image* Camino::obtenerRepresentacion()
 			int red = tb.getTextura().getRed();
 			int green = tb.getTextura().getGreen();
 			int blue = tb.getTextura().getBlue();
-			this->imagen->superImpose(*(this->bonus->obtenerRepresentacion()), red, green, blue, tb.getTextura().getDelta());
+			Image* iBonus = this->bonus->obtenerRepresentacion();
+			this->imagen->superImpose(*iBonus, red, green, blue, tb.getTextura().getDelta());
+			delete iBonus;
 			/*ss >> repres;*/
 		}
 	}
@@ -117,21 +118,6 @@ Image* Camino::obtenerRepresentacion()
 	return this->imagen;
 }
 
-
-Image* Camino::borrarBonus()
-{
-	if (this->hasBonus() && !(this->imagen->hasError()))
-	{
-		Image imagen("Images/texturas/camino.bmp");
-		TipoBonus tb = this->getBonus()->getTipoBonus();
-		int red = tb.getTextura().getRed();
-		int green = tb.getTextura().getGreen();
-		int blue = tb.getTextura().getBlue();
-		this->imagen->superImpose(imagen, red, green, blue, tb.getTextura().getDelta());
-		/*ss >> repres;*/
-	}
-	return this->imagen;
-}
 
 Celda* Camino::copiar(void)
 {
@@ -193,6 +179,7 @@ Textura Camino::obtenerTextura()
 	return textura;
 }
 void Camino::removeBonus(void){
+	delete this->bonus;
 	this->tieneBonus=false;
 }
 

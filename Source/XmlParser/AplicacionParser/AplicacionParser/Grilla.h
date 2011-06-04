@@ -32,8 +32,8 @@ class Grilla
 	bool verificarTipoObstaculoExistente(std::string to);
 	void verificarTiposUtilizados();
 	void llenarMatrizDeObstaculosDefecto(void);
-	TipoBonus obtenerTipoBonus(std::string tb);
-	TipoObstaculo obtenerTipoObstaculo(std::string to);
+	TipoBonus& obtenerTipoBonus(std::string tb);
+	TipoObstaculo& obtenerTipoObstaculo(std::string to);
 	List<TipoObstaculo> tiposObstaculos;
 	List<TipoBonus> tiposBonus;
 public:

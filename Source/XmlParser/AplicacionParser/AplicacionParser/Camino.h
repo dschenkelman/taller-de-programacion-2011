@@ -25,9 +25,8 @@ public:
 	void removeBonus(void);
 	Celda* copiar(void);
 	bool hasError(void);
-	~Camino(void);
+	virtual ~Camino(void);
 	Textura obtenerTextura();
 	Image* obtenerRepresentacion();
 	void setearRepresentacion(Image*);
-	Image* borrarBonus();
 };
