@@ -169,68 +169,28 @@ int main(int argc, char* argv[])
 //int _tmain(int argc, _TCHAR* argv[]){
 //	
 //	int videoMode =640;
+//	int width = videoMode;
+//	int height = ((videoMode * 3) / 4);
+//	Window* w = new Window("DualPacman", height, width);
 //
-//	//char* fileName = "escenarioPacman.xml";
+//	// Actividad de Inicio
+//	PresentationActivity* pActivity = new PresentationActivity(width, height);
+//	pActivity->init();
+//	
+//	// Seteo la actividad
+//	w->setCurrentActivity(pActivity);
+//	
+//	pActivity->drawViews();
 //
-//	//ifstream ifile(fileName);
-//	//if (ifile) 
-//	//{
-//	//	// The file exists, and is open for input
-//	//	ifile.close();
-//	//	XmlParser parser;
-//	//	string name = fileName;
-//	//	parser.openFile(name);
-//	//	XmlElement* root = parser.parse();
-//	//	parser.closeFile();
-//	//	
-//	//	Escenario* escenario = new Escenario(*root);
-//
-//	//	delete root;
-//	//	if (!escenario->hasError())
-//	//	{
-//	//		Grapher grapher;
-//	//		grapher.setVideoMode(videoMode);
-//	//		Image* fondo = grapher.draw(*escenario);
-//	//		if (!grapher.hasError())
-//	//		{
-//				int width = videoMode;
-//				int height = ((videoMode * 3) / 4);
-//				Window* w = new Window("DualPacman", height, width);
-//
-//				// Actividad de Inicio
-//				PresentationActivity* pActivity = new PresentationActivity(width, height);
-//				pActivity->init();
-//				
-//				// Seteo la actividad
-//				w->setCurrentActivity(pActivity);
-//				
-//				pActivity->drawViews();
-//
-//				// Actualizo la ventana
-//				w->refresh();
-//				
-//				// Inicio manejo de eventos
-//				w->init();				
+//	// Actualizo la ventana
+//	w->refresh();
+//	
+//	// Inicio manejo de eventos
+//	w->init();				
 //
 //
-//				delete w;
-//			/*}
-//			else
-//			{
-//				cout << "Error al graficar. Ver el archivo parser.log.txt";
-//			}
-//		}
-//		else
-//		{
-//			cout << "Error al imprimir el Escenario. Referirse a parser.log.txt para mas detalles." << endl;
-//			return -1;
-//		}
-//	}
-//	else
-//	{
-//		cout << "El archivo: " << fileName << " no existe." << endl;
-//		return -1;
-//	}*/
+//	delete w;
+//	
 //	
 //	return 0;
 //}

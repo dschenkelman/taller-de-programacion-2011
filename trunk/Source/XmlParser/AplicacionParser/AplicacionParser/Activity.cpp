@@ -1,6 +1,7 @@
 #include "StdAfx.h"
 #include "Activity.h"
 #include "PixelHelpers.h"
+#include "ImageView.h"
 
 Activity::Activity(int width, int height) : Image(width,height){
 	this->widgets = new List<View*>();
@@ -93,18 +94,21 @@ void Activity::drawViews(){
 		
 		w->draw();
 
+		int posX;
+
+		if(w->getVerticalAlign() == View::VERTICAL_ALIGN_CENTER){
+			posX = ((this->getWidth()/2)-(w->getWidth()/2));
+		}else{
+			posX = w->getX();
+		}
+
 		if(w->hasAlpha()){
-			this->display(w, w->getX(), w->getY(), w->getRed(), w->getBlue(), w->getGreen(), w->getDelta());
+			this->display(w, posX, w->getY(), w->getRed(), w->getBlue(), w->getGreen(), w->getDelta());
 		}else{
 			SDL_Rect rec;
 			rec.h = w->getHeight();
 			rec.w = w->getWidth();
-
-			if(w->getVerticalAlign() == View::VERTICAL_ALIGN_CENTER){
-				rec.x = ((this->getWidth()/2)-(w->getWidth()/2));
-			}else{
-				rec.x = w->getX();
-			}
+			rec.x = posX;
 			rec.y = w->getY();
 			
 			SDL_BlitSurface(w->getSDLSurface(), NULL, this->getSDLSurface(), &rec);
@@ -146,4 +150,12 @@ void Activity::display(Image* image, int x, int y, int width, int height)
 			}
 		}	
 	}
+}
+
+void Activity::setBackgroundImage(std::string uri){
+	ImageView* img = new ImageView(uri);
+	//img->resize(this->getWidth(), this->getHeight());
+	/*SDL_BlitSurface(img->getSDLSurface(), NULL, this->getSDLSurface(), NULL);
+	SDL_Flip(this->getSDLSurface());*/
+	this->add(img);
 }

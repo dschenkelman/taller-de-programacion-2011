@@ -21,21 +21,33 @@ points1(0), points2(0), xCarteles(0)
 
 GameActivity::~GameActivity()
 {
-	if(!this->errorFound)
+	if(!this->errorFound && this->loaded)
 	{
 		delete this->screenManager;
 		delete this->escenario;
 		delete this->fondo;
+		delete this->loadingTxt;
 		/*delete this->timeTitle;
 		delete this->pointsTitle;*/
 	}
 }
 
 
+
 void GameActivity::onLoad(){
 
 	this->period = 1000.0 / 60;
-	this->errorFound = false;	
+	this->errorFound = false;
+	this->loaded = false;
+	
+	this->loadingTxt = new RichTextView("loading&sdot;&sdot;&sdot;", RichTextView::NORMAL);
+	this->loadingTxt->setY(300);
+	this->loadingTxt->setVerticalAlign(View::VERTICAL_ALIGN_CENTER);
+	this->add(loadingTxt);
+
+}
+
+void GameActivity::loadGame(){
 	char* fileName = "escenarioPacman.xml";
 	ifstream ifile(fileName);
 	if (ifile) 
@@ -80,6 +92,9 @@ void GameActivity::onLoad(){
 
 				this->points2View = new RichTextView("0", RichTextView::NORMAL);
 				this->points2View->setX(this->xCarteles); this->points2View->setY(125);
+
+				// antes de mostrar el juego borro el texto loading
+				this->removeView(this->loadingTxt);
 
 				// Creo un screenmanager para la logica del juego
 				this->screenManager = new ScreenManager(this, this->fondo, this->escenario->getGrilla(), grapher.getImageHeight(), grapher.getImageWidth(), this->period);
@@ -138,13 +153,19 @@ void GameActivity::onLoad(){
 // En el update de esta actividad hago el update del juego
 void GameActivity::update()
 {
-	if(!this->errorFound)
+	if(!this->errorFound && this->loaded)
 	{
 		screenManager->updateScreen();
 		this->updateScoreBoard();
 	}
 }
 Activity* GameActivity::notify(SDL_Event e){
+	
+	if(!this->loaded){
+		this->loadGame();
+		this->loaded = true;
+		return NULL;
+	}
 	
 	Activity* nextActivity = NULL;
 
@@ -155,7 +176,7 @@ Activity* GameActivity::notify(SDL_Event e){
 					nextActivity = new MenuActivity(this->getWidth(), this->getHeight());
 					break;
 				default:
-					if(!this->errorFound){
+					if(!this->errorFound && this->loaded){
 						screenManager->handleKeyStroke();
 						if (this->screenManager->gameOver())
 						{
