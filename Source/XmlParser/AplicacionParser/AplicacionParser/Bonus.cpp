@@ -27,6 +27,14 @@ Bonus::Bonus(XmlElement& e) : tieneError(false)
 	{
 		tipo = e.getValue("tipo");
 	}	
+	if (e.hasAttribute("frecuencia"))
+	{
+		this->frecuencia = atof(e.getValue("frecuencia").c_str());
+	} else this->frecuencia = -1;
+	if (e.hasAttribute("duracion"))
+	{
+		this->duracion = atoi(e.getValue("duracion").c_str());
+	}	else this->duracion = -1;
 }
 
 bool Bonus::validateAttributes(XmlElement& e)

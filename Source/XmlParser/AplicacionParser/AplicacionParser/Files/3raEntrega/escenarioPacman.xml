@@ -858,6 +858,8 @@
   <TIPOSBONUS>
 	<TIPOBONUS nombre="alimento" textura="alimento"/>
 	<TIPOBONUS nombre="alimentoEspecial" textura="alimentoEspecial"/>
+  <TIPOBONUS nombre="anana" textura="anana" frecuencia="0.8" duracion="10"/>
+  <TIPOBONUS nombre="manzana" textura="manzana" frecuencia="0.2" duracion="5"/>
   </TIPOSBONUS>
   <TEXTURAS>
 	<TEXTURA nombre="Fondo" path="Images\texturaFondo.bmp"/>
