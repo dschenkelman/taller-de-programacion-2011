@@ -40,6 +40,7 @@ public:
 	void kill(void);
 	bool isAlive(void);
 	void increaseScore(int increase);
+	int getScore(void);
 	void increaseEatenBonus(void);
 	int getEatenBonus(void);
 	int getGhostKills(void);

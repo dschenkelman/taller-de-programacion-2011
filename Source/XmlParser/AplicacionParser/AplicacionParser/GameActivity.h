@@ -7,14 +7,20 @@
 
 class GameActivity : public Activity {
 private:
+	int xCarteles;
 	Escenario* escenario;
 	Image* fondo;
-	RichTextView* pointsTitle;
+	RichTextView* points1Title;
+	RichTextView* points2Title;
 	RichTextView* timeTitle;
+	RichTextView* points1View;
+	RichTextView* points2View;
 	Uint32 period;
 	ScreenManager* screenManager;
 	bool errorFound;
-
+	int points1;
+	int points2;
+	void updateScoreBoard(void);
 public:
 	GameActivity(int width, int height);
 	GameActivity(Escenario* escenario, int width, int height);

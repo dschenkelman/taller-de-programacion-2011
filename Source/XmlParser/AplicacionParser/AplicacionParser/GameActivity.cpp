@@ -6,13 +6,15 @@
 #include "Grapher.h"
 #include <iostream>
 #include "XmlParser.h"
+#include <sstream>
 
-GameActivity::GameActivity(int width, int height):Activity(width, height)
+GameActivity::GameActivity(int width, int height):Activity(width, height), points1(0), points2(0), xCarteles(0)
 {
 	this->errorFound = false;
 }
 
-GameActivity::GameActivity(Escenario* escenario, int width, int height):Activity(escenario, width, height)
+GameActivity::GameActivity(Escenario* escenario, int width, int height):Activity(escenario, width, height),
+points1(0), points2(0), xCarteles(0)
 {
 }
 
@@ -53,23 +55,35 @@ void GameActivity::onLoad(){
 
 			if (!grapher.hasError()){
 
-				int posX = (grapher.getImageWidth() * this->escenario->getGrilla()->getAncho())+10;
+				this->xCarteles = (grapher.getImageWidth() * this->escenario->getGrilla()->getAncho())+10;
 
 				// texto del tiempo
 				this->timeTitle = new RichTextView("Time", RichTextView::NORMAL);
-				this->timeTitle->setX(posX); this->timeTitle->setY(0);
+				this->timeTitle->setX(this->xCarteles); this->timeTitle->setY(0);
 
-				// texto de los puntos
-				this->pointsTitle = new RichTextView("Points", RichTextView::NORMAL);
-				this->pointsTitle->setX(posX); this->pointsTitle->setY(50);
+				// texto de los puntos jugador 1
+				this->points1Title = new RichTextView("Yellow Pac", RichTextView::NORMAL);
+				this->points1Title->setX(this->xCarteles); this->points1Title->setY(50);
+
+				this->points1View = new RichTextView("0", RichTextView::NORMAL);
+				this->points1View->setX(this->xCarteles); this->points1View->setY(75);
+
+				// texto de los puntos jugador 2
+				this->points2Title = new RichTextView("Red Pac", RichTextView::NORMAL);
+				this->points2Title->setX(this->xCarteles); this->points2Title->setY(100);
+
+				this->points2View = new RichTextView("0", RichTextView::NORMAL);
+				this->points2View->setX(this->xCarteles); this->points2View->setY(125);
 
 				// Creo un screenmanager para la logica del juego
 				this->screenManager = new ScreenManager(this, fondo, this->escenario->getGrilla(), grapher.getImageHeight(), grapher.getImageWidth(), this->period);
 
 				// los agrego a la pantalla
 				this->add(this->timeTitle);
-				this->add(this->pointsTitle);
-
+				this->add(this->points1Title);
+				this->add(this->points2Title);
+				this->add(this->points1View);
+				this->add(this->points2View);
 			}
 			else{
 				std::string msg = "Error al graficar. Ver el archivo parser.log.txt";
@@ -116,13 +130,12 @@ void GameActivity::onLoad(){
 
 // En el update de esta actividad hago el update del juego
 void GameActivity::update(){
-	if(!this->errorFound){
+	if(!this->errorFound)
+	{
 		screenManager->updateScreen();
+		this->updateScoreBoard();
 	}
 }
-
-
-
 Activity* GameActivity::notify(SDL_Event e){
 	
 	Activity* nextActivity = NULL;
@@ -157,4 +170,39 @@ Activity* GameActivity::notify(SDL_Event e){
 	}
 
 	return nextActivity;
+}
+
+void GameActivity::updateScoreBoard(void)
+{
+
+	int pacman1Score = screenManager->getPacman1()->getScore();
+	int pacman2Score = screenManager->getPacman2()->getScore();
+
+	if (this->points1 != pacman1Score)
+	{
+		this->points1 = pacman1Score;
+		stringstream ss;//create a stringstream
+		ss << pacman1Score;//add number to the stream
+		RichTextView* updatedPoints1View = new RichTextView(ss.str(), RichTextView::NORMAL);
+		updatedPoints1View->setX(this->xCarteles); updatedPoints1View->setY(75);
+
+		this->updateViewFromView(this->points1View, updatedPoints1View);
+
+		delete this->points1View;
+		this->points1View = updatedPoints1View;
+	}
+
+	if (this->points2 != pacman2Score)
+	{
+		this->points2 = pacman2Score;
+		stringstream ss;//create a stringstream
+		ss << pacman2Score;//add number to the stream
+		RichTextView* updatedPoints2View = new RichTextView(ss.str(), RichTextView::NORMAL);
+		updatedPoints2View->setX(this->xCarteles); updatedPoints2View->setY(125);
+
+		this->updateViewFromView(this->points2View, updatedPoints2View);
+
+		delete this->points2View;
+		this->points2View = updatedPoints2View;
+	}
 }

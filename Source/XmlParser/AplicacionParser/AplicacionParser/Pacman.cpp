@@ -182,6 +182,11 @@ void Pacman::increaseScore(int increase)
 	this->score += increase;
 }
 
+int Pacman::getScore(void)
+{
+	return this->score;
+}
+
 void Pacman::increaseEatenBonus(void)
 {
 	this->normalBonusEaten++;

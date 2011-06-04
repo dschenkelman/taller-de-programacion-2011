@@ -243,6 +243,17 @@ bool ScreenManager::gameOver(void)
 	// eventually this will also include whether all bonuses have been eaten
 	return (this->deadCycles >= 40 || (this->pacman1->getEatenBonus() + this->pacman2->getEatenBonus() == this->grilla->getCantidadBonus())) ;
 }
+
+Pacman* ScreenManager::getPacman1(void)
+{
+	return this->pacman1;
+}
+
+Pacman* ScreenManager::getPacman2(void)
+{
+	return this->pacman2;
+}
+
 void ScreenManager::handleBonusEating(Pacman* pac, List<Ghost*>& ghosts, string bonus, bool isPacman1)
 {
 	if (bonus == "alimento")
