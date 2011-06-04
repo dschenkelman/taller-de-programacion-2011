@@ -5,16 +5,16 @@
 /** string parameters */
 void ParameterHolder::addParameter(std::string key, std::string value){
 	Parameter* newParameter = new Parameter(key, value);
-	this->parameters->add(newParameter);
+	this->parameters.add(newParameter);
 }
 
 std::string ParameterHolder::getParameter(std::string key){
 	std::string toReturn = NULL;
 	bool found = false;
 	size_t pos = 0;
-	while(!found && pos < this->parameters->length()){
-		if(this->parameters->at(pos)->getKey() == key){
-			toReturn = this->parameters->at(pos)->getValue();
+	while(!found && pos < this->parameters.length()){
+		if(this->parameters.at(pos)->getKey() == key){
+			toReturn = this->parameters.at(pos)->getValue();
 			found = true;
 		}
 	}
@@ -29,15 +29,15 @@ void ParameterHolder::addIntParameter(std::string key, int value){
 	out << value;
 	s = out.str();
 	Parameter* newParameter = new Parameter(key, s);
-	this->parameters->add(newParameter);
+	this->parameters.add(newParameter);
 }
 int ParameterHolder::getIntParameter(std::string key){
 	std::string toReturn = NULL;
 	bool found = false;
 	size_t pos = 0;
-	while(!found && pos < this->parameters->length()){
-		if(this->parameters->at(pos)->getKey() == key){
-			toReturn = this->parameters->at(pos)->getValue();
+	while(!found && pos < this->parameters.length()){
+		if(this->parameters.at(pos)->getKey() == key){
+			toReturn = this->parameters.at(pos)->getValue();
 			found = true;
 		}
 	}
@@ -48,8 +48,8 @@ int ParameterHolder::getIntParameter(std::string key){
 
 ParameterHolder::~ParameterHolder()
 {
-	for (int i = 0; i < this->parameters->length(); i++)
+	for (int i = 0; i < this->parameters.length(); i++)
 	{
-		delete this->parameters->at(i);
+		delete this->parameters.at(i);
 	}
 }

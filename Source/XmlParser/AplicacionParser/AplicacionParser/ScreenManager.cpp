@@ -50,23 +50,23 @@ void ScreenManager::createGhostsForPacman1(void)
 	int ghostInitialX = (this->imageWidth * (this->grilla->getAncho() - 1)) / 2;
 	int ghostInitialY = (this->imageHeight * (this->grilla->getAlto() - 1)) / 2;
 
-	this->pacman1Ghosts.add(new Ghost("Images/redGhost.bmp", "Images/brownVGhost.bmp" , 
+	this->pacman1Ghosts.add(new Ghost(this->soundManager, "Images/redGhost.bmp", "Images/brownVGhost.bmp" , 
 		this->grilla, this->window->getHeight(), this->window->getWidth(),
 		ghostInitialX - this->imageWidth
 		, ghostInitialY - 22, 2, this->pacman1, 
 		this->imageHeight, this->imageWidth, false, 0));
 
-	this->pacman1Ghosts.add(new Ghost("Images/redGhost.bmp", "Images/brownVGhost.bmp", 
+	this->pacman1Ghosts.add(new Ghost(this->soundManager, "Images/redGhost.bmp", "Images/brownVGhost.bmp", 
 		this->grilla, this->window->getHeight(), this->window->getWidth(),
 		ghostInitialX + this->imageWidth, ghostInitialY + this->imageHeight, 2, this->pacman1, 
 		this->imageHeight, this->imageWidth, true, 1));
 
-	this->pacman1Ghosts.add(new Ghost("Images/redGhost.bmp", "Images/brownVGhost.bmp" , 
+	this->pacman1Ghosts.add(new Ghost(this->soundManager, "Images/redGhost.bmp", "Images/brownVGhost.bmp" , 
 		this->grilla, this->window->getHeight(), this->window->getWidth(),
 		ghostInitialX - this->imageWidth, ghostInitialY + this->imageHeight, 2, 
 		this->pacman1, this->imageHeight, this->imageWidth, true, 2));
 
-	this->pacman1Ghosts.add(new Ghost("Images/redGhost.bmp", "Images/brownVGhost.bmp" , 
+	this->pacman1Ghosts.add(new Ghost(this->soundManager, "Images/redGhost.bmp", "Images/brownVGhost.bmp" , 
 		this->grilla, this->window->getHeight(), this->window->getWidth(),
 		ghostInitialX, 
 		ghostInitialY + this->imageHeight, 2, this->pacman1, 
@@ -78,22 +78,22 @@ void ScreenManager::createGhostsForPacman2(void)
 	int ghostInitialX = (this->imageWidth * (this->grilla->getAncho() - 1)) / 2;
 	int ghostInitialY = (this->imageHeight * (this->grilla->getAlto() - 1)) / 2;
 
-	this->pacman2Ghosts.add(new Ghost("Images/blueGhost.bmp", "Images/greenVGhost.bmp" , 
+	this->pacman2Ghosts.add(new Ghost(this->soundManager,"Images/blueGhost.bmp", "Images/greenVGhost.bmp" , 
 		this->grilla, this->window->getHeight(), this->window->getWidth(),
 		ghostInitialX + this->imageWidth, ghostInitialY -22, 2, this->pacman2, 
 		this->imageHeight, this->imageWidth, false, 0));
 	
-	this->pacman2Ghosts.add(new Ghost("Images/blueGhost.bmp","Images/greenVGhost.bmp", 
+	this->pacman2Ghosts.add(new Ghost(this->soundManager,"Images/blueGhost.bmp","Images/greenVGhost.bmp", 
 		this->grilla, this->window->getHeight(), this->window->getWidth(),
 		ghostInitialX - this->imageWidth, ghostInitialY + this->imageHeight * 2, 2, this->pacman2, 
 		this->imageHeight, this->imageWidth, true, 1));
 
-	this->pacman2Ghosts.add(new Ghost("Images/blueGhost.bmp", "Images/greenVGhost.bmp", 
+	this->pacman2Ghosts.add(new Ghost(this->soundManager,"Images/blueGhost.bmp", "Images/greenVGhost.bmp", 
 		this->grilla, this->window->getHeight(), this->window->getWidth(),
 		ghostInitialX + this->imageWidth, ghostInitialY + this->imageHeight * 2, 2, 
 		this->pacman2, this->imageHeight, this->imageWidth, true, 2));
 
-	this->pacman2Ghosts.add(new Ghost("Images/blueGhost.bmp", "Images/greenVGhost.bmp" , 
+	this->pacman2Ghosts.add(new Ghost(this->soundManager,"Images/blueGhost.bmp", "Images/greenVGhost.bmp" , 
 		this->grilla, this->window->getHeight(), this->window->getWidth(),
 		ghostInitialX, ghostInitialY + this->imageHeight * 2, 2, this->pacman2, 
 		this->imageHeight, this->imageWidth, true, 3));
@@ -111,7 +111,7 @@ void ScreenManager::handleKeyStroke(void)
 void ScreenManager::updateScreen(void)
 {
 	this->updateGhostsVulnerability();
-	// this->updateGhostsActivation();
+	this->updateGhostsActivation();
 	this->deletePacman(this->pacman1);
 	this->deletePacman(this->pacman2);
 	this->deleteGhosts(this->pacman1Ghosts);
@@ -283,13 +283,13 @@ void ScreenManager::handleBonusEating(Pacman* pac, List<Ghost*>& ghosts, string 
 		// alimento comun
 		pac->increaseScore(10);
 		pac->increaseEatenBonus();
-		this->soundManager->playSound(this->soundManager->getEatSoundPath(), 1);
+		this->soundManager->playSound(this->soundManager->getEatPath(), 1);
 		return;
 	}
 
 	if (bonus == "alimentoEspecial")
 	{
-		this->soundManager->playSound(this->soundManager->getEatSoundPath(), 1);
+		this->soundManager->playSound(this->soundManager->getEatPath(), 1);
 		
 		// alimento bonus, fanstamas vulnerablesppp
 		pac->setGhostKills(0);

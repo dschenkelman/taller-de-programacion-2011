@@ -13,10 +13,12 @@ class SoundManager
 	std::map<std::string, Mix_Chunk*> audioChunks; 
 	std::map<std::string, int> audioChannels; 
 	std::string eatSound;
+	std::string eatGhostSound;
 	void loadPacmanSounds(void);
 public:
 	SoundManager(void);
-	std::string getEatSoundPath();
+	std::string getEatPath();
+	std::string getEatGhostPath();
 	void loadSound(std::string path);
 	void playSound(std::string path, int timesToPlay);
 	~SoundManager(void);

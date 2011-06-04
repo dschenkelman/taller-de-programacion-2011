@@ -11,7 +11,7 @@
 
 using namespace std;
 
-Ghost::Ghost(string pathTextura, string pathTexturaVulnerable, Grilla* grilla, int h, int w, 
+Ghost::Ghost(SoundManager* soundManager, string pathTextura, string pathTexturaVulnerable, Grilla* grilla, int h, int w, 
 			 int x, int y, int speed, Pacman* pacman, int imageHeight, int imageWidth, bool inHq, int idiotCorner):
 Character(pathTextura, grilla, h, w, x, y, 0, 0, speed, imageHeight, imageWidth), pacman(pacman), 
 pathTextura(pathTextura), pathTexturaVulnerable(pathTexturaVulnerable),
@@ -19,6 +19,7 @@ isVulnerable(false), originalSpeed(speed), originalX(x), originalY(y),
 inHeadquarters(inHq), isActive(false),
 outXPosition(0), outYPosition(0)
 {
+	this->soundManager = soundManager;
 	this->outXPosition = this->imageWidth * ((grilla->getAncho() - 1) / 2);
 	this->outYPosition = ((this->imageHeight * (this->grilla->getAlto() - 1)) / 2) - 22;
 	this->texturaNoVulnerable = this->textura;

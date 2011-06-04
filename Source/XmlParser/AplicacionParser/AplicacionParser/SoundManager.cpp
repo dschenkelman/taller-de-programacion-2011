@@ -5,7 +5,7 @@
 
 using namespace std;
 
-SoundManager::SoundManager(void) : eatSound("sounds/eat.wav")
+SoundManager::SoundManager(void) : eatSound("sounds/eat.wav"), eatGhostSound("sounds/eatGhost.wav")
 {
 	if(Mix_OpenAudio(AUDIO_RATE, AUDIO_FORMAT, AUDIO_CHANNELS, AUDIO_BUFFERS) != 0) 
 	{
@@ -20,11 +20,17 @@ SoundManager::SoundManager(void) : eatSound("sounds/eat.wav")
 void SoundManager::loadPacmanSounds()
 {
 	this->loadSound(this->eatSound);
+	this->loadSound(this->eatGhostSound);
 }
 
-std::string SoundManager::getEatSoundPath(void)
+std::string SoundManager::getEatPath(void)
 {
 	return this->eatSound;
+}
+
+std::string SoundManager::getEatGhostPath(void)
+{
+	return this->eatGhostSound;
 }
 
 void SoundManager::loadSound(string path)
