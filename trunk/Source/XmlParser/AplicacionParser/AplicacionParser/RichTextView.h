@@ -4,6 +4,8 @@
 #include "View.h"
 
 class RichTextView: public View{
+private:
+	int getLetterCount(std::string txt);
 
 public:
 	RichTextView(std::string txt, std::string type);
