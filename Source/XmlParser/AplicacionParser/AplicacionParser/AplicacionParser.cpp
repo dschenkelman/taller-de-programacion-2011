@@ -27,15 +27,16 @@ void printLeaks(int leaks)
 
 int execute(int argc, char* argv[])
 {
-	if (argc != 3)
+	/*if (argc != 3)
 	{
 		cout<<"Sintaxis: ApplicationParser nombreArch.xml modoVideo (640 | 800 | 1024)"<<endl;
 		return 0;
-	}
+	}*/
 	
 	int videoMode =640;
-	char* fileName = argv[1];
-	videoMode = atoi(argv[2]);
+	//char* fileName = argv[1];
+	char* fileName = "escenarioPacman.xml";
+	//videoMode = atoi(argv[2]);
 
 	int width = videoMode;
 	int height = ((videoMode * 3) / 4);

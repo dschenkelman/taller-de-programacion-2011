@@ -14,6 +14,13 @@ GameActivity::GameActivity(int width, int height):Activity(width, height), point
 	this->errorFound = false;
 }
 
+GameActivity::GameActivity(int width, int height, std::string playerOne, std::string playerTwo):Activity(width, height), points1(0), points2(0), xCarteles(0)
+{
+	this->playerOne = playerOne;
+	this->playerTwo = playerTwo;
+	this->errorFound = false;
+}
+
 GameActivity::GameActivity(Escenario* escenario, int width, int height):Activity(escenario, width, height),
 points1(0), points2(0), xCarteles(0)
 {
@@ -80,14 +87,16 @@ void GameActivity::loadGame(){
 				this->timeTitle->setX(this->xCarteles); this->timeTitle->setY(0);
 
 				// texto de los puntos jugador 1
-				this->points1Title = new RichTextView("Yellow Pac", RichTextView::NORMAL);
+				//this->points1Title = new RichTextView("Yellow Pac", RichTextView::NORMAL);
+				this->points1Title = new RichTextView(this->playerOne, RichTextView::NORMAL);
 				this->points1Title->setX(this->xCarteles); this->points1Title->setY(50);
 
 				this->points1View = new RichTextView("0", RichTextView::NORMAL);
 				this->points1View->setX(this->xCarteles); this->points1View->setY(75);
 
 				// texto de los puntos jugador 2
-				this->points2Title = new RichTextView("Red Pac", RichTextView::NORMAL);
+				//this->points2Title = new RichTextView("Red Pac", RichTextView::NORMAL);
+				this->points2Title = new RichTextView(this->playerTwo, RichTextView::NORMAL);
 				this->points2Title->setX(this->xCarteles); this->points2Title->setY(100);
 
 				this->points2View = new RichTextView("0", RichTextView::NORMAL);

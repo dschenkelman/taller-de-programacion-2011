@@ -4,6 +4,7 @@
 #include "GameActivity.h"
 #include "StatsActivity.h"
 #include "CreatePlayerActivity.h"
+#include "SelectPlayerActivity.h"
 
 MenuActivity::MenuActivity(int width, int height):Activity(width, height){
 }
@@ -55,7 +56,7 @@ Activity* MenuActivity::notify(SDL_Event e){
 			switch(e.key.keysym.sym){
 				case SDLK_RETURN:
 					if(this->arrowMenu->getSelectedOption() == "new game")
-						nextActivity = new GameActivity(this->getEscenario(), this->getWidth(), this->getHeight());
+						nextActivity = new SelectPlayerActivity(this->getWidth(), this->getHeight(), this->getEscenario());
 
 					if(this->arrowMenu->getSelectedOption() == "create player")
 						nextActivity = new CreatePlayerActivity(this->getWidth(), this->getHeight());
