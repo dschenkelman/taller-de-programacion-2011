@@ -1,12 +1,9 @@
 <ESCENARIO nombre="Escenario numero 1" texturaFondo="Fondo">
-<GRILLA ancho="26" 
+<GRILLA ancho="27" 
   		  alto="28" 
 		  tipoObstaculoPorDefecto="ladrillo">
-    <CAMINO fila="1" columna="0">
+    <CAMINO fila="1" columna="1">
 		<BONUS tipo="alimentoEspecial"/>
-	</CAMINO>
-	<CAMINO fila="1" columna="1">
-		<BONUS tipo="alimento"/>
 	</CAMINO>
 	<CAMINO fila="1" columna="2">
 		<BONUS tipo="alimento"/>
@@ -38,7 +35,7 @@
 	<CAMINO fila="1" columna="11">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="1" columna="13">
+	<CAMINO fila="1" columna="12">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
 	<CAMINO fila="1" columna="14">
@@ -72,63 +69,63 @@
 		<BONUS tipo="alimento"/>
 	</CAMINO>
 	<CAMINO fila="1" columna="24">
+		<BONUS tipo="alimento"/>
+	</CAMINO>
+	<CAMINO fila="1" columna="25">
 		<BONUS tipo="alimentoEspecial"/>
 	</CAMINO>
-	<CAMINO fila="2" columna="0">
+	<CAMINO fila="2" columna="1">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="2" columna="5">
+	<CAMINO fila="2" columna="6">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="2" columna="11">
+	<CAMINO fila="2" columna="12">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="2" columna="13">
+	<CAMINO fila="2" columna="14">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="2" columna="19">
+	<CAMINO fila="2" columna="20">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="2" columna="24">
+	<CAMINO fila="2" columna="25">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="3" columna="0">
+	<CAMINO fila="3" columna="1">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="3" columna="5">
+	<CAMINO fila="3" columna="6">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="3" columna="11">
+	<CAMINO fila="3" columna="12">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="3" columna="13">
+	<CAMINO fila="3" columna="14">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="3" columna="19">
+	<CAMINO fila="3" columna="20">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="3" columna="24">
+	<CAMINO fila="3" columna="25">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="4" columna="0">
+	<CAMINO fila="4" columna="1">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="4" columna="5">
+	<CAMINO fila="4" columna="6">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="4" columna="11">
+	<CAMINO fila="4" columna="12">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="4" columna="13">
+	<CAMINO fila="4" columna="14">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="4" columna="19">
+	<CAMINO fila="4" columna="20">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="4" columna="24">
-		<BONUS tipo="alimento"/>
-	</CAMINO>
-	<CAMINO fila="5" columna="0">
+	<CAMINO fila="4" columna="25">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
 	<CAMINO fila="5" columna="1">
@@ -203,43 +200,43 @@
 	<CAMINO fila="5" columna="24">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="6" columna="0">
+	<CAMINO fila="5" columna="25">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="6" columna="5">
+	<CAMINO fila="6" columna="1">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="6" columna="8">
+	<CAMINO fila="6" columna="6">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="6" columna="16">
+	<CAMINO fila="6" columna="9">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="6" columna="19">
+	<CAMINO fila="6" columna="17">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="6" columna="24">
+	<CAMINO fila="6" columna="20">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="7" columna="0">
+	<CAMINO fila="6" columna="25">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="7" columna="5">
+	<CAMINO fila="7" columna="1">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="7" columna="8">
+	<CAMINO fila="7" columna="6">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="7" columna="16">
+	<CAMINO fila="7" columna="9">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="7" columna="19">
+	<CAMINO fila="7" columna="17">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="7" columna="24">
+	<CAMINO fila="7" columna="20">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="8" columna="0">
+	<CAMINO fila="7" columna="25">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
 	<CAMINO fila="8" columna="1">
@@ -257,7 +254,7 @@
 	<CAMINO fila="8" columna="5">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="8" columna="8">
+	<CAMINO fila="8" columna="6">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
 	<CAMINO fila="8" columna="9">
@@ -269,7 +266,7 @@
 	<CAMINO fila="8" columna="11">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="8" columna="13">
+	<CAMINO fila="8" columna="12">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
 	<CAMINO fila="8" columna="14">
@@ -281,7 +278,7 @@
 	<CAMINO fila="8" columna="16">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="8" columna="19">
+	<CAMINO fila="8" columna="17">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
 	<CAMINO fila="8" columna="20">
@@ -299,55 +296,46 @@
 	<CAMINO fila="8" columna="24">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="9" columna="5">
+	<CAMINO fila="8" columna="25">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="9" columna="11">
+	<CAMINO fila="9" columna="6">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="9" columna="13">
+	<CAMINO fila="9" columna="12">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="9" columna="19">
+	<CAMINO fila="9" columna="14">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="10" columna="5">
+	<CAMINO fila="9" columna="20">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="10" columna="11">
+	<CAMINO fila="10" columna="6">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="10" columna="13">
+	<CAMINO fila="10" columna="12">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="10" columna="19">
+	<CAMINO fila="10" columna="14">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="11" columna="5">
+	<CAMINO fila="10" columna="20">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="11" columna="11">
+	<CAMINO fila="11" columna="6">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="11" columna="13">
+	<CAMINO fila="11" columna="12">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="11" columna="19">
+	<CAMINO fila="11" columna="14">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="12" columna="5">
+	<CAMINO fila="11" columna="20">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="12" columna="19">
-		<BONUS tipo="alimento"/>
-	</CAMINO>
-	<CAMINO fila="13" columna="5">
-		<BONUS tipo="alimento"/>
-	</CAMINO>
-	<CAMINO fila="13" columna="19">
-		<BONUS tipo="alimento"/>
-	</CAMINO>
-	<CAMINO fila="12" columna="8">
+	<CAMINO fila="12" columna="6">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
 	<CAMINO fila="12" columna="9">
@@ -374,6 +362,12 @@
 	<CAMINO fila="12" columna="16">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
+	<CAMINO fila="12" columna="17">
+		<BONUS tipo="alimento"/>
+	</CAMINO>
+	<CAMINO fila="12" columna="20">
+		<BONUS tipo="alimento"/>
+	</CAMINO>
 	<CAMINO fila="13" columna="0">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
@@ -389,6 +383,9 @@
 	<CAMINO fila="13" columna="4">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
+	<CAMINO fila="13" columna="5">
+		<BONUS tipo="alimento"/>
+	</CAMINO>
 	<CAMINO fila="13" columna="6">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
@@ -398,14 +395,17 @@
 	<CAMINO fila="13" columna="8">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<OBSTACULO fila="13" columna="12" tipo="puerta"/>
-	<CAMINO fila="13" columna="16">
+	<CAMINO fila="13" columna="9">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
+	<OBSTACULO fila="13" columna="13" tipo="puerta"/>
 	<CAMINO fila="13" columna="17">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
 	<CAMINO fila="13" columna="18">
+		<BONUS tipo="alimento"/>
+	</CAMINO>
+	<CAMINO fila="13" columna="19">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
 	<CAMINO fila="13" columna="20">
@@ -423,72 +423,74 @@
 	<CAMINO fila="13" columna="24">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	
-	<CAMINO fila="14" columna="5">
+	<CAMINO fila="13" columna="25">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="14" columna="8">
+	<CAMINO fila="13" columna="26">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="14" columna="10"/>
+	<CAMINO fila="14" columna="6">
+		<BONUS tipo="alimento"/>
+	</CAMINO>
+	<CAMINO fila="14" columna="9">
+		<BONUS tipo="alimento"/>
+	</CAMINO>
 	<CAMINO fila="14" columna="11"/>
 	<CAMINO fila="14" columna="12"/>
 	<CAMINO fila="14" columna="13"/>
 	<CAMINO fila="14" columna="14"/>
-	<CAMINO fila="14" columna="16">
+	<CAMINO fila="14" columna="15"/>
+	<CAMINO fila="14" columna="17">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="14" columna="19">
+	<CAMINO fila="14" columna="20">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="15" columna="5">
+	<CAMINO fila="15" columna="6">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="15" columna="8">
+	<CAMINO fila="15" columna="9">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="15" columna="10"/>
 	<CAMINO fila="15" columna="11"/>
 	<CAMINO fila="15" columna="12"/>
 	<CAMINO fila="15" columna="13"/>
 	<CAMINO fila="15" columna="14"/>
-	<CAMINO fila="15" columna="16">
+	<CAMINO fila="15" columna="15"/>
+	<CAMINO fila="15" columna="17">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="15" columna="19">
+	<CAMINO fila="15" columna="20">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="16" columna="5">
+	<CAMINO fila="16" columna="6">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="16" columna="8">
+	<CAMINO fila="16" columna="9">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="16" columna="10"/>
 	<CAMINO fila="16" columna="11"/>
 	<CAMINO fila="16" columna="12"/>
 	<CAMINO fila="16" columna="13"/>
 	<CAMINO fila="16" columna="14"/>
-	<CAMINO fila="16" columna="16">
+	<CAMINO fila="16" columna="15"/>
+	<CAMINO fila="16" columna="17">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
 	
-	<CAMINO fila="16" columna="19">
+	<CAMINO fila="16" columna="20">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="17" columna="8">
+	<CAMINO fila="17" columna="9">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="17" columna="5">
+	<CAMINO fila="17" columna="6">
 		<BONUS tipo="alimento"/>
 	</CAMINO>>
-	<CAMINO fila="17" columna="16">
+	<CAMINO fila="17" columna="17">
 		<BONUS tipo="alimento"/>
 	</CAMINO>>
-	<CAMINO fila="17" columna="19">
-		<BONUS tipo="alimento"/>
-	</CAMINO>
-	<CAMINO fila="18" columna="0">
+	<CAMINO fila="17" columna="20">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
 	<CAMINO fila="18" columna="1">
@@ -563,61 +565,61 @@
 	<CAMINO fila="18" columna="24">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="19" columna="0">
+	<CAMINO fila="18" columna="25">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="19" columna="5">
+	<CAMINO fila="19" columna="1">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="19" columna="8">
+	<CAMINO fila="19" columna="6">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="19" columna="16">
+	<CAMINO fila="19" columna="9">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="19" columna="19">
+	<CAMINO fila="19" columna="17">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="19" columna="24">
+	<CAMINO fila="19" columna="20">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="20" columna="0">
+	<CAMINO fila="19" columna="25">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="20" columna="5">
+	<CAMINO fila="20" columna="1">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="20" columna="8">
+	<CAMINO fila="20" columna="6">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="20" columna="16">
+	<CAMINO fila="20" columna="9">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="20" columna="19">
+	<CAMINO fila="20" columna="17">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="20" columna="24">
+	<CAMINO fila="20" columna="20">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="21" columna="0">
+	<CAMINO fila="20" columna="25">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="21" columna="5">
+	<CAMINO fila="21" columna="1">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="21" columna="8">
+	<CAMINO fila="21" columna="6">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="21" columna="16">
+	<CAMINO fila="21" columna="9">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="21" columna="19">
+	<CAMINO fila="21" columna="17">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="21" columna="24">
+	<CAMINO fila="21" columna="20">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="22" columna="0">
+	<CAMINO fila="21" columna="25">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
 	<CAMINO fila="22" columna="1">
@@ -692,65 +694,65 @@
 	<CAMINO fila="22" columna="24">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="23" columna="0">
+	<CAMINO fila="22" columna="25">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="23" columna="5">
+	<CAMINO fila="23" columna="1">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="23" columna="11">
+	<CAMINO fila="23" columna="6">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="23" columna="13">
+	<CAMINO fila="23" columna="12">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="23" columna="19">
+	<CAMINO fila="23" columna="14">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="23" columna="24">
+	<CAMINO fila="23" columna="20">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="24" columna="0">
+	<CAMINO fila="23" columna="25">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="24" columna="5">
+	<CAMINO fila="24" columna="1">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="24" columna="11">
+	<CAMINO fila="24" columna="6">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="24" columna="13">
+	<CAMINO fila="24" columna="12">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="24" columna="19">
+	<CAMINO fila="24" columna="14">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="24" columna="24">
+	<CAMINO fila="24" columna="20">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="25" columna="0">
+	<CAMINO fila="24" columna="25">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="25" columna="5">
+	<CAMINO fila="25" columna="1">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="25" columna="11">
+	<CAMINO fila="25" columna="6">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="25" columna="13">
+	<CAMINO fila="25" columna="12">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="25" columna="19">
+	<CAMINO fila="25" columna="14">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="25" columna="24">
+	<CAMINO fila="25" columna="20">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="26" columna="0">
-		<BONUS tipo="alimentoEspecial"/>
+	<CAMINO fila="25" columna="25">
+		<BONUS tipo="alimento"/>
 	</CAMINO>
 	<CAMINO fila="26" columna="1">
-		<BONUS tipo="alimento"/>
+		<BONUS tipo="alimentoEspecial"/>
 	</CAMINO>
 	<CAMINO fila="26" columna="2">
 		<BONUS tipo="alimento"/>
@@ -782,7 +784,7 @@
 	<CAMINO fila="26" columna="11">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
-	<CAMINO fila="26" columna="13">
+	<CAMINO fila="26" columna="12">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
 	<CAMINO fila="26" columna="14">
@@ -816,18 +818,21 @@
 		<BONUS tipo="alimento"/>
 	</CAMINO>
 	<CAMINO fila="26" columna="24">
+		<BONUS tipo="alimento"/>
+	</CAMINO>
+	<CAMINO fila="26" columna="25">
 		<BONUS tipo="alimentoEspecial"/>
 	</CAMINO>
   </GRILLA>
   <TIPOSOBSTACULOS>
 	<TIPOOBSTACULO nombre="ladrillo" textura="ladrillo"/>
-	<TIPOOBSTACULO nombre="puerta" textura="puerta"/>
+		<TIPOOBSTACULO nombre="puerta" textura="puerta"/>
   </TIPOSOBSTACULOS>
   <TIPOSBONUS>
 	<TIPOBONUS nombre="alimento" textura="alimento"/>
 	<TIPOBONUS nombre="alimentoEspecial" textura="alimentoEspecial"/>
-	<TIPOBONUS nombre="anana" textura="anana" frecuencia="0.8" duracion="10"/>
-    <TIPOBONUS nombre="manzana" textura="manzana" frecuencia="0.2" duracion="5"/>
+	<TIPOBONUS nombre="anana" textura="anana" />
+    <TIPOBONUS nombre="manzana" textura="manzana" />
 	<TIPOBONUS nombre="alimentoDuplicador" textura="alimentoDuplicador"/>
 	<TIPOBONUS nombre="alimentoRobaPuntos" textura="alimentoRobaPuntos"/>
 	<TIPOBONUS nombre="alimentoPersecucion" textura="alimentoPersecucion"/>
@@ -839,8 +844,8 @@
 	<TEXTURA nombre="Fondo" path="Images\texturaFondo.bmp"/>
 	<TEXTURA nombre="ladrillo" path="Images/ladrillo.bmp"/>
 	<TEXTURA nombre="alimento" path="Images\bonus.bmp" alpha="#FFFFFF"/>	
-	<TEXTURA nombre="anana" path="Images\pineapple.bmp"alpha="#FFFFFF"/>
-	<TEXTURA nombre="manzana" path="Images\manzana.bmp"alpha="#FFFFFF"/>
+	<TEXTURA nombre="anana" path="Images\pineapple.bmp" alpha="#FFFFFF"/>
+	<TEXTURA nombre="manzana" path="Images\manzana.bmp" alpha="#FFFFFF"/>
 	<TEXTURA nombre="alimentoEspecial" path="Images\alimentoEspecial.bmp" alpha="#FFFFFF"/>
 	<TEXTURA nombre="alimentoDuplicador" path="Images\alimentoDuplicador.bmp" alpha="#FFFFFF"/>
 	<TEXTURA nombre="alimentoCongelado" path="Images\alimentoCongelado.bmp" alpha="#FFFFFF"/>
