@@ -133,6 +133,12 @@ void ScreenManager::updateScreen(void)
 	}
 	else
 	{
+		if (this->deadCycles == 0)
+		{
+			this->soundManager->playSound(this->soundManager->getDiesPath(), 1);
+			this->soundManager->pauseSound(this->soundManager->getBackgroundPath());
+		}
+
 		if (this->deadCycles < 20)
 		{
 			// one of the pacmans is dead.
@@ -267,13 +273,9 @@ void ScreenManager::deleteBonus(Pacman *pac, List<Ghost*>& ghosts, bool isPacman
 bool ScreenManager::gameOver(void)
 {
 	// eventually this will also include whether all bonuses have been eaten
-	bool gameOver = (this->deadCycles >= 40 || (this->pacman1->getEatenBonus() + this->pacman2->getEatenBonus() == this->grilla->getCantidadBonus()));
-	if (gameOver)
-	{
-		this->soundManager->pauseSound(this->soundManager->getBackgroundPath());
-	}
-	
-	return gameOver;
+	bool foodOver = (this->pacman1->getEatenBonus() + this->pacman2->getEatenBonus() == this->grilla->getCantidadBonus());
+	bool pacmanDead = this->deadCycles >= 40;
+	return (pacmanDead || foodOver);
 }
 
 Pacman* ScreenManager::getPacman1(void)
