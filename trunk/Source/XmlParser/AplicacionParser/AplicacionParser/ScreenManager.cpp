@@ -20,18 +20,21 @@ activatedGhosts(0), activationCycles(ghostActivationTime)
 	this->fondo = imageFondo;
 	this->gameOverImage = new Image("Images/gameOver.bmp");
 
-	int pacman1InitialX = this->imageWidth * 11;
+	this->boardHeight = this->grilla->getAlto() * this->imageHeight;
+	this->boardWidth = this->grilla->getAncho() * this->imageWidth;
+
+	int pacman1InitialX = this->imageWidth * 12;
 	int pacman1InitialY = this->imageHeight * 18;
 
-	int pacman2InitialX = this->imageWidth * 13;
+	int pacman2InitialX = this->imageWidth * 14;
 	int pacman2InitialY = this->imageHeight * 18;
 
 	this->pacman1 = new Pacman("Images/pacman.bmp","Images/pacmanClosed.bmp", this->grilla,
-		this->window->getHeight(), this->window->getWidth(),
+		this->boardHeight, this->boardWidth,
 		pacman1InitialX, pacman1InitialY, 3, this->imageHeight, this->imageWidth);
 
 	this->pacman2 = new Pacman("Images/pacman2.bmp", "Images/pacman2Closed.bmp", this->grilla,
-		this->window->getHeight(), this->window->getWidth(),
+		this->boardHeight, this->boardWidth,
 		pacman2InitialX, pacman2InitialY, 3, this->imageHeight, this->imageWidth);
 
 	this->createGhostsForPacman1();
@@ -55,23 +58,23 @@ void ScreenManager::createGhostsForPacman1(void)
 	int ghostInitialY = (this->imageHeight * (this->grilla->getAlto() - 1)) / 2;
 
 	this->pacman1Ghosts.add(new Ghost(this->soundManager, "Images/redGhost.bmp", "Images/brownVGhost.bmp" , 
-		this->grilla, this->window->getHeight(), this->window->getWidth(),
+		this->grilla, this->boardHeight, this->boardWidth,
 		ghostInitialX - this->imageWidth
 		, ghostInitialY - 22, 2, this->pacman1, 
 		this->imageHeight, this->imageWidth, false, 0));
 
 	this->pacman1Ghosts.add(new Ghost(this->soundManager, "Images/redGhost.bmp", "Images/brownVGhost.bmp", 
-		this->grilla, this->window->getHeight(), this->window->getWidth(),
+		this->grilla, this->boardHeight, this->boardWidth,
 		ghostInitialX + this->imageWidth, ghostInitialY + this->imageHeight, 2, this->pacman1, 
 		this->imageHeight, this->imageWidth, true, 1));
 
 	this->pacman1Ghosts.add(new Ghost(this->soundManager, "Images/redGhost.bmp", "Images/brownVGhost.bmp" , 
-		this->grilla, this->window->getHeight(), this->window->getWidth(),
+		this->grilla, this->boardHeight, this->boardWidth,
 		ghostInitialX - this->imageWidth, ghostInitialY + this->imageHeight, 2, 
 		this->pacman1, this->imageHeight, this->imageWidth, true, 2));
 
 	this->pacman1Ghosts.add(new Ghost(this->soundManager, "Images/redGhost.bmp", "Images/brownVGhost.bmp" , 
-		this->grilla, this->window->getHeight(), this->window->getWidth(),
+		this->grilla, this->boardHeight, this->boardWidth,
 		ghostInitialX, 
 		ghostInitialY + this->imageHeight, 2, this->pacman1, 
 		this->imageHeight, this->imageWidth, true, 3));

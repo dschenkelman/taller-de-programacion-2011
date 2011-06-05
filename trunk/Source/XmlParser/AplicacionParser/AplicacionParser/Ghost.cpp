@@ -160,8 +160,8 @@ void Ghost::determineNextPosition(void)
 	int attempts = 0;
 	do
 	{
-		//cout << "x " << this->xDirection << " y " << this->yDirection << endl;
 		int position;	
+
 		if (this->isVulnerable)
 		{
 			this->idiotMode=false;
@@ -187,14 +187,12 @@ void Ghost::determineNextPosition(void)
 		}
 		if (getDiferentPositions(this->moveHistory,4) == 2 && this->idiotModeTimeout < 100 ) {
 			if (!this->idiotMode) {
-				cout << "ENTERING IDIOT MODE" <<endl<<endl;
+				this->idiotMode = true;
 			}
-			this->idiotMode = true;
+			/*this->idiotMode = true;*/
 			this->idiotModeTimeout++;
-			cout << this->idiotModeTimeout << endl;
 		} else {
 			if (this->idiotMode) {
-				cout << "LEAVING IDIOT MODE" <<endl<<endl;
 				this->moveHistory[0]=0;
 				this->moveHistory[1]=1;
 				this->moveHistory[2]=2;
@@ -229,14 +227,12 @@ void Ghost::rotateLeft(void)
 	if (this->xDirection==0 && this->yDirection==0) {
 		this->xDirection=-1;
 		this->yDirection=0;
-		//cout << "posx " << this->xDirection << " posy " << this->yDirection << endl;
 		return;
 	}
 	int tmp = this->xDirection;
 	this->xDirection = this->yDirection;
 	this->yDirection = tmp;
 	if (this->xDirection==0) this->yDirection = -this->yDirection;
-	//cout << "posx " << this->xDirection << " posy " << this->yDirection << endl;
 }
 
 vector<double> Ghost::getDistanceForEachPosition(void)
@@ -283,6 +279,7 @@ void Ghost::comeBackToLife(void)
 	Character::y = ((this->imageHeight * (this->grilla->getAlto() - 1)) / 2) + this->imageHeight;
 	this->setIsVulnerable(false);
 	this->inHeadquarters = true;
+	this->idiotMode = false;
 }
 
 bool Ghost::isNextPositionValid(void)
