@@ -42,17 +42,17 @@ string XmlElement::getName() const {
 	return this->name;
 }
 
-List<XmlElement> XmlElement::getChildren() const {
+List<XmlElement>& XmlElement::getChildren() const {
 	if(!this->children_created) {
 		throw std::exception();
 	}
 
-	return List<XmlElement>(*(this->children));
+	return *this->children;
 }
 
-List<XmlAttribute> XmlElement::getAttributes() const
+List<XmlAttribute>& XmlElement::getAttributes()
 {
-	return List<XmlAttribute>(this->attributes);
+	return this->attributes;
 }
 	
 void XmlElement::addChild(const XmlElement& child) {
