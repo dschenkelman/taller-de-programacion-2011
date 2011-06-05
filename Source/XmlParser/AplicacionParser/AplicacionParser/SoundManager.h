@@ -15,13 +15,15 @@ class SoundManager
 	std::string backgroundSound;
 	std::string eatSound;
 	std::string eatGhostSound;
+	std::string diesSound;
 	void loadPacmanSounds(void);
 	int lastChannel;
 public:
 	SoundManager(void);
-	std::string getEatPath();
-	std::string getEatGhostPath();
-	std::string getBackgroundPath();
+	std::string getEatPath(void);
+	std::string getEatGhostPath(void);
+	std::string getBackgroundPath(void);
+	std::string getDiesPath(void);
 	void loadSound(std::string path);
 	void playSound(std::string path, int timesToPlay);
 	void pauseSound(std::string path);
