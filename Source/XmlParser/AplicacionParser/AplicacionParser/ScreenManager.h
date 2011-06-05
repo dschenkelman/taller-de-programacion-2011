@@ -21,6 +21,7 @@ class ScreenManager
 	List<Ghost*> pacman2Ghosts;
 	Activity* window;
 	//Window* window;
+	bool finished;
 	Image* fondo;
 	Image* gameOverImage;
 	Pacman* pacman1;
@@ -48,6 +49,7 @@ class ScreenManager
 	void createGhostsForPacman2(void);
 	void handleBonusEating(Pacman* pac, List<Ghost*>& ghosts, std::string bonus, bool isPacman1);
 	void deleteBonus(Pacman *pac, List<Ghost*>& ghosts, bool isPacman1);
+	bool isFoodOver(void);
 public:
 	ScreenManager(Activity* w, Image* imageFondo, Grilla* grilla, int imageHeight, int imageWidth, Uint32 period);
 	//ScreenManager(Window* w, Image* imageFondo, Grilla& grilla, int imageHeight, int imageWidth);

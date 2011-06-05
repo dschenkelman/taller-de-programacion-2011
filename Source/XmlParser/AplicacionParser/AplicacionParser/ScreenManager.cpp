@@ -11,7 +11,7 @@ ScreenManager::ScreenManager(Activity* w, Image* imageFondo, Grilla* g, int imag
 : deadCycles(0), imageHeight(imageHeight), imageWidth(imageWidth), period(period),
 vulnerablePacman1Cycles(0), vulnerablePacman2Cycles(0), 
 pacman1GhostsVulnerable(false), pacman2GhostsVulnerable(false),
-activatedGhosts(0), activationCycles(ghostActivationTime)
+activatedGhosts(0), activationCycles(ghostActivationTime), finished(false)
 {
 	this->soundManager = new SoundManager();
 	
@@ -125,12 +125,27 @@ void ScreenManager::updateScreen(void)
 	this->deleteGhosts(this->pacman2Ghosts);
 	if (this->pacman1->isAlive() && this->pacman2->isAlive())
 	{
-		this->deleteBonus(this->pacman1, this->pacman1Ghosts, true);
-		this->deleteBonus(this->pacman2, this->pacman2Ghosts, false);
-		this->updatePacman(this->pacman1);
-		this->updatePacman(this->pacman2);
-		this->updateGhosts(this->pacman1Ghosts);
-		this->updateGhosts(this->pacman2Ghosts);
+		if (this->isFoodOver())
+		{
+			// game is finished, someone won
+			this->soundManager->pauseSound(this->soundManager->getBackgroundPath());
+			this->soundManager->playSound(this->soundManager->getWonPath(), 1);
+			while (this->soundManager->isSoundPlaying(this->soundManager->getWonPath()))
+			{
+				// wait until sounds is over playing
+			}
+			
+			this->finished = true;
+		}
+		else
+		{
+			this->deleteBonus(this->pacman1, this->pacman1Ghosts, true);
+			this->deleteBonus(this->pacman2, this->pacman2Ghosts, false);
+			this->updatePacman(this->pacman1);
+			this->updatePacman(this->pacman2);
+			this->updateGhosts(this->pacman1Ghosts);
+			this->updateGhosts(this->pacman2Ghosts);
+		}
 		/*this->deleteBonus(this->pacman1, this->pacman1Ghosts, true);
 		this->deleteBonus(this->pacman2, this->pacman2Ghosts, false);*/
 	}
@@ -273,12 +288,16 @@ void ScreenManager::deleteBonus(Pacman *pac, List<Ghost*>& ghosts, bool isPacman
 	this->window->display(this->fondoNegro, ia.getX(), ia.getY(), ia.getImageWidth(), ia.getImageHeight());
 }
 
+bool ScreenManager::isFoodOver()
+{
+	return (this->pacman1->getEatenBonus() + this->pacman2->getEatenBonus() == this->grilla->getCantidadBonus());
+}
+
 bool ScreenManager::gameOver(void)
 {
-	// eventually this will also include whether all bonuses have been eaten
-	bool foodOver = (this->pacman1->getEatenBonus() + this->pacman2->getEatenBonus() == this->grilla->getCantidadBonus());
 	bool pacmanDead = this->deadCycles >= 40;
-	return (pacmanDead || foodOver);
+
+	return (pacmanDead || this->finished);
 }
 
 Pacman* ScreenManager::getPacman1(void)
