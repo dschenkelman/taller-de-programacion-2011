@@ -1,5 +1,5 @@
 <ESCENARIO nombre="Escenario numero 1" texturaFondo="Fondo">
-<GRILLA ancho="25" 
+<GRILLA ancho="26" 
   		  alto="28" 
 		  tipoObstaculoPorDefecto="ladrillo">
     <CAMINO fila="1" columna="0">
@@ -341,6 +341,39 @@
 	<CAMINO fila="12" columna="19">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
+	<CAMINO fila="13" columna="5">
+		<BONUS tipo="alimento"/>
+	</CAMINO>
+	<CAMINO fila="13" columna="19">
+		<BONUS tipo="alimento"/>
+	</CAMINO>
+	<CAMINO fila="10" columna="5">
+		<BONUS tipo="alimento"/>
+	</CAMINO>
+	<CAMINO fila="10" columna="11">
+		<BONUS tipo="alimento"/>
+	</CAMINO>
+	<CAMINO fila="10" columna="13">
+		<BONUS tipo="alimento"/>
+	</CAMINO>
+	<CAMINO fila="10" columna="19">
+		<BONUS tipo="alimento"/>
+	</CAMINO>
+	<CAMINO fila="11" columna="5">
+		<BONUS tipo="alimento"/>
+	</CAMINO>
+	<CAMINO fila="11" columna="11">
+		<BONUS tipo="alimento"/>
+	</CAMINO>
+	<CAMINO fila="11" columna="13">
+		<BONUS tipo="alimento"/>
+	</CAMINO>
+	<CAMINO fila="11" columna="19">
+		<BONUS tipo="alimento"/>
+	</CAMINO>
+	<CAMINO fila="12" columna="5">
+		<BONUS tipo="alimento"/>
+	</CAMINO>
 	<CAMINO fila="12" columna="8">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
@@ -368,6 +401,9 @@
 	<CAMINO fila="12" columna="16">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
+	<CAMINO fila="12" columna="19">
+		<BONUS tipo="alimento"/>
+	</CAMINO>
 	
 	<CAMINO fila="13" columna="0">
 		<BONUS tipo="alimento"/>
@@ -385,6 +421,12 @@
 		<BONUS tipo="alimento"/>
 	</CAMINO>
 	<CAMINO fila="13" columna="5">
+		<BONUS tipo="alimento"/>
+	</CAMINO>
+	<CAMINO fila="13" columna="6">
+		<BONUS tipo="alimento"/>
+	</CAMINO>
+	<CAMINO fila="13" columna="7">
 		<BONUS tipo="alimento"/>
 	</CAMINO>
 	<CAMINO fila="13" columna="8">
@@ -813,7 +855,7 @@
 	<CAMINO fila="26" columna="24">
 		<BONUS tipo="alimentoEspecial"/>
 	</CAMINO>
-   </GRILLA>
+  </GRILLA>
   <TIPOSOBSTACULOS>
 	<TIPOOBSTACULO nombre="ladrillo" textura="ladrillo"/>
 	<TIPOOBSTACULO nombre="puerta" textura="puerta"/>
@@ -821,12 +863,28 @@
   <TIPOSBONUS>
 	<TIPOBONUS nombre="alimento" textura="alimento"/>
 	<TIPOBONUS nombre="alimentoEspecial" textura="alimentoEspecial"/>
+	<TIPOBONUS nombre="anana" textura="anana" frecuencia="0.8" duracion="10"/>
+    <TIPOBONUS nombre="manzana" textura="manzana" frecuencia="0.2" duracion="5"/>
+	<TIPOBONUS nombre="alimentoDuplicador" textura="alimentoDuplicador"/>
+	<TIPOBONUS nombre="alimentoRobaPuntos" textura="alimentoRobaPuntos"/>
+	<TIPOBONUS nombre="alimentoPersecucion" textura="alimentoPersecucion"/>
+	<TIPOBONUS nombre="alimentoCongelado" textura="alimentoCongelado"/>
+	<TIPOBONUS nombre="alimentoDuplicaVelocidad" textura="alimentoDuplicaVelocidad"/>
+	<TIPOBONUS nombre="alimentoReduceVelocidad" textura="alimentoReduceVelocidad"/>
   </TIPOSBONUS>
   <TEXTURAS>
-	<TEXTURA nombre="Fondo" path="Images/texturaFondo.bmp"/>
+	<TEXTURA nombre="Fondo" path="Images\texturaFondo.bmp"/>
 	<TEXTURA nombre="ladrillo" path="Images/ladrillo.bmp"/>
+	<TEXTURA nombre="alimento" path="Images\bonus.bmp" alpha="#FFFFFF"/>	
+	<TEXTURA nombre="anana" path="Images\pineapple.bmp"alpha="#FFFFFF"/>
+	<TEXTURA nombre="manzana" path="Images\manzana.bmp"alpha="#FFFFFF"/>
+	<TEXTURA nombre="alimentoEspecial" path="Images\alimentoEspecial.bmp" alpha="#FFFFFF"/>
+	<TEXTURA nombre="alimentoDuplicador" path="Images\alimentoDuplicador.bmp" alpha="#FFFFFF"/>
+	<TEXTURA nombre="alimentoCongelado" path="Images\alimentoCongelado.bmp" alpha="#FFFFFF"/>
+	<TEXTURA nombre="alimentoRobaPuntos" path="Images\alimentoRobaPuntos.bmp" alpha="#FFFFFF"/>
+	<TEXTURA nombre="alimentoPersecucion" path="Images\alimentoPersecucion.bmp" alpha="#FFFFFF"/>
+	<TEXTURA nombre="alimentoDuplicaVelocidad" path="Images\alimentoDuplicaVelocidad.bmp" alpha="#FFFFFF"/>
+	<TEXTURA nombre="alimentoReduceVelocidad" path="Images\alimentoReduceVelocidad.bmp" alpha="#FFFFFF"/>
 	<TEXTURA nombre="puerta" path="Images/puerta.bmp" alpha="#FFFFFF"/>
-	<TEXTURA nombre="alimento" path="Images/bonus.bmp" alpha="#FFFFFF"/>	
-	<TEXTURA nombre="alimentoEspecial" path="Images/alimentoEspecial.bmp" alpha="#FFFFFF"/>
   </TEXTURAS>
   </ESCENARIO>
