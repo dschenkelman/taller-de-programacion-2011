@@ -100,7 +100,7 @@ Activity* SelectPlayerActivity::notify(SDL_Event e)
 
 					if(this->menuPlayerTwoActive && !this->menuPlayerOneActive)
 					{
-						this->arrowMenuPlayerTwo->arrowDown();
+						this->arrowMenuPlayerTwo->arrowUp();
 					}
 					
 					break;
