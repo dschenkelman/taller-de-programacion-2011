@@ -17,8 +17,8 @@ public:
 	XmlElement(void);
 	XmlElement::XmlElement(const XmlElement& other);
 	std::string getName(void) const;
-	List<XmlElement> getChildren() const;
-	List<XmlAttribute> getAttributes() const;
+	List<XmlElement>& getChildren() const;
+	List<XmlAttribute>& getAttributes();
 	void addChild(const XmlElement& child);
 	bool addAttribute(const XmlAttribute& attribute);
 	bool hasAttribute(const std::string& key) const;
