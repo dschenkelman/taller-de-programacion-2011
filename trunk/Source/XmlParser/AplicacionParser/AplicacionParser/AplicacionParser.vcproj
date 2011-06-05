@@ -324,6 +324,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\SelectPlayerActivity.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\SoundManager.cpp"
 				>
 			</File>
@@ -563,6 +567,10 @@
 			</File>
 			<File
 				RelativePath=".\ScreenManager.h"
+				>
+			</File>
+			<File
+				RelativePath=".\SelectPlayerActivity.h"
 				>
 			</File>
 			<File

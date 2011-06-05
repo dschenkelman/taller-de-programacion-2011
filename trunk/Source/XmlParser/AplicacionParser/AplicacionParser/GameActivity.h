@@ -23,9 +23,12 @@ private:
 	void updateScoreBoard(void);
 	bool loaded;
 	void loadGame(void);
+	std::string playerOne;
+	std::string playerTwo;
 	RichTextView* loadingTxt;
 public:
 	GameActivity(int width, int height);
+	GameActivity(int width, int height, std::string playerOne, std::string playerTwo);
 	GameActivity(Escenario* escenario, int width, int height);
 	~GameActivity();
 	void onLoad();
