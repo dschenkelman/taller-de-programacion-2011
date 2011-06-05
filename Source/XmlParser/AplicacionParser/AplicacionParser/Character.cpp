@@ -49,16 +49,16 @@ bool Character::isNextPositionValid(void)
 	int width = this->textura->getWidth();
 	int height = this->textura->getHeight();
 
-	int x1 = nextX / this->imageWidth;
-	int y1 = nextY / this->imageHeight;
+	int x1 = (nextX / this->imageWidth) % this->grilla->getAncho();
+	int y1 = (nextY / this->imageHeight) % this->grilla->getAlto();
 
-	int x2 = (nextX + width) / this->imageWidth;
-	int y2 = (nextY + height) / this->imageHeight;
+	int x2 = ((nextX + width) / this->imageWidth) % this->grilla->getAncho();
+	int y2 = ((nextY + height) / this->imageHeight) % this->grilla->getAlto();
 
-	if (x1 < 0 || x2 >= this->grilla->getAncho() || y1 < 0 || y2 >= this->grilla->getAlto())
-	{
-		return false;
-	}
+	//if (x1 < 0 || x2 >= this->grilla->getAncho() || y1 < 0 || y2 >= this->grilla->getAlto())
+	//{
+	//	return false;
+	//}
 	Celda* c1 = this->grilla->getCelda(y1, x1);
 	Celda* c2 = this->grilla->getCelda(y2, x1);
 	Celda* c3 = this->grilla->getCelda(y1, x2);

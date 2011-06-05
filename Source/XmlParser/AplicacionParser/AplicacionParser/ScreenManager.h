@@ -34,6 +34,8 @@ class ScreenManager
 	int deadCycles;
 	int imageHeight;
 	int imageWidth;
+	int boardHeight;
+	int boardWidth;
 	Grilla* grilla;
 	Image *fondoNegro;
 	void updatePacman(Pacman* pac);
