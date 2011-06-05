@@ -831,8 +831,8 @@
   <TIPOSBONUS>
 	<TIPOBONUS nombre="alimento" textura="alimento"/>
 	<TIPOBONUS nombre="alimentoEspecial" textura="alimentoEspecial"/>
-	<TIPOBONUS nombre="anana" textura="anana" />
-    <TIPOBONUS nombre="manzana" textura="manzana" />
+	<TIPOBONUS nombre="anana" textura="anana"  probabilidad="0.8" duracion="10" unidad="tiempo" apariciones="1" />
+    <TIPOBONUS nombre="manzana" textura="manzana" probabilidad="0.2" duracion="5" apariciones="2" unidad="tiempo"/>
 	<TIPOBONUS nombre="alimentoDuplicador" textura="alimentoDuplicador"/>
 	<TIPOBONUS nombre="alimentoRobaPuntos" textura="alimentoRobaPuntos"/>
 	<TIPOBONUS nombre="alimentoPersecucion" textura="alimentoPersecucion"/>
