@@ -66,7 +66,7 @@ Activity* InsertPasswordActivity::notify(SDL_Event e)
 					if(this->passPlayerOne.size() > 0)
 					{
 						this->passPlayerOne.erase(this->passPlayerOne.size()-1, 1);
-						this->passPlayerOneView.erase(this->passPlayerOneView.size()-1, 1);
+						this->passPlayerOneView.erase(this->passPlayerOneView.size()-7, 7);
 						RichTextView* newPass = new InputTextView(this->passPlayerOneView, 5);
 						newPass->setX(this->passBoxPlayerOne->getX());
 						newPass->setY(this->passBoxPlayerOne->getY());
@@ -81,7 +81,7 @@ Activity* InsertPasswordActivity::notify(SDL_Event e)
 					if(this->passPlayerTwo.size() > 0)
 					{
 						this->passPlayerTwo.erase(this->passPlayerTwo.size()-1, 1);
-						this->passPlayerTwoView.erase(this->passPlayerTwoView.size()-1, 1);
+						this->passPlayerTwoView.erase(this->passPlayerTwoView.size()-7, 7);
 						RichTextView* newPass = new InputTextView(this->passPlayerTwoView, 5);
 						newPass->setX(this->passBoxPlayerTwo->getX());
 						newPass->setY(this->passBoxPlayerTwo->getY());
