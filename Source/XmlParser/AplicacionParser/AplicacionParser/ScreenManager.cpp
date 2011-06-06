@@ -11,7 +11,7 @@ ScreenManager::ScreenManager(Activity* w, Image* imageFondo, Grilla* g, int imag
 : deadCycles(0), imageHeight(imageHeight), imageWidth(imageWidth), period(period),
 vulnerablePacman1Cycles(0), vulnerablePacman2Cycles(0), 
 pacman1GhostsVulnerable(false), pacman2GhostsVulnerable(false),
-activatedGhosts(0), activationCycles(ghostActivationTime), finished(false)
+activatedGhosts(0), activationCycles(ghostActivationTime), bonusActivationCycles(0), bonusActiveTime(0),bonusShowing(false), finished(false)
 {
 	this->soundManager = new SoundManager();
 	
@@ -50,6 +50,8 @@ activatedGhosts(0), activationCycles(ghostActivationTime), finished(false)
 
 	// 0 means infiinte loop
 	this->soundManager->playSound(this->soundManager->getBackgroundPath(), 0);
+
+	this->loadSpecialBonus(); //Load all the special Bonus
 }
 
 void ScreenManager::createGhostsForPacman1(void)
@@ -78,6 +80,7 @@ void ScreenManager::createGhostsForPacman1(void)
 		ghostInitialX, 
 		ghostInitialY + this->imageHeight, 2, this->pacman1, 
 		this->imageHeight, this->imageWidth, true, 3));
+
 }
 
 void ScreenManager::createGhostsForPacman2(void)
@@ -117,6 +120,7 @@ void ScreenManager::handleKeyStroke(void)
 
 void ScreenManager::updateScreen(void)
 {
+	this->showSpecialBonus();
 	this->updateGhostsVulnerability();
 	this->updateGhostsActivation();
 	this->deletePacman(this->pacman1);
@@ -364,5 +368,43 @@ ScreenManager::~ScreenManager(void)
 	for (int i = 0; i < this->pacman2Ghosts.length(); i++)
 	{
 		delete this->pacman2Ghosts.getValueAt(i);
+	}
+}
+
+void ScreenManager::loadSpecialBonus(void){
+	
+	List<TipoBonus> specialBonus(this->grilla->getTiposBonus());
+	int lenght=specialBonus.length();
+	for (int i=0; i < lenght ; i++)
+	{
+		this->sbm.addBonusType(specialBonus.at(i));
+	}
+
+}
+
+void ScreenManager::showSpecialBonus(void)
+{
+	this->bonusActivationCycles++;
+	int millisecondsActive = this->bonusActivationCycles * period;
+
+	if (!this->bonusShowing){
+		this->sbm.selectBonus();
+		if (this->sbm.isSelectedBonusValid() )
+		{
+			this->bonusToShow=this->sbm.getSelectedBonus();
+			this->bonusActiveTime=bonusToShow.getDuracion()*1000;
+			this->bonusShowing =true;
+			cout<<"Bono "<<bonusToShow.getNombre()<<"	activo"<<endl;
+		}
+	}
+	else{
+		if (millisecondsActive <= this->bonusActiveTime){
+			//cout<<"Bono "<<bonusToShow.getNombre()<<"	activo"<<endl;
+		}
+		else{
+			this->bonusActivationCycles=0;
+			this->bonusShowing=false;
+			//cout<<"Bono "<<bonusToShow.getNombre()<<"	termino Activacion"<<endl;
+		}
 	}
 }

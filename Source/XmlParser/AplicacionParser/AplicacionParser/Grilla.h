@@ -48,5 +48,6 @@ public:
 	Celda* getCelda(int fila, int columna);
 	bool hasError(void);
 	int getCantidadBonus(void);
+	List<TipoBonus> getTiposBonus(void);
 	~Grilla(void);
 };

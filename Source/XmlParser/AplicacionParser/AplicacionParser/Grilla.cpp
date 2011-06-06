@@ -496,3 +496,7 @@ int Grilla::getCantidadBonus(void)
 {
 	return this->cantidadBonus;
 }
+List<TipoBonus> Grilla::getTiposBonus(void){
+
+	return this->tiposBonus;
+}

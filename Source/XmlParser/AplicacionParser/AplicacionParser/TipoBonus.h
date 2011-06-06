@@ -35,5 +35,6 @@ public:
 	int getProbabilidad(void);
 	int getApariciones();
 	void decreaseApariciones();
+	int getDuracion(void);
 	~TipoBonus(void);
 };
