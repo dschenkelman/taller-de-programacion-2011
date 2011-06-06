@@ -2,18 +2,21 @@
 #include "SelectPlayerActivity.h"
 #include "DAO.h"
 #include "GameActivity.h"
+#include "InsertPasswordActivity.h"
 
-SelectPlayerActivity::SelectPlayerActivity(int width, int height, Escenario* escenario):Activity(escenario, width, height)
+SelectPlayerActivity::SelectPlayerActivity(int width, int height, Escenario* escenario, bool game):Activity(escenario, width, height)
 {
 	this->menuPlayerOneActive = true;
 	this->menuPlayerTwoActive = false;
 	this->escenario = escenario;
+	this->game = game;
 }
 
-SelectPlayerActivity::SelectPlayerActivity(int width, int height):Activity(width, height)
+SelectPlayerActivity::SelectPlayerActivity(int width, int height, bool game):Activity(width, height)
 {
 	this->menuPlayerOneActive = true;
 	this->menuPlayerTwoActive = false;
+	this->game = game;
 }
 
 void SelectPlayerActivity::onLoad()
@@ -73,11 +76,17 @@ Activity* SelectPlayerActivity::notify(SDL_Event e)
 						RichTextView* newRtv = new RichTextView("Select player two", RichTextView::NORMAL);
 						newRtv->setX(this->getWidth() - 300); newRtv->setY(160);
 						this->updateViewFromView(this->subtitle, newRtv);
+						delete this->subtitle;
+						this->subtitle = newRtv;
 					}
 
 					else if(this->menuPlayerTwoActive)
 					{
-						this->menuPlayerTwoActive = false;
+						if(!(this->arrowMenuPlayerTwo->getSelectedOption() ==
+							this->arrowMenuPlayerOne->getSelectedOption()))
+						{
+							this->menuPlayerTwoActive = false;
+						}
 						/*RichTextView* newRtv = new RichTextView("Players selected", RichTextView::NORMAL);
 						newRtv->setX(this->getWidth()/2 - 145); newRtv->setY(this->getHeight() - 50);
 						this->updateViewFromView(this->subtitle, newRtv);*/
@@ -85,8 +94,19 @@ Activity* SelectPlayerActivity::notify(SDL_Event e)
 
 					if(!(this->menuPlayerOneActive || this->menuPlayerTwoActive))
 					{
-						nextActivity = new GameActivity(this->getWidth(), this->getHeight(), 
-							this->arrowMenuPlayerOne->getSelectedOption(), this->arrowMenuPlayerTwo->getSelectedOption());
+						if(game)
+						{
+							//nextActivity = new GameActivity(this->getWidth(), this->getHeight(), 
+							//	this->arrowMenuPlayerOne->getSelectedOption(), this->arrowMenuPlayerTwo->getSelectedOption());
+							nextActivity = new InsertPasswordActivity(this->getWidth(), this->getHeight(),
+								this->arrowMenuPlayerOne->getSelectedOption(), this->arrowMenuPlayerTwo->getSelectedOption());
+						}
+
+						else
+						{
+							//nextActivity = new ComparisonBetweenPlayers(this->getWidth(), this->getHeight(),
+							//	this->arrowMenuPlayerOne->getSelectedOption(), this->arrowMenuPlayerTwo->getSelectedOption());
+						}
 					}
 
 					break;

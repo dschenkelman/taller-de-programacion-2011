@@ -37,7 +37,7 @@ void RankingByWinsActivity::onLoad()
 		rtvName->setX(100); rtvName->setY(userY);
 		
 		RichTextView* rtvWins = new RichTextView(wins, RichTextView::NORMAL);
-		rtvWins->setX(this->getWidth() - 120); rtvWins->setY(userY + 100);
+		rtvWins->setX(this->getWidth() - 120); rtvWins->setY(userY);
 
 		this->add(rtvName); this->add(rtvWins);
 

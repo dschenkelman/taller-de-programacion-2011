@@ -204,6 +204,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\ComparisonBetweenPlayersActivity.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\CreatePlayerActivity.cpp"
 				>
 			</File>
@@ -257,6 +261,10 @@
 			</File>
 			<File
 				RelativePath=".\InputTextView.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\InsertPasswordActivity.cpp"
 				>
 			</File>
 			<File
@@ -434,6 +442,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\ComparisonBetweenPlayersActivity.h"
+				>
+			</File>
+			<File
 				RelativePath=".\CreatePlayerActivity.h"
 				>
 			</File>
@@ -487,6 +499,10 @@
 			</File>
 			<File
 				RelativePath=".\InputTextView.h"
+				>
+			</File>
+			<File
+				RelativePath=".\InsertPasswordActivity.h"
 				>
 			</File>
 			<File

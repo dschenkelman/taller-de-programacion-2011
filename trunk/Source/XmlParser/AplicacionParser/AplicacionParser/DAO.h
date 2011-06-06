@@ -15,6 +15,7 @@ public:
 	query* getRankingByGamesPlayed();
 	query* getRankingByWins();
 	query* getPlayers();
+	query* getComparisonBetweenPlayers(std::string nameOne, std::string nameTwo);
 	void createPlayer(std::string name, std::string pass);
 	~DAO(void);
 };

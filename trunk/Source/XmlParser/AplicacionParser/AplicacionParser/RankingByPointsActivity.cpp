@@ -36,7 +36,7 @@ void RankingByPointsActivity::onLoad()
 		rtvName->setX(100); rtvName->setY(userY);
 		
 		RichTextView* rtvPoints = new RichTextView(points, RichTextView::NORMAL);
-		rtvPoints->setX(this->getWidth() - 120); rtvPoints->setY(userY + 100);
+		rtvPoints->setX(this->getWidth() - 120); rtvPoints->setY(userY);
 
 		this->add(rtvName); this->add(rtvPoints);
 
