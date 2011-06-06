@@ -58,6 +58,7 @@ class ScreenManager
 	void loadSpecialBonus(void);
 	void showSpecialBonus(void);
 	bool isFoodOver(void);
+	void placeBonusInMaze(TipoBonus& bonus);
 public:
 	ScreenManager(Activity* w, Image* imageFondo, Grilla* grilla, int imageHeight, int imageWidth, Uint32 period);
 	//ScreenManager(Window* w, Image* imageFondo, Grilla& grilla, int imageHeight, int imageWidth);

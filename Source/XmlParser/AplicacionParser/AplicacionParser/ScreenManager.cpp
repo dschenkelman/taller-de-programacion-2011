@@ -3,6 +3,7 @@
 #include "Pacman.h"
 #include "Window.h"
 #include "ImageArea.h"
+#include "Camino.h"
 #include <string>
 
 using namespace std;
@@ -11,7 +12,8 @@ ScreenManager::ScreenManager(Activity* w, Image* imageFondo, Grilla* g, int imag
 : deadCycles(0), imageHeight(imageHeight), imageWidth(imageWidth), period(period),
 vulnerablePacman1Cycles(0), vulnerablePacman2Cycles(0), 
 pacman1GhostsVulnerable(false), pacman2GhostsVulnerable(false),
-activatedGhosts(0), activationCycles(ghostActivationTime), bonusActivationCycles(0), bonusActiveTime(0),bonusShowing(false), finished(false)
+activatedGhosts(0), activationCycles(ghostActivationTime), bonusActivationCycles(0), 
+bonusActiveTime(0),bonusShowing(false), finished(false)
 {
 	this->soundManager = new SoundManager();
 	
@@ -32,10 +34,12 @@ activatedGhosts(0), activationCycles(ghostActivationTime), bonusActivationCycles
 	this->pacman1 = new Pacman("Images/pacman.bmp","Images/pacmanClosed.bmp", this->grilla,
 		this->boardHeight, this->boardWidth,
 		pacman1InitialX, pacman1InitialY, 3, this->imageHeight, this->imageWidth);
+	this->pacman1->setPacmanId(1);
 
 	this->pacman2 = new Pacman("Images/pacman2.bmp", "Images/pacman2Closed.bmp", this->grilla,
 		this->boardHeight, this->boardWidth,
 		pacman2InitialX, pacman2InitialY, 3, this->imageHeight, this->imageWidth);
+	this->pacman2->setPacmanId(2);
 
 	this->createGhostsForPacman1();
 	this->createGhostsForPacman2();
@@ -351,6 +355,50 @@ void ScreenManager::handleBonusEating(Pacman* pac, List<Ghost*>& ghosts, string 
 
 		return;
 	}
+	
+	if (bonus == "alimentoDuplicador" && this->bonusShowing)
+	{
+		// alimento duplicador
+		pac->increaseScore(20); //Lo que come vale doble.
+		pac->increaseEatenBonus();
+		this->soundManager->playSound(this->soundManager->getEatPath(), 1);
+		return;
+	}
+
+	if (bonus == "anana" && this->bonusShowing)
+	{
+		// bonus anana
+		pac->increaseScore(100); //Lo que come vale doble.
+		pac->increaseEatenBonus();
+		this->soundManager->playSound(this->soundManager->getEatPath(), 1);
+		return;
+	}
+
+	if (bonus == "manzana" && this->bonusShowing)
+	{
+		// alimento manzana
+		pac->increaseScore(200); //Lo que come vale doble.
+		pac->increaseEatenBonus();
+		this->soundManager->playSound(this->soundManager->getEatPath(), 1);
+		return;
+	}
+
+	if (bonus == "alimentoCongelado" && this->bonusShowing)
+	{
+		// alimento congelado
+		pac->increaseScore(10); //Lo que come vale doble.
+		pac->increaseEatenBonus();
+		if (pac->getPacmanId() == 1){
+			//Desactivar los fantasmas 1
+		}
+		else{
+			//Desactivar los fantasmas 2
+		}
+
+
+		this->soundManager->playSound(this->soundManager->getEatPath(), 1);
+		return;
+	}
 }
 ScreenManager::~ScreenManager(void)
 {
@@ -395,6 +443,7 @@ void ScreenManager::showSpecialBonus(void)
 			this->bonusActiveTime=bonusToShow.getDuracion()*1000;
 			this->bonusShowing =true;
 			cout<<"Bono "<<bonusToShow.getNombre()<<"	activo"<<endl;
+			this->placeBonusInMaze(this->bonusToShow);
 		}
 	}
 	else{
@@ -408,3 +457,10 @@ void ScreenManager::showSpecialBonus(void)
 		}
 	}
 }
+void ScreenManager::placeBonusInMaze(TipoBonus& bonus){
+
+	
+	//Acá hay que lograr insertar la imagen
+
+}
+

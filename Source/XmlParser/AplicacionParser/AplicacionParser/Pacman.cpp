@@ -387,3 +387,10 @@ void Pacman::rotateFromRight( Direction next){
 	this->dir =next;
 }
 
+void Pacman::setPacmanId(int id){
+	this->pacmanId=id;
+}
+
+int Pacman::getPacmanId(void){
+	return this->pacmanId;
+}
