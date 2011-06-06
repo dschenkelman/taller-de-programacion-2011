@@ -188,6 +188,14 @@ void Window::init(){
 					break;
 				default:
 					Activity* nextActivity = this->getCurrentActivity()->notify(e);
+					
+					// compruebo que no se haya salido de sdl
+					if(!SDL_WasInit(SDL_INIT_VIDEO | SDL_INIT_AUDIO)) {
+						running = false;
+						delete this->currentActivity;
+						break;
+					}
+					
 					// si la actividad en curso devuelve la siguiente actividad
 					// la seteo como corriente y destruyo la anterior
 					if( nextActivity != NULL)
