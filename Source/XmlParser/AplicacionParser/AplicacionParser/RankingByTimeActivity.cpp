@@ -37,7 +37,7 @@ void RankingByTimeActivity::onLoad()
 		rtvName->setX(100); rtvName->setY(userY);
 		
 		RichTextView* rtvTime = new RichTextView(time, RichTextView::NORMAL);
-		rtvTime->setX(this->getWidth() - 120); rtvTime->setY(userY + 100);
+		rtvTime->setX(this->getWidth() - 120); rtvTime->setY(userY);
 
 		this->add(rtvName); this->add(rtvTime);
 

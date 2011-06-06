@@ -37,7 +37,7 @@ void RankingByGamesPlayedActivity::onLoad()
 		rtvName->setX(100); rtvName->setY(userY);
 		
 		RichTextView* rtvGames = new RichTextView(games, RichTextView::NORMAL);
-		rtvGames->setX(this->getWidth() - 120); rtvGames->setY(userY + 100);
+		rtvGames->setX(this->getWidth() - 120); rtvGames->setY(userY);
 
 		this->add(rtvName); this->add(rtvGames);
 

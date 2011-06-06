@@ -56,7 +56,8 @@ Activity* MenuActivity::notify(SDL_Event e){
 			switch(e.key.keysym.sym){
 				case SDLK_RETURN:
 					if(this->arrowMenu->getSelectedOption() == "new game")
-						nextActivity = new SelectPlayerActivity(this->getWidth(), this->getHeight(), this->getEscenario());
+						//nextActivity = new SelectPlayerActivity(this->getWidth(), this->getHeight(), this->getEscenario(), true);
+						nextActivity = new SelectPlayerActivity(this->getWidth(), this->getHeight(), true);
 
 					if(this->arrowMenu->getSelectedOption() == "create player")
 						nextActivity = new CreatePlayerActivity(this->getWidth(), this->getHeight());

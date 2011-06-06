@@ -16,10 +16,11 @@ private:
 	Escenario* escenario;
 	bool menuPlayerOneActive;
 	bool menuPlayerTwoActive;
+	bool game;
 
 public:
-	SelectPlayerActivity(int width, int height, Escenario* escenario);
-	SelectPlayerActivity(int width, int height);
+	SelectPlayerActivity(int width, int height, Escenario* escenario, bool game);
+	SelectPlayerActivity(int width, int height, bool game);
 	void onLoad();
 	Activity* notify(SDL_Event e);
 	~SelectPlayerActivity(void);
