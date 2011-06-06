@@ -3,6 +3,7 @@
 #include "InputTextView.h"
 #include "SelectPlayerActivity.h"
 #include "GameActivity.h"
+#include "DAO.h"
 
 InsertPasswordActivity::InsertPasswordActivity(int width, int height, std::string playerOne, std::string playerTwo):Activity(width, height)
 {
@@ -130,6 +131,14 @@ Activity* InsertPasswordActivity::notify(SDL_Event e)
 
 						else
 						{
+							this->passPlayerOne = "";
+							this->passPlayerOneView = "";
+							RichTextView* newPass = new InputTextView(this->passPlayerOneView, 5);
+							newPass->setX(this->passBoxPlayerOne->getX());
+							newPass->setY(this->passBoxPlayerOne->getY());
+							this->updateViewFromView(this->passBoxPlayerOne, newPass);
+							delete this->passBoxPlayerOne;
+							this->passBoxPlayerOne = newPass;
 							this->msg = new RichTextView("Incorrect password", RichTextView::NORMAL);
 							this->msg->setX(10); this->msg->setY(210);
 							this->add(this->msg);
@@ -149,6 +158,14 @@ Activity* InsertPasswordActivity::notify(SDL_Event e)
 						
 						else
 						{
+							this->passPlayerTwo = "";
+							this->passPlayerTwoView = "";
+							RichTextView* newPass = new InputTextView(this->passPlayerTwoView, 5);
+							newPass->setX(this->passBoxPlayerTwo->getX());
+							newPass->setY(this->passBoxPlayerTwo->getY());
+							this->updateViewFromView(this->passBoxPlayerTwo, newPass);
+							delete this->passBoxPlayerTwo;
+							this->passBoxPlayerTwo = newPass;
 							this->msg = new RichTextView("Incorrect password", RichTextView::NORMAL);
 							this->msg->setX(this->getWidth()/2 + 10); this->msg->setY(210);
 							this->add(this->msg);
@@ -273,5 +290,6 @@ char InsertPasswordActivity::getKey(SDL_KeyboardEvent e)
 
 std::string InsertPasswordActivity::getPassword(std::string name)
 {
-	return "lala";
+	DAO d("gamelog.sql");
+	return d.getPassword(name);
 }

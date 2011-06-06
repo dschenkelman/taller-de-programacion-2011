@@ -36,6 +36,13 @@ query* DAO::getComparisonBetweenPlayers(std::string nameOne, std::string nameTwo
 	return glog->playersComparison((char*)nameOne.c_str(), (char*)nameTwo.c_str());
 }
 
+std::string DAO::getPassword(std::string name)
+{
+	//return glog->getPassword((char*)name.c_str());
+	std::string ret = "lala";
+	return ret;
+}
+
 void DAO::createPlayer(std::string name, std::string pass)
 {
 	glog->createPlayer((char*)name.c_str(), (char*)pass.c_str());
