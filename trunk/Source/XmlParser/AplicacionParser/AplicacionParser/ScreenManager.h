@@ -9,6 +9,7 @@
 #include "Grilla.h"
 #include "Activity.h"
 #include "SoundManager.h"
+#include "SpecialBonusManager.h"
 
 class ScreenManager
 {
@@ -17,6 +18,10 @@ class ScreenManager
 	static const int ghostActivationTime = 4000;
 	int activatedGhosts;
 	int activationCycles;
+	int bonusActivationCycles;
+	int bonusActiveTime;
+	bool bonusShowing;
+	TipoBonus bonusToShow;
 	List<Ghost*> pacman1Ghosts;
 	List<Ghost*> pacman2Ghosts;
 	Activity* window;
@@ -39,6 +44,7 @@ class ScreenManager
 	int boardWidth;
 	Grilla* grilla;
 	Image *fondoNegro;
+	SpecialBonusManager sbm;
 	void updatePacman(Pacman* pac);
 	void updateGhostsVulnerability(void);
 	void updateGhostsActivation(void);
@@ -49,6 +55,8 @@ class ScreenManager
 	void createGhostsForPacman2(void);
 	void handleBonusEating(Pacman* pac, List<Ghost*>& ghosts, std::string bonus, bool isPacman1);
 	void deleteBonus(Pacman *pac, List<Ghost*>& ghosts, bool isPacman1);
+	void loadSpecialBonus(void);
+	void showSpecialBonus(void);
 	bool isFoodOver(void);
 public:
 	ScreenManager(Activity* w, Image* imageFondo, Grilla* grilla, int imageHeight, int imageWidth, Uint32 period);

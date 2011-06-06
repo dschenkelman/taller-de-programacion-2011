@@ -169,3 +169,6 @@ void TipoBonus::decreaseApariciones()
 {
 	this->apariciones--;
 }
+int TipoBonus::getDuracion(void){
+	return this->duracion;
+}
