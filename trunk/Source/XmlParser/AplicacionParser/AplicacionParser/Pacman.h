@@ -40,6 +40,7 @@ class Pacman : public Character
 	void rotateFromDown( Direction next);
 	void rotateFromLeft( Direction next);
 	void rotateFromRight( Direction next);
+	int scoreMultiplier;
 public:
 	Pacman(std::string pathTexturaAbierta, std::string pathTexturaCerrada, Grilla* grilla, 
 		int h, int w, int x, int y, int speed, int imageHeight, int imageWidth);
@@ -60,5 +61,6 @@ public:
 	void setPacmanSpeed(int speed);
 	int getPacmanSpeed(void);
 	void inmovilizar(bool flag);
+	void setScoreMultiplier(int mul);
 	~Pacman(void);
 };
