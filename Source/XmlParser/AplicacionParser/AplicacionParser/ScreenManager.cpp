@@ -126,7 +126,7 @@ void ScreenManager::handleKeyStroke(void)
 void ScreenManager::updateScreen(void)
 {
 	this->showSpecialBonus();
-	this->handleCollisionWithOppositeCharacters(this->pacman1, this->pacman2, this->pacman2Ghosts);
+	
 	this->updateGhostsVulnerability();
 	this->updateGhostsActivation();
 	this->deletePacman(this->pacman1);
@@ -149,6 +149,8 @@ void ScreenManager::updateScreen(void)
 		}
 		else
 		{
+			this->handleCollisionWithOppositeCharacters(this->pacman1, this->pacman2, this->pacman2Ghosts);
+			this->handleCollisionWithOppositeCharacters(this->pacman2, this->pacman1, this->pacman1Ghosts);
 			this->deleteBonus(this->pacman1, this->pacman1Ghosts, true);
 			this->deleteBonus(this->pacman2, this->pacman2Ghosts, false);
 			this->updatePacman(this->pacman1);
@@ -304,6 +306,14 @@ void ScreenManager::handleCollisionWithOppositeCharacters(Pacman* pac, Pacman* o
 	bool opCollision = false;
 	opCollision = CollisionHelper::AreFullyCollisioned(pac->getX(), 
 		pac->getY(), op->getX(), op->getY(), 3);
+
+	for (int i = 0; i < opGhosts.length(); i++)
+	{
+		Ghost* g = opGhosts.at(i);
+
+		opCollision = opCollision || CollisionHelper::AreFullyCollisioned(pac->getX(), 
+			pac->getY(), g->getX(), g->getY(), 3);
+	}
 
 	if(opCollision)
 	{
