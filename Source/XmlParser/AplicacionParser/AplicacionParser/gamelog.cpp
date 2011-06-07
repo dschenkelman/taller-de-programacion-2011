@@ -111,9 +111,9 @@ query* gamelog::playersByWinnedCount()
 }
 
 query* gamelog::playersComparison(char* player0, char* player1)
-// select p0.name as Player0,p1.name as Player1,ug0.points as Points0,ug1.points as Points1,pw.name,g.duration from games g inner join usergame ug0 on p0.name='ale' and ug0.gameid=g.id inner join usergame ug1 on p1.name='juan' and ug1.gameid=g.id inner join players p0 on p0.id=ug0.playerid inner join players p1 on p1.id=ug1.playerid inner join players pw on pw.id=g.winnerid order by g.id;
+// select p0.name as Player0,p1.name as Player1,ug0.points as Points0,ug1.points as Points1,pw.name as Winner,g.duration from games g inner join usergame ug0 on p0.name='ale' and ug0.gameid=g.id inner join usergame ug1 on p1.name='juan' and ug1.gameid=g.id inner join players p0 on p0.id=ug0.playerid inner join players p1 on p1.id=ug1.playerid inner join players pw on pw.id=g.winnerid order by g.id;
 {
-	string sql("select p0.name as Player0,p1.name as Player1,ug0.points as Points0,ug1.points as Points1,pw.name,g.duration from games g inner join usergame ug0 on p0.name='");
+	string sql("select p0.name as Player0,p1.name as Player1,ug0.points as Points0,ug1.points as Points1,pw.name as Winner,g.duration from games g inner join usergame ug0 on p0.name='");
 	sql += string(player0);
 	sql += string("' and ug0.gameid=g.id inner join usergame ug1 on p1.name='");
 	sql += string(player1);
