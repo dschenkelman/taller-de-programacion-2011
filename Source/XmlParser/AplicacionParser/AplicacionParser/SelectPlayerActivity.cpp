@@ -3,9 +3,13 @@
 #include "DAO.h"
 #include "GameActivity.h"
 #include "InsertPasswordActivity.h"
+#include "CreatePlayerActivity.h"
+
+using namespace std;
 
 SelectPlayerActivity::SelectPlayerActivity(int width, int height, Escenario* escenario, bool game):Activity(escenario, width, height)
 {
+	this->playersQty = 0;
 	this->menuPlayerOneActive = true;
 	this->menuPlayerTwoActive = false;
 	this->escenario = escenario;
@@ -14,6 +18,7 @@ SelectPlayerActivity::SelectPlayerActivity(int width, int height, Escenario* esc
 
 SelectPlayerActivity::SelectPlayerActivity(int width, int height, bool game):Activity(width, height)
 {
+	this->playersQty = 0;
 	this->menuPlayerOneActive = true;
 	this->menuPlayerTwoActive = false;
 	this->game = game;
@@ -50,6 +55,7 @@ void SelectPlayerActivity::onLoad()
 
 	while(!players->next())
 	{
+		this->playersQty++;
 		this->arrowMenuPlayerOne->addOption(players->getChars(1));
 		this->arrowMenuPlayerTwo->addOption(players->getChars(1));
 	}
@@ -65,6 +71,7 @@ void SelectPlayerActivity::onLoad()
 
 Activity* SelectPlayerActivity::notify(SDL_Event e)
 {
+	if (this->playersQty < 2) return new CreatePlayerActivity(this->getWidth(),this->getHeight());
 	Activity* nextActivity = NULL;
 
 	switch(e.type){
@@ -86,6 +93,7 @@ Activity* SelectPlayerActivity::notify(SDL_Event e)
 					{
 						if(!(this->arrowMenuPlayerTwo->getSelectedOption() ==
 							this->arrowMenuPlayerOne->getSelectedOption()))
+							cout << this->arrowMenuPlayerOne->getSelectedOption();
 						{
 							this->menuPlayerTwoActive = false;
 						}

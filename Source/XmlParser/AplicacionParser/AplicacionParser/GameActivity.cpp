@@ -8,6 +8,7 @@
 #include "XmlParser.h"
 #include <sstream>
 #include <algorithm>
+#include "gamelog.h"
 
 GameActivity::GameActivity(int width, int height):Activity(width, height),
 points1(0), points2(0), xCarteles(0), gameTime(0), displayedSeconds(0)
@@ -189,6 +190,11 @@ Activity* GameActivity::notify(SDL_Event e){
 		case SDL_KEYDOWN:
 			switch(e.key.keysym.sym){
 				case SDLK_RETURN:
+					glog = new gamelog("gamelog.sql");
+					glog->insertGame((char*)this->playerOne.c_str(),(char*)this->playerTwo.c_str(),this->points1,this->points2,this->displayedSeconds);
+					delete(glog);
+					cout << "game over" << endl;
+					cout << this->playerOne << this->playerTwo << this->points1 << this->points2 << this->displayedSeconds << endl;
 					nextActivity = new MenuActivity(this->getWidth(), this->getHeight());
 					break;
 				default:
