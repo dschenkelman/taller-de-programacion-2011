@@ -9,6 +9,7 @@ private:
 	ImageView* banner;
 	RichTextView* pressEnter;
 	ImageView* pc3d;
+	ImageView* dual;
 	int clock;
 public:
 	PresentationActivity(int width, int height);

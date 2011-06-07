@@ -22,19 +22,18 @@ MenuActivity::~MenuActivity()
 void MenuActivity::onLoad(){
 	
 	// cabecera
-	this->banner = new ImageView("Images/dual.bmp");
-	this->banner->setX(5); this->banner->setY(5);
+	this->banner = new ImageView("Images/title_pacman_medium.bmp");
+	this->banner->setX(5); this->banner->setY(1);
 	this->banner->setVerticalAlign(View::VERTICAL_ALIGN_CENTER);
 
 	// titulo
-	//this->title = new RichTextView("pacman", RichTextView::NORMAL, 0, 0, 0, 1);
-	this->title = new RichTextView("pacman", RichTextView::NORMAL);
-	this->title->setY(50);
+	this->title = new RichTextView("MENU", RichTextView::NEON);
+	this->title->setY(100);
 	this->title->setVerticalAlign(View::VERTICAL_ALIGN_CENTER);
 	
 	// menu con flecha
 	this->arrowMenu = new OptionArrowMenuView();
-	this->arrowMenu->setX(50); this->arrowMenu->setY(200); 
+	this->arrowMenu->setX(this->getWidth()/4); this->arrowMenu->setY(200); 
 	this->arrowMenu->addOption("new game");
 	this->arrowMenu->addOption("create player");
 	this->arrowMenu->addOption("stats");
@@ -56,7 +55,6 @@ Activity* MenuActivity::notify(SDL_Event e){
 			switch(e.key.keysym.sym){
 				case SDLK_RETURN:
 					if(this->arrowMenu->getSelectedOption() == "new game")
-						//nextActivity = new SelectPlayerActivity(this->getWidth(), this->getHeight(), this->getEscenario(), true);
 						nextActivity = new SelectPlayerActivity(this->getWidth(), this->getHeight(), true);
 
 					if(this->arrowMenu->getSelectedOption() == "create player")

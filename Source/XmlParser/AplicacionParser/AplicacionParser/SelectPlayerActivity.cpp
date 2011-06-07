@@ -22,13 +22,13 @@ SelectPlayerActivity::SelectPlayerActivity(int width, int height, bool game):Act
 void SelectPlayerActivity::onLoad()
 {
 	// cabecera
-	this->banner = new ImageView("Images/dual.bmp");
-	this->banner->setX(5); this->banner->setY(5);
+	this->banner = new ImageView("Images/title_pacman_medium.bmp");
+	this->banner->setX(5); this->banner->setY(2);
 	this->banner->setVerticalAlign(View::VERTICAL_ALIGN_CENTER);
 
 	// titulo
-	this->title = new RichTextView("pacman", RichTextView::NORMAL);
-	this->title->setY(50);
+	this->title = new RichTextView("players selection", RichTextView::NEON);
+	this->title->setY(100);
 	this->title->setVerticalAlign(View::VERTICAL_ALIGN_CENTER);
 
 	// datos

@@ -3,6 +3,7 @@
 
 std::string RichTextView::NORMAL_GREEN = "arial_green_black";
 std::string RichTextView::NORMAL = "verdana_white_black";
+std::string RichTextView::NEON = "neon_color_black";
 
 RichTextView::RichTextView(std::string txt, std::string type, int r, int g, int b, int delta): View(r,g,b,delta){
 	RichTextView::RichTextView(txt,type);
