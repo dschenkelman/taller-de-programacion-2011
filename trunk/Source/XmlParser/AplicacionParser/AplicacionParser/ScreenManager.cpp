@@ -17,9 +17,10 @@ ScreenManager::ScreenManager(Activity* w, Image* imageFondo, Grilla* g,
 vulnerablePacman1Cycles(0), vulnerablePacman2Cycles(0), 
 pacman1GhostsVulnerable(false), pacman2GhostsVulnerable(false),
 activatedGhosts(0), activationCycles(ghostActivationTime), bonusAppearenceCycles(0), 
-bonusShowing(false), finished(false)
+bonusShowing(false), finished(false), specialBonusX(0), specialBonusY(0)
 {
 	this->soundManager = new SoundManager();
+	this->specialBonusImage = NULL;
 	
 	this->bonusAppearenceInterval = bonusInterval * 1000;
 	this->bonusLastingInterval = lastingProportion * this->bonusAppearenceInterval;
@@ -131,6 +132,8 @@ void ScreenManager::handleKeyStroke(void)
 
 void ScreenManager::updateScreen(void)
 {
+	this->updateBonusEffects(this->pacman1, this->pacman2, this->pacman1Ghosts);
+	this->updateBonusEffects(this->pacman1, this->pacman2, this->pacman2Ghosts);
 	this->updateSpecialBonus();
 	this->updateGhostsVulnerability();
 	this->updateGhostsActivation();
@@ -573,6 +576,7 @@ void ScreenManager::updateSpecialBonus(void)
 		// bonus should dissapear
 		this->bonusShowing=false;
 		// remove bonus from maze
+		this->removeBonusFromMaze();
 		cout<<"Bono "<<this->bonusToShow.getNombre()<<"	termino Activacion"<<endl;
 	}
 }
@@ -654,11 +658,41 @@ void ScreenManager::increasePacmanScore(Pacman* pac, bool isPacman1, int score)
 	}
 }
 
-void ScreenManager::placeBonusInMaze(TipoBonus& bonus){
-
-	
+void ScreenManager::placeBonusInMaze(TipoBonus& bonus)
+{
 	//Acá hay que lograr insertar la imagen
+	Textura& t = bonus.getTextura();
+	string imagePath = t.getPath();
+	this->specialBonusImage = new Image(imagePath);
 
+	int height = this->specialBonusImage->getHeight();
+
+	if (this->specialBonusImage->getHeight() > this->imageHeight)
+	{
+		height = this->imageHeight;	
+	}
+
+	int width = this->specialBonusImage->getHeight();
+
+	if (this->specialBonusImage->getWidth() > this->imageWidth)
+	{
+		width = this->imageWidth;	
+	}
+
+	this->specialBonusImage->resize(width, height);
+
+	this->window->display(this->specialBonusImage, this->specialBonusX,
+		this->specialBonusY, t.getRed(), t.getGreen(), t.getBlue(), t.getDelta());
+}
+
+void ScreenManager::removeBonusFromMaze(void)
+{
+	this->window->display(this->fondo, this->specialBonusX, this->specialBonusY,
+		this->specialBonusImage->getWidth(), this->specialBonusImage->getHeight());
+
+	delete this->specialBonusImage;
+
+	this->specialBonusImage = NULL;
 }
 
 ScreenManager::~ScreenManager(void)
@@ -668,6 +702,11 @@ ScreenManager::~ScreenManager(void)
 	delete this->gameOverImage;
 	delete this->fondoNegro;
 	delete this->soundManager;
+
+	if (this->specialBonusImage != NULL)
+	{
+		delete this->specialBonusImage;
+	}
 
 	for (int i = 0; i < this->pacman1Ghosts.length(); i++)
 	{
