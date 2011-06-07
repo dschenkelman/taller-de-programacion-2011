@@ -850,7 +850,7 @@
 	<TEXTURA nombre="alimentoDuplicador" path="Images\alimentoDuplicador.bmp" alpha="#FFFFFF"/>
 	<TEXTURA nombre="alimentoCongelado" path="Images\alimentoCongelado.bmp" alpha="#FFFFFF"/>
 	<TEXTURA nombre="alimentoRobaPuntos" path="Images\alimentoRobaPuntos.bmp" alpha="#FFFFFF"/>
-	<TEXTURA nombre="alimentoPersecucion" path="Images\alimentoPersecucion.bmp" alpha="#FFFFFF"/>
+	<TEXTURA nombre="alimentoPersecucion" path="Images\ghostBuster.bmp" alpha="#FFFFFF"/>
 	<TEXTURA nombre="alimentoDuplicaVelocidad" path="Images\alimentoDuplicaVelocidad.bmp" alpha="#FFFFFF"/>
 	<TEXTURA nombre="alimentoReduceVelocidad" path="Images\alimentoReduceVelocidad.bmp" alpha="#FFFFFF"/>
 	<TEXTURA nombre="puerta" path="Images/puerta.bmp" alpha="#FFFFFF"/>
