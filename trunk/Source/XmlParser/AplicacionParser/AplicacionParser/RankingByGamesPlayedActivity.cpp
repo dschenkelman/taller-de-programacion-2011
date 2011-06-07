@@ -12,13 +12,13 @@ RankingByGamesPlayedActivity::RankingByGamesPlayedActivity(int width, int height
 void RankingByGamesPlayedActivity::onLoad()
 {
 	// cabecera
-	this->banner = new ImageView("Images/dual.bmp");
-	this->banner->setX(5); this->banner->setY(5);
+	this->banner = new ImageView("Images/title_pacman_medium.bmp");
+	this->banner->setX(5); this->banner->setY(2);
 	this->banner->setVerticalAlign(View::VERTICAL_ALIGN_CENTER);
 
 	// titulo
-	this->title = new RichTextView("Ranking by games played", RichTextView::NORMAL);
-	this->title->setX(100); this->title->setY(50);
+	this->title = new RichTextView("Ranking by games played", RichTextView::NEON);
+	this->title->setX(100); this->title->setY(100);
 	this->title->setVerticalAlign(View::VERTICAL_ALIGN_CENTER);
 
 	// datos

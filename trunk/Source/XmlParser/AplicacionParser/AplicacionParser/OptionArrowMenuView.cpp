@@ -28,7 +28,7 @@ OptionArrowMenuView::~OptionArrowMenuView()
 void OptionArrowMenuView::draw(){
 
 	int newH = ( (this->optionHeight+12)*this->options->length() );
-	Image* aux = new Image(350, newH);
+	Image* aux = new Image(500, newH);
 	this->copy(*aux);
 	delete aux;
 

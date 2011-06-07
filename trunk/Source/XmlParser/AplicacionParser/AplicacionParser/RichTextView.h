@@ -12,4 +12,5 @@ public:
 	int getLetterCount(std::string txt);
 	static std::string NORMAL_GREEN;
 	static std::string NORMAL;
+	static std::string NEON;
 };
