@@ -116,7 +116,7 @@ Activity* InsertPasswordActivity::notify(SDL_Event e)
 						// si no lo es, mostrar cartel de incorrecto
 						// si es, mostrar cartel de correcto y poner
 						// this->boxPlayerOneActive en false
-						if(this->passPlayerOne == this->getPassword(this->playerOne))
+						if(this->verifyPassword(this->passPlayerOne, this->passPlayerOne))
 						{
 							RichTextView* newSubtitle = new RichTextView("Password " + this->playerTwo, RichTextView::NORMAL);
 							newSubtitle->setX(this->getWidth()/2 + 50); newSubtitle->setY(this->subtitle->getY());
@@ -147,7 +147,7 @@ Activity* InsertPasswordActivity::notify(SDL_Event e)
 
 					else
 					{
-						if(this->passPlayerTwo == this->getPassword(this->playerTwo))
+						if(this->verifyPassword(this->passPlayerTwo, this->passPlayerTwo))
 						{
 							RichTextView* correctMsg = new RichTextView("Correct password", RichTextView::NORMAL);
 							correctMsg->setX(10); correctMsg->setY(210);
@@ -288,8 +288,8 @@ char InsertPasswordActivity::getKey(SDL_KeyboardEvent e)
 	}
 }
 
-std::string InsertPasswordActivity::getPassword(std::string name)
+bool InsertPasswordActivity::verifyPassword(std::string name, std::string pass)
 {
 	DAO d("gamelog.sql");
-	return d.getPassword(name);
+	return d.verifyPassword(name, pass);
 }
