@@ -204,10 +204,12 @@ bool CreatePlayerActivity::verifyUsername(std::string username)
 	{
 		if(strcmp(players->getChars(1), username.c_str()) == 0)
 		{
+			delete players;
 			return true;
 		}
 	}
 
+	delete players;
 	return false;
 }
 
