@@ -72,7 +72,7 @@ class ScreenManager
 	void deleteBonus(Pacman *pac, List<Ghost*>& ghosts, bool isPacman1);
 	void loadSpecialBonus(void);
 	void updateSpecialBonus(void);
-	void updateBonusEffects(Pacman* pac, Pacman* op, List<Ghost*>& ghosts);
+	void updateBonusEffects(Pacman* pac, Pacman* op, List<Ghost*>& ghosts, std::map<std::string, int>& pacmanActiveBonus);
 	void cancelBonusEffect(std::string bonusType, Pacman* pac, Pacman* op, List<Ghost*>& ghosts);
 	void increasePacmanScore(Pacman* pac, bool isPacman1, int score);
 	bool isFoodOver(void);
