@@ -25,6 +25,7 @@ class Pacman : public Character
 	Direction keyPressed;
 
 	bool isDead;
+	bool notMove;
 	virtual void moveLeft(void);
 	virtual void moveRight(void);
 	virtual void moveDown(void);
@@ -39,7 +40,6 @@ class Pacman : public Character
 	void rotateFromDown( Direction next);
 	void rotateFromLeft( Direction next);
 	void rotateFromRight( Direction next);
-	int pacmanId;
 public:
 	Pacman(std::string pathTexturaAbierta, std::string pathTexturaCerrada, Grilla* grilla, 
 		int h, int w, int x, int y, int speed, int imageHeight, int imageWidth);
@@ -57,7 +57,8 @@ public:
 	void setGhostKills(int kills);
 	std::string getLastEatenBonus(void);
 	ImageArea eatBonus(void);
-	void setPacmanId(int id);
-	int getPacmanId(void);
+	void setPacmanSpeed(int speed);
+	int getPacmanSpeed(void);
+	void inmovilizar(bool flag);
 	~Pacman(void);
 };

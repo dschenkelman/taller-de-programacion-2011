@@ -215,7 +215,7 @@ void GameActivity::updateScoreBoard(void)
 
 	int pacman1Score = screenManager->getPacman1()->getScore();
 	int pacman2Score = screenManager->getPacman2()->getScore();
-
+	
 	if (this->points1 != pacman1Score)
 	{
 		this->points1 = pacman1Score;

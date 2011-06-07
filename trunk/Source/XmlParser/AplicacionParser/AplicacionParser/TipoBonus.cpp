@@ -172,3 +172,7 @@ void TipoBonus::decreaseApariciones()
 int TipoBonus::getDuracion(void){
 	return this->duracion;
 }
+
+std::string TipoBonus::getUnidad(void){
+	return this->unidad;
+}

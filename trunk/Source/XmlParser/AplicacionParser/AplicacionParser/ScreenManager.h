@@ -4,6 +4,7 @@
 #include "Pacman.h"
 #include "Window.h"
 #include <string>
+#include <map>
 #include "Ghost.h"
 #include "List.h"
 #include "Grilla.h"
@@ -21,9 +22,14 @@ class ScreenManager
 	int bonusActivationCycles;
 	int bonusActiveTime;
 	bool bonusShowing;
+	bool robarDelPacman2;
+	bool robarDelPacman1;
 	TipoBonus bonusToShow;
 	List<Ghost*> pacman1Ghosts;
 	List<Ghost*> pacman2Ghosts;
+
+	std::map<std::string, bool> activeBonus;
+
 	Activity* window;
 	//Window* window;
 	bool finished;
@@ -42,8 +48,10 @@ class ScreenManager
 	int imageWidth;
 	int boardHeight;
 	int boardWidth;
+	int pasosTotales;
 	Grilla* grilla;
 	Image *fondoNegro;
+	int originalPacmanSpeed;
 	SpecialBonusManager sbm;
 	void updatePacman(Pacman* pac);
 	void updateGhostsVulnerability(void);
@@ -59,6 +67,7 @@ class ScreenManager
 	void showSpecialBonus(void);
 	bool isFoodOver(void);
 	void placeBonusInMaze(TipoBonus& bonus);
+	void bonusInitialization(void);
 public:
 	ScreenManager(Activity* w, Image* imageFondo, Grilla* grilla, int imageHeight, int imageWidth, Uint32 period);
 	//ScreenManager(Window* w, Image* imageFondo, Grilla& grilla, int imageHeight, int imageWidth);
@@ -71,4 +80,6 @@ public:
 	List<Ghost*> getPacman2Ghosts();
 	Pacman* getPacman1();
 	Pacman* getPacman2();
+	bool getRobarDelPacman1(void);
+	bool getRobarDelPacman2(void);
 };

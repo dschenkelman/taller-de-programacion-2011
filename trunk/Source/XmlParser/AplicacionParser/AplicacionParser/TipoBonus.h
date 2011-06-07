@@ -36,5 +36,6 @@ public:
 	int getApariciones();
 	void decreaseApariciones();
 	int getDuracion(void);
+	std::string getUnidad(void);
 	~TipoBonus(void);
 };
