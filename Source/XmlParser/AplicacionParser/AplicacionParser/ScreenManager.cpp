@@ -5,6 +5,7 @@
 #include "ImageArea.h"
 #include "Camino.h"
 #include <string>
+#include "CollisionHelper.h"
 
 using namespace std;
 
@@ -125,6 +126,7 @@ void ScreenManager::handleKeyStroke(void)
 void ScreenManager::updateScreen(void)
 {
 	this->showSpecialBonus();
+	this->handleCollisionWithOppositeCharacters(this->pacman1, this->pacman2, this->pacman2Ghosts);
 	this->updateGhostsVulnerability();
 	this->updateGhostsActivation();
 	this->deletePacman(this->pacman1);
@@ -294,6 +296,19 @@ void ScreenManager::deleteBonus(Pacman *pac, List<Ghost*>& ghosts, bool isPacman
 
 	this->fondo->display(this->fondoNegro, ia.getX(), ia.getY(), ia.getImageWidth(), ia.getImageHeight());
 	this->window->display(this->fondoNegro, ia.getX(), ia.getY(), ia.getImageWidth(), ia.getImageHeight());
+}
+
+void ScreenManager::handleCollisionWithOppositeCharacters(Pacman* pac, Pacman* op, 
+														  List<Ghost*>& opGhosts)
+{
+	bool opCollision = false;
+	opCollision = CollisionHelper::AreFullyCollisioned(pac->getX(), 
+		pac->getY(), op->getX(), op->getY(), 3);
+
+	if(opCollision)
+	{
+		this->soundManager->playSound(this->soundManager->getCollisionPath(), 1);
+	}
 }
 
 bool ScreenManager::isFoodOver()

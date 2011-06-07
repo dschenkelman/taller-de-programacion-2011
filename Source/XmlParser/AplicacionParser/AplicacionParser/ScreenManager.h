@@ -62,6 +62,7 @@ class ScreenManager
 	void createGhostsForPacman1(void);
 	void createGhostsForPacman2(void);
 	void handleBonusEating(Pacman* pac, List<Ghost*>& ghosts, std::string bonus, bool isPacman1);
+	void handleCollisionWithOppositeCharacters(Pacman* pac, Pacman* opponent, List<Ghost*>& opponentGhosts);
 	void deleteBonus(Pacman *pac, List<Ghost*>& ghosts, bool isPacman1);
 	void loadSpecialBonus(void);
 	void showSpecialBonus(void);
