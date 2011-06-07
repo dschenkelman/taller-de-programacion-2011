@@ -21,7 +21,7 @@ char* database::execute(char* sql)
 {
 	char* res;
 	sqlite3_exec(this->db, sql, NULL, 0, &res);
-	cout << sql << endl;
+	//cout << sql << endl;
 	return res;
 }
 
@@ -39,6 +39,8 @@ query* database::getQuery_v2(char* sql)
 
 database::~database(void)
 {
-	sqlite3_close(this->db);
+	int res = sqlite3_close(this->db);
+	if (!res) cout << "Connection closed." << endl;
+	else cout << "Error closing DB connection." << endl;
 	this->db = NULL;
 }

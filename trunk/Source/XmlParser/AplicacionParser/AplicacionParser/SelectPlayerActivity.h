@@ -17,6 +17,7 @@ private:
 	bool menuPlayerOneActive;
 	bool menuPlayerTwoActive;
 	bool game;
+	int playersQty;
 
 public:
 	SelectPlayerActivity(int width, int height, Escenario* escenario, bool game);

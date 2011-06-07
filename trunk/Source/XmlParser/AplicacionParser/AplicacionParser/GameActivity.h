@@ -4,6 +4,7 @@
 #include "OptionArrowMenuView.h"
 #include "Escenario.h"
 #include "ScreenManager.h"
+#include "gamelog.h"
 
 class GameActivity : public Activity {
 private:
@@ -29,6 +30,7 @@ private:
 	RichTextView* loadingTxt;
 	long gameTime;
 	long displayedSeconds;
+	gamelog* glog;
 public:
 	GameActivity(int width, int height);
 	GameActivity(int width, int height, std::string playerOne, std::string playerTwo);

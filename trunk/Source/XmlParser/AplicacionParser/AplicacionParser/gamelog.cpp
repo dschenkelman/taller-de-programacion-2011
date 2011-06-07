@@ -85,6 +85,12 @@ bool gamelog::insertGame(char* player0, char* player1, int winner, int points0, 
 	return false; // TODO
 }
 
+bool gamelog::insertGame(char* player0, char* player1, int points0, int points1, int duration) {
+	int winner;
+	if (points0>points1) winner=0;
+	else winner=1;
+	return gamelog::insertGame(player0,player1,winner,points0,points1,duration);
+}
 query* gamelog::getPlayers()
 {
        return this->db->getQuery_v2("SELECT * FROM Players");
