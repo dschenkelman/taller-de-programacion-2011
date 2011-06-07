@@ -345,7 +345,6 @@ Pacman* ScreenManager::getPacman2(void)
 
 void ScreenManager::handleBonusEating(Pacman* pac, List<Ghost*>& ghosts, string bonus, bool isPacman1)
 {
-	
 	if (!this->activeBonus["alimentoCongelado"]){
 		this->pacman1->inmovilizar(false);
 		this->pacman2->inmovilizar(false);
@@ -361,7 +360,11 @@ void ScreenManager::handleBonusEating(Pacman* pac, List<Ghost*>& ghosts, string 
 		this->pacman2->setPacmanSpeed(this->originalPacmanSpeed);
 	}
 
-
+	if (!this->activeBonus["alimentoPersecucion"])
+	{
+		this->assignPacmanToGhosts(this->pacman1Ghosts, this->pacman1);
+		this->assignPacmanToGhosts(this->pacman2Ghosts, this->pacman2);
+	}
 
 	if (bonus == "alimento")
 	{
@@ -504,8 +507,29 @@ void ScreenManager::handleBonusEating(Pacman* pac, List<Ghost*>& ghosts, string 
 		return;
 	}
 
+	if (bonus == "alimentoPersecucion" && this->bonusShowing)
+	{
+		if (isPacman1)
+		{
+			this->assignPacmanToGhosts(this->pacman1Ghosts, this->pacman2);
+		}
+		else
+		{
+			this->assignPacmanToGhosts(this->pacman2Ghosts, this->pacman1);
+		}
+	}
 	
 }
+
+void ScreenManager::assignPacmanToGhosts(List<Ghost*>& ghosts, Pacman* pac)
+{
+	for (int i = 0; i < ghosts.length(); i++)
+	{
+		Ghost* g = ghosts.at(i);
+		g->setPacman(pac);
+	}
+}
+
 ScreenManager::~ScreenManager(void)
 {
 	delete this->pacman1;

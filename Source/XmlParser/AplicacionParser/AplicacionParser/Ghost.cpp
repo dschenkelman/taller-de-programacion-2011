@@ -337,6 +337,11 @@ bool Ghost::isGoingThroughDoor(void)
 	return a && b && c && d;
 }
 
+void Ghost::setPacman(Pacman* pac)
+{
+	this->pacman = pac;
+}
+
 Ghost::~Ghost(void)
 {
 	if (this->isVulnerable)

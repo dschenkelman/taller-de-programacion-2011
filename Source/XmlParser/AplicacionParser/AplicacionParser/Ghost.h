@@ -47,5 +47,6 @@ public:
 	void setIsActive(bool value);
 	virtual void updatePosition();
 	void rotateLeft(void);
+	void setPacman(Pacman* pac);
 	~Ghost(void);
 };
