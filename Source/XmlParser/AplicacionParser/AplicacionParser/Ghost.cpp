@@ -162,7 +162,7 @@ void Ghost::determineNextPosition(void)
 	{
 		int position;	
 
-		if (this->isVulnerable)
+		if (this->isVulnerable && !this->inHeadquarters)
 		{
 			this->idiotMode=false;
 			this->idiotModeTimeout=0;
