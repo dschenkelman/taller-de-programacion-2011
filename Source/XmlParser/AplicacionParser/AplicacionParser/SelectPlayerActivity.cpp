@@ -4,6 +4,7 @@
 #include "GameActivity.h"
 #include "InsertPasswordActivity.h"
 #include "CreatePlayerActivity.h"
+#include "ComparisonBetweenPlayersActivity.h"
 
 using namespace std;
 
@@ -93,7 +94,6 @@ Activity* SelectPlayerActivity::notify(SDL_Event e)
 					{
 						if(!(this->arrowMenuPlayerTwo->getSelectedOption() ==
 							this->arrowMenuPlayerOne->getSelectedOption()))
-							cout << this->arrowMenuPlayerOne->getSelectedOption();
 						{
 							this->menuPlayerTwoActive = false;
 						}
@@ -106,16 +106,14 @@ Activity* SelectPlayerActivity::notify(SDL_Event e)
 					{
 						if(game)
 						{
-							//nextActivity = new GameActivity(this->getWidth(), this->getHeight(), 
-							//	this->arrowMenuPlayerOne->getSelectedOption(), this->arrowMenuPlayerTwo->getSelectedOption());
 							nextActivity = new InsertPasswordActivity(this->getWidth(), this->getHeight(),
 								this->arrowMenuPlayerOne->getSelectedOption(), this->arrowMenuPlayerTwo->getSelectedOption());
 						}
 
 						else
 						{
-							//nextActivity = new ComparisonBetweenPlayers(this->getWidth(), this->getHeight(),
-							//	this->arrowMenuPlayerOne->getSelectedOption(), this->arrowMenuPlayerTwo->getSelectedOption());
+							nextActivity = new ComparisonBetweenPlayersActivity(this->getWidth(), this->getHeight(),
+								this->arrowMenuPlayerOne->getSelectedOption(), this->arrowMenuPlayerTwo->getSelectedOption());
 						}
 					}
 

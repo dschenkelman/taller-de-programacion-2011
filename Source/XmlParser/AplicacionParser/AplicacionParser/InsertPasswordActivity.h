@@ -23,7 +23,7 @@ private:
 	std::string passPlayerOneView;
 	std::string passPlayerTwoView;
 	char getKey(SDL_KeyboardEvent e);
-	std::string getPassword(std::string name);
+	bool verifyPassword(std::string name, std::string pass);
 public:
 	InsertPasswordActivity(int width, int height, std::string playerOne, std::string playerTwo);
 	void onLoad();
