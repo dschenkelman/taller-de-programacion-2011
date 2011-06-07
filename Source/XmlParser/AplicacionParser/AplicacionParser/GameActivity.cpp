@@ -63,17 +63,12 @@ void GameActivity::loadGame(){
 		ifile.close();
 		XmlParser parser;
 		string name = fileName;
-		cout << "Parsing XML... ";
 		parser.openFile(name);
 		XmlElement* root = parser.parse();
 		parser.closeFile();
-		cout << "OK" << endl;
-		cout << "Creating scenario... ";
 		this->escenario = new Escenario(*root);
 		delete root;
-		cout << "OK" << endl;
 		if (!this->escenario->hasError()){
-			cout << "Graphing... ";
 			Grapher grapher;
 			grapher.setVideoMode(this->getWidth());
 			this->fondo = grapher.draw(*this->escenario);
@@ -114,7 +109,6 @@ void GameActivity::loadGame(){
 				this->add(this->points2Title);
 				this->add(this->points1View);
 				this->add(this->points2View);
-				cout << " OK" << endl;
 			}
 			else{
 				std::string msg = "Error al graficar. Ver el archivo parser.log.txt";
