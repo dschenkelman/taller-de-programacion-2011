@@ -340,6 +340,7 @@ bool Ghost::isGoingThroughDoor(void)
 void Ghost::setPacman(Pacman* pac)
 {
 	this->pacman = pac;
+
 }
 
 Ghost::~Ghost(void)
