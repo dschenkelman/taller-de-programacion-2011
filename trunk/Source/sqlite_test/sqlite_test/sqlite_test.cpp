@@ -42,6 +42,8 @@ int main() {
 		cout << "Jugador: " << stats->getChars(0) << " Puntos: " << stats->getInt(1) << endl;
 	}
 
+	stats = glog.playersComparison("ale","ela");
+
 	//dump memory leaks to VS Output Window
 	int leaks = _CrtDumpMemoryLeaks();
 	cout << "Memory leaks: " << leaks << endl;

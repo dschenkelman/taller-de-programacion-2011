@@ -107,11 +107,11 @@ query* gamelog::playersByWinnedCount()
 query* gamelog::playersComparison(char* player0, char* player1)
 //select GameId,p.Name,w.Name as Winner,Duration,Points from games g inner join usergame ug on g.id=ug.gameid inner join players p on p.id=ug.playerid inner join players w on w.id=g.winnerid where g.id in (select g.id from games g inner join usergame ug on g.id=ug.gameid inner join players p on p.id=ug.playerid where p.name in ('ale') group by g.id) order by gameid;
 {
-	string sql("select GameId,p.Name,w.Name as Winner,Duration,Points from games g inner join usergame ug on g.id=ug.gameid inner join players p on p.id=ug.playerid inner join players w on w.id=g.winnerid where g.id in (select g.id from games g inner join usergame ug on g.id=ug.gameid inner join players p on p.id=ug.playerid where p.name in ('");
+	string sql("select p0.name as Player0,p1.name as Player1,ug0.points as Points0,ug1.points as Points1,g.winnerid,g.duration from games g inner join usergame ug0 on p0.name='");
 	sql += string(player0);
-	sql += string("','");
+	sql += string("' and ug0.gameid=g.id inner join usergame ug1 on p1.name='");
 	sql += string(player1);
-	sql += string("') group by g.id) order by gameid;");
+	sql += string("' and ug1.gameid=g.id inner join players p0 on p0.id=ug0.playerid inner join players p1 on p1.id=ug1.playerid order by g.id;");
 	return this->db->getQuery_v2((char*)sql.c_str());
 }
 
