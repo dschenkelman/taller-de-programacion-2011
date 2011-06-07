@@ -31,10 +31,10 @@ void SpecialBonusManager::selectBonus(void)
 		i++;
 	}
 
-	if (this->bonusTypes.at(i).getApariciones() > 0)
+	if (this->bonusTypes.at(i - 1).getApariciones() > 0)
 	{
-		this->bonusTypes.at(i).decreaseApariciones();
-		this->selectedBonus = this->bonusTypes.at(i);
+		this->bonusTypes.at(i - 1).decreaseApariciones();
+		this->selectedBonus = this->bonusTypes.at(i - 1);
 		this->validBonus = true;
 	}
 	else

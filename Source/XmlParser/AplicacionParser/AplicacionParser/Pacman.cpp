@@ -413,3 +413,8 @@ int Pacman::getPacmanSpeed(void){
 void Pacman::inmovilizar(bool flag){
 	this->notMove=flag;
 }
+
+bool Pacman::tryEatSpecialBonus(int x, int y, int height, int width)
+{
+	return CollisionHelper::BonusCollision(this->textura, this->x, this->y, x, y, height, width);
+}

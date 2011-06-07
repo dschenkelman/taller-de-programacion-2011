@@ -62,5 +62,6 @@ public:
 	int getPacmanSpeed(void);
 	void inmovilizar(bool flag);
 	void setScoreMultiplier(int mul);
+	bool tryEatSpecialBonus(int x, int y, int height, int width);
 	~Pacman(void);
 };

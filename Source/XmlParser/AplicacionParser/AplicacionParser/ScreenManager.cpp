@@ -301,7 +301,19 @@ void ScreenManager::deleteBonus(Pacman *pac, List<Ghost*>& ghosts, bool isPacman
 	string bonus = pac->getLastEatenBonus();
 	if (bonus != "")
 	{
-		this->handleBonusEating(pac, ghosts, bonus, isPacman1);
+		this->handleNormalBonusEating(pac, ghosts, bonus, isPacman1);
+	}
+
+	if (this->bonusShowing)
+	{
+		bool success = pac->tryEatSpecialBonus(this->specialBonusX, this->specialBonusY, 
+		this->specialBonusImage->getHeight(), this->specialBonusImage->getWidth());
+
+		if (success)
+		{
+			this->handleSpecialBonusEating(pac, ghosts, this->bonusToShow.getNombre(), isPacman1);
+			this->removeBonusFromMaze();
+		}
 	}
 
 	this->fondo->display(this->fondoNegro, ia.getX(), ia.getY(), ia.getImageWidth(), ia.getImageHeight());
@@ -351,7 +363,7 @@ Pacman* ScreenManager::getPacman2(void)
 	return this->pacman2;
 }
 
-void ScreenManager::handleBonusEating(Pacman* pac, List<Ghost*>& ghosts, string bonus, bool isPacman1)
+void ScreenManager::handleNormalBonusEating(Pacman* pac, List<Ghost*>& ghosts, string bonus, bool isPacman1)
 {
 	if (bonus == "alimento")
 	{
@@ -387,12 +399,16 @@ void ScreenManager::handleBonusEating(Pacman* pac, List<Ghost*>& ghosts, string 
 		}
 		return;
 	}
-	
+}
+
+void ScreenManager::handleSpecialBonusEating(Pacman* pac, List<Ghost*>& ghosts, std::string bonus, bool isPacman1)
+{
+	this->soundManager->playSound(this->soundManager->getBonusPath(), 1);
+
 	if (bonus == "alimentoDuplicador" && this->bonusShowing)
 	{
 		// alimento duplicador
 		pac->setScoreMultiplier(2);
-		this->soundManager->playSound(this->soundManager->getBonusPath(), 1);
 		
 		if (isPacman1)
 		{
@@ -411,7 +427,6 @@ void ScreenManager::handleBonusEating(Pacman* pac, List<Ghost*>& ghosts, string 
 	{
 		// bonus anana
 		this->increasePacmanScore(pac, isPacman1, 100);
-		this->soundManager->playSound(this->soundManager->getBonusPath(), 1);
 		return;
 	}
 
@@ -419,7 +434,6 @@ void ScreenManager::handleBonusEating(Pacman* pac, List<Ghost*>& ghosts, string 
 	{
 		// alimento manzana
 		this->increasePacmanScore(pac, isPacman1, 200);
-		this->soundManager->playSound(this->soundManager->getBonusPath(), 1);
 		return;
 	}
 
@@ -427,30 +441,22 @@ void ScreenManager::handleBonusEating(Pacman* pac, List<Ghost*>& ghosts, string 
 	{
 		if (isPacman1)
 		{
-			this->pacman2->inmovilizar(true);
-		}
-		else
-		{
-			this->pacman1->inmovilizar(true);
-		}
-		this->soundManager->playSound(this->soundManager->getBonusPath(), 1);
-		
-		if (isPacman1)
-		{
 			this->activeBonusPacman1["alimentoCongelado"] = 
 				this->bonusToShow.getDuracionTiempo(this->period);
+			this->pacman2->inmovilizar(true);
 		}
 		else
 		{
 			this->activeBonusPacman2["alimentoCongelado"] = 
 				this->bonusToShow.getDuracionTiempo(this->period);
+			this->pacman1->inmovilizar(true);
 		}
+
 		return;
 	}
 		
 	if (bonus == "alimentoRobaPuntos" && this->bonusShowing)
 	{
-		this->soundManager->playSound(this->soundManager->getBonusPath(), 1);
 		if (isPacman1)
 		{
 			this->activeBonusPacman1["alimentoRobaPuntos"] = 
@@ -469,19 +475,12 @@ void ScreenManager::handleBonusEating(Pacman* pac, List<Ghost*>& ghosts, string 
 		if (isPacman1)
 		{
 			this->pacman1->setPacmanSpeed(this->pacman1->getPacmanSpeed()*2); 
-		}
-		else
-		{
-			this->pacman2->setPacmanSpeed(this->pacman2->getPacmanSpeed()*2); 
-		}
-		this->soundManager->playSound(this->soundManager->getBonusPath(), 1);
-		if (isPacman1)
-		{
 			this->activeBonusPacman1["alimentoDuplicaVelocidad"] = 
 				this->bonusToShow.getDuracionTiempo(this->period);
 		}
 		else
 		{
+			this->pacman2->setPacmanSpeed(this->pacman2->getPacmanSpeed()*2); 
 			this->activeBonusPacman2["alimentoDuplicaVelocidad"] = 
 				this->bonusToShow.getDuracionTiempo(this->period);
 		}
@@ -493,15 +492,17 @@ void ScreenManager::handleBonusEating(Pacman* pac, List<Ghost*>& ghosts, string 
 	{
 		if (isPacman1)
 		{
+			this->pacman2->setPacmanSpeed(this->pacman2->getPacmanSpeed()/2); 
 			this->activeBonusPacman1["alimentoReduceVelocidad"] = 
 				this->bonusToShow.getDuracionTiempo(this->period);
 		}
 		else
 		{
+			this->pacman1->setPacmanSpeed(this->pacman1->getPacmanSpeed()/2); 
 			this->activeBonusPacman2["alimentoReduceVelocidad"] = 
 				this->bonusToShow.getDuracionTiempo(this->period);
 		}
-		this->soundManager->playSound(this->soundManager->getBonusPath(), 1);
+
 		return;
 	}
 
@@ -520,12 +521,9 @@ void ScreenManager::handleBonusEating(Pacman* pac, List<Ghost*>& ghosts, string 
 				this->bonusToShow.getDuracionTiempo(this->period);
 		}
 
-		this->soundManager->playSound(this->soundManager->getBonusPath(), 1);
-
 		return;
 	}
 }
-
 void ScreenManager::assignPacmanToGhosts(List<Ghost*>& ghosts, Pacman* pac)
 {
 	for (int i = 0; i < ghosts.length(); i++)
@@ -573,8 +571,7 @@ void ScreenManager::updateSpecialBonus(void)
 
 	if (this->bonusShowing && timeSinceAppearence >= this->bonusLastingInterval)
 	{
-		// bonus should dissapear
-		this->bonusShowing=false;
+
 		// remove bonus from maze
 		this->removeBonusFromMaze();
 		cout<<"Bono "<<this->bonusToShow.getNombre()<<"	termino Activacion"<<endl;
@@ -679,7 +676,13 @@ void ScreenManager::placeBonusInMaze(TipoBonus& bonus)
 		width = this->imageWidth;	
 	}
 
+	this->specialBonusX = this->imageWidth * 12;
+	this->specialBonusY = this->imageHeight * 18;
+
 	this->specialBonusImage->resize(width, height);
+
+	this->fondo->display(this->specialBonusImage, this->specialBonusX,
+		this->specialBonusY, t.getRed(), t.getGreen(), t.getBlue(), t.getDelta());
 
 	this->window->display(this->specialBonusImage, this->specialBonusX,
 		this->specialBonusY, t.getRed(), t.getGreen(), t.getBlue(), t.getDelta());
@@ -687,7 +690,13 @@ void ScreenManager::placeBonusInMaze(TipoBonus& bonus)
 
 void ScreenManager::removeBonusFromMaze(void)
 {
-	this->window->display(this->fondo, this->specialBonusX, this->specialBonusY,
+	// bonus should dissapear
+	this->bonusShowing=false;
+
+	this->fondo->display(this->fondoNegro, this->specialBonusX, this->specialBonusY,
+		this->specialBonusImage->getWidth(), this->specialBonusImage->getHeight());
+
+	this->window->display(this->fondoNegro, this->specialBonusX, this->specialBonusY,
 		this->specialBonusImage->getWidth(), this->specialBonusImage->getHeight());
 
 	delete this->specialBonusImage;
