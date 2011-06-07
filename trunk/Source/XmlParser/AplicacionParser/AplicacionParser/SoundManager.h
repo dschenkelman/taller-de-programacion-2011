@@ -17,6 +17,8 @@ class SoundManager
 	std::string eatGhostSound;
 	std::string diesSound;
 	std::string wonSound;
+	std::string bonusSound;
+	std::string collisionSound;
 	void loadPacmanSounds(void);
 	int lastChannel;
 public:
@@ -26,6 +28,8 @@ public:
 	std::string getBackgroundPath(void);
 	std::string getDiesPath(void);
 	std::string getWonPath(void);
+	std::string getBonusPath(void);
+	std::string getCollisionPath(void);
 	void loadSound(std::string path);
 	void playSound(std::string path, int timesToPlay);
 	void pauseSound(std::string path);
