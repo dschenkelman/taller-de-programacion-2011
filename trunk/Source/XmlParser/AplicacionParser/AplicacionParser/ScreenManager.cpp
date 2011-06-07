@@ -132,8 +132,8 @@ void ScreenManager::handleKeyStroke(void)
 
 void ScreenManager::updateScreen(void)
 {
-	this->updateBonusEffects(this->pacman1, this->pacman2, this->pacman1Ghosts);
-	this->updateBonusEffects(this->pacman1, this->pacman2, this->pacman2Ghosts);
+	this->updateBonusEffects(this->pacman1, this->pacman2, this->pacman1Ghosts, this->activeBonusPacman1);
+	this->updateBonusEffects(this->pacman1, this->pacman2, this->pacman2Ghosts, this->activeBonusPacman2);
 	this->updateSpecialBonus();
 	this->updateGhostsVulnerability();
 	this->updateGhostsActivation();
@@ -578,12 +578,12 @@ void ScreenManager::updateSpecialBonus(void)
 	}
 }
 
-void ScreenManager::updateBonusEffects(Pacman* pac, Pacman* op, List<Ghost*>& ghosts)
+void ScreenManager::updateBonusEffects(Pacman* pac, Pacman* op, List<Ghost*>& ghosts, map<string, int>& activeBonusForPacman)
 {
 	std::map<std::string, int>::iterator bonusTimeEffect;
 
-	for (bonusTimeEffect = this->activeBonusPacman1.begin(); 
-		bonusTimeEffect != this->activeBonusPacman1.end();
+	for (bonusTimeEffect = activeBonusForPacman.begin(); 
+		bonusTimeEffect != activeBonusForPacman.end();
 		bonusTimeEffect++) 
 	{
 		if (bonusTimeEffect->second > 0)
