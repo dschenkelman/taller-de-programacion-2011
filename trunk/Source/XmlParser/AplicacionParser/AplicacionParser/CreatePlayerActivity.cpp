@@ -39,10 +39,13 @@ void CreatePlayerActivity::onLoad()
 	//this->rtvUsernameBox = new RichTextView(this->name, RichTextView::NORMAL);
 	this->rtvUsernameBox = new InputTextView("", this->MAX_LENGHT);
 	this->rtvUsernameBox->setX((this->getWidth()/2) - 20); this->rtvUsernameBox->setY(200);
+	this->rtvUsernameBox->setFocusable(true);
+	this->rtvUsernameBox->setFocused(true);
 
 	//this->rtvPassBox = new RichTextView(this->passView, RichTextView::NORMAL);
 	this->rtvPassBox = new InputTextView("", this->MAX_LENGHT);
 	this->rtvPassBox->setX((this->getWidth()/2) - 20); this->rtvPassBox->setY(260);
+	this->rtvPassBox->setFocusable(true);
 
 	this->arrowMenu = new OptionArrowMenuView();
 	this->arrowMenu->setVerticalAlign(View::VERTICAL_ALIGN_CENTER); this->arrowMenu->setY(this->getHeight() - 50);
@@ -82,6 +85,7 @@ Activity* CreatePlayerActivity::notify(SDL_Event e)
 					{
 						this->name.erase(this->name.size()-1, 1);
 						RichTextView* newRtvUsernameBox = new InputTextView(this->name, this->MAX_LENGHT);
+						newRtvUsernameBox->setFocusable(true);
 						newRtvUsernameBox->setX(this->rtvUsernameBox->getX());
 						newRtvUsernameBox->setY(this->rtvUsernameBox->getY());
 						this->updateViewFromView(this->rtvUsernameBox, newRtvUsernameBox);
@@ -98,6 +102,7 @@ Activity* CreatePlayerActivity::notify(SDL_Event e)
 						this->pass.erase(this->pass.size()-1, 1);
 						this->passView.erase(this->passView.size()-7, 7);	
 						RichTextView* newRtvPassBox = new InputTextView(this->passView, this->MAX_LENGHT);
+						newRtvPassBox->setFocusable(true);
 						newRtvPassBox->setX(this->rtvPassBox->getX());
 						newRtvPassBox->setY(this->rtvPassBox->getY());
 						this->updateViewFromView(this->rtvPassBox, newRtvPassBox);
@@ -142,6 +147,7 @@ Activity* CreatePlayerActivity::notify(SDL_Event e)
 					{
 						this->name += letra;
 						RichTextView* newRtvUsernameBox = new InputTextView(this->name, this->MAX_LENGHT);
+						newRtvUsernameBox->setFocusable(true);
 						newRtvUsernameBox->setX(this->rtvUsernameBox->getX());
 						newRtvUsernameBox->setY(this->rtvUsernameBox->getY());
 						this->updateViewFromView(this->rtvUsernameBox, newRtvUsernameBox);
@@ -149,15 +155,19 @@ Activity* CreatePlayerActivity::notify(SDL_Event e)
 						this->rtvUsernameBox = newRtvUsernameBox;
 					}
 				}
-
 				else
 				{
-					this->pass += letra;
-					this->passView += "&atrsk;";
-					RichTextView* newRtvPassBox = new InputTextView(this->passView, this->MAX_LENGHT);
-					newRtvPassBox->setX(this->rtvPassBox->getX());
-					newRtvPassBox->setY(this->rtvPassBox->getY());
-					this->updateViewFromView(this->rtvPassBox, newRtvPassBox);
+					if(this->pass.size() < this->MAX_LENGHT)
+					{
+						this->pass += letra;
+						this->passView += "&atrsk;";
+						RichTextView* newRtvPassBox = new InputTextView(this->passView, this->MAX_LENGHT);
+						newRtvPassBox->setFocusable(true);
+						newRtvPassBox->setX(this->rtvPassBox->getX());
+						newRtvPassBox->setY(this->rtvPassBox->getY());
+						this->updateViewFromView(this->rtvPassBox, newRtvPassBox);
+						this->rtvPassBox = newRtvPassBox;
+					}
 				}
 			}
 
@@ -178,6 +188,9 @@ Activity* CreatePlayerActivity::notify(SDL_Event e)
 
 			break;
 	}
+
+	this->rtvUsernameBox->setFocused(this->usernameBoxActive);
+	this->rtvPassBox->setFocused(!(this->usernameBoxActive));
 
 	return nextActivity;
 }

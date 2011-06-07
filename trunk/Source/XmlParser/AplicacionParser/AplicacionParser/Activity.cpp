@@ -94,6 +94,10 @@ void Activity::drawViews(){
 		
 		w->draw();
 
+		 // dibujo el focus
+		if(w->isFocusable())
+			this->setFocus(w, w->isFocused());
+
 		int posX;
 
 		if(w->getVerticalAlign() == View::VERTICAL_ALIGN_CENTER){
@@ -114,6 +118,7 @@ void Activity::drawViews(){
 			SDL_BlitSurface(w->getSDLSurface(), NULL, this->getSDLSurface(), &rec);
 			SDL_Flip(this->getSDLSurface());
 		}
+
 	}
 }
 
@@ -151,6 +156,42 @@ void Activity::display(Image* image, int x, int y, int width, int height)
 		}	
 	}
 }
+
+
+void Activity::setFocus(View* v, bool value){
+	
+	int fromX, toX, fromY, toY;
+	
+	if(v->getVerticalAlign() == View::VERTICAL_ALIGN_CENTER){
+		fromX = (((this->getWidth()/2)-(v->getWidth()/2))-10);
+	}else{
+		fromX = (v->getX()-10);
+	}
+	
+	toX = fromX+v->getWidth()+10;
+	fromY = (v->getY()-10);
+	toY = (fromY+v->getHeight()+10);
+
+	// seteo el color
+	Uint32 pixel;
+	if(value){
+		pixel = SDL_MapRGB(this->getFormat(), 0, 255, 0);
+	}else{
+		pixel = SDL_MapRGB(this->getFormat(), 0, 0, 0);
+	}
+	
+	// dibujo el reactangulo
+	for(int x = fromX; x<toX; x++){
+		this->putPixel(pixel, x, fromY);
+		this->putPixel(pixel, x, toY);
+	}
+	for(int y = fromY; y<toY; y++){
+		this->putPixel(pixel, fromX, y);
+		this->putPixel(pixel, toX, y);
+	}
+
+}
+
 
 void Activity::setBackgroundImage(std::string uri){
 	ImageView* img = new ImageView(uri);

@@ -28,4 +28,5 @@ public:
 	void display(Image* image, int x, int y, int width, int height);
 	Escenario* getEscenario();
 	void setBackgroundImage(std::string uri);
+	void setFocus(View* v, bool value);
 };
