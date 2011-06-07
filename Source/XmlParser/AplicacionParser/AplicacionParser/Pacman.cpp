@@ -12,7 +12,7 @@ Pacman::Pacman(string pathTexturaAbierta, string pathTexturaCerrada, Grilla* gri
 			   int w, int x, int y, int speed, int imageHeight, int imageWidth) : 
 Character(pathTexturaAbierta, grilla, h, w, x, y, 0, 0, speed, imageHeight, imageWidth), dir(Direction::RIGHT),
 rightKey(SDLK_RIGHT),leftKey(SDLK_LEFT), upKey(SDLK_UP), downKey(SDLK_DOWN), isDead(false), keyPressed(Direction::CENTER), 
-score(0), normalBonusEaten(0), lastEatenBonus(""), ghostKills(0), notMove(false)
+score(0), normalBonusEaten(0), lastEatenBonus(""), ghostKills(0), notMove(false), scoreMultiplier(1)
 {
 	this->texturaOpuesta = new Image(pathTexturaCerrada);
 	this->texturaOpuesta->resize(this->imageWidth - this->speed, this->imageHeight - this->speed);
@@ -179,7 +179,12 @@ bool Pacman::isAlive(void)
 
 void Pacman::increaseScore(int increase)
 {
-	this->score += increase;
+	this->score += increase * this->scoreMultiplier;
+}
+
+void Pacman::setScoreMultiplier(int mul)
+{
+	this->scoreMultiplier = mul;
 }
 
 int Pacman::getScore(void)

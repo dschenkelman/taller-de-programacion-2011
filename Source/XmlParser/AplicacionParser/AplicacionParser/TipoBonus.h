@@ -37,5 +37,6 @@ public:
 	void decreaseApariciones();
 	int getDuracion(void);
 	std::string getUnidad(void);
+	int getDuracionTiempo(int periodo);
 	~TipoBonus(void);
 };

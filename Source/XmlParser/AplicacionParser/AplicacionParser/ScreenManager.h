@@ -21,13 +21,12 @@ class ScreenManager
 	int activationCycles;
 	int bonusAppearenceCycles;
 	bool bonusShowing;
-	bool robarDelPacman2;
-	bool robarDelPacman1;
 	TipoBonus bonusToShow;
 	List<Ghost*> pacman1Ghosts;
 	List<Ghost*> pacman2Ghosts;
 
-	std::map<std::string, bool> activeBonus;
+	std::map<std::string, int> activeBonusPacman1;
+	std::map<std::string, int> activeBonusPacman2;
 
 	Activity* window;
 	//Window* window;
@@ -70,6 +69,9 @@ class ScreenManager
 	void deleteBonus(Pacman *pac, List<Ghost*>& ghosts, bool isPacman1);
 	void loadSpecialBonus(void);
 	void updateSpecialBonus(void);
+	void updateBonusEffects(Pacman* pac, Pacman* op, List<Ghost*>& ghosts);
+	void cancelBonusEffect(std::string bonusType, Pacman* pac, Pacman* op, List<Ghost*>& ghosts);
+	void increasePacmanScore(Pacman* pac, bool isPacman1, int score);
 	bool isFoodOver(void);
 	void placeBonusInMaze(TipoBonus& bonus);
 	void bonusInitialization(void);
@@ -86,6 +88,4 @@ public:
 	List<Ghost*> getPacman2Ghosts();
 	Pacman* getPacman1();
 	Pacman* getPacman2();
-	bool getRobarDelPacman1(void);
-	bool getRobarDelPacman2(void);
 };

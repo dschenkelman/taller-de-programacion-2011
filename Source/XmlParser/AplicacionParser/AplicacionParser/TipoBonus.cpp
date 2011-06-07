@@ -176,3 +176,12 @@ int TipoBonus::getDuracion(void){
 std::string TipoBonus::getUnidad(void){
 	return this->unidad;
 }
+int TipoBonus::getDuracionTiempo(int periodo)
+{
+	if (this->unidad == "tiempo")
+	{
+		return this->duracion * 1000;
+	}
+
+	return this->duracion * periodo;
+}

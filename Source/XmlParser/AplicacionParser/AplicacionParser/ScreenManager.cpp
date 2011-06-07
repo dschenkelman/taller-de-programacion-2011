@@ -350,48 +350,10 @@ Pacman* ScreenManager::getPacman2(void)
 
 void ScreenManager::handleBonusEating(Pacman* pac, List<Ghost*>& ghosts, string bonus, bool isPacman1)
 {
-	if (!this->activeBonus["alimentoCongelado"]){
-		this->pacman1->inmovilizar(false);
-		this->pacman2->inmovilizar(false);
-	}
-	
-	if (!this->activeBonus["alimentoRobaPuntos"]){
-		this->robarDelPacman2=false;
-		this->robarDelPacman1=false;
-	}
-
-	if (!this->activeBonus["alimentoDuplicaVelocidad"] && !this->activeBonus["alimentoReduceVelocidad"]){
-		this->pacman1->setPacmanSpeed(this->originalPacmanSpeed);
-		this->pacman2->setPacmanSpeed(this->originalPacmanSpeed);
-	}
-
-	if (!this->activeBonus["alimentoPersecucion"])
-	{
-		this->assignPacmanToGhosts(this->pacman1Ghosts, this->pacman1);
-		this->assignPacmanToGhosts(this->pacman2Ghosts, this->pacman2);
-	}
-
 	if (bonus == "alimento")
 	{
 		// alimento comun
-		if (this->activeBonus["alimentoRobaPuntos"])
-		{
-			if (this->robarDelPacman1){
-				this->pacman2->increaseScore(10);
-				this->pacman2->increaseEatenBonus();
-			}
-			else{
-				this->pacman1->increaseScore(10);
-				this->pacman1->increaseEatenBonus();
-			}
-		}else{
-			if (this->activeBonus["alimentoDuplicador"])
-				pac->increaseScore(20);
-			else
-				pac->increaseScore(10);
-
-			pac->increaseEatenBonus();
-		}
+		this->increasePacmanScore(pac, isPacman1, 10);
 		this->soundManager->playSound(this->soundManager->getEatPath(), 1);
 
 		return;
@@ -403,8 +365,7 @@ void ScreenManager::handleBonusEating(Pacman* pac, List<Ghost*>& ghosts, string 
 		
 		// alimento bonus, fanstamas vulnerables
 		pac->setGhostKills(0);
-		pac->increaseScore(50);
-		pac->increaseEatenBonus();
+		this->increasePacmanScore(pac, isPacman1, 50);
 
 		for (int i = 0; i < ghosts.length(); i++)
 		{
@@ -427,88 +388,117 @@ void ScreenManager::handleBonusEating(Pacman* pac, List<Ghost*>& ghosts, string 
 	if (bonus == "alimentoDuplicador" && this->bonusShowing)
 	{
 		// alimento duplicador
-		pac->increaseScore(20); //Lo que come vale doble.
-		pac->increaseEatenBonus();
-		this->soundManager->playSound(this->soundManager->getEatPath(), 1);
+		pac->setScoreMultiplier(2);
+		this->soundManager->playSound(this->soundManager->getBonusPath(), 1);
+		
+		if (isPacman1)
+		{
+			this->activeBonusPacman1["alimentoDuplicador"] = 
+				this->bonusToShow.getDuracionTiempo(this->period);
+		}
+		else
+		{
+			this->activeBonusPacman2["alimentoDuplicador"] = 
+				this->bonusToShow.getDuracionTiempo(this->period);
+		}
 		return;
 	}
 
 	if (bonus == "anana" && this->bonusShowing)
 	{
 		// bonus anana
-		pac->increaseScore(100); 
-		pac->increaseEatenBonus();
-		this->soundManager->playSound(this->soundManager->getEatPath(), 1);
+		this->increasePacmanScore(pac, isPacman1, 100);
+		this->soundManager->playSound(this->soundManager->getBonusPath(), 1);
 		return;
 	}
 
 	if (bonus == "manzana" && this->bonusShowing)
 	{
 		// alimento manzana
-		pac->increaseScore(200);
-		pac->increaseEatenBonus();
-		this->soundManager->playSound(this->soundManager->getEatPath(), 1);
+		this->increasePacmanScore(pac, isPacman1, 200);
+		this->soundManager->playSound(this->soundManager->getBonusPath(), 1);
 		return;
 	}
 
 	if (bonus == "alimentoCongelado" && this->bonusShowing)
 	{
-		// alimento congelado
-		pac->increaseScore(10); 
-		pac->increaseEatenBonus();
-		if (isPacman1){
+		if (isPacman1)
+		{
 			this->pacman2->inmovilizar(true);
 		}
-		else{
+		else
+		{
 			this->pacman1->inmovilizar(true);
-		
 		}
-		this->soundManager->playSound(this->soundManager->getEatPath(), 1);
+		this->soundManager->playSound(this->soundManager->getBonusPath(), 1);
+		
+		if (isPacman1)
+		{
+			this->activeBonusPacman1["alimentoCongelado"] = 
+				this->bonusToShow.getDuracionTiempo(this->period);
+		}
+		else
+		{
+			this->activeBonusPacman2["alimentoCongelado"] = 
+				this->bonusToShow.getDuracionTiempo(this->period);
+		}
 		return;
 	}
 		
 	if (bonus == "alimentoRobaPuntos" && this->bonusShowing)
 	{
-		// alimento congelado
-		pac->increaseScore(10); //Lo que come vale doble.
-		pac->increaseEatenBonus();
-		if (isPacman1){
-			this->robarDelPacman2=true;
+		this->soundManager->playSound(this->soundManager->getBonusPath(), 1);
+		if (isPacman1)
+		{
+			this->activeBonusPacman1["alimentoRobaPuntos"] = 
+				this->bonusToShow.getDuracionTiempo(this->period);
 		}
-		else{
-			this->robarDelPacman1=true;
+		else
+		{
+			this->activeBonusPacman2["alimentoRobaPuntos"] = 
+				this->bonusToShow.getDuracionTiempo(this->period);
 		}
-		this->soundManager->playSound(this->soundManager->getEatPath(), 1);
 		return;
 	}
 
 	if (bonus == "alimentoDuplicaVelocidad" && this->bonusShowing)
 	{
-		// alimento congelado
-		pac->increaseScore(10); //Lo que come vale doble.
-		pac->increaseEatenBonus();
-		if (isPacman1){
+		if (isPacman1)
+		{
 			this->pacman1->setPacmanSpeed(this->pacman1->getPacmanSpeed()*2); 
 		}
-		else{
+		else
+		{
 			this->pacman2->setPacmanSpeed(this->pacman2->getPacmanSpeed()*2); 
 		}
-		this->soundManager->playSound(this->soundManager->getEatPath(), 1);
+		this->soundManager->playSound(this->soundManager->getBonusPath(), 1);
+		if (isPacman1)
+		{
+			this->activeBonusPacman1["alimentoDuplicaVelocidad"] = 
+				this->bonusToShow.getDuracionTiempo(this->period);
+		}
+		else
+		{
+			this->activeBonusPacman2["alimentoDuplicaVelocidad"] = 
+				this->bonusToShow.getDuracionTiempo(this->period);
+		}
+		
 		return;
 	}
 
 	if (bonus == "alimentoReduceVelocidad" && this->bonusShowing)
 	{
-		// alimento congelado
-		pac->increaseScore(10); 
-		pac->increaseEatenBonus();
-		if (isPacman1){
-			this->pacman1->setPacmanSpeed(this->pacman1->getPacmanSpeed()*0.5); 
+		if (isPacman1)
+		{
+			this->activeBonusPacman1["alimentoReduceVelocidad"] = 
+				this->bonusToShow.getDuracionTiempo(this->period);
 		}
-		else{
-			this->pacman2->setPacmanSpeed(this->pacman2->getPacmanSpeed()*0.5); 
+		else
+		{
+			this->activeBonusPacman2["alimentoReduceVelocidad"] = 
+				this->bonusToShow.getDuracionTiempo(this->period);
 		}
-		this->soundManager->playSound(this->soundManager->getEatPath(), 1);
+		this->soundManager->playSound(this->soundManager->getBonusPath(), 1);
 		return;
 	}
 
@@ -516,14 +506,21 @@ void ScreenManager::handleBonusEating(Pacman* pac, List<Ghost*>& ghosts, string 
 	{
 		if (isPacman1)
 		{
+			this->activeBonusPacman1["alimentoPersecucion"] = 
+				this->bonusToShow.getDuracionTiempo(this->period);
 			this->assignPacmanToGhosts(this->pacman1Ghosts, this->pacman2);
 		}
 		else
 		{
 			this->assignPacmanToGhosts(this->pacman2Ghosts, this->pacman1);
+			this->activeBonusPacman2["alimentoPersecucion"] = 
+				this->bonusToShow.getDuracionTiempo(this->period);
 		}
+
+		this->soundManager->playSound(this->soundManager->getBonusPath(), 1);
+
+		return;
 	}
-	
 }
 
 void ScreenManager::assignPacmanToGhosts(List<Ghost*>& ghosts, Pacman* pac)
@@ -534,26 +531,6 @@ void ScreenManager::assignPacmanToGhosts(List<Ghost*>& ghosts, Pacman* pac)
 		g->setPacman(pac);
 	}
 }
-
-ScreenManager::~ScreenManager(void)
-{
-	delete this->pacman1;
-	delete this->pacman2;
-	delete this->gameOverImage;
-	delete this->fondoNegro;
-	delete this->soundManager;
-
-	for (int i = 0; i < this->pacman1Ghosts.length(); i++)
-	{
-		delete this->pacman1Ghosts.getValueAt(i);
-	}
-
-	for (int i = 0; i < this->pacman2Ghosts.length(); i++)
-	{
-		delete this->pacman2Ghosts.getValueAt(i);
-	}
-}
-
 void ScreenManager::loadSpecialBonus(void){
 	
 	List<TipoBonus> specialBonus(this->grilla->getTiposBonus());
@@ -561,7 +538,8 @@ void ScreenManager::loadSpecialBonus(void){
 	for (int i=0; i < lenght ; i++)
 	{
 		this->sbm.addBonusType(specialBonus.at(i));
-		this->activeBonus[specialBonus.at(i).getNombre()]=false;
+		this->activeBonusPacman1[specialBonus.at(i).getNombre()]=0;
+		this->activeBonusPacman2[specialBonus.at(i).getNombre()]=0;
 	}
 
 }
@@ -599,12 +577,81 @@ void ScreenManager::updateSpecialBonus(void)
 	}
 }
 
-bool ScreenManager::getRobarDelPacman1(void){
-	return this->robarDelPacman1;
-}
+void ScreenManager::updateBonusEffects(Pacman* pac, Pacman* op, List<Ghost*>& ghosts)
+{
+	std::map<std::string, int>::iterator bonusTimeEffect;
 
-bool ScreenManager::getRobarDelPacman2(void){
-	return this->robarDelPacman2;
+	for (bonusTimeEffect = this->activeBonusPacman1.begin(); 
+		bonusTimeEffect != this->activeBonusPacman1.end();
+		bonusTimeEffect++) 
+	{
+		if (bonusTimeEffect->second > 0)
+		{
+			int remainingTime = bonusTimeEffect->second - this->period;
+
+			if (remainingTime <= 0)
+			{
+				bonusTimeEffect->second = 0;
+				//cancel bonus effect
+				this->cancelBonusEffect(bonusTimeEffect->first, pac, op, ghosts);
+			}
+			else
+			{
+				bonusTimeEffect->second = remainingTime;
+			}
+		}
+	}
+}
+void ScreenManager::cancelBonusEffect(string bonusType, Pacman* pac, Pacman* op, List<Ghost*>& ghosts)
+{
+	if (bonusType == "alimentoCongelado")
+	{
+		op->inmovilizar(false);
+		return;
+	}
+	
+	if (bonusType == "alimentoDuplicaVelocidad")
+	{
+		pac->setPacmanSpeed(this->originalPacmanSpeed);
+		return;
+	} 
+
+	if (bonusType == "alimentoReduceVelocidad")
+	{
+		op->setPacmanSpeed(this->originalPacmanSpeed);
+		return;
+	}
+
+	if (bonusType == "alimentoPersecucion")
+	{
+		this->assignPacmanToGhosts(ghosts, pac);
+		return;
+	}
+
+	if (bonusType == "alimentoDuplicador")
+	{
+		pac->setScoreMultiplier(1);
+		return;
+	}
+
+}
+void ScreenManager::increasePacmanScore(Pacman* pac, bool isPacman1, int score)
+{
+	if (this->activeBonusPacman1["alimentoRobaPuntos"] > 0	&& !isPacman1)
+	{
+		this->pacman1->increaseScore(score);
+		this->pacman1->increaseEatenBonus();
+	}
+	else if (this->activeBonusPacman2["alimentoRobaPuntos"] > 0	&& isPacman1)
+	{
+		this->pacman2->increaseScore(score);
+		this->pacman2->increaseEatenBonus();
+	}
+	else
+	{
+		pac->increaseScore(score);
+		pac->increaseEatenBonus();
+	}
 }
 
 void ScreenManager::placeBonusInMaze(TipoBonus& bonus){
@@ -614,3 +661,21 @@ void ScreenManager::placeBonusInMaze(TipoBonus& bonus){
 
 }
 
+ScreenManager::~ScreenManager(void)
+{
+	delete this->pacman1;
+	delete this->pacman2;
+	delete this->gameOverImage;
+	delete this->fondoNegro;
+	delete this->soundManager;
+
+	for (int i = 0; i < this->pacman1Ghosts.length(); i++)
+	{
+		delete this->pacman1Ghosts.getValueAt(i);
+	}
+
+	for (int i = 0; i < this->pacman2Ghosts.length(); i++)
+	{
+		delete this->pacman2Ghosts.getValueAt(i);
+	}
+}
