@@ -113,7 +113,7 @@ query* gamelog::playersByTotalPoints()
 
 query* gamelog::playersByWinnedCount()
 {
-	return this->db->getQuery_v2("select count(distinct g.winnerid)as WinnedCount,p.name from games g inner join players p on p.id=g.winnerid group by g.winnerid;");
+	return this->db->getQuery_v2("select count(g.winnerid)as WinnedCount,p.name from games g inner join players p on p.id=g.winnerid group by g.winnerid;");
 }
 
 query* gamelog::playersComparison(char* player0, char* player1)
