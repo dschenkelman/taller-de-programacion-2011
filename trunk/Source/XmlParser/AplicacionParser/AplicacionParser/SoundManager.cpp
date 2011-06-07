@@ -8,7 +8,7 @@ using namespace std;
 SoundManager::SoundManager(void) : lastChannel(0), 
 eatSound("sounds/eat.wav"), eatGhostSound("sounds/eatGhost.wav"),
 backgroundSound("sounds/siren.wav"), diesSound("sounds/dies.wav"), wonSound("sounds/won.wav")
-,bonusSound("sounds/eatBonus.wav"), collisionSound("sounds/collision.wav")
+,bonusSound("sounds/eatBonus.wav"), collisionSound("sounds/collision.wav"), beginSound("sounds/begin.wav")
 {
 	if(Mix_OpenAudio(AUDIO_RATE, AUDIO_FORMAT, AUDIO_CHANNELS, AUDIO_BUFFERS) != 0) 
 	{
@@ -27,6 +27,7 @@ void SoundManager::loadPacmanSounds()
 	this->loadSound(this->bonusSound);
 	this->loadSound(this->collisionSound);
 	this->loadSound(this->eatGhostSound);
+	this->loadSound(this->beginSound);
 	this->loadSound(this->diesSound);
 	this->loadSound(this->wonSound);
 }
@@ -34,6 +35,11 @@ void SoundManager::loadPacmanSounds()
 std::string SoundManager::getEatPath(void)
 {
 	return this->eatSound;
+}
+
+std::string SoundManager::getBeginPath(void)
+{
+	return this->beginSound;
 }
 
 std::string SoundManager::getEatGhostPath(void)

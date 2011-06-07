@@ -44,6 +44,7 @@ class ScreenManager
 	Grilla* grilla;
 	Image *fondoNegro;
 	int originalPacmanSpeed;
+	bool playedOpeningSong;
 	
 	Image* specialBonusImage;
 	int specialBonusX;
