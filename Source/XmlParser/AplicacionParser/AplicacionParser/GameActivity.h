@@ -15,6 +15,7 @@ private:
 	RichTextView* timeTitle;
 	RichTextView* points1View;
 	RichTextView* points2View;
+	RichTextView* secondsView;
 	Uint32 period;
 	ScreenManager* screenManager;
 	bool errorFound;
@@ -26,6 +27,8 @@ private:
 	std::string playerOne;
 	std::string playerTwo;
 	RichTextView* loadingTxt;
+	long gameTime;
+	long displayedSeconds;
 public:
 	GameActivity(int width, int height);
 	GameActivity(int width, int height, std::string playerOne, std::string playerTwo);

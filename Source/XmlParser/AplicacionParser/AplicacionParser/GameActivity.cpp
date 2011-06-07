@@ -9,12 +9,14 @@
 #include <sstream>
 #include <algorithm>
 
-GameActivity::GameActivity(int width, int height):Activity(width, height), points1(0), points2(0), xCarteles(0)
+GameActivity::GameActivity(int width, int height):Activity(width, height),
+points1(0), points2(0), xCarteles(0), gameTime(0), displayedSeconds(0)
 {
 	this->errorFound = false;
 }
 
-GameActivity::GameActivity(int width, int height, std::string playerOne, std::string playerTwo):Activity(width, height), points1(0), points2(0), xCarteles(0)
+GameActivity::GameActivity(int width, int height, std::string playerOne, std::string playerTwo):Activity(width, height),
+points1(0), points2(0), xCarteles(0), gameTime(0), displayedSeconds(0)
 {
 	this->playerOne = playerOne;
 	this->playerTwo = playerTwo;
@@ -22,7 +24,7 @@ GameActivity::GameActivity(int width, int height, std::string playerOne, std::st
 }
 
 GameActivity::GameActivity(Escenario* escenario, int width, int height):Activity(escenario, width, height),
-points1(0), points2(0), xCarteles(0)
+points1(0), points2(0), xCarteles(0), gameTime(0), displayedSeconds(0)
 {
 }
 
@@ -81,6 +83,9 @@ void GameActivity::loadGame(){
 				this->timeTitle = new RichTextView("Time", RichTextView::NORMAL);
 				this->timeTitle->setX(this->xCarteles); this->timeTitle->setY(0);
 
+				this->secondsView = new RichTextView("0", RichTextView::NORMAL);
+				this->secondsView->setX(this->xCarteles); this->secondsView->setY(25);
+
 				// texto de los puntos jugador 1
 				//this->points1Title = new RichTextView("Yellow Pac", RichTextView::NORMAL);
 				this->points1Title = new RichTextView(this->playerOne, RichTextView::NORMAL);
@@ -107,6 +112,7 @@ void GameActivity::loadGame(){
 				this->add(this->timeTitle);
 				this->add(this->points1Title);
 				this->add(this->points2Title);
+				this->add(this->secondsView);
 				this->add(this->points1View);
 				this->add(this->points2View);
 			}
@@ -158,6 +164,7 @@ void GameActivity::update()
 {
 	if(!this->errorFound && this->loaded)
 	{
+		this->gameTime += this->period;
 		screenManager->updateScreen();
 		this->updateScoreBoard();
 	}
@@ -185,7 +192,7 @@ Activity* GameActivity::notify(SDL_Event e){
 						{
 							nextActivity = new MenuActivity(this->getWidth(), this->getHeight());
 						}
-						screenManager->updateScreen();
+						// screenManager->updateScreen();
 					}
 				
 			}
@@ -234,8 +241,8 @@ void GameActivity::updateScoreBoard(void)
 	if (this->points2 != pacman2Score)
 	{
 		this->points2 = pacman2Score;
-		stringstream ss;//create a stringstream
-		ss << pacman2Score;//add number to the stream
+		stringstream ss;
+		ss << pacman2Score;
 
 		string score  = ss.str();
 
@@ -251,5 +258,23 @@ void GameActivity::updateScoreBoard(void)
 
 		delete this->points2View;
 		this->points2View = updatedPoints2View;
+	}
+
+	if ((this->gameTime / 1000) != this->displayedSeconds)
+	{
+		this->displayedSeconds = this->gameTime / 1000;
+
+		stringstream ss;
+		ss << this->displayedSeconds;
+
+		string seconds  = ss.str();
+
+		RichTextView* updatedSecondsView = new RichTextView(seconds, RichTextView::NORMAL);
+		updatedSecondsView->setX(this->xCarteles); updatedSecondsView->setY(25);
+
+		this->updateViewFromView(this->secondsView, updatedSecondsView);
+
+		delete this->secondsView;
+		this->secondsView = updatedSecondsView;
 	}
 }
