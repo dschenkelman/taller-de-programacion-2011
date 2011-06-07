@@ -45,6 +45,7 @@ GameActivity::~GameActivity()
 
 void GameActivity::onLoad(){
 
+
 	this->period = 1000.0 / 60;
 	this->errorFound = false;
 	this->loaded = false;
@@ -106,7 +107,9 @@ void GameActivity::loadGame(){
 				this->removeView(this->loadingTxt);
 
 				// Creo un screenmanager para la logica del juego
-				this->screenManager = new ScreenManager(this, this->fondo, this->escenario->getGrilla(), grapher.getImageHeight(), grapher.getImageWidth(), this->period);
+				this->screenManager = new ScreenManager(this, this->fondo, this->escenario->getGrilla(),
+					grapher.getImageHeight(), grapher.getImageWidth(), this->period,
+					this->escenario->getIntervaloBonus(), this->escenario->getProporcionDuracionBonus());
 
 				// los agrego a la pantalla
 				this->add(this->timeTitle);

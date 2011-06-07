@@ -9,14 +9,20 @@
 
 using namespace std;
 
-ScreenManager::ScreenManager(Activity* w, Image* imageFondo, Grilla* g, int imageHeight, int imageWidth, Uint32 period) 
-: deadCycles(0), imageHeight(imageHeight), imageWidth(imageWidth), period(period),
+ScreenManager::ScreenManager(Activity* w, Image* imageFondo, Grilla* g, 
+							 int imageHeight, int imageWidth, Uint32 period,
+							 int bonusInterval, double lastingProportion) 
+
+							 : deadCycles(0), imageHeight(imageHeight), imageWidth(imageWidth), period(period),
 vulnerablePacman1Cycles(0), vulnerablePacman2Cycles(0), 
 pacman1GhostsVulnerable(false), pacman2GhostsVulnerable(false),
-activatedGhosts(0), activationCycles(ghostActivationTime), bonusActivationCycles(0), 
-bonusActiveTime(0),bonusShowing(false), finished(false)
+activatedGhosts(0), activationCycles(ghostActivationTime), bonusAppearenceCycles(0), 
+bonusShowing(false), finished(false)
 {
 	this->soundManager = new SoundManager();
+	
+	this->bonusAppearenceInterval = bonusInterval * 1000;
+	this->bonusLastingInterval = lastingProportion * this->bonusAppearenceInterval;
 	
 	this->grilla = g;
 	this->window = w;
@@ -125,8 +131,7 @@ void ScreenManager::handleKeyStroke(void)
 
 void ScreenManager::updateScreen(void)
 {
-	this->showSpecialBonus();
-	
+	this->updateSpecialBonus();
 	this->updateGhostsVulnerability();
 	this->updateGhostsActivation();
 	this->deletePacman(this->pacman1);
@@ -561,42 +566,36 @@ void ScreenManager::loadSpecialBonus(void){
 
 }
 
-void ScreenManager::showSpecialBonus(void)
+void ScreenManager::updateSpecialBonus(void)
 {
-	this->bonusActivationCycles++;
-	int millisecondsActive = this->bonusActivationCycles * period;
-	
+	this->bonusAppearenceCycles++;
+	int timeSinceAppearence = this->bonusAppearenceCycles * this->period;
 
-	if (!this->bonusShowing){
+	if (timeSinceAppearence >= this->bonusAppearenceInterval)
+	{
+		// bonus should appear
+		this->bonusAppearenceCycles = 0;
+
 		this->sbm.selectBonus();
 		
-		if (this->sbm.isSelectedBonusValid() )
+		if (this->sbm.isSelectedBonusValid())
 		{
 			this->bonusToShow=this->sbm.getSelectedBonus();
-			
-			if (bonusToShow.getUnidad().compare("tiempo") == 0)
-				this->bonusActiveTime=bonusToShow.getDuracion()*1000;
-			else
-				this->bonusActiveTime=bonusToShow.getDuracion();
-			
 			this->bonusShowing =true;
-			this->activeBonus[bonusToShow.getNombre()]=true;
 			cout<<"Bono "<<bonusToShow.getNombre()<<"	activo"<<endl;
 			this->placeBonusInMaze(this->bonusToShow);
+			this->bonusShowing =true;
 		}
 	}
-	else{
-		//Se mantiene activo mientras cumpla con los pasos o los tiempos.
-		if (millisecondsActive <= this->bonusActiveTime || this->bonusActivationCycles <= this->bonusActiveTime ){
-			//
 
-		}
-		else{
-			this->bonusActivationCycles=0;
-			this->bonusShowing=false;
-			this->activeBonus[bonusToShow.getNombre()]=false;
-			//cout<<"Bono "<<bonusToShow.getNombre()<<"	termino Activacion"<<endl;
-		}
+	timeSinceAppearence = this->bonusAppearenceCycles * this->period;
+
+	if (this->bonusShowing && timeSinceAppearence >= this->bonusLastingInterval)
+	{
+		// bonus should dissapear
+		this->bonusShowing=false;
+		// remove bonus from maze
+		cout<<"Bono "<<this->bonusToShow.getNombre()<<"	termino Activacion"<<endl;
 	}
 }
 

@@ -422,6 +422,16 @@ void Escenario::verificarTexturasUtilizadas()
 	}
 }
 
+int Escenario::getIntervaloBonus(void)
+{
+	return this->intervaloBonus;	
+}
+
+double Escenario::getProporcionDuracionBonus(void)
+{
+	return this->proporcionDuracion;
+}
+
 Escenario::~Escenario()
 {
 	delete this->grilla;
