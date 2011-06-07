@@ -17,7 +17,7 @@ ScreenManager::ScreenManager(Activity* w, Image* imageFondo, Grilla* g,
 vulnerablePacman1Cycles(0), vulnerablePacman2Cycles(0), 
 pacman1GhostsVulnerable(false), pacman2GhostsVulnerable(false),
 activatedGhosts(0), activationCycles(ghostActivationTime), bonusAppearenceCycles(0), 
-bonusShowing(false), finished(false), specialBonusX(0), specialBonusY(0)
+bonusShowing(false), finished(false), specialBonusX(0), specialBonusY(0), playedOpeningSong(false)
 {
 	this->soundManager = new SoundManager();
 	this->specialBonusImage = NULL;
@@ -132,6 +132,16 @@ void ScreenManager::handleKeyStroke(void)
 
 void ScreenManager::updateScreen(void)
 {
+	if (!this->playedOpeningSong)
+	{
+		this->soundManager->playSound(this->soundManager->getBeginPath(), 1);
+		while (this->soundManager->isSoundPlaying(this->soundManager->getBeginPath()))
+		{
+			// wait until sounds is over playing
+		}	
+		this->playedOpeningSong = true;
+	}
+
 	this->updateBonusEffects(this->pacman1, this->pacman2, this->pacman1Ghosts, this->activeBonusPacman1);
 	this->updateBonusEffects(this->pacman1, this->pacman2, this->pacman2Ghosts, this->activeBonusPacman2);
 	this->updateSpecialBonus();
