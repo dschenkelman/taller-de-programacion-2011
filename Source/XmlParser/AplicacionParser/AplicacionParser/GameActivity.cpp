@@ -164,7 +164,10 @@ void GameActivity::update()
 {
 	if(!this->errorFound && this->loaded)
 	{
-		this->gameTime += this->period;
+		if (!this->screenManager->gameOver())
+		{
+			this->gameTime += this->period;
+		}
 		screenManager->updateScreen();
 		this->updateScoreBoard();
 	}
