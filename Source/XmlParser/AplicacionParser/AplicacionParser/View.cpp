@@ -5,6 +5,8 @@
 
 View::View():Image(0,0){
 	this->withAlpha = false;
+	this->focusable = false;
+	this->hasFocus = false;
 }
 
 View::View(int r, int g, int b, int delta):Image(0,0){
@@ -13,6 +15,8 @@ View::View(int r, int g, int b, int delta):Image(0,0){
 	this->b = b;
 	this->delta = delta;
 	this->withAlpha = true;
+	this->focusable = false;
+	this->hasFocus = false;
 }
 
 View::~View(){

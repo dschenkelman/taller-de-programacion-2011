@@ -13,6 +13,8 @@ private:
 	int b;
 	int delta;
 	bool withAlpha;
+	bool hasFocus;
+	bool focusable;
 public:
 	View();
 	View(int r, int g, int b, int delta);
@@ -41,6 +43,19 @@ public:
 	}
 	bool hasAlpha(){
 		return this->withAlpha;
+	}
+
+	bool isFocused(){
+		return this->hasFocus;
+	}
+	void setFocused(bool value){
+		this->hasFocus = value;
+	}
+	bool isFocusable(){
+		return this->focusable;
+	}
+	void setFocusable(bool value){
+		this->focusable = value;
 	}
 	
 	// valores de la alineacion
