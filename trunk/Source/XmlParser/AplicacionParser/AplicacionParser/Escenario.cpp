@@ -3,11 +3,13 @@
 #include <sstream>
 using namespace std;
 
-Escenario::Escenario(void): tieneError(false), textura("")
+Escenario::Escenario(void): tieneError(false), textura(""),
+intervaloBonus(10), proporcionDuracion(0.8)
 {
 }
 
-Escenario::Escenario(XmlElement& e) : tieneError(false), texturaFondo(""), textura("")
+Escenario::Escenario(XmlElement& e) : tieneError(false), texturaFondo(""), textura(""),
+intervaloBonus(10), proporcionDuracion(0.8)
 {
 	if (e.getName() != "escenario")
 	{
@@ -19,6 +21,26 @@ Escenario::Escenario(XmlElement& e) : tieneError(false), texturaFondo(""), textu
 	if (e.hasAttribute("nombre"))
 	{
 		this->nombre = e.getValue("nombre");
+	}
+
+	if (e.hasAttribute("intervalobonus"))
+	{
+		string i = e.getValue("intervalobonus");
+		int value = atoi(i.c_str());
+		if (value > 0)
+		{
+			this->intervaloBonus = value;
+		}
+	}
+
+	if (e.hasAttribute("proporcionduracion"))
+	{
+		string p = e.getValue("proporcionduracion");
+		double value = atof(p.c_str());
+		if (value > 0 && value < 1)
+		{
+			this->proporcionDuracion = value;
+		}
 	}
 
 	this->populateValidAttributes();
@@ -275,6 +297,8 @@ void Escenario::populateValidAttributes(void)
 {
 	this->validAttributes.add("nombre");
 	this->validAttributes.add("texturafondo");
+	this->validAttributes.add("intervalobonus");
+	this->validAttributes.add("proporcionduracion");
 }
 
 bool Escenario::validateAttributes(XmlElement& e)

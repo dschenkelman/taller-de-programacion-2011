@@ -12,6 +12,8 @@ class Escenario
 	Textura textura;
 	std::string texturaFondo;
 	std::string nombre;
+	int intervaloBonus;
+	double proporcionDuracion;
 	Grilla* grilla;
 	bool tieneError;
 	List<std::string> validAttributes;
@@ -37,7 +39,10 @@ public:
 	Grilla* getGrilla(void);
 	std::string getNombre(void);
 	std::string getTexturaFondo(void);
+	int getIntervaloBonus(void);
+	double getProporcionDuracionBonus(void);
 	bool hasError(void);
 	Textura getTextura(void);
 	~Escenario(void);
 };
+
