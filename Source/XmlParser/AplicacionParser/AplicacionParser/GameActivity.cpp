@@ -190,11 +190,6 @@ Activity* GameActivity::notify(SDL_Event e){
 		case SDL_KEYDOWN:
 			switch(e.key.keysym.sym){
 				case SDLK_RETURN:
-					glog = new gamelog("gamelog.sql");
-					glog->insertGame((char*)this->playerOne.c_str(),(char*)this->playerTwo.c_str(),this->points1,this->points2,this->displayedSeconds);
-					delete(glog);
-					cout << "game over" << endl;
-					cout << this->playerOne << this->playerTwo << this->points1 << this->points2 << this->displayedSeconds << endl;
 					nextActivity = new MenuActivity(this->getWidth(), this->getHeight());
 					break;
 				default:
@@ -213,6 +208,9 @@ Activity* GameActivity::notify(SDL_Event e){
 
 	if (this->screenManager->gameOver())
 	{
+		glog = new gamelog("gamelog.sql");
+		glog->insertGame((char*)this->playerOne.c_str(),(char*)this->playerTwo.c_str(),this->points1,this->points2,this->displayedSeconds);
+		delete(glog);
 		nextActivity = new MenuActivity(this->getWidth(), this->getHeight());
 	}
 	else
