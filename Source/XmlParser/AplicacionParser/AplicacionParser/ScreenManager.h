@@ -19,8 +19,7 @@ class ScreenManager
 	static const int ghostActivationTime = 4000;
 	int activatedGhosts;
 	int activationCycles;
-	int bonusActivationCycles;
-	int bonusActiveTime;
+	int bonusAppearenceCycles;
 	bool bonusShowing;
 	bool robarDelPacman2;
 	bool robarDelPacman1;
@@ -53,6 +52,10 @@ class ScreenManager
 	Image *fondoNegro;
 	int originalPacmanSpeed;
 	SpecialBonusManager sbm;
+	
+	int bonusAppearenceInterval;
+	int bonusLastingInterval;
+
 	void updatePacman(Pacman* pac);
 	void updateGhostsVulnerability(void);
 	void updateGhostsActivation(void);
@@ -66,12 +69,13 @@ class ScreenManager
 	void assignPacmanToGhosts(List<Ghost*>& ghosts, Pacman* pac);
 	void deleteBonus(Pacman *pac, List<Ghost*>& ghosts, bool isPacman1);
 	void loadSpecialBonus(void);
-	void showSpecialBonus(void);
+	void updateSpecialBonus(void);
 	bool isFoodOver(void);
 	void placeBonusInMaze(TipoBonus& bonus);
 	void bonusInitialization(void);
 public:
-	ScreenManager(Activity* w, Image* imageFondo, Grilla* grilla, int imageHeight, int imageWidth, Uint32 period);
+	ScreenManager(Activity* w, Image* imageFondo, Grilla* grilla, int imageHeight,
+		int imageWidth, Uint32 period, int bonusInterval, double lastingProportion);
 	//ScreenManager(Window* w, Image* imageFondo, Grilla& grilla, int imageHeight, int imageWidth);
 	bool gameOver(void);
 	void startGame(void);
