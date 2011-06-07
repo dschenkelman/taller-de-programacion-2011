@@ -54,6 +54,8 @@ void SelectPlayerActivity::onLoad()
 		this->arrowMenuPlayerTwo->addOption(players->getChars(1));
 	}
 
+	delete players;
+
 	this->add(this->banner);
 	this->add(this->title);
 	this->add(this->subtitle);
