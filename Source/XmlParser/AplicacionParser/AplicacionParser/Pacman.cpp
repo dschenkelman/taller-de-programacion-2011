@@ -12,7 +12,7 @@ Pacman::Pacman(string pathTexturaAbierta, string pathTexturaCerrada, Grilla* gri
 			   int w, int x, int y, int speed, int imageHeight, int imageWidth) : 
 Character(pathTexturaAbierta, grilla, h, w, x, y, 0, 0, speed, imageHeight, imageWidth), dir(Direction::RIGHT),
 rightKey(SDLK_RIGHT),leftKey(SDLK_LEFT), upKey(SDLK_UP), downKey(SDLK_DOWN), isDead(false), keyPressed(Direction::CENTER), 
-score(0), normalBonusEaten(0), lastEatenBonus(""), ghostKills(0)
+score(0), normalBonusEaten(0), lastEatenBonus(""), ghostKills(0), notMove(false)
 {
 	this->texturaOpuesta = new Image(pathTexturaCerrada);
 	this->texturaOpuesta->resize(this->imageWidth - this->speed, this->imageHeight - this->speed);
@@ -66,7 +66,17 @@ void Pacman::handleKeyStroke(void)
 
 void Pacman::updatePosition(void)
 {
-	
+	if (this->notMove){
+		Character::xDirection = 0;
+		Character::yDirection = 0;
+		this->keyPressed=Direction::CENTER;
+		Image* aux = Character::textura;
+		Character::textura = this->texturaOpuesta;
+		this->texturaOpuesta = aux;
+		Character::updatePosition();
+		return;
+	}
+
 	int x=Character::xDirection;
 	int y=Character::yDirection;
 
@@ -387,10 +397,14 @@ void Pacman::rotateFromRight( Direction next){
 	this->dir =next;
 }
 
-void Pacman::setPacmanId(int id){
-	this->pacmanId=id;
+void Pacman::setPacmanSpeed(int speed){
+	this->speed=speed;
 }
 
-int Pacman::getPacmanId(void){
-	return this->pacmanId;
+int Pacman::getPacmanSpeed(void){
+	return this->speed;
+}
+
+void Pacman::inmovilizar(bool flag){
+	this->notMove=flag;
 }

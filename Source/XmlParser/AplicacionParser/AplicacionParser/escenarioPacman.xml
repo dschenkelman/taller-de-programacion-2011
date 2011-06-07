@@ -831,14 +831,14 @@
   <TIPOSBONUS>
 	<TIPOBONUS nombre="alimento" textura="alimento"/>
 	<TIPOBONUS nombre="alimentoEspecial" textura="alimentoEspecial"/>
-	<TIPOBONUS nombre="anana" textura="anana"  probabilidad="0.8" duracion="5" unidad="tiempo" apariciones="1" />
-    <TIPOBONUS nombre="manzana" textura="manzana" probabilidad="0.2" duracion="5" apariciones="2" unidad="tiempo"/>
-	<TIPOBONUS nombre="alimentoDuplicador" textura="alimentoDuplicador"  duracion="5" unidad="tiempo" apariciones="1"/>
-	<TIPOBONUS nombre="alimentoRobaPuntos" textura="alimentoRobaPuntos"  duracion="5" unidad="tiempo" apariciones="1"/>
-	<TIPOBONUS nombre="alimentoPersecucion" textura="alimentoPersecucion"  duracion="5" unidad="tiempo" apariciones="1"/>
-	<TIPOBONUS nombre="alimentoCongelado" textura="alimentoCongelado"  duracion="5" unidad="tiempo" apariciones="1"/>
-	<TIPOBONUS nombre="alimentoDuplicaVelocidad" textura="alimentoDuplicaVelocidad"  duracion="5" unidad="tiempo" apariciones="1"/>
-	<TIPOBONUS nombre="alimentoReduceVelocidad" textura="alimentoReduceVelocidad" duracion="2" unidad="tiempo" apariciones="3"/>
+	<TIPOBONUS nombre="anana" textura="anana"  probabilidad="0.8" duracion="5" unidad="pasos" apariciones="1" />
+    <TIPOBONUS nombre="manzana" textura="manzana" probabilidad="0.2" duracion="5" apariciones="2" unidad="pasos"/>
+	<TIPOBONUS nombre="alimentoDuplicador" textura="alimentoDuplicador"  duracion="5" unidad="pasos" apariciones="1"/>
+	<TIPOBONUS nombre="alimentoRobaPuntos" textura="alimentoRobaPuntos" probabilidad="0.9" duracion="5" unidad="pasos" apariciones="7"/>
+	<TIPOBONUS nombre="alimentoPersecucion" textura="alimentoPersecucion"  duracion="5" unidad="pasos" apariciones="1"/>
+	<TIPOBONUS nombre="alimentoCongelado" textura="alimentoCongelado"  duracion="5" unidad="pasos" apariciones="1"/>
+	<TIPOBONUS nombre="alimentoDuplicaVelocidad" textura="alimentoDuplicaVelocidad"  duracion="5" unidad="pasos" apariciones="1"/>
+	<TIPOBONUS nombre="alimentoReduceVelocidad" textura="alimentoReduceVelocidad" duracion="2" unidad="pasos" apariciones="3"/>
   </TIPOSBONUS>
   <TEXTURAS>
 	<TEXTURA nombre="Fondo" path="Images\texturaFondo.bmp"/>
