@@ -80,6 +80,9 @@ class ScreenManager
 	void placeBonusInMaze(TipoBonus& bonus);
 	void removeBonusFromMaze(void);
 	void bonusInitialization(void);
+	void setMinimalDistanceForBonuses(int x1, int y1, int x2, int y2);
+	bool isPointInRoad(int middleX, int middleY);
+	void normalizeXY(int &x, int &y, int delta);
 public:
 	ScreenManager(Activity* w, Image* imageFondo, Grilla* grilla, int imageHeight,
 		int imageWidth, Uint32 period, int bonusInterval, double lastingProportion);

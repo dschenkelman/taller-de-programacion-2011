@@ -153,6 +153,8 @@ void ScreenManager::updateScreen(void)
 	this->deleteGhosts(this->pacman2Ghosts);
 	if (this->pacman1->isAlive() && this->pacman2->isAlive())
 	{
+		/*cout<<"pacman1 posx "<<this->pacman1->getX()<<" posy "<<this->pacman1->getY()<<endl;
+		cout<<"pacman2 posx "<<this->pacman2->getX()<<" posy "<<this->pacman2->getY()<<endl;*/
 		if (this->isFoodOver())
 		{
 			// game is finished, someone won
@@ -695,8 +697,10 @@ void ScreenManager::placeBonusInMaze(TipoBonus& bonus)
 		width = this->imageWidth;	
 	}
 
-	this->specialBonusX = this->imageWidth * 12;
-	this->specialBonusY = this->imageHeight * 18;
+	this->setMinimalDistanceForBonuses(this->pacman1->getX(), this->pacman1->getY(), 
+									   this->pacman2->getX(), this->pacman2->getY());
+	/*this->specialBonusX = this->imageWidth * 12;
+	this->specialBonusY = this->imageHeight * 18;*/
 
 	this->specialBonusImage->resize(width, height);
 
@@ -744,5 +748,71 @@ ScreenManager::~ScreenManager(void)
 	for (int i = 0; i < this->pacman2Ghosts.length(); i++)
 	{
 		delete this->pacman2Ghosts.getValueAt(i);
+	}
+}
+void ScreenManager::setMinimalDistanceForBonuses(int xPac1, int yPac1, int xPac2, int yPac2){
+
+	int middleX=abs(xPac1-xPac2)/2.0;
+	int middleY=abs(yPac1-yPac2)/2.0;
+	
+	while (!isPointInRoad(middleX,middleY)){
+		middleY+=1;
+		middleX+=1;
+		if (middleX <0 || middleX > this->boardWidth)
+			middleX %= this->boardWidth;
+	
+		if (middleY <0 || middleY > this->boardHeight)
+			middleY %= this->boardHeight;
+
+	}
+	this->normalizeXY(middleX,middleY, 10);
+	this->specialBonusX=middleX;
+	this->specialBonusY=middleY;
+
+}
+
+bool ScreenManager::isPointInRoad(int middleX, int middleY){
+
+	int width = this->specialBonusImage->getWidth();
+	int height = this->specialBonusImage->getHeight();
+
+	int x1 = middleX / this->imageWidth;
+	int y1 = middleY / this->imageHeight;
+	
+	int x2 = (middleX + width) / this->imageWidth;
+	int y2 = (middleY + height) / this->imageHeight;
+
+	if (x1 < 0 || x2 >= this->grilla->getAncho() || y1 < 0 || y2 >= this->grilla->getAlto())
+	{
+		return false;
+	}
+
+	Celda* c1 = this->grilla->getCelda(y1, x1);
+	Camino* cam1 = dynamic_cast<Camino*>(c1);
+	if (cam1 == NULL || CollisionHelper::IsPointInRectangle(middleX,middleY,155,222,291,296)){
+		return false;
+	}
+
+	return true;
+
+}
+
+void ScreenManager::normalizeXY(int &x, int &y, int delta){
+
+	int poscionesX[8]={18,34,102,153,204,240,291,426};
+	int posicionesY[6]={18,87,138,306,375,44};
+
+	for (int i=0; i< 8; i++){
+		if (abs(x- poscionesX[i]) < delta){
+			x=poscionesX[i];
+			break;
+		}
+	}
+
+	for (int i=0; i< 6; i++){
+		if (abs(x- posicionesY[i]) < delta){
+			y=posicionesY[i];
+			break;
+		}
 	}
 }
