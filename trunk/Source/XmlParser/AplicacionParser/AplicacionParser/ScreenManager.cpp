@@ -824,6 +824,23 @@ void ScreenManager::normalizeXY(int &x, int &y, int deltax, int deltay){
 			break;
 		}
 	}
+
+	//Condiciones de borde.
+
+	//esta tiene que ir primero, las otras se basan en esta.
+	if (x > 102 && x < 204)
+		x=204;
+	
 	if (y == 222 && (x > 203 && x < 240 ))
 		y=204;
+
+	if (y == 204 && (x < 203 || x > 240 ))
+		y=222;
+
+	if (y == 204 && (x < 203 || x > 240 ))
+		y=222;
+
+	if (x > 342 && x < 426)
+		x=426;
+
 }
