@@ -153,8 +153,8 @@ void ScreenManager::updateScreen(void)
 	this->deleteGhosts(this->pacman2Ghosts);
 	if (this->pacman1->isAlive() && this->pacman2->isAlive())
 	{
-		cout<<"pacman1 posx "<<this->pacman1->getX()<<" posy "<<this->pacman1->getY()<<endl;
-		cout<<"pacman2 posx "<<this->pacman2->getX()<<" posy "<<this->pacman2->getY()<<endl;
+		/*cout<<"pacman1 posx "<<this->pacman1->getX()<<" posy "<<this->pacman1->getY()<<endl;
+		cout<<"pacman2 posx "<<this->pacman2->getX()<<" posy "<<this->pacman2->getY()<<endl;*/
 		if (this->isFoodOver())
 		{
 			// game is finished, someone won
@@ -775,7 +775,6 @@ void ScreenManager::setMinimalDistanceForBonuses(int xPac1, int yPac1, int xPac2
 		middleY%=426;
 
 	}*/
-	this->normalizeXY(middleX,middleY, 30);
 	this->specialBonusX=middleX;
 	this->specialBonusY=middleY;
 
@@ -810,7 +809,7 @@ bool ScreenManager::isPointInRoad(int middleX, int middleY){
 void ScreenManager::normalizeXY(int &x, int &y, int delta){
 
 	int poscionesX[8]={18,34,102,204,240,291,342,426};
-	int posicionesY[7]={18,87,138,204,306,375,444};
+	int posicionesY[8]={18,87,138,204,222,306,375,444};
 
 	for (int i=0; i< 8; i++){
 		if (abs(x- poscionesX[i]) < delta){
@@ -819,10 +818,12 @@ void ScreenManager::normalizeXY(int &x, int &y, int delta){
 		}
 	}
 
-	for (int i=0; i< 7; i++){
+	for (int i=0; i< 8; i++){
 		if (abs(y- posicionesY[i]) < delta){
 			y=posicionesY[i];
 			break;
 		}
 	}
+	if (y == 222 && (x > 203 && x < 240 ))
+		y=204;
 }
