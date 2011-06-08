@@ -283,7 +283,7 @@ void ComparisonBetweenPlayersActivity::updateRTV()
 
 	// actualiza numero de partido
 	std::stringstream gn;
-	gn << this->gameNumber;
+	gn << this->gameNumber + 1;
 	RichTextView* newGame = new RichTextView(gn.str(), RichTextView::NORMAL);
 	newGame->setX(this->gameNumberRTV->getX());
 	newGame->setY(this->gameNumberRTV->getY());
