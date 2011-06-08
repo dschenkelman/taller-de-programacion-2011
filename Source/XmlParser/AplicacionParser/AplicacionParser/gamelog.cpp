@@ -100,22 +100,22 @@ query* gamelog::getPlayers()
 
 query* gamelog::playersByPlayedTime()
 {
-	return this->db->getQuery_v2("SELECT p.Name,sum(distinct Duration) AS TotalPlayed FROM Games g INNER JOIN UserGame ug ON g.Id=ug.GameId INNER JOIN Players p ON p.Id=ug.PlayerId GROUP BY PlayerId;");
+	return this->db->getQuery_v2("SELECT p.Name,sum(distinct Duration) AS TotalPlayed FROM Games g INNER JOIN UserGame ug ON g.Id=ug.GameId INNER JOIN Players p ON p.Id=ug.PlayerId GROUP BY PlayerId ORDER BY TotalPlayed DESC;");
 }
 
 query* gamelog::playersByGamesPlayed()
 {
-	return this->db->getQuery_v2("select count(distinct ug.gameid) as GamesPlayed,p.name from usergame ug inner join players p on p.id=ug.playerid group by ug.playerid;");
+	return this->db->getQuery_v2("select count(distinct ug.gameid) as GamesPlayed,p.name from usergame ug inner join players p on p.id=ug.playerid group by ug.playerid ORDER BY GamesPlayed DESC;");
 }
 
 query* gamelog::playersByTotalPoints()
 {
-	return this->db->getQuery_v2("select sum(distinct ug.points) as TotalPoints,p.name from usergame ug inner join players p on p.id=ug.playerid group by ug.playerid;");
+	return this->db->getQuery_v2("select sum(distinct ug.points) as TotalPoints,p.name from usergame ug inner join players p on p.id=ug.playerid group by ug.playerid ORDER BY TotalPoints DESC;");
 }
 
 query* gamelog::playersByWinnedCount()
 {
-	return this->db->getQuery_v2("select count(g.winnerid)as WinnedCount,p.name from games g inner join players p on p.id=g.winnerid group by g.winnerid;");
+	return this->db->getQuery_v2("select count(g.winnerid)as WinnedCount,p.name from games g inner join players p on p.id=g.winnerid group by g.winnerid ORDER BY WinnedCount DESC;");
 }
 
 query* gamelog::playersComparison(char* player0, char* player1)
