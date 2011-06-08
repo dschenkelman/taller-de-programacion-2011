@@ -11,9 +11,10 @@ private:
 	int arrowY;
 	void increaseSizeForOption();
 	int optionHeight;
-
+	int width;
 public:
 	OptionArrowMenuView();
+	OptionArrowMenuView(int width);
 	virtual ~OptionArrowMenuView();
 	void addOption(std::string optionTxt);
 	void addListener();
