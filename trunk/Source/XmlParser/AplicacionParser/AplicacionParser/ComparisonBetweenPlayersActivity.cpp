@@ -226,7 +226,7 @@ void ComparisonBetweenPlayersActivity::updateAttributes(bool next)
 	if(this->gamesList.at(this->gameNumber).pointsOne < 0)
 	{
 		this->gamesList.at(this->gameNumber).pointsOne = abs(this->gamesList.at(this->gameNumber).pointsOne);
-		ptsOne << "&udash;";
+		ptsOne << "&mdash;";
 	}
 	ptsOne << this->gamesList.at(this->gameNumber).pointsOne;
 	this->pointsPlayerOne = ptsOne.str();
@@ -235,7 +235,7 @@ void ComparisonBetweenPlayersActivity::updateAttributes(bool next)
 	if(this->gamesList.at(this->gameNumber).pointsTwo < 0)
 	{
 		this->gamesList.at(this->gameNumber).pointsTwo = abs(this->gamesList.at(this->gameNumber).pointsTwo);
-		ptsOne << "&udash;";
+		ptsOne << "&mdash;";
 	}
 	ptsTwo << this->gamesList.at(this->gameNumber).pointsTwo;
 	this->pointsPlayerTwo = ptsTwo.str();
