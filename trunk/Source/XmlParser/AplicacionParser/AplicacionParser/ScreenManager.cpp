@@ -704,8 +704,8 @@ void ScreenManager::placeBonusInMaze(TipoBonus& bonus)
 
 	this->specialBonusImage->resize(width, height);
 
-	this->fondo->display(this->specialBonusImage, this->specialBonusX,
-		this->specialBonusY, t.getRed(), t.getGreen(), t.getBlue(), t.getDelta());
+	/*this->fondo->display(this->specialBonusImage, this->specialBonusX,
+		this->specialBonusY, t.getRed(), t.getGreen(), t.getBlue(), t.getDelta());*/
 
 	this->window->display(this->specialBonusImage, this->specialBonusX,
 		this->specialBonusY, t.getRed(), t.getGreen(), t.getBlue(), t.getDelta());
@@ -716,10 +716,10 @@ void ScreenManager::removeBonusFromMaze(void)
 	// bonus should dissapear
 	this->bonusShowing=false;
 
-	this->fondo->display(this->fondoNegro, this->specialBonusX, this->specialBonusY,
-		this->specialBonusImage->getWidth(), this->specialBonusImage->getHeight());
+	/*this->fondo->display(this->fondoNegro, this->specialBonusX, this->specialBonusY,
+		this->specialBonusImage->getWidth(), this->specialBonusImage->getHeight());*/
 
-	this->window->display(this->fondoNegro, this->specialBonusX, this->specialBonusY,
+	this->window->display(this->fondo, this->specialBonusX, this->specialBonusY,
 		this->specialBonusImage->getWidth(), this->specialBonusImage->getHeight());
 
 	delete this->specialBonusImage;
