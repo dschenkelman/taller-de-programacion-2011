@@ -101,22 +101,22 @@ void ScreenManager::createGhostsForPacman2(void)
 	int ghostInitialY = (this->imageHeight * (this->grilla->getAlto() - 1)) / 2;
 
 	this->pacman2Ghosts.add(new Ghost(this->soundManager,"Images/blueGhost.bmp", "Images/greenVGhost.bmp" , 
-		this->grilla, this->window->getHeight(), this->window->getWidth(),
+		this->grilla, this->boardHeight, this->boardWidth,
 		ghostInitialX + this->imageWidth, ghostInitialY -22, 2, this->pacman2, 
 		this->imageHeight, this->imageWidth, false, 0));
 	
 	this->pacman2Ghosts.add(new Ghost(this->soundManager,"Images/blueGhost.bmp","Images/greenVGhost.bmp", 
-		this->grilla, this->window->getHeight(), this->window->getWidth(),
+		this->grilla, this->boardHeight, this->boardWidth,
 		ghostInitialX - this->imageWidth, ghostInitialY + this->imageHeight * 2, 2, this->pacman2, 
 		this->imageHeight, this->imageWidth, true, 1));
 
 	this->pacman2Ghosts.add(new Ghost(this->soundManager,"Images/blueGhost.bmp", "Images/greenVGhost.bmp", 
-		this->grilla, this->window->getHeight(), this->window->getWidth(),
+		this->grilla, this->boardHeight, this->boardWidth,
 		ghostInitialX + this->imageWidth, ghostInitialY + this->imageHeight * 2, 2, 
 		this->pacman2, this->imageHeight, this->imageWidth, true, 2));
 
 	this->pacman2Ghosts.add(new Ghost(this->soundManager,"Images/blueGhost.bmp", "Images/greenVGhost.bmp" , 
-		this->grilla, this->window->getHeight(), this->window->getWidth(),
+		this->grilla, this->boardHeight, this->boardWidth,
 		ghostInitialX, ghostInitialY + this->imageHeight * 2, 2, this->pacman2, 
 		this->imageHeight, this->imageWidth, true, 3));
 }
