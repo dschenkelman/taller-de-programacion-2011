@@ -6,6 +6,9 @@
 #include "Camino.h"
 #include <string>
 #include "CollisionHelper.h"
+#include "Obstaculo.h"
+#include "Celda.h"
+#include <algorithm>
 
 using namespace std;
 
@@ -74,23 +77,23 @@ void ScreenManager::createGhostsForPacman1(void)
 	this->pacman1Ghosts.add(new Ghost(this->soundManager, "Images/redGhost.bmp", "Images/brownVGhost.bmp" , 
 		this->grilla, this->boardHeight, this->boardWidth,
 		ghostInitialX - this->imageWidth
-		, ghostInitialY - 22, 2, this->pacman1, 
+		, ghostInitialY - 22, 0, this->pacman1, 
 		this->imageHeight, this->imageWidth, false, 0));
 
 	this->pacman1Ghosts.add(new Ghost(this->soundManager, "Images/redGhost.bmp", "Images/brownVGhost.bmp", 
 		this->grilla, this->boardHeight, this->boardWidth,
-		ghostInitialX + this->imageWidth, ghostInitialY + this->imageHeight, 2, this->pacman1, 
+		ghostInitialX + this->imageWidth, ghostInitialY + this->imageHeight, 0, this->pacman1, 
 		this->imageHeight, this->imageWidth, true, 1));
 
 	this->pacman1Ghosts.add(new Ghost(this->soundManager, "Images/redGhost.bmp", "Images/brownVGhost.bmp" , 
 		this->grilla, this->boardHeight, this->boardWidth,
-		ghostInitialX - this->imageWidth, ghostInitialY + this->imageHeight, 2, 
+		ghostInitialX - this->imageWidth, ghostInitialY + this->imageHeight, 0, 
 		this->pacman1, this->imageHeight, this->imageWidth, true, 2));
 
 	this->pacman1Ghosts.add(new Ghost(this->soundManager, "Images/redGhost.bmp", "Images/brownVGhost.bmp" , 
 		this->grilla, this->boardHeight, this->boardWidth,
 		ghostInitialX, 
-		ghostInitialY + this->imageHeight, 2, this->pacman1, 
+		ghostInitialY + this->imageHeight, 0, this->pacman1, 
 		this->imageHeight, this->imageWidth, true, 3));
 
 }
@@ -102,22 +105,22 @@ void ScreenManager::createGhostsForPacman2(void)
 
 	this->pacman2Ghosts.add(new Ghost(this->soundManager,"Images/blueGhost.bmp", "Images/greenVGhost.bmp" , 
 		this->grilla, this->boardHeight, this->boardWidth,
-		ghostInitialX + this->imageWidth, ghostInitialY -22, 2, this->pacman2, 
+		ghostInitialX + this->imageWidth, ghostInitialY -22, 0, this->pacman2, 
 		this->imageHeight, this->imageWidth, false, 0));
 	
 	this->pacman2Ghosts.add(new Ghost(this->soundManager,"Images/blueGhost.bmp","Images/greenVGhost.bmp", 
 		this->grilla, this->boardHeight, this->boardWidth,
-		ghostInitialX - this->imageWidth, ghostInitialY + this->imageHeight * 2, 2, this->pacman2, 
+		ghostInitialX - this->imageWidth, ghostInitialY + this->imageHeight * 2, 0, this->pacman2, 
 		this->imageHeight, this->imageWidth, true, 1));
 
 	this->pacman2Ghosts.add(new Ghost(this->soundManager,"Images/blueGhost.bmp", "Images/greenVGhost.bmp", 
 		this->grilla, this->boardHeight, this->boardWidth,
-		ghostInitialX + this->imageWidth, ghostInitialY + this->imageHeight * 2, 2, 
+		ghostInitialX + this->imageWidth, ghostInitialY + this->imageHeight * 2, 0, 
 		this->pacman2, this->imageHeight, this->imageWidth, true, 2));
 
 	this->pacman2Ghosts.add(new Ghost(this->soundManager,"Images/blueGhost.bmp", "Images/greenVGhost.bmp" , 
 		this->grilla, this->boardHeight, this->boardWidth,
-		ghostInitialX, ghostInitialY + this->imageHeight * 2, 2, this->pacman2, 
+		ghostInitialX, ghostInitialY + this->imageHeight * 2, 0, this->pacman2, 
 		this->imageHeight, this->imageWidth, true, 3));
 }
 
@@ -697,12 +700,183 @@ void ScreenManager::placeBonusInMaze(TipoBonus& bonus)
 		width = this->imageWidth;	
 	}
 
-	this->setMinimalDistanceForBonuses(this->pacman1->getX(), this->pacman1->getY(), 
-									   this->pacman2->getX(), this->pacman2->getY());
 	/*this->specialBonusX = this->imageWidth * 12;
 	this->specialBonusY = this->imageHeight * 18;*/
 
 	this->specialBonusImage->resize(width, height);
+
+	
+	int x1 = this->pacman1->getX() / this->imageWidth;
+	int y1 = this->pacman1->getY() / this->imageHeight;
+	
+	int x2 = this->pacman2->getX() / this->imageWidth;
+	int y2 = this->pacman2->getY() / this->imageHeight;
+
+	int lastMovement1 = -1;
+	int lastMovement2 = -1;
+
+	while (x1 != x2 || y1 != y2)
+	{
+		// first pacman "moves"
+		int left = (x1 - 1) % this->grilla->getAncho();
+		int right = (x1 + 1) % this->grilla->getAncho();
+		int top = (y1 - 1) % this->grilla->getAlto();
+		int bottom = (y1 + 1) % this->grilla->getAlto();
+
+		left = left == -1 ? 0 : left;
+		right = right == -1 ? 0 : right;
+		top = top == -1 ? 0 : top;
+		bottom = bottom == -1 ? 0 : bottom;
+
+		Celda* c1 = this->grilla->getCelda(y1, left);
+		Celda* c2 = this->grilla->getCelda(y1, right);
+		Celda* c3 = this->grilla->getCelda(top, x1);
+		Celda* c4 = this->grilla->getCelda(bottom, x1);
+
+		Obstaculo* o1 = dynamic_cast<Obstaculo*>(c1);
+		Obstaculo* o2 = dynamic_cast<Obstaculo*>(c2);
+		Obstaculo* o3 = dynamic_cast<Obstaculo*>(c3);
+		Obstaculo* o4 = dynamic_cast<Obstaculo*>(c4);
+
+		double distanceRight = (right - x2) * (right - x2) + (y1 - y2) * (y1 - y2);
+		double distanceLeft = (left - x2) * (left - x2) + (y1 - y2) * (y1 - y2);
+		double distanceTop = (x1 - x2) * (x1 - x2) + (top - y2) * (top - y2);
+		double distanceBottom = (x1 - x2) * (x1 - x2) + (bottom - y2) * (bottom - y2);
+		vector<double> distances;
+		distances.push_back(distanceRight);
+		distances.push_back(distanceLeft);
+		distances.push_back(distanceTop);
+		distances.push_back(distanceBottom);
+
+		bool correct = false;
+		
+		while(!correct)
+		{
+			int position = min_element(distances.begin(), distances.end()) - distances.begin();
+			switch(position)
+			{
+				case 0:
+					if (o2 == NULL  && lastMovement1 != 1)
+					{
+						correct = true;
+						lastMovement1 = 0;
+						x1 = right;
+					}
+					break;
+				case 1:
+					if (o1 == NULL  && lastMovement1 != 0)
+					{
+						correct = true;
+						lastMovement1 = 1;
+						x1 = left;
+					}
+					break;
+				case 2:
+					if (o3 == NULL  && lastMovement1 != 3)
+					{
+						correct = true;
+						lastMovement1 = 2;
+						y1 = top;
+					}
+					break;
+				case 3:
+					if (o4 == NULL  && lastMovement1 != 2)
+					{
+						correct = true;
+						lastMovement1 = 3;
+						y1 = bottom;
+					}
+					break;
+			}
+			
+			distances[position] = numeric_limits<double>::max();
+		}
+
+		// second pacman "moves"
+		if (x1 == x2 && y1 == y2)
+		{
+			break;
+		}
+
+		left = (x2 - 1) % this->grilla->getAncho();
+		right = (x2 + 1) % this->grilla->getAncho();
+		top = (y2 - 1)  % this->grilla->getAlto();
+		bottom = (y2 + 1) % this->grilla->getAlto();
+
+		left = left == -1 ? 0 : left;
+		right = right == -1 ? 0 : right;
+		top = top == -1 ? 0 : top;
+		bottom = bottom == -1 ? 0 : bottom;
+		5
+		c1 = this->grilla->getCelda(y2, left);
+		c2 = this->grilla->getCelda(y2, right);
+		c3 = this->grilla->getCelda(top, x2);
+		c4 = this->grilla->getCelda(bottom, x2);
+
+		o1 = dynamic_cast<Obstaculo*>(c1);
+		o2 = dynamic_cast<Obstaculo*>(c2);
+		o3 = dynamic_cast<Obstaculo*>(c3);
+		o4 = dynamic_cast<Obstaculo*>(c4);
+
+		distanceRight = (right - x1) * (right - x1) + (y1 - y2) * (y1 - y2);
+		distanceLeft = (left - x1) * (left - x1) + (y1 - y2) * (y1 - y2);
+		distanceTop = (x1 - x2) * (x1 - x2) + (top - y1) * (top - y1);
+		distanceBottom = (x1 - x2) * (x1 - x2) + (bottom - y1) * (bottom - y1);
+		distances.clear();
+		distances.push_back(distanceRight);
+		distances.push_back(distanceLeft);
+		distances.push_back(distanceTop);
+		distances.push_back(distanceBottom);
+
+		lastMovement2 = -1;
+
+		correct = false;
+		
+		while(!correct)
+		{
+			int position = min_element(distances.begin(), distances.end()) - distances.begin();
+			switch(position)
+			{
+				case 0:
+					if (o2 == NULL  && lastMovement2 != 1)
+					{
+						correct = true;
+						lastMovement2 = 0;
+						x2 = right;
+					}
+					break;
+				case 1:
+					if (o1 == NULL  && lastMovement2 != 0)
+					{
+						correct = true;
+						lastMovement2 = 1;
+						x2 = left;
+					}
+					break;
+				case 2:
+					if (o3 == NULL  && lastMovement2 != 3)
+					{
+						correct = true;
+						lastMovement2 = 2;
+						y2 = top;
+					}
+					break;
+				case 3:
+					if (o4 == NULL  && lastMovement2 != 2)
+					{
+						correct = true;
+						lastMovement2 = 3;
+						y2 = bottom;
+					}
+					break;
+			}
+			
+			distances[position] = numeric_limits<double>::max();
+		}
+	} 
+
+	this->specialBonusX = x1 * imageWidth;
+	this->specialBonusY = y1 * imageHeight;
 
 	/*this->fondo->display(this->specialBonusImage, this->specialBonusX,
 		this->specialBonusY, t.getRed(), t.getGreen(), t.getBlue(), t.getDelta());*/
