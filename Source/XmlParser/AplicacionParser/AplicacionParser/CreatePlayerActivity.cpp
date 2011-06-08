@@ -106,6 +106,7 @@ Activity* CreatePlayerActivity::notify(SDL_Event e)
 						newRtvPassBox->setX(this->rtvPassBox->getX());
 						newRtvPassBox->setY(this->rtvPassBox->getY());
 						this->updateViewFromView(this->rtvPassBox, newRtvPassBox);
+						delete this->rtvPassBox;
 						this->rtvPassBox = newRtvPassBox;
 					}
 
@@ -166,6 +167,7 @@ Activity* CreatePlayerActivity::notify(SDL_Event e)
 						newRtvPassBox->setX(this->rtvPassBox->getX());
 						newRtvPassBox->setY(this->rtvPassBox->getY());
 						this->updateViewFromView(this->rtvPassBox, newRtvPassBox);
+						delete this->rtvPassBox;
 						this->rtvPassBox = newRtvPassBox;
 					}
 				}
