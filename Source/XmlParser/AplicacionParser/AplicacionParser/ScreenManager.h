@@ -75,7 +75,7 @@ class ScreenManager
 	void updateSpecialBonus(void);
 	void updateBonusEffects(Pacman* pac, Pacman* op, List<Ghost*>& ghosts, std::map<std::string, int>& pacmanActiveBonus);
 	void cancelBonusEffect(std::string bonusType, Pacman* pac, Pacman* op, List<Ghost*>& ghosts);
-	void increasePacmanScore(Pacman* pac, bool isPacman1, int score);
+	void increasePacmanScore(Pacman* pac, bool isPacman1, int score, bool increaseCount);
 	bool isFoodOver(void);
 	void placeBonusInMaze(TipoBonus& bonus);
 	void removeBonusFromMaze(void);
