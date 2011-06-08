@@ -127,7 +127,7 @@ Activity* InsertPasswordActivity::notify(SDL_Event e)
 						// si no lo es, mostrar cartel de incorrecto
 						// si es, mostrar cartel de correcto y poner
 						// this->boxPlayerOneActive en false
-						if(this->verifyPassword(this->passPlayerOne, this->passPlayerOne))
+						if(this->verifyPassword(this->playerOne, this->passPlayerOne))
 						{
 							RichTextView* newSubtitle = new RichTextView("Password " + this->playerTwo, RichTextView::NORMAL);
 							newSubtitle->setX(this->getWidth()/2 + 50); newSubtitle->setY(this->subtitle->getY());

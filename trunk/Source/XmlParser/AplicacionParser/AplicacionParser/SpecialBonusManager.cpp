@@ -25,7 +25,7 @@ void SpecialBonusManager::selectBonus(void)
 	int sum = 0;
 	int i = 0;
 
-	while(sum < number)
+	while(sum <= number)
 	{
 		sum += this->bonusTypes.at(i).getProbabilidad();
 		i++;
