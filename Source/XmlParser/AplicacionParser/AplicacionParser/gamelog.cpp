@@ -19,13 +19,15 @@ gamelog::gamelog(char* uri)
 	if (debugmsg) cout << debugmsg << endl;
 }
 
-bool gamelog::login(char* name, char* password) {
-	string sql("SELECT Id FROM Players WHERE Name=");
+bool gamelog::login(char* name, char* password) 
+{
+	string sql("SELECT Id FROM Players WHERE Name='");
 	sql += string(name);
-	sql += string(" AND Password=");
+	sql += string("' AND Password='");
 	sql += string(password);
+	sql += string("';");
 	query q = db->getQuery((char*)sql.c_str());
-	
+	q.next();
 	unsigned int id = q.getInt(0);
 	if (id > 0) return true;
 	return false;
