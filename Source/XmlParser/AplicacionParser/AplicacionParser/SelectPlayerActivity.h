@@ -18,7 +18,7 @@ private:
 	bool menuPlayerTwoActive;
 	bool game;
 	int playersQty;
-
+	RichTextView* returnToMenu;
 public:
 	SelectPlayerActivity(int width, int height, Escenario* escenario, bool game);
 	SelectPlayerActivity(int width, int height, bool game);

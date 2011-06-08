@@ -8,7 +8,18 @@ OptionArrowMenuView::OptionArrowMenuView(): View(){
 	this->arrowX = 0;
 	this->arrowY = 0;
 	this->arrow = new Image("images/menu-arrow.bmp");
+	this->width = 500;
+	// la flecha siempre se inicia en la primera opcion
+	this->arrowIndex = 1;
+}
 
+OptionArrowMenuView::OptionArrowMenuView(int width): View(){
+	this->options = new List<std::string>();
+	this->optionHeight = 17;
+	this->arrowX = 0;
+	this->arrowY = 0;
+	this->arrow = new Image("images/menu-arrow.bmp");
+	this->width = width;
 	// la flecha siempre se inicia en la primera opcion
 	this->arrowIndex = 1;
 }
@@ -28,7 +39,7 @@ OptionArrowMenuView::~OptionArrowMenuView()
 void OptionArrowMenuView::draw(){
 
 	int newH = ( (this->optionHeight+12)*this->options->length() );
-	Image* aux = new Image(500, newH);
+	Image* aux = new Image(this->width, newH);
 	this->copy(*aux);
 	delete aux;
 
