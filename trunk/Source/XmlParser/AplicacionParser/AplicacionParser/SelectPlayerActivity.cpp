@@ -43,14 +43,14 @@ void SelectPlayerActivity::onLoad()
 	this->subtitle->setX(10); this->subtitle->setY(160);
 
 	// player one
-	this->arrowMenuPlayerOne = new OptionArrowMenuView(250);
+	this->arrowMenuPlayerOne = new OptionArrowMenuView(220);
 	this->arrowMenuPlayerOne->setX(50);
 	this->arrowMenuPlayerOne->setY(200);
 	this->arrowMenuPlayerOne->setFocusable(true);
 	this->arrowMenuPlayerOne->setFocused(true);
 
 	//player two
-	this->arrowMenuPlayerTwo = new OptionArrowMenuView(250);
+	this->arrowMenuPlayerTwo = new OptionArrowMenuView(220);
 	this->arrowMenuPlayerTwo->setX(this->getWidth() - 250);
 	this->arrowMenuPlayerTwo->setY(200);
 	this->arrowMenuPlayerTwo->setFocusable(true);
