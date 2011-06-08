@@ -74,23 +74,23 @@ void ScreenManager::createGhostsForPacman1(void)
 	this->pacman1Ghosts.add(new Ghost(this->soundManager, "Images/redGhost.bmp", "Images/brownVGhost.bmp" , 
 		this->grilla, this->boardHeight, this->boardWidth,
 		ghostInitialX - this->imageWidth
-		, ghostInitialY - 22, 2, this->pacman1, 
+		, ghostInitialY - 22, 0, this->pacman1, 
 		this->imageHeight, this->imageWidth, false, 0));
 
 	this->pacman1Ghosts.add(new Ghost(this->soundManager, "Images/redGhost.bmp", "Images/brownVGhost.bmp", 
 		this->grilla, this->boardHeight, this->boardWidth,
-		ghostInitialX + this->imageWidth, ghostInitialY + this->imageHeight, 2, this->pacman1, 
+		ghostInitialX + this->imageWidth, ghostInitialY + this->imageHeight, 0, this->pacman1, 
 		this->imageHeight, this->imageWidth, true, 1));
 
 	this->pacman1Ghosts.add(new Ghost(this->soundManager, "Images/redGhost.bmp", "Images/brownVGhost.bmp" , 
 		this->grilla, this->boardHeight, this->boardWidth,
-		ghostInitialX - this->imageWidth, ghostInitialY + this->imageHeight, 2, 
+		ghostInitialX - this->imageWidth, ghostInitialY + this->imageHeight, 0, 
 		this->pacman1, this->imageHeight, this->imageWidth, true, 2));
 
 	this->pacman1Ghosts.add(new Ghost(this->soundManager, "Images/redGhost.bmp", "Images/brownVGhost.bmp" , 
 		this->grilla, this->boardHeight, this->boardWidth,
 		ghostInitialX, 
-		ghostInitialY + this->imageHeight, 2, this->pacman1, 
+		ghostInitialY + this->imageHeight, 0, this->pacman1, 
 		this->imageHeight, this->imageWidth, true, 3));
 
 }
@@ -102,22 +102,22 @@ void ScreenManager::createGhostsForPacman2(void)
 
 	this->pacman2Ghosts.add(new Ghost(this->soundManager,"Images/blueGhost.bmp", "Images/greenVGhost.bmp" , 
 		this->grilla, this->boardHeight, this->boardWidth,
-		ghostInitialX + this->imageWidth, ghostInitialY -22, 2, this->pacman2, 
+		ghostInitialX + this->imageWidth, ghostInitialY -22, 0, this->pacman2, 
 		this->imageHeight, this->imageWidth, false, 0));
 	
 	this->pacman2Ghosts.add(new Ghost(this->soundManager,"Images/blueGhost.bmp","Images/greenVGhost.bmp", 
 		this->grilla, this->boardHeight, this->boardWidth,
-		ghostInitialX - this->imageWidth, ghostInitialY + this->imageHeight * 2, 2, this->pacman2, 
+		ghostInitialX - this->imageWidth, ghostInitialY + this->imageHeight * 2, 0, this->pacman2, 
 		this->imageHeight, this->imageWidth, true, 1));
 
 	this->pacman2Ghosts.add(new Ghost(this->soundManager,"Images/blueGhost.bmp", "Images/greenVGhost.bmp", 
 		this->grilla, this->boardHeight, this->boardWidth,
-		ghostInitialX + this->imageWidth, ghostInitialY + this->imageHeight * 2, 2, 
+		ghostInitialX + this->imageWidth, ghostInitialY + this->imageHeight * 2, 0, 
 		this->pacman2, this->imageHeight, this->imageWidth, true, 2));
 
 	this->pacman2Ghosts.add(new Ghost(this->soundManager,"Images/blueGhost.bmp", "Images/greenVGhost.bmp" , 
 		this->grilla, this->boardHeight, this->boardWidth,
-		ghostInitialX, ghostInitialY + this->imageHeight * 2, 2, this->pacman2, 
+		ghostInitialX, ghostInitialY + this->imageHeight * 2, 0, this->pacman2, 
 		this->imageHeight, this->imageWidth, true, 3));
 }
 
@@ -754,18 +754,28 @@ void ScreenManager::setMinimalDistanceForBonuses(int xPac1, int yPac1, int xPac2
 
 	int middleX=abs(xPac1-xPac2)/2.0;
 	int middleY=abs(yPac1-yPac2)/2.0;
-	
-	while (!isPointInRoad(middleX,middleY)){
-		middleY+=1;
-		middleX+=1;
-		if (middleX <0 || middleX > this->boardWidth)
-			middleX %= this->boardWidth;
-	
-		if (middleY <0 || middleY > this->boardHeight)
-			middleY %= this->boardHeight;
+	int cont=0;
 
-	}
-	this->normalizeXY(middleX,middleY, 10);
+	if (xPac1 < xPac2)
+		middleX=xPac1+middleX;
+	else
+		middleX=xPac2+middleX;
+
+	if (yPac1 < yPac2)
+		middleY=yPac1+middleY;
+	else
+		middleY=yPac2+middleY;
+
+	this->normalizeXY(middleX,middleY, 30);
+
+	/*while (!isPointInRoad(middleX,middleY)){
+		middleX++;
+		middleY++;
+		middleX%=426;
+		middleY%=426;
+
+	}*/
+	this->normalizeXY(middleX,middleY, 30);
 	this->specialBonusX=middleX;
 	this->specialBonusY=middleY;
 
@@ -789,7 +799,7 @@ bool ScreenManager::isPointInRoad(int middleX, int middleY){
 
 	Celda* c1 = this->grilla->getCelda(y1, x1);
 	Camino* cam1 = dynamic_cast<Camino*>(c1);
-	if (cam1 == NULL || CollisionHelper::IsPointInRectangle(middleX,middleY,155,222,291,296)){
+	if (cam1 == NULL || CollisionHelper::IsPointInRectangle(middleX,middleY,155,218,286,286)){
 		return false;
 	}
 
@@ -799,18 +809,18 @@ bool ScreenManager::isPointInRoad(int middleX, int middleY){
 
 void ScreenManager::normalizeXY(int &x, int &y, int delta){
 
-	int poscionesX[8]={18,34,102,153,204,240,291,426};
-	int posicionesY[6]={18,87,138,306,375,44};
+	int poscionesX[7]={18,34,102,204,240,291,426};
+	int posicionesY[7]={18,87,138,204,306,375,444};
 
-	for (int i=0; i< 8; i++){
+	for (int i=0; i< 7; i++){
 		if (abs(x- poscionesX[i]) < delta){
 			x=poscionesX[i];
 			break;
 		}
 	}
 
-	for (int i=0; i< 6; i++){
-		if (abs(x- posicionesY[i]) < delta){
+	for (int i=0; i< 7; i++){
+		if (abs(y- posicionesY[i]) < delta){
 			y=posicionesY[i];
 			break;
 		}
