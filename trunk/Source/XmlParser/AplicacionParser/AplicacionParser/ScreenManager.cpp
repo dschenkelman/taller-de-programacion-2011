@@ -378,7 +378,7 @@ void ScreenManager::handleNormalBonusEating(Pacman* pac, List<Ghost*>& ghosts, s
 	if (bonus == "alimento")
 	{
 		// alimento comun
-		this->increasePacmanScore(pac, isPacman1, 10);
+		this->increasePacmanScore(pac, isPacman1, 10, true);
 		this->soundManager->playSound(this->soundManager->getEatPath(), 1);
 
 		return;
@@ -390,7 +390,7 @@ void ScreenManager::handleNormalBonusEating(Pacman* pac, List<Ghost*>& ghosts, s
 		
 		// alimento bonus, fanstamas vulnerables
 		pac->setGhostKills(0);
-		this->increasePacmanScore(pac, isPacman1, 50);
+		this->increasePacmanScore(pac, isPacman1, 50, true);
 
 		for (int i = 0; i < ghosts.length(); i++)
 		{
@@ -436,14 +436,14 @@ void ScreenManager::handleSpecialBonusEating(Pacman* pac, List<Ghost*>& ghosts, 
 	if (bonus == "anana" && this->bonusShowing)
 	{
 		// bonus anana
-		this->increasePacmanScore(pac, isPacman1, 100);
+		this->increasePacmanScore(pac, isPacman1, 100, false);
 		return;
 	}
 
 	if (bonus == "manzana" && this->bonusShowing)
 	{
 		// alimento manzana
-		this->increasePacmanScore(pac, isPacman1, 200);
+		this->increasePacmanScore(pac, isPacman1, 200, false);
 		return;
 	}
 
@@ -646,22 +646,31 @@ void ScreenManager::cancelBonusEffect(string bonusType, Pacman* pac, Pacman* op,
 	}
 
 }
-void ScreenManager::increasePacmanScore(Pacman* pac, bool isPacman1, int score)
+void ScreenManager::increasePacmanScore(Pacman* pac, bool isPacman1, int score, bool increaseCount)
 {
 	if (this->activeBonusPacman1["alimentoRobaPuntos"] > 0	&& !isPacman1)
 	{
 		this->pacman1->increaseScore(score);
-		this->pacman1->increaseEatenBonus();
+		if (increaseCount)
+		{
+			this->pacman1->increaseEatenBonus();
+		}
 	}
 	else if (this->activeBonusPacman2["alimentoRobaPuntos"] > 0	&& isPacman1)
 	{
 		this->pacman2->increaseScore(score);
-		this->pacman2->increaseEatenBonus();
+		if (increaseCount)
+		{
+			this->pacman2->increaseEatenBonus();
+		}
 	}
 	else
 	{
 		pac->increaseScore(score);
-		pac->increaseEatenBonus();
+		if (increaseCount)
+		{
+			pac->increaseEatenBonus();
+		}
 	}
 }
 
