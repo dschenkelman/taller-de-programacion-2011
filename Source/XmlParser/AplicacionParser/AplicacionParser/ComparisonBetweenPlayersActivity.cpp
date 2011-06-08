@@ -93,7 +93,7 @@ void ComparisonBetweenPlayersActivity::onLoad()
 
 	else
 	{
-		RichTextView* msg = new RichTextView("No games founded", RichTextView::NORMAL);
+		RichTextView* msg = new RichTextView("No games found", RichTextView::NORMAL);
 		msg->setX(this->getWidth()/2 - 186); msg->setY(this->getHeight()/2 - 50);
 		this->add(msg);
 	}
@@ -183,6 +183,8 @@ bool ComparisonBetweenPlayersActivity::initializeAttributes()
 		this->gamesList.add(game);
 		ret = true;
 	}
+
+	delete stats;
 
 	this->gameNumber = -1;
 	
