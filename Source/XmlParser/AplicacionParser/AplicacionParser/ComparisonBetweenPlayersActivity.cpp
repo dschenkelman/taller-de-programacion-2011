@@ -225,19 +225,17 @@ void ComparisonBetweenPlayersActivity::updateAttributes(bool next)
 	std::stringstream ptsOne;
 	if(this->gamesList.at(this->gameNumber).pointsOne < 0)
 	{
-		this->gamesList.at(this->gameNumber).pointsOne = abs(this->gamesList.at(this->gameNumber).pointsOne);
 		ptsOne << "&mdash;";
 	}
-	ptsOne << this->gamesList.at(this->gameNumber).pointsOne;
+	ptsOne << abs(this->gamesList.at(this->gameNumber).pointsOne);
 	this->pointsPlayerOne = ptsOne.str();
 
 	std::stringstream ptsTwo;
 	if(this->gamesList.at(this->gameNumber).pointsTwo < 0)
 	{
-		this->gamesList.at(this->gameNumber).pointsTwo = abs(this->gamesList.at(this->gameNumber).pointsTwo);
 		ptsOne << "&mdash;";
 	}
-	ptsTwo << this->gamesList.at(this->gameNumber).pointsTwo;
+	ptsTwo << abs(this->gamesList.at(this->gameNumber).pointsTwo);
 	this->pointsPlayerTwo = ptsTwo.str();
 
 	std::stringstream timeStr;
