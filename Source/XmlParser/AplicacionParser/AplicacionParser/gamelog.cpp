@@ -20,9 +20,9 @@ gamelog::gamelog(char* uri)
 }
 
 bool gamelog::login(char* name, char* password) {
-	string sql("SELECT Id FROM Players WHERE?AND Name=");
+	string sql("SELECT Id FROM Players WHERE Name=");
 	sql += string(name);
-	sql += string("WHERE?AND Password=");
+	sql += string(" AND Password=");
 	sql += string(password);
 	query q = db->getQuery((char*)sql.c_str());
 	
@@ -32,7 +32,7 @@ bool gamelog::login(char* name, char* password) {
 }
 
 bool gamelog::login(char* name) {
-	string sql("SELECT Id FROM Players WHERE?AND Name=");
+	string sql("SELECT Id FROM Players WHERE Name=");
 	sql += string(name);
 	query q = db->getQuery((char*)sql.c_str());
 	
