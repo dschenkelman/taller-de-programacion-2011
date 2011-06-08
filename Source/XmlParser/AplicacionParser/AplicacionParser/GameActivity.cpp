@@ -190,7 +190,7 @@ Activity* GameActivity::notify(SDL_Event e){
 		case SDL_KEYDOWN:
 			switch(e.key.keysym.sym){
 				case SDLK_RETURN:
-					nextActivity = new MenuActivity(this->getWidth(), this->getHeight());
+					//nextActivity = new MenuActivity(this->getWidth(), this->getHeight());
 					break;
 				default:
 					if(!this->errorFound && this->loaded){
