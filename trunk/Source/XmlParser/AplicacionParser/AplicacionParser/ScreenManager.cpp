@@ -766,7 +766,7 @@ void ScreenManager::setMinimalDistanceForBonuses(int xPac1, int yPac1, int xPac2
 	else
 		middleY=yPac2+middleY;
 
-	this->normalizeXY(middleX,middleY, 16);
+	this->normalizeXY(middleX,middleY, 16, 50);
 
 	/*while (!isPointInRoad(middleX,middleY)){
 		middleX++;
@@ -806,20 +806,20 @@ bool ScreenManager::isPointInRoad(int middleX, int middleY){
 
 }
 
-void ScreenManager::normalizeXY(int &x, int &y, int delta){
+void ScreenManager::normalizeXY(int &x, int &y, int deltax, int deltay){
 
 	int poscionesX[8]={18,34,102,204,240,291,342,426};
 	int posicionesY[8]={18,87,138,204,222,306,375,444};
 
 	for (int i=0; i< 8; i++){
-		if (abs(x- poscionesX[i]) < delta){
+		if (abs(x- poscionesX[i]) < deltax){
 			x=poscionesX[i];
 			break;
 		}
 	}
 
 	for (int i=0; i< 8; i++){
-		if (abs(y- posicionesY[i]) < delta){
+		if (abs(y- posicionesY[i]) < deltay){
 			y=posicionesY[i];
 			break;
 		}
