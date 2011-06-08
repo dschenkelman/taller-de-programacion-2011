@@ -10,6 +10,7 @@ InsertPasswordActivity::InsertPasswordActivity(int width, int height, std::strin
 	this->playerOne = playerOne;
 	this->playerTwo = playerTwo;
 	this->boxPlayerOneActive = true;
+	this->msg = NULL;
 }
 
 void InsertPasswordActivity::onLoad()
@@ -96,12 +97,22 @@ Activity* InsertPasswordActivity::notify(SDL_Event e)
 			else if(letra == '1')
 			{
 				this->removeView(this->msg);
+				if (this->msg != NULL)
+				{
+					delete this->msg;
+					this->msg = NULL;
+				}
 			}
 
 			//enter
 			else if(letra == '2')
 			{
 				this->removeView(this->msg);
+				if (this->msg != NULL)
+				{
+					delete this->msg;
+					this->msg = NULL;
+				}
 
 				if(this->arrowMenu->getSelectedOption() == "back")
 				{
@@ -139,9 +150,14 @@ Activity* InsertPasswordActivity::notify(SDL_Event e)
 							this->updateViewFromView(this->passBoxPlayerOne, newPass);
 							delete this->passBoxPlayerOne;
 							this->passBoxPlayerOne = newPass;
-							this->msg = new RichTextView("Incorrect password", RichTextView::NORMAL);
-							this->msg->setX(10); this->msg->setY(210);
-							this->add(this->msg);
+							RichTextView* errorMessage = new RichTextView("Incorrect password", RichTextView::NORMAL);
+							errorMessage->setX(10); errorMessage->setY(210);
+							this->updateViewFromView(this->msg, errorMessage);
+							if (this->msg != NULL)
+							{
+								delete this->msg;
+							}
+							this->msg = errorMessage;
 						}
 					}
 
@@ -166,9 +182,14 @@ Activity* InsertPasswordActivity::notify(SDL_Event e)
 							this->updateViewFromView(this->passBoxPlayerTwo, newPass);
 							delete this->passBoxPlayerTwo;
 							this->passBoxPlayerTwo = newPass;
-							this->msg = new RichTextView("Incorrect password", RichTextView::NORMAL);
-							this->msg->setX(this->getWidth()/2 + 10); this->msg->setY(210);
-							this->add(this->msg);
+							RichTextView* errorMessage = new RichTextView("Incorrect password", RichTextView::NORMAL);
+							errorMessage->setX(this->getWidth()/2 + 10); errorMessage->setY(210);
+							this->updateViewFromView(this->msg, errorMessage);
+							if (this->msg != NULL)
+							{
+								delete this->msg;
+							}
+							this->msg = errorMessage;
 						}
 						
 					}
@@ -179,6 +200,12 @@ Activity* InsertPasswordActivity::notify(SDL_Event e)
 			else
 			{
 				this->removeView(this->msg);
+				
+				if (this->msg != NULL)
+				{
+					delete this->msg;
+					this->msg = NULL;
+				}
 
 				if(this->boxPlayerOneActive)
 				{
