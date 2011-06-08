@@ -77,23 +77,23 @@ void ScreenManager::createGhostsForPacman1(void)
 	this->pacman1Ghosts.add(new Ghost(this->soundManager, "Images/redGhost.bmp", "Images/brownVGhost.bmp" , 
 		this->grilla, this->boardHeight, this->boardWidth,
 		ghostInitialX - this->imageWidth
-		, ghostInitialY - 22, 0, this->pacman1, 
+		, ghostInitialY - 22, 2, this->pacman1, 
 		this->imageHeight, this->imageWidth, false, 0));
 
 	this->pacman1Ghosts.add(new Ghost(this->soundManager, "Images/redGhost.bmp", "Images/brownVGhost.bmp", 
 		this->grilla, this->boardHeight, this->boardWidth,
-		ghostInitialX + this->imageWidth, ghostInitialY + this->imageHeight, 0, this->pacman1, 
+		ghostInitialX + this->imageWidth, ghostInitialY + this->imageHeight, 2, this->pacman1, 
 		this->imageHeight, this->imageWidth, true, 1));
 
 	this->pacman1Ghosts.add(new Ghost(this->soundManager, "Images/redGhost.bmp", "Images/brownVGhost.bmp" , 
 		this->grilla, this->boardHeight, this->boardWidth,
-		ghostInitialX - this->imageWidth, ghostInitialY + this->imageHeight, 0, 
+		ghostInitialX - this->imageWidth, ghostInitialY + this->imageHeight, 2, 
 		this->pacman1, this->imageHeight, this->imageWidth, true, 2));
 
 	this->pacman1Ghosts.add(new Ghost(this->soundManager, "Images/redGhost.bmp", "Images/brownVGhost.bmp" , 
 		this->grilla, this->boardHeight, this->boardWidth,
 		ghostInitialX, 
-		ghostInitialY + this->imageHeight, 0, this->pacman1, 
+		ghostInitialY + this->imageHeight, 2, this->pacman1, 
 		this->imageHeight, this->imageWidth, true, 3));
 
 }
@@ -105,22 +105,22 @@ void ScreenManager::createGhostsForPacman2(void)
 
 	this->pacman2Ghosts.add(new Ghost(this->soundManager,"Images/blueGhost.bmp", "Images/greenVGhost.bmp" , 
 		this->grilla, this->boardHeight, this->boardWidth,
-		ghostInitialX + this->imageWidth, ghostInitialY -22, 0, this->pacman2, 
+		ghostInitialX + this->imageWidth, ghostInitialY -22, 2, this->pacman2, 
 		this->imageHeight, this->imageWidth, false, 0));
 	
 	this->pacman2Ghosts.add(new Ghost(this->soundManager,"Images/blueGhost.bmp","Images/greenVGhost.bmp", 
 		this->grilla, this->boardHeight, this->boardWidth,
-		ghostInitialX - this->imageWidth, ghostInitialY + this->imageHeight * 2, 0, this->pacman2, 
+		ghostInitialX - this->imageWidth, ghostInitialY + this->imageHeight * 2, 2, this->pacman2, 
 		this->imageHeight, this->imageWidth, true, 1));
 
 	this->pacman2Ghosts.add(new Ghost(this->soundManager,"Images/blueGhost.bmp", "Images/greenVGhost.bmp", 
 		this->grilla, this->boardHeight, this->boardWidth,
-		ghostInitialX + this->imageWidth, ghostInitialY + this->imageHeight * 2, 0, 
+		ghostInitialX + this->imageWidth, ghostInitialY + this->imageHeight * 2, 2, 
 		this->pacman2, this->imageHeight, this->imageWidth, true, 2));
 
 	this->pacman2Ghosts.add(new Ghost(this->soundManager,"Images/blueGhost.bmp", "Images/greenVGhost.bmp" , 
 		this->grilla, this->boardHeight, this->boardWidth,
-		ghostInitialX, ghostInitialY + this->imageHeight * 2, 0, this->pacman2, 
+		ghostInitialX, ghostInitialY + this->imageHeight * 2, 2, this->pacman2, 
 		this->imageHeight, this->imageWidth, true, 3));
 }
 
@@ -807,7 +807,6 @@ void ScreenManager::placeBonusInMaze(TipoBonus& bonus)
 		right = right == -1 ? 0 : right;
 		top = top == -1 ? 0 : top;
 		bottom = bottom == -1 ? 0 : bottom;
-		5
 		c1 = this->grilla->getCelda(y2, left);
 		c2 = this->grilla->getCelda(y2, right);
 		c3 = this->grilla->getCelda(top, x2);
