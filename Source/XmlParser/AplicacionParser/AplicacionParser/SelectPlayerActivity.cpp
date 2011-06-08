@@ -135,6 +135,11 @@ Activity* SelectPlayerActivity::notify(SDL_Event e)
 						{
 							this->menuPlayerTwoActive = false;
 						}
+						else
+						{
+							this->menuPlayerOneActive = true;
+							this->menuPlayerTwoActive = false;
+						}
 						/*RichTextView* newRtv = new RichTextView("Players selected", RichTextView::NORMAL);
 						newRtv->setX(this->getWidth()/2 - 145); newRtv->setY(this->getHeight() - 50);
 						this->updateViewFromView(this->subtitle, newRtv);*/

@@ -235,7 +235,7 @@ void ComparisonBetweenPlayersActivity::updateAttributes(bool next)
 	std::stringstream ptsTwo;
 	if(this->gamesList.at(this->gameNumber).pointsTwo < 0)
 	{
-		ptsOne << "&mdash;";
+		ptsTwo << "&mdash;";
 	}
 	ptsTwo << abs(this->gamesList.at(this->gameNumber).pointsTwo);
 	this->pointsPlayerTwo = ptsTwo.str();
