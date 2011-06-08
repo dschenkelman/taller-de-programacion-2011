@@ -74,23 +74,23 @@ void ScreenManager::createGhostsForPacman1(void)
 	this->pacman1Ghosts.add(new Ghost(this->soundManager, "Images/redGhost.bmp", "Images/brownVGhost.bmp" , 
 		this->grilla, this->boardHeight, this->boardWidth,
 		ghostInitialX - this->imageWidth
-		, ghostInitialY - 22, 0, this->pacman1, 
+		, ghostInitialY - 22, 2, this->pacman1, 
 		this->imageHeight, this->imageWidth, false, 0));
 
 	this->pacman1Ghosts.add(new Ghost(this->soundManager, "Images/redGhost.bmp", "Images/brownVGhost.bmp", 
 		this->grilla, this->boardHeight, this->boardWidth,
-		ghostInitialX + this->imageWidth, ghostInitialY + this->imageHeight, 0, this->pacman1, 
+		ghostInitialX + this->imageWidth, ghostInitialY + this->imageHeight, 2, this->pacman1, 
 		this->imageHeight, this->imageWidth, true, 1));
 
 	this->pacman1Ghosts.add(new Ghost(this->soundManager, "Images/redGhost.bmp", "Images/brownVGhost.bmp" , 
 		this->grilla, this->boardHeight, this->boardWidth,
-		ghostInitialX - this->imageWidth, ghostInitialY + this->imageHeight, 0, 
+		ghostInitialX - this->imageWidth, ghostInitialY + this->imageHeight, 2, 
 		this->pacman1, this->imageHeight, this->imageWidth, true, 2));
 
 	this->pacman1Ghosts.add(new Ghost(this->soundManager, "Images/redGhost.bmp", "Images/brownVGhost.bmp" , 
 		this->grilla, this->boardHeight, this->boardWidth,
 		ghostInitialX, 
-		ghostInitialY + this->imageHeight, 0, this->pacman1, 
+		ghostInitialY + this->imageHeight, 2, this->pacman1, 
 		this->imageHeight, this->imageWidth, true, 3));
 
 }
@@ -102,22 +102,22 @@ void ScreenManager::createGhostsForPacman2(void)
 
 	this->pacman2Ghosts.add(new Ghost(this->soundManager,"Images/blueGhost.bmp", "Images/greenVGhost.bmp" , 
 		this->grilla, this->boardHeight, this->boardWidth,
-		ghostInitialX + this->imageWidth, ghostInitialY -22, 0, this->pacman2, 
+		ghostInitialX + this->imageWidth, ghostInitialY -22, 2, this->pacman2, 
 		this->imageHeight, this->imageWidth, false, 0));
 	
 	this->pacman2Ghosts.add(new Ghost(this->soundManager,"Images/blueGhost.bmp","Images/greenVGhost.bmp", 
 		this->grilla, this->boardHeight, this->boardWidth,
-		ghostInitialX - this->imageWidth, ghostInitialY + this->imageHeight * 2, 0, this->pacman2, 
+		ghostInitialX - this->imageWidth, ghostInitialY + this->imageHeight * 2, 2, this->pacman2, 
 		this->imageHeight, this->imageWidth, true, 1));
 
 	this->pacman2Ghosts.add(new Ghost(this->soundManager,"Images/blueGhost.bmp", "Images/greenVGhost.bmp", 
 		this->grilla, this->boardHeight, this->boardWidth,
-		ghostInitialX + this->imageWidth, ghostInitialY + this->imageHeight * 2, 0, 
+		ghostInitialX + this->imageWidth, ghostInitialY + this->imageHeight * 2, 2, 
 		this->pacman2, this->imageHeight, this->imageWidth, true, 2));
 
 	this->pacman2Ghosts.add(new Ghost(this->soundManager,"Images/blueGhost.bmp", "Images/greenVGhost.bmp" , 
 		this->grilla, this->boardHeight, this->boardWidth,
-		ghostInitialX, ghostInitialY + this->imageHeight * 2, 0, this->pacman2, 
+		ghostInitialX, ghostInitialY + this->imageHeight * 2, 2, this->pacman2, 
 		this->imageHeight, this->imageWidth, true, 3));
 }
 
@@ -810,20 +810,55 @@ void ScreenManager::normalizeXY(int &x, int &y, int deltax, int deltay){
 
 	int poscionesX[8]={18,34,102,204,240,291,342,426};
 	int posicionesY[8]={18,87,138,204,222,306,375,444};
+	int i=0;
+	int j=0;
 
-	for (int i=0; i< 8; i++){
+	for (i=0; i< 8; i++){
 		if (abs(x- poscionesX[i]) < deltax){
 			x=poscionesX[i];
 			break;
 		}
 	}
 
-	for (int i=0; i< 8; i++){
-		if (abs(y- posicionesY[i]) < deltay){
-			y=posicionesY[i];
+	for (j=0; j< 8; j++){
+		if (abs(y- posicionesY[j]) < deltay){
+			y=posicionesY[j];
 			break;
 		}
 	}
+
+	if (!isPointInRoad(poscionesX[i],posicionesY[j])){
+		if (isPointInRoad(poscionesX[i-1],posicionesY[j])){
+			x=poscionesX[i-1];
+			y=posicionesY[j];
+		}else{
+			if (isPointInRoad(poscionesX[i+1],posicionesY[j])){
+				x=poscionesX[i+1];
+				y=posicionesY[j];
+			}else{
+				if (isPointInRoad(poscionesX[i],posicionesY[j-1])){
+					x=poscionesX[i];
+					y=posicionesY[j-1];
+				}else{
+					if (isPointInRoad(poscionesX[i],posicionesY[j+1])){
+						x=poscionesX[i];
+						y=posicionesY[j+1];
+					}else{
+						if (isPointInRoad(poscionesX[i-1],posicionesY[j-1])){
+							x=poscionesX[i-1];
+							y=posicionesY[j-1];
+						}else{
+							if (isPointInRoad(poscionesX[i+1],posicionesY[j+1])){
+								x=poscionesX[i+1];
+								y=posicionesY[j+1];
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
 
 	//Condiciones de borde.
 
