@@ -70,8 +70,8 @@ int execute(int argc, char* argv[])
 int main(int argc, char* argv[])
 {
 	int res = execute(argc, argv);
-	int leaks = _CrtDumpMemoryLeaks();
-	printLeaks(leaks);
+	//int leaks = _CrtDumpMemoryLeaks();
+	//printLeaks(leaks);
 
 	char aux;
 	cin >> aux;
