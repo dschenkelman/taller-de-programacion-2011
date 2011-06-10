@@ -1,8 +1,20 @@
-<ESCENARIO nombre="Escenario numero 1" texturaFondo="Fondo" intervaloBonus="15" proporcionDuracion="0.6">
+<ESCENARIO nombre="Escenario numero 1" texturaFondo="Fondo" intervaloBonus="5" proporcionDuracion="0.6">
 <GRILLA ancho="27" 
   		  alto="28" 
 		  tipoObstaculoPorDefecto="ladrillo">
-    <CAMINO fila="1" columna="1">
+    <CAMINO fila="0" columna="20">
+		<BONUS tipo="alimento"/>
+	</CAMINO>
+	<CAMINO fila="27" columna="20">
+		<BONUS tipo="alimento"/>
+	</CAMINO>
+	<CAMINO fila="18" columna="0">
+		<BONUS tipo="alimento"/>
+	</CAMINO>
+	<CAMINO fila="18" columna="26">
+		<BONUS tipo="alimento"/>
+	</CAMINO>
+	<CAMINO fila="1" columna="1">
 		<BONUS tipo="alimentoEspecial"/>
 	</CAMINO>
 	<CAMINO fila="1" columna="2">
@@ -835,8 +847,8 @@
     <TIPOBONUS nombre="manzana" textura="manzana" probabilidad="0.2" duracion="5" apariciones="2" unidad="tiempo"/>
 	<TIPOBONUS nombre="alimentoDuplicador" textura="alimentoDuplicador"  duracion="5" unidad="tiempo" apariciones="1"/>
 	<TIPOBONUS nombre="alimentoRobaPuntos" textura="alimentoRobaPuntos" probabilidad="0.9" duracion="5" unidad="tiempo" apariciones="7"/>
-	<TIPOBONUS nombre="alimentoPersecucion" textura="alimentoPersecucion" probabilidad="1"  duracion="15" unidad="tiempo" apariciones="1"/>
-	<TIPOBONUS nombre="alimentoCongelado" textura="alimentoCongelado"  duracion="5" unidad="tiempo" apariciones="1"/>
+	<TIPOBONUS nombre="alimentoPersecucion" textura="alimentoPersecucion" probabilidad="0"  duracion="15" unidad="tiempo" apariciones="1"/>
+	<TIPOBONUS nombre="alimentoCongelado" textura="alimentoCongelado"  duracion="5" probabilidad="0.5" unidad="tiempo" apariciones="1"/>
 	<TIPOBONUS nombre="alimentoDuplicaVelocidad" textura="alimentoDuplicaVelocidad"  duracion="5" unidad="tiempo" apariciones="1"/>
 	<TIPOBONUS nombre="alimentoReduceVelocidad" textura="alimentoReduceVelocidad" duracion="5" unidad="tiempo" apariciones="3"/>
   </TIPOSBONUS>

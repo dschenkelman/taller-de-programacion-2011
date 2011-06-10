@@ -146,7 +146,7 @@ void ScreenManager::updateScreen(void)
 	}
 
 	this->updateBonusEffects(this->pacman1, this->pacman2, this->pacman1Ghosts, this->activeBonusPacman1);
-	this->updateBonusEffects(this->pacman1, this->pacman2, this->pacman2Ghosts, this->activeBonusPacman2);
+	this->updateBonusEffects(this->pacman2, this->pacman1, this->pacman2Ghosts, this->activeBonusPacman2);
 	this->updateSpecialBonus();
 	this->updateGhostsVulnerability();
 	this->updateGhostsActivation();
