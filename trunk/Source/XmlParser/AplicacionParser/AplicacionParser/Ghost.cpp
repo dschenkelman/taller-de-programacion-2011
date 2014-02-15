@@ -298,7 +298,7 @@ bool Ghost::isNextPositionValid(void)
 			return false;
 		}
 	} else {
-		if (!this->inHeadquarters) {
+		if (!this->inHeadquarters && !this->isVulnerable && !this->idiotMode) {
 			if (this->getNextX() == this->lastX && this->getNextY() == this->lastY) {
 				return false;
 			}
