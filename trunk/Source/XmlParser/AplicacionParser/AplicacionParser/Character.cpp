@@ -13,6 +13,8 @@ screenHeight(h), screenWidth(w), x(x), y(y),
 xDirection(xDir), yDirection(yDir), speed(speed),
 grilla(g), imageHeight(imageHeight), imageWidth(imageWidth)
 {
+	this->lastX = -1;
+	this->lastY = -1;
 	this->grilla = g;
 	this->textura = new Image(pathTextura);
 	this->textura->resize(this->imageWidth - this->speed, this->imageHeight - this->speed);
@@ -46,6 +48,7 @@ bool Character::isNextPositionValid(void)
 {
 	int nextX = this->getNextX();
 	int nextY = this->getNextY();
+
 	int width = this->textura->getWidth();
 	int height = this->textura->getHeight();
 
@@ -80,6 +83,8 @@ bool Character::isNextPositionValid(void)
 
 void Character::updatePosition(void)
 {
+	this->lastX = this->x;
+	this->lastY = this->y;
 	this->x = this->getNextX();
 	this->y = this->getNextY();
 }

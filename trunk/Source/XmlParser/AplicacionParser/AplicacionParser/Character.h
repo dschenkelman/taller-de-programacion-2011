@@ -12,6 +12,8 @@ protected:
 	Grilla* grilla;
 	int x;
 	int y;
+	int lastX;
+	int lastY;
 	int xDirection;
 	int yDirection;
 	int screenWidth;
